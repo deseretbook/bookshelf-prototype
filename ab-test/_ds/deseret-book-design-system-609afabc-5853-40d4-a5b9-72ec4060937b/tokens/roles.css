@@ -1,0 +1,68 @@
+/* ============================================================
+   ROLE CLASSES — the type hierarchy, ready to apply.
+   Shipped with the brand skill; kept verbatim in behaviour.
+   ============================================================ */
+.db-eyebrow {
+  font-family: var(--db-font-sans);
+  font-weight: var(--db-weight-sans-black);
+  text-transform: uppercase;
+  letter-spacing: var(--db-tracking-eyebrow);
+  font-size: var(--db-text-eyebrow);
+  line-height: var(--db-lh-tight);
+}
+.db-heading {
+  font-family: var(--db-font-serif);
+  font-weight: var(--db-weight-serif-regular);
+  font-size: var(--db-text-heading);
+  line-height: var(--db-lh-tight);
+  color: var(--db-display);
+  text-wrap: pretty;
+  /* Title case when not a full sentence; sentence case when it is. */
+}
+.db-subhead {
+  font-family: var(--db-font-sans);
+  font-weight: var(--db-weight-sans-light);
+  font-size: var(--db-text-subhead);
+  line-height: var(--db-lh-tight);
+  text-wrap: pretty;
+  /* Always sentence case, a complete sentence with punctuation. */
+}
+.db-body {
+  font-family: var(--db-font-sans);
+  font-weight: var(--db-weight-sans-regular);
+  font-size: var(--db-text-body);
+  line-height: var(--db-lh-body);
+  color: var(--db-ink);
+  text-align: left; /* flush left is the default; never justify */
+}
+.db-caption {
+  font-family: var(--db-font-sans);
+  font-weight: var(--db-weight-sans-regular);
+  font-size: var(--db-text-caption);
+  line-height: var(--db-lh-body);
+}
+.db-label {
+  font-family: var(--db-font-sans);
+  font-weight: var(--db-weight-sans-regular);
+  font-size: var(--db-text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--db-tracking-label);
+}
+.db-button {
+  font-family: var(--db-font-sans);
+  font-weight: var(--db-weight-sans-regular);
+  font-size: var(--db-text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--db-tracking-label);
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  border-radius: var(--db-radius-pill);
+  background: var(--db-accent);
+  color: var(--db-ink-inverse);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+/* Links — defined so authored links never fall back to browser blue. */
+a { color: var(--db-link); text-decoration: underline; text-underline-offset: 0.15em; text-decoration-thickness: 1px; transition: var(--db-transition); }
+a:hover { color: var(--db-link-hover); }
