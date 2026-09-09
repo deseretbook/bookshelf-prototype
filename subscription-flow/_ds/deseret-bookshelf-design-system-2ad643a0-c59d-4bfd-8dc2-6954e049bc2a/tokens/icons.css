@@ -1,0 +1,22 @@
+/* Deseret Bookshelf+ — Iconography.
+   The source uses Apple SF Symbols (a proprietary font that cannot be extracted or shipped).
+   SUBSTITUTE: Material Symbols Rounded (Google, freely licensable) — the closest widely
+   available match for a rounded, single-weight system icon set. The <Icon> component maps
+   the kit's SF Symbol vocabulary onto Material Symbol ligature names. */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..200&display=block');
+
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/deseret-bookshelf-design-system-2ad643a0-c59d-4bfd-8dc2-6954e049bc2a/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/deseret-bookshelf-design-system-2ad643a0-c59d-4bfd-8dc2-6954e049bc2a/tokens/fig-tokens.css">
+<link rel="stylesheet" href="_ds/deseret-bookshelf-design-system-2ad643a0-c59d-4bfd-8dc2-6954e049bc2a/tokens/semantic.css">
+<link rel="stylesheet" href="_ds/deseret-bookshelf-design-system-2ad643a0-c59d-4bfd-8dc2-6954e049bc2a/tokens/typography.css">
+<link rel="stylesheet" href="_ds/deseret-bookshelf-design-system-2ad643a0-c59d-4bfd-8dc2-6954e049bc2a/tokens/icons.css">
+<link rel="stylesheet" href="_ds/deseret-bookshelf-design-system-2ad643a0-c59d-4bfd-8dc2-6954e049bc2a/styles.css">
+<script src="_ds/deseret-bookshelf-design-system-2ad643a0-c59d-4bfd-8dc2-6954e049bc2a/_ds_bundle.js"></script>
+<style>
+  *{box-sizing:border-box;}
+  .ms{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;line-height:1;display:inline-block;-webkit-font-smoothing:antialiased;}
+  .scr::-webkit-scrollbar{width:0;height:0;}
+  .scr{scrollbar-width:none;}
+  @keyframes hs{0%{box-shadow:0 0 0 0 rgba(210,110,9,0.45);}70%{box-shadow:0 0 0 12px rgba(210,110,9,0);}100%{box-shadow:0 0 0 0 rgba(210,110,9,0);}}
+  @keyframes hsblue{0%{box-shadow:0 0 0 0 rgba(21,112,239,0.45);}70%{box-shadow:0 0 0 12px rgba(21,112,239,0);}100%{box-shadow:0 0 0 0 rgba(21,112,239,0);}}
+  @keyframes hsgreen{0%{box-shadow:0 0 0 0 rgba(23,178,106,0.45);}70%{box-shadow:0 0 0 12px rgba(23,178,106,0);}100%{box-shadow:0 0 0 0 rgba(23,178,106,0);}}
+  .hs{animation:hs 1.7s ease-out infinite;border-radius:999px;}
+  .hs-blue{animation:hsblue 1.7s ease-out infinite;}
+  .hs-green{animation:hsgreen 1.7s ease-out infinite;}
+  @keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .fx{animation:fadein .32s ease both;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .spin{animation:spin .9s linear infinite;}
+  @keyframes ho{from{opacity:0;}to{opacity:1;}}
+  .fade{animation:ho .25s ease both;}
+</style>
+</helmet>
+<div style="min-height:100vh;background:linear-gradient(180deg,#eef0f3,#e6e8ec);font-family:var(--font-text);color:var(--label-primary);padding:28px 20px 56px;">
+  <div style="max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:22px;">
+
+    <header style="display:flex;flex-direction:column;gap:6px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="ms" style="font-size:26px;color:var(--brand);">auto_stories</span>
+        <h1 class="ds-title-2" style="margin:0;">Bookshelf+ Subscription Journey</h1>
+      </div>
+    </header>
+
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch;">
+      <div role="tablist" style="display:flex;gap:8px;background:#fff;padding:6px;border-radius:16px;box-shadow:var(--shadow-sm);flex:1;min-width:300px;">
+        <button onClick="{{ pickA }}" style="{{ tabAStyle }}"><span style="font-weight:700;">A · iOS</span><span style="font-size:12px;opacity:.8;">United States</span></button>
+        <button onClick="{{ pickB }}" style="{{ tabBStyle }}"><span style="font-weight:700;">B · iOS</span><span style="font-size:12px;opacity:.8;">International</span></button>
+        <button onClick="{{ pickC }}" style="{{ tabCStyle }}"><span style="font-weight:700;">C · Android</span><span style="font-size:12px;opacity:.8;">All regions</span></button>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;background:#fff;padding:12px 18px;border-radius:16px;box-shadow:var(--shadow-sm);">
+        <div style="display:flex;flex-direction:column;gap:1px;">
+          <span style="font-weight:600;font-size:15px;">Platinum member</span>
+          <span style="font-size:12px;color:var(--label-secondary);">Applies the member discount</span>
+        </div>
+        <button onClick="{{ togglePlatinum }}" role="switch" style="{{ platinumTrackStyle }}"><span style="{{ platinumKnobStyle }}"></span></button>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:28px;justify-content:center;align-items:flex-start;">
+
+      <div style="display:flex;flex-direction:column;gap:14px;align-items:center;">
+        <div style="width:352px;height:748px;background:#0b0b0d;border-radius:{{ frameRadius }};padding:11px;box-shadow:0 22px 60px rgba(0,0,0,0.28),0 4px 12px rgba(0,0,0,0.18);position:relative;">
+          <div class="scr" style="width:100%;height:100%;background:#fff;border-radius:{{ screenRadius }};overflow:hidden;position:relative;display:flex;flex-direction:column;">
+
+            <sc-if value="{{ isIOS }}" hint-placeholder-val="{{ true }}">
+              <div style="position:relative;z-index:5;flex:0 0 auto;height:52px;">
+                <div style="position:absolute;top:9px;left:50%;transform:translateX(-50%);width:118px;height:31px;background:#000;border-radius:20px;z-index:6;"></div>
+                <div style="height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;color:{{ statusFg }};">
+                  <span style="font-size:17px;font-weight:600;font-family:var(--font-text);letter-spacing:-0.2px;">9:41</span>
+                  <span style="display:inline-flex;align-items:center;gap:7px;">
+                    <span class="ms" style="font-size:17px;">signal_cellular_alt</span>
+                    <span class="ms" style="font-size:17px;">wifi</span>
+                    <span class="ms" style="font-size:20px;">battery_full</span>
+                  </span>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ isAndroid }}" hint-placeholder-val="{{ true }}">
+              <div style="flex:0 0 auto;height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:{{ androidBarBg }};color:{{ androidBarFg }};z-index:5;">
+                <span style="font-size:13px;font-weight:600;font-family:var(--font-text);">9:41</span>
+                <span style="display:flex;gap:6px;align-items:center;">
+                  <span class="ms" style="font-size:15px;">signal_cellular_alt</span>
+                  <span class="ms" style="font-size:15px;">wifi</span>
+                  <span class="ms" style="font-size:16px;">battery_full</span>
+                </span>
+              </div>
+            </sc-if>
+
+            <div class="scr" style="flex:1;min-height:0;overflow-y:auto;position:relative;background:{{ bodyBg }};">
+
+              <!-- ============ BOOK DETAIL (gated entry) ============ -->
+              <sc-if value="{{ show.book_detail }}" hint-placeholder-val="{{ true }}">
+                <div class="fx" data-brand="bookshelf" style="min-height:100%;background:#fff;display:flex;flex-direction:column;padding:8px 20px 26px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0 10px;">
+                    <span style="width:34px;height:34px;border-radius:50%;background:var(--fill-tertiary);display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:20px;color:var(--label-primary);">{{ dismissIcon }}</span></span>
+                    <span style="width:34px;height:34px;border-radius:50%;background:var(--fill-tertiary);display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:20px;color:var(--label-primary);">more_horiz</span></span>
+                  </div>
+                  <img src="assets/cover-eba.png" alt="Every Beat After" style="width:220px;height:auto;align-self:center;border-radius:6px;box-shadow:0 10px 26px rgba(0,0,0,0.22);margin:6px 0 14px;"/>
+                  <div style="text-align:center;display:flex;flex-direction:column;gap:4px;">
+                    <span style="color:var(--brand);font-weight:700;font-size:16px;">bookshelf +</span>
+                    <span class="ds-title-2" style="margin:0;">Every Beat After</span>
+                    <span style="letter-spacing:1px;font-size:13px;font-weight:600;color:var(--label-secondary);">SARA B. LARSON</span>
+                    <span style="display:flex;gap:6px;align-items:center;justify-content:center;margin-top:4px;color:#e8a020;">
+                      <span class="ms" style="font-size:18px;font-variation-settings:'FILL' 1;">star</span>
+                      <span class="ms" style="font-size:18px;font-variation-settings:'FILL' 1;">star</span>
+                      <span class="ms" style="font-size:18px;font-variation-settings:'FILL' 1;">star</span>
+                      <span class="ms" style="font-size:18px;font-variation-settings:'FILL' 1;">star</span>
+                      <span class="ms" style="font-size:18px;font-variation-settings:'FILL' 1;">star_half</span>
+                      <span style="color:var(--label-primary);font-weight:700;font-size:15px;margin-left:2px;">4.5</span>
+                      <span style="color:var(--label-secondary);font-size:15px;">(22)</span>
+                    </span>
+                  </div>
+                  <div style="background:var(--fill-quaternary);border-radius:16px;padding:20px 18px;margin:18px 0;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;">
+                    <span style="color:var(--brand);font-weight:700;font-size:19px;">bookshelf +</span>
+                    <div class="hs" style="width:100%;">
+                      <button onClick="{{ next }}" style="width:100%;border:none;background:var(--brand);color:#fff;font-family:var(--font-text);font-weight:600;font-size:17px;padding:14px;border-radius:999px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;"><span class="ms" style="font-size:19px;">open_in_new</span>Listen FREE for 7 days</button>
+                    </div>
+                    <span style="font-size:12px;color:var(--label-secondary);">Clicking this button you'll be taken to our website. <span style="text-decoration:underline;">Terms Apply</span></span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;text-align:center;padding:6px 4px 16px;">
+                    <div style="flex:1;"><span class="ms" style="font-size:22px;">headphones</span><div style="font-size:13px;font-weight:700;margin-top:4px;">Audiobook</div></div>
+                    <div style="flex:1;border-left:0.5px solid var(--separator-nonopaque);border-right:0.5px solid var(--separator-nonopaque);"><div style="font-weight:700;">12h 25m</div><div style="font-size:13px;color:var(--label-secondary);">unabridged</div></div>
+                    <div style="flex:1;"><div style="font-weight:700;">2026</div><div style="font-size:13px;color:var(--label-secondary);">published</div></div>
+                  </div>
+                  <button style="align-self:center;border:1.5px solid #0c958b;color:#0c958b;background:#fff;font-family:var(--font-text);font-weight:600;font-size:16px;padding:12px 34px;border-radius:999px;display:flex;align-items:center;gap:8px;"><span class="ms" style="font-size:19px;">menu_book</span>View eBook</button>
+                </div>
+              </sc-if>
+
+              <!-- ============ PAYWALL — PRICING (Flow A) ============ -->
+              <sc-if value="{{ show.paywall_pricing }}" hint-placeholder-val="{{ true }}">
+                <div class="fx" data-brand="bookshelf" style="min-height:100%;background:#fff;display:flex;flex-direction:column;padding:6px 22px 26px;">
+                  <button onClick="{{ back }}" style="align-self:flex-start;width:38px;height:38px;border-radius:50%;border:none;background:var(--fill-tertiary);display:flex;align-items:center;justify-content:center;cursor:pointer;margin:4px 0 6px;"><span class="ms" style="font-size:20px;">arrow_back_ios_new</span></button>
+                  <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                    <span style="color:var(--brand);font-weight:700;font-size:22px;">bookshelf +</span>
+                    <h2 class="ds-title-1" style="margin:6px 0 0;">Get Unlimited Access</h2>
+                    <span style="color:var(--label-secondary);font-size:15px;">Start your 7-day free trial. Cancel anytime.</span>
+                  </div>
+                  <sc-if value="{{ platinum }}" hint-placeholder-val="{{ true }}">
+                    <div style="align-self:center;margin-top:14px;background:var(--brand-tint-14);color:var(--brand);font-weight:700;font-size:12px;letter-spacing:.5px;padding:7px 14px;border-radius:999px;">PLATINUM MEMBER PRICE APPLIED</div>
+                  </sc-if>
+                  <div style="display:flex;flex-direction:column;gap:12px;margin:18px 0;">
+                    <sc-for list="{{ benefitsA }}" as="b" hint-placeholder-count="3">
+                      <div style="display:flex;align-items:center;gap:12px;"><span style="width:24px;height:24px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><span class="ms" style="font-size:16px;color:#fff;">check</span></span><span style="font-size:16px;font-weight:500;">{{ b }}</span></div>
+                    </sc-for>
+                  </div>
+                  <div onClick="{{ selectYearly }}" style="{{ planYearlyStyle }}">
+                    <sc-if value="{{ yearlySel }}" hint-placeholder-val="{{ true }}"><span style="width:26px;height:26px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><span class="ms" style="font-size:18px;color:#fff;">check</span></span></sc-if>
+                    <sc-if value="{{ yearlyUnsel }}" hint-placeholder-val="{{ true }}"><span style="width:26px;height:26px;border-radius:50%;border:2px solid var(--label-tertiary);flex:0 0 auto;"></span></sc-if>
+                    <div style="flex:1;min-width:0;">
+                      <div style="display:flex;align-items:center;gap:8px;"><span style="font-weight:700;font-size:18px;">Yearly</span><span style="background:var(--brand);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;">Best Value</span></div>
+                      <div style="color:var(--label-secondary);font-size:14px;margin-top:2px;">{{ yPer }}</div>
+                    </div>
+                    <div style="text-align:right;"><span style="font-size:19px;font-weight:600;color:var(--label-secondary);">{{ yPrice }}</span><sc-if value="{{ yStrikeShow }}" hint-placeholder-val="{{ true }}"><div style="font-size:13px;color:var(--label-tertiary);text-decoration:line-through;">{{ yStrike }}</div></sc-if></div>
+                  </div>
+                  <div onClick="{{ selectMonthly }}" style="{{ planMonthlyStyle }}">
+                    <sc-if value="{{ monthlySel }}" hint-placeholder-val="{{ true }}"><span style="width:26px;height:26px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><span class="ms" style="font-size:18px;color:#fff;">check</span></span></sc-if>
+                    <sc-if value="{{ monthlyUnsel }}" hint-placeholder-val="{{ true }}"><span style="width:26px;height:26px;border-radius:50%;border:2px solid var(--label-tertiary);flex:0 0 auto;"></span></sc-if>
+                    <div style="flex:1;min-width:0;"><div style="font-weight:700;font-size:18px;">Monthly</div><div style="color:var(--label-secondary);font-size:14px;margin-top:2px;">{{ mPer }}</div></div>
+                    <div style="text-align:right;"><span style="font-size:19px;font-weight:600;color:var(--label-secondary);">{{ mPrice }}</span><sc-if value="{{ mStrikeShow }}" hint-placeholder-val="{{ true }}"><div style="font-size:13px;color:var(--label-tertiary);text-decoration:line-through;">{{ mStrike }}</div></sc-if></div>
+                  </div>
+                  <div class="hs" style="margin-top:22px;">
+                    <button onClick="{{ next }}" style="width:100%;border:none;background:var(--brand);color:#fff;font-family:var(--font-text);font-weight:600;font-size:17px;padding:16px;border-radius:999px;cursor:pointer;">Start 7-Day Free Trial</button>
+                  </div>
+                  <span style="text-align:center;font-size:13px;margin-top:12px;color:var(--label-secondary);">{{ trialNote }}</span>
+                </div>
+              </sc-if>
+
+              <!-- ============ PAYWALL — BENEFITS (Flow B iOS Intl · Flow C Android) ============ -->
+              <sc-if value="{{ show.paywall_benefits }}" hint-placeholder-val="{{ true }}">
+                <div class="fx" data-brand="bookshelf" style="min-height:100%;background:#fff;display:flex;flex-direction:column;padding:6px 22px 26px;position:relative;">
+                  <button onClick="{{ back }}" style="align-self:flex-start;width:38px;height:38px;border-radius:50%;border:none;background:var(--fill-tertiary);display:flex;align-items:center;justify-content:center;cursor:pointer;margin:4px 0 10px;"><span class="ms" style="font-size:20px;">arrow_back_ios_new</span></button>
+                  <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:6px;">
+                    <span style="color:var(--brand);font-weight:700;font-size:22px;">bookshelf +</span>
+                    <h2 class="ds-title-1" style="margin:8px 0 0;">Unlimited Reading Starts Here</h2>
+                    <span style="color:var(--label-secondary);font-size:15px;">4,000+ audiobooks &amp; eBooks</span>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:14px;margin:18px 0;">
+                    <sc-for list="{{ benefitsB }}" as="b" hint-placeholder-count="3">
+                      <div style="display:flex;align-items:center;gap:12px;"><span style="width:26px;height:26px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><span class="ms" style="font-size:17px;color:#fff;">check</span></span><span style="font-size:16px;font-weight:500;">{{ b }}</span></div>
+                    </sc-for>
+                  </div>
+                  <sc-if value="{{ isAndroid }}" hint-placeholder-val="{{ false }}">
+                    <div style="background:var(--fill-quaternary);border-radius:16px;padding:18px;margin-top:4px;">
+                      <div style="font-weight:700;font-size:17px;margin-bottom:6px;">Plans &amp; pricing</div>
+                      <div style="color:var(--label-secondary);font-size:14px;line-height:1.5;">You cannot purchase a Bookshelf+ subscription from the app but visit Deseret Book's Website for more information.</div>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ isAndroid }}" hint-placeholder-val="{{ false }}">
+                    <div style="margin-top:auto;padding-top:22px;display:flex;flex-direction:column;gap:12px;">
+                      <div class="hs"><button onClick="{{ androidLearnMore }}" style="width:100%;border:none;background:var(--brand);color:#fff;font-family:var(--font-text);font-weight:600;font-size:17px;padding:16px;border-radius:999px;cursor:pointer;">I'd Like to Know More</button></div>
+                      <button onClick="{{ reset }}" style="width:100%;border:1px solid var(--separator-opaque);background:#fff;color:var(--label-primary);font-family:var(--font-text);font-weight:600;font-size:16px;padding:15px;border-radius:999px;cursor:pointer;">Skip</button>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ isIOS }}" hint-placeholder-val="{{ true }}">
+                    <div class="hs" style="margin-top:auto;padding-top:22px;"><button onClick="{{ next }}" style="width:100%;border:none;background:var(--brand);color:#fff;font-family:var(--font-text);font-weight:600;font-size:17px;padding:16px;border-radius:999px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;"><span class="ms" style="font-size:19px;">open_in_new</span>See Pricing on the Web</button></div>
+                  </sc-if>
+                  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+                    <div class="fade" style="position:absolute;left:16px;right:16px;bottom:18px;background:#1c1c1e;color:#fff;border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--shadow-lg);">
+                      <span style="font-size:14px;">We'll send you an email, check your inbox.</span>
+                      <span class="ms" style="font-size:18px;color:rgba(255,255,255,0.7);">close</span>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
+
+              <!-- ============ EMAIL (Flow C, Platinum-aware) ============ -->
+              <sc-if value="{{ show.inbox_email }}" hint-placeholder-val="{{ true }}">
+                <div class="fx" style="min-height:100%;background:#f4f2ee;display:flex;flex-direction:column;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#fff;border-bottom:1px solid var(--separator-nonopaque);">
+                    <span style="display:flex;align-items:center;gap:10px;"><span class="ms" style="font-size:22px;">arrow_back</span><span style="font-weight:600;">Inbox</span></span>
+                    <span style="display:flex;gap:16px;color:var(--label-secondary);"><span class="ms" style="font-size:20px;">archive</span><span class="ms" style="font-size:20px;">delete</span></span>
+                  </div>
+                  <div style="background:#fff;padding:18px 24px 0;">
+                    <div style="text-align:right;font-size:12px;color:#3f6ad8;text-decoration:underline;margin-bottom:12px;">View in browser</div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding-bottom:16px;">
+                      <span style="width:36px;height:36px;border-radius:9px;background:#1f2a2a;display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:21px;color:#2aa898;font-variation-settings:'FILL' 1;">auto_stories</span></span>
+                      <span style="font-size:16px;font-weight:700;"><span style="color:#1c1c1e;">deseret</span><span style="color:#0c7d70;">bookshelf</span></span>
+                    </div>
+                  </div>
+                  <div style="background:#fff;padding:18px 24px 26px;border-top:1px solid var(--separator-nonopaque);">
+                    <h2 class="ds-serif" style="font-size:29px;line-height:1.14;margin:2px 0 6px;color:#2b2620;">Unlimited Listening Starts Here</h2>
+                    <div style="color:#0c7d70;font-size:16px;margin-bottom:14px;">4,000+ audiobooks &amp; eBooks</div>
+                    <p style="font-size:15px;line-height:1.55;color:#4a4640;margin:0 0 16px;">Bookshelf+ opens up a library of 4,000+ audiobooks and eBooks — all in the app you already use. Read at home, listen on the drive, and pick up right where you left off.</p>
+                    <div style="width:44px;border-top:1px solid #cfccc6;margin:0 0 14px;"></div>
+                    <div style="border-bottom:1px solid #e6e3dd;padding-bottom:12px;font-size:15px;color:#2b2620;">Always clean, always wholesome</div>
+                    <div style="border-bottom:1px solid #e6e3dd;padding:12px 0;font-size:15px;color:#2b2620;">Exclusive titles you won't find anywhere else</div>
+                    <div style="padding:12px 0 18px;font-size:15px;color:#2b2620;">Listen or read offline, always ad free</div>
+                    <sc-if value="{{ platinum }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:inline-block;background:var(--brand-tint-14);color:#0c7d70;font-weight:700;font-size:11px;letter-spacing:.5px;padding:7px 13px;border-radius:999px;margin-bottom:14px;">PLATINUM MEMBER PRICE APPLIED</div>
+                    </sc-if>
+                    <div style="display:flex;gap:12px;">
+                      <div style="flex:1;border:1.5px solid #0c7d70;border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:5px;">
+                        <span style="align-self:flex-start;background:#0c7d70;color:#fff;font-size:10px;font-weight:700;letter-spacing:.5px;padding:4px 9px;border-radius:999px;">BEST VALUE</span>
+                        <span style="font-size:11px;letter-spacing:1.5px;color:#8a8680;margin-top:2px;">YEARLY</span>
+                        <span style="font-size:28px;font-weight:700;color:#2b2620;">{{ yPrice }}</span>
+                        <sc-if value="{{ yStrikeShow }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#a29e97;text-decoration:line-through;">{{ yStrike }}</span></sc-if>
+                        <span style="font-size:12px;color:#6b675f;">{{ emailYPer }}</span>
+                        <button onClick="{{ chooseYearly }}" style="margin-top:8px;border:none;background:#0c7d70;color:#fff;font-family:var(--font-text);font-weight:700;font-size:11px;letter-spacing:.5px;padding:12px;border-radius:999px;cursor:pointer;">CHOOSE YEARLY</button>
+                      </div>
+                      <div style="flex:1;border:1px solid #d8d5cf;border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:5px;">
+                        <span style="font-size:11px;letter-spacing:1.5px;color:#8a8680;margin-top:24px;">MONTHLY</span>
+                        <span style="font-size:28px;font-weight:700;color:#2b2620;">{{ mPrice }}</span>
+                        <sc-if value="{{ mStrikeShow }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#a29e97;text-decoration:line-through;">{{ mStrike }}</span></sc-if>
+                        <span style="font-size:12px;color:#6b675f;">Billed monthly</span>
+                        <button onClick="{{ chooseMonthly }}" style="margin-top:8px;border:1px solid #2b2620;background:transparent;color:#2b2620;font-family:var(--font-text);font-weight:700;font-size:11px;letter-spacing:.5px;padding:12px;border-radius:999px;cursor:pointer;">CHOOSE MONTHLY</button>
+                      </div>
+                    </div>
+                    <div style="text-align:center;font-size:13px;color:#6b675f;margin-top:16px;">Start with 7 days free. Cancel anytime.</div>
+                  </div>
+                  <div style="background:#efece7;padding:18px 24px 22px;font-size:11px;color:#8a8680;line-height:1.7;">Deseret Book Company<br/>57 West South Temple, Salt Lake City, UT 84101<br/><span style="color:#3f6ad8;text-decoration:underline;">Preference center</span> · <span style="color:#3f6ad8;text-decoration:underline;">Unsubscribe</span><br/>© 2026 Deseret Book Company. All rights reserved.</div>
+                </div>
+              </sc-if>
+
+              <!-- ============ WEB: LOGIN (Flow C) ============ -->
+              <sc-if value="{{ show.web_login }}" hint-placeholder-val="{{ true }}">
+                <div class="fx" style="min-height:100%;background:var(--bg-secondary);display:flex;flex-direction:column;">
+                  <div style="{{ browserBarStyle }}">
+                    <span class="ms" style="font-size:16px;color:var(--label-secondary);">lock</span>
+                    <span style="flex:1;text-align:center;font-size:15px;">deseretbook.chargebee.com</span>
+                    <span class="ms" style="font-size:18px;color:var(--label-secondary);">refresh</span>
+                  </div>
+                  <div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:34px 26px;gap:8px;">
+                    <span style="width:52px;height:52px;border-radius:50%;background:#1c1c1e;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-weight:700;font-size:20px;">DB</span>
+                    <h2 style="font-size:22px;font-weight:700;margin:12px 0 2px;">Sign in to continue</h2>
+                    <span style="color:var(--label-secondary);font-size:14px;text-align:center;margin-bottom:16px;">You arrived from your email. Sign in to link this subscription to your account.</span>
+                    <div style="width:100%;background:#fff;border:1px solid var(--separator-opaque);border-radius:10px;padding:14px 16px;color:var(--label-secondary);font-size:15px;">graciela.barrow@gmail.com</div>
+                    <div style="width:100%;background:#fff;border:1px solid var(--separator-opaque);border-radius:10px;padding:14px 16px;color:var(--label-tertiary);font-size:15px;">••••••••••</div>
+                    <div class="hs-blue" style="width:100%;margin-top:10px;border-radius:10px;">
+                      <button onClick="{{ next }}" style="width:100%;border:none;background:var(--system-blue);color:#fff;font-family:var(--font-text);font-weight:700;font-size:16px;padding:15px;border-radius:10px;cursor:pointer;">Sign In</button>
+                    </div>
+                    <span style="font-size:13px;color:var(--label-tertiary);margin-top:8px;">Standard checkout — post-login, not express.</span>
+                  </div>
+                  <sc-if value="{{ isIOS }}" hint-placeholder-val="{{ true }}"><div style="{{ safariBarStyle }}"><span class="ms">arrow_back_ios</span><span class="ms" style="color:var(--label-tertiary);">arrow_forward_ios</span><span class="ms">ios_share</span><span class="ms">menu_book</span><span class="ms">filter_none</span></div></sc-if>
+                </div>
+              </sc-if>
+
+              <!-- ============ WEB: PRICING (Flow B) ============ -->
+              <sc-if value="{{ show.web_pricing }}" hint-placeholder-val="{{ true }}">
+                <div class="fx" style="min-height:100%;background:var(--bg-secondary);display:flex;flex-direction:column;">
+                  <div style="{{ browserBarStyle }}">
+                    <span class="ms" style="font-size:16px;color:var(--label-secondary);">lock</span>
+                    <span style="flex:1;text-align:center;font-size:15px;">deseretbook.chargebee.com</span>
+                    <span class="ms" style="font-size:18px;color:var(--label-secondary);">refresh</span>
+                  </div>
+                  <div style="padding:22px 22px 26px;display:flex;flex-direction:column;">
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:6px;">
+                      <span style="width:46px;height:46px;border-radius:50%;background:#1c1c1e;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-weight:700;font-size:18px;">DB</span>
+                      <h2 style="font-size:22px;font-weight:700;margin:8px 0 0;">Choose your plan</h2>
+                      <span style="color:var(--label-secondary);font-size:14px;text-align:center;">Welcome back, Graciela — no need to sign in again.</span>
+                    </div>
+                    <sc-if value="{{ platinum }}" hint-placeholder-val="{{ true }}">
+                      <div style="align-self:center;margin:14px 0 4px;background:var(--brand-tint-14);color:var(--brand);font-weight:700;font-size:12px;letter-spacing:.5px;padding:7px 14px;border-radius:999px;">PLATINUM MEMBER PRICE APPLIED</div>
+                    </sc-if>
+                    <div onClick="{{ selectYearly }}" style="{{ planYearlyStyle }}">
+                      <sc-if value="{{ yearlySel }}" hint-placeholder-val="{{ true }}"><span style="width:26px;height:26px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><span class="ms" style="font-size:18px;color:#fff;">check</span></span></sc-if>
+                      <sc-if value="{{ yearlyUnsel }}" hint-placeholder-val="{{ true }}"><span style="width:26px;height:26px;border-radius:50%;border:2px solid var(--label-tertiary);flex:0 0 auto;"></span></sc-if>
+                      <div style="flex:1;min-width:0;"><div style="display:flex;align-items:center;gap:8px;"><span style="font-weight:700;font-size:18px;">Yearly</span><span style="background:var(--brand);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;">Best Value</span></div><div style="color:var(--label-secondary);font-size:14px;margin-top:2px;">{{ yPer }}</div></div>
+                      <div style="text-align:right;"><span style="font-size:19px;font-weight:600;color:var(--label-secondary);">{{ yPrice }}</span><sc-if value="{{ yStrikeShow }}" hint-placeholder-val="{{ true }}"><div style="font-size:13px;color:var(--label-tertiary);text-decoration:line-through;">{{ yStrike }}</div></sc-if></div>
+                    </div>
+                    <div onClick="{{ selectMonthly }}" style="{{ planMonthlyStyle }}">
+                      <sc-if value="{{ monthlySel }}" hint-placeholder-val="{{ true }}"><span style="width:26px;height:26px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><span class="ms" style="font-size:18px;color:#fff;">check</span></span></sc-if>
+                      <sc-if value="{{ monthlyUnsel }}" hint-placeholder-val="{{ true }}"><span style="width:26px;height:26px;border-radius:50%;border:2px solid var(--label-tertiary);flex:0 0 auto;"></span></sc-if>
+                      <div style="flex:1;min-width:0;"><div style="font-weight:700;font-size:18px;">Monthly</div><div style="color:var(--label-secondary);font-size:14px;margin-top:2px;">{{ mPer }}</div></div>
+                      <div style="text-align:right;"><span style="font-size:19px;font-weight:600;color:var(--label-secondary);">{{ mPrice }}</span><sc-if value="{{ mStrikeShow }}" hint-placeholder-val="{{ true }}"><div style="font-size:13px;color:var(--label-tertiary);text-decoration:line-through;">{{ mStrike }}</div></sc-if></div>
+                    </div>
+                    <div class="hs-blue" style="margin-top:22px;border-radius:10px;">
+                      <button onClick="{{ next }}" style="width:100%;border:none;background:var(--system-blue);color:#fff;font-family:var(--font-text);font-weight:700;font-size:16px;padding:15px;border-radius:10px;cursor:pointer;">Continue To Checkout</button>
+                    </div>
+                  </div>
+                  <sc-if value="{{ isIOS }}" hint-placeholder-val="{{ true }}"><div style="{{ safariBarStyle }}"><span class="ms">arrow_back_ios</span><span class="ms" style="color:var(--label-tertiary);">arrow_forward_ios</span><span class="ms">ios_share</span><span class="ms">menu_book</span><span class="ms">filter_none</span></div></sc-if>
+                </div>
+              </sc-if>
+
+              <!-- ============ WEB: ORDER ============ -->
+              <sc-if value="{{ show.web_order }}" hint-placeholder-val="{{ true }}">
+                <div class="fx" style="min-height:100%;background:var(--bg-secondary);display:flex;flex-direction:column;">
+                  <div style="{{ browserBarStyle }}">
+                    <span class="ms" style="font-size:16px;color:var(--label-secondary);">lock</span>
+                    <span style="flex:1;text-align:center;font-size:15px;">deseretbook.chargebee.com</span>
+                    <span class="ms" style="font-size:18px;color:var(--label-secondary);">refresh</span>
+                  </div>
+                  <div style="background:#fff;padding:16px 0 14px;display:flex;flex-direction:column;align-items:center;gap:8px;border-bottom:1px solid var(--separator-nonopaque);">
+                    <span style="width:44px;height:44px;border-radius:50%;background:#1c1c1e;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-weight:700;font-size:18px;">DB</span>
+                    <span style="color:var(--system-blue);font-weight:700;font-size:18px;">Your order</span>
+                  </div>
+                  <div style="flex:1;padding:26px 22px;display:flex;flex-direction:column;">
+                    <div style="font-size:30px;font-weight:700;">{{ selectedPrice }}</div>
+                    <div style="font-size:17px;margin-top:2px;">Bookshelf+ · {{ planLabel }}</div>
+                    <sc-if value="{{ platinum }}" hint-placeholder-val="{{ true }}"><div style="margin-top:10px;color:var(--brand);font-weight:600;font-size:14px;display:flex;align-items:center;gap:6px;"><span class="ms" style="font-size:17px;">verified</span>Platinum member price applied</div></sc-if>
+                    <div style="color:var(--system-blue);font-size:16px;margin-top:18px;">Apply coupon</div>
+                  </div>
+                  <div style="padding:0 22px 22px;">
+                    <div style="background:#fff;border-radius:8px;padding:12px 14px;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm);margin-bottom:16px;"><span class="ms" style="color:var(--system-blue);font-size:18px;">info</span>You will be charged after the 7-day trial.</div>
+                    <div class="hs-blue" style="border-radius:8px;">
+                      <button onClick="{{ next }}" style="width:100%;border:none;background:var(--system-blue);color:#fff;font-family:var(--font-text);font-weight:700;font-size:17px;padding:16px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">Proceed To Checkout <span style="font-size:18px;">→</span></button>
+                    </div>
+                  </div>
+                  <sc-if value="{{ isIOS }}" hint-placeholder-val="{{ true }}"><div style="{{ safariBarStyle }}"><span class="ms">arrow_back_ios</span><span class="ms" style="color:var(--label-tertiary);">arrow_forward_ios</span><span class="ms">ios_share</span><span class="ms">menu_book</span><span class="ms">filter_none</span></div></sc-if>
+                </div>
+              </sc-if>
+
+              <!-- ============ WEB: PAYMENT ============ -->
+              <sc-if value="{{ show.web_payment }}" hint-placeholder-val="{{ true }}">
+                <div class="fx" style="min-height:100%;background:var(--bg-secondary);display:flex;flex-direction:column;">
+                  <div style="{{ browserBarStyle }}">
+                    <span class="ms" style="font-size:16px;color:var(--label-secondary);">lock</span>
+                    <span style="flex:1;text-align:center;font-size:15px;">deseretbook.chargebee.com</span>
+                    <span class="ms" style="font-size:18px;color:var(--label-secondary);">refresh</span>
+                  </div>
+                  <div style="background:#fff;padding:16px 0 14px;display:flex;flex-direction:column;align-items:center;gap:8px;border-bottom:1px solid var(--separator-nonopaque);">
+                    <span style="width:44px;height:44px;border-radius:50%;background:#1c1c1e;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-weight:700;font-size:18px;">DB</span>
+                    <span style="color:var(--system-blue);font-weight:700;font-size:18px;">Add your payment details</span>
+                  </div>
+                  <div style="flex:1;padding:24px 22px;display:flex;flex-direction:column;gap:14px;">
+                    <div style="background:#fff;border:1px solid var(--separator-opaque);border-radius:10px;padding:15px 16px;display:flex;align-items:center;gap:10px;color:var(--label-secondary);font-size:15px;"><span class="ms" style="font-size:20px;">credit_card</span>Card Number</div>
+                    <div style="display:flex;gap:14px;">
+                      <div style="flex:1;background:#fff;border:1px solid var(--separator-opaque);border-radius:10px;padding:15px 16px;color:var(--label-secondary);font-size:15px;">Expiry</div>
+                      <div style="flex:1;background:#fff;border:1px solid var(--separator-opaque);border-radius:10px;padding:15px 16px;color:var(--label-secondary);font-size:15px;">CVV</div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;margin-top:4px;"><x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Toggle" checked="{{ true }}" tint="var(--system-blue)" hint-size="51px,31px"></x-import><span style="font-size:14px;color:var(--label-secondary);">Use my billing address as card address</span></div>
+                  </div>
+                  <div style="padding:0 22px 22px;">
+                    <div class="hs-blue" style="border-radius:8px;">
+                      <button onClick="{{ next }}" style="width:100%;border:none;background:var(--system-blue);color:#fff;font-family:var(--font-text);font-weight:700;font-size:17px;padding:16px;border-radius:8px;cursor:pointer;">Next</button>
+                    </div>
+                  </div>
+                  <sc-if value="{{ isIOS }}" hint-placeholder-val="{{ true }}"><div style="{{ safariBarStyle }}"><span class="ms">arrow_back_ios</span><span class="ms" style="color:var(--label-tertiary);">arrow_forward_ios</span><span class="ms">ios_share</span><span class="ms">menu_book</span><span class="ms">filter_none</span></div></sc-if>
+                </div>
+              </sc-if>
+
+              <!-- ============ WEB: COMPLETE ============ -->
+              <sc-if value="{{ show.web_complete }}" hint-placeholder-val="{{ true }}">
+                <div class="fx" style="min-height:100%;background:var(--bg-secondary);display:flex;flex-direction:column;">
+                  <div style="{{ browserBarStyle }}">
+                    <span class="ms" style="font-size:16px;color:var(--label-secondary);">lock</span>
+                    <span style="flex:1;text-align:center;font-size:15px;">deseretbook.chargebee.com</span>
+                    <span class="ms" style="font-size:18px;color:var(--label-secondary);">refresh</span>
+                  </div>
+                  <div style="background:#fff;padding:16px 0 14px;display:flex;flex-direction:column;align-items:center;gap:8px;border-bottom:1px solid var(--separator-nonopaque);">
+                    <span style="width:44px;height:44px;border-radius:50%;background:#1c1c1e;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-weight:700;font-size:18px;">DB</span>
+                    <span style="color:var(--system-blue);font-weight:700;font-size:18px;">Complete your order</span>
+                  </div>
+                  <div style="flex:1;padding:20px 22px;display:flex;flex-direction:column;gap:2px;">
+                    <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:600;"><span>Bookshelf+ · {{ planLabel }}</span><span>{{ selectedPrice }}</span></div>
+                    <div style="font-size:12px;color:var(--label-tertiary);margin-bottom:16px;">You will be charged after the 7-day trial.</div>
+                    <div style="border-top:1px solid var(--separator-nonopaque);"></div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--separator-nonopaque);"><div><div style="font-size:12px;color:var(--label-tertiary);">Account</div><div style="font-size:14px;">graciela.barrow@gmail.com</div></div><span style="color:var(--system-blue);font-size:14px;">Edit</span></div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--separator-nonopaque);"><div><div style="font-size:12px;color:var(--label-tertiary);">Payment</div><div style="font-size:14px;display:flex;align-items:center;gap:6px;"><span class="ms" style="font-size:16px;color:var(--system-blue);">credit_card</span>ending 6883</div></div><span style="color:var(--system-blue);font-size:14px;">Edit</span></div>
+                  </div>
+                  <div style="padding:0 22px 22px;">
+                    <div class="hs-blue" style="border-radius:8px;">
+                      <button onClick="{{ next }}" style="width:100%;border:none;background:var(--system-blue);color:#fff;font-family:var(--font-text);font-weight:700;font-size:17px;padding:16px;border-radius:8px;cursor:pointer;">Subscribe</button>
+                    </div>
+                    <div style="text-align:center;font-size:12px;color:var(--label-tertiary);margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;"><span class="ms" style="font-size:14px;">lock</span>Secure Checkout by Chargebee</div>
+                  </div>
+                  <sc-if value="{{ isIOS }}" hint-placeholder-val="{{ true }}"><div style="{{ safariBarStyle }}"><span class="ms">arrow_back_ios</span><span class="ms" style="color:var(--label-tertiary);">arrow_forward_ios</span><span class="ms">ios_share</span><span class="ms">menu_book</span><span class="ms">filter_none</span></div></sc-if>
+                </div>
+              </sc-if>
+
+              <!-- ============ UNLOCKED (converged outcome) ============ -->
+              <sc-if value="{{ show.unlocked }}" hint-placeholder-val="{{ true }}">
+                <div class="fx" data-brand="bookshelf" style="min-height:100%;background:#fff;display:flex;flex-direction:column;padding:8px 20px 26px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0 10px;">
+                    <span style="width:34px;height:34px;border-radius:50%;background:var(--fill-tertiary);display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:20px;">{{ dismissIcon }}</span></span>
+                    <span style="width:34px;height:34px;border-radius:50%;background:var(--fill-tertiary);display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:20px;">more_horiz</span></span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:10px;background:color-mix(in srgb,var(--system-green) 12%,#fff);border:1px solid color-mix(in srgb,var(--system-green) 30%,#fff);border-radius:12px;padding:12px 14px;margin-bottom:14px;">
+                    <span class="ms" style="font-size:22px;color:var(--system-green);font-variation-settings:'FILL' 1;">check_circle</span>
+                    <div style="font-size:14px;line-height:1.4;"><strong>You're now a Bookshelf+ member.</strong><br/><span style="color:var(--label-secondary);">Your 7-day free trial has started.</span></div>
+                  </div>
+                  <img src="assets/cover-eba.png" alt="Every Beat After" style="width:190px;height:auto;align-self:center;border-radius:6px;box-shadow:0 10px 26px rgba(0,0,0,0.22);margin:2px 0 14px;"/>
+                  <div style="text-align:center;display:flex;flex-direction:column;gap:3px;margin-bottom:16px;">
+                    <span style="color:var(--brand);font-weight:700;font-size:15px;">bookshelf +</span>
+                    <span class="ds-title-2" style="margin:0;">Every Beat After</span>
+                    <span style="letter-spacing:1px;font-size:13px;font-weight:600;color:var(--label-secondary);">SARA B. LARSON</span>
+                  </div>
+                  <div class="hs" style="width:100%;">
+                    <button onClick="{{ reset }}" style="width:100%;border:none;background:var(--brand);color:#fff;font-family:var(--font-text);font-weight:600;font-size:17px;padding:15px;border-radius:999px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 1;">play_arrow</span>Listen Now</button>
+                  </div>
+                  <button onClick="{{ reset }}" style="align-self:center;margin-top:14px;border:none;background:transparent;color:var(--label-secondary);font-family:var(--font-text);font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;"><span class="ms" style="font-size:17px;">replay</span>Restart this flow</button>
+                </div>
+              </sc-if>
+
+              <!-- ============ LOADING SPINNER (surface handoff) ============ -->
+              <sc-if value="{{ handoff }}" hint-placeholder-val="{{ false }}">
+                <div class="fade" style="position:absolute;inset:0;z-index:20;background:rgba(255,255,255,0.74);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;">
+                  <span class="spin" style="width:40px;height:40px;border-radius:50%;border:3px solid rgba(0,0,0,0.12);border-top-color:var(--brand);display:block;"></span>
+                </div>
+              </sc-if>
+
+            </div>
+
+            <sc-if value="{{ isIOS }}" hint-placeholder-val="{{ true }}">
+              <div style="flex:0 0 auto;height:26px;display:flex;align-items:center;justify-content:center;background:transparent;position:relative;z-index:5;"><div style="width:135px;height:5px;border-radius:3px;background:{{ homeBarColor }};"></div></div>
+            </sc-if>
+            <sc-if value="{{ isAndroid }}" hint-placeholder-val="{{ true }}">
+              <div style="flex:0 0 auto;height:44px;display:flex;align-items:center;justify-content:space-around;background:{{ androidBarBg }};color:{{ androidBarFg }};z-index:5;">
+                <span class="ms" style="font-size:20px;">change_history</span>
+                <span class="ms" style="font-size:20px;">radio_button_unchecked</span>
+                <span class="ms" style="font-size:18px;">crop_square</span>
+              </div>
+            </sc-if>
+
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--label-secondary);display:flex;align-items:center;gap:8px;">
+          <span class="ms" style="font-size:16px;">touch_app</span>Tap the pulsing control to advance · <span onClick="{{ reset }}" style="color:var(--brand);cursor:pointer;font-weight:600;">Restart</span>
+        </div>
+      </div>
+
+      <aside style="flex:1;min-width:280px;max-width:400px;display:flex;flex-direction:column;gap:18px;">
+        <div style="background:#fff;border-radius:18px;padding:20px;box-shadow:var(--shadow-sm);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <span style="{{ surfaceBadgeStyle }}">{{ surfaceLabel }}</span>
+            <span style="font-size:13px;color:var(--label-tertiary);">{{ stepLabel }}</span>
+          </div>
+          <h3 style="margin:8px 0 6px;font-size:20px;font-weight:700;">{{ capTitle }}</h3>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:var(--label-secondary);">{{ capDesc }}</p>
+        </div>
+
+        <div style="background:#fff;border-radius:18px;padding:20px;box-shadow:var(--shadow-sm);">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--label-tertiary);text-transform:uppercase;margin-bottom:14px;">{{ flowSummary }}</div>
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <sc-for list="{{ railSteps }}" as="r" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span style="{{ r.dotStyle }}">
+                  <sc-if value="{{ r.done }}" hint-placeholder-val="{{ true }}"><span class="ms" style="font-size:16px;">check</span></sc-if>
+                  <sc-if value="{{ r.notDone }}" hint-placeholder-val="{{ true }}"><span class="ms" style="font-size:15px;">{{ r.icon }}</span></sc-if>
+                </span>
+                <span style="{{ r.labelStyle }}">{{ r.label }}</span>
+              </div>
+              <sc-if value="{{ r.connector }}" hint-placeholder-val="{{ true }}"><div style="{{ r.lineStyle }}"></div></sc-if>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;">
+          <button onClick="{{ back }}" style="flex:1;background:#fff;border:1px solid var(--separator-opaque);border-radius:12px;padding:13px;font-family:var(--font-text);font-weight:600;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;color:var(--label-primary);"><span class="ms" style="font-size:18px;">arrow_back</span>Back</button>
+          <button onClick="{{ next }}" style="flex:1;background:var(--brand);border:none;border-radius:12px;padding:13px;font-family:var(--font-text);font-weight:600;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;color:#fff;">Next<span class="ms" style="font-size:18px;">arrow_forward</span></button>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { flow: 'a', platinum: false, plan: 'yearly', step: 0, handoff: null, toast: false };
+
+  flows = {
+    a: ['book_detail','paywall_pricing','web_order','web_payment','web_complete','unlocked'],
+    b: ['book_detail','paywall_benefits','web_pricing','web_order','web_payment','web_complete','unlocked'],
+    c: ['book_detail','paywall_benefits','inbox_email','web_login','web_order','web_payment','web_complete','unlocked'],
+  };
+  surfaceOf = {
+    book_detail:'APP', paywall_pricing:'APP', paywall_benefits:'APP', info_banner:'APP',
+    inbox_email:'EMAIL', web_pricing:'WEB', web_login:'WEB', web_order:'WEB',
+    web_payment:'WEB', web_complete:'WEB', unlocked:'APP',
+  };
+  meta = {
+    book_detail:{t:'Subscribe intent', d:'The user hits gated content or taps Subscribe on a Bookshelf+ title.'},
+    paywall_pricing:{t:'Paywall — price shown', d:'Plans and prices are shown in-app. Platinum members see their discount applied automatically, so they decide before leaving the app.'},
+    paywall_benefits:{t:'Benefits paywall', d:'Value props only — no pricing shown in-app, per legal guidance for international customers. A single CTA sends them to the web.'},
+    info_banner:{t:'Info banner', d:'Play Store policy blocks pricing and any purchase path in the app. Instead of a dead end, a "Learn More" CTA triggers a follow-up email.'},
+    inbox_email:{t:'Email follow-up', d:'The email bridges the Play Store gap. Platinum members see their member price right here and pick a tier.'},
+    web_pricing:{t:'Select plan on web', d:'Full lineup and prices. The user arrives already known — no second login required.'},
+    web_login:{t:'Login required', d:'Coming from email, the user arrives unknown and must sign in before a standard (non-express) checkout.'},
+    web_order:{t:'Your order', d:'Arrives already recognized. Express checkout — no re-authentication needed.'},
+    web_payment:{t:'Payment details', d:'The user enters card details to continue.'},
+    web_complete:{t:'Complete your order', d:'A final review, then confirm the subscription.'},
+    processing:{t:'Subscription linked', d:'Payment is processed on the web and the subscription is tied to the Bookshelf+ account.'},
+    unlocked:{t:'Content unlocked', d:'The app refreshes and prompts the user back in. Identical outcome for every platform and plan name.'},
+  };
+  surfaceMeta = {
+    APP:{label:'App', color:'#0c958b', icon:'smartphone'},
+    WEB:{label:'Web', color:'rgb(21,112,239)', icon:'language'},
+    EMAIL:{label:'Email', color:'rgb(122,90,248)', icon:'mail'},
+    SYSTEM:{label:'System', color:'rgb(120,120,128)', icon:'dns'},
+  };
+
+  get screens(){ return this.flows[this.state.flow]; }
+  get screen(){ return this.screens[this.state.step]; }
+
+  priceFor(plan){
+    const p = this.state.platinum;
+    if (plan === 'yearly') return p
+      ? { price:'$109.00', per:'Billed yearly — save $22.88', strike:'$129' }
+      : { price:'$129.00', per:'Just $10.75 · billed annually', strike:null };
+    return p
+      ? { price:'$10.99', per:'Billed monthly · cancel anytime', strike:'$12.99' }
+      : { price:'$12.99', per:'Billed monthly · cancel anytime', strike:null };
+  }
+
+  handoffFor(from, to){
+    return (from !== to) ? true : null;
+  }
+
+  goto(step){
+    const s = Math.max(0, Math.min(step, this.screens.length - 1));
+    if (s === this.state.step) return;
+    const from = this.surfaceOf[this.screens[this.state.step]];
+    const to = this.surfaceOf[this.screens[s]];
+    const ho = s > this.state.step ? this.handoffFor(from, to) : null;
+    clearTimeout(this._t);
+    if (ho){
+      this.setState({ handoff: ho });
+      this._t = setTimeout(() => this.setState({ step: s, handoff: null }), 900);
+    } else {
+      this.setState({ step: s, handoff: null });
+    }
+  }
+  next = () => this.goto(this.state.step + 1);
+  back = () => { clearTimeout(this._t); this.setState(st => ({ step: Math.max(0, st.step - 1), handoff: null, toast: false })); };
+  reset = () => { clearTimeout(this._t); this.setState({ step: 0, handoff: null, toast: false }); };
+  setFlow = (f) => { clearTimeout(this._t); this.setState({ flow: f, step: 0, handoff: null, toast: false }); };
+  pickA = () => this.setFlow('a');
+  pickB = () => this.setFlow('b');
+  pickC = () => this.setFlow('c');
+  setPlatinum = (v) => this.setState({ platinum: !!v });
+  togglePlatinum = () => this.setState(s => ({ platinum: !s.platinum }));
+  selectYearly = () => this.setState({ plan: 'yearly' });
+  selectMonthly = () => this.setState({ plan: 'monthly' });
+  chooseYearly = () => { this.setState({ plan: 'yearly' }); this.goto(this.state.step + 1); };
+  chooseMonthly = () => { this.setState({ plan: 'monthly' }); this.goto(this.state.step + 1); };
+  androidLearnMore = () => { clearTimeout(this._t); this.setState({ toast: true }); this._t = setTimeout(() => this.setState(s => ({ step: Math.min(s.step + 1, this.screens.length - 1), toast: false })), 1600); };
+
+  componentWillUnmount(){ clearTimeout(this._t); }
+
+  planCardStyle(sel){
+    return {
+      display:'flex', alignItems:'center', gap:14, padding:'16px 18px', borderRadius:16,
+      cursor:'pointer', transition:'all .15s ease', marginTop:12,
+      border: sel ? '1.5px solid var(--brand)' : '1.5px solid transparent',
+      background: sel ? 'color-mix(in srgb, var(--brand) 7%, #fff)' : 'var(--fill-quaternary)',
+    };
+  }
+  tabStyle(active){
+    return {
+      flex:1, display:'flex', flexDirection:'column', gap:1, alignItems:'center', justifyContent:'center',
+      padding:'10px 8px', borderRadius:11, border:'none', cursor:'pointer', fontFamily:'var(--font-text)',
+      background: active ? 'var(--brand)' : 'transparent',
+      color: active ? '#fff' : 'var(--label-secondary)',
+      transition:'all .15s ease',
+    };
+  }
+
+  renderVals(){
+    const scr = this.screen;
+    const flow = this.state.flow;
+    const isAndroid = flow === 'c';
+    const isIOS = !isAndroid;
+    const y = this.priceFor('yearly');
+    const m = this.priceFor('monthly');
+    const plan = this.state.plan;
+    const sel = this.priceFor(plan);
+    const surface = this.surfaceOf[scr];
+    const sm = this.surfaceMeta[surface];
+
+    // show map
+    const show = {};
+    Object.keys(this.surfaceOf).forEach(k => { show[k] = (k === scr); });
+
+    // status bar theme: light content only on the teal processing screen
+    const statusTheme = 'dark';
+    const bodyBg = '#fff';
+    const homeBarColor = 'rgba(0,0,0,0.85)';
+
+    // rail groups
+    const groups = [];
+    this.screens.forEach((s, i) => {
+      const sf = this.surfaceOf[s];
+      const last = groups[groups.length - 1];
+      if (last && last.surface === sf) last.end = i;
+      else groups.push({ surface: sf, start: i, end: i });
+    });
+    const cur = this.state.step;
+    const railSteps = groups.map((g, idx) => {
+      const active = cur >= g.start && cur <= g.end;
+      const done = cur > g.end;
+      const meta = this.surfaceMeta[g.surface];
+      const dotBg = done ? 'var(--system-green)' : active ? meta.color : 'var(--fill-secondary)';
+      const dotFg = (done || active) ? '#fff' : 'var(--label-tertiary)';
+      return {
+        label: meta.label,
+        icon: meta.icon,
+        done,
+        notDone: !done,
+        connector: idx < groups.length - 1,
+        dotStyle: { width:30, height:30, borderRadius:'50%', flex:'0 0 auto', display:'flex', alignItems:'center', justifyContent:'center', background:dotBg, color:dotFg },
+        labelStyle: { fontSize:15, fontWeight: active ? 700 : 500, color: (done||active) ? 'var(--label-primary)' : 'var(--label-tertiary)' },
+        lineStyle: { width:2, height:14, marginLeft:14, background: done ? 'var(--system-green)' : 'var(--separator-opaque)' },
+      };
+    });
+
+    const summaries = {
+      a: '2 surfaces · one session · no re-login',
+      b: '2 surfaces · pricing lives on the web',
+      c: '3 surfaces · email bridge · login required',
+    };
+
+    return {
+      // controls
+      pickA:this.pickA, pickB:this.pickB, pickC:this.pickC,
+      setPlatinum:this.setPlatinum, togglePlatinum:this.togglePlatinum, platinum:this.state.platinum,
+      platinumTrackStyle:{ position:'relative', width:51, height:31, flex:'0 0 auto', border:'none', padding:0, borderRadius:9999, cursor:'pointer', background: this.state.platinum ? 'var(--brand)' : 'var(--fill-primary)', transition:'background .25s ease' },
+      platinumKnobStyle:{ position:'absolute', top:2, left: this.state.platinum ? 22 : 2, width:27, height:27, borderRadius:'50%', background:'#fff', boxShadow:'0 3px 8px rgba(0,0,0,0.15)', transition:'left .25s cubic-bezier(0.32,0.72,0,1)' },
+      tabAStyle:this.tabStyle(flow==='a'), tabBStyle:this.tabStyle(flow==='b'), tabCStyle:this.tabStyle(flow==='c'),
+      next:this.next, back:this.back, reset:this.reset,
+      selectYearly:this.selectYearly, selectMonthly:this.selectMonthly,
+      chooseYearly:this.chooseYearly, chooseMonthly:this.chooseMonthly,
+
+      // frame / chrome
+      isIOS, isAndroid, statusTheme, statusFg: '#000', bodyBg, homeBarColor,
+      frameRadius: isAndroid ? '38px' : '54px',
+      screenRadius: isAndroid ? '28px' : '44px',
+      androidBarBg: '#ffffff',
+      androidBarFg: '#1c1c1e',
+      dismissIcon: isAndroid ? 'arrow_back' : 'keyboard_arrow_down',
+      browserBarStyle: { flex:'0 0 auto', margin:'10px 12px', display:'flex', alignItems:'center', gap:10, background:'#fff', borderRadius:'999px', padding:'11px 18px', boxShadow:'var(--shadow-sm)', color:'var(--label-primary)' },
+      safariBarStyle: { flex:'0 0 auto', display:'flex', alignItems:'center', justifyContent:'space-around', padding:'10px 22px 6px', color:'var(--label-primary)', fontSize:'20px' },
+
+      // screen switch + overlay
+      show,
+      handoff: this.state.handoff,
+      toast: this.state.toast,
+      androidLearnMore: this.androidLearnMore,
+      emailYPer: this.state.platinum ? 'Billed yearly — save $22.88' : 'Billed yearly — save $26.88',
+
+      // pricing
+      yPrice:y.price, yPer:y.per, yStrike:y.strike, yStrikeShow:!!y.strike,
+      mPrice:m.price, mPer:m.per, mStrike:m.strike, mStrikeShow:!!m.strike,
+      selectedPrice:sel.price, planLabel: plan==='yearly' ? 'Yearly' : 'Monthly',
+      trialNote: plan==='yearly' ? ('Then ' + y.price + '/year after your free trial. Cancel anytime.') : ('Then ' + m.price + '/month after your free trial. Cancel anytime.'),
+      yearlySel: plan==='yearly', yearlyUnsel: plan!=='yearly',
+      monthlySel: plan==='monthly', monthlyUnsel: plan!=='monthly',
+      planYearlyStyle:this.planCardStyle(plan==='yearly'),
+      planMonthlyStyle:this.planCardStyle(plan==='monthly'),
+
+      // content lists
+      benefitsA: ['Unlimited access to 1,000+ eBooks & audiobooks','New titles added every week','Listen and read offline, ad-free'],
+      benefitsB: ['Always clean, always wholesome',"Exclusive titles you won't find anywhere else",'Listen or read offline, always ad-free'],
+
+      // rail + caption
+      railSteps,
+      flowSummary: summaries[flow],
+      surfaceLabel: sm.label,
+      surfaceBadgeStyle: { background: 'color-mix(in srgb,' + sm.color + ' 14%, #fff)', color: sm.color, fontWeight:700, fontSize:12, letterSpacing:'.5px', padding:'5px 11px', borderRadius:'999px', textTransform:'uppercase' },
+      stepLabel: 'Step ' + (cur+1) + ' of ' + this.screens.length,
+      capTitle: this.meta[scr] ? this.meta[scr].t : '',
+      capDesc: (scr === 'paywall_benefits' && isAndroid) ? 'Play Store policy blocks pricing and purchases in the app. Instead of a dead end, an "I\'d Like to Know More" CTA triggers a follow-up email.' : (this.meta[scr] ? this.meta[scr].d : ''),
+    };
+  }
+}
+</script>
+</body>
+</html>

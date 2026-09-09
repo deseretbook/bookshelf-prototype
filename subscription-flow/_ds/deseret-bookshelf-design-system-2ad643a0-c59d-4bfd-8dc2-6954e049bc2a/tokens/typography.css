@@ -1,0 +1,39 @@
+/* Deseret Bookshelf+ — Type scale.
+   iOS Human Interface text styles (values verbatim from the kit's Text styles variables).
+   Use the .ds-* classes or the CSS custom props. Sizes are px; never snap to a grid. */
+:root {
+  --type-large-title:   34px;  --type-large-title-lh:   41px;
+  --type-title-1:       28px;  --type-title-1-lh:       34px;
+  --type-title-2:       22px;  --type-title-2-lh:       28px;
+  --type-title-3:       20px;  --type-title-3-lh:       25px;
+  --type-headline:      17px;  --type-headline-lh:      22px;
+  --type-body:          17px;  --type-body-lh:          22px;
+  --type-callout:       16px;  --type-callout-lh:       21px;
+  --type-subhead:       15px;  --type-subhead-lh:       20px;
+  --type-footnote:      13px;  --type-footnote-lh:      18px;
+  --type-caption-1:     12px;  --type-caption-1-lh:     16px;
+  --type-caption-2:     11px;  --type-caption-2-lh:     13px;
+  /* Marketing / web display scale (from display-* variables) */
+  --type-display-xl:    60px;  --type-display-xl-lh:    72px;
+  --type-display-lg:    48px;  --type-display-lg-lh:    60px;
+  --type-display-md:    36px;  --type-display-md-lh:    44px;
+  --type-display-sm:    30px;  --type-display-sm-lh:    38px;
+  --type-display-xs:    24px;  --type-display-xs-lh:    32px;
+}
+
+.ds-large-title { font-family: var(--font-display); font-size: var(--type-large-title); line-height: var(--type-large-title-lh); font-weight: var(--weight-bold); letter-spacing: 0.4px; }
+.ds-title-1 { font-family: var(--font-display); font-size: var(--type-title-1); line-height: var(--type-title-1-lh); font-weight: var(--weight-bold); letter-spacing: 0.36px; }
+.ds-title-2 { font-family: var(--font-display); font-size: var(--type-title-2); line-height: var(--type-title-2-lh); font-weight: var(--weight-bold); letter-spacing: 0.35px; }
+.ds-title-3 { font-family: var(--font-display); font-size: var(--type-title-3); line-height: var(--type-title-3-lh); font-weight: var(--weight-semibold); letter-spacing: 0.38px; }
+.ds-headline { font-family: var(--font-text); font-size: var(--type-headline); line-height: var(--type-headline-lh); font-weight: var(--weight-semibold); letter-spacing: -0.43px; }
+.ds-body { font-family: var(--font-text); font-size: var(--type-body); line-height: var(--type-body-lh); font-weight: var(--weight-regular); letter-spacing: -0.43px; }
+.ds-callout { font-family: var(--font-text); font-size: var(--type-callout); line-height: var(--type-callout-lh); font-weight: var(--weight-regular); letter-spacing: -0.31px; }
+.ds-subhead { font-family: var(--font-text); font-size: var(--type-subhead); line-height: var(--type-subhead-lh); font-weight: var(--weight-regular); letter-spacing: -0.23px; }
+.ds-footnote { font-family: var(--font-text); font-size: var(--type-footnote); line-height: var(--type-footnote-lh); font-weight: var(--weight-regular); letter-spacing: -0.08px; }
+.ds-caption-1 { font-family: var(--font-text); font-size: var(--type-caption-1); line-height: var(--type-caption-1-lh); font-weight: var(--weight-regular); }
+.ds-caption-2 { font-family: var(--font-text); font-size: var(--type-caption-2); line-height: var(--type-caption-2-lh); font-weight: var(--weight-regular); }
+.ds-display-xl { font-family: var(--font-display); font-size: var(--type-display-xl); line-height: var(--type-display-xl-lh); font-weight: var(--weight-bold); letter-spacing: -1.2px; }
+.ds-display-lg { font-family: var(--font-display); font-size: var(--type-display-lg); line-height: var(--type-display-lg-lh); font-weight: var(--weight-bold); letter-spacing: -0.96px; }
+.ds-display-md { font-family: var(--font-display); font-size: var(--type-display-md); line-height: var(--type-display-md-lh); font-weight: var(--weight-bold); letter-spacing: -0.72px; }
+.ds-serif { font-family: var(--font-serif); }
+.ds-mono { font-family: var(--font-mono); }

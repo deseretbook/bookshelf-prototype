@@ -1,0 +1,141 @@
+/* Deseret Bookshelf+ — Semantic tokens.
+   Clean aliases the components consume, mapped from the exact values in fig-tokens.css.
+   iOS system palette (light default) + the kit's teal brand. Three brand tint modes:
+   Deseret (teal, default), Bookshelf (orange), VIP (cyan) — switch via [data-brand] on a root. */
+:root {
+  /* ---- Brand (Deseret / teal — the kit default) ---- */
+  --brand-50:  rgb(240,253,250);
+  --brand-100: rgb(204,251,241);
+  --brand-200: rgb(152,247,230);
+  --brand-300: rgb(93,235,215);
+  --brand-400: rgb(45,214,195);
+  --brand-500: rgb(21,186,170);
+  --brand-600: rgb(12,149,139);   /* primary brand */
+  --brand-700: rgb(15,128,121);   /* brand hover / pressed */
+  --brand-800: rgb(16,95,91);
+  --brand: var(--brand-600);
+  --brand-hover: var(--brand-700);
+  --brand-tint-14: rgba(12,149,139,0.14);
+  --brand-tint-20: rgba(12,149,139,0.2);
+  --on-brand: rgb(255,255,255);
+
+  /* ---- iOS labels (light) ---- */
+  --label-primary: rgb(0,0,0);
+  --label-secondary: rgba(60,60,67,0.6);
+  --label-tertiary: rgba(60,60,67,0.3);
+  --label-quaternary: rgba(60,60,67,0.18);
+  --label-vibrant-secondary: rgb(114,114,114);
+  --on-color: rgb(255,255,255);
+
+  /* ---- iOS backgrounds (light) ---- */
+  --bg-primary: rgb(255,255,255);
+  --bg-secondary: rgb(242,242,247);
+  --bg-tertiary: rgb(255,255,255);
+  --bg-grouped-primary: rgb(242,242,247);
+  --bg-grouped-secondary: rgb(255,255,255);
+  --bg-elevated: rgb(255,255,255);
+
+  /* ---- iOS fills (translucent grays) ---- */
+  --fill-primary: rgba(120,120,128,0.2);
+  --fill-secondary: rgba(120,120,128,0.16);
+  --fill-tertiary: rgba(118,118,128,0.12);
+  --fill-quaternary: rgba(116,116,128,0.08);
+
+  /* ---- Separators ---- */
+  --separator-opaque: rgb(198,198,200);
+  --separator-nonopaque: rgba(60,60,67,0.29);
+
+  /* ---- iOS system accent colors ---- */
+  --system-blue:   rgb(21,112,239);
+  --system-green:  rgb(23,178,106);
+  --system-indigo: rgb(122,90,248);
+  --system-orange: rgb(245,128,10);
+  --system-pink:   rgb(246,61,104);
+  --system-purple: rgb(203,48,224);
+  --system-red:    rgb(217,45,32);
+  --system-teal:   rgb(0,195,208);
+  --system-yellow: rgb(234,170,8);
+  --system-mint:   rgb(0,200,179);
+  --system-cyan:   rgb(8,151,184);
+  --system-brown:  rgb(172,127,94);
+
+  /* ---- Semantic status ---- */
+  --success: var(--system-green);
+  --warning: var(--system-orange);
+  --danger:  var(--system-red);
+  --info:    var(--system-blue);
+
+  /* ---- Radii (from Radius collection) ---- */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-full: 9999px;
+
+  /* ---- Spacing (from Spacing collection, 4pt base) ---- */
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 8px;
+  --space-4: 12px;
+  --space-5: 16px;
+  --space-6: 20px;
+  --space-7: 24px;
+  --space-8: 32px;
+  --space-9: 40px;
+  --space-10: 48px;
+
+  /* ---- Elevation (iOS material shadows) ---- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.10);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.16), 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-menu: 0 10px 40px rgba(0,0,0,0.22);
+
+  /* ---- Motion ---- */
+  --ease-ios: cubic-bezier(0.32, 0.72, 0, 1); /* @kind other */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --dur-fast: 150ms; /* @kind other */
+  --dur-base: 250ms; /* @kind other */
+  --dur-slow: 400ms; /* @kind other */
+}
+
+/* ---- Brand tint modes ---- */
+[data-brand="bookshelf"] {
+  --brand-500: rgb(246,154,55);
+  --brand-600: rgb(210,110,9);
+  --brand-700: rgb(180,92,6);
+  --brand: var(--brand-600);
+  --brand-hover: var(--brand-700);
+  --brand-tint-14: rgba(210,110,9,0.14);
+  --brand-tint-20: rgba(210,110,9,0.2);
+}
+[data-brand="vip"] {
+  --brand-500: rgb(34,211,238);
+  --brand-600: rgb(8,151,184);
+  --brand-700: rgb(14,116,144);
+  --brand: var(--brand-600);
+  --brand-hover: var(--brand-700);
+  --brand-tint-14: rgba(8,151,184,0.14);
+  --brand-tint-20: rgba(8,151,184,0.2);
+}
+
+/* ---- Dark mode ---- */
+[data-theme="dark"] {
+  --label-primary: rgb(255,255,255);
+  --label-secondary: rgba(235,235,245,0.6);
+  --label-tertiary: rgba(235,235,245,0.3);
+  --label-quaternary: rgba(235,235,245,0.18);
+  --bg-primary: rgb(0,0,0);
+  --bg-secondary: rgb(28,28,30);
+  --bg-tertiary: rgb(44,44,46);
+  --bg-grouped-primary: rgb(0,0,0);
+  --bg-grouped-secondary: rgb(28,28,30);
+  --bg-elevated: rgb(28,28,30);
+  --fill-primary: rgba(120,120,128,0.36);
+  --fill-secondary: rgba(120,120,128,0.32);
+  --fill-tertiary: rgba(118,118,128,0.24);
+  --fill-quaternary: rgba(118,118,128,0.18);
+  --separator-opaque: rgb(56,56,58);
+  --separator-nonopaque: rgba(84,84,88,0.6);
+  --shadow-menu: 0 10px 40px rgba(0,0,0,0.5);
+}
