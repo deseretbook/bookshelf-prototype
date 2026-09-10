@@ -1,0 +1,28 @@
+/* ============================================================
+   SURFACES — radii, borders, elevation.
+   The style guide defines no shadow or radius system; these are
+   a deliberate extension built to match its restraint. Hairline
+   borders do most of the work; shadow is warm, low, and rare.
+   ============================================================ */
+:root {
+  --db-radius-none: 0px;
+  --db-radius-sm:   2px;
+  --db-radius-md:   4px;   /* cards, panels, inputs */
+  --db-radius-lg:   8px;   /* large media panels, dialogs */
+  --db-radius-pill: 999px; /* buttons are enclosed in a shape */
+
+  --db-border-hairline: 1px solid var(--db-hairline);
+  --db-border-strong:   1px solid var(--db-charcoal);
+  --db-border-width:    1px;
+
+  /* Warm-cast shadows (charcoal, never blue-black) */
+  --db-shadow-none: none;
+  --db-shadow-sm: 0 1px 2px rgba(58, 54, 51, 0.06);
+  --db-shadow-md: 0 2px 8px rgba(58, 54, 51, 0.08);
+  --db-shadow-lg: 0 12px 32px rgba(58, 54, 51, 0.12);
+  --db-shadow-overlay: 0 24px 64px rgba(58, 54, 51, 0.22);
+
+  --db-scrim: rgba(58, 54, 51, 0.55);   /* dialog backdrop */
+  /* type-over-image protection */
+  --db-protect: linear-gradient(to top, rgba(58, 54, 51, 0.72) 0%, rgba(58, 54, 51, 0) 72%); /* @kind other */
+}

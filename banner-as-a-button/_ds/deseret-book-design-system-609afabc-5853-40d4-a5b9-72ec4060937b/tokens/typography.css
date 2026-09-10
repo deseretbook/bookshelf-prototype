@@ -1,0 +1,38 @@
+/* ============================================================
+   TYPOGRAPHY — Lora (display) + DM Sans (workhorse).
+   Weight limits are hard rules: Lora 400/700 only; DM Sans
+   200/400/900 only. Never faux bold or italic.
+   ============================================================ */
+:root {
+  --db-font-serif:        'Lora', Georgia, 'Times New Roman', serif;
+  --db-font-sans:         'DM Sans', system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --db-font-accent-serif: 'Fraunces', Georgia, serif;   /* accent only */
+  --db-font-accent-sans:  'Josefin Sans', sans-serif;   /* accent only */
+
+  --db-weight-serif-regular: 400;
+  --db-weight-serif-bold:    700;
+  --db-weight-sans-light:    200; /* ExtraLight */
+  --db-weight-sans-regular:  400;
+  --db-weight-sans-black:    900;
+
+  /* print leading; headings, display, subheads */
+  --db-lh-tight: 1.2; /* @kind other */
+  /* body copy on screen */
+  --db-lh-body:  1.5; /* @kind other */
+
+  --db-text-eyebrow: 0.75rem;
+  --db-text-caption: 0.8125rem;
+  --db-text-label:   0.8125rem;
+  --db-text-body:    1rem;      /* 16px baseline */
+  --db-text-body-lg: 1.125rem;
+  --db-text-subhead: 2rem;      /* ~200% of body */
+  --db-text-heading: 3rem;      /* ~300% of body */
+  --db-text-display: 4.5rem;    /* oversized editorial headline */
+
+  --db-tracking-eyebrow: 0.3em; /* InDesign tracking 300 */
+  --db-tracking-label:   0.05em;
+  --db-tracking-normal:  0;
+
+  --db-measure-body: 68ch;      /* comfortable body measure */
+  --db-measure-lede: 46ch;
+}
