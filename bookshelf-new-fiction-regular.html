@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/colors.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/typography.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/surfaces.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/motion.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/roles.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/styles.css">
+<script src="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&amp;family=DM+Sans:opsz,wght@9..40,200;9..40,400;9..40,500;9..40,600;9..40,700;9..40,900&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-text: 'DM Sans', system-ui, -apple-system, sans-serif;
+    --font-display: 'DM Sans', system-ui, -apple-system, sans-serif;
+    --font-serif: Lora, Georgia, 'Times New Roman', serif;
+    --label-primary: rgb(0,0,0);
+    --bg-primary: rgb(255,255,255);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: rgb(255,255,255); }
+  a { color: var(--db-link); }
+  a:hover { color: var(--db-link-hover); }
+</style>
+<style>
+/* ===== Ported verbatim from "Deseret Book Concept E": announcement bar, header,
+   desktop mega-nav, mobile drawer, and footer — including every breakpoint. ===== */
+:root{--ink:#2b2e30;--ink-2:#26292b;--muted:#6b7073;--hair:#e0e0e0;--gold:#ac761e;--teal:#0f8079;--dim:#c9cccf}
+:root{--pad:clamp(16px,3.5vw,24px);--maxw:1240px}
+.hdr,.hdr *,.ftr,.ftr *,.drawer,.drawer *{box-sizing:border-box}
+.hdr button,.ftr button,.drawer button{font:inherit;background:none;border:0;cursor:pointer}
+.ftr a,.drawer a,.nav-foot a{text-decoration:none}
+.hdr {position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--hair)}
+.hdr.srch-on {z-index:80}
+.hdr-in {height:42px;display:flex;align-items:center;justify-content:space-between;padding:8px var(--pad)}
+.hdr-ico {display:flex;align-items:center;gap:16px;width:68px}
+.iconbtn {width:26px;height:26px;display:grid;place-items:center;color:var(--ink);position:relative}
+.badge {position:absolute;left:14px;top:-2px;min-width:12px;height:12px;padding:0 3px;border-radius:999px;background:var(--gold);display:grid;place-items:center;font-family:Inter,system-ui;font-weight:600;font-size:8px;color:#fff}
+.wordmark {display:flex;align-items:center;gap:4.02px;height:24px}
+.wm-e {width:23.984px;height:24px}
+.wm-w {width:100.994px;height:11.164px}
+.srch {padding:4px var(--pad);background:#fff;position:relative}
+.srch-row {display:flex;align-items:center;gap:12px}
+.srch-f {width:100%;height:36px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px #c5c5c5;display:flex;align-items:center;justify-content:space-between;padding:8px 12px;font-size:16px;line-height:20px;color:#767676}
+.srch-f.open {gap:8px;justify-content:flex-start;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.srch-f.open input {flex:1;min-width:0;border:0;background:none;font-size:16px;line-height:20px;color:var(--ink);outline:none;padding:0}
+.srch-f.open input::placeholder {color:#767676}
+.srch-cancel {font-size:13px;color:var(--teal);white-space:nowrap}
+.srch-panel {position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);max-height:min(60vh,520px);overflow-y:auto;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity var(--db-duration-base) var(--db-ease-standard),transform var(--db-duration-base) var(--db-ease-standard)}
+.srch-panel.on {opacity:1;transform:none;pointer-events:auto}
+.btn-white {height:33px;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;padding:8px 12px;font-weight:600;font-size:13px;letter-spacing:.15em;color:var(--teal);white-space:nowrap}
+.btn-white {text-transform:uppercase}
+.ftr {background:var(--ink-2);padding:36px var(--pad) 100px;display:flex;flex-direction:column;gap:28px}
+.ftr .acc {display:flex;flex-direction:column}
+.ftr .acc-h {display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;color:#fff;letter-spacing:.04em;padding:0 0 2px}
+.ftr .acc-b {display:flex;flex-direction:column;gap:12px;padding-top:14px}
+.ftr .acc-b a {font-size:12px;color:var(--dim)}
+.ftr .acc-b a:hover {color:#fff}
+.ftr .rule {height:1px;background:rgba(255,255,255,.15)}
+.ftr .legal {display:flex;flex-direction:column;gap:10px}
+.ftr .legal span,.ftr .legal a {font-size:11px;color:var(--dim);line-height:1.35}
+.social {display:flex;gap:14px;color:#fff}
+.drawer {position:absolute;top:0;bottom:0;left:0;width:min(340px,88%);background:#fff;z-index:70;display:flex;pointer-events:auto;flex-direction:column;transform:translateX(-100%);transition:transform var(--db-duration-slow) var(--db-ease-standard)}
+.drawer.on {transform:none}
+.drawer-h {display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--hair)}
+.drawer-b {overflow-y:auto;flex:1;padding-bottom:24px}
+.nav-row {width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--hair);font-size:14px;font-weight:500;text-align:left}
+.nav-row > span:first-child {white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-row.l2 {padding-left:28px;font-weight:400;font-size:13px;color:#3a3633}
+.nav-row.l3 {padding-left:40px;font-weight:400;font-size:12px;color:var(--muted)}
+.nav-foot {padding:20px 16px;display:flex;flex-direction:column;gap:14px}
+.nav-foot a {font-size:13px;color:var(--ink)}
+.srow {display:flex;gap:12px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--hair);width:100%;text-align:left}
+.hdr-bar {display:block}
+.dnav {display:none}
+.ico-lab {display:none}
+.ftr .acc-b {display:none}
+.ftr .acc-b.on {display:flex}
+.drawer,.srch-panel {-webkit-backface-visibility:hidden;backface-visibility:hidden;will-change:transform,opacity}
+.drawer {-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}
+.drawer.on,.srch-panel.on {-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+.btn-white {border-radius:999px}
+
+[data-cta] a {transition:background-color .15s ease,border-color .15s ease}
+[data-cta] a:hover {background:var(--db-orange-400)!important;border-color:var(--db-orange-400)!important;color:#fff!important}
+[data-cta] a:focus-visible {outline:2px solid var(--db-orange-500);outline-offset:2px}
+[data-cta] a:active {background:var(--db-orange-500)!important;border-color:var(--db-orange-500)!important}
+[data-cta-teal] a {transition:background-color .15s ease,border-color .15s ease}
+[data-cta-teal] a:hover {background:var(--db-charcoal)!important;border-color:var(--db-charcoal)!important;color:#fff!important}
+[data-cta-teal] a:focus-visible {outline:2px solid var(--db-accent-deep);outline-offset:2px}
+[data-cta-teal] a:active {background:var(--db-charcoal)!important;border-color:var(--db-charcoal)!important}
+
+@media (min-width:640px) {
+  [data-hero-banner] {background-image:url('uploads/DB_2026_FictionLandingPage-18-8130a9a2.jpg')!important;background-size:auto 100%!important;background-position:center center!important;background-repeat:no-repeat!important;background-color:rgb(1,71,70)!important}
+  [data-hero-cta] {display:flex!important}
+  [data-hero-banner] > div {justify-content:flex-end!important}
+  [data-hero-stack] {width:50%!important;max-width:50%!important;margin-right:0!important;background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  [data-hero-stack] h1:nth-of-type(1) {color:rgb(255,255,255)!important;font-size:clamp(20px,3.1vw,48px)!important}
+  [data-hero-stack] h1:nth-of-type(2) {color:rgb(255,255,255)!important;font-size:clamp(13px,1.35vw,21px)!important}
+}
+
+@media (max-width:639px) {
+  [data-hero-stack] {background:rgba(255,255,255,0.95)!important}
+  [data-hero-stack] svg {color:var(--db-charcoal,#2b2e30)!important}
+  [data-hero-stack] h1:nth-of-type(1) {color:var(--db-charcoal,#2b2e30)!important}
+  [data-hero-stack] h1:nth-of-type(2) {color:#4a4d4f!important}
+  [data-hero-banner] {min-height:72vh;display:flex;align-items:center;padding-top:32px!important;padding-bottom:32px!important}
+  [data-hero-banner] > div {width:100%}
+  [data-hero-stack] h1:nth-of-type(1) {font-size:32px!important;letter-spacing:-0.6px!important}
+  [data-hero-stack] h1:nth-of-type(2) {font-size:19px!important}
+  [data-hero-br-m] {display:inline!important}
+  [data-hero-cta] {display:flex!important}
+  [data-perks-grid] {grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  [data-perks-grid] {gap:28px 20px!important}
+  [data-hero-br-d] {display:none}
+  [data-top-row="trial"] {min-height:0!important;margin-bottom:0!important}
+  #plans > div > div > .sc-host-x:first-child > div {padding-top:14px!important}
+}
+
+@media (min-width:640px) {
+  .hdr-bar {max-width:var(--maxw);margin:0 auto}
+  .hdr-in {padding:10px 24px}
+  .hdr-ico {width:auto}
+  .hdr-acts {gap:26px}
+  .srch {padding:0 24px 6px}
+  .srch-f {height:42px}
+  .srch-panel {border-radius:0 0 8px 8px;box-shadow:0 12px 32px rgba(58,54,51,.12)}
+  .wm-e {width:30px;height:30px}
+  .wm-w {width:126px;height:14px}
+  .ftr {padding:56px var(--pad) 72px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 32px;align-items:start}
+  .ftr>.btn-white,.ftr .rule,.ftr .legal,.ftr .social {grid-column:1/-1}
+  .ftr .acc-b {display:flex!important;padding-top:16px}
+  .ftr .acc-h {pointer-events:none;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .ftr .acc-h > span:last-child {display:none!important}
+  .ftr .legal {flex-direction:row;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .drawer {width:min(420px,100%)}
+}
+
+@media (min-width:1024px) {
+  .hdr-bar {display:flex;align-items:center;gap:40px;min-height:88px;padding:0 32px}
+  .hdr-in {display:contents}
+  .wordmark {order:1;flex:1 1 0;min-width:0}
+  .hdr-srch {order:2;flex:0 0 auto}
+  .hdr-ico {order:3}
+  .srch {padding:0;margin-bottom:0!important}
+  .hdr-burger {display:none}
+  .iconbtn {width:auto;height:auto;flex-direction:column;gap:3px}
+  .ico-lab {display:block;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .iconbtn:hover .ico-lab {color:var(--ink)}
+  .badge {left:auto;right:-7px;top:-3px}
+  .hdr-srch {position:relative;width:min(440px,100%)}
+  .hdr-acts {gap:36px;flex:1 1 0}
+  .dnav {display:block;border-top:1px solid var(--hair)}
+  .dnav-in {display:flex;align-items:stretch;justify-content:space-between;gap:2px;max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .dnav-i {display:flex;position:static}
+  .dnav-b {height:46px;padding:0 4px;white-space:nowrap;font-size:10px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);border-bottom:2px solid transparent;transition:border-color var(--db-duration-fast) var(--db-ease-standard)}
+  .dnav-b:hover,.dnav-b.on {border-bottom-color:var(--ink)}
+  .dmega {position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid var(--hair);box-shadow:0 12px 32px rgba(58,54,51,.12);z-index:50}
+  .dmega-in {max-width:var(--maxw);margin:0 auto;padding:32px;display:grid;grid-template-columns:repeat(4,1fr);gap:28px 32px}
+  .dcol {display:flex;flex-direction:column;gap:8px;align-items:flex-start;text-align:left}
+  .dcol-h {font-size:13px;font-weight:600;color:var(--ink);text-align:left}
+  .dcol-h:hover {color:var(--teal)}
+  .dcol-l {font-size:12px;color:var(--muted);text-align:left;line-height:1.4}
+  .dcol-l:hover {color:var(--ink)}
+  .dmega-all {grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);border-top:1px solid var(--hair);padding-top:20px}
+  .dmega-all:hover {color:var(--ink)}
+  .ftr {padding:72px var(--pad) 88px;gap:40px 32px}
+  .srch-panel {border-radius:16px;margin-top:4px;border:0}
+}
+/* Concept E scopes the drawer to a phone shell; on a full page it pins to the viewport. */
+.drawer{position:fixed}
+.drawer-scrim{position:fixed;inset:0;z-index:65;background:rgba(58,54,51,.55);opacity:0;pointer-events:none;transition:opacity var(--db-duration-base) var(--db-ease-standard)}
+.drawer-scrim.on{opacity:1;pointer-events:auto}
+</style>
+</helmet>
+
+<div style="font-family: var(--font-text); color: var(--label-primary); background: var(--bg-primary);">
+
+  <header class="{{ hdrCls }}">
+    <div class="hdr-bar">
+      <div class="hdr-in">
+        <div class="hdr-ico hdr-burger">
+          <button class="iconbtn" onClick="{{ openDrawer }}" aria-label="Open menu"><x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="menu" size="{{ 22 }}" hint-size="22px,22px"></x-import></button>
+        </div>
+        <a class="wordmark" href="#plans" aria-label="Deseret Book home">
+          <img class="wm-e" src="assets/emblem.svg" alt="">
+          <img class="wm-w" src="assets/wordmark.svg" alt="Deseret Book">
+        </a>
+        <div class="hdr-ico hdr-acts" style="justify-content: flex-end;">
+          <button class="iconbtn" aria-label="Account"><x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="user" size="{{ 20 }}" hint-size="20px,20px"></x-import><span class="ico-lab">Account</span></button>
+          <button class="iconbtn" aria-label="Bag, 0 items"><x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="shopping-bag" size="{{ 20 }}" hint-size="20px,20px"></x-import><span class="badge">0</span><span class="ico-lab">Bag</span></button>
+        </div>
+      </div>
+      <div class="hdr-srch">
+        <div class="srch" style="margin-bottom: 4px;">
+          <div class="srch-row">
+            <button class="{{ srchBtnCls }}" onClick="{{ openSearch }}">
+              <span>Search</span>
+              <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="search" size="{{ 16 }}" hint-size="16px,16px"></x-import>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="dnav" onMouseLeave="{{ closeNav }}" aria-label="Shop categories">
+      <div class="dnav-in">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="9">
+          <div class="dnav-i" onMouseEnter="{{ n.enter }}">
+            <button class="{{ n.cls }}" aria-expanded="{{ n.open }}" style="font-size: 12px; font-weight: 600">{{ n.label }}</button>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ mega }}" hint-placeholder-val="{{ false }}">
+        <div class="dmega">
+          <div class="dmega-in">
+            <sc-for list="{{ mega.cols }}" as="c">
+              <div class="dcol">
+                <button class="dcol-h">{{ c.title }}</button>
+                <sc-for list="{{ c.links }}" as="l">
+                  <button class="dcol-l">{{ l }}</button>
+                </sc-for>
+              </div>
+            </sc-for>
+            <button class="dmega-all">{{ mega.allLabel }}<x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="arrow-right" size="{{ 14 }}" hint-size="14px,14px"></x-import></button>
+          </div>
+        </div>
+      </sc-if>
+    </nav>
+  </header>
+
+  <sc-if value="{{ searchOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="srch-panel on" role="dialog" aria-label="Search">
+      <div class="srch-row">
+        <div class="srch-f open" style="flex: 1;">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="search" size="{{ 16 }}" hint-size="16px,16px"></x-import>
+          <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="Search by title, author, or keyword" autoFocus="{{ true }}" style="border: 0; outline: 0; background: transparent; font: inherit; flex: 1; color: inherit;">
+        </div>
+        <button class="srch-cancel" onClick="{{ closeSearch }}">Cancel</button>
+      </div>
+      <sc-if value="{{ results }}" hint-placeholder-val="{{ false }}">
+        <div class="srow">
+          <sc-for list="{{ results }}" as="p" hint-placeholder-count="0">
+            <a href="#plans" class="dcol-l" style="display: flex; align-items: center; gap: 12px;">
+              <span style="{{ p.thumbStyle }}"></span>
+              <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ p.t }}</span>
+                <span style="font-size: 13px; color: var(--muted);">{{ p.by }} · {{ p.price }}</span>
+              </span>
+            </a>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <div class="{{ scrimCls }}" onClick="{{ closeDrawer }}"></div>
+  <nav class="{{ drawerCls }}" aria-hidden="{{ drawerHidden }}">
+    <div class="drawer-h">
+      <span class="wordmark">
+        <img class="wm-e" src="assets/emblem.svg" alt="">
+        <img class="wm-w" src="assets/wordmark.svg" alt="Deseret Book">
+      </span>
+      <button class="iconbtn" onClick="{{ closeDrawer }}" aria-label="Close menu"><x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="x" size="{{ 22 }}" hint-size="22px,22px"></x-import></button>
+    </div>
+    <div class="drawer-b">
+      <sc-for list="{{ drawerRows }}" as="r" hint-placeholder-count="10">
+        <button class="{{ r.cls }}" onClick="{{ r.toggle }}">
+          <span>{{ r.label }}</span>
+          <sc-if value="{{ r.chevron }}">
+            <span style="display: grid; transform: {{ r.rot }}; transition: transform 180ms;"><x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="chevron-down" size="{{ 16 }}" hint-size="16px,16px"></x-import></span>
+          </sc-if>
+          <sc-if value="{{ r.arrow }}"><x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="arrow-right" size="{{ 14 }}" hint-size="14px,14px"></x-import></sc-if>
+        </button>
+      </sc-for>
+      <div class="nav-foot">
+        <button style="font-size: 13px; color: var(--teal); text-align: left;">Sign In</button>
+        <a href="#plans">Wishlist</a>
+        <a href="#plans">Find My Store</a>
+      </div>
+    </div>
+  </nav>
+
+  <section data-hero-banner="" style="position: relative; width: 100%; padding: clamp(20px, 3vw, 44px) 20px 40px; background-color: rgb(214,214,214); background-image: url('uploads/DB_2026_FictionLandingPage-22.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div style="display: flex; justify-content: center;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: clamp(10px, 1.6vw, 22px); max-width: 900px; padding: clamp(16px, 2.4vw, 34px) clamp(20px, 3.5vw, 56px); box-sizing: border-box; background: rgba(15,128,121,0.9); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: 4px; text-align: center;" data-hero-stack="">
+        <div style="display: flex; align-items: center; justify-content: center; margin-bottom: clamp(-14px, -1.2vw, -4px);">
+          <svg viewBox="0 0 140 32" style="display: block; width: clamp(124px, 15vw, 240px); height: auto; color: rgb(255,255,255);" xmlns="http://www.w3.org/2000/svg" fill="currentColor" role="img" aria-hidden="true" focusable="false">
+        <path d="M29.3725 13.6931H28.2802V9.50069C28.2802 6.81622 27.08 4.34651 24.8999 2.55375C22.9308 0.92906 20.2866 0 17.6518 0C15.0169 0 12.3727 0.92906 10.4036 2.55375C8.22355 4.34651 7.02334 6.81622 7.02334 9.50069V13.6931H5.93096C2.83667 13.6931 0.319046 16.2002 0.319046 19.2815C0.319046 22.3628 2.83667 24.8699 5.93096 24.8699H10.2208V9.50535C10.2208 5.60704 14.0746 3.19335 17.6471 3.19335C22.2322 3.19335 25.0734 6.47074 25.0734 9.50535V24.8699H29.3632C32.4575 24.8699 34.9751 22.3628 34.9751 19.2815C34.9751 16.2002 32.4575 13.6931 29.3632 13.6931H29.3725ZM7.02803 21.6812H5.93565C4.60417 21.6812 3.52586 20.6027 3.52586 19.2815C3.52586 17.9603 4.60886 16.8818 5.93565 16.8818H7.02803V21.6858V21.6812ZM26.3205 9.50535C26.3205 4.84605 21.8244 1.96083 17.6564 1.96083C13.4885 1.96083 8.99243 4.84605 8.99243 9.50535H8.26574C8.26574 4.39786 13.1416 1.23719 17.6564 1.23719C22.1713 1.23719 27.0471 4.39786 27.0471 9.50535H26.3205ZM29.3725 21.6812H28.2802V16.8771H29.3725C30.704 16.8771 31.7823 17.9556 31.7823 19.2768C31.7823 20.598 30.6993 21.6765 29.3725 21.6765V21.6812Z"></path>
+        <path d="M14.159 8.34753H12.2977V24.8699H14.159V8.34753Z"></path>
+        <path d="M24.1591 24.473L21.7447 24.9352L18.6973 8.69303L21.1117 8.22617L24.1591 24.473Z"></path>
+        <path d="M18.5238 5.58835H15.7202V24.8698H18.5238V5.58835Z"></path>
+        <path d="M40.9175 20.6529V21.9136H38.2353V8.80441H40.9721V13.6735C41.3176 13.162 41.7722 12.8148 42.2814 12.5316C42.736 12.2484 43.3088 12.1297 43.8816 12.1297C46.1093 12.1297 48.2187 13.9019 48.2187 17.1084V17.1632C48.2187 20.3697 46.1093 22.142 43.8816 22.142C43.3088 22.142 42.7451 22.0232 42.2268 21.7949C41.7177 21.4477 41.2539 21.1097 40.9175 20.6529ZM45.5364 17.1084C45.5364 15.5006 44.4545 14.4135 43.1997 14.4135C41.945 14.4135 40.863 15.4458 40.863 17.0445V17.0993C40.863 18.7071 41.8904 19.7303 43.1997 19.7303C44.509 19.7303 45.5364 18.698 45.5364 17.0993V17.1084Z"></path>
+        <path d="M49.3552 17.1632C49.4098 15.7929 49.9826 14.5322 50.9555 13.6095C51.9283 12.696 53.1831 12.1753 54.5469 12.1753C55.9108 12.1753 57.1655 12.6869 58.1384 13.6095C59.1113 14.5231 59.675 15.7837 59.7387 17.1632V17.218C59.6841 18.5335 59.1113 19.849 58.1384 20.7716C57.1655 21.6852 55.9108 22.2059 54.5469 22.2059C53.1831 22.2059 51.9283 21.6943 50.9555 20.7716C49.9826 19.7393 49.4189 18.4787 49.3552 17.1632ZM56.9928 17.1632C56.9928 16.7612 56.9382 16.4141 56.82 16.1309C56.7018 15.7837 56.5382 15.5006 56.3109 15.2722C56.0835 15.0438 55.8017 14.8154 55.4562 14.6966C55.1743 14.5779 54.8288 14.4683 54.4833 14.4683C54.1378 14.4683 53.8014 14.5231 53.5104 14.6418C53.2285 14.7606 52.9376 14.989 52.7103 15.2174C52.483 15.4457 52.3102 15.7289 52.2011 16.0761C52.0829 16.4232 52.0284 16.7064 52.0829 17.0536V17.1084C52.0829 17.4555 52.1375 17.7935 52.2557 18.0859C52.3739 18.433 52.5375 18.7162 52.7648 18.9446C52.9921 19.173 53.274 19.4013 53.6195 19.5201C53.9014 19.6389 54.2469 19.7485 54.5924 19.7485C54.9379 19.7485 55.2743 19.6937 55.5653 19.5749C55.8471 19.4562 56.1381 19.2278 56.3654 18.9994C56.5927 18.771 56.7655 18.4878 56.8746 18.1407C56.9928 17.7935 57.0473 17.5103 56.9928 17.1632Z"></path>
+        <path d="M60.6934 17.1632C60.748 15.7929 61.3208 14.5322 62.2937 13.6095C63.2665 12.6869 64.5213 12.1753 65.8851 12.1753C67.249 12.1753 68.5037 12.6869 69.4766 13.6095C70.4495 14.5231 71.0132 15.7837 71.0769 17.1632V17.218C71.0223 18.5335 70.4495 19.849 69.4766 20.7716C68.5037 21.6852 67.249 22.2059 65.8851 22.2059C64.5213 22.2059 63.2665 21.6943 62.2937 20.7716C61.3208 19.7393 60.7571 18.4787 60.6934 17.1632ZM68.331 17.1632C68.331 16.7612 68.2764 16.4141 68.1582 16.1309C68.04 15.7837 67.8764 15.5006 67.649 15.2722C67.4217 15.0438 67.1399 14.8154 66.7944 14.6966C66.5125 14.5779 66.167 14.4683 65.8215 14.4683C65.476 14.4683 65.1396 14.5231 64.8486 14.6418C64.5667 14.7606 64.2758 14.989 64.0485 15.2174C63.8212 15.4457 63.6484 15.7289 63.5393 16.0761C63.4302 16.4232 63.3666 16.7064 63.4211 17.0536V17.1084C63.4211 17.4555 63.4757 17.7935 63.5939 18.0859C63.7121 18.433 63.8757 18.7162 64.103 18.9446C64.3303 19.173 64.6122 19.4013 64.9577 19.5201C65.2396 19.6389 65.5851 19.7485 65.9306 19.7485C66.2761 19.7485 66.6125 19.6937 66.9035 19.5749C67.1853 19.4562 67.4763 19.2278 67.7036 18.9994C67.9309 18.771 68.1037 18.4878 68.2128 18.1407C68.331 17.7935 68.3855 17.5103 68.331 17.1632Z"></path>
+        <path d="M72.5498 8.80441H75.2866V15.7929L78.478 12.3032H81.724L78.0779 16.0853L81.8422 21.9319H78.7053L76.2504 17.9763L75.2775 19.0086V21.9319H72.5407V8.80441H72.5498Z"></path>
+        <path d="M82.4151 20.5982L83.5516 18.8259C84.4063 19.511 85.4883 19.913 86.5703 19.9678C87.3704 19.9678 87.7068 19.6846 87.7068 19.2187V19.1639C87.7068 18.5884 86.7976 18.36 85.7156 18.0768C84.4063 17.6748 82.8697 17.0445 82.8697 15.2174V15.1626C82.8697 13.2168 84.4699 12.1297 86.3429 12.1297C87.5977 12.1297 88.8524 12.5317 89.9344 13.2168L88.907 15.1626C88.1069 14.6511 87.2522 14.3587 86.3429 14.2491C85.661 14.2491 85.3155 14.5323 85.3155 14.9342V14.9891C85.3155 15.5006 86.2247 15.793 87.2522 16.131C88.5615 16.5877 90.1617 17.2181 90.1617 18.9903V19.0451C90.1617 21.1645 88.5615 22.142 86.5157 22.142C84.9791 22.0233 83.5516 21.5117 82.4151 20.5982Z"></path>
+        <path d="M92.0529 8.80441H94.7897V13.6187C95.0716 13.162 95.5353 12.76 95.9899 12.4768C96.499 12.1936 97.0173 12.0749 97.5901 12.0749C99.645 12.0749 100.836 13.4452 100.836 15.6285V21.8131H98.0993V16.4872C98.0993 15.1717 97.4719 14.5414 96.4445 14.5414C95.4171 14.5414 94.7351 15.2266 94.7351 16.4872V21.8131H91.9983V8.80441H92.0529Z"></path>
+        <path d="M102.309 17.1632C102.309 14.4135 104.246 12.1205 107.037 12.1205C110.228 12.1205 111.711 14.5871 111.711 17.3368C111.711 17.5652 111.711 17.7936 111.656 18.0859H104.982C105.037 18.6614 105.382 19.1182 105.782 19.4562C106.237 19.8034 106.755 19.9678 107.319 19.913C107.774 19.913 108.174 19.8582 108.574 19.6846C108.974 19.511 109.319 19.2826 109.656 18.9355L111.192 20.3058C110.51 21.1097 109.656 21.6761 108.683 21.9136C107.71 22.1968 106.628 22.142 105.664 21.7949C104.691 21.4477 103.837 20.8174 103.273 19.9587C102.645 19.1547 102.3 18.1864 102.3 17.1541L102.309 17.1632ZM109.037 16.3593C108.865 15.1535 108.183 14.2948 107.046 14.2948C105.91 14.2948 105.164 15.0987 104.991 16.3593H109.037Z"></path>
+        <path d="M113.311 8.80441H116.048V21.8679H113.311V8.80441Z"></path>
+        <path d="M118.73 14.6419H117.593V12.4037H118.73V11.7734C118.675 11.3714 118.73 10.9147 118.903 10.5127C119.021 10.1108 119.248 9.76362 119.53 9.42561C119.812 9.14242 120.157 8.96884 120.557 8.85008C120.957 8.73133 121.358 8.67651 121.758 8.67651C122.385 8.67651 123.067 8.73133 123.694 8.95971V11.1979C123.294 11.0243 122.894 10.9695 122.44 10.9695C121.812 10.9695 121.467 11.3166 121.467 12.0018V12.4037H123.631V14.6419H121.403V21.9136H118.666V14.6419H118.721H118.73Z"></path>
+        <path d="M139.706 15.464C139.706 15.8203 139.542 16.0852 139.369 16.2497C139.115 16.5055 138.851 16.6059 138.588 16.6059H134.896C134.851 16.6059 134.751 16.6242 134.705 16.6699C134.66 16.7338 134.641 16.8343 134.641 16.8617V21.064C134.641 21.1279 134.641 21.2102 134.605 21.2558C134.587 21.3198 134.569 21.3837 134.541 21.4477C134.478 21.5756 134.396 21.7035 134.269 21.8405C134.087 22.0232 133.932 22.1146 133.75 22.1694C133.669 22.1876 133.587 22.2059 133.505 22.2059C133.423 22.2059 133.341 22.1876 133.259 22.1694C133.032 22.1054 132.85 21.9775 132.741 21.8405C132.614 21.7126 132.532 21.5756 132.468 21.4477C132.432 21.3837 132.423 21.3198 132.405 21.2558C132.368 21.2102 132.368 21.1279 132.368 21.064V16.8617C132.368 16.8617 132.35 16.7338 132.305 16.6699C132.259 16.6242 132.159 16.6059 132.114 16.6059H128.422C128.168 16.6059 127.904 16.5055 127.64 16.2497C127.458 16.0852 127.304 15.8294 127.304 15.464C127.304 15.2174 127.386 14.9616 127.64 14.6967C127.822 14.514 128.077 14.3404 128.422 14.3404L132.15 14.3587C132.277 14.3587 132.377 14.249 132.377 14.112V9.89148C132.377 9.63569 132.477 9.37076 132.732 9.10584H132.75C132.814 9.04189 132.878 8.99622 132.941 8.9414C133.132 8.81351 133.332 8.7587 133.505 8.7587C133.732 8.7587 133.923 8.84092 134.069 8.9414C134.132 8.98708 134.196 9.04189 134.26 9.10584H134.278C134.541 9.36163 134.632 9.62655 134.632 9.89148V14.1029C134.632 14.2308 134.732 14.3495 134.86 14.3495L138.588 14.3312C138.924 14.3312 139.188 14.514 139.369 14.6875C139.624 14.9433 139.706 15.2082 139.706 15.4549V15.464Z"></path>
+      </svg>
+        </div>
+        <h1 style="margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: clamp(22px, 3.8vw, 60px); line-height: 1.12; letter-spacing: -1px; color: rgb(255,255,255);">Thousands of Stories. <br>Zero Surprises.</h1>
+        <h1 style="margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: clamp(14px, 1.6vw, 26px); line-height: 1.3; color: rgb(235,232,228);">Your clean fiction library-romance, mystery, fantasy, &amp; more. <br>All in one app.</h1>
+        <div data-hero-cta="" data-cta="" style="display: none; justify-content: center; width: 100%; margin-top: 16px;">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" dc-props="{{ heroCtaProps }}" hint-size="280px,48px">Start 14-day free trial</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="plans" style="padding: clamp(24px, 5vw, 40px) clamp(12px, 4vw, 20px) clamp(24px, 4vw, 40px); background-color: rgb(255,255,255)">
+    <div style="max-width: 1180px; margin: 0 auto;">
+      <div style="max-width: 760px; margin: 0 auto clamp(24px, 3.5vw, 36px); text-align: center; display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-family: var(--db-font-serif); font-weight: 400; font-size: clamp(26px, 3.2vw, 42px); line-height: 1.18; letter-spacing: -0.4px; color: var(--db-display); text-wrap: balance;">Tired of getting 3 chapters in...<br> and wishing you hadn't?</h2>
+        <p style="margin: 0; font-family: var(--db-font-sans); font-size: clamp(15px, 1.2vw, 18px); line-height: 1.55; color: var(--db-ink-muted); text-wrap: pretty;">Every bookshelf+ title is hand-curated so you never have to worry about inappropriate content.</p>
+      </div>
+      <div style="margin-bottom: clamp(32px, 5vw, 56px); display: flex; flex-direction: column; align-items: center; gap: 4px;">
+        <div onMouseEnter="{{ pauseAuto }}" onMouseLeave="{{ resumeAuto }}" style="position: relative; width: min(100%, 640px); aspect-ratio: 16 / 9; border-radius: 4px; perspective: 1200px; perspective-origin: 50% 50%; background: radial-gradient(ellipse 62% 70% at 50% 54%, rgba(174,230,252,0.62) 0%, rgba(174,230,252,0.30) 45%, rgba(174,230,252,0) 78%);">
+          <sc-for list="{{ slides }}" as="g" hint-placeholder-count="1">
+            <a href="{{ g.href }}" target="_blank" rel="noopener" aria-label="{{ g.label }}" style="{{ g.style }}" style-hover="transform: scale(1.07) translateZ(40px);">
+              <div style="{{ g.left.wrap }}"><div style="{{ g.left.style }}" style-after="content: ''; position: absolute; left: 0; top: 0; width: 6.5%; height: 100%; transform-origin: left center; transform: rotateY(90deg); background: linear-gradient(to right, rgba(20,22,24,0.92), rgba(62,66,70,0.82) 45%, rgba(18,20,22,0.95)); box-shadow: inset 0 0 12px rgba(0,0,0,0.5); border-radius: 1px 0 0 1px;" style-before="content: ''; position: absolute; left: 0; top: 0; width: 9%; height: 100%; pointer-events: none; background: linear-gradient(to right, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.10) 42%, rgba(255,255,255,0.18) 62%, rgba(255,255,255,0) 100%); border-radius: 2px;"></div></div>
+              <div style="{{ g.mid.wrap }}"><div style="{{ g.mid.style }}" style-after="content: ''; position: absolute; right: 0; top: 0.5%; width: 6.5%; height: 99%; transform-origin: right center; transform: rotateY(-90deg); background: repeating-linear-gradient(to bottom, rgb(247,243,235) 0 2px, rgb(203,194,179) 2px 3px); box-shadow: inset 0 0 14px rgba(43,46,48,0.35); border-radius: 1px;" style-before="content: ''; position: absolute; left: 0; top: 0; width: 9%; height: 100%; pointer-events: none; background: linear-gradient(to right, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.10) 42%, rgba(255,255,255,0.18) 62%, rgba(255,255,255,0) 100%); border-radius: 2px;"></div></div>
+              <div style="{{ g.right.wrap }}"><div style="{{ g.right.style }}" style-after="content: ''; position: absolute; right: 0; top: 0.5%; width: 6.5%; height: 99%; transform-origin: right center; transform: rotateY(-90deg); background: repeating-linear-gradient(to bottom, rgb(247,243,235) 0 2px, rgb(203,194,179) 2px 3px); box-shadow: inset 0 0 14px rgba(43,46,48,0.35); border-radius: 1px;" style-before="content: ''; position: absolute; right: 0; top: 0; width: 9%; height: 100%; pointer-events: none; background: linear-gradient(to left, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.10) 42%, rgba(255,255,255,0.18) 62%, rgba(255,255,255,0) 100%); border-radius: 2px;"></div></div>
+            </a>
+          </sc-for>
+          <button type="button" aria-label="Previous genre" onClick="{{ prevSlide }}" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 999px; background: rgba(233,224,209,0.3); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); color: var(--db-ink); cursor: pointer; padding: 0;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button type="button" aria-label="Next genre" onClick="{{ nextSlide }}" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 999px; background: rgba(233,224,209,0.3); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); color: var(--db-ink); cursor: pointer; padding: 0;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+        <span style="position: relative; z-index: 5; margin-top: -26px; width: min(50%, 320px); padding: 10px 20px; border-radius: 999px; background: rgba(233,224,209,0.3); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); font-family: var(--db-font-serif); font-size: 21px; line-height: 1.4; color: var(--db-ink); text-align: center; min-height: 28px;">{{ slideName }}</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(14px, 3vw, 32px);">
+        <sc-for list="{{ tiers }}" as="t">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Card" dc-props="{{ t.cardProps }}" hint-size="100%,372px">
+            <span style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px;">
+            <span style="font-family: var(--db-font-sans); font-size: var(--db-text-label); font-weight: var(--db-weight-sans-regular); letter-spacing: var(--db-tracking-label); line-height: 1.5; text-transform: uppercase; text-align: center; color: {{ t.nameColor }};">{{ t.name }}</span>
+            <sc-if value="{{ t.badge }}">
+              <span style="padding: 4px 12px; border-radius: 999px; background: var(--db-orange-100); color: var(--db-orange-500); font-family: var(--db-font-sans); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">{{ t.badge }}</span>
+            </sc-if>
+            </span>
+            <span style="display: flex; align-items: baseline; justify-content: center; gap: 4px; margin: {{ t.rowMargin }}; white-space: {{ t.rowWhite }};">
+              <span style="font-family: var(--db-font-serif); font-size: {{ t.amountSize }}; font-weight: var(--db-weight-serif-regular); line-height: 1.2; text-align: center; text-wrap: pretty; color: var(--db-display);">{{ t.amount }}</span>
+              <sc-if value="{{ t.unit }}">
+                <span style="font-family: var(--db-font-sans); font-size: {{ t.unitSize }}; white-space: nowrap; color: var(--db-ink-muted);">{{ t.unit }}</span>
+              </sc-if>
+            </span>
+            <sc-if value="{{ t.hasMeta }}">
+              <span style="display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 4px 10px; margin-top: var(--db-space-3);">
+                <sc-if value="{{ t.compare }}">
+                  <span style="font-family: var(--db-font-sans); font-size: 15px; text-decoration: line-through; color: var(--db-ink-muted);">{{ t.compare }}</span>
+                </sc-if>
+                <sc-if value="{{ t.save }}">
+                  <span style="font-family: var(--db-font-sans); font-size: var(--db-text-label); font-weight: var(--db-weight-sans-regular); letter-spacing: var(--db-tracking-label); text-transform: uppercase; color: {{ t.nameColor }};">{{ t.save }}</span>
+                </sc-if>
+                <sc-if value="{{ t.annual }}">
+                  <span style="font-family: var(--db-font-sans); font-size: 15px; color: var(--db-ink-muted);">{{ t.annual }}</span>
+                </sc-if>
+              </span>
+            </sc-if>
+          </x-import>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: clamp(24px, 3.5vw, 36px);">
+        <div data-cta-teal="" style="display: flex; justify-content: center; width: 100%;">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" dc-props="{{ signupCtaProps }}" hint-size="280px,48px">Sign up today</x-import>
+        </div>
+        <p style="margin: 0; text-align: center; font-family: var(--db-font-sans); font-size: 13px; line-height: 1.4; color: var(--db-ink-muted);">Cancel any time.</p>
+      </div>
+      <section style="max-width: 1280px; margin: 0 auto; padding: clamp(32px, 5vw, 56px) 0 0;">
+    <h1 style="margin: 0 0 48px; text-align: center; font-family: var(--db-font-serif); font-weight: 400; font-size: clamp(30px, 4vw, 48px); line-height: 1.2; letter-spacing: 0; color: var(--db-display); text-wrap: balance;">You'll Get Exclusive Access To</h1>
+    <ul data-perks-grid="" style="list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 40px 32px; margin: 0; padding: 0; justify-content: center;">
+      <li style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <img src="https://www.deseretbook.com/dw/image/v2/BJJM_PRD/on/demandware.static/-/Sites-DeseretBooks-Library/default/dwd5ffc99c/Bookshelf/DB_2025_4Across_BookshelfPLUSNew_UnlimitedListening.jpg" alt="Unlimited Listening" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border: 1px solid var(--db-hairline); border-radius: 4px;">
+        <span style="font-family: var(--db-font-sans); font-size: 17px; font-weight: 400; line-height: 1.5; color: var(--db-ink); text-align: center; text-wrap: pretty;">Unlimited Listening</span>
+      </li>
+      <li style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <img src="https://www.deseretbook.com/dw/image/v2/BJJM_PRD/on/demandware.static/-/Sites-DeseretBooks-Library/default/dw81310129/Bookshelf/DB_2025_4Across_BookshelfPLUSNew_Wholesome.jpg" alt="Guaranteed Clean Content" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border: 1px solid var(--db-hairline); border-radius: 4px;">
+        <span style="font-family: var(--db-font-sans); font-size: 17px; font-weight: 400; line-height: 1.5; color: var(--db-ink); text-align: center; text-wrap: pretty;">Guaranteed Clean Content</span>
+      </li>
+      <li style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <img src="https://www.deseretbook.com/dw/image/v2/BJJM_PRD/on/demandware.static/-/Sites-DeseretBooks-Library/default/dw87da7960/Bookshelf/DB_2025_4Across_BookshelfPLUSNew_Ebooks.jpg" alt="4,000+ Audiobooks &amp; eBooks" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border: 1px solid var(--db-hairline); border-radius: 4px;">
+        <span style="font-family: var(--db-font-sans); font-size: 17px; font-weight: 400; line-height: 1.5; color: var(--db-ink); text-align: center; text-wrap: pretty;">4,000+ Audiobooks &amp; eBooks</span>
+      </li>
+      <li style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <img src="https://www.deseretbook.com/dw/image/v2/BJJM_PRD/on/demandware.static/-/Sites-DeseretBooks-Library/default/dw5aae7d71/Bookshelf/DB_2025_4Across_BookshelfPLUSNew_ExclusiveContent.jpg" alt="Podcasts" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border: 1px solid var(--db-hairline); border-radius: 4px;">
+        <span style="font-family: var(--db-font-sans); font-size: 17px; font-weight: 400; line-height: 1.5; color: var(--db-ink); text-align: center; text-wrap: pretty;">Podcasts</span>
+      </li>
+      <li style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <img src="https://www.deseretbook.com/dw/image/v2/BJJM_PRD/on/demandware.static/-/Sites-DeseretBooks-Library/default/dw8919b5f4/Bookshelf/DB_2025_4Across_BookshelfPLUSNew_NewAudiobooks.jpg" alt="New Audiobooks on Release Day" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border: 1px solid var(--db-hairline); border-radius: 4px;">
+        <span style="font-family: var(--db-font-sans); font-size: 17px; font-weight: 400; line-height: 1.5; color: var(--db-ink); text-align: center; text-wrap: pretty;">New Audiobooks on Release Day</span>
+      </li>
+    </ul>
+  </section>
+
+    </div>
+  </section>
+
+
+  <section style="background: rgb(240,240,240); padding: 40px 20px 64px;">
+    <div style="max-width: 1180px; margin: 0 auto;">
+      <h2 style="margin: 0 0 56px; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.2vw, 44px); letter-spacing: -0.4px; color: rgb(51,46,43);">What People are Saying</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 44px;">
+        <div style="position: relative; display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-height: 320px; margin-top: 40px; padding: 76px 26px 26px; background: rgb(255,255,255); border: 1px solid rgb(16,122,118); border-radius: 4px;">
+          <span style="position: absolute; top: -40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; box-sizing: border-box; border-radius: 50%; background: rgb(240,240,240); border: 1px solid rgb(16,122,118); font-family: var(--font-serif); font-size: 64px; line-height: 1; color: rgb(0,122,118); padding-top: 34px;">”</span>
+          <p style="margin: 0; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(20px, 1.9vw, 27px); line-height: 1.35; color: rgb(0,122,118);">“We’ve listened to dozens of books for the price of three hard copies.”</p>
+          <span style="margin-top: 28px; font-family: var(--font-serif); font-style: italic; font-size: 13px; color: rgb(120,120,120);">—Customer Review</span>
+        </div>
+        <div style="position: relative; display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-height: 320px; margin-top: 40px; padding: 76px 26px 26px; background: rgb(255,255,255); border: 1px solid rgb(16,122,118); border-radius: 4px;">
+          <span style="position: absolute; top: -40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; box-sizing: border-box; border-radius: 50%; background: rgb(240,240,240); border: 1px solid rgb(16,122,118); font-family: var(--font-serif); font-size: 64px; line-height: 1; color: rgb(0,122,118); padding-top: 34px;">”</span>
+          <p style="margin: 0; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(20px, 1.9vw, 27px); line-height: 1.35; color: rgb(0,122,118);">“I’m a busy mom…This app makes reading so much easier for me!”</p>
+          <span style="margin-top: 28px; font-family: var(--font-serif); font-style: italic; font-size: 13px; color: rgb(120,120,120);">—Customer Review</span>
+        </div>
+        <div style="position: relative; display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-height: 320px; margin-top: 40px; padding: 76px 26px 26px; background: rgb(255,255,255); border: 1px solid rgb(16,122,118); border-radius: 4px;">
+          <span style="position: absolute; top: -40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; box-sizing: border-box; border-radius: 50%; background: rgb(240,240,240); border: 1px solid rgb(16,122,118); font-family: var(--font-serif); font-size: 64px; line-height: 1; color: rgb(0,122,118); padding-top: 34px;">”</span>
+          <p style="margin: 0; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(20px, 1.9vw, 27px); line-height: 1.35; color: rgb(0,122,118);">“I love the variety of books found here!”</p>
+          <span style="margin-top: 28px; font-family: var(--font-serif); font-style: italic; font-size: 13px; color: rgb(120,120,120);">—Customer Review</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: rgb(240,240,240); padding: 56px 20px 72px;">
+   <div style="max-width: 1180px; margin: 0 auto;">
+    <h2 style="margin: 0 0 30px; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 46px); letter-spacing: -0.4px; color: rgb(51,46,43);">Frequently Asked Questions</h2>
+    <div style="background: rgb(255,255,255); border: 1px solid rgb(226,226,226); border-radius: 6px; overflow: hidden;">
+      <div style="">
+        <button type="button" onClick="{{ faq1Toggle }}" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 26px 30px; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: var(--font-text); font-size: 19px; font-weight: 400; color: rgb(51,46,43);" style-hover="background: rgb(250,250,250);">
+          <span>What is bookshelf+?</span>
+          <span style="flex: none; font-size: 26px; font-weight: 300; line-height: 1; color: rgb(51,46,43);">{{ faq1Sign }}</span>
+        </button>
+        <sc-if value="{{ faq1Open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 0 30px 26px; max-width: 980px;"><p style="margin: 0; font-size: 17px; line-height: 1.6; color: rgb(80,76,73);"><strong style="color: rgb(51,46,43);">Bookshelf+ is a digital subscription that gives you unlimited access to Deseret Book's entire digital audiobook library—</strong>including books from gospel leaders, a full library of clean and compelling fiction, inspiring audiobooks, exclusive podcasts, and more. It's like having an uplifting library in your pocket, wherever you go.</p></div>
+        </sc-if>
+      </div>
+      <div style="border-top: 1px solid rgb(232,232,232);">
+        <button type="button" onClick="{{ faq2Toggle }}" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 26px 30px; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: var(--font-text); font-size: 19px; font-weight: 400; color: rgb(51,46,43);" style-hover="background: rgb(250,250,250);">
+          <span>Is there a free trial?</span>
+          <span style="flex: none; font-size: 26px; font-weight: 300; line-height: 1; color: rgb(51,46,43);">{{ faq2Sign }}</span>
+        </button>
+        <sc-if value="{{ faq2Open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 0 30px 26px; max-width: 980px;"><p style="margin: 0; font-size: 17px; line-height: 1.6; color: rgb(80,76,73);">Yes! You get 7 days to try bookshelf+ risk-free. Just sign up, and you won't be charged if you cancel before the 7-day trial ends. No commitment, no fees. One free trial per customer.</p></div>
+        </sc-if>
+      </div>
+      <div style="border-top: 1px solid rgb(232,232,232);">
+        <button type="button" onClick="{{ faq3Toggle }}" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 26px 30px; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: var(--font-text); font-size: 19px; font-weight: 400; color: rgb(51,46,43);" style-hover="background: rgb(250,250,250);">
+          <span>Where can I use bookshelf+?</span>
+          <span style="flex: none; font-size: 26px; font-weight: 300; line-height: 1; color: rgb(51,46,43);">{{ faq3Sign }}</span>
+        </button>
+        <sc-if value="{{ faq3Open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 0 30px 26px; max-width: 980px;"><p style="margin: 0; font-size: 17px; line-height: 1.6; color: rgb(80,76,73);">Anywhere, anytime. Just download the <strong style="color: rgb(51,46,43);">deseret bookshelf app</strong> from the <a href="https://apps.apple.com/us/app/deseret-bookshelf-lds-books/id428709147">App Store</a> or <a href="https://play.google.com/store/apps/details?id=com.deseretdigital.bookshelf&amp;hl=en_US">Google Play</a> and log in to access your subscription on your phone or tablet.<br>Prefer desktop? You can also read and listen at <strong><a href="https://read.deseretbook.com/">read.deseretbook.com</a></strong> on any browser.</p></div>
+        </sc-if>
+      </div>
+      <div style="border-top: 1px solid rgb(232,232,232);">
+        <button type="button" onClick="{{ faq4Toggle }}" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 26px 30px; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: var(--font-text); font-size: 19px; font-weight: 400; color: rgb(51,46,43);" style-hover="background: rgb(250,250,250);">
+          <span>Can I cancel anytime?</span>
+          <span style="flex: none; font-size: 26px; font-weight: 300; line-height: 1; color: rgb(51,46,43);">{{ faq4Sign }}</span>
+        </button>
+        <sc-if value="{{ faq4Open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 0 30px 26px; max-width: 980px;"><p style="margin: 0; font-size: 17px; line-height: 1.6; color: rgb(80,76,73);">Yes, bookshelf+ is flexible. You can cancel anytime through your account settings at DeseretBook.com.</p></div>
+        </sc-if>
+      </div>
+      <div style="border-top: 1px solid rgb(232,232,232);">
+        <button type="button" onClick="{{ faq5Toggle }}" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 26px 30px; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: var(--font-text); font-size: 19px; font-weight: 400; color: rgb(51,46,43);" style-hover="background: rgb(250,250,250);">
+          <span>What happens if I cancel? Will I lose my books?</span>
+          <span style="flex: none; font-size: 26px; font-weight: 300; line-height: 1; color: rgb(51,46,43);">{{ faq5Sign }}</span>
+        </button>
+        <sc-if value="{{ faq5Open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 0 30px 26px; max-width: 980px;"><p style="margin: 0; font-size: 17px; line-height: 1.6; color: rgb(80,76,73);">If you cancel, you'll lose access to the full bookshelf+ library. However, any individual books you've purchased separately (a la carte) will still be accessible through the deseret bookshelf app.</p></div>
+        </sc-if>
+      </div>
+    </div>
+    <h4 style="margin: 26px 0 0; text-align: center; font-family: var(--font-text); font-size: 16px; font-weight: 400; color: rgb(51,46,43);">View Bookshelf <a href="#plans" style="color: inherit; text-decoration: underline;">Terms and Conditions</a></h4>
+   </div>
+  </section>
+
+
+  <footer class="ftr">
+    <button class="btn-white" style="width: 143px;">FIND MY STORE</button>
+    <sc-for list="{{ footerAcc }}" as="a" hint-placeholder-count="3">
+      <div class="acc">
+        <button class="acc-h" onClick="{{ a.toggle }}">
+          <span>{{ a.title }}</span>
+          <span style="display: grid; transform: {{ a.rot }}; transition: transform 180ms;"><x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="chevron-down" size="{{ 16 }}" hint-size="16px,16px"></x-import></span>
+        </button>
+        <div class="{{ a.bodyCls }}">
+          <sc-for list="{{ a.links }}" as="l" hint-placeholder-count="6">
+            <a href="#plans">{{ l }}</a>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+    <div class="social">
+      <a href="https://www.facebook.com/DeseretBook/" aria-label="Facebook" style="color: #fff;"><x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="facebook" size="{{ 18 }}" hint-size="18px,18px"></x-import></a>
+      <a href="https://www.instagram.com/deseretbook/" aria-label="Instagram" style="color: #fff;"><x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="instagram" size="{{ 18 }}" hint-size="18px,18px"></x-import></a>
+    </div>
+    <div class="rule"></div>
+    <div class="legal">
+      <span>© 1996–2025 Deseret Book Company. All Rights Reserved.</span>
+      <span>Product Submission Guidelines&nbsp;&nbsp; |&nbsp;&nbsp; Manuscript Submissions&nbsp;&nbsp; |&nbsp;&nbsp; Legal</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{}">
+const FOOTER = {
+  ACCOUNT: ['My Account', 'Check Order', 'Purchase an eGift Card', 'Gift Card Balance', 'Bookshelf Plus', 'Platinum Rewards', 'Request a Catalog'],
+  'CUSTOMER SERVICE': ['Contact Us', 'Questions & Support', 'Shipping & Returns', 'Do Not Sell My Information', 'Deseret Book Store Locations'],
+  ABOUT: ['About Deseret Book', 'Careers', 'Terms of Use', 'Privacy Policy', 'Deseret Book Events', 'Deseret Book Blog', 'Browse All Categories']
+};
+
+const IB = "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/";
+const I = (p) => IB + p + "?s=1000x1000&t=JPEG&v=2";
+const dbl = (n) => n + "/" + n;
+const NAV = [
+    { id: "books", n: "Books", sub: [
+      { id: "books_fiction", n: "Fiction", sub: [
+        { id: "books_fiction_romance", n: "Romance" },
+        { id: "books_fiction_historical-fiction", n: "Historical Fiction" },
+        { id: "books_fiction_mystery-and-suspense", n: "Mystery and Suspense" },
+        { id: "books_fiction_teen-fiction", n: "Teen Fiction" }] },
+      { id: "books_gospel-voices", n: "Gospel Voices", sub: [
+        { id: "books_gospel-voices_art-books", n: "Art Books" },
+        { id: "books_gospel-voices_general-authority-books", n: "General Authority Books" },
+        { id: "books_gospel-voices_inspiration", n: "Inspiration" },
+        { id: "books_gospel-voices_temple-books", n: "Temple Books" }] },
+      { id: "books_nonfiction", n: "Nonfiction", sub: [
+        { id: "books_nonfiction_biography", n: "Biography" },
+        { id: "books_nonfiction_family-and-parenting", n: "Family and Parenting" },
+        { id: "books_nonfiction_history", n: "History" },
+        { id: "books_nonfiction_self-improvement", n: "Self-Improvement" }] }] },
+    { id: "church-resources_scriptures_scripture-essentials", n: "Scriptures" },
+    { id: "baptism", n: "Baptism" },
+    { id: "church-resources", n: "Church Resources", sub: [
+      { id: "church-resources_scriptures", n: "Scriptures", sub: [
+        { id: "church-resources_scriptures_genuine-leather-scriptures", n: "Genuine Leather Scriptures" },
+        { id: "church-resources_scriptures_simulated-leather-scriptures", n: "Simulated Leather Scriptures" },
+        { id: "church-resources_scriptures_scripture-journal-editions", n: "Scripture Journal Editions" },
+        { id: "church-resources_scriptures_scripture-totes", n: "Scripture Totes" }] },
+      { id: "church-resources_church-distribution", n: "Church Distribution" },
+      { id: "church-resources_teaching-helps", n: "Teaching Helps" },
+      { id: "church-resources_prints", n: "Prints" }] },
+    { id: "games-puzzles", n: "Games & Puzzles" },
+    { id: "art", n: "Art", sub: [
+      { id: "art_wall-art", n: "Wall Art" },
+      { id: "art_temple-art", n: "Temple Art" },
+      { id: "art_statues", n: "Statues" },
+      { id: "art_savior-art", n: "Savior Art" },
+      { id: "art_decor", n: "D\u00e9cor" }] },
+    { id: "missionary", n: "Missionary", sub: [
+      { id: "missionary_accessories", n: "Accessories" },
+      { id: "missionary_bags", n: "Bags" },
+      { id: "missionary_books", n: "Books" },
+      { id: "missionary_jewelry", n: "Jewelry" },
+      { id: "missionary_journals", n: "Journals" }] },
+    { id: "temple-worship", n: "Temple Worship", sub: [
+      { id: "temple-worship_temple-accessories", n: "Temple Accessories" },
+      { id: "temple-worship_temple-bags", n: "Temple Bags" },
+      { id: "temple-worship_temple-clothing", n: "Temple Clothing" }] },
+    { id: "all-categories", n: "Browse All" }
+  ];
+const P = [
+    { id: "6017019", t: "The Candy Shop War Complete Boxed Set", by: "Mull, Brandon", price: 15.00, r: 4.8, rc: 176, cat: "books_fiction_teen-fiction", fmt: "Paperback",
+      img: [I("26/5b/21/66/66215b26b1dea3bbbe48c291/6017019_The_Candy_Shop_War_Complete_Boxed_Set.png/6017019_The_Candy_Shop_War_Complete_Boxed_Set.jpg")],
+      d: "All three Candy Shop War novels in one boxed set. Clearance price, while supplies last." },
+    { id: "5254477", t: "And These Words Scripture Study Journal", by: "Deseret Book", price: 6.25, r: 4.1, rc: 58, cat: "church-resources_scriptures_scripture-journal-editions", fmt: "Hardcover",
+      img: [I("6a/5b/21/66/66215b6ab1dea3bbbe48c904/5254477_5254477_none_base_8d114ae9.png/5254477_5254477_none_base_8d114ae9.jpg"), I("6a/5b/21/66/66215b6ab1dea3bbbe48c902/5254477_and-these-words-lifestyle.png/5254477_and-these-words-lifestyle.jpg")],
+      d: "A guided journal for daily scripture study, with prompts and room to write." },
+    { id: "5212882", t: "The Book of Mormon Legacy Edition", by: "Deseret Book", price: 49.99, r: 5.0, rc: 91, cat: "church-resources_scriptures", fmt: "Hardcover",
+      img: [I("f5/0f/35/66/66350ff54a47d8ad45efa9f6/5212882_5212882_none_base_bbd468fc.png/5212882_5212882_none_base_bbd468fc.jpg"), I("f5/0f/35/66/66350ff54a47d8ad45efa9f9/5212882_Book_of_Mormon_Legacy_Edition.png/5212882_Book_of_Mormon_Legacy_Edition.jpg")],
+      d: "A keepsake edition of the Book of Mormon, printed on heavier stock with wide margins." },
+    { id: "6070661", t: "The Love of God (18x22 Framed Canvas Print)", by: "Deseret Book", price: 114.50, r: 3.9, rc: 24, cat: "home_fine-art", fmt: "Framed Canvas Print", size: "18\" x 22\"",
+      img: [I("44/a6/cf/67/67cfa6449ab7822b03cba060/6070661_6070661_none_base_ba804e01.png/6070661_6070661_none_base_ba804e01.jpg"), I("43/a6/cf/67/67cfa6439ab7822b03cba057/6070661_6070661_none_base_f7479931.png/6070661_6070661_none_base_f7479931.jpg")],
+      d: "Canvas print in a wood frame, ready to hang. Half off during clearance." },
+    { id: "5255079", t: "The Old Testament, Journal Edition, Patterned Unlined", by: "Deseret Book", price: 5.00, r: 4.6, rc: 143, cat: "church-resources_scriptures_scripture-journal-editions", fmt: "Paperback",
+      img: [I("26/3f/16/69/69163f26c97833c19f56bead/" + dbl("5255079_HERO_OLD-TESTAMENT-JOURNAL-EDITION-PATTERNED-UNLINED.jpg")), I("29/3f/16/69/69163f29b4b73250f42334e9/" + dbl("5255079_PRODGALLERY_OLD-TESTAMENT-JOURNAL-EDITION-PATTERNED-UNLINED.jpg"))],
+      d: "Wide unlined margins for notes and sketches. No index." },
+    { id: "6024672", t: "Cable Knit Blessing Blanket", by: "Deseret Book", price: 6.25, r: 4.3, rc: 67, cat: "baptism", fmt: "Knit Cotton",
+      img: [I("aa/70/21/66/662170aa4d8f8419f6bef5d6/6024672_6024672_none_base_42b715b0.png/6024672_6024672_none_base_42b715b0.jpg")],
+      d: "A soft cable-knit blanket for a blessing day keepsake." },
+    { id: "6095538", t: "Seeking Persephone (Movie Tie-in Edition)", by: "Eden, Sarah M.", price: 18.99, r: 4.8, rc: 214, cat: "books_fiction_romance", fmt: "Paperback",
+      img: [I("63/79/6b/6a/6a6b7963aecf6cfadd773d25/" + dbl("6095538_HERO_SEEKING-PERSEPHONE-MOVIE-TIE-IN-EDITION_PAPERBACK_1.jpg")), I("7b/22/d9/69/69d9227b974f08152f873bca/" + dbl("5068623_HERO_SEEKING-PERSEPHONE.jpg"))],
+      d: "The movie tie-in edition of Sarah M. Eden\u2019s beloved Regency romance. Persephone Lancaster marries a stranger to save her family \u2014 and finds a quiet, guarded man who needs her more than he knows." },
+    { id: "P5068623", t: "Seeking Persephone (The Lancaster Family, Book 1)", by: "Eden, Sarah M.", price: 11.99, priceHigh: 17.99, r: 4.2, rc: 386, cat: "books_fiction_romance", fmt: "Paperback",
+      img: [I("7b/22/d9/69/69d9227b974f08152f873bca/" + dbl("5068623_HERO_SEEKING-PERSEPHONE.jpg")), I("fe/21/d9/69/69d921fe778e76271e56f640/" + dbl("5068623_FEATURE_SEEKING-PERSEPHONE_INTERIOR1.jpg"))],
+      d: "Book one of the Lancaster Family series. A marriage of convenience becomes something neither of them expected." },
+    { id: "P5043081", t: "Courting Miss Lancaster (The Lancaster Family, Book 2)", by: "Eden, Sarah M.", price: 11.99, priceHigh: 15.99, r: 3.9, rc: 241, cat: "books_fiction_romance", fmt: "Paperback",
+      img: [I("97/1d/d9/69/69d91d972877f3aacd15491d/" + dbl("5043081_HERO_COURTING-MISS-LANCASTER.jpg")), I("a1/1d/d9/69/69d91da1eabe6d00111fdaf4/" + dbl("5043081_FEATURE_COURTING-MISS-LANCASTER_INTERIOR1.jpg"))],
+      d: "Athena Lancaster wants a romantic suitor. Her guardian asks his closest friend to help her find one \u2014 a plan with one obvious flaw." },
+    { id: "P5183500", t: "Romancing Daphne (The Lancaster Family, Book 3)", by: "Eden, Sarah M.", price: 9.99, priceHigh: 17.99, r: 4.6, rc: 178, cat: "books_fiction_romance", fmt: "Paperback",
+      img: [I("07/50/27/69/69275007869d9d2aed915ea2/P5183500_HERO_ROMANCING-DAPHNE-THE-LANCASTER-FAMILY.png/P5183500_HERO_ROMANCING-DAPHNE-THE-LANCASTER-FAMILY.jpg")],
+      d: "The quietest Lancaster sister steps into a London season she never wanted." },
+    { id: "P5197705", t: "Loving Lieutenant Lancaster (The Lancaster Family, Book 4)", by: "Eden, Sarah M.", price: 9.99, priceHigh: 16.99, r: 5, rc: 143, cat: "books_fiction_romance", fmt: "Paperback",
+      img: [I("b2/23/d9/69/69d923b24ad2ea64df99c5f3/" + dbl("5197705_HERO_LOVING-LIEUTENANT-LANCASTER.jpg"))],
+      d: "A soldier returns from war to a woman who remembers who he was before." },
+    { id: "P5258117", t: "Charming Artemis (The Lancaster Family, Book 5)", by: "Eden, Sarah M.", price: 9.99, priceHigh: 18.99, r: 4.4, rc: 132, cat: "books_fiction_romance", fmt: "Paperback",
+      img: [I("d9/1b/d9/69/69d91bd9b9ba62fc50204cd0/" + dbl("5258117_HERO_CHARMING-ARTEMIS.jpg"))],
+      d: "The last Lancaster sister and the Jonquil brother who has always exasperated her." },
+    { id: "PR00001380", t: "Every Beat After", by: "Various", price: 18.99, priceHigh: 32.99, r: 3.7, rc: 27, cat: "books_fiction_romance", fmt: "Paperback",
+      img: [I("c6/eb/c6/69/69c6ebc6bcb2c7b68da50814/6087090_HERO_EVERY-BEAT-AFTER_PAPERBACK-KAL.png/6087090_HERO_EVERY-BEAT-AFTER_PAPERBACK-KAL.jpg"), I("29/b8/ca/69/69cab829eff20acca1da5cf9/" + dbl("6087090_FEATURE_EVERY-BEAT-AFTER_PAPERBACK_INTERIOR1.jpg"))],
+      d: "A new release for the reader who needs a steady hour." },
+    { id: "PR00001397", t: "The Duke\u2019s Bargain", by: "Various", price: 18.99, priceHigh: 32.99, r: 4.9, rc: 31, cat: "books_fiction_romance", fmt: "Paperback",
+      img: [I("4f/eb/cb/69/69cbeb4f1697b5a856e37127/PR00001397_HERO_THE-DUKES-BARGAIN.png/PR00001397_HERO_THE-DUKES-BARGAIN.jpg")],
+      d: "A bargain struck in good faith, and the season that tests it." }
+];
+const CAT_NAMES = {};
+(function walk(list) { list.forEach(c => { CAT_NAMES[c.id] = c.n; if (c.sub) walk(c.sub); }); })(NAV);
+const money = (n) => "$" + n.toFixed(2);
+const PDP = (id) => "https://www.deseretbook.com/product/" + id + ".html";
+const CAT = (c) => "https://www.deseretbook.com/category/books_fiction/" + c + "/";
+const GENRE_SHELVES = [
+  { n: 'Romance', cat: CAT('books_fiction_romance'), books: [
+    { t: 'Every Beat After', href: PDP('PR00001380'), img: I("c6/eb/c6/69/69c6ebc6bcb2c7b68da50814/6087090_HERO_EVERY-BEAT-AFTER_PAPERBACK-KAL.png/6087090_HERO_EVERY-BEAT-AFTER_PAPERBACK-KAL.jpg") },
+    { t: 'Seeking Persephone (Movie Tie-in Edition)', href: PDP('6095538'), img: I("63/79/6b/6a/6a6b7963aecf6cfadd773d25/" + dbl("6095538_HERO_SEEKING-PERSEPHONE-MOVIE-TIE-IN-EDITION_PAPERBACK_1.jpg")) },
+    { t: "The Duke's Bargain", href: PDP('PR00001397'), img: I("4f/eb/cb/69/69cbeb4f1697b5a856e37127/PR00001397_HERO_THE-DUKES-BARGAIN.png/PR00001397_HERO_THE-DUKES-BARGAIN.jpg") }
+  ] },
+  { n: 'Regency', cat: CAT('books_fiction_historical-fiction'), books: [
+    { t: 'Courting Miss Lancaster', href: PDP('P5043081'), img: I("97/1d/d9/69/69d91d972877f3aacd15491d/" + dbl("5043081_HERO_COURTING-MISS-LANCASTER.jpg")) },
+    { t: 'Romancing Daphne', href: PDP('P5183500'), img: I("07/50/27/69/69275007869d9d2aed915ea2/P5183500_HERO_ROMANCING-DAPHNE-THE-LANCASTER-FAMILY.png/P5183500_HERO_ROMANCING-DAPHNE-THE-LANCASTER-FAMILY.jpg") },
+    { t: 'Charming Artemis', href: PDP('P5258117'), img: I("d9/1b/d9/69/69d91bd9b9ba62fc50204cd0/" + dbl("5258117_HERO_CHARMING-ARTEMIS.jpg")) }
+  ] },
+  { n: 'Teen Fiction', cat: CAT('books_fiction_teen-fiction'), books: [
+    { t: "Wendy's Ever After", href: PDP('P6073624'), img: I("10/71/3f/68/683f7110096dff25dda260d2/" + dbl("6073624_HERO_WENDYS-EVER-AFTER_HARDBACK.jpg")) },
+    { t: 'Casters and Crowns', href: PDP('P6054216'), img: I("b3/e6/07/67/6707e6b3450e244009863e4e/P6054216_CASTERS_AND_CROWNS.png/P6054216_CASTERS_AND_CROWNS.jpg") },
+    { t: 'The Art of Us', href: PDP('P6054221'), img: I("e4/a3/cf/67/67cfa3e49ab7822b03cb64b1/P6054221_P6054221_none_base_319fd634.png/P6054221_P6054221_none_base_319fd634.jpg") }
+  ] }
+];
+const SLIDES = GENRE_SHELVES.length;
+const CTA = (bg) => ({
+  href: '#plans', variant: 'primary', size: 'lg',
+  style: { background: bg, borderColor: bg, whiteSpace: 'nowrap', minWidth: 'min(320px, 100%)' }
+});
+
+const TIERS = [
+  {
+    key: 'monthly', name: 'Monthly', badge: 'Most Popular', term: 'monthly',
+    price: '$12.99/month', monthly: 12.99
+  },
+  {
+    key: 'yearly', name: 'Yearly', badge: 'Best Value', term: 'yearly',
+    price: '$129/year', monthly: 12.99, yearlyTotal: 129
+  }
+];
+
+class Component extends DCLogic {
+  state = { faq: null, footAcc: {}, navOpen: null, searchOpen: false, query: '', drawerOpen: false, drawerTop: null, drawerMid: null, slide: 0, dir: 1 };
+
+  componentDidMount() {
+    const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    this._reducedMotion = !!(mq && mq.matches);
+    if (!this._reducedMotion) this.startAuto();
+  }
+  componentWillUnmount() { clearInterval(this._t); }
+  startAuto() {
+    clearInterval(this._t);
+    if (this._reducedMotion) return;
+    this._t = setInterval(() => this.setState(s => ({ slide: (s.slide + 1) % SLIDES, dir: 1 })), 7000);
+  }
+  stopAuto() { clearInterval(this._t); }
+  go(d) { this.setState(s => ({ slide: (s.slide + SLIDES + d) % SLIDES, dir: d })); this.startAuto(); }
+
+  renderVals() {
+    const faq = {};
+    ['faq1', 'faq2', 'faq3', 'faq4', 'faq5'].forEach(k => {
+      const isOpen = this.state.faq === k;
+      faq[k + 'Open'] = isOpen;
+      faq[k + 'Sign'] = isOpen ? '\u2212' : '+';
+      faq[k + 'Toggle'] = () => this.setState(s => ({ faq: s.faq === k ? null : k }));
+    });
+
+
+    const navOpen = this.state.navOpen;
+    const q = this.state.query.trim().toLowerCase();
+    const results = q ? P.filter(p => p.t.toLowerCase().includes(q) || p.by.toLowerCase().includes(q)).slice(0, 6).map(p => ({ t: p.t, by: p.by, price: money(p.price), thumbStyle: { width: '44px', height: '44px', borderRadius: '4px', flex: 'none', backgroundImage: 'url(' + p.img[0] + ')', backgroundSize: 'cover', backgroundPosition: 'center' } })) : null;
+
+    const dTop = this.state.drawerTop, dMid = this.state.drawerMid;
+    const drawerRows = [];
+    NAV.forEach((top, i) => {
+      const topOn = dTop === i;
+      drawerRows.push({
+        label: top.n, cls: 'nav-row', chevron: !!top.sub, arrow: !top.sub,
+        rot: topOn ? 'rotate(180deg)' : 'none',
+        toggle: top.sub ? (() => this.setState(s => ({ drawerTop: s.drawerTop === i ? null : i, drawerMid: null }))) : (() => this.setState({ drawerOpen: false }))
+      });
+      if (top.sub && topOn) {
+        top.sub.forEach((mid, j) => {
+          const midOn = dMid === j;
+          drawerRows.push({
+            label: mid.n, cls: 'nav-row l2', chevron: !!mid.sub, arrow: !mid.sub,
+            rot: midOn ? 'rotate(180deg)' : 'none',
+            toggle: mid.sub ? (() => this.setState(s => ({ drawerMid: s.drawerMid === j ? null : j }))) : (() => this.setState({ drawerOpen: false }))
+          });
+          if (mid.sub && midOn) {
+            mid.sub.forEach(leaf => drawerRows.push({ label: leaf.n, cls: 'nav-row l3', chevron: false, arrow: true, rot: 'none', toggle: () => this.setState({ drawerOpen: false }) }));
+            drawerRows.push({ label: 'Shop all ' + mid.n, cls: 'nav-row l3', chevron: false, arrow: true, rot: 'none', toggle: () => this.setState({ drawerOpen: false }) });
+          }
+        });
+        drawerRows.push({ label: 'Shop all ' + top.n, cls: 'nav-row l2', chevron: false, arrow: true, rot: 'none', toggle: () => this.setState({ drawerOpen: false }) });
+      }
+    });
+
+    const cur = this.state.slide;
+    const EASE = 'cubic-bezier(.33,.02,.18,1)';
+    const POP = 'cubic-bezier(.4,.05,.2,1)';
+    const hv = !!this.state.shelfHover;
+    const rm = !!this._reducedMotion;
+    const tr = (spec) => rm ? 'none' : spec;
+    const place = (t, mid, delay, origin) => ({
+      transform: t, transformOrigin: origin,
+      transformStyle: 'preserve-3d', WebkitTransformStyle: 'preserve-3d',
+      backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
+      transition: tr('transform ' + (hv ? (mid ? '.62s' : '.9s') : '1.15s') + ' ' + EASE + ' ' + (hv ? 0 : delay) + 's'),
+      height: mid ? '80%' : '58%', aspectRatio: '2 / 3', flex: 'none', zIndex: mid ? 2 : 1
+    });
+    const cover = (base, mid, on) => ({
+      display: 'block', position: 'relative', width: '100%', height: '100%', borderRadius: '2px',
+      transformStyle: 'preserve-3d', WebkitTransformStyle: 'preserve-3d',
+      backgroundImage: 'url(' + base + ')', backgroundSize: 'cover', backgroundPosition: 'center',
+      boxShadow: mid
+        ? '0 24px 44px rgba(43,46,48,0.34), 0 2px 6px rgba(43,46,48,0.22)'
+        : '0 14px 30px rgba(43,46,48,0.26), 0 2px 5px rgba(43,46,48,0.18)',
+      textDecoration: 'none', opacity: on ? 1 : 0,
+      transition: tr('box-shadow .8s ease, opacity ' + (on ? '.5s' : '.3s') + ' ease')
+    });
+    const SLOTS = [
+      { key: 'left',  y: 24,  yHover: 38,  ySpin: 78,  z: -20, zHover: -6, tilt: -7, origin: 'left center',  delay: 0 },
+      { key: 'mid',   y: -7,  yHover: -14, ySpin: 72,  z: 44,  zHover: 60, tilt: 0,  origin: 'left center',  delay: 0.09, mid: true },
+      { key: 'right', y: -24, yHover: -38, ySpin: -78, z: -20, zHover: -6, tilt: 7,  origin: 'right center', delay: 0.18 }
+    ];
+    const slides = GENRE_SHELVES.map((sh, i) => {
+      const on = i === cur;
+      const ahead = ((i - cur + SLIDES) % SLIDES) === 1;
+      const behind = ((cur - i + SLIDES) % SLIDES) === 1;
+      const s = on ? 0 : (ahead ? 1 : behind ? -1 : (this.state.dir || 1));
+      const g = {
+        href: sh.cat, label: 'Browse ' + sh.n,
+        style: {
+          position: 'absolute', inset: 0, display: 'flex', textDecoration: 'none', color: 'inherit',
+          alignItems: 'center', justifyContent: 'center', gap: 'clamp(8px, 2.2%, 22px)',
+          transformStyle: 'preserve-3d', WebkitTransformStyle: 'preserve-3d',
+          transform: on ? 'none' : 'translateX(' + (s * 12) + '%) translateZ(-220px) rotateY(' + (-s * 30) + 'deg)',
+          opacity: on ? 1 : 0,
+          visibility: on ? 'visible' : 'hidden',
+          transition: tr(on
+            ? 'opacity .75s ease .1s, transform .85s ' + POP + ', visibility 0s linear 0s'
+            : 'opacity .5s ease, transform .85s ' + EASE + ', visibility 0s linear .85s'),
+          pointerEvents: on ? 'auto' : 'none'
+        }
+      };
+      SLOTS.forEach((sl, n) => {
+        const rest = sl.mid
+          ? 'translateZ(' + (hv ? sl.zHover : sl.z) + 'px) rotateY(' + (hv ? sl.yHover : sl.y) + 'deg)'
+          : 'translateY(6%) rotateY(' + (hv ? sl.yHover : sl.y) + 'deg) translateZ(' + (hv ? sl.zHover : sl.z) + 'px)' + (hv ? ' rotate(' + sl.tilt + 'deg)' : '');
+        const spin = sl.mid
+          ? 'translateZ(-10px) rotateY(' + sl.ySpin + 'deg)'
+          : 'translateY(6%) rotateY(' + sl.ySpin + 'deg) translateZ(-40px)';
+        const w = place(on ? rest : spin, !!sl.mid, on ? sl.delay : 0, sl.origin);
+        w.opacity = on ? 1 : 0;
+        w.transition = tr((w.transition === 'none' ? '' : w.transition + ', ') + 'opacity ' + (on ? '.5s' : '.35s') + ' ease');
+        g[sl.key] = { wrap: w, style: cover(sh.books[n].img, !!sl.mid, on) };
+      });
+      return g;
+    });
+    return {
+      ...faq,
+      slides,
+      prevSlide: () => this.go(-1),
+      nextSlide: () => this.go(1),
+      pauseAuto: () => { this.stopAuto(); this.setState({ shelfHover: true }); },
+      resumeAuto: () => { this.startAuto(); this.setState({ shelfHover: false }); },
+      slideName: GENRE_SHELVES[cur].n,
+      hdrCls: 'hdr' + (this.state.searchOpen ? ' srch-on' : ''),
+      srchBtnCls: 'srch-f' + (this.state.searchOpen ? ' open' : ''),
+      navItems: NAV.map((n, i) => ({ label: n.n, cls: 'dnav-b' + (navOpen === i ? ' on' : ''), open: navOpen === i, enter: () => this.setState({ navOpen: n.sub ? i : null }) })),
+      closeNav: () => this.setState({ navOpen: null }),
+      mega: (navOpen != null && NAV[navOpen].sub) ? { allLabel: 'Shop all ' + NAV[navOpen].n, cols: NAV[navOpen].sub.map(s => ({ title: s.n, links: (s.sub || []).map(x => x.n) })) } : null,
+      searchOpen: this.state.searchOpen,
+      openSearch: () => this.setState({ searchOpen: true }),
+      closeSearch: () => this.setState({ searchOpen: false, query: '' }),
+      query: this.state.query,
+      onQuery: e => this.setState({ query: e.target.value }),
+      results,
+      drawerOpen: this.state.drawerOpen,
+      openDrawer: () => this.setState({ drawerOpen: true }),
+      closeDrawer: () => this.setState({ drawerOpen: false }),
+      drawerCls: 'drawer' + (this.state.drawerOpen ? ' on' : ''),
+      scrimCls: 'drawer-scrim' + (this.state.drawerOpen ? ' on' : ''),
+      drawerHidden: !this.state.drawerOpen,
+      drawerRows,
+      heroCtaProps: CTA('var(--db-orange-300)'),
+      ctaProps: CTA('var(--db-orange-300)'),
+      signupCtaProps: CTA('var(--db-accent-deep)'),
+      tiers: TIERS.map(t => {
+        const money = v => '$' + v.toFixed(2).replace(/\.00$/, '');
+        let compare = '', save = '', annual = '';
+        if (t.term === 'monthly') {
+          annual = money(t.monthly * 12) + '/year total';
+        } else if (t.term === 'yearly') {
+          compare = money(t.monthly * 12) + '/year';
+          save = 'Save ' + money(t.monthly * 12 - t.yearlyTotal);
+        }
+        const price = t.price;
+        const slash = price.indexOf('/');
+        const accent = 'var(--db-accent-deep)';
+        const hairline = 'var(--db-accent)';
+        return {
+          name: t.name,
+          nameColor: accent,
+          cardProps: {
+            ground: 'white',
+            padding: 'none',
+            style: {
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: 'clamp(18px, 3vw, 28px)',
+              borderColor: hairline
+            }
+          },
+          amount: slash === -1 ? price : price.slice(0, slash),
+          unit: slash === -1 ? '' : price.slice(slash),
+          unitSize: '16px',
+          amountSize: '38px',
+          rowWhite: t.term ? 'nowrap' : 'normal',
+          rowMargin: t.term ? 'clamp(6px, 1.8vw, 20px) -16px 0' : 'clamp(6px, 1.8vw, 20px) 0 0',
+          compare,
+          save,
+          annual,
+          badge: t.badge,
+          hasMeta: !!(compare || save || annual)
+        };
+      }),
+
+      footerAcc: Object.keys(FOOTER).map(k => {
+        const on = !!this.state.footAcc[k];
+        return {
+          title: k,
+          links: FOOTER[k],
+          rot: on ? 'rotate(180deg)' : 'none',
+          bodyCls: 'acc-b' + (on ? ' on' : ''),
+          toggle: () => this.setState(s => ({ footAcc: Object.assign({}, s.footAcc, { [k]: !s.footAcc[k] }) }))
+        };
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>
