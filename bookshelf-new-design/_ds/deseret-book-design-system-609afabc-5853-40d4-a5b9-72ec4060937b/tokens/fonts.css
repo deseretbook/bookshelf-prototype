@@ -1,0 +1,5 @@
+/* Deseret Book webfonts — all four brand faces are hosted on Google Fonts,
+   so no binaries are vendored. Lora + DM Sans load always; Fraunces and
+   Josefin Sans are accent faces, loaded here so specimens render but only to
+   be USED when a piece genuinely calls for one (never both). */
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,400;0,9..40,900;1,9..40,400&family=Fraunces:ital,wght@0,400;0,600;0,900;1,400&family=Josefin+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap");

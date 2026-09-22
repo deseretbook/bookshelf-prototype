@@ -1,0 +1,25 @@
+/* ============================================================
+   MOTION — extension. The style guide is silent on animation;
+   these values keep motion quiet: short, eased, opacity and
+   small translations only. No bounce, no spring, no attention
+   loops.
+   ============================================================ */
+:root {
+  --db-duration-fast:  120ms; /* @kind other */
+  --db-duration-base:  180ms; /* @kind other */
+  --db-duration-slow:  280ms; /* @kind other */
+  --db-ease-standard: cubic-bezier(0.2, 0, 0, 1); /* @kind other */
+  --db-ease-out:      cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --db-transition: color var(--db-duration-base) var(--db-ease-standard),
+                   background-color var(--db-duration-base) var(--db-ease-standard),
+                   border-color var(--db-duration-base) var(--db-ease-standard),
+                   opacity var(--db-duration-base) var(--db-ease-standard),
+                   transform var(--db-duration-base) var(--db-ease-standard);
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --db-duration-fast: 0ms; /* @kind other */
+    --db-duration-base: 0ms; /* @kind other */
+    --db-duration-slow: 0ms; /* @kind other */
+  }
+}
