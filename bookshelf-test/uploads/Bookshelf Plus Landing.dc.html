@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="support.js"></script>
+
+
+
+</head>
+<body>
+<x-dc>
+<helmet>
+
+
+<style>/* Deseret Bookshelf+ — Semantic tokens.
+   Clean aliases the components consume, mapped from the exact values in fig-tokens.css.
+   iOS system palette (light default) + the kit's teal brand. Three brand tint modes:
+   Deseret (teal, default), Bookshelf (orange), VIP (cyan) — switch via [data-brand] on a root. */
+:root {
+  /* ---- Brand (Deseret / teal — the kit default) ---- */
+  --brand-50:  rgb(240,253,250);
+  --brand-100: rgb(204,251,241);
+  --brand-200: rgb(152,247,230);
+  --brand-300: rgb(93,235,215);
+  --brand-400: rgb(45,214,195);
+  --brand-500: rgb(21,186,170);
+  --brand-600: rgb(12,149,139);   /* primary brand */
+  --brand-700: rgb(15,128,121);   /* brand hover / pressed */
+  --brand-800: rgb(16,95,91);
+  --brand: var(--brand-600);
+  --brand-hover: var(--brand-700);
+  --brand-tint-14: rgba(12,149,139,0.14);
+  --brand-tint-20: rgba(12,149,139,0.2);
+  --on-brand: rgb(255,255,255);
+
+  /* ---- iOS labels (light) ---- */
+  --label-primary: rgb(0,0,0);
+  --label-secondary: rgba(60,60,67,0.6);
+  --label-tertiary: rgba(60,60,67,0.3);
+  --label-quaternary: rgba(60,60,67,0.18);
+  --label-vibrant-secondary: rgb(114,114,114);
+  --on-color: rgb(255,255,255);
+
+  /* ---- iOS backgrounds (light) ---- */
+  --bg-primary: rgb(255,255,255);
+  --bg-secondary: rgb(242,242,247);
+  --bg-tertiary: rgb(255,255,255);
+  --bg-grouped-primary: rgb(242,242,247);
+  --bg-grouped-secondary: rgb(255,255,255);
+  --bg-elevated: rgb(255,255,255);
+
+  /* ---- iOS fills (translucent grays) ---- */
+  --fill-primary: rgba(120,120,128,0.2);
+  --fill-secondary: rgba(120,120,128,0.16);
+  --fill-tertiary: rgba(118,118,128,0.12);
+  --fill-quaternary: rgba(116,116,128,0.08);
+
+  /* ---- Separators ---- */
+  --separator-opaque: rgb(198,198,200);
+  --separator-nonopaque: rgba(60,60,67,0.29);
+
+  /* ---- iOS system accent colors ---- */
+  --system-blue:   rgb(21,112,239);
+  --system-green:  rgb(23,178,106);
+  --system-indigo: rgb(122,90,248);
+  --system-orange: rgb(245,128,10);
+  --system-pink:   rgb(246,61,104);
+  --system-purple: rgb(203,48,224);
+  --system-red:    rgb(217,45,32);
+  --system-teal:   rgb(0,195,208);
+  --system-yellow: rgb(234,170,8);
+  --system-mint:   rgb(0,200,179);
+  --system-cyan:   rgb(8,151,184);
+  --system-brown:  rgb(172,127,94);
+
+  /* ---- Semantic status ---- */
+  --success: var(--system-green);
+  --warning: var(--system-orange);
+  --danger:  var(--system-red);
+  --info:    var(--system-blue);
+
+  /* ---- Radii (from Radius collection) ---- */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-full: 9999px;
+
+  /* ---- Spacing (from Spacing collection, 4pt base) ---- */
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 8px;
+  --space-4: 12px;
+  --space-5: 16px;
+  --space-6: 20px;
+  --space-7: 24px;
+  --space-8: 32px;
+  --space-9: 40px;
+  --space-10: 48px;
+
+  /* ---- Elevation (iOS material shadows) ---- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.10);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.16), 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-menu: 0 10px 40px rgba(0,0,0,0.22);
+
+  /* ---- Motion ---- */
+  --ease-ios: cubic-bezier(0.32, 0.72, 0, 1); /* @kind other */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --dur-fast: 150ms; /* @kind other */
+  --dur-base: 250ms; /* @kind other */
+  --dur-slow: 400ms; /* @kind other */
+}
+
+/* ---- Brand tint modes ---- */
+[data-brand="bookshelf"] {
+  --brand-500: rgb(246,154,55);
+  --brand-600: rgb(210,110,9);
+  --brand-700: rgb(180,92,6);
+  --brand: var(--brand-600);
+  --brand-hover: var(--brand-700);
+  --brand-tint-14: rgba(210,110,9,0.14);
+  --brand-tint-20: rgba(210,110,9,0.2);
+}
+[data-brand="vip"] {
+  --brand-500: rgb(34,211,238);
+  --brand-600: rgb(8,151,184);
+  --brand-700: rgb(14,116,144);
+  --brand: var(--brand-600);
+  --brand-hover: var(--brand-700);
+  --brand-tint-14: rgba(8,151,184,0.14);
+  --brand-tint-20: rgba(8,151,184,0.2);
+}
+
+/* ---- Dark mode ---- */
+[data-theme="dark"] {
+  --label-primary: rgb(255,255,255);
+  --label-secondary: rgba(235,235,245,0.6);
+  --label-tertiary: rgba(235,235,245,0.3);
+  --label-quaternary: rgba(235,235,245,0.18);
+  --bg-primary: rgb(0,0,0);
+  --bg-secondary: rgb(28,28,30);
+  --bg-tertiary: rgb(44,44,46);
+  --bg-grouped-primary: rgb(0,0,0);
+  --bg-grouped-secondary: rgb(28,28,30);
+  --bg-elevated: rgb(28,28,30);
+  --fill-primary: rgba(120,120,128,0.36);
+  --fill-secondary: rgba(120,120,128,0.32);
+  --fill-tertiary: rgba(118,118,128,0.24);
+  --fill-quaternary: rgba(118,118,128,0.18);
+  --separator-opaque: rgb(56,56,58);
+  --separator-nonopaque: rgba(84,84,88,0.6);
+  --shadow-menu: 0 10px 40px rgba(0,0,0,0.5);
+}
+</style>
+<style>/* Deseret Bookshelf+ — Type scale.
+   iOS Human Interface text styles (values verbatim from the kit's Text styles variables).
+   Use the .ds-* classes or the CSS custom props. Sizes are px; never snap to a grid. */
+:root {
+  --type-large-title:   34px;  --type-large-title-lh:   41px;
+  --type-title-1:       28px;  --type-title-1-lh:       34px;
+  --type-title-2:       22px;  --type-title-2-lh:       28px;
+  --type-title-3:       20px;  --type-title-3-lh:       25px;
+  --type-headline:      17px;  --type-headline-lh:      22px;
+  --type-body:          17px;  --type-body-lh:          22px;
+  --type-callout:       16px;  --type-callout-lh:       21px;
+  --type-subhead:       15px;  --type-subhead-lh:       20px;
+  --type-footnote:      13px;  --type-footnote-lh:      18px;
+  --type-caption-1:     12px;  --type-caption-1-lh:     16px;
+  --type-caption-2:     11px;  --type-caption-2-lh:     13px;
+  /* Marketing / web display scale (from display-* variables) */
+  --type-display-xl:    60px;  --type-display-xl-lh:    72px;
+  --type-display-lg:    48px;  --type-display-lg-lh:    60px;
+  --type-display-md:    36px;  --type-display-md-lh:    44px;
+  --type-display-sm:    30px;  --type-display-sm-lh:    38px;
+  --type-display-xs:    24px;  --type-display-xs-lh:    32px;
+}
+
+.ds-large-title { font-family: var(--font-display); font-size: var(--type-large-title); line-height: var(--type-large-title-lh); font-weight: var(--weight-bold); letter-spacing: 0.4px; }
+.ds-title-1 { font-family: var(--font-display); font-size: var(--type-title-1); line-height: var(--type-title-1-lh); font-weight: var(--weight-bold); letter-spacing: 0.36px; }
+.ds-title-2 { font-family: var(--font-display); font-size: var(--type-title-2); line-height: var(--type-title-2-lh); font-weight: var(--weight-bold); letter-spacing: 0.35px; }
+.ds-title-3 { font-family: var(--font-display); font-size: var(--type-title-3); line-height: var(--type-title-3-lh); font-weight: var(--weight-semibold); letter-spacing: 0.38px; }
+.ds-headline { font-family: var(--font-text); font-size: var(--type-headline); line-height: var(--type-headline-lh); font-weight: var(--weight-semibold); letter-spacing: -0.43px; }
+.ds-body { font-family: var(--font-text); font-size: var(--type-body); line-height: var(--type-body-lh); font-weight: var(--weight-regular); letter-spacing: -0.43px; }
+.ds-callout { font-family: var(--font-text); font-size: var(--type-callout); line-height: var(--type-callout-lh); font-weight: var(--weight-regular); letter-spacing: -0.31px; }
+.ds-subhead { font-family: var(--font-text); font-size: var(--type-subhead); line-height: var(--type-subhead-lh); font-weight: var(--weight-regular); letter-spacing: -0.23px; }
+.ds-footnote { font-family: var(--font-text); font-size: var(--type-footnote); line-height: var(--type-footnote-lh); font-weight: var(--weight-regular); letter-spacing: -0.08px; }
+.ds-caption-1 { font-family: var(--font-text); font-size: var(--type-caption-1); line-height: var(--type-caption-1-lh); font-weight: var(--weight-regular); }
+.ds-caption-2 { font-family: var(--font-text); font-size: var(--type-caption-2); line-height: var(--type-caption-2-lh); font-weight: var(--weight-regular); }
+.ds-display-xl { font-family: var(--font-display); font-size: var(--type-display-xl); line-height: var(--type-display-xl-lh); font-weight: var(--weight-bold); letter-spacing: -1.2px; }
+.ds-display-lg { font-family: var(--font-display); font-size: var(--type-display-lg); line-height: var(--type-display-lg-lh); font-weight: var(--weight-bold); letter-spacing: -0.96px; }
+.ds-display-md { font-family: var(--font-display); font-size: var(--type-display-md); line-height: var(--type-display-md-lh); font-weight: var(--weight-bold); letter-spacing: -0.72px; }
+.ds-serif { font-family: var(--font-serif); }
+.ds-mono { font-family: var(--font-mono); }
+</style>
+<style>/* Deseret Bookshelf+ — Iconography.
+   The source uses Apple SF Symbols (a proprietary font that cannot be extracted or shipped).
+   SUBSTITUTE: Material Symbols Rounded (Google, freely licensable) — the closest widely
+   available match for a rounded, single-weight system icon set. The <Icon> component maps
+   the kit's SF Symbol vocabulary onto Material Symbol ligature names. */
+/* fallback */
+@font-face {
+  font-family: 'Material Symbols Rounded';
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: block;
+  src: url("assets/fonts/f871ce02-47a6-440b-91a2-a1256fbef7ab.woff2") format('woff2');
+}
+
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+</style>
+<link rel="stylesheet" href="assets/ds.css">
+<script src="bookshelf-ds.js"></script>
+<script src="image-slot.js"></script>
+<style>
+  body { margin: 0; background: rgb(255,255,255); --bsp-logo-scale: 2.6; }
+  @media (max-width: 900px) { body { --bsp-logo-scale: 1.8; } }
+  @media (max-width: 600px) { body { --bsp-logo-scale: 1.3; } }
+  a { color: var(--brand); }
+  a:hover { color: var(--brand-hover); }
+</style>
+</helmet>
+
+<div style="font-family: var(--font-text); color: var(--label-primary); background: var(--bg-primary);">
+
+  <div style="position: relative; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 44px; background: rgb(33,137,182); color: rgb(255,255,255); font-size: 15px; font-weight: 600; text-align: center;">
+    <a href="#plans" style="color: inherit; font-weight: 700; text-decoration: underline;">FREE SHIPPING</a>
+    <span>on orders of $49 or more.</span>
+    <a href="#plans" style="color: inherit; text-decoration: underline;">Exclusions apply.</a>
+    <span style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); display: inline-flex; color: rgb(255,255,255);">
+      <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="xmark" size="{{ 20 }}" hint-size="20px,20px"></x-import>
+    </span>
+  </div>
+
+  <header>
+    <div style="position: relative; display: flex; align-items: center; justify-content: center; min-height: 72px; padding: 10px 20px; background: rgb(255,255,255);">
+      <a href="#plans" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 2px; text-decoration: none; color: rgb(51,46,43);">
+        <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="shopping_cart" size="{{ 26 }}" hint-size="26px,26px"></x-import>
+        <span style="font-size: 13px; font-weight: 600;">0</span>
+      </a>
+      <a href="#plans" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: rgb(29,29,27);">
+        <span style="display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 50%; background: rgb(77,77,77); color: rgb(255,255,255); font-family: var(--font-serif); font-size: 22px; font-weight: 700; letter-spacing: -0.5px;">DB</span>
+        <span style="font-family: var(--font-serif); font-size: 34px; line-height: 1; letter-spacing: -0.5px;">Deseret Book</span>
+      </a>
+      <div style="position: absolute; right: 0; top: 0; bottom: 0; display: flex; align-items: stretch;">
+        <a href="#plans" style="display: flex; align-items: center; gap: 10px; padding: 0 22px; border-left: 1px solid rgb(226,226,226); text-decoration: none; color: rgb(29,29,27);">
+          <span style="font-size: 15px; font-weight: 600; letter-spacing: 0.6px;">SEARCH</span>
+          <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="magnifyingglass" size="{{ 24 }}" hint-size="24px,24px"></x-import>
+        </a>
+        <a href="#plans" style="display: flex; align-items: center; gap: 2px; padding: 0 18px; border-left: 1px solid rgb(226,226,226); text-decoration: none; color: rgb(29,29,27);">
+          <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="person.circle" size="{{ 26 }}" hint-size="26px,26px"></x-import>
+          <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="chevron.down" size="{{ 16 }}" hint-size="16px,16px"></x-import>
+        </a>
+        <a href="#plans" style="position: relative; display: flex; align-items: center; padding: 0 22px 0 8px; text-decoration: none; color: rgb(29,29,27);">
+          <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="shopping_cart" size="{{ 28 }}" hint-size="28px,28px"></x-import>
+          <span style="position: absolute; top: 14px; right: 12px; display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; padding: 0 5px; box-sizing: border-box; border-radius: 50%; background: rgb(239,128,34); color: rgb(255,255,255); font-size: 12px; font-weight: 700;">0</span>
+        </a>
+      </div>
+    </div>
+
+    <nav style="position: relative; background: rgb(51,46,43);" sc-camel-on-mouse-leave="{{ closeNav }}">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; max-width: 1280px; margin: 0 auto; padding: 0 20px;">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="10">
+          <a href="#plans" sc-camel-on-mouse-enter="{{ item.onEnter }}" style="padding: 16px 14px; font-size: 15px; font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase; text-decoration: none; color: rgb(255,255,255);" style-hover="color: rgb(239,128,34);">{{ item.label }}</a>
+        </sc-for>
+      </div>
+      <sc-if value="{{ openMenu }}" hint-placeholder-val="{{ false }}">
+        <div style="position: absolute; left: 0; right: 0; top: 100%; z-index: 30; background: rgba(255,255,255,0.92); backdrop-filter: saturate(180%) blur(24px); -webkit-backdrop-filter: saturate(180%) blur(24px); border-bottom: 0.5px solid var(--separator-opaque); box-shadow: var(--shadow-menu);">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px; max-width: 1280px; margin: 0 auto; padding: 28px 20px 32px;">
+            <sc-for list="{{ openMenu.groups }}" as="g" hint-placeholder-count="3">
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <a href="#plans" style="font-size: 15px; font-weight: 700; letter-spacing: -0.2px; text-decoration: none; color: var(--label-primary);">{{ g.title }}</a>
+                <sc-for list="{{ g.links }}" as="l" hint-placeholder-count="4">
+                  <a href="#plans" style="font-size: 14px; text-decoration: none; color: var(--label-secondary);" style-hover="color: var(--brand);">{{ l }}</a>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </nav>
+
+    <div style="display: flex; justify-content: center; padding: 14px 20px; background: rgb(239,128,34);">
+      <a href="#plans" style="font-size: 22px; font-weight: 500; letter-spacing: -0.2px; text-decoration: underline; color: rgb(29,29,27);">Get 7-Day Free Trial</a>
+    </div>
+  </header>
+
+  <section style="position: relative; width: 100%; aspect-ratio: 2560 / 990; min-height: 380px; overflow: hidden; background: rgb(237,235,233);">
+    <div style="position: absolute; inset: 0;">
+      <image-slot id="bsp-hero" shape="rect" fit="cover" src="assets/9d34da58-9278-48b9-83ba-bab6ede80e1c.jpg" placeholder="Hero photo — hands holding a phone in the Bookshelf+ app"></image-slot>
+    </div>
+    <div style="position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; align-items: center; pointer-events: none;">
+      <div></div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1.6vw, 22px); padding: 0 clamp(12px, 3vw, 48px); text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center; width: clamp(150px, 19vw, 360px); height: clamp(20px, 2.54vw, 48px);">
+          <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.LogoBookshelfBrandmarkLight" size="2xl" hint-size="90px,12px" style="width:90px;height:12px;flex:none;transform:scale(var(--bsp-logo-scale));transform-origin:center;color:rgb(239,128,34)"></x-import>
+        </div>
+        <h1 style="margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: clamp(26px, 4.6vw, 76px); line-height: 1.1; letter-spacing: -1px; color: rgb(140,140,140); text-wrap: balance;">4000+ audiobooks &amp; eBooks in your pocket</h1>
+        <h1 style="margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: clamp(15px, 2vw, 34px); line-height: 1.2; color: rgb(140,140,140);">$12.99/month. Cancel anytime.</h1>
+        <a href="#plans" style="pointer-events: auto; display: inline-flex; align-items: center; justify-content: center; margin-top: clamp(4px, 1vw, 14px); padding: clamp(8px, 1.1vw, 16px) clamp(16px, 2.2vw, 34px); border: 2px solid rgb(239,128,34); background: transparent; color: rgb(239,128,34); font-size: clamp(11px, 1.15vw, 19px); font-weight: 600; letter-spacing: 1px; text-decoration: none;">START FREE TRIAL</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="plans" style="padding: 56px 20px 72px; background-color: rgb(255,255,255)">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="margin: 0 0 36px; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 3.6vw, 46px); letter-spacing: -0.5px; color: rgb(51,46,43);">Pick Your Plan</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 260px; padding: 40px 28px; background: rgb(255,255,255); border: 3px solid rgb(239,128,34); border-radius: 6px;">
+          <span style="font-size: 22px; font-weight: 400; color: rgb(51,46,43);">Monthly</span>
+          <span style="font-size: 34px; font-weight: 700; letter-spacing: -0.5px; color: rgb(51,46,43);">$12.99/month</span>
+          <span style="font-size: 20px; font-weight: 400; color: rgb(51,46,43);">Most Popular</span>
+          <a href="#plans" style="display: inline-flex; align-items: center; justify-content: center; margin-top: 12px; padding: 13px 44px; border-radius: 8px; background: rgb(150,99,17); color: rgb(255,255,255); font-size: 20px; font-weight: 700; text-decoration: none;">Start Now</a>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 260px; padding: 40px 28px; background: rgb(255,255,255); border: 3px solid rgb(239,128,34); border-radius: 6px;">
+          <span style="font-size: 22px; font-weight: 400; color: rgb(51,46,43);">Yearly</span>
+          <span style="font-size: 34px; font-weight: 700; letter-spacing: -0.5px; color: rgb(51,46,43);">$129/year</span>
+          <span style="font-size: 20px; font-weight: 400; color: rgb(51,46,43);">Best Value</span>
+          <a href="#plans" style="display: inline-flex; align-items: center; justify-content: center; margin-top: 12px; padding: 13px 44px; border-radius: 8px; background: rgb(150,99,17); color: rgb(255,255,255); font-size: 20px; font-weight: 700; text-decoration: none;">Start Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: 64px 20px;">
+    <h1 style="margin: 0 0 40px; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(30px, 4vw, 54px); letter-spacing: -0.5px; color: rgb(29,29,27); text-wrap: balance;">You'll Get Exclusive Access To:</h1>
+    <ul style="list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 40px; margin: 0 0 44px; padding: 0;">
+      <li style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <img src="assets/b63e3146-ed90-4df9-b680-02b4caea5f17.png" alt="Unlimited Listening" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+        <span style="font-size: clamp(15px, 1.4vw, 22px); color: rgb(29,29,27); text-align: center;">Unlimited Listening</span>
+      </li>
+      <li style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <img src="assets/0de1ba9d-0dd9-4424-9528-b0f21fbf8d08.png" alt="4,000+ Audiobooks &amp; eBooks" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+        <span style="font-size: clamp(15px, 1.4vw, 22px); color: rgb(29,29,27); text-align: center;">4,000+ Audiobooks &amp; eBooks</span>
+      </li>
+      <li style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <img src="assets/bac16aa2-9418-4d8c-9464-87e9a12673f1.png" alt="Exclusive Content" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+        <span style="font-size: clamp(15px, 1.4vw, 22px); color: rgb(29,29,27); text-align: center;">Exclusive Content</span>
+      </li>
+    </ul>
+    <ul style="list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 40px; margin: 0 auto; padding: 0; max-width: 68%;">
+      <li style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <img src="assets/1aef1d8a-9f3c-468e-8c98-bbb0c9538f0c.png" alt="Guaranteed Clean Content" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+        <span style="font-size: clamp(15px, 1.4vw, 22px); color: rgb(29,29,27); text-align: center;">Guaranteed Clean Content</span>
+      </li>
+      <li style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <img src="assets/6017753d-ee32-4699-93c9-848d0f28eada.png" alt="New Audiobooks on Release Day" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+        <span style="font-size: clamp(15px, 1.4vw, 22px); color: rgb(29,29,27); text-align: center;">New Audiobooks on Release Day</span>
+      </li>
+    </ul>
+  </section>
+
+  <section style="background: rgb(240,240,240); padding: 40px 20px 64px;">
+    <div style="max-width: 1180px; margin: 0 auto;">
+      <h2 style="margin: 0 0 56px; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.2vw, 44px); letter-spacing: -0.4px; color: rgb(51,46,43);">What People are Saying</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 44px;">
+        <div style="position: relative; display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-height: 320px; margin-top: 40px; padding: 76px 26px 26px; background: rgb(255,255,255); border: 1px solid rgb(16,122,118); border-radius: 12px;">
+          <span style="position: absolute; top: -40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; box-sizing: border-box; border-radius: 50%; background: rgb(240,240,240); border: 1px solid rgb(16,122,118); font-family: var(--font-serif); font-size: 64px; line-height: 1; color: rgb(0,122,118); padding-top: 34px;">&rdquo;</span>
+          <p style="margin: 0; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(20px, 1.9vw, 27px); line-height: 1.35; color: rgb(0,122,118);">&ldquo;We&rsquo;ve listened to dozens of books for the price of three hard copies.&rdquo;</p>
+          <span style="margin-top: 28px; font-family: var(--font-serif); font-style: italic; font-size: 13px; color: rgb(120,120,120);">&mdash;Customer Review</span>
+        </div>
+        <div style="position: relative; display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-height: 320px; margin-top: 40px; padding: 76px 26px 26px; background: rgb(255,255,255); border: 1px solid rgb(16,122,118); border-radius: 12px;">
+          <span style="position: absolute; top: -40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; box-sizing: border-box; border-radius: 50%; background: rgb(240,240,240); border: 1px solid rgb(16,122,118); font-family: var(--font-serif); font-size: 64px; line-height: 1; color: rgb(0,122,118); padding-top: 34px;">&rdquo;</span>
+          <p style="margin: 0; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(20px, 1.9vw, 27px); line-height: 1.35; color: rgb(0,122,118);">&ldquo;I&rsquo;m a busy mom&hellip;This app makes reading so much easier for me!&rdquo;</p>
+          <span style="margin-top: 28px; font-family: var(--font-serif); font-style: italic; font-size: 13px; color: rgb(120,120,120);">&mdash;Customer Review</span>
+        </div>
+        <div style="position: relative; display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-height: 320px; margin-top: 40px; padding: 76px 26px 26px; background: rgb(255,255,255); border: 1px solid rgb(16,122,118); border-radius: 12px;">
+          <span style="position: absolute; top: -40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; box-sizing: border-box; border-radius: 50%; background: rgb(240,240,240); border: 1px solid rgb(16,122,118); font-family: var(--font-serif); font-size: 64px; line-height: 1; color: rgb(0,122,118); padding-top: 34px;">&rdquo;</span>
+          <p style="margin: 0; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(20px, 1.9vw, 27px); line-height: 1.35; color: rgb(0,122,118);">&ldquo;I love the variety of books found here!&rdquo;</p>
+          <span style="margin-top: 28px; font-family: var(--font-serif); font-style: italic; font-size: 13px; color: rgb(120,120,120);">&mdash;Customer Review</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: rgb(240,240,240); padding: 56px 20px 72px;">
+   <div style="max-width: 1180px; margin: 0 auto;">
+    <h2 style="margin: 0 0 30px; text-align: center; font-family: var(--font-serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 46px); letter-spacing: -0.4px; color: rgb(51,46,43);">Frequently Asked Questions</h2>
+    <div style="background: rgb(255,255,255); border: 1px solid rgb(226,226,226); border-radius: 6px; overflow: hidden;">
+      <div style="">
+        <button type="button" onClick="{{ faq1Toggle }}" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 26px 30px; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: var(--font-text); font-size: 19px; font-weight: 400; color: rgb(51,46,43);" style-hover="background: rgb(250,250,250);">
+          <span>What is bookshelf+?</span>
+          <span style="flex: none; font-size: 26px; font-weight: 300; line-height: 1; color: rgb(51,46,43);">{{ faq1Sign }}</span>
+        </button>
+        <sc-if value="{{ faq1Open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 0 30px 26px; max-width: 980px;"><p style="margin: 0; font-size: 17px; line-height: 1.6; color: rgb(80,76,73);"><strong style="color: rgb(51,46,43);">Bookshelf+ is a digital subscription that gives you unlimited access to Deseret Book's entire digital audiobook library&mdash;</strong>including books from gospel leaders, a full library of clean and compelling fiction, inspiring audiobooks, exclusive podcasts, and more. It's like having an uplifting library in your pocket, wherever you go.</p></div>
+        </sc-if>
+      </div>
+      <div style="border-top: 1px solid rgb(232,232,232);">
+        <button type="button" onClick="{{ faq2Toggle }}" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 26px 30px; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: var(--font-text); font-size: 19px; font-weight: 400; color: rgb(51,46,43);" style-hover="background: rgb(250,250,250);">
+          <span>Is there a free trial?</span>
+          <span style="flex: none; font-size: 26px; font-weight: 300; line-height: 1; color: rgb(51,46,43);">{{ faq2Sign }}</span>
+        </button>
+        <sc-if value="{{ faq2Open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 0 30px 26px; max-width: 980px;"><p style="margin: 0; font-size: 17px; line-height: 1.6; color: rgb(80,76,73);">Yes! You get 7 days to try bookshelf+ risk-free. Just sign up, and you won't be charged if you cancel before the 7-day trial ends. No commitment, no fees. One free trial per customer.</p></div>
+        </sc-if>
+      </div>
+      <div style="border-top: 1px solid rgb(232,232,232);">
+        <button type="button" onClick="{{ faq3Toggle }}" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 26px 30px; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: var(--font-text); font-size: 19px; font-weight: 400; color: rgb(51,46,43);" style-hover="background: rgb(250,250,250);">
+          <span>Where can I use bookshelf+?</span>
+          <span style="flex: none; font-size: 26px; font-weight: 300; line-height: 1; color: rgb(51,46,43);">{{ faq3Sign }}</span>
+        </button>
+        <sc-if value="{{ faq3Open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 0 30px 26px; max-width: 980px;"><p style="margin: 0; font-size: 17px; line-height: 1.6; color: rgb(80,76,73);">Anywhere, anytime. Just download the <strong style="color: rgb(51,46,43);">deseret bookshelf app</strong> from the <a href="https://apps.apple.com/us/app/deseret-bookshelf-lds-books/id428709147">App Store</a> or <a href="https://play.google.com/store/apps/details?id=com.deseretdigital.bookshelf&amp;hl=en_US">Google Play</a> and log in to access your subscription on your phone or tablet.<br>Prefer desktop? You can also read and listen at <strong><a href="https://read.deseretbook.com/">read.deseretbook.com</a></strong> on any browser.</p></div>
+        </sc-if>
+      </div>
+      <div style="border-top: 1px solid rgb(232,232,232);">
+        <button type="button" onClick="{{ faq4Toggle }}" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 26px 30px; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: var(--font-text); font-size: 19px; font-weight: 400; color: rgb(51,46,43);" style-hover="background: rgb(250,250,250);">
+          <span>Can I cancel anytime?</span>
+          <span style="flex: none; font-size: 26px; font-weight: 300; line-height: 1; color: rgb(51,46,43);">{{ faq4Sign }}</span>
+        </button>
+        <sc-if value="{{ faq4Open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 0 30px 26px; max-width: 980px;"><p style="margin: 0; font-size: 17px; line-height: 1.6; color: rgb(80,76,73);">Yes, bookshelf+ is flexible. You can cancel anytime through your account settings at DeseretBook.com.</p></div>
+        </sc-if>
+      </div>
+      <div style="border-top: 1px solid rgb(232,232,232);">
+        <button type="button" onClick="{{ faq5Toggle }}" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 26px 30px; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: var(--font-text); font-size: 19px; font-weight: 400; color: rgb(51,46,43);" style-hover="background: rgb(250,250,250);">
+          <span>What happens if I cancel? Will I lose my books?</span>
+          <span style="flex: none; font-size: 26px; font-weight: 300; line-height: 1; color: rgb(51,46,43);">{{ faq5Sign }}</span>
+        </button>
+        <sc-if value="{{ faq5Open }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 0 30px 26px; max-width: 980px;"><p style="margin: 0; font-size: 17px; line-height: 1.6; color: rgb(80,76,73);">If you cancel, you'll lose access to the full bookshelf+ library. However, any individual books you've purchased separately (a la carte) will still be accessible through the deseret bookshelf app.</p></div>
+        </sc-if>
+      </div>
+    </div>
+    <h4 style="margin: 26px 0 0; text-align: center; font-family: var(--font-text); font-size: 16px; font-weight: 400; color: rgb(51,46,43);">View Bookshelf <a href="#plans" style="color: inherit; text-decoration: underline;">Terms and Conditions</a></h4>
+   </div>
+  </section>
+
+
+  <footer style="position: relative; background: rgb(247,243,239);">
+    <div style="display: grid; grid-template-columns: minmax(280px, 1fr) repeat(3, minmax(170px, 0.8fr)); gap: 40px; max-width: 1280px; margin: 0 auto; padding: 96px 20px 40px;">
+      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 18px; max-width: 470px;">
+        <a href="#plans" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 999px; background: rgb(150,99,17); color: rgb(255,255,255); font-size: 15px; font-weight: 700; letter-spacing: 1px; text-decoration: none;" style-hover="background: rgb(128,84,14); color: rgb(255,255,255);">FIND MY STORE</a>
+        <p style="margin: 0; font-size: 17px; line-height: 1.5; color: rgb(51,46,43);">The Store Locator is designed to help you find the closest store near you.</p>
+        <span style="margin-top: 16px; font-size: 16px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: rgb(51,46,43);">Sign up for discounts, news and limited-time offers</span>
+        <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="text" placeholder="First Name" style="width: 100%; box-sizing: border-box; padding: 16px 44px 16px 18px; font-family: var(--font-text); font-size: 17px; color: rgb(51,46,43); background: rgb(255,255,255); border: 1px solid rgb(232,228,222); border-radius: 6px;">
+        </div>
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="text" placeholder="Last Name" style="width: 100%; box-sizing: border-box; padding: 16px 44px 16px 18px; font-family: var(--font-text); font-size: 17px; color: rgb(51,46,43); background: rgb(255,255,255); border: 1px solid rgb(232,228,222); border-radius: 6px;">
+        </div>
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="email" placeholder="Email" style="width: 100%; box-sizing: border-box; padding: 16px 44px 16px 18px; font-family: var(--font-text); font-size: 17px; color: rgb(51,46,43); background: rgb(255,255,255); border: 1px solid rgb(232,228,222); border-radius: 6px;">
+          <span style="position: absolute; right: 16px; display: inline-flex; color: rgb(190,185,178); pointer-events: none;">
+            <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="mail" size="{{ 20 }}" hint-size="20px,20px"></x-import>
+          </span>
+        </div>
+          <button type="button" style="width: 100%; padding: 17px 20px; border: 0; border-radius: 6px; background: rgb(150,99,17); color: rgb(255,255,255); font-family: var(--font-text); font-size: 16px; font-weight: 700; letter-spacing: 1px; cursor: pointer;" style-hover="background: rgb(128,84,14);">SUBMIT</button>
+        </div>
+        <div style="display: flex; gap: 14px; margin-top: 44px;">
+          <a href="https://www.facebook.com/DeseretBook/" aria-label="Facebook" style="display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: rgb(150,99,17); color: rgb(255,255,255);" style-hover="background: rgb(128,84,14); color: rgb(255,255,255);">
+            <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="thumb_up" size="{{ 24 }}" hint-size="24px,24px"></x-import>
+          </a>
+          <a href="https://www.instagram.com/deseretbook/" aria-label="Instagram" style="display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: rgb(150,99,17); color: rgb(255,255,255);" style-hover="background: rgb(128,84,14); color: rgb(255,255,255);">
+            <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="photo_camera" size="{{ 24 }}" hint-size="24px,24px"></x-import>
+          </a>
+        </div>
+      </div>
+      <sc-for list="{{ footerCols }}" as="col" hint-placeholder-count="3">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <span style="font-size: 16px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: rgb(51,46,43);">{{ col.title }}</span>
+          <sc-for list="{{ col.links }}" as="l" hint-placeholder-count="6">
+            <a href="#plans" style="font-size: 16px; line-height: 1.35; color: rgb(150,99,17); text-decoration: none;" style-hover="text-decoration: underline;">{{ l }}</a>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+    <a href="#plans" aria-label="Back to top" style="position: absolute; top: 96px; right: 40px; display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: rgb(150,99,17); color: rgb(255,255,255);" style-hover="background: rgb(128,84,14); color: rgb(255,255,255);">
+      <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="arrow.up" size="{{ 22 }}" hint-size="22px,22px"></x-import>
+    </a>
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 20px; max-width: 1280px; margin: 0 auto; padding: 60px 20px 48px;">
+      <p style="margin: 0; max-width: 560px; font-size: 15px; line-height: 1.55; color: rgb(120,115,110);">© 1996-2025 Deseret Book Company. All Rights Reserved. For screen reader problems with this website, please call 1-800-453-4532.</p>
+      <p style="margin: 0; display: flex; flex-wrap: wrap; gap: 14px; font-size: 15px; color: rgb(120,115,110);">
+        <a href="#plans" style="color: inherit; text-decoration: none;" style-hover="text-decoration: underline; color: inherit;">Product Submission Guidelines</a><span>|</span>
+        <a href="#plans" style="color: inherit; text-decoration: none;" style-hover="text-decoration: underline; color: inherit;">Manuscript Submissions</a><span>|</span>
+        <a href="#plans" style="color: inherit; text-decoration: none;" style-hover="text-decoration: underline; color: inherit;">Legal</a>
+      </p>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{}">
+const NAV = [
+  { label: 'Books', groups: [
+    { title: 'Fiction', links: ['Romance', 'Historical Fiction', 'Mystery and Suspense', 'Teen Fiction'] },
+    { title: 'Gospel Voices', links: ['Art Books', 'Foreign Language', 'General Authority Books', 'Inspiration', 'Remembrance Books', 'Temple Books'] },
+    { title: 'Nonfiction', links: ['Biography', 'Family and Parenting', 'History', 'Self-Improvement'] }
+  ] },
+  { label: 'Scriptures' },
+  { label: 'Baptism' },
+  { label: 'Church Resources', groups: [
+    { title: 'Scriptures', links: ['Foreign Language Scriptures', 'Genuine Leather Scriptures', 'Scripture Accessories', 'Scripture Journal Editions', 'Simulated Leather Scriptures'] },
+    { title: 'Church Distribution', links: ['Church Curriculum', 'Distribution Scriptures', 'Primary', 'Self Reliance'] },
+    { title: 'Teaching Helps', links: ['The Red Headed Hostess', 'General Conference Resources', 'Youth Theme', 'Elders Quorum', 'Primary', 'Relief Society', 'Sunday School', 'Youth'] },
+    { title: 'Prints', links: [] }
+  ] },
+  { label: 'Games & Puzzles' },
+  { label: 'Art', groups: [
+    { title: 'Art', links: ['Wall Art', 'Temple Art', 'Statues', 'Savior Art', 'Décor'] }
+  ] },
+  { label: 'Missionary', groups: [
+    { title: 'Missionary', links: ['Accessories', 'Bags', 'Books', 'Jewelry', 'Journals'] }
+  ] },
+  { label: 'Temple Worship', groups: [
+    { title: 'Temple Accessories', links: ['Family Name Holders', 'Temple Recommend Holders'] },
+    { title: 'Temple Worship', links: ['Temple Bags', 'Temple Clothing'] }
+  ] },
+  { label: 'Browse All' },
+  { label: 'Clearance' }
+];
+
+class Component extends DCLogic {
+  state = { open: null, faq: null };
+  renderVals() {
+    const open = this.state.open;
+    const faq = {};
+    ['faq1', 'faq2', 'faq3', 'faq4', 'faq5'].forEach(k => {
+      const isOpen = this.state.faq === k;
+      faq[k + 'Open'] = isOpen;
+      faq[k + 'Sign'] = isOpen ? '\u2212' : '+';
+      faq[k + 'Toggle'] = () => this.setState(s => ({ faq: s.faq === k ? null : k }));
+    });
+    return {
+      ...faq,
+      navItems: NAV.map((n, i) => ({
+        label: n.label,
+        onEnter: () => this.setState({ open: n.groups ? i : null })
+      })),
+      openMenu: open != null && NAV[open].groups ? { groups: NAV[open].groups.filter(g => g.links.length) } : null,
+      closeNav: () => this.setState({ open: null }),
+      footerCols: [
+        { title: 'Account', links: ['My Account', 'Check Order', 'Purchase an eGift Card', 'Gift Card Balance', 'Bookshelf Plus', 'Platinum Rewards', 'Request a Catalog'] },
+        { title: 'Customer Service', links: ['Contact Us', 'Questions & Support', 'Shipping & Returns', 'Do Not Sell My Information', 'Deseret Book Store Locations'] },
+        { title: 'About', links: ['About Deseret Book', 'Careers', 'Terms of Use', 'Privacy Policy', 'Deseret Book Events', 'Deseret Book Blog', 'Browse All Categories'] }
+      ]
+    };
+  }
+}
+
+</script>
+
+
+</body></html>
