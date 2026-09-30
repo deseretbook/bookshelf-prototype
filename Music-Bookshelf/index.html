@@ -168,7 +168,16 @@
 .frow h4{margin:0;font-family:"Hanken Grotesk",system-ui,sans-serif;font-weight:600;font-size:1rem;line-height:1.3}
 .frow p{color:var(--muted);font-size:.93rem;line-height:1.45;margin-top:3px}
 @media (max-width:900px){.srows{grid-template-columns:1fr}.scard.wide .flist{grid-template-columns:1fr}.scard.wide .frow:nth-child(2){border-top:1px solid var(--line)}}
-@media (max-width:520px){.scard,.scard.wide{grid-template-columns:96px 1fr;gap:16px;padding:18px}.smedia .shot,.smedia .mock{width:96px}.sbody h3.sname{font-size:1.2rem}}
+@media (max-width:720px){
+ .scard,.scard.wide{display:flex;flex-direction:column;gap:0;padding:24px 20px 12px}
+ .sbody{display:contents}
+ .sbody h3.sname{order:1;font-size:1.6rem;margin-bottom:18px}
+ .smedia{order:2;display:flex;justify-content:center;margin-bottom:20px}
+ .smedia .shot,.smedia .mock{width:72%;max-width:300px}
+ .smedia .shot{border-radius:28px}
+ .flist{order:3}
+ .scard.wide .frow:nth-child(2){border-top:1px solid var(--line)}
+}
 </style></head><body>
 <header class="hero"><div class="wrap">
 <p class="kicker">Bookshelf+ Music</p><h1>What's new in Music</h1>
