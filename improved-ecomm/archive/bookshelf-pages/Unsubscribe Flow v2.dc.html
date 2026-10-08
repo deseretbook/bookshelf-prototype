@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&amp;family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,400;0,9..40,900;1,9..40,400&amp;family=Fraunces:ital,wght@0,400;0,600;0,900;1,400&amp;family=Josefin+Sans:ital,wght@0,300;0,400;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/colors.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/typography.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/surfaces.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/motion.css">
+<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/roles.css">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/checkout.css">
+<style>html,body{height:auto!important;min-height:100%}#dc-root,#dc-root>.sc-host{height:auto!important}x-dc{display:none}</style>
+<link id="f7-icons-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/framework7-icons@5.0.5/css/framework7-icons.css">
+<script defer src="src/stay.js"></script>
+<script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
+<script defer src="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/_ds_bundle.js"></script>
+<script defer src="src/build/shell.js"></script>
+<script defer src="src/support.js"></script>
+</head>
+<body>
+<div id="site-top" style="display:contents"><div class="ann">FREE SHIPPING on orders of $49 or more. Exclusions apply.</div><header class="hdr"><div class="hdr-bar"><div class="hdr-in"><div class="hdr-ico hdr-burger"><button class="iconbtn" aria-label="Open menu"><i class="f7-icons f7i" aria-hidden="true" style="font-size:22px;width:22px;height:22px;line-height:22px;display:inline-grid;place-items:center;flex:none">line_horizontal_3</i></button></div><button class="wordmark" aria-label="Deseret Book home"><img class="wm-e" src="assets/emblem.svg" alt=""/><img class="wm-w" src="assets/wordmark.svg" alt="Deseret Book"/></button><div class="hdr-ico hdr-acts" style="justify-content:flex-end"><button class="iconbtn" aria-label="Account"><i class="f7-icons f7i" aria-hidden="true" style="font-size:20px;width:20px;height:20px;line-height:20px;display:inline-grid;place-items:center;flex:none">person</i><span class="ico-lab">Account</span></button><button class="iconbtn" aria-label="Bag, 0 items"><span class="bagpill"><i class="f7-icons f7i" aria-hidden="true" style="font-size:20px;width:20px;height:20px;line-height:20px;display:inline-grid;place-items:center;flex:none">bag</i><span class="bagq" hidden="">0</span></span><span class="ico-lab">Bag</span></button></div></div><div class="hdr-srch"><div class="srch" style="margin-bottom:4px"><div class="srch-row"><button class="srch-f"><span>Search</span><i class="f7-icons f7i" aria-hidden="true" style="font-size:20px;width:20px;height:20px;line-height:20px;display:inline-grid;place-items:center;flex:none">search</i></button></div><div class="srch-panel" aria-hidden="true"><div style="padding:16px"><div class="lab" style="margin-bottom:12px">Popular searches</div><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="chip">Scriptures</button><button class="chip">Sarah M. Eden</button><button class="chip">Scripture totes</button><button class="chip">Journal edition</button><button class="chip">Quad combination</button></div></div></div></div></div></div><nav class="dnav" aria-label="Shop categories"><div class="dnav-in"><div class="dnav-i"><button class="dnav-b" aria-expanded="false">Books</button></div><div class="dnav-i"><button class="dnav-b" aria-expanded="false">Scriptures</button></div><div class="dnav-i"><button class="dnav-b" aria-expanded="false">Baptism</button></div><div class="dnav-i"><button class="dnav-b" aria-expanded="false">Church Resources</button></div><div class="dnav-i"><button class="dnav-b" aria-expanded="false">Games &amp; Puzzles</button></div><div class="dnav-i"><button class="dnav-b" aria-expanded="false">Art</button></div><div class="dnav-i"><button class="dnav-b" aria-expanded="false">Missionary</button></div><div class="dnav-i"><button class="dnav-b" aria-expanded="false">Temple Worship</button></div><div class="dnav-i"><button class="dnav-b" aria-expanded="false">Browse All</button></div><div class="dnav-i"><button class="dnav-b" aria-expanded="false">Clearance</button></div></div></nav></header><div class="ovh"><div class="scrim"></div><nav class="drawer" aria-hidden="true"><div class="drawer-h"><span class="wordmark"><img class="wm-e" src="assets/emblem.svg" alt=""/><img class="wm-w" src="assets/wordmark.svg" alt="Deseret Book"/></span><button class="iconbtn" aria-label="Close menu"><i class="f7-icons f7i" aria-hidden="true" style="font-size:22px;width:22px;height:22px;line-height:22px;display:inline-grid;place-items:center;flex:none">xmark</i></button></div><div class="drawer-b"><button class="nav-row"><span>Books</span><span style="transform:none;transition:transform 180ms;display:grid"><i class="f7-icons f7i" aria-hidden="true" style="font-size:16px;width:16px;height:16px;line-height:16px;display:inline-grid;place-items:center;flex:none">chevron_down</i></span></button><button class="nav-row"><span>Scriptures</span><i class="f7-icons f7i" aria-hidden="true" style="font-size:14px;width:14px;height:14px;line-height:14px;display:inline-grid;place-items:center;flex:none">arrow_right</i></button><button class="nav-row"><span>Baptism</span><i class="f7-icons f7i" aria-hidden="true" style="font-size:14px;width:14px;height:14px;line-height:14px;display:inline-grid;place-items:center;flex:none">arrow_right</i></button><button class="nav-row"><span>Church Resources</span><span style="transform:none;transition:transform 180ms;display:grid"><i class="f7-icons f7i" aria-hidden="true" style="font-size:16px;width:16px;height:16px;line-height:16px;display:inline-grid;place-items:center;flex:none">chevron_down</i></span></button><button class="nav-row"><span>Games &amp; Puzzles</span><i class="f7-icons f7i" aria-hidden="true" style="font-size:14px;width:14px;height:14px;line-height:14px;display:inline-grid;place-items:center;flex:none">arrow_right</i></button><button class="nav-row"><span>Art</span><span style="transform:none;transition:transform 180ms;display:grid"><i class="f7-icons f7i" aria-hidden="true" style="font-size:16px;width:16px;height:16px;line-height:16px;display:inline-grid;place-items:center;flex:none">chevron_down</i></span></button><button class="nav-row"><span>Missionary</span><span style="transform:none;transition:transform 180ms;display:grid"><i class="f7-icons f7i" aria-hidden="true" style="font-size:16px;width:16px;height:16px;line-height:16px;display:inline-grid;place-items:center;flex:none">chevron_down</i></span></button><button class="nav-row"><span>Temple Worship</span><span style="transform:none;transition:transform 180ms;display:grid"><i class="f7-icons f7i" aria-hidden="true" style="font-size:16px;width:16px;height:16px;line-height:16px;display:inline-grid;place-items:center;flex:none">chevron_down</i></span></button><button class="nav-row"><span>Browse All</span><i class="f7-icons f7i" aria-hidden="true" style="font-size:14px;width:14px;height:14px;line-height:14px;display:inline-grid;place-items:center;flex:none">arrow_right</i></button><button class="nav-row"><span>Clearance</span><i class="f7-icons f7i" aria-hidden="true" style="font-size:14px;width:14px;height:14px;line-height:14px;display:inline-grid;place-items:center;flex:none">arrow_right</i></button><div class="nav-foot"><button style="font-size:13px;color:var(--teal);text-align:left">Sign In</button><a href="#/wishlist">Wishlist</a><a href="#/stores">Find My Store</a></div></div></nav><aside class="bagd" aria-hidden="true" aria-label="Shopping bag"><div class="bagd-h"><h2>Shopping Bag</h2><button class="iconbtn" aria-label="Close bag"><i class="f7-icons f7i" aria-hidden="true" style="font-size:22px;width:22px;height:22px;line-height:22px;display:inline-grid;place-items:center;flex:none">xmark</i></button></div><div class="bagd-b"><div class="empty"><i class="f7-icons f7i" aria-hidden="true" style="font-size:28px;width:28px;height:28px;line-height:28px;display:inline-grid;place-items:center;flex:none">bag</i><h1 style="font-family:Lora,Georgia,serif;font-weight:500;font-size:24px;margin:0">Your Bag Is Empty</h1><p>Books, journals, and art and home decor are waiting on the shelves.</p><button class="btn-gold">START SHOPPING</button></div></div></aside><div class="toast toast-pill toast-neutral" role="status" aria-live="polite"><span class="toast-ic"><i class="f7-icons f7i" aria-hidden="true" style="font-size:18px;width:18px;height:18px;line-height:18px;display:inline-grid;place-items:center;flex:none">info_circle</i></span><span></span></div><aside class="acctd" aria-hidden="true" aria-label="My account"><div class="bagd-h"><h2>Sign In</h2><button class="iconbtn" aria-label="Close account"><i class="f7-icons f7i" aria-hidden="true" style="font-size:22px;width:22px;height:22px;line-height:22px;display:inline-grid;place-items:center;flex:none">xmark</i></button></div><div class="bagd-b"><p class="acct-lede">Sign in to see your orders, saved addresses, and Bookshelf Plus library.</p><form class="acct-form" novalidate=""><label class="lab" for="acct-email">Email address</label><input id="acct-email" type="email" placeholder="you@example.com" autoComplete="email" value=""/><label class="lab" for="acct-pw">Password</label><input id="acct-pw" type="password" placeholder="••••••••" autoComplete="current-password" value=""/><button class="btn-gold" type="submit" style="height:48px;padding:0 24px;font-size:16px;margin-top:4px">SIGN IN</button></form><div class="acct-alt"><button>Create an account</button><button>Forgot password?</button></div></div></aside></div></div>
+<x-dc>
+<helmet>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--db-white); font-family: var(--db-font-sans); color: var(--db-ink); }
+  a { color: var(--db-link); }
+  a:hover { color: var(--db-link-hover); }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--db-focus-ring); outline-offset: 2px; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+</helmet>
+
+<div style="min-height: 100vh; display: flex; flex-direction: column; font-family: var(--db-font-sans); font-weight: 400; color: var(--db-ink); background: var(--db-white);">
+
+  <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 20px; padding: 10px 16px; background: var(--db-pearl); border-bottom: 1px solid var(--db-granite);">
+    <span style="font-size: var(--db-text-eyebrow); letter-spacing: var(--db-tracking-eyebrow); text-transform: uppercase; color: var(--db-ink-muted);">Prototype</span>
+    <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Switch" label="Platinum member" checked="{{ platinum }}" onChange="{{ onPlat }}" hint-size="170px,28px"></x-import>
+    <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Select" aria-label="Plan" value="{{ plan }}" onChange="{{ onPlan }}" options="{{ planOptions }}" hint-size="150px,44px"></x-import>
+    <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Select" aria-label="Scenario" value="{{ scenario }}" onChange="{{ onScenario }}" options="{{ scenarioOptions }}" hint-size="260px,44px"></x-import>
+    <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="ghost" size="sm" icon="arrow_counterclockwise" onClick="{{ reset }}" hint-size="100px,32px">Reset</x-import>
+  </div>
+
+
+  <main style="flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: clamp(32px, 6vw, 64px) 20px 96px;">
+
+    <sc-if value="{{ isSubs }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="My Subscriptions" style="display: flex; flex-direction: column; gap: 40px;">
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <span style="font-size: var(--db-text-eyebrow); letter-spacing: var(--db-tracking-eyebrow); text-transform: uppercase; color: var(--db-ink-muted);">My Account</span>
+          <h1 style="margin: 0; font-family: var(--db-font-serif); font-weight: 400; font-size: clamp(32px, 5vw, 48px); line-height: 1.2; color: var(--db-display);">My Subscriptions</h1>
+        </div>
+        <section style="display: flex; flex-direction: column; gap: 12px;">
+          <h2 style="margin: 0; font-size: var(--db-text-eyebrow); font-weight: 400; letter-spacing: var(--db-tracking-eyebrow); text-transform: uppercase; color: var(--db-ink-muted);">Reading and Listening</h2>
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Card" ground="white" bordered="{{ true }}" padding="lg" hint-size="100%,150px">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;">
+              <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0; flex: 1 1 280px;">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+                  <span style="font-family: var(--db-font-serif); font-size: 24px; line-height: 1.2; color: var(--db-display);">Bookshelf+ {{ planName }}</span>
+                  <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Badge" tone="{{ statusTone }}" hint-size="80px,22px">{{ statusLabel }}</x-import>
+                </div>
+                <sc-if value="{{ showPriceLine }}"><span style="font-size: var(--db-text-body);">{{ priceText }}<sc-if value="{{ platinum }}"><span style="color: var(--db-ink-muted);"> · Platinum member price</span></sc-if></span></sc-if>
+                <span style="font-size: var(--db-text-caption); line-height: 1.5; color: var(--db-ink-muted);">{{ listLine }}</span>
+              </div>
+              <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="secondary" size="md" onClick="{{ goDetails }}" hint-size="110px,40px">Manage</x-import>
+            </div>
+          </x-import>
+        </section>
+        <sc-if value="{{ platinum }}" hint-placeholder-val="{{ true }}">
+          <section style="display: flex; flex-direction: column; gap: 12px;">
+            <h2 style="margin: 0; font-size: var(--db-text-eyebrow); font-weight: 400; letter-spacing: var(--db-tracking-eyebrow); text-transform: uppercase; color: var(--db-ink-muted);">Membership</h2>
+            <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Card" ground="pearl" bordered="{{ true }}" padding="lg" hint-size="100%,120px">
+              <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+                <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 280px;">
+                  <span style="font-family: var(--db-font-serif); font-size: 20px; line-height: 1.2; color: var(--db-display);">Platinum Rewards</span>
+                  <span style="font-size: var(--db-text-caption); line-height: 1.5; color: var(--db-ink-muted);">Renews March 3, 2027. Your Platinum price is applied to Bookshelf+ automatically.</span>
+                </div>
+                <a href="#" onClick="{{ noop }}" style="font-size: var(--db-text-caption);">View membership</a>
+              </div>
+            </x-import>
+          </section>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDetails }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Subscription Details" style="display: flex; flex-direction: column; gap: 32px;">
+        <div style="align-self: flex-start; margin-left: -12px;">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="ghost" size="sm" icon="chevron_left" onClick="{{ goSubs }}" hint-size="170px,32px">My Subscriptions</x-import>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px;">
+          <h1 style="margin: 0; font-family: var(--db-font-serif); font-weight: 400; font-size: clamp(32px, 5vw, 48px); line-height: 1.2; color: var(--db-display);">Bookshelf+</h1>
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Badge" tone="{{ statusTone }}" hint-size="80px,22px">{{ statusLabel }}</x-import>
+        </div>
+
+        <sc-if value="{{ notice }}" hint-placeholder-val="{{ false }}">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Card" ground="pearl" bordered="{{ true }}" padding="md" hint-size="100%,90px">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px;">
+              <p style="margin: 0; flex: 1 1 300px; font-size: var(--db-text-body); line-height: 1.5; text-wrap: pretty;">{{ notice.text }}</p>
+              <sc-if value="{{ notice.cta }}">
+                <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="primary" size="md" onClick="{{ notice.action }}" hint-size="170px,40px">{{ notice.cta }}</x-import>
+              </sc-if>
+            </div>
+          </x-import>
+        </sc-if>
+
+        <dl style="margin: 0; display: flex; flex-direction: column; border-top: 1px solid var(--db-granite);">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 16px 0; border-bottom: 1px solid var(--db-granite);">
+            <dt style="font-size: var(--db-text-caption); color: var(--db-ink-muted);">Plan</dt>
+            <dd style="margin: 0; font-size: var(--db-text-body);">{{ planName }}</dd>
+          </div>
+          <sc-if value="{{ showPriceLine }}">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 16px 0; border-bottom: 1px solid var(--db-granite);">
+              <dt style="font-size: var(--db-text-caption); color: var(--db-ink-muted);">Price</dt>
+              <dd style="margin: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; text-align: right;">
+                <span style="display: flex; align-items: baseline; gap: 8px;">
+                  <sc-if value="{{ platinum }}"><span style="font-size: var(--db-text-caption); text-decoration: line-through; color: var(--db-ink-muted);">{{ regPriceText }}</span></sc-if>
+                  <span style="font-family: var(--db-font-serif); font-size: 20px; color: var(--db-display);">{{ priceText }}</span>
+                </span>
+                <sc-if value="{{ priceNote }}"><span style="font-size: var(--db-text-caption); color: var(--db-ink-muted);">{{ priceNote }}</span></sc-if>
+              </dd>
+            </div>
+          </sc-if>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 16px 0; border-bottom: 1px solid var(--db-granite);">
+            <dt style="font-size: var(--db-text-caption); color: var(--db-ink-muted);">{{ dateLabel }}</dt>
+            <dd style="margin: 0; font-size: var(--db-text-body);">{{ dateValue }}</dd>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 16px 0; border-bottom: 1px solid var(--db-granite);">
+            <dt style="font-size: var(--db-text-caption); color: var(--db-ink-muted);">Billed through</dt>
+            <dd style="margin: 0; font-size: var(--db-text-body);">{{ billedThrough }}</dd>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 16px 0; border-bottom: 1px solid var(--db-granite);">
+            <dt style="font-size: var(--db-text-caption); color: var(--db-ink-muted);">Member since</dt>
+            <dd style="margin: 0; font-size: var(--db-text-body);">January 12, 2025</dd>
+          </div>
+        </dl>
+
+        <sc-if value="{{ giftInfo }}" hint-placeholder-val="{{ false }}">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Card" ground="pearl" bordered="{{ true }}" padding="md" hint-size="100%,90px">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px;">
+              <p style="margin: 0; flex: 1 1 300px; font-size: var(--db-text-body); line-height: 1.5; text-wrap: pretty;">This is a gift subscription and it won’t renew, so there’s nothing to cancel. You have access until January 5, 2027.</p>
+              <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="secondary" size="md" onClick="{{ giftRenew }}" hint-size="210px,40px">Continue after it ends</x-import>
+            </div>
+          </x-import>
+        </sc-if>
+
+        <sc-if value="{{ showPromo }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="align-self: flex-start; margin-left: -12px;">
+              <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="ghost" size="sm" iconAfter="{{ promoIcon }}" onClick="{{ togglePromo }}" hint-size="190px,32px">Have a promo code?</x-import>
+            </div>
+            <sc-if value="{{ promoOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px;">
+                <div style="flex: 1 1 260px;">
+                  <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Input" label="Promo code" size="md" hint="Use a code from a Deseret Book email or gift offer. It applies to your next renewal. Platinum Rewards discounts are applied automatically and don’t need a code." hint-size="100%,110px"></x-import>
+                </div>
+                <div style="padding-top: 26px;">
+                  <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="secondary" size="md" hint-size="90px,40px">Apply</x-import>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ canCancel }}" hint-placeholder-val="{{ true }}">
+          <div style="align-self: flex-start; margin-left: -12px;">
+            <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="ghost" size="sm" onClick="{{ startCancel }}" hint-size="190px,32px">Cancel subscription</x-import>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isReason }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Cancel: Reason" style="display: flex; flex-direction: column; gap: 32px;">
+        <div style="align-self: flex-start; margin-left: -12px;">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="ghost" size="sm" icon="chevron_left" onClick="{{ goDetails }}" hint-size="190px,32px">Subscription details</x-import>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <span style="font-size: var(--db-text-eyebrow); letter-spacing: var(--db-tracking-eyebrow); text-transform: uppercase; color: var(--db-ink-muted);">Cancel Bookshelf+</span>
+          <h1 style="margin: 0; font-family: var(--db-font-serif); font-weight: 400; font-size: clamp(32px, 5vw, 48px); line-height: 1.2; color: var(--db-display); text-wrap: balance;">What’s the main reason you’re leaving?</h1>
+          <p style="margin: 0; font-size: var(--db-text-body-lg); line-height: 1.5; color: var(--db-ink-muted);">Optional. Pick one, or skip this question.</p>
+        </div>
+        <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Radio" name="reason" options="{{ reasonOptions }}" value="{{ reason }}" onChange="{{ pickReason }}" hint-size="100%,260px"></x-import>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="primary" size="lg" disabled="{{ noReason }}" onClick="{{ continueReason }}" hint-size="140px,48px">Continue</x-import>
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="ghost" size="lg" onClick="{{ skipReason }}" hint-size="90px,48px">Skip</x-import>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isOffer }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Cancel: Offer" style="display: flex; flex-direction: column; gap: 32px;">
+        <div style="align-self: flex-start; margin-left: -12px;">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="ghost" size="sm" icon="chevron_left" onClick="{{ goReason }}" hint-size="90px,32px">Back</x-import>
+        </div>
+        <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Card" ground="pearl" bordered="{{ true }}" padding="lg" hint-size="100%,260px">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <sc-if value="{{ offer.badge }}">
+              <div style="align-self: flex-start;">
+                <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Badge" tone="clay" hint-size="140px,22px">{{ offer.badge }}</x-import>
+              </div>
+            </sc-if>
+            <h1 style="margin: 0; font-family: var(--db-font-serif); font-weight: 400; font-size: clamp(28px, 4vw, 40px); line-height: 1.2; color: var(--db-display); text-wrap: balance;">{{ offer.title }}</h1>
+            <p style="margin: 0; font-size: var(--db-text-body-lg); line-height: 1.5; text-wrap: pretty;">{{ offer.body }}</p>
+            <sc-if value="{{ offer.isPause }}">
+              <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Radio" name="pause" options="{{ pauseOptions }}" value="{{ pauseValue }}" onChange="{{ pickPause }}" hint-size="100%,120px"></x-import>
+            </sc-if>
+            <sc-if value="{{ offer.note }}">
+              <span style="font-size: var(--db-text-caption); line-height: 1.5; color: var(--db-ink-muted);">{{ offer.note }}</span>
+            </sc-if>
+          </div>
+        </x-import>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <div style="flex: 1 1 220px;">
+            <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="primary" size="lg" fullWidth="{{ true }}" onClick="{{ acceptOffer }}" hint-size="100%,48px">{{ offer.accept }}</x-import>
+          </div>
+          <div style="flex: 1 1 220px;">
+            <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="secondary" size="lg" fullWidth="{{ true }}" onClick="{{ goConfirm }}" hint-size="100%,48px">No thanks, cancel</x-import>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isConfirm }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Cancel: Confirm" style="display: flex; flex-direction: column; gap: 32px;">
+        <div style="align-self: flex-start; margin-left: -12px;">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="ghost" size="sm" icon="chevron_left" onClick="{{ backFromConfirm }}" hint-size="90px,32px">Back</x-import>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <h1 style="margin: 0; font-family: var(--db-font-serif); font-weight: 400; font-size: clamp(32px, 5vw, 48px); line-height: 1.2; color: var(--db-display);">Cancel Bookshelf+?</h1>
+          <p style="margin: 0; max-width: 46ch; font-size: var(--db-text-body-lg); line-height: 1.5; text-wrap: pretty;">{{ confirmText }}</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 16px;">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Card" ground="white" bordered="{{ true }}" padding="md" hint-size="100%,200px">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <h2 style="margin: 0; font-family: var(--db-font-serif); font-weight: 400; font-size: 20px; line-height: 1.2; color: var(--db-display);">Until {{ endDate }}</h2>
+              <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px;">
+                <sc-for list="{{ keepList }}" as="k" hint-placeholder-count="3">
+                  <li style="display: flex; gap: 10px; font-size: var(--db-text-body); line-height: 1.5;">
+                    <span style="flex: none; display: flex; padding-top: 2px; color: var(--db-accent-deep);"><x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="checkmark_alt" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+                    <span>{{ k }}</span>
+                  </li>
+                </sc-for>
+              </ul>
+            </div>
+          </x-import>
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Card" ground="white" bordered="{{ true }}" padding="md" hint-size="100%,200px">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <h2 style="margin: 0; font-family: var(--db-font-serif); font-weight: 400; font-size: 20px; line-height: 1.2; color: var(--db-display);">After {{ endDate }}</h2>
+              <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px;">
+                <sc-for list="{{ afterList }}" as="a" hint-placeholder-count="3">
+                  <li style="display: flex; gap: 10px; font-size: var(--db-text-body); line-height: 1.5;">
+                    <span style="flex: none; display: flex; padding-top: 2px; color: var(--db-charcoal);"><x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="arrow_right" size="{{ 20 }}" hint-size="20px,20px"></x-import></span>
+                    <span>{{ a }}</span>
+                  </li>
+                </sc-for>
+              </ul>
+            </div>
+          </x-import>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <div style="flex: 1 1 220px;">
+            <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="primary" size="lg" fullWidth="{{ true }}" onClick="{{ confirmCancel }}" hint-size="100%,48px">Cancel subscription</x-import>
+          </div>
+          <div style="flex: 1 1 220px;">
+            <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="secondary" size="lg" fullWidth="{{ true }}" onClick="{{ goDetails }}" hint-size="100%,48px">Keep Bookshelf+</x-import>
+          </div>
+        </div>
+        <sc-if value="{{ showRefund }}" hint-placeholder-val="{{ true }}">
+          <p style="margin: 0; font-size: var(--db-text-caption); line-height: 1.5; color: var(--db-ink-muted);">Just renewed and looking for a refund? Read the <a href="#" onClick="{{ noop }}">refund policy</a> or <a href="#" onClick="{{ noop }}">contact support</a>.</p>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Cancellation Confirmed" style="display: flex; flex-direction: column; align-items: flex-start; gap: 20px;">
+        <span style="width: 48px; height: 48px; border-radius: 999px; background: var(--db-accent-deep); color: var(--db-white); display: grid; place-items: center;">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Icon" name="checkmark_alt" size="{{ 24 }}" hint-size="24px,24px"></x-import>
+        </span>
+        <h1 style="margin: 0; font-family: var(--db-font-serif); font-weight: 400; font-size: clamp(32px, 5vw, 48px); line-height: 1.2; color: var(--db-display); text-wrap: balance;">Your cancellation is scheduled.</h1>
+        <p style="margin: 0; max-width: 46ch; font-size: var(--db-text-body-lg); line-height: 1.5; text-wrap: pretty;">{{ doneText }}</p>
+        <p style="margin: 0; font-size: var(--db-text-body); line-height: 1.5; color: var(--db-ink-muted);">We sent a confirmation to jane.tester@example.com.</p>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 8px;">
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="primary" size="lg" onClick="{{ reactivate }}" hint-size="240px,48px">Undo, keep Bookshelf+</x-import>
+          <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Button" variant="ghost" size="lg" onClick="{{ goSubs }}" hint-size="240px,48px">Go to My Subscriptions</x-import>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+  <x-import component-from-global-scope="SiteFooter" newsletter="{{ false }}" hint-size="100%,600px"></x-import>
+
+  <x-import component-from-global-scope="DeseretBookDesignSystem_609afa.Toast" open="{{ toastOpen }}" message="{{ toast }}" tone="success" fixed="{{ true }}" seq="{{ toastSeq }}" onDismiss="{{ hideToast }}" hint-size="0px,0px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;platinum&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;plan&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;monthly&quot;,&quot;yearly&quot;],&quot;default&quot;:&quot;monthly&quot;,&quot;tsType&quot;:&quot;'monthly' | 'yearly'&quot;},&quot;scenario&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;standard&quot;,&quot;trial&quot;,&quot;gift&quot;],&quot;default&quot;:&quot;standard&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;startState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;active&quot;,&quot;scheduled&quot;,&quot;paused&quot;],&quot;default&quot;:&quot;active&quot;,&quot;tsType&quot;:&quot;'active' | 'scheduled' | 'paused'&quot;}}">
+const PRICES = { reg: { m: 12.99, y: 129 }, plat: { m: 9.99, y: 99 } };
+const RENEW = 'October 28, 2026', TRIAL_END = 'October 14, 2026', GIFT_END = 'January 5, 2027';
+const RESUME = { 1: 'November 28, 2026', 2: 'December 28, 2026', 3: 'January 28, 2027' };
+const REASONS = ['Too expensive', 'Not using it enough', 'Not enough content I want', 'Technical issues', 'Switching to another service', 'Other'];
+const money = n => '$' + (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, '');
+const short = d => d.replace('October', 'Oct').replace('November', 'Nov').replace('December', 'Dec').replace('January', 'Jan');
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = this.initial(); }
+  initial() {
+    const p = this.props || {};
+    return { screen: 'subs', platinum: p.platinum ?? true, plan: p.plan ?? 'monthly', status: p.startState ?? 'active',
+      scenario: p.scenario ?? 'standard', reason: '', pauseMonths: 1, discount: false, promoOpen: false,
+      toast: '', toastOpen: false, toastSeq: 0 };
+  }
+  componentDidUpdate(prev) {
+    if (['platinum', 'plan', 'startState', 'scenario'].some(k => prev[k] !== this.props[k])) this.setState(this.initial());
+  }
+  componentWillUnmount() { clearTimeout(this.tt); }
+  go(screen, extra) { this.setState({ screen, ...(extra || {}) }); window.scrollTo(0, 0); }
+  flash(toast) {
+    clearTimeout(this.tt);
+    this.setState(s => ({ toast, toastOpen: true, toastSeq: s.toastSeq + 1 }));
+    this.tt = setTimeout(() => this.setState({ toastOpen: false }), 4500);
+  }
+  offerFor(reason) {
+    const s = this.state;
+    if (s.scenario === 'trial') return reason === 'Technical issues' ? 'support' : null;
+    switch (reason) {
+      case 'Too expensive': return s.plan === 'monthly' ? 'yearly' : 'monthly';
+      case 'Not using it enough': return 'pause';
+      case 'Not enough content I want':
+      case 'Switching to another service': return s.discount ? null : 'discount';
+      case 'Technical issues': return 'support';
+      default: return null;
+    }
+  }
+  reactivate(priceText) {
+    this.go('details', { status: 'active' });
+    const trial = this.state.scenario === 'trial';
+    this.flash(trial ? 'Your free trial continues. First charge ' + priceText + ' on ' + TRIAL_END + '.' : 'Bookshelf+ is active again. Next renewal ' + RENEW + ' at ' + priceText + '.');
+  }
+
+  renderVals() {
+    const s = this.state;
+    const tier = s.platinum ? PRICES.plat : PRICES.reg;
+    const monthly = s.plan === 'monthly';
+    const trial = s.scenario === 'trial', gift = s.scenario === 'gift';
+    const scheduled = s.status === 'scheduled', paused = s.status === 'paused';
+    const endDate = trial ? TRIAL_END : gift ? GIFT_END : RENEW;
+    const priceText = monthly ? money(tier.m) + '/month' : money(tier.y) + '/year';
+    const regPriceText = monthly ? money(PRICES.reg.m) + '/month' : money(PRICES.reg.y) + '/year';
+    const half = monthly ? money(tier.m / 2) + '/month' : money(tier.y * 0.75) + '/year';
+    const resume = RESUME[s.pauseMonths];
+    const nav = screen => e => { if (e && e.preventDefault) e.preventDefault(); this.go(screen); };
+
+    let statusLabel = 'Active', statusTone = 'accent';
+    if (scheduled) { statusLabel = 'Ends ' + short(endDate); statusTone = 'clay'; }
+    else if (paused) { statusLabel = 'Pauses ' + short(RENEW); statusTone = 'clay'; }
+    else if (trial) { statusLabel = 'Free trial'; }
+    else if (gift) { statusLabel = 'Gift'; statusTone = 'sand'; }
+
+    let listLine = 'Renews ' + RENEW;
+    if (scheduled) listLine = 'Access until ' + endDate + '. No further charges.';
+    else if (paused) listLine = 'Paused from ' + RENEW + '. Billing resumes ' + resume + '.';
+    else if (trial) listLine = 'Free trial ends ' + TRIAL_END + '. First charge of ' + priceText + ' on that date.';
+    else if (gift) listLine = 'Access until ' + GIFT_END + '. Doesn\u2019t renew.';
+
+    let dateLabel = 'Next renewal', dateValue = RENEW;
+    if (scheduled) { dateLabel = 'Access until'; dateValue = endDate; }
+    else if (paused) { dateLabel = 'Billing resumes'; dateValue = resume; }
+    else if (trial) { dateLabel = 'Trial ends'; dateValue = TRIAL_END; }
+    else if (gift) { dateLabel = 'Access until'; dateValue = GIFT_END; }
+
+    const priceNotes = [];
+    if (s.platinum) priceNotes.push('Platinum member price, applied automatically');
+    if (s.discount) priceNotes.push(monthly ? half + ' for your next 2 months' : half + ' for your next year');
+
+    let notice = null;
+    if (scheduled) notice = { text: 'Your subscription ends on ' + endDate + '. You have full access until then and won\u2019t be charged again.', cta: 'Keep Bookshelf+', action: () => this.reactivate(priceText) };
+    else if (paused) notice = { text: 'Bookshelf+ pauses on ' + RENEW + '. You won\u2019t be charged while it\u2019s paused. Billing and access resume on ' + resume + '.', cta: 'Don\u2019t pause', action: () => { this.setState({ status: 'active' }); this.flash('Pause removed. Next renewal ' + RENEW + '.'); } };
+    else if (trial) notice = { text: 'You\u2019re in your 14-day free trial. Cancel before ' + TRIAL_END + ' and you won\u2019t be charged.' };
+
+    const offerKind = this.offerFor(s.reason);
+    const offers = {
+      yearly: { badge: s.platinum ? 'Your Platinum price' : 'Yearly plan', title: 'Save ' + money(tier.m * 12 - tier.y) + ' a year with the yearly plan.',
+        body: 'Switch to yearly for ' + money(tier.y) + '/year instead of ' + money(tier.m * 12) + ' for 12 monthly payments. The yearly plan starts ' + RENEW + ', when your current month ends.', accept: 'Switch to yearly',
+        done: 'You\u2019re staying. Your yearly plan starts ' + RENEW + ' at ' + money(tier.y) + '/year.' },
+      monthly: { badge: s.platinum ? 'Your Platinum price' : '', title: 'Pay monthly instead.',
+        body: 'Switch to ' + money(tier.m) + '/month when your current year ends on ' + RENEW + '. You can cancel any month after that.', accept: 'Switch to monthly',
+        done: 'You\u2019ll move to ' + money(tier.m) + '/month on ' + RENEW + '.' },
+      pause: { title: 'Take a break instead.', isPause: true,
+        body: 'Pause Bookshelf+ for up to 3 months. You won\u2019t be charged while it\u2019s paused, and your library will be here when you come back.',
+        note: 'The pause starts ' + RENEW + '. Billing and access resume ' + resume + '.', accept: 'Pause for ' + s.pauseMonths + (s.pauseMonths === 1 ? ' month' : ' months'),
+        done: 'Bookshelf+ will pause on ' + RENEW + ' and resume ' + resume + '.' },
+      discount: { badge: 'Offer for you', title: monthly ? 'Stay for half price.' : 'Stay for 25% off.',
+        body: monthly ? 'Get your next 2 months for ' + half + ', then ' + money(tier.m) + '/month after that. New titles are added every week.' : 'Renew for ' + half + ' instead of ' + money(tier.y) + '/year. New titles are added every week.',
+        accept: 'Accept offer', done: 'Offer applied. ' + (monthly ? 'Your next 2 months are ' + half + '.' : 'Your next year is ' + half + '.') },
+      support: { title: 'Let us help fix it.', body: 'Most playback, download, and sign-in problems can be fixed quickly. Our support team is available by phone, chat, or email.',
+        accept: 'Contact support', done: 'This would open Deseret Book support.', stay: true }
+    };
+    const offer = offers[offerKind] || { title: '', body: '', accept: '' };
+
+    return {
+      platinum: s.platinum, plan: s.plan, scenario: s.scenario,
+      onPlat: e => this.setState({ platinum: !!(e && e.target ? e.target.checked : !s.platinum) }),
+      planOptions: [{ value: 'monthly', label: 'Monthly plan' }, { value: 'yearly', label: 'Yearly plan' }],
+      onPlan: e => this.setState({ plan: e.target.value }),
+      scenarioOptions: [{ value: 'standard', label: 'Billed on deseretbook.com' }, { value: 'trial', label: 'In free trial' }, { value: 'gift', label: 'Gift (doesn\u2019t renew)' }],
+      onScenario: e => this.go('subs', { scenario: e.target.value, status: 'active', discount: false }),
+      reset: () => { clearTimeout(this.tt); this.setState(this.initial()); window.scrollTo(0, 0); },
+      noop: e => e.preventDefault(),
+
+      isSubs: s.screen === 'subs', isDetails: s.screen === 'details', isReason: s.screen === 'reason',
+      isOffer: s.screen === 'offer', isConfirm: s.screen === 'confirm', isDone: s.screen === 'done',
+      goSubs: nav('subs'), goDetails: nav('details'), goReason: nav('reason'), goConfirm: nav('confirm'),
+      startCancel: () => this.go('reason', { reason: '' }),
+      backFromConfirm: () => this.go(offerKind ? 'offer' : 'reason'),
+
+      planName: gift ? 'Gift' : monthly ? 'Monthly' : 'Yearly',
+      statusLabel, statusTone, listLine, dateLabel, dateValue, endDate, notice,
+      showPriceLine: !gift, priceText, regPriceText, priceNote: priceNotes.join(' · '),
+      billedThrough: gift ? 'Gift subscription' : 'Visa ending in 4242',
+      giftInfo: gift,
+      giftRenew: () => this.flash('This would open plan selection, starting ' + GIFT_END + '.'),
+      canCancel: !gift && !scheduled && !paused,
+      showPromo: !s.platinum && !gift && !scheduled && !trial,
+      promoOpen: s.promoOpen,
+      promoIcon: s.promoOpen ? 'chevron_up' : 'chevron_down',
+      togglePromo: () => this.setState({ promoOpen: !s.promoOpen }),
+
+      reasonOptions: REASONS,
+      reason: s.reason,
+      pickReason: v => { const label = v && v.target ? v.target.value : v; this.setState({ reason: label }); },
+      noReason: !s.reason,
+      continueReason: () => this.go(this.offerFor(s.reason) ? 'offer' : 'confirm'),
+      skipReason: () => this.go('confirm', { reason: '' }),
+
+      offer,
+      pauseOptions: [{ value: '1', label: '1 month' }, { value: '2', label: '2 months' }, { value: '3', label: '3 months' }],
+      pauseValue: String(s.pauseMonths),
+      pickPause: v => this.setState({ pauseMonths: Number(v && v.target ? v.target.value : v) }),
+      acceptOffer: () => {
+        if (offer.stay) { this.flash(offer.done); return; }
+        const patch = offerKind === 'yearly' ? { plan: 'yearly' } : offerKind === 'monthly' ? { plan: 'monthly' } : offerKind === 'pause' ? { status: 'paused' } : { discount: true };
+        this.go('details', patch); this.flash(offer.done);
+      },
+
+      confirmText: trial
+        ? 'You\u2019re in your free trial, so you won\u2019t be charged. You\u2019ll keep full access until ' + endDate + ', when your trial ends.'
+        : 'Billing stops at the end of your current period. You\u2019ll keep full access until ' + endDate + ', and you won\u2019t be charged again.',
+      keepList: ['Unlimited listening and reading across 4,000+ audiobooks and eBooks', 'Exclusive podcasts', 'New audiobooks on release day'],
+      afterList: ['Bookshelf+ titles are no longer available to listen to or read', 'Books you purchased stay in your library', 'You can subscribe again any time'],
+      showRefund: !trial,
+      confirmCancel: () => this.go('done', { status: 'scheduled' }),
+      doneText: 'You\u2019ll have access to Bookshelf+ until ' + endDate + '. ' + (trial ? 'Your trial won\u2019t convert to a paid plan, and you won\u2019t be charged.' : 'You won\u2019t be charged again.'),
+      reactivate: () => this.reactivate(priceText),
+      toast: s.toast, toastOpen: s.toastOpen, toastSeq: s.toastSeq,
+      hideToast: () => { clearTimeout(this.tt); this.setState({ toastOpen: false }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
