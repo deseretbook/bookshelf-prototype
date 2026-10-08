@@ -1,0 +1,66 @@
+/* ============================================================
+   COLOR — corporate palette (neutral canvas) + variable palette
+   (8 hues x 5 values). Hexes are authoritative, from the 2026
+   Deseret Book Visual Style Guide.
+   ============================================================ */
+:root {
+  /* Corporate palette — the neutral canvas */
+  --db-black:    #000000; /* Pure Black — body copy, single-ink print */
+  --db-charcoal: #3a3633; /* preferred dark: bg, marks, display type */
+  --db-granite:  #d8d5d2; /* foundational warm mid-gray — rules, hairlines */
+  --db-dove:     #efefef; /* light neutral — soft panels, section grounds */
+  --db-white:    #ffffff; /* default ground */
+  --db-pearl:    #f7f4f0; /* warm off-white ground */
+  --db-sand:     #e0d5c6; /* warm neutral */
+  --db-clay:     #bf906e; /* warm brown, most saturated neutral */
+
+  /* Variable palette — 100 lightest to 500 darkest */
+  --db-red-100: #f8c1b8; --db-red-200: #ff9da2; --db-red-300: #f95a62; --db-red-400: #cf3037; --db-red-500: #b31f2f;
+  --db-orange-100: #f8cfa9; --db-orange-200: #f8ad6d; --db-orange-300: #ef6f2e; --db-orange-400: #af4904; --db-orange-500: #833921;
+  --db-yellow-100: #fbd872; --db-yellow-200: #ebbc4e; --db-yellow-300: #c18630; --db-yellow-400: #89572e; --db-yellow-500: #704620;
+  --db-green-100: #d6e595; --db-green-200: #b6d654; --db-green-300: #809f39; --db-green-400: #5b722e; --db-green-500: #3e5824;
+  --db-teal-100: #a6f4e5; --db-teal-200: #86dbcb; --db-teal-300: #3ca495; --db-teal-400: #1d8574; --db-teal-500: #006d68;
+  --db-blue-100: #aee6fc; --db-blue-200: #84d2ee; --db-blue-300: #2ca1c2; --db-blue-400: #1a7fa8; --db-blue-500: #006185;
+  --db-purple-100: #dad7f7; --db-purple-200: #b9b8e5; --db-purple-300: #8888ba; --db-purple-400: #645a9b; --db-purple-500: #4c4084;
+  --db-pink-100: #f9cde1; --db-pink-200: #f29ec6; --db-pink-300: #e05fa3; --db-pink-400: #af3583; --db-pink-500: #991e66;
+
+  /* Semantic aliases — override --db-accent per project.
+     One variable color plus a corporate neutral is usually enough. */
+  --db-ground:        var(--db-white);
+  --db-ground-warm:   var(--db-pearl);
+  --db-ground-soft:   var(--db-dove);
+  --db-ground-dark:   var(--db-charcoal);
+  --db-ink:           var(--db-black);      /* body copy */
+  --db-ink-muted:     #56504b;              /* charcoal lightened; captions on light ground (AA at body size) */
+  --db-ink-inverse:   var(--db-white);
+  --db-display:       var(--db-charcoal);   /* headlines, display, marks */
+  --db-hairline:      var(--db-granite);
+  --db-accent:        var(--db-teal-400);   /* per-project lead color */
+  --db-accent-soft:   var(--db-teal-100);
+  --db-accent-deep:   var(--db-teal-500);
+  --db-accent-ink:    var(--db-white);      /* text on --db-accent */
+  --db-link:          var(--db-teal-500);
+  --db-link-hover:    var(--db-charcoal);
+  --db-focus-ring:    var(--db-charcoal);
+
+  /* Status colors — drawn from the variable palette, not new hues.
+     Extension: the style guide defines no status set. */
+  --db-status-error:   var(--db-red-500);
+  --db-status-warning: var(--db-yellow-300);
+  --db-status-success: var(--db-green-400);
+  --db-status-info:    var(--db-blue-500);
+}
+
+/* Dark ground scope — apply to a section to invert the canvas. */
+.db-on-dark {
+  --db-ground: var(--db-charcoal);
+  --db-ink: var(--db-white);
+  --db-ink-muted: #cfc9c3;
+  --db-display: var(--db-white);
+  --db-hairline: #56504b;
+  --db-link: var(--db-white);
+  --db-link-hover: var(--db-sand);
+  --db-focus-ring: var(--db-white);
+  background: var(--db-ground);
+  color: var(--db-ink);
+}
