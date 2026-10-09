@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bookshelf+ Music V1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="stage">
+  <aside class="hint">
+    <h1>Music V1</h1>
+    <p>Clickable iPhone prototype of the Bookshelf+ Music experience, built from the Figma “Music-V1” iOS 26 screens.</p>
+    <p><b>Try:</b> My Library › Albums › This New Day › play a song. Open the mini player, use Up Next, add a song to a new playlist, or search “Gentri”.</p>
+    <p>Account › Offline Mode shows how songs that aren’t downloaded behave. Playback is simulated (no audio).</p>
+    <p><button id="resetBtn">Reset prototype data</button></p>
+  </aside>
+  <div class="device" id="device">
+    <div class="statusbar"><span id="clock">9:41</span><span class="levels" id="levels"></span></div>
+    <div class="screens" id="screens"></div>
+    <div class="mini" id="mini" hidden></div>
+    <nav class="tabbar" id="tabbar"></nav>
+    <div id="overlays"></div>
+  </div>
+</div>
+<script src="src/icons.js"></script>
+<script src="src/data.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>
