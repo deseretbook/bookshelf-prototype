@@ -30,18 +30,18 @@
       var demo = p.get('demo') === 'on';
       if (demo) { p.delete('demo'); changed = true; }
       if (changed) history.replaceState(null, '', url.pathname + (url.search || '') + url.hash);
-      if (demo) {
-        var show = function() {
+      if (!demo) {
+        var hide = function() {
           var els = document.querySelectorAll('div');
           for (var i = 0; i < els.length; i++) {
-            if (els[i].textContent.trim() === 'Demo' && els[i].style.display === 'none') {
-              els[i].style.display = 'flex';
+            if (els[i].textContent.trim() === 'Demo' && els[i].style.display === 'flex' && els[i].style.position === 'absolute') {
+              els[i].style.display = 'none';
               return true;
             }
           }
           return false;
         };
-        var ob = new MutationObserver(function() { if (show()) ob.disconnect(); });
+        var ob = new MutationObserver(function() { if (hide()) ob.disconnect(); });
         ob.observe(document.documentElement, { childList: true, subtree: true });
         setTimeout(function() { ob.disconnect(); }, 15000);
       }
