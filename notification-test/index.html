@@ -34,7 +34,7 @@
         var hide = function() {
           var els = document.querySelectorAll('div');
           for (var i = 0; i < els.length; i++) {
-            if (els[i].textContent.trim() === 'Demo' && els[i].style.display === 'flex' && els[i].style.position === 'absolute') {
+            if (els[i].textContent.indexOf('Demo') > -1 && els[i].style.display === 'flex' && els[i].style.position === 'absolute' && els[i].style.bottom === '16px') {
               els[i].style.display = 'none';
               return true;
             }
