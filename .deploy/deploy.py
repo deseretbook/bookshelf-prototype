@@ -2,10 +2,11 @@
 """Deploy a Claude artifact prototype to this repo's GitHub Pages site.
 
 Steps (each is a subcommand, run in order by the deploy-prototype skill):
-  build  copy a downloaded artifact into <repo>/<slug>/, bake saved Tweaks values
-         into TWEAK_DEFAULTS, hide the Tweaks launcher (?tweaks=1 shows it)
+  build  copy a downloaded artifact into <repo>/improved-ecomm/ and bake the deployed state:
+         saved Tweaks values, signed-out visitor with every plan, one seasonal Clearance
+         banner with no animated elements, no Tweaks panel
   qa     load a page headless, report console errors and failed requests
-  push   commit only <slug>/ (and .deploy/) and push to main
+  push   commit only the folder (and .deploy/) and push to main
   wait   poll the live URL until the new build is served
 
 Stdlib only, plus Playwright for `qa`.
@@ -17,8 +18,26 @@ PAGES = "https://deseretbook.github.io/bookshelf-prototype/"
 SKIP_FILES = {"CLAUDE.md", "compat.json", "preflight.js"}
 SKIP_DIRS = {"archive"}
 EDIT_RE = re.compile(r"(/\*EDITMODE-BEGIN\*/)(\{.*?\})(/\*EDITMODE-END\*/)", re.S)
-PILL_OLD = r"if (/[?&]tweaks=0\b/.test(location.search)) return null;"
-PILL_NEW = r"if (!/[?&]tweaks=1\b/.test(location.search)) return null; /* deploy: launcher hidden unless ?tweaks=1 */"
+FOLDER = "improved-ecomm"  # every deploy goes to this one folder
+# Deployed state: a signed-out visitor who has every plan (Platinum Rewards + Bookshelf+), and one
+# seasonal Clearance banner (the saved season), animations off. Applied after the saved Tweaks values.
+DEPLOY_STATE = {"platinum": True, "bookshelf": True, "motion": False}
+# The Tweaks panel is left out: its launcher never renders and it can never open. The component stays
+# mounted only because it hands the baked values to the page.
+PANEL_PATCHES = [
+    (r"if (/[?&]tweaks=0\b/.test(location.search)) return null;", "return null; /* deploy: no Tweaks panel */"),
+    ("if (!open) {", "if (true) { /* deploy: panel never opens */"),
+]
+# One seasonal Clearance banner (the saved season) with no animations and no animated elements: the
+# motif layers (falling leaves, flakes, petals, sun) are removed; the copy and static background stay.
+HOLD = ("<style>/* deploy: Clearance banner without animated elements */"
+        ".plp-banner .plp-leaves,.plp-banner .plp-sun{display:none!important}"
+        ".plp-banner,.plp-banner *{animation:none!important;transition:none!important}</style>")
+# Each visit starts fresh: signed out, no Bookshelf+ cancel/pause state, no Tweaks values left in this
+# browser by an earlier visit. Runs once per tab, so signing in during the visit still works.
+RESET = ("<script>/* deploy: start signed out with the baked state */try{if(!sessionStorage.getItem('db-deploy-fresh')){"
+         "sessionStorage.setItem('db-deploy-fresh','1');['db-mobile-user','db-bsp-status'].forEach(function(k){localStorage.removeItem(k)});"
+         "Object.keys(localStorage).forEach(function(k){if(k.indexOf('db-tweaks')===0)localStorage.removeItem(k)})}}catch(e){}</script>")
 
 
 def sh(*cmd, cwd=None, check=True):
@@ -52,41 +71,48 @@ def build(a):
         shutil.copy2(entry, os.path.join(dst, "index.html"))
     notes = [f"{n} files copied"]
 
+    saved = {}
     if a.tweaks:
         saved = json.load(open(a.tweaks))
         saved = saved.get("values", saved)
-        for root, _, files in os.walk(dst):
-            for f in files:
-                if not f.endswith(".html"):
-                    continue
-                p = os.path.join(root, f)
-                html = open(p, encoding="utf-8").read()
-                m = EDIT_RE.search(html)
-                if not m:
-                    continue
-                defaults = json.loads(m.group(2))
-                merged = {**defaults, **saved}
-                html = html[: m.start(2)] + json.dumps(merged, indent=2) + html[m.end(2):]
-                open(p, "w", encoding="utf-8").write(html)
-                notes.append(f"Tweaks baked into {os.path.relpath(p, dst)} ({len(saved)} saved values)")
+    for root, _, files in os.walk(dst):
+        for f in files:
+            if not f.endswith(".html"):
+                continue
+            p = os.path.join(root, f)
+            html = open(p, encoding="utf-8").read()
+            m = EDIT_RE.search(html)
+            if not m:
+                continue
+            merged = {**json.loads(m.group(2)), **saved, **DEPLOY_STATE}
+            html = html[: m.start(2)] + json.dumps(merged, indent=2) + html[m.end(2):]
+            if RESET not in html:
+                html = html.replace("<head>", "<head>" + RESET, 1)
+            if HOLD not in html:
+                i = html.rfind("</body>"); html = html[:i] + HOLD + html[i:]
+            open(p, "w", encoding="utf-8").write(html)
+            notes.append(f"{os.path.relpath(p, dst)}: {len(saved)} saved Tweaks values, season {merged.get('season')}, "
+                         f"banner without animated elements, Platinum + Bookshelf+ {merged.get('bspPlan')}, starts signed out")
 
-    if not a.keep_tweaks_pill:
-        hit = False
-        for root, _, files in os.walk(dst):
-            for f in files:
-                if f.endswith((".jsx", ".js", ".html")):
-                    p = os.path.join(root, f)
-                    t = open(p, encoding="utf-8", errors="surrogateescape").read()
-                    if PILL_OLD in t:
-                        open(p, "w", encoding="utf-8", errors="surrogateescape").write(t.replace(PILL_OLD, PILL_NEW))
-                        hit = True
-        notes.append("Tweaks launcher hidden (add ?tweaks=1 to show it)" if hit else "no Tweaks launcher found")
+    hits = 0
+    for root, _, files in os.walk(dst):
+        for f in files:
+            if f == "tweaks-panel.jsx":
+                p = os.path.join(root, f)
+                t = open(p, encoding="utf-8", errors="surrogateescape").read()
+                t2 = t
+                for old, new in PANEL_PATCHES:
+                    t2 = t2.replace(old, new)
+                if t2 != t:
+                    open(p, "w", encoding="utf-8", errors="surrogateescape").write(t2)
+                    hits += 1
+    notes.append("Tweaks panel left out" if hits else "WARNING: Tweaks panel code not found; check the page by hand")
     print("\n".join(notes))
 
 
 def qa(a):
     from playwright.sync_api import sync_playwright
-    errs, fails = [], []
+    errs, fails, state = [], [], None
     with sync_playwright() as p:
         b = p.chromium.launch()
         for w, h, label in [(1440, 900, "desktop"), (390, 844, "mobile")]:
@@ -101,12 +127,34 @@ def qa(a):
                     os.makedirs(a.shots, exist_ok=True)
                     name = (route.strip("#/").replace("/", "_") or "home") + f"-{label}.png"
                     pg.screenshot(path=os.path.join(a.shots, name))
+            if label == "desktop":
+                # The deployed state: no Tweaks panel, signed out, every plan, one banner, no animated elements.
+                pg.goto(a.url + "#/c/clearance", wait_until="networkidle", timeout=90000)
+                pg.wait_for_timeout(2000)
+                st = pg.evaluate("""() => ({
+                  panel: !!document.querySelector('.twk-glass, .twk-panel'),
+                  signedIn: (() => { try { return !!JSON.parse(localStorage.getItem('db-mobile-user')); } catch (e) { return false; } })(),
+                  subs: window.DB_SUBS ? {platinum: !!DB_SUBS.platinum, bookshelf: !!DB_SUBS.bookshelf} : null,
+                  season: window.DB_LEAVES ? DB_LEAVES.season : null,
+                  banners: document.querySelectorAll('.plp-banner').length,
+                  still: document.querySelectorAll('.plp-banner.is-still').length,
+                  motif: [...document.querySelectorAll('.plp-banner .plp-leaves, .plp-banner .plp-sun')].filter(e => e.offsetParent).length,
+                  running: document.getAnimations().filter(x => x.playState === 'running' && x.effect && x.effect.target && x.effect.target.closest && x.effect.target.closest('.plp-banner')).length })""")
+                problems = []
+                if st["panel"]: problems.append("Tweaks panel is on the page")
+                if st["signedIn"]: problems.append("visitor starts signed in")
+                if st["subs"] != {"platinum": True, "bookshelf": True}: problems.append(f"subscriptions are {st['subs']}")
+                if st["banners"] != 1 or st["still"] != 1: problems.append(f"{st['banners']} banners, {st['still']} still")
+                if st["motif"]: problems.append(f"{st['motif']} animated banner elements visible")
+                if st["running"]: problems.append(f"{st['running']} banner animations running")
+                state = {"check": st, "problems": problems}
+                errs.extend("[state] " + p_ for p_ in problems)
             pg.close()
         b.close()
     # External hosts (fonts, analytics) are not ours to fix; report them separately.
     own = [f for f in fails if a.url.split("/")[2] in f]
     other = [f for f in fails if f not in own]
-    print(json.dumps({"console_errors": sorted(set(errs)), "failed_own": sorted(set(own)),
+    print(json.dumps({"state": state, "console_errors": sorted(set(errs)), "failed_own": sorted(set(own)),
                       "failed_external": sorted(set(other))}, indent=2))
     sys.exit(1 if errs or own else 0)
 
@@ -151,15 +199,15 @@ def wait(a):
 
 ap = argparse.ArgumentParser()
 sp = ap.add_subparsers(dest="cmd", required=True)
-b = sp.add_parser("build"); b.add_argument("--src", required=True); b.add_argument("--slug", required=True)
+b = sp.add_parser("build"); b.add_argument("--src", required=True); b.add_argument("--slug", default=FOLDER)
 b.add_argument("--repo", default="."); b.add_argument("--entry", default="index.html")
-b.add_argument("--tweaks"); b.add_argument("--keep-tweaks-pill", action="store_true")
+b.add_argument("--tweaks")
 b.add_argument("--prune", action="store_true", help="delete files the artifact no longer has (ask first)")
 q = sp.add_parser("qa"); q.add_argument("--url", required=True); q.add_argument("--routes", nargs="*")
 q.add_argument("--shots")
-p_ = sp.add_parser("push"); p_.add_argument("--slug", required=True); p_.add_argument("--repo", default=".")
+p_ = sp.add_parser("push"); p_.add_argument("--slug", default=FOLDER); p_.add_argument("--repo", default=".")
 p_.add_argument("--message", required=True); p_.add_argument("--session")
-w = sp.add_parser("wait"); w.add_argument("--slug", required=True); w.add_argument("--repo", default=".")
+w = sp.add_parser("wait"); w.add_argument("--slug", default=FOLDER); w.add_argument("--repo", default=".")
 w.add_argument("--file", default="index.html"); w.add_argument("--tries", type=int, default=40)
 w.add_argument("--every", type=int, default=15)
 a = ap.parse_args()

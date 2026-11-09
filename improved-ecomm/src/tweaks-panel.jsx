@@ -591,8 +591,8 @@ function TweaksPanel({ title = 'Tweaks', children }) {
     return () => document.documentElement.removeAttribute('data-om-starter');
   }, []);
 
-  if (!open) {
-    if (!/[?&]tweaks=1\b/.test(location.search)) return null; /* deploy: launcher hidden unless ?tweaks=1 */
+  if (true) { /* deploy: panel never opens */
+    return null; /* deploy: no Tweaks panel */
     return (
       <><style>{__TWK_GLASS}</style>
       <button type="button" className="twk-glass" aria-label={'Open ' + title} onClick={(e) => { const r = e.currentTarget.getBoundingClientRect(); pillBox.current = { w: Math.round(r.width), h: Math.round(r.height) }; setOpen(true); }}
