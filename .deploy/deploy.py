@@ -10,7 +10,7 @@ Steps (each is a subcommand, run in order by the deploy-prototype skill):
 
 Stdlib only, plus Playwright for `qa`.
 """
-import argparse, json, os, re, shutil, subprocess, sys, time, urllib.request
+import argparse, json, os, re, shutil, subprocess, sys, time, urllib.parse, urllib.request
 
 PAGES = "https://deseretbook.github.io/bookshelf-prototype/"
 # Artifact bookkeeping files that never belong on the public site.
@@ -136,7 +136,7 @@ def push(a):
 def wait(a):
     """Poll until the live copy of a file matches the local one."""
     want = open(os.path.join(a.repo, a.slug, a.file), "rb").read()
-    url = PAGES + a.slug + "/" + a.file
+    url = PAGES + urllib.parse.quote(a.slug + "/" + a.file)
     for i in range(a.tries):
         try:
             got = urllib.request.urlopen(f"{url}?v={time.time()}", timeout=30).read()
