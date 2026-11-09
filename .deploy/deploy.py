@@ -32,8 +32,9 @@ def build(a):
     src, dst = os.path.abspath(a.src), os.path.join(a.repo, a.slug)
     if not os.path.isfile(os.path.join(src, a.entry)):
         sys.exit(f"entry page {a.entry} not found in {src}")
-    # Mirror: the folder ends up exactly the artifact, so files removed there disappear here.
-    if os.path.isdir(dst):
+    # Add and update only: files already in the folder that the artifact no longer has are kept,
+    # because the repo is shared and older pages may be linked from tickets. --prune removes them.
+    if a.prune and os.path.isdir(dst):
         shutil.rmtree(dst)
     n = 0
     for root, dirs, files in os.walk(src):
@@ -153,6 +154,7 @@ sp = ap.add_subparsers(dest="cmd", required=True)
 b = sp.add_parser("build"); b.add_argument("--src", required=True); b.add_argument("--slug", required=True)
 b.add_argument("--repo", default="."); b.add_argument("--entry", default="index.html")
 b.add_argument("--tweaks"); b.add_argument("--keep-tweaks-pill", action="store_true")
+b.add_argument("--prune", action="store_true", help="delete files the artifact no longer has (ask first)")
 q = sp.add_parser("qa"); q.add_argument("--url", required=True); q.add_argument("--routes", nargs="*")
 q.add_argument("--shots")
 p_ = sp.add_parser("push"); p_.add_argument("--slug", required=True); p_.add_argument("--repo", default=".")
