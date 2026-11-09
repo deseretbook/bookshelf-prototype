@@ -1,0 +1,437 @@
+/* PLP template and module library (src/plp.js). Design system tokens only; strokes are outer rings, never borders. */
+
+/* Frame */
+.plp{display:flex;flex-direction:column}
+.plp .plp-h{gap:var(--db-space-2)}
+/* Room between the title (and intro) and the page content below it: 24px on phones, 32px from 640px. */
+.plp>.plp-h{padding-bottom:var(--db-space-5)}
+@media (min-width:640px){.plp>.plp-h{padding-bottom:var(--db-space-6)}}
+.plp-intro{margin:0;max-width:var(--db-measure-lede);font-size:var(--db-text-body);line-height:var(--db-lh-body);color:var(--db-ink-muted)}
+
+.plp-slot{display:flex;flex-direction:column;gap:var(--db-space-6);padding-bottom:var(--db-space-7)}
+.plp-slot:empty{display:none}
+.plp-slot>.sect{padding:0}
+
+/* Toolbar, rail and grid */
+/* Footer spacing: whatever ends the listing (grid, pagination, or the SEO block) needs more room before the footer
+   than the 32-48px rhythm used between sections inside the page. .plp-body owns that gap; the grid or pager's own
+   trailing padding is zeroed when either is last so the two don't stack, and the gap hands off to .plp-seo's own
+   margin (below) when an SEO block follows, so a page with SEO text gets one gap, not two stacked ones. */
+.plp-body{display:grid;grid-template-columns:minmax(0,1fr);padding:0 var(--pad) var(--db-space-8);scroll-margin-top:140px}
+.plp-body:has(+ .plp-seo){padding-bottom:0}
+.plp-main{min-width:0;display:flex;flex-direction:column}
+/* No divider above the product list: the header slot's bottom padding (48px phones, 64px from 640px) is the only gap above it. */
+.plp-bar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--db-space-3);padding:0 0 var(--db-space-4)}
+.plp-count{order:3;flex:1 0 100%;font-size:var(--db-text-caption);color:var(--db-ink-muted)}
+.plp-bar>.plp-sortw{flex:1 1 0;width:auto;min-width:0}
+.plp-bar>.plp-fbtn{flex:none}
+@media (min-width:640px){.plp-count{order:0;flex:1 1 auto}.plp-bar>.plp-sortw{flex:0 0 auto;min-width:220px}}
+/* Below 1024px (phones and tablets): sort first, then the Filter button, then the grid/list SegmentedControl at the right end;
+   the count wraps below. Phones: sort fills the room left. Tablets: sort keeps 220px to 280px and the switch is pushed right.
+   From 1024px the toolbar row hides (sort and count move to the rail) and the grid is the only view. */
+.plp-bar>.plp-view{flex:none}
+@media (max-width:1023px){.plp-bar>.plp-sortw{order:1}.plp-bar>.plp-fbtn{order:2}.plp-bar>.plp-view{order:3}html:not(#_) .plp-count{order:4;flex:1 0 100%}}
+@media (min-width:640px) and (max-width:1023px){html:not(#_) .plp-bar>.plp-sortw{flex:0 1 280px;min-width:220px}.plp-bar>.plp-view{margin-left:auto}}
+@media (min-width:1024px){.plp-bar>.plp-view{display:none!important}}
+/* List view (below 1024px): DS ProductCard layout="row" in a DS .db-pc-list (hairlines between rows). */
+.plp-list{padding:0 0 var(--db-space-6)}
+.plp-main>.plp-list:last-child{padding-bottom:0}
+.plp-active{display:flex;flex-wrap:wrap;align-items:center;gap:var(--db-space-2);padding:0 0 var(--db-space-4)}
+.plp-clear,.plp-fg-more{padding:0;border:0;background:none;font:inherit;font-size:var(--db-text-caption);color:var(--db-link);cursor:pointer}
+.plp-clear .ul-t,.plp-fg-more .ul-t{text-decoration:underline;text-underline-offset:.15em}
+.plp-clear:hover,.plp-fg-more:hover{color:var(--db-link-hover)}
+.plp-clear:focus-visible,.plp-fg-more:focus-visible{outline:2px solid var(--db-focus-ring);outline-offset:2px}
+/* DS ProductCard is a fixed 192px: the grid fits as many 192px columns as the row holds and spreads them across the full width. */
+.plp-grid{display:grid;grid-template-columns:repeat(auto-fill,192px);justify-content:space-between;gap:var(--db-space-6) var(--db-space-3);padding:0 0 var(--db-space-6)}
+
+/* No pager: the grid is .plp-main's last child, so its own trailing padding gives way to .plp-body's footer gap above. */
+.plp-main>.plp-grid:last-child{padding-bottom:0}
+.plp-grid-full{padding:0 var(--pad) var(--db-space-8)}
+.plp-grid-full:has(+ .plp-seo){padding-bottom:0}
+.plp-none{padding:var(--db-space-6) 0}
+/* The pager (DS Pagination) is .plp-main's last child when it renders and carries no trailing space of its own. */
+.plp-rail{display:none}
+.plp-rail-h{margin:0;font-family:var(--db-font-serif);font-weight:400;font-size:20px;line-height:1.2;color:var(--db-display)}
+.plp-fg{margin:0;padding:var(--db-space-4) 0;min-width:0;display:flex;flex-direction:column;box-shadow:0 -1px 0 var(--db-hairline)}
+.plp-fg-l{padding:0;margin:0;font-size:var(--db-text-eyebrow);font-weight:700;letter-spacing:var(--db-tracking-eyebrow);text-transform:uppercase;color:var(--db-ink)}
+.plp-fg-v{display:flex;flex-direction:column;gap:var(--db-space-3)}
+/* Collapsible facet: the group name is a full-width button with a chevron; the values sit in a grid-rows 1fr/0fr wrapper so they ease shut. */
+.plp-fg-t{display:flex;align-items:center;justify-content:space-between;gap:var(--db-space-3);width:100%;padding:0;border:0;background:none;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;text-align:left;cursor:pointer}
+.plp-fg-t:focus-visible{outline:2px solid var(--db-focus-ring);outline-offset:2px;border-radius:var(--db-radius-sm)}
+.plp-fg-chev{flex:none;transform:rotate(180deg);transition:transform var(--db-duration-base,200ms) var(--db-ease-standard,ease)}
+.plp-fg.is-closed .plp-fg-chev{transform:none}
+.plp-fg-b{display:grid;grid-template-rows:1fr;transition:grid-template-rows var(--db-duration-base,200ms) var(--db-ease-standard,ease),visibility 0s}
+.plp-fg-bi{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:var(--db-space-3);padding:0 2px;margin:0 -2px}
+.plp-fg-bi>.plp-fg-v{padding-top:var(--db-space-3)}
+.plp-fg.is-closed .plp-fg-b{grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows var(--db-duration-base,200ms) var(--db-ease-standard,ease),visibility 0s var(--db-duration-base,200ms)}
+@media (prefers-reduced-motion:reduce){.plp-fg-chev,.plp-fg-b,.plp-fg.is-closed .plp-fg-b{transition:none}}
+.plp-fg-more{align-self:flex-start}
+.plp-fv{font-size:14px;line-height:1.3;color:var(--db-ink)}
+.plp-fv-n{margin-left:var(--db-space-1);color:var(--db-ink-muted)}
+.plp-sheet .plp-fg:first-child{box-shadow:none;padding-top:0}
+@media (min-width:640px){
+  .plp-grid{gap:var(--db-space-8) var(--db-space-5)}
+  .plp-slot{gap:var(--db-space-7);padding-bottom:var(--db-space-8)}
+  .plp-body,.plp-grid-full{padding-bottom:var(--db-space-9)}
+}
+@media (min-width:1024px){
+  .plp-body.has-rail{grid-template-columns:232px minmax(0,1fr);column-gap:var(--db-space-7)}
+  /* Never sticky, never an internal scroll: the rail flows with the page and every facet shows in full. */
+  .plp-rail{display:block;align-self:start;padding:0 var(--db-space-1) var(--db-space-6) 1px}
+  /* Count and sort live at the top of the rail; the toolbar row above the grid goes, so rail and grid start on one line. */
+  .plp-body.has-rail .plp-bar{display:none}
+  /* Filter title and count share one row, then a divider, then Sort by, then the facet groups. */
+  .plp-rail-top{display:flex;align-items:baseline;justify-content:space-between;gap:var(--db-space-3);padding:0 0 var(--db-space-4);box-shadow:0 1px 0 var(--db-hairline)}
+  .plp-rail-count{flex:none;font-size:var(--db-text-caption);line-height:1.2;color:var(--db-ink-muted);white-space:nowrap}
+  .plp-rail-sort{padding:var(--db-space-4) 0}
+  .plp-fbtn{display:none!important}
+}
+
+/* Sale banner (CONFIG banner): a small band across the content width (inside the page margins), under the title.
+   Yellow 100 ground with the card radius and an outer ring, Yellow 600 eyebrow, Lora headline. */
+/* Space below matches the subcategory cards: the slot's bottom padding (48px phones, 64px from 640px) plus the 20px the card
+   reserves for its pill and the grid's 2px edge, measured from the card's bottom edge. */
+.plp-banner{margin:2px calc(var(--pad) + 2px) calc(var(--db-space-7) + 22px);border-radius:var(--db-radius-lg);background:var(--db-yellow-100);box-shadow:0 0 0 1px color-mix(in srgb,var(--db-yellow-400) 30%,transparent);container-type:inline-size}
+/* Green ground: a very diffuse radial gradient centered below the bottom edge, Green 100 at its center (a small glow along the bottom)
+   out to Green 500, which fills most of the banner, with a Green 400 outline.
+   On the dark ground the copy turns white and the eyebrow Yellow 200. */
+.plp-banner{--bn-dark:var(--db-green-500);--bn-light:var(--db-green-100);--bn-line:var(--db-green-400);--bn-eb:var(--db-yellow-200);
+  background:var(--bn-dark);background:radial-gradient(var(--bg-rx,150%) var(--bg-ry,115%) at 50% var(--bg-y,var(--bn-y,135%)),var(--bn-light) 0%,color-mix(in srgb,var(--bn-light) 62%,var(--bn-dark)) 18%,color-mix(in srgb,var(--bn-light) 32%,var(--bn-dark)) 38%,color-mix(in srgb,var(--bn-light) 12%,var(--bn-dark)) 60%,color-mix(in srgb,var(--bn-light) 3%,var(--bn-dark)) 78%,var(--bn-dark) 92%);box-shadow:0 0 0 1px var(--bn-line)}
+.plp-banner .plp-banner-t,.plp-banner .plp-banner-x{color:var(--db-white)}
+.plp-banner .plp-banner-eb{color:var(--bn-eb)}
+/* Seasonal variants (Tweaks: Season), the same recipe in each season's colors: the 500 fills the banner (winter: Dove; summer: its own sunrise, below),
+   the 100 glows up from the bottom, the 200 outlines it. Fall is the green above. */
+/* Winter: a light ground, Dove at 80% opacity filling it and Blue 200 glowing up from the bottom, a Dove outline, so its copy is charcoal
+   and the eyebrow Blue 600. */
+.plp-banner[data-season="winter"]{--bn-dark:color-mix(in srgb,var(--db-dove) 80%,transparent);--bn-light:var(--db-blue-200);--bn-line:var(--db-dove);--bn-eb:var(--db-blue-500)}
+.plp-banner[data-season="winter"] .plp-banner-t,.plp-banner[data-season="winter"] .plp-banner-x{color:var(--db-blue-700)}
+.plp-banner[data-season="spring"]{--bn-dark:var(--db-green-200);--bn-light:var(--db-teal-600);--bn-line:var(--db-teal-400);--bn-eb:var(--db-green-100);--bn-y:85%}
+.plp-banner[data-season="spring"] .plp-banner-t,.plp-banner[data-season="spring"] .plp-banner-x{color:var(--db-white)}
+/* The Tweaks background editor's settings (--bg-s scale, --bg-y center, --bg-g ground, --bg-stops, set by SeasonBanner) replace the built-in spring gradient above. */
+/* Summer: an afternoon sun. A wide white where the sun sits (bottom middle) with a crisp edge, then an afternoon sky,
+   very diffuse: white, then Yellow 200 at 60% opacity (--sky-y), a long, soft Orange 200 to 300, then a light touch of Purple 300 at the top (mixed in oklab so the orange and purple meet without a muddy band). Charcoal copy, Orange 500 eyebrow, Pearl outline. */
+.plp-banner[data-season="summer"]{--sky-y:color-mix(in srgb,var(--db-yellow-200) 60%,transparent);--bn-line:var(--db-pearl);--bn-eb:var(--db-orange-500);
+  background:var(--db-purple-300);background:radial-gradient(150% var(--sky-h,160%) at 50% 118%,var(--db-white) 0%,var(--db-white) 34%,color-mix(in srgb,var(--sky-y) 18%,white) 37%,color-mix(in srgb,var(--sky-y) 42%,white) 40%,color-mix(in srgb,var(--sky-y) 68%,white) 44%,color-mix(in srgb,var(--sky-y) 88%,white) 49%,color-mix(in oklab,color-mix(in srgb,var(--sky-y) 92%,white) 85%,var(--db-orange-200)) 54%,color-mix(in oklab,color-mix(in srgb,var(--sky-y) 92%,white) 60%,var(--db-orange-200)) 59%,color-mix(in oklab,color-mix(in srgb,var(--sky-y) 92%,white) 30%,var(--db-orange-200)) 64%,color-mix(in oklab,var(--db-orange-200) 75%,var(--db-orange-300)) 69%,color-mix(in oklab,var(--db-orange-200) 55%,var(--db-orange-300)) 74%,color-mix(in oklab,color-mix(in oklab,var(--db-orange-200) 55%,var(--db-orange-300)) 70%,var(--db-purple-300)) 75%,color-mix(in oklab,color-mix(in oklab,var(--db-orange-200) 55%,var(--db-orange-300)) 30%,var(--db-purple-300)) 80%,color-mix(in oklab,var(--db-orange-200) 12%,var(--db-purple-300)) 100%)}
+/* The Tweaks gradient editor's stops (--sky-stops, set by SeasonBanner) replace the built-in sky above; blended in oklab where supported. */
+.plp-banner[data-season="summer"][style*="--sky-stops"]{background:radial-gradient(var(--bg-rx,150%) var(--bg-ry,var(--sky-h,160%)) at 50% var(--bg-y,118%),var(--sky-stops))}
+@supports (background:linear-gradient(in oklab,red,blue)){.plp-banner[data-season="summer"][style*="--sky-stops"]{background:radial-gradient(var(--bg-rx,150%) var(--bg-ry,var(--sky-h,160%)) at 50% var(--bg-y,118%) in oklab,var(--sky-stops))}}
+.plp-banner[data-season="summer"] .plp-banner-t,.plp-banner[data-season="summer"] .plp-banner-x{color:var(--db-orange-700)}
+/* The Tweaks background editor (fall, winter, spring): --bg-rx/--bg-ry radii (scale and roundness), --bg-y center, --bg-g ground and
+   --bg-stops, set by SeasonBanner, replace the season's built-in gradient. Shape alone (no stops yet) reshapes the built-in one. */
+.plp-banner[data-season][style*="--bg-stops"]{background:var(--bg-g);background:radial-gradient(var(--bg-rx,150%) var(--bg-ry,115%) at 50% var(--bg-y,135%),var(--bg-stops))}
+/* The sun (SunMotif in plp.js). --sun-s size, --sun-g glow strength, --sun-r ray strength, --sun-blur a soft blur over the whole sun,
+   --halo-d the time a halo takes to rise and fade; --sky-h on the banner sets the sky gradient's height. Everything centered on the bottom middle; only transform and opacity move. */
+.plp-sun{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;border-radius:inherit;-webkit-filter:blur(var(--sun-blur,0px));filter:blur(var(--sun-blur,0px));-webkit-animation:plp-leaves-in 1.2s cubic-bezier(.2,0,0,1) both;animation:plp-leaves-in 1.2s cubic-bezier(.2,0,0,1) both}
+.plp-sun>span{position:absolute;left:50%;bottom:0;border-radius:50%;will-change:transform,opacity}
+.plp-sun-core{width:calc(150px * var(--sun-s) * var(--sun-k,1));height:calc(150px * var(--sun-s) * var(--sun-k,1));-webkit-transform:translate(-50%,50%);transform:translate(-50%,50%);
+  background:radial-gradient(closest-side,#fff 0%,#fff 60%,rgba(255,255,255,.85) 72%,color-mix(in srgb,var(--db-yellow-100) 30%,transparent) 86%,transparent 100%)}
+.plp-sun-glow{width:calc(1000px * var(--sun-s) * var(--sun-k,1));height:calc(1000px * var(--sun-s) * var(--sun-k,1));opacity:var(--sun-g);-webkit-transform:translate(-50%,50%);transform:translate(-50%,50%);
+  background:radial-gradient(closest-side,rgba(255,255,255,.95) 0%,rgba(255,255,255,.7) 14%,color-mix(in srgb,var(--db-yellow-200) 45%,rgba(255,255,255,.3)) 30%,color-mix(in srgb,var(--db-yellow-200) 18%,transparent) 52%,transparent 78%);
+  -webkit-animation:plp-sun-breathe 7s cubic-bezier(.45,0,.55,1) infinite alternate both;animation:plp-sun-breathe 7s cubic-bezier(.45,0,.55,1) infinite alternate both}
+.plp-sun-rays{width:calc(1400px * var(--sun-s) * var(--sun-k,1));height:calc(1400px * var(--sun-s) * var(--sun-k,1));opacity:var(--sun-r);-webkit-transform:translate(-50%,50%);transform:translate(-50%,50%);
+  -webkit-mask-image:radial-gradient(closest-side,#000 6%,rgba(0,0,0,.5) 30%,transparent 70%);mask-image:radial-gradient(closest-side,#000 6%,rgba(0,0,0,.5) 30%,transparent 70%);
+  -webkit-animation:plp-sun-turn 160s linear infinite;animation:plp-sun-turn 160s linear infinite}
+.plp-sun-rays.b{width:calc(1100px * var(--sun-s) * var(--sun-k,1));height:calc(1100px * var(--sun-s) * var(--sun-k,1));-webkit-animation-duration:230s;animation-duration:230s;-webkit-animation-direction:reverse;animation-direction:reverse}
+.plp-sun-halo{width:calc(220px * var(--sun-s) * var(--sun-k,1));height:calc(220px * var(--sun-s) * var(--sun-k,1));opacity:0;-webkit-transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(.5);transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(.5);
+  /* a crescent: a soft Yellow 100 disc with a Yellow 200 rim with an offset circle cut out toward the sun, tipped per halo (--halo-rot) */
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--db-yellow-100) 55%,rgba(255,255,255,.6)) 0%,color-mix(in srgb,var(--db-yellow-100) 55%,rgba(255,255,255,.6)) 66%,color-mix(in srgb,var(--db-yellow-200) 55%,transparent) 84%,transparent 100%);
+  -webkit-mask-image:radial-gradient(45% 45% at 50% 64%,transparent 88%,#000 100%);mask-image:radial-gradient(45% 45% at 50% 64%,transparent 88%,#000 100%);
+  -webkit-animation:plp-sun-halo var(--halo-d) cubic-bezier(.25,.1,.3,1) var(--halo-dl) infinite both;animation:plp-sun-halo var(--halo-d) cubic-bezier(.25,.1,.3,1) var(--halo-dl) infinite both}
+@-webkit-keyframes plp-sun-halo{0%{-webkit-transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(.5);opacity:0}18%{opacity:calc(.9 * var(--sun-g))}100%{-webkit-transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(5.5);opacity:0}}
+@keyframes plp-sun-halo{0%{transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(.5);opacity:0}18%{opacity:calc(.9 * var(--sun-g))}100%{transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(5.5);opacity:0}}
+@-webkit-keyframes plp-sun-breathe{from{-webkit-transform:translate(-50%,50%) scale(.94)}to{-webkit-transform:translate(-50%,50%) scale(1.06)}}
+@keyframes plp-sun-breathe{from{transform:translate(-50%,50%) scale(.94)}to{transform:translate(-50%,50%) scale(1.06)}}
+@-webkit-keyframes plp-sun-turn{from{-webkit-transform:translate(-50%,50%) rotate(0deg)}to{-webkit-transform:translate(-50%,50%) rotate(360deg)}}
+@keyframes plp-sun-turn{from{transform:translate(-50%,50%) rotate(0deg)}to{transform:translate(-50%,50%) rotate(360deg)}}
+/* The front halo (summer): above the copy, with the same blur; it grows and fades in the first half of a cycle twice a halo's lifetime, then waits. */
+.plp-banner.has-motif .plp-sun.front{z-index:2;-webkit-animation:none;animation:none}
+.plp-sun-halo.rare{-webkit-animation:plp-sun-halo-rare calc(var(--halo-d) * 2) linear var(--halo-dl) infinite both;animation:plp-sun-halo-rare calc(var(--halo-d) * 2) linear var(--halo-dl) infinite both}
+@-webkit-keyframes plp-sun-halo-rare{0%{-webkit-transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(.5);opacity:0;-webkit-animation-timing-function:cubic-bezier(.25,.1,.3,1)}9%{opacity:calc(.9 * var(--sun-g));-webkit-animation-timing-function:cubic-bezier(.25,.1,.3,1)}50%,100%{-webkit-transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(5.5);opacity:0}}
+@keyframes plp-sun-halo-rare{0%{transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(.5);opacity:0;animation-timing-function:cubic-bezier(.25,.1,.3,1)}9%{opacity:calc(.9 * var(--sun-g));animation-timing-function:cubic-bezier(.25,.1,.3,1)}50%,100%{transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(5.5);opacity:0}}
+@media (max-width:639px){.plp-sun{--sun-k:.6}}
+@media (prefers-reduced-motion:reduce){.plp-sun>span{-webkit-animation-play-state:paused;animation-play-state:paused}}
+/* While the saved season is on its way, the copy waits invisibly, then fades in. */
+.plp-banner .plp-banner-in{transition:opacity .4s cubic-bezier(.2,0,0,1)}
+.plp-banner.is-pending .plp-banner-in{opacity:0}
+/* Box matches the subcategory cards: inset 2px like the tiles grid (so its edges line up with the cards' edges and the
+   content below starts at the same place), and as tall as a card: the grid's and 2 columns with 12px gaps on phones, 3 with 16px from 640px, 5 from 1024px. */
+.plp-banner-in{box-sizing:border-box;min-height:calc((100cqw - var(--db-space-3)) / 2);padding-block:var(--db-space-5) !important;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--db-space-2);padding:0 var(--db-space-5);text-align:center}
+@media (min-width:640px){.plp-banner-in{min-height:calc((100cqw - 2 * var(--db-space-4)) / 3);padding:0 var(--db-space-6);align-content:center}}
+@media (min-width:1024px){.plp-banner-in{min-height:calc((100cqw - 4 * var(--db-space-4)) / 5)}}
+.plp-banner-eb{color:var(--db-yellow-600)}
+/* Leaves motif (FallingLeaves in plp.js): a layer under the copy, clipped to the banner's rounded box. Every changing property
+   eases: the fall (a diagonal toward the bottom-left corner) and the focus (blur). Transforms and filter
+   only, on their own elements, so Safari composites each layer; isolation keeps the rounded clip intact.
+   cqw is the banner's width (the banner is an inline-size container), so the diagonal scales with it. */
+.plp-banner.has-motif{position:relative;overflow:hidden;isolation:isolate}
+.plp-banner.has-motif .plp-banner-in{position:relative;z-index:1}
+.plp-leaves{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;border-radius:inherit;-webkit-animation:plp-leaves-in .8s cubic-bezier(.2,0,0,1) both;animation:plp-leaves-in .8s cubic-bezier(.2,0,0,1) both}
+/* The leaves fade in once their settings are known. */
+@-webkit-keyframes plp-leaves-in{from{opacity:0}to{opacity:1}}
+@keyframes plp-leaves-in{from{opacity:0}to{opacity:1}}
+.plp-leaf{--sz:var(--s);--drift:calc(var(--dp,38) * 1cqw);position:absolute;top:0;left:var(--x);height:100%;width:var(--sz);margin-left:calc(var(--sz) / -2);opacity:var(--o);
+  -webkit-animation:plp-leaf-fall var(--d) cubic-bezier(.35,.05,.65,.95) var(--dl) infinite both;animation:plp-leaf-fall var(--d) cubic-bezier(.35,.05,.65,.95) var(--dl) infinite both;will-change:transform}
+.plp-leaf-spin,.plp-leaf-focus{display:block;width:var(--sz);height:var(--sz)}
+/* Spin: the leaf's fixed Z rotation (Tweaks), no motion of its own. */
+.plp-leaf-spin{position:absolute;top:100%;left:0;-webkit-transform:rotate(var(--r0));transform:rotate(var(--r0));
+  -webkit-animation:plp-leaf-spin var(--d) cubic-bezier(.35,.05,.65,.95) var(--dl) infinite both;animation:plp-leaf-spin var(--d) cubic-bezier(.35,.05,.65,.95) var(--dl) infinite both;will-change:transform}
+/* Rotation while falling (Tweaks: X, Y and Z rotation amount): the spin turns the leaf flat by --rz over one fall, in step
+   with it (eased the same way, restarting while the leaf is out of view). X and Y turns are drawn in 3D by plp.js. */
+@-webkit-keyframes plp-leaf-spin{from{-webkit-transform:rotate(var(--r0))}to{-webkit-transform:rotate(calc(var(--r0) + var(--rz,0deg)))}}
+@keyframes plp-leaf-spin{from{transform:rotate(var(--r0))}to{transform:rotate(calc(var(--r0) + var(--rz,0deg)))}}
+.plp-leaf-focus{-webkit-animation:plp-leaf-focus var(--fd) cubic-bezier(.45,0,.55,1) var(--fdl) infinite alternate both,plp-leaf-sway var(--swd,4s) ease-in-out var(--swl,0s) infinite alternate both;animation:plp-leaf-focus var(--fd) cubic-bezier(.45,0,.55,1) var(--fdl) infinite alternate both,plp-leaf-sway var(--swd,4s) ease-in-out var(--swl,0s) infinite alternate both;will-change:filter,translate,rotate}
+/* Sway (Tweaks): the wind pushes each leaf back and forth, sideways and a little rotation, on its own period and phase. Individual translate/rotate, so it adds to the fall and spin. */
+@keyframes plp-leaf-sway{from{translate:calc(var(--sw,0) * -.05cqw) 0;rotate:calc(var(--sw,0) * -.12deg)}to{translate:calc(var(--sw,0) * .05cqw) 0;rotate:calc(var(--sw,0) * .12deg)}}
+/* The leaf picture: a canvas (drawn once per leaf by drawLeaf in plp.js) covering 1.5x the leaf box, centered on it,
+   so curled tips and tilted edges have room. */
+.plp-leaf-focus{position:relative}
+.plp-leaf-cv{position:absolute;left:-25%;top:-25%;width:150%;height:150%;display:block}
+/* Glimmer (winter): a soft white bloom over the flake, its opacity set by plp.js each frame from how squarely the flake
+   faces the sun's reflection, so it flashes as it turns through that angle and fades either side. Opacity only. */
+.plp-glint{position:absolute;left:-35%;top:-35%;width:170%;height:170%;pointer-events:none;opacity:0;will-change:opacity;
+  background:radial-gradient(closest-side,rgba(255,255,255,1) 0%,rgba(255,255,255,1) 18%,rgba(255,255,255,.7) 36%,rgba(255,255,255,.3) 58%,rgba(255,255,255,0) 80%)}
+/* The fall starts and ends with the whole leaf picture out of view (the canvas reaches 0.75 of the leaf past its box and
+   further when spun, so 1.7 above and 0.7 below the box), so the loop's restart, where the spin and turn reset, is never seen. */
+@-webkit-keyframes plp-leaf-fall{from{-webkit-transform:translate3d(0,calc(-100% - var(--sz) * 1.7),0)}to{-webkit-transform:translate3d(calc(var(--drift) * -1),calc(var(--sz) * .7),0)}}
+@keyframes plp-leaf-fall{from{transform:translate3d(0,calc(-100% - var(--sz) * 1.7),0)}to{transform:translate3d(calc(var(--drift) * -1),calc(var(--sz) * .7),0)}}
+@-webkit-keyframes plp-leaf-focus{from{-webkit-filter:blur(var(--b0));filter:blur(var(--b0))}to{-webkit-filter:blur(var(--b1));filter:blur(var(--b1))}}
+@keyframes plp-leaf-focus{from{-webkit-filter:blur(var(--b0));filter:blur(var(--b0))}to{-webkit-filter:blur(var(--b1));filter:blur(var(--b1))}}
+/* Phones: fewer leaves at half the size, the near ones fainter, since the copy fills most of the banner. */
+@media (max-width:639px){.plp-leaf{--sz:calc(var(--s) * var(--pz,.5))}.plp-leaf.wide{display:none}.plp-leaf.l2{opacity:.55}}
+/* Rising motifs (summer): the same path, run backward, so they drift up and to the right. */
+/* The rare front flake (winter): above the copy; it falls in the first 60% of its cycle (same path and easing) and waits below the banner. */
+.plp-banner.has-motif .plp-leaves.front{z-index:2}
+.plp-leaf.rare{-webkit-animation-name:plp-leaf-rare;animation-name:plp-leaf-rare;-webkit-animation-timing-function:linear;animation-timing-function:linear}
+.plp-leaf.rare .plp-leaf-spin{-webkit-animation-name:plp-leaf-spin-rare;animation-name:plp-leaf-spin-rare;-webkit-animation-timing-function:linear;animation-timing-function:linear}
+@-webkit-keyframes plp-leaf-rare{0%{-webkit-transform:translate3d(0,calc(-100% - var(--sz) * 1.7),0);-webkit-animation-timing-function:cubic-bezier(.35,.05,.65,.95)}60%,100%{-webkit-transform:translate3d(calc(var(--drift) * -1),calc(var(--sz) * .7),0)}}
+@keyframes plp-leaf-rare{0%{transform:translate3d(0,calc(-100% - var(--sz) * 1.7),0);animation-timing-function:cubic-bezier(.35,.05,.65,.95)}60%,100%{transform:translate3d(calc(var(--drift) * -1),calc(var(--sz) * .7),0)}}
+@-webkit-keyframes plp-leaf-spin-rare{0%{-webkit-transform:rotate(var(--r0));-webkit-animation-timing-function:cubic-bezier(.35,.05,.65,.95)}60%,100%{-webkit-transform:rotate(calc(var(--r0) + var(--rz,0deg)))}}
+@keyframes plp-leaf-spin-rare{0%{transform:rotate(var(--r0));animation-timing-function:cubic-bezier(.35,.05,.65,.95)}60%,100%{transform:rotate(calc(var(--r0) + var(--rz,0deg)))}}
+/* Winter's front flake falls in the first 20% of its cycle (.r20), then waits. */
+@-webkit-keyframes plp-leaf-rare20{0%{-webkit-transform:translate3d(0,calc(-100% - var(--sz) * 1.7),0);-webkit-animation-timing-function:cubic-bezier(.35,.05,.65,.95)}20%,100%{-webkit-transform:translate3d(calc(var(--drift) * -1),calc(var(--sz) * .7),0)}}
+@keyframes plp-leaf-rare20{0%{transform:translate3d(0,calc(-100% - var(--sz) * 1.7),0);animation-timing-function:cubic-bezier(.35,.05,.65,.95)}20%,100%{transform:translate3d(calc(var(--drift) * -1),calc(var(--sz) * .7),0)}}
+@-webkit-keyframes plp-leaf-spin-rare20{0%{-webkit-transform:rotate(var(--r0));-webkit-animation-timing-function:cubic-bezier(.35,.05,.65,.95)}20%,100%{-webkit-transform:rotate(calc(var(--r0) + var(--rz,0deg)))}}
+@keyframes plp-leaf-spin-rare20{0%{transform:rotate(var(--r0));animation-timing-function:cubic-bezier(.35,.05,.65,.95)}20%,100%{transform:rotate(calc(var(--r0) + var(--rz,0deg)))}}
+.plp-leaf.rare.r20{-webkit-animation-name:plp-leaf-rare20;animation-name:plp-leaf-rare20}
+.plp-leaf.rare.r20 .plp-leaf-spin{-webkit-animation-name:plp-leaf-spin-rare20;animation-name:plp-leaf-spin-rare20}
+/* Fall's front leaf falls in the first 50% of a cycle that is twice the other leaves' fall (.r50), then waits. */
+@-webkit-keyframes plp-leaf-rare50{0%{-webkit-transform:translate3d(0,calc(-100% - var(--sz) * 1.7),0);-webkit-animation-timing-function:cubic-bezier(.35,.05,.65,.95)}50%,100%{-webkit-transform:translate3d(calc(var(--drift) * -1),calc(var(--sz) * .7),0)}}
+@keyframes plp-leaf-rare50{0%{transform:translate3d(0,calc(-100% - var(--sz) * 1.7),0);animation-timing-function:cubic-bezier(.35,.05,.65,.95)}50%,100%{transform:translate3d(calc(var(--drift) * -1),calc(var(--sz) * .7),0)}}
+@-webkit-keyframes plp-leaf-spin-rare50{0%{-webkit-transform:rotate(var(--r0));-webkit-animation-timing-function:cubic-bezier(.35,.05,.65,.95)}50%,100%{-webkit-transform:rotate(calc(var(--r0) + var(--rz,0deg)))}}
+@keyframes plp-leaf-spin-rare50{0%{transform:rotate(var(--r0));animation-timing-function:cubic-bezier(.35,.05,.65,.95)}50%,100%{transform:rotate(calc(var(--r0) + var(--rz,0deg)))}}
+.plp-leaf.rare.r50{-webkit-animation-name:plp-leaf-rare50;animation-name:plp-leaf-rare50}
+.plp-leaf.rare.r50 .plp-leaf-spin{-webkit-animation-name:plp-leaf-spin-rare50;animation-name:plp-leaf-spin-rare50}
+.plp-leaves.rise .plp-leaf,.plp-leaves.rise .plp-leaf-spin{-webkit-animation-direction:reverse;animation-direction:reverse}
+/* Tweaks: Animations off fades out every animated element in the banner (leaves, snowflakes, petals, the sun with its
+   haloes and rays), leaving the background and copy, and pauses their motion so it resumes where it left off. The fade
+   runs on filter, since the motifs' fade-in animation holds their opacity. */
+.plp-banner :is(.plp-leaves,.plp-sun){-webkit-transition:-webkit-filter var(--db-duration-slow) var(--db-ease-standard);transition:filter var(--db-duration-slow) var(--db-ease-standard)}
+.plp-banner.is-still .plp-leaves{-webkit-filter:opacity(0);filter:opacity(0)}
+.plp-banner.is-still .plp-sun{-webkit-filter:blur(var(--sun-blur,0px)) opacity(0);filter:blur(var(--sun-blur,0px)) opacity(0)}
+.plp-banner.is-still :is(.plp-leaf,.plp-leaf-spin,.plp-leaf-focus,.plp-sun>span){-webkit-animation-play-state:paused;animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.plp-leaf,.plp-leaf-spin,.plp-leaf-focus{-webkit-animation-play-state:paused;animation-play-state:paused}}
+.plp-banner-l{display:block;text-wrap:balance}
+.plp-banner-t .plp-banner-l{white-space:nowrap}
+/* Title and text break where the config writes \n: "Save up / to 50%", and the text after its first sentence. */
+/* The title stays on one line; on narrow phones it scales down with the banner width to fit. */
+.plp-banner-t{margin:0;font-family:var(--db-font-serif);font-weight:400;font-size:min(42px,11.4cqw);line-height:1.1;color:var(--db-charcoal);white-space:nowrap}
+.plp-banner-x{margin:0;font-size:20px;line-height:1.4;color:var(--db-charcoal)}
+@media (min-width:640px){.plp-banner{margin-bottom:calc(var(--db-space-8) + 22px)}.plp-banner-t{font-size:46px}}
+/* One centered column at every size: eyebrow, title, then text. */
+@media (min-width:1024px){.plp-banner-t{font-size:56px}}
+
+/* Subcategory tiles: the DS SubcategoryCard (square image card, name in a frosted Pearl pill on its bottom edge; the card reserves 20px below for the pill). The page owns only the grid, per the DS:
+   2 columns with 12px gaps on phones, 3 with 16px from 640px, 5 from 1024px (project choice: the DS suggests 4 from 1200px),
+   2px of room so the outlines are not clipped. */
+.plp-tiles{padding:0 var(--pad)}
+.plp-tiles-row{list-style:none;margin:0;padding:2px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--db-space-3)}
+.plp-tiles-row li{min-width:0;display:flex}
+.plp-tiles-row li>.db-sc{flex:1 1 auto}
+/* Full titles: TilesRow sets --sc-s (one pill scale for the row, .75 at the least) and, when that is not enough, --sc-min
+   (the tile width the longest title needs) and on desktop --sc-cols. The pill keeps its place on the card's bottom edge. */
+html:not(#_) .plp-tiles-row .db-sc-tw{max-width:calc(100% / var(--sc-s,1));transform:translate(-50%,50%) scale(var(--sc-s,1))}
+
+@media (min-width:640px){
+  .plp-tiles-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--db-space-4)}
+}
+@media (min-width:1024px){
+  .plp-tiles-row{grid-template-columns:repeat(var(--sc-cols,5),minmax(0,1fr))}
+}
+/* Below 1024px (phones and tablets) the subcategory cards don't wrap: one row that scrolls sideways, edge to edge of the
+   screen (it starts and ends on the page margins), with a part of the next card showing so the scroll is obvious.
+   About 2.2 cards on phones (12px gaps), about 3.4 on tablets (16px gaps). No scrollbar; snaps to the card edges. */
+@media (max-width:1023px){
+  html:not(#_) .plp-tiles-row{display:flex;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:0 var(--pad);margin:0 calc(-1 * var(--pad));padding:2px var(--pad);scrollbar-width:none}
+  html:not(#_) .plp-tiles-row::-webkit-scrollbar{display:none}
+  html:not(#_) .plp-tiles-row li{flex:0 0 max(var(--sc-min,0px),calc((100vw - 2 * var(--pad) - 2 * var(--db-space-3)) / 2.2));scroll-snap-align:start}
+}
+@media (min-width:640px) and (max-width:1023px){
+  html:not(#_) .plp-tiles-row li{flex-basis:max(var(--sc-min,0px),calc((100vw - 2 * var(--pad) - 3 * var(--db-space-4)) / 3.4))}
+}
+
+/* Hero: image, promo banner or shoppable hotspots. Same module on every device. */
+.plp-hero{margin:0 var(--pad);display:grid;grid-template-columns:minmax(0,1fr);overflow:hidden;border-radius:var(--db-radius-sm);background:var(--db-pearl)}
+.plp-hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:var(--db-space-3);padding:var(--db-space-6) var(--db-space-5)}
+.plp-hero.a-center .plp-hero-copy{align-items:center;text-align:center;margin:0 auto}
+.plp-hero-eb{font-size:var(--db-text-eyebrow);font-weight:700;letter-spacing:var(--db-tracking-eyebrow);text-transform:uppercase;color:var(--db-accent-deep)}
+.plp-hero-t{margin:0;font-family:var(--db-font-serif);font-weight:400;font-size:clamp(28px,4vw,40px);line-height:1.2;color:var(--db-display);text-wrap:pretty}
+.plp-hero-x{margin:0;max-width:var(--db-measure-lede);font-size:var(--db-text-body);line-height:var(--db-lh-body);color:var(--db-ink)}
+.plp-hero-copy>button,.plp-hero-copy>a{margin-top:var(--db-space-2)}
+.plp-hero-media{position:relative;display:grid;place-items:center;background:var(--db-pearl);order:-1}
+.plp-hero-media img{display:block;width:100%;height:100%;object-fit:cover}
+.plp-hero.is-image .plp-hero-media{aspect-ratio:4/3}
+.plp-hero.is-image .plp-hero-media img{object-fit:contain;width:76%;height:86%;mix-blend-mode:multiply}
+.plp-hero.is-hotspots .plp-hero-media{aspect-ratio:1}
+.plp-hero.is-promo{background:var(--db-ground-dark);color:var(--db-ink-inverse)}
+.plp-hero.is-promo .plp-hero-t{color:var(--db-white)}
+.plp-hero.is-promo .plp-hero-x{color:var(--db-white)}
+.plp-hero.is-promo.h-short .plp-hero-copy{padding:var(--db-space-6) var(--db-space-5)}
+@media (min-width:640px){
+  .plp-hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch}
+  .plp-hero.is-promo{grid-template-columns:minmax(0,1fr)}
+  .plp-hero-media{order:0}
+  .plp-hero-copy{justify-content:center;padding:var(--db-space-7)}
+  .plp-hero.h-medium{min-height:400px}
+  .plp-hero.h-short{min-height:280px}
+  .plp-hero.is-promo.h-short{min-height:0}
+  .plp-hero.is-promo .plp-hero-copy{padding:var(--db-space-8) var(--db-space-7)}
+  .plp-hero.is-image .plp-hero-media,.plp-hero.is-hotspots .plp-hero-media{aspect-ratio:auto}
+  .plp-hero.is-hotspots .plp-hero-media{min-height:440px}
+  .plp-hero-media img{position:absolute;inset:0;width:100%;height:100%}
+  .plp-hero.is-image .plp-hero-media img{inset:7% 12%;width:76%;height:86%}
+}
+/* Hotspots */
+.plp-hs-dot{position:absolute;width:32px;height:32px;margin:-16px 0 0 -16px;padding:0;border:0;border-radius:var(--db-radius-pill);display:grid;place-items:center;background:rgba(255,255,255,.88);box-shadow:var(--db-shadow-md);cursor:pointer;transition:var(--db-transition);z-index:1}
+.plp-hs-dot span{width:12px;height:12px;border-radius:var(--db-radius-pill);background:var(--db-charcoal);transition:var(--db-transition)}
+.plp-hs-dot:hover,.plp-hs-dot.on{background:var(--db-white)}
+.plp-hs-dot.on span{background:var(--db-accent)}
+.plp-hs-dot:active{transform:scale(.98)}
+.plp-hs-dot:focus-visible{outline:2px solid var(--db-focus-ring);outline-offset:2px}
+.plp-hs-pop{position:absolute;z-index:2;width:240px;margin:24px 0 0 -24px;display:grid;grid-template-columns:64px minmax(0,1fr);gap:var(--db-space-3);padding:var(--db-space-3);border-radius:var(--db-radius-md);background:var(--db-white);box-shadow:var(--db-ring-hairline),var(--db-shadow-lg)}
+.plp-hs-pop.to-l{margin-left:-216px}
+.plp-hs-pop.to-t{transform:translateY(calc(-100% - 48px))}
+.plp-hs-th{width:64px;height:64px;border-radius:var(--db-radius-sm);overflow:hidden;background:var(--db-pearl)}
+.plp-hs-th img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.plp-hs-b{display:flex;flex-direction:column;gap:var(--db-space-1);min-width:0}
+.plp-hs-n{font-family:var(--db-font-serif);font-size:15px;line-height:1.3;color:var(--db-display)}
+.plp-hs-p{font-size:var(--db-text-caption);color:var(--db-ink)}
+.plp-hs-go{display:inline-flex;align-items:center;gap:var(--db-space-1);font-size:var(--db-text-caption);color:var(--db-link);text-decoration:none}
+.plp-hs-go .ul-t{text-decoration:underline;text-underline-offset:.15em}
+.plp-hs-go:hover{color:var(--db-link-hover)}
+
+/* Highlighted products (type "highlight"): static one-row sections at the top of the listing, never a carousel.
+   The row reuses .plp-grid (same 192px card, columns and gaps); cards that wrap past the first row are clipped, so it is always one row.
+   An "All Products" heading separates the highlights from the grid (no divider line). Headings are the DS SectionHeading (24, 28, 32px, 16px below). */
+.plp-hl{display:flex;flex-direction:column}
+
+.plp-grid.plp-hl-grid{grid-template-rows:auto;grid-auto-rows:0;row-gap:0;overflow:hidden;padding:8px;margin:-8px}
+/* Skeleton cards while a recommendation highlight loads */
+.plp-skel{display:flex;flex-direction:column;gap:var(--db-space-2)}
+.plp-skel span{display:block;border-radius:var(--db-radius-sm);background:var(--db-ground-soft);animation:plp-pulse 1.2s var(--db-ease-standard) infinite alternate}
+.plp-skel-c{aspect-ratio:1/1}
+.plp-skel-l{height:14px;width:90%}
+.plp-skel-l.s{width:50%}
+@keyframes plp-pulse{from{opacity:1}to{opacity:.55}}
+@media (prefers-reduced-motion:reduce){.plp-skel span{animation:none}}
+
+/* Editorial cards: 2 to 4. Stacked on phones, 2x2 on tablets, one row on desktop. */
+.plp-ed{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--db-space-5);padding:0 var(--pad)}
+.plp-ed-c{display:flex;flex-direction:column;overflow:hidden;border-radius:var(--db-radius-sm);background:var(--db-white);box-shadow:var(--db-ring-hairline);color:var(--db-ink);text-decoration:none;transition:var(--db-transition)}
+.plp-ed-c:hover{box-shadow:var(--db-ring-strong)}
+.plp-ed-c:active{transform:scale(.98)}
+.plp-ed-c:focus-visible{outline:2px solid var(--db-focus-ring);outline-offset:2px}
+.plp-ed-img{display:grid;place-items:center;aspect-ratio:4/3;background:var(--db-pearl)}
+.plp-ed-img img{width:72%;height:84%;object-fit:contain;mix-blend-mode:multiply}
+.plp-ed-ph{display:none;color:var(--db-granite-deep)}
+.plp-ed-img.is-empty{background:var(--db-ground-soft)}
+.plp-ed-img.is-empty .plp-ed-ph{display:grid}
+.plp-ed-b{display:flex;flex-direction:column;gap:var(--db-space-2);padding:var(--db-space-4) var(--db-space-5) var(--db-space-5)}
+.plp-ed-t{font-family:var(--db-font-serif);font-size:20px;line-height:1.25;color:var(--db-display)}
+.plp-ed-x{font-size:14px;line-height:var(--db-lh-body);color:var(--db-ink-muted)}
+.plp-ed-cta{display:inline-flex;align-items:center;gap:var(--db-space-1);margin-top:var(--db-space-1);font-size:var(--db-text-label);letter-spacing:var(--db-tracking-label);text-transform:uppercase;color:var(--db-link)}
+.plp-ed-cta .ul-t{text-decoration:underline;text-decoration-color:transparent;text-underline-offset:.2em;transition:var(--db-transition)}
+.plp-ed-c:hover .plp-ed-cta{color:var(--db-link-hover)}
+.plp-ed-c:hover .plp-ed-cta .ul-t{text-decoration-color:currentColor}
+@media (min-width:640px){.plp-ed{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1024px){.plp-ed.n3{grid-template-columns:repeat(3,minmax(0,1fr))}.plp-ed.n4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* Section heading */
+.plp-sh{display:flex;flex-direction:column;gap:var(--db-space-1);padding:0 var(--pad);margin-bottom:calc(-1 * var(--db-space-3))}
+.plp-sh-t{margin:0;font-family:var(--db-font-serif);font-weight:400;font-size:24px;line-height:1.2;color:var(--db-display)}
+.plp-sh-x{margin:0;font-size:var(--db-text-body);line-height:var(--db-lh-body);color:var(--db-ink-muted)}
+@media (min-width:640px){.plp-sh-t{font-size:28px}}
+@media (min-width:1024px){.plp-sh-t{font-size:32px}}
+
+/* Browse All directory, generated from the category tree */
+.plp-dir{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--db-space-5) var(--db-space-6);padding:0 var(--pad)}
+.plp-dir-s{display:flex;flex-direction:column;gap:var(--db-space-2);padding-top:var(--db-space-4);box-shadow:0 -1px 0 var(--db-hairline)}
+.plp-dir-h{margin:0;font-family:var(--db-font-serif);font-weight:400;font-size:20px;line-height:1.25}
+.plp-dir a{color:var(--db-ink);text-decoration:none}
+.plp-dir-h a{color:var(--db-display)}
+.plp-dir a:hover{color:var(--db-link-hover);text-decoration:underline;text-underline-offset:.15em}
+.plp-dir ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--db-space-2);font-size:15px}
+.plp-dir ul.plp-dir-gs{gap:var(--db-space-3)}
+.plp-dir-g{display:flex;flex-direction:column;gap:var(--db-space-2)}
+.plp-dir-gh{margin:var(--db-space-2) 0 0;font-family:var(--db-font-sans);font-size:15px;font-weight:700;line-height:1.3}
+.plp-dir-g ul{padding-left:var(--db-space-3)!important;font-size:14px}
+@media (min-width:640px){.plp-dir{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1024px){.plp-dir{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* SEO block: below the grid, collapsed after about 3 lines. Always the listing's last element when it exists,
+   so its own bottom margin is the gap before the footer (matched to .plp-body's, above). */
+.plp-seo{display:flex;flex-direction:column;align-items:flex-start;gap:var(--db-space-2);margin:0 var(--pad) var(--db-space-8);padding-top:var(--db-space-6);box-shadow:0 -1px 0 var(--db-hairline)}
+.plp-seo-t{margin:0;font-family:var(--db-font-serif);font-weight:400;font-size:20px;line-height:1.25;color:var(--db-display)}
+.plp-seo-b{position:relative;max-width:var(--db-measure-body);max-height:calc(3 * 1.5em);overflow:hidden;font-size:15px;line-height:1.5;color:var(--db-ink)}
+.plp-seo-b p{margin:0 0 1em}
+.plp-seo-b.open{max-height:none}
+.plp-seo-b.clipped::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5em;background:linear-gradient(to bottom,rgba(255,255,255,0),var(--db-ground))}
+.plp-seo-more{margin-left:-12px}
+@media (min-width:640px){.plp-seo{margin-bottom:var(--db-space-9)}}
+
+/* The nav gained Christmas in the rebuild: tighten the desktop bar between 1024 and 1199px so all items still fit. */
+@media (min-width:1024px) and (max-width:1199px){html:not(#_) .dnav-b{font-size:11px;letter-spacing:.02em}}
+
+/* 404 page (NotFound in app.js): DS EmptyState, search, two ways out, then Popular Categories tiles */
+.nf{width:100%;max-width:calc(var(--maxw,1240px) + 2 * var(--pad));margin:0 auto;box-sizing:border-box;padding:48px 0 96px;display:flex;flex-direction:column;gap:56px}
+.nf-es{padding:0 var(--pad)}
+.nf-es h1{font-size:clamp(28px,4vw,40px)!important;line-height:1.2}
+html:not(#_) .nf-es>p{max-width:44ch!important}
+.nf-es>div:last-child{width:min(520px,100%);margin-top:var(--db-space-3)!important}
+.nf-acts{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%}
+.nf-search{display:flex;gap:8px;width:100%}
+.nf-search>:first-child{flex:1 1 auto;min-width:0}
+.nf-links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.nf-cats{display:flex;flex-direction:column;gap:24px}
+.nf-cats-t{margin:0;padding:0 var(--pad);font-family:var(--db-font-serif);font-weight:400;font-size:24px;line-height:1.2;color:var(--db-display)}
+@media (min-width:640px){.nf-cats-t{font-size:28px}}
+@media (min-width:1024px){.nf{padding-top:64px;gap:72px}.nf-cats-t{font-size:32px}html:not(#_) .nf .plp-tiles-row{grid-template-columns:repeat(6,minmax(0,1fr))}}
+
+/* Phones: product grids (PLP, search, wishlist) always show two columns. A column is 192px (the DS card) when two fit,
+   otherwise half the row less the 12px gap, and the card narrows to its column: the cover scales with it, the type stays. */
+@media (max-width:639px){
+  html:not(#_):not(#_):not(#_) :is(.plp-grid,.grid.wl-grid){grid-template-columns:repeat(auto-fill,min(192px,calc((100% - var(--db-space-3)) / 2)))!important;column-gap:var(--db-space-3)!important}
+  html:not(#_):not(#_) :is(.plp-grid,.grid.wl-grid) .db-pc{width:auto!important;min-width:0}
+}
+
+/* Shadow under every moving piece of the seasonal banners (leaves, flakes, petals): a layer of black copies of the pieces under them (see ShadowCanvas in plp.js), cast down and to the right,
+   far from the piece, blurred wide and blended with the banner as Overlay. The offset uses the individual "translate" property so it stays in the same direction as the piece turns.
+   Strength is the Tweaks "Shadow" slider (--shd, 0 to 1). */
+.plp-leaves.shd{mix-blend-mode:overlay}
+.plp-leaves.shd .plp-leaf{translate:calc(var(--sz) * .26) calc(var(--sz) * .55)}
+.plp-leaves.shd .plp-leaf-cv{-webkit-filter:brightness(0);filter:brightness(0);opacity:calc(var(--shd,0) * .32)}
+/* Every season: the pieces' shadow is fully opaque (as in winter) */
+.plp-banner :is(.plp-leaves.shd) .plp-leaf-cv{opacity:1}
+/* Every season: a second shadow of the pieces, the same offset and blur, at 5% opacity, Color Burn */
+.plp-leaves.shd.shd2{mix-blend-mode:color-burn}
+.plp-banner .plp-leaves.shd.shd2 .plp-leaf-cv{opacity:.05}
+/* Fall and spring: the Overlay shadow is at 10% opacity (winter stays at 100%) */
+.plp-banner:is([data-season="fall"],[data-season="spring"]) .plp-leaves.shd:not(.shd2) .plp-leaf-cv{opacity:.1}
+/* Spring: the Overlay shadow at 15% and the Color Burn shadow at 2% */
+.plp-banner[data-season="spring"] .plp-leaves.shd:not(.shd2) .plp-leaf-cv{opacity:.15}
+.plp-banner[data-season="spring"] .plp-leaves.shd.shd2 .plp-leaf-cv{opacity:.02}
+/* Fall: the Overlay shadow at 40% and the Color Burn shadow at 5% */
+.plp-banner[data-season="fall"] .plp-leaves.shd:not(.shd2) .plp-leaf-cv{opacity:.4}
+.plp-banner[data-season="fall"] .plp-leaves.shd.shd2 .plp-leaf-cv{opacity:.05}
+/* Phones: the banner subtitle is a little smaller */
+/* each sentence stays on one line (the only break is the one after the first period), so the size follows the banner's width: it is the 17px, or less on narrower phones, at which the longest line fits */
+@media (max-width:639px){.plp-banner .plp-banner-x{font-size:clamp(11px,calc((100cqw - 48px) / 21),17px)}.plp-banner .plp-banner-x .plp-banner-l{white-space:nowrap}}

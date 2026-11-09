@@ -1,0 +1,17 @@
+/* Custom site buttons aligned to the latest DS Button (components/actions/button): DM Sans, ALL CAPS, label size and tracking, line-height 1, pill.
+   Weight: medium 500 for every variant. Outline (secondary) label is Pure Black. Strokes are an inset 1px ring (inside the pill), like the DS Button. lg (48px) label is +2px. Other colors stay as customized here. */
+html:not(#_):not(#_) :is(.btn-gold,.btn-teal,.btn-wg,.news-form .sub,.btn-out,.btn-line,.pz-btn,.btn-white,.news .sub){font-family:var(--db-font-sans);font-size:var(--db-text-label,.8125rem);letter-spacing:var(--db-tracking-label,.05em);line-height:1;text-transform:uppercase;border-radius:var(--db-radius-pill);gap:var(--db-space-2,8px);white-space:nowrap;transition:var(--db-transition)}
+html:not(#_):not(#_) :is(.btn-gold,.btn-teal,.btn-wg,.news-form .sub,.btn-out,.btn-line,.pz-btn,.btn-white,.news .sub){font-weight:var(--db-weight-sans-medium,500)}
+html:not(#_):not(#_) :is(.btn-out,.btn-line,.pz-btn.out){color:var(--db-black,#000)}
+html:not(#_):not(#_) :is(.btn-teal,.btn-line,.news .sub){font-size:calc(var(--db-text-label,.8125rem) + 2px)}
+html:not(#_):not(#_) :is(.btn-gold,.btn-teal,.btn-wg,.btn-out,.btn-line,.pz-btn,.btn-white,.news-form .sub,.news .sub):active{transform:scale(.98)}
+html:not(#_):not(#_) :is(.btn-out,.btn-line,.pz-btn.out){border:0;box-shadow:inset 0 0 0 1px var(--db-charcoal)}
+html:not(#_):not(#_) :is(.btn-gold,.btn-teal,.btn-wg,.btn-white,.news-form .sub){border:0;box-shadow:inset 0 0 0 1px transparent}
+
+/* A DS Button rendered as a link (href) keeps its variant colors: the site's link rules (a, .fp a, a:hover) must not recolor the label or underline it. */
+html:not(#_):not(#_) a.db-btn{text-decoration:none}
+html:not(#_):not(#_) a.db-btn-primary,html:not(#_):not(#_) a.db-btn-primary:is(:hover,:focus-visible,:visited){color:var(--db-accent-ink)}
+html:not(#_):not(#_) a.db-btn-secondary,html:not(#_):not(#_) a.db-btn-secondary:is(:hover,:focus-visible,:visited){color:var(--db-black)}
+html:not(#_):not(#_) a.db-btn-ghost,html:not(#_):not(#_) a.db-btn-ghost:is(:hover,:focus-visible,:visited){color:var(--db-charcoal)}
+html:not(#_):not(#_) a.db-btn-dark,html:not(#_):not(#_) a.db-btn-dark:is(:hover,:focus-visible,:visited){color:var(--db-white)}
+html:not(#_):not(#_) a.db-btn-inverse,html:not(#_):not(#_) a.db-btn-inverse:is(:hover,:focus-visible,:visited){color:var(--db-charcoal)}

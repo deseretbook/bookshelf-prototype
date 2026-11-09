@@ -1,0 +1,226 @@
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pdpx-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.pdpx-price .price{display:flex;align-items:baseline;gap:10px}
+.pdpx-price .price.sale{color:var(--db-charcoal)}
+
+
+.pdpx-clr{flex-basis:100%;margin:0;font-size:13px;line-height:1.5;color:var(--db-ink-muted)}
+.pdpx-imp{margin:0;font-size:15px;line-height:1.5;color:var(--db-ink);white-space:nowrap}
+.fmt-o.out{box-shadow:0 0 0 1px transparent;outline:1px dashed var(--n-300,var(--db-granite-deep));outline-offset:0}
+.fmt-o.out .fmt-n{color:var(--n-500,var(--db-ink-muted))}
+.fmt-o.out .fmt-p{color:var(--n-500,var(--db-ink-muted))}
+.fmt-o.out:not(.on){opacity:.5}
+.fmt-o.out.on{outline:0;box-shadow:0 0 0 2px var(--db-charcoal)}
+.fmt-o.out.on .fmt-n{color:var(--db-charcoal)}
+.sw.out{opacity:.5}
+.sw.out.on{opacity:1}
+.pdpx-sel{width:100%;max-width:none}.pdpx-sel>.fmt-hd{width:100%}.pdpx-sel>:last-child{width:auto;max-width:100%;align-self:flex-start;min-width:240px}
+.pdpx-ntf{display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:var(--db-radius-md);background:var(--db-pearl);box-shadow:0 0 0 1px var(--hair,var(--db-dove))}
+.pdpx-ntf-p{margin:0;font-size:14px;color:var(--db-ink)}
+.pdpx-ntf-r{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap}
+.pdpx-ntf-r>:first-child{min-width:200px}
+.pdpx-ntf-ok{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;color:var(--db-ink)}
+.pdpx-ntf-ok .f7i{color:var(--db-teal-400)}
+.pdpx-promo{display:flex;align-items:center;gap:8px;margin:8px 0 0;font-size:14px;line-height:1.4;color:var(--db-ink)}
+.pdpx-promo .f7i{color:var(--db-charcoal)}
+.pdpx-ser{margin:4px 0 0;font-size:14px;color:var(--db-ink-muted)}
+.pdpx-ser a,.ser a{color:var(--db-teal-600,#0f6a64);text-decoration:underline;text-underline-offset:2px}
+.pdpx-ser a:hover,.ser a:hover{color:var(--db-charcoal)}
+.ser{padding:0 0 64px}
+.ser-h,.ser>section,.ser-all{padding-left:var(--pad);padding-right:var(--pad)}
+.ser-h{display:flex;flex-direction:column;gap:10px;max-width:calc(760px + 2 * var(--pad));padding-top:8px;padding-bottom:24px}
+.ser-eb{font-size:12px;letter-spacing:.3em;color:var(--db-ink-muted)}
+.ser-h h1{margin:0;font-family:var(--db-font-serif);font-weight:400;font-size:clamp(28px,4vw,40px);line-height:1.2;color:var(--db-charcoal)}
+.ser-by{margin:0;font-size:14px;color:var(--db-ink-muted)}
+.ser-d{margin:0;font-size:16px;line-height:1.5;color:var(--db-ink);max-width:68ch}
+.ser-lab{margin:0 0 12px;font-size:12px;letter-spacing:.3em;text-transform:uppercase;font-weight:400;color:var(--db-ink-muted)}
+.ser-ord{padding-bottom:32px}
+.ser-ord ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.ser-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.ser-row{display:grid;grid-template-columns:72px minmax(0,1fr);gap:16px;padding:20px 0;box-shadow:0 -1px 0 var(--hair,var(--db-dove))}
+.ser-row:first-child{box-shadow:none}
+.ser-cv{width:72px;height:108px;padding:0;border:0;background:var(--db-pearl);border-radius:var(--db-radius-md);overflow:hidden;cursor:pointer}
+.ser-cv img{width:100%;height:100%;object-fit:cover;display:block}
+.ser-i{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ser-n{font-size:11px;letter-spacing:.3em;color:var(--db-ink-muted)}
+.ser-t{align-self:flex-start;padding:0;border:0;background:none;font-family:var(--db-font-serif);font-size:20px;line-height:1.25;color:var(--db-charcoal);text-align:left;cursor:pointer}
+.ser-t:hover{text-decoration:underline}
+.ser-r{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--db-ink-muted)}
+.ser-i .fmt-opts{max-width:520px}
+.ser-buy{grid-column:2;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ser-p{font-family:var(--db-font-serif);font-size:20px;color:var(--db-charcoal)}
+.ser-all{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:8px var(--pad) 0;padding-top:20px;padding-bottom:20px;border-radius:var(--db-radius-md);background:var(--db-pearl);box-shadow:0 0 0 1px var(--hair,var(--db-dove))}
+.ser-all strong{font-weight:700}
+.ser-all span{color:var(--db-ink-muted)}
+@media (min-width:768px){.ser-row{grid-template-columns:96px minmax(0,1fr) 200px;align-items:start}.ser-cv{width:96px;height:144px}.ser-buy{grid-column:3;flex-direction:column;align-items:flex-end;justify-content:flex-start}}
+.pdpx-ml{color:inherit;text-decoration:underline;text-decoration-color:var(--hair);text-underline-offset:3px}
+.pdpx-ml:hover{color:var(--db-charcoal);text-decoration-color:currentColor}
+.fmt-hd{display:block;line-height:1.5}
+.fmt-hd .lab{display:inline}
+.pdpx-av{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--db-granite-deep);white-space:pre-wrap}
+.pdpx-av.ok{color:var(--db-teal-600,#0f6a64)}
+.pdpx-av.out{color:var(--db-red-600,#9b3a2f)}
+.pdpx-av-note{display:block;margin-top:4px;font-size:13px;line-height:1.5;color:var(--db-ink-muted)}
+html:not(#_):not(#_):not(#_):not(#_) .bsp-su-pri{background:var(--db-orange-400)!important;background-color:var(--db-orange-400)!important;box-shadow:0 0 0 1px var(--db-orange-400)!important;border-color:var(--db-orange-400)!important;color:#fff!important}
+html:not(#_):not(#_):not(#_):not(#_) .bsp-su-pri *{color:#fff!important}
+html:not(#_):not(#_):not(#_):not(#_) .bsp-su-pri:is(:hover,:active){background:var(--db-orange-500)!important;background-color:var(--db-orange-500)!important;box-shadow:0 0 0 1px var(--db-orange-500)!important;border-color:var(--db-orange-500)!important}
+html:not(#_) .acct-d .card-list,html:not(#_) .card-list{border-top:0!important;box-shadow:none}
+html:not(#_) .card-list>a,html:not(#_) .card-list>button{border-bottom:0!important;box-shadow:none}
+html:not(#_) .card-list>:is(a,button)+:is(a,button){box-shadow:0 -1px 0 var(--hair,var(--db-dove))}
+html:not(#_):not(#_):not(#_):not(#_) :is(.art-box,.promo-box,.bagd-f) .btn-gold{background:var(--db-teal-500)!important;background-color:var(--db-teal-500)!important;border-color:var(--db-teal-500)!important;color:#fff!important;transition:background-color var(--db-duration-base,180ms) var(--db-ease-standard,var(--db-ease-standard)),border-color var(--db-duration-base,180ms) var(--db-ease-standard,var(--db-ease-standard)),transform 120ms}
+html:not(#_):not(#_):not(#_):not(#_) :is(.art-box,.promo-box,.bagd-f) .btn-gold:is(:hover,:active){background:var(--db-teal-600)!important;background-color:var(--db-teal-600)!important;border-color:var(--db-teal-600)!important}
+html:not(#_):not(#_):not(#_):not(#_) :is(.art-box,.promo-box,.bagd-f) .btn-gold:active{transform:scale(.98)}
+html:not(#_):not(#_):not(#_):not(#_) :is(.art-box,.promo-box,.bagd-f) .btn-gold *{color:#fff!important}
+/* Bag line image container and image: the ProductCard's specs (transparent container, product trimmed and kept at its own shape, bottom-left, small radius, no ground or border). */
+html:not(#_):not(#_) :is(.bagd-b,.bagp) .line .th{width:80px;height:80px;position:relative;display:flex;align-items:flex-end;justify-content:flex-start;padding:0;border:0!important;background:transparent!important;box-shadow:none;overflow:visible}
+.fill-img{position:relative;display:block;width:100%;height:100%;overflow:hidden;background:var(--db-pearl)}
+.fill-img img{mix-blend-mode:multiply}
+html:not(#_):not(#_) .bagp-l .line .bagd-top,html:not(#_):not(#_) .bagd-b .line .bagd-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+html:not(#_):not(#_) .bagp-l .line .bagd-top .t,html:not(#_):not(#_) .bagd-b .line .bagd-top .t{flex:1;min-width:0}
+html:not(#_):not(#_) .bagp-l .line .bagd-lp,html:not(#_):not(#_) .bagd-b .line .bagd-lp{flex:none;font-size:13px;line-height:1.3;color:var(--db-ink);white-space:nowrap}
+html:not(#_):not(#_) .bagp-l .line .r,html:not(#_):not(#_) .bagd-b .line .r{display:flex;align-items:center;justify-content:space-between;gap:12px}
+html:not(#_):not(#_) .bagp-l .line .t,html:not(#_):not(#_) .bagp-l .line .bagd-lp{font-size:16px}
+html:not(#_):not(#_) .bagp-l .line .c,html:not(#_):not(#_) .bagp-l .line .pbk{font-size:13px}
+/* Item row: the trash (outline icon button) sits at the right, 8px before the quantity stepper; on the bag page an outline
+   wishlist heart starts the row on the left. */
+html:not(#_):not(#_) .bagp-l .line .r,html:not(#_):not(#_) .bagd-b .line .r{gap:8px}
+html:not(#_):not(#_) .bagp-l .line .r .bagd-rm,html:not(#_):not(#_) .bagd-b .line .r .bagd-rm{margin:0 0 0 auto;align-self:center;order:-1}
+html:not(#_):not(#_) .promo-in{display:flex;flex-wrap:nowrap;align-items:flex-end;gap:8px;width:100%}
+html:not(#_):not(#_) .promo-in>:first-child{flex:1 1 auto;min-width:0;width:auto}
+html:not(#_):not(#_) .promo-in>:first-child input{width:100%}
+html:not(#_):not(#_) .promo-in>:last-child{flex:none}
+
+
+
+html:not(#_):not(#_):not(#_):not(#_) .sub-trial{background:var(--db-teal-500)!important;background-color:var(--db-teal-500)!important;border-color:var(--db-teal-500)!important;color:#fff!important}
+html:not(#_):not(#_):not(#_):not(#_) .sub-trial:is(:hover,:active){background:var(--db-teal-600)!important;background-color:var(--db-teal-600)!important;border-color:var(--db-teal-600)!important}
+html:not(#_):not(#_):not(#_):not(#_) .sub-trial:active{transform:scale(.98)}
+html:not(#_):not(#_):not(#_):not(#_) .acct-tier{color:var(--db-teal-600)!important}
+.ftr-news{display:flex;flex-direction:column;gap:10px;width:100%;max-width:480px;margin:0 0 8px}
+.ftr-news-l{font-family:var(--db-font-serif);font-size:18px;line-height:1.3;color:inherit}
+.ftr-news-r{display:flex;align-items:flex-start;gap:8px;width:100%}
+.ftr-news-r>:first-child{flex:1 1 auto;min-width:0}
+.ftr-news-r>:first-child input{width:100%}
+html:not(#_):not(#_):not(#_):not(#_) .ftr-news-b{flex:none;background:var(--db-yellow-300)!important;background-color:var(--db-yellow-300)!important;box-shadow:inset 0 0 0 1px var(--db-yellow-300)!important;border-color:var(--db-yellow-300)!important;color:var(--db-charcoal)!important}
+html:not(#_):not(#_):not(#_):not(#_) .ftr-news-b:is(:hover,:active){background:var(--db-yellow-400)!important;background-color:var(--db-yellow-400)!important;box-shadow:inset 0 0 0 1px var(--db-yellow-400)!important;border-color:var(--db-yellow-400)!important}
+.ftr-news-ok{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;color:inherit}
+.ftr-news-ok .f7i{color:var(--db-teal-400)}
+.ftr-top{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px;width:100%}
+.ftr-top .ftr-news{flex:1 1 320px;margin:0}
+.ftr-top .ftr-store{flex:none}
+html:not(#_) .ftr{padding-top:24px}
+@media (min-width:640px){html:not(#_) .ftr{padding-top:32px}}
+@media (min-width:1024px){html:not(#_) .ftr{padding-top:40px}}
+@media (min-width:640px){html:not(#_) .ftr{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Pre-order: DS Badge (violator) on PLP covers and the PDP, release date and charge note, bag and order lines. */
+
+
+.p-rel{font-size:13px;line-height:1.3;color:var(--db-ink-muted)}
+.pre-pdp{display:flex;flex-wrap:wrap;align-items:center;gap:var(--db-space-1) var(--db-space-3);margin:var(--db-space-1) 0 0}
+.pre-pdp-d{margin:0;font-size:var(--db-text-body);line-height:var(--db-lh-body);color:var(--db-ink)}
+.pre-pdp-n{flex-basis:100%;margin:0;font-size:var(--db-text-caption);line-height:var(--db-lh-body);color:var(--db-ink-muted)}
+.pre-c{color:var(--db-ink)}
+.ord-pre{display:inline-flex;align-items:center;gap:var(--db-space-1);margin-top:var(--db-space-1);font-size:13px;line-height:1.4;color:var(--db-ink)}
+html:not(#_):not(#_) .acct-d .bagd-b{display:flex;flex-direction:column;min-height:calc(100% - var(--sa-b) - var(--sa-gap))}
+html:not(#_):not(#_) .acct-d .acct-signout{align-self:flex-end;margin-top:auto;margin-bottom:0}
+html:not(#_):not(#_) .acct-d .card-list{margin-bottom:24px}
+
+/* Personalization and Notify me cards sit a fixed 16px (DS space 4) below the options above them, at every width,
+   so switching color, format or size never moves them. The column gap is 10px below 768px and 12px from 768px; the margin tops it up. */
+.pdp>:is(.pz,.pdpx-ntf,.pdpx-ntf-ok){margin-top:6px}
+@media (min-width:768px){.pdp>:is(.pz,.pdpx-ntf,.pdpx-ntf-ok){margin-top:4px}}
+
+/* Buy bar, phones only (below 640px): on the product page the quantity stepper, Add to Bag and wishlist row (.cta) is a
+   frame fixed to the bottom of the viewport: white, a hairline above, safe-area aware, the row filling the width inside
+   the page margins. The page gets matching room at the bottom so the footer is never hidden behind it. From 640px the
+   row stays in place under the options. */
+/* --sa-b: the bottom safe area, the system's env(safe-area-inset-bottom) unless the page runs inside the Tweaks
+   presentation phone, which sets it to the space under Safari's controls. */
+:root{--sa-b:env(safe-area-inset-bottom,0px)}
+/* Shopping bag drawer: the sticky checkout footer keeps its content inside the bottom safe area; its white ground still
+   runs to the screen's edge behind the system UI. */
+.bag-d .db-drawer-f{padding-bottom:max(var(--db-space-4),calc(var(--sa-b) + 12px))}
+/* Modals stay inside the safe area (notch, rounded corners, home indicator, landscape side bars): the scrim and the white ground of a
+   drawer still run to the screen's edge, but dialogs, drawer headers, bodies and footers keep their controls and content inside it.
+   --sa-t/-r/-l are the system's env() insets (--sa-b above, which the Tweaks presentation phone overrides). --sa-gap is the 24px (DS space 5) of room every control keeps
+   above the bottom inset (nothing when there is no inset), so controls never sit flush on the system bar. */
+:root{--sa-gap:min(var(--sa-b),var(--db-space-5));--sa-t:env(safe-area-inset-top,0px);--sa-r:env(safe-area-inset-right,0px);--sa-l:env(safe-area-inset-left,0px)}
+/* DS Dialog: its fixed scrim centers the panel with 20px of room; never less than the safe area on any side. */
+html:not(#_) .db-dialog-scrim{padding:max(var(--db-space-5),var(--sa-t)) max(var(--db-space-5),var(--sa-r)) max(var(--db-space-5),calc(var(--sa-b) + var(--sa-gap))) max(var(--db-space-5),var(--sa-l))!important}
+/* Project dialogs (.pdlg: newsletter, personalization, and the rest). */
+html:not(#_) .pdlg{padding:max(24px,var(--sa-t)) max(24px,var(--sa-r)) max(24px,calc(var(--sa-b) + var(--sa-gap))) max(24px,var(--sa-l))}
+html:not(#_) .pz-dlg .pdlg-c{max-height:100%}
+/* DS Drawer: the side next to the screen edge keeps off the side bar; the header clears the top inset; the last block (footer, or the body
+   when there is none; the account panel's Sign out included) keeps its content above the bottom inset, with a spacer so it holds
+   whatever padding the body has. */
+html:not(#_) .db-drawer-right{padding-right:var(--sa-r)}
+html:not(#_) .db-drawer-left{padding-left:var(--sa-l)}
+html:not(#_) .db-drawer-h{padding-top:calc(var(--db-space-2) + var(--sa-t));min-height:calc(56px + var(--sa-t))}
+html:not(#_) .db-drawer-f{padding-bottom:max(var(--db-space-4),calc(var(--sa-b) + 12px))}
+html:not(#_) .db-drawer-b:last-child::after{content:"";display:block;flex:none;height:calc(var(--sa-b) + var(--sa-gap))}
+/* Toasts (DS Toast's fixed wrapper, bottom center): 24px up from the bottom, or above the bottom inset with the same 24px of room as the other
+   modals, whichever is higher, and clear of any landscape side bar. The buy bar rule below lifts it further on phone product pages. */
+html:not(#_) div:has(>div>.db-toast){bottom:calc(var(--sa-b) + var(--db-space-5))!important;padding-left:var(--sa-l);padding-right:var(--sa-r);box-sizing:border-box}
+@media (max-width:639px){
+  .pdp>.cta{position:fixed;left:0;right:0;bottom:0;z-index:60;margin:0!important;box-sizing:border-box;width:auto;
+    padding:var(--db-space-3) var(--pad) calc(12px + var(--sa-b));
+    background:var(--db-white);box-shadow:0 -1px 0 var(--db-hairline),0 -8px 24px rgba(58,54,51,.08)}
+  .phone:has(.pdp>.cta){padding-bottom:calc(72px + var(--sa-b))}
+  /* Toasts (DS Toast, fixed wrapper) rise above the buy bar instead of covering it: bar height plus 16px. */
+  html:not(#_):has(.pdp>.cta) div:has(>div>.db-toast){bottom:calc(72px + var(--db-space-4) + var(--sa-b))!important}
+}
+
+/* Rating row: on phones the wishlist heart sits at the bottom right of the rating and meta line; from 640px the wrapper is
+   transparent to layout (display:contents) and the heart stays in the buy row. !important because the DS IconButton sets display inline. */
+.pdp-rate-row{display:contents}
+.pdp-rate-row>.pdp-fav-m{display:none!important}
+.pdp-price-row{display:flex;align-items:center;justify-content:space-between;gap:var(--db-space-3)}
+.pdp-price-row>:first-child{flex:1 1 auto;min-width:0}
+@media (max-width:639px){
+  .pdp-rate-row{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--db-space-3)}
+  .pdp-rate-row>.pdp-row{flex:1 1 auto;min-width:0}
+  .pdp-rate-row>.pdp-fav-m{display:inline-flex!important;flex:0 0 auto}
+  .pdp>.cta .pdp-fav{display:none!important}
+}
+
+/* Phones: title and the ratings row sit above the image gallery. The info column (.pdp) dissolves into the page column
+   (display: contents) so its children can be ordered around the gallery; the column's own padding and 10px gap are
+   rebuilt as margins. Order: title, ratings row, gallery, then everything else, then the tabs. */
+@media (max-width:639px){
+  .pdp-wrap{display:flex;flex-direction:column}
+  .pdp-wrap>.pdp{display:contents}
+  .pdp-wrap>.pdp>*{order:3;margin-left:var(--pad);margin-right:var(--pad);margin-top:10px}
+  .pdp-wrap>.pdp>h1{order:0;margin-top:16px}
+  .pdp-wrap>.pdp>.pdp-rate-row{order:1}
+  .pdp-wrap>.pdp-gal-col{order:2}
+  .pdp-wrap>.pdp>.pdp-price-row{margin-top:20px}
+  .pdp-wrap>.pdp>:is(.pz,.pdpx-ntf,.pdpx-ntf-ok){margin-top:16px}
+  .pdp-wrap>.pdp>:last-child{margin-bottom:8px}
+  .pdp-wrap>:not(.pdp):not(.pdp-gal-col){order:4}
+  /* The main gallery image is 4:3 on phones (it is square from 640px), so it takes less of the first screen. */
+  html:not(#_):not(#_) .pdp-gal .track>div{height:75cqw}
+  /* Product title: 24px on phones (19px before). */
+  html:not(#_):not(#_) .pdp h1{font-size:24px;line-height:1.2}
+}
+
+/* Bag drawer: the rules between items and above the promo code are DS Dividers (hairline <hr>), not borders on the lines.
+   The drawer body is a column with a 4px gap; each divider takes back the gap below it so the spacing is unchanged. */
+html:not(#_):not(#_) .bagd-b>.line{border-top:0!important}
+html:not(#_):not(#_) .bagd-b>.promo-row{border-top:0!important;margin-top:0!important}
+html:not(#_):not(#_) .bagd-b>.bagd-div{margin:-4px 0 -4px!important;flex:none}
+html:not(#_):not(#_) .bagd-b>.bagd-div-promo{margin-top:-4px!important}
+/* Bag page: close the list with a rule under the last item, same 16px spacing as above. */
+html:not(#_):not(#_) .bagp-l .line:last-child{border-bottom:1px solid var(--hair)}
+
+/* Phones: when an add opens the bag, the line just added gets a Teal 100 wash that fades out over 1.6s. The wash is a layer
+   behind the item only: 8px in from the dividers above and below (inside the line's 16px padding), 8px past the sides. */
+@keyframes bag-added{from{opacity:1}to{opacity:0}}
+.bag-d .line{position:relative;isolation:isolate}
+.bag-d .line.just-added::before{content:"";position:absolute;inset:8px -8px;z-index:-1;border-radius:var(--db-radius-md);background:var(--db-teal-100);opacity:0;animation:bag-added 1.6s var(--db-ease-standard)}
+@media (prefers-reduced-motion:reduce){.bag-d .line.just-added::before{animation:none}}
+
+/* Product cards whose color photos have a light studio backdrop that the DS still reads as white (the scripture color options):
+   the trim cuts them, so the photo fills the whole image container, cropped from the center, instead of sitting in the bottom-left corner. */
+html:not(#_) .pc.pc-fill .db-pc-img{aspect-ratio:auto!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important}
+html:not(#_) .pc.pc-fill .db-pc-img img{left:0!important;top:0!important;width:100%!important;height:100%!important;object-fit:cover;object-position:center}

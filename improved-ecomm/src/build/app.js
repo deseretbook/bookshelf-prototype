@@ -1,11 +1,11 @@
-/* Generated from src/catalog.js, src/ui.jsx, src/screens.jsx, src/checkout.jsx, src/subscriptions.jsx, src/app.jsx. Files share one top-level scope, as separate classic scripts would. Rebuild after editing (see src/build/README.md). */
+/* SOURCE OF TRUTH: edit this file directly. Originally compiled from .jsx sources that are now stale (archived in archive/stale-jsx/). See src/build/README.md. */
 /* src/catalog.js */
 /* Real Deseret Book product data + image URLs (deseretbook.com / images.deseretbook.io) */
 (function () {
-  const IB = "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/";
+  const IB = "assets/img/pim/";
   const FB = IB; /* same CDN host: plytix-backed assets serve from images.deseretbook.io too */
-  const I = (p) => IB + p + "?s=1000x1000&t=JPEG&v=2";
-  const F = (p) => FB + p + "?s=1000x1000&t=JPEG&v=2";
+  const I = (p) => IB + p;
+  const F = (p) => FB + p;
   const dbl = (n) => n + "/" + n;
 
   const SS_IMG = [I("4f/cf/c6/69/69c6cf4fe1d7ade0a65677a5/" + dbl("6088361_HERO_Silent-Strike_HARDBACK.jpg")), I("4c/cf/c6/69/69c6cf4ce1d7ade0a65677a3/" + dbl("6088361_FEATURE_Silent-Strike_HARDBACK_FLAP1.jpg")), I("4d/cf/c6/69/69c6cf4de1d7ade0a65677a4/" + dbl("6088361_FEATURE_Silent-Strike_HARDBACK_FLAP2.jpg")), I("13/bf/ef/69/69efbf134fcae523f31c953f/6088361_FEATURE_SILENT-STRIKE_HARDBACK_INTERIOR.png/6088361_FEATURE_SILENT-STRIKE_HARDBACK_INTERIOR.jpg"), I("4a/cf/c6/69/69c6cf4ae1d7ade0a65677a2/" + dbl("6088361_BACK_Silent-Strike_HARDBACK.jpg")), I("91/1f/4c/6a/6a4c1f911a4cf7e9be57409e/" + dbl("6088361_PRODGALLERY_SILENT-STRIKE-LUKE-STEEL-BOOK-3_UP.jpg"))];
@@ -16,10 +16,10 @@
     Object.assign({ id: "PR00001543-AB", price: 29.99, fmt: "Audiobook (Digital)", digital: true, img: [SS_IMG[0]] }, SS)
   ];
   const P = [
-    { id: "PR00001543", t: "Silent Strike (Luke Steele, Book 3)", by: "Abramson, Traci Hunter", price: 27.99, priceHigh: 32.99, r: 5, rc: 18, cat: "books_fiction_mystery-and-suspense", fmt: "Hardcover",
+    { id: "PR00001543", t: "Silent Strike (Luke Steele, Book 3)", by: "Abramson, Traci Hunter", price: 27.99, priceHigh: 32.99, r: 5, rc: 18, cat: "books_fiction_mystery-and-suspense", fmt: "Hardcover", release: "2026-12-01",
       formats: ["6088361", "PR00001543-EB", "PR00001543-AB"], img: SS_IMG,
       d: "A military aide to the president and an FBI agent follow a trail of Cold War secrets from Washington to Eastern Europe." },
-    { id: "6017019", t: "The Candy Shop War Complete Boxed Set", by: "Mull, Brandon", price: 15.00, r: 4.8, rc: 176, cat: "books_fiction_teen-fiction", fmt: "Paperback",
+    { id: "6017019", t: "The Candy Shop War Complete Boxed Set", by: "Mull, Brandon", price: 15.00, r: 4.8, rc: 176, cat: "books_fiction_teen-fiction", also: ["books_childrens-books"], fmt: "Paperback",
       img: [I("26/5b/21/66/66215b26b1dea3bbbe48c291/6017019_The_Candy_Shop_War_Complete_Boxed_Set.png/6017019_The_Candy_Shop_War_Complete_Boxed_Set.jpg")],
       d: "All three Candy Shop War novels in one boxed set. Clearance price, while supplies last." },
     { id: "5254477", t: "And These Words Scripture Study Journal", by: "Deseret Book", price: 6.25, r: 4.1, rc: 58, cat: "church-resources_scriptures_scripture-journal-editions", fmt: "Hardcover",
@@ -55,7 +55,7 @@
     { id: "P5258117", t: "Charming Artemis (The Lancaster Family, Book 5)", by: "Eden, Sarah M.", price: 9.99, priceHigh: 18.99, r: 4.4, rc: 132, cat: "books_fiction_romance", fmt: "Paperback",
       img: [I("d9/1b/d9/69/69d91bd9b9ba62fc50204cd0/" + dbl("5258117_HERO_CHARMING-ARTEMIS.jpg"))],
       d: "The last Lancaster sister and the Jonquil brother who has always exasperated her." },
-    { id: "PR00001380", t: "Every Beat After", by: "Various", price: 18.99, priceHigh: 32.99, r: 3.7, rc: 27, cat: "books_fiction_romance", fmt: "Paperback",
+    { id: "PR00001380", t: "Every Beat After", by: "Various", price: 18.99, priceHigh: 32.99, r: 3.7, rc: 27, cat: "books_fiction_romance", fmt: "Paperback", release: "2026-11-04",
       img: [I("c6/eb/c6/69/69c6ebc6bcb2c7b68da50814/6087090_HERO_EVERY-BEAT-AFTER_PAPERBACK-KAL.png/6087090_HERO_EVERY-BEAT-AFTER_PAPERBACK-KAL.jpg"), I("29/b8/ca/69/69cab829eff20acca1da5cf9/" + dbl("6087090_FEATURE_EVERY-BEAT-AFTER_PAPERBACK_INTERIOR1.jpg"))],
       d: "A new release for the reader who needs a steady hour." },
     { id: "6073624", t: "Wendy\u2019s Ever After", by: "Wright, Julie", price: 19.99, r: 4.5, cat: "books_fiction_teen-fiction", fmt: "Hardcover",
@@ -76,7 +76,7 @@
     { id: "P6001424", t: "Lily of the Valley (The Gents, Book 2)", by: "Eden, Sarah M.", price: 9.99, priceHigh: 17.99, r: 4.1, rc: 84, cat: "books_fiction_romance", fmt: "Paperback",
       img: [I("27/45/0b/6a/6a0b4527ad820a67a64ae936/" + dbl("6001424_HERO_LILY-OF-THE-VALLEY_PAPERBACK.jpg"))],
       d: "Book two of the Gents." },
-    { id: "P6087437", t: "Love in a Mist (The Gents, Book 5)", by: "Eden, Sarah M.", price: 17.99, priceHigh: 19.99, r: 4.7, rc: 44, cat: "books_fiction_romance", fmt: "Paperback",
+    { id: "P6087437", t: "Love in a Mist (The Gents, Book 5)", by: "Eden, Sarah M.", price: 17.99, priceHigh: 19.99, r: 4.7, rc: 44, cat: "books_fiction_romance", fmt: "Paperback", release: "2026-11-17",
       img: [I("80/02/0e/6a/6a0e02809a628cfe734712de/" + dbl("6087437_HERO_LOVE-IN-A-MIST_PAPERBACK.jpg"))],
       d: "Book five of the Gents." },
     { id: "P5226193", t: "The Heart of a Vicar (The Jonquil Brothers, Book 6)", by: "Eden, Sarah M.", price: 11.99, priceHigh: 17.99, r: 3.5, rc: 118, cat: "books_fiction_romance", fmt: "Paperback",
@@ -97,7 +97,7 @@
 
     { id: "P6073551", t: "Anne Regular Scripture Tote", by: "Deseret Book", price: 39.99, r: 5.0, rc: 12, cat: "church-resources_scriptures_scripture-totes", fmt: "Vegan Leather", size: "13\" x 12\" x 5\"",
       colors: [
-        { n: "Gray", sw: "#9b958f", img: F("15/34/d3/67/67d33415eb1441e50565866f/anne-scripture-tote-gray.png/anne-scripture-tote-gray.jpg") },
+        { n: "Gray", sw: "var(--db-granite-deep)", img: F("15/34/d3/67/67d33415eb1441e50565866f/anne-scripture-tote-gray.png/anne-scripture-tote-gray.jpg") },
         { n: "Cream", sw: "#e9dfcc", img: F("15/34/d3/67/67d334153b069b58ad1a2d38/anne-scripture-tote-cream.png/anne-scripture-tote-cream.jpg") },
         { n: "Olive", sw: "#77744c", img: F("16/34/d3/67/67d334164e29dc485478b43c/anne-scripture-tote-olive.png/anne-scripture-tote-olive.jpg") },
         { n: "Pink", sw: "#dcaaa6", img: F("16/34/d3/67/67d33416b14197a2b98a7e95/anne-scripture-tote-pink.png/anne-scripture-tote-pink.jpg") }],
@@ -110,7 +110,7 @@
         { n: "Taupe Pearl", sw: "#cdb6a4", img: I("a6/9b/03/6a/6a039ba6083e55fa84334fdd/" + dbl("6096127_PRODGALLERY_SIMULATED-LEATHER-QUAD-COMBINATION-REGULAR-TAUPE-PEARL_ybbc0g.jpg")) }],
       img: [I("7f/a3/03/6a/6a03a37ffbcf04ee5222edbf/" + dbl("P6096125_HERO_SIMULATED-LEATHER-QUAD-COMBINATION-REGULAR_exl7om.jpg")), I("a5/9b/03/6a/6a039ba5fbcf04ee5222ec7f/" + dbl("6096125_PRODGALLERY_SIMULATED-LEATHER-QUAD-COMBINATION-REGULAR-ROSEWOOD_INSIDE_hnyn87.jpg")), I("a1/9b/03/6a/6a039ba1fbcf04ee5222ec7c/" + dbl("6096126_PRODGALLERY_SIMULATED-LEATHER-QUAD-COMBINATION-REGULAR-TEAL_INSIDE_tylgkp.jpg")), I("a3/9b/03/6a/6a039ba3fbcf04ee5222ec7d/" + dbl("6096127_PRODGALLERY_SIMULATED-LEATHER-QUAD-COMBINATION-REGULAR-TAUPE-PEARL_INSIDE_imuug2.jpg")), I("db/a4/fb/69/69fba4db4d575ecc21aac7fb/" + dbl("MULTIPLE_PRODGALLERY_SIMULATED-LEATHER-QUAD-COMBINATIONS-REGULAR.jpg"))],
       d: "Limited quantities, while supplies last. These standard-size, simulated leather quadruple combination scriptures are an online exclusive, available in three limited-edition colors: Rosewood, Teal, and Taupe. Each set comes indexed for easy navigation and features gilded edges and a satin ribbon bookmark." },
-    { id: "P6074927", personalize: true, t: "Simulated Leather Quad Combination, Regular (Color Options)", by: "Deseret Book", price: 79, r: 4.9, rc: 402, cat: "church-resources_scriptures_scripture-essentials", fmt: "Faux-Leather", size: "5.25\" x 7.25\"",
+    { id: "P6074927", fillImg: true, personalize: true, t: "Simulated Leather Quad Combination, Regular (Color Options)", by: "Deseret Book", price: 79, r: 4.9, rc: 402, cat: "church-resources_scriptures_scripture-essentials", fmt: "Faux-Leather", size: "5.25\" x 7.25\"",
       colors: [
         { n: "Dusty Rose", sw: "#c39ba0", gallery: [F("bc/a3/cf/67/67cfa3bc9ab7822b03cb60fa/P6074927_P6074927_none_base_f13bac11.jpg/P6074927_P6074927_none_base_f13bac11.jpg"), F("bd/a3/cf/67/67cfa3bd9ab7822b03cb6110/P6074927_P6074927_none_base_76a3b780.jpg/P6074927_P6074927_none_base_76a3b780.jpg"), F("bc/a3/cf/67/67cfa3bc9ab7822b03cb610b/P6074927_P6074927_none_base_822235c8.jpg/P6074927_P6074927_none_base_822235c8.jpg")] },
         { n: "Pacific Blue", sw: "#4d6f8c", gallery: [F("bc/a3/cf/67/67cfa3bc9ab7822b03cb6102/P6074927_P6074927_none_base_b2b31640.jpg/P6074927_P6074927_none_base_b2b31640.jpg"), F("bc/a3/cf/67/67cfa3bc9ab7822b03cb60fd/P6074927_P6074927_none_base_d77abcce.jpg/P6074927_P6074927_none_base_d77abcce.jpg"), F("bd/a3/cf/67/67cfa3bd9ab7822b03cb6112/P6074927_P6074927_none_base_6f7972e5.jpg/P6074927_P6074927_none_base_6f7972e5.jpg")] },
@@ -118,7 +118,7 @@
         { n: "Walnut Brown", sw: "#7b5b42", gallery: [F("bc/a3/cf/67/67cfa3bc9ab7822b03cb60ff/P6074927_P6074927_none_base_c918eeef.jpg/P6074927_P6074927_none_base_c918eeef.jpg"), F("bd/a3/cf/67/67cfa3bd9ab7822b03cb6115/P6074927_P6074927_none_base_65d95cdd.jpg/P6074927_P6074927_none_base_65d95cdd.jpg"), F("bc/a3/cf/67/67cfa3bc9ab7822b03cb6100/P6074927_P6074927_none_base_a2159194.jpg/P6074927_P6074927_none_base_a2159194.jpg")] }],
       img: [F("02/f8/42/69/6942f802f89a3d2d3c62b42f/P6074927_HERO_SIMULATED-LEATHER-QUAD-REGULAR-COLOR-OPTIONS.png/P6074927_HERO_SIMULATED-LEATHER-QUAD-REGULAR-COLOR-OPTIONS.jpg"), F("f6/8c/b0/69/69b08cf6e18979a989b316f1/" + dbl("scriptureComparison.jpg")), F("bd/a3/cf/67/67cfa3bd9ab7822b03cb6117/P6074927_P6074927_none_base_66af756b.png/P6074927_P6074927_none_base_66af756b.jpg"), F("bd/a3/cf/67/67cfa3bd9ab7822b03cb611c/P6074927_P6074927_none_base_17d67ed0.png/P6074927_P6074927_none_base_17d67ed0.jpg"), F("bc/a3/cf/67/67cfa3bc9ab7822b03cb60fb/P6074927_P6074927_none_base_f6af96fd.png/P6074927_P6074927_none_base_f6af96fd.jpg")],
       d: "All four standard works in one indexed volume, in four everyday colors. Gilded edges and a satin ribbon bookmark." },
-    { id: "P6079208", personalize: true, t: "Simulated Leather Triple Combination, Regular (Color Options)", by: "Deseret Book", price: 45, r: 4.4, rc: 236, cat: "church-resources_scriptures_scripture-essentials", fmt: "Faux-Leather",
+    { id: "P6079208", fillImg: true, personalize: true, t: "Simulated Leather Triple Combination, Regular (Color Options)", by: "Deseret Book", price: 45, r: 4.4, rc: 236, cat: "church-resources_scriptures_scripture-essentials", fmt: "Faux-Leather",
       colors: [
         { n: "Dusty Rose", sw: "#c39ba0", gallery: [F("b3/a3/cf/67/67cfa3b39ab7822b03cb601c/P6079208_P6079208_none_base_316ae9cf.png/P6079208_P6079208_none_base_316ae9cf.jpg"), F("b3/a3/cf/67/67cfa3b39ab7822b03cb601a/P6079208_P6079208_none_base_1da2fffd.png/P6079208_P6079208_none_base_1da2fffd.jpg")] },
         { n: "Pacific Blue", sw: "#4d6f8c", gallery: [F("b3/a3/cf/67/67cfa3b39ab7822b03cb6017/P6079208_P6079208_none_base_b6e94ac5.png/P6079208_P6079208_none_base_b6e94ac5.jpg"), F("b3/a3/cf/67/67cfa3b39ab7822b03cb6018/P6079208_P6079208_none_base_6e5f5264.png/P6079208_P6079208_none_base_6e5f5264.jpg")] },
@@ -126,7 +126,7 @@
         { n: "Walnut Brown", sw: "#7b5b42", gallery: [F("b4/a3/cf/67/67cfa3b49ab7822b03cb6028/P6079208_P6079208_none_base_00e48287.png/P6079208_P6079208_none_base_00e48287.jpg")] }],
       img: [F("7f/f8/42/69/6942f87ff89a3d2d3c62b431/P6079208_HERO_SIMULATED-LEATHER-TRIPLE-REGULAR-COLOR-OPTIONS.png/P6079208_HERO_SIMULATED-LEATHER-TRIPLE-REGULAR-COLOR-OPTIONS.jpg"), F("b3/a3/cf/67/67cfa3b39ab7822b03cb6023/P6079208_P6079208_none_base_0ed65b28.png/P6079208_P6079208_none_base_0ed65b28.jpg"), F("b3/a3/cf/67/67cfa3b39ab7822b03cb6022/P6079208_P6079208_none_base_493ca769.png/P6079208_P6079208_none_base_493ca769.jpg"), F("b3/a3/cf/67/67cfa3b39ab7822b03cb6020/P6079208_P6079208_none_base_0505c7ed.png/P6079208_P6079208_none_base_0505c7ed.jpg"), F("b2/a3/cf/67/67cfa3b29ab7822b03cb600f/P6079208_P6079208_none_base_f5a57e52.png/P6079208_P6079208_none_base_f5a57e52.jpg")],
       d: "The Book of Mormon, Doctrine and Covenants, and Pearl of Great Price in one indexed volume." },
-    { id: "P6079204", personalize: true, t: "Simulated Leather Holy Bible, Regular (Color Options)", by: "Deseret Book", price: 55, r: 4.2, rc: 194, cat: "church-resources_scriptures_scripture-essentials", fmt: "Faux-Leather",
+    { id: "P6079204", fillImg: true, personalize: true, t: "Simulated Leather Holy Bible, Regular (Color Options)", by: "Deseret Book", price: 55, r: 4.2, rc: 194, cat: "church-resources_scriptures_scripture-essentials", fmt: "Faux-Leather",
       colors: [
         { n: "Dusty Rose", sw: "#c39ba0", gallery: [F("b4/a3/cf/67/67cfa3b49ab7822b03cb602f/P6079204_P6079204_none_base_a78cc42b.png/P6079204_P6079204_none_base_a78cc42b.jpg"), F("b4/a3/cf/67/67cfa3b49ab7822b03cb6029/P6079204_P6079204_none_base_bad77c7b.png/P6079204_P6079204_none_base_bad77c7b.jpg")] },
         { n: "Pacific Blue", sw: "#4d6f8c", gallery: [F("b4/a3/cf/67/67cfa3b49ab7822b03cb602d/P6079204_P6079204_none_base_a7fb881c.png/P6079204_P6079204_none_base_a7fb881c.jpg"), F("b5/a3/cf/67/67cfa3b59ab7822b03cb603d/P6079204_P6079204_none_base_49398337.png/P6079204_P6079204_none_base_49398337.jpg")] },
@@ -191,6 +191,33 @@
   ].map((a) => ({ id: a[0], t: a[1], by: a[2], price: a[3], priceHigh: a[4] || undefined, r: a[5], rc: a[6], cat: "books_gospel-voices", fmt: a[7], img: [I(a[8])], d: "From the Gospel Voices collection at Deseret Book." }));
   P.push.apply(P, GVD);
   const GV_ORDER = ["PR00001860", "PR00001661", "PR00001662", "5254477", "6080309", "P5232737", "PR00001477", "P3941679"];
+
+  /* Children's Books: page 1 of deseretbook.com/category/inspire-your-child/inspire-your-child_children-s-books/, in site order. No rating where the site shows none.
+     The Candy Shop War boxed set (6017019) is already in the catalog (Teen Fiction) and joins this shelf through its also list. */
+  const KIDS = [
+    ["PR00001671", "Spy Sisters Versus Snake Ten-Fangs", "Markham, Alan", 18.99, 24.99, 5, 1, "Hardcover", "7d/05/f0/68/68f0057d628473a13dcf6392/PR00001671_HERO_Spy-Sisters-Versus-Snake-Ten-Fangs_HARDBACK.jpg/PR00001671_HERO_Spy-Sisters-Versus-Snake-Ten-Fangs_HARDBACK.jpg", "When the world is in danger, the Spy Sisters are trained to save the day."],
+    ["PR00001045", "Forever Ripley", "Hoyle, McCall", 9.99, 24.99, 4.7, 3, "Hardcover", "88/4d/c4/68/68c44d88ec3723bcfd60b43a/6077935_HERO_FOREVER-RIPLEY_HARDBACK.png/6077935_HERO_FOREVER-RIPLEY_HARDBACK.jpg", "A middle-grade novel about an aging German Shepherd and the girl she loves."],
+    ["PR815", "The Invincible List of Lani Li", "Bybee, Veeda", 18.99, 24.99, 4.7, 3, "Hardcover", "de/1b/42/68/68421bde43a02440032a2e8c/6079605_HERO_THE-INVINCIBLE-LIST-OF-LANI-LI_HARDBACK.jpg/6079605_HERO_THE-INVINCIBLE-LIST-OF-LANI-LI_HARDBACK.jpg", "A Chinese fable inspires Lani Li to find her bravery on a band trip to London."],
+    ["PR00001104", "War of the Wasteland", "Whitesides, Tyler", 18.99, 24.99, 5, 3, "Hardcover", "90/0e/3e/68/683e0e900f3cfc9b4469e775/6079610_HERO_WAR-OF-THE-WASTELAND_HARDBACK.jpg/6079610_HERO_WAR-OF-THE-WASTELAND_HARDBACK.jpg", "The Janitors School of Garbage trilogy concludes as Landon takes on the Locksmith."],
+    ["6089743", "Doctrine and Covenants Scripture Stories", "Various", 5.5, null, 5, 1, "Paperback", "14/08/1d/69/691d0814dadbd81f5b4f895a/6089743_HERO_DOCTRINE-AND-COVENANTS-SCRIPTURE-STORIES.png/6089743_HERO_DOCTRINE-AND-COVENANTS-SCRIPTURE-STORIES.jpg", "Illustrated stories from the Doctrine and Covenants and Church history for children."],
+    ["6097197", "Mighty Kids", "Foster, Shannon", 27.99, null, 0, 0, "Spiral-bound", "b4/db/db/6a/6adbdbb4237fd25ba8cbf741/6097197_HERO_MIGHTY-KIDS-NEW-TESTAMENT_1.png/6097197_HERO_MIGHTY-KIDS-NEW-TESTAMENT_1.jpg", "Scripture stories so exciting, your kids will want to read ahead."],
+    ["PR00001705", "Waiting with Wonder", "Sabey, Josh and Sarah", 5.99, 18.99, 0, 0, "Hardcover", "ae/1f/4c/6a/6a4c1fae442d870ea30f157a/6089466_PRODGALLERY_WAITING-WITH-WONDER-HARDCOVER.jpg/6089466_PRODGALLERY_WAITING-WITH-WONDER-HARDCOVER.jpg", "An Advent storybook for the four weeks before Christmas."]
+  ].map((a) => ({ id: a[0], t: a[1], by: a[2], price: a[3], priceHigh: a[4] || undefined, r: a[5] || undefined, rc: a[6] || undefined, cat: "books_childrens-books", fmt: a[7], img: [I(a[8])], d: a[9] }));
+  P.push.apply(P, KIDS);
+
+  /* Bible Translations: page 1 of deseretbook.com/category/church-resources_scriptures/church-resources_scriptures_bible-translations/, in site order.
+     No ratings: none are published for these. Names are the item only; cover, print size and color are details in NAMES. */
+  const BIBLES = [
+    ["6092179", "NKJV Thinline Holy Bible", "Thomas Nelson", 49.99, "Leathersoft", "8a/8b/5d/69/695d8b8af63102b02d5f1f8c/6092179_HERO_NKJV-THINLINE-HOLY-BIBLE-LEATHER-LARGE-PRINT_BROWN.png/6092179_HERO_NKJV-THINLINE-HOLY-BIBLE-LEATHER-LARGE-PRINT_BROWN.jpg", "A slim, large-print New King James Version in Thomas Nelson's Comfort Print typeface."],
+    ["5243652", "NIV Value Thinline Bible", "Zondervan", 21.99, "Faux-Leather", "78/c6/5e/69/695ec6781d20533d254d748f/5243652_FEATURE_NIV-VALUE-THINLINE-BIBLE_ANGLED.png/5243652_FEATURE_NIV-VALUE-THINLINE-BIBLE_ANGLED.jpg", "An affordable New International Version with the Comfort Print typeface and a presentation page."],
+    ["6092167", "NLT Premium Value Thinline Bible", "Tyndale", 22.99, "Faux-Leather", "65/a4/5e/69/695ea46562d5a76d9f0f7135/6092167_WEBGALLERY_NLT-LARGE-PRINT-THINLINE-BIBLE_BROWNCELTIC.png/6092167_WEBGALLERY_NLT-LARGE-PRINT-THINLINE-BIBLE_BROWNCELTIC.jpg", "A readable, large-print New Living Translation in a slim, affordable edition."],
+    ["6077926", "NLT Everyday Devotional Bible for Women", "Tyndale", 39.99, "Faux-Leather", "d8/1e/8a/69/698a1ed884c85e029d9bdb42/6077926_HERO_EVERYDAY-DEVOTIONAL-BIBLE-FOR-WOMEN-NLT.png/6077926_HERO_EVERYDAY-DEVOTIONAL-BIBLE-FOR-WOMEN-NLT.jpg", "A year-long journey of daily devotions alongside the New Living Translation."],
+    ["5259002", "KJV My Creative Holy Bible", "", 39.99, "Faux-Leather", "0c/1d/8a/69/698a1d0c0fb3ae6b3d3a01f2/5259002_HERO_MY-CREATIVE-BIBLE-KJV-FAUX-LEATHER-TEAL.png/5259002_HERO_MY-CREATIVE-BIBLE-KJV-FAUX-LEATHER-TEAL.jpg", "A King James Version journaling Bible with wide margins for notes and art."],
+    ["5243647", "NIV Value Thinline Bible", "Zondervan", 19.99, "Faux-Leather", "3e/c8/5e/69/695ec83e244def6f1a21d62d/5243647_FEATURE_NIV-VALUE-THINLINE-BIBLE_TEAL.png/5243647_FEATURE_NIV-VALUE-THINLINE-BIBLE_TEAL.jpg", "An affordable New International Version with the Comfort Print typeface and a presentation page."],
+    ["6097160", "The New Oxford Annotated Bible", "Oxford University Press", 75, "Book", "12/0f/d8/69/69d80f120458430988c6ea91/6097160_HERO_NEW-OXFORD-ANNOTATED-BIBLE.jpg/6097160_HERO_NEW-OXFORD-ANNOTATED-BIBLE.jpg", "The trusted study Bible for students, professors, clergy, and general readers."],
+    ["6092172", "NRSVue Holy Bible", "Zondervan", 34.99, "Leathersoft", "c5/8c/5e/69/695e8cc5f63102b02d5f42eb/6092172_FEATURE_NRSVUE-HOLY-BIBLE-COMPACT_BROWN.png/6092172_FEATURE_NRSVUE-HOLY-BIBLE-COMPACT_BROWN.jpg", "A compact, on-the-go New Revised Standard Version, Updated Edition."]
+  ].map((a) => ({ id: a[0], t: a[1], by: a[2] || undefined, price: a[3], cat: "church-resources_scriptures_bible-translations", fmt: a[4], img: [I(a[5])], d: a[6] }));
+  P.push.apply(P, BIBLES);
 
   /* Real products from deseretbook.com category pages (Art, Missionary, Temple Worship). No ratings shown: none were published on the listing pages. */
   const XD = [
@@ -279,57 +306,70 @@
   const GVSUB = { PR00001860: "general-authority-books", PR00001662: "general-authority-books", P5232737: "general-authority-books", "6080309": "art-books", PR00001661: "inspiration", PR00001477: "inspiration", P3941679: "inspiration" };
   P.forEach((p) => { if (GVSUB[p.id]) p.cat = "books_gospel-voices_" + GVSUB[p.id]; });
 
+  /* Category tree and nav. Display names live here once: nav, breadcrumbs, H1s and PLP tiles all read them (PLP plan, Fix 9).
+     alias: true marks a nav shortcut to a category that lives elsewhere in the tree (it is not a second category).
+     icon is the Material Symbols Rounded name shown on the category’s PLP subcategory tile (src/plp.js falls back to "category"). */
   const NAV = [
-    { id: "books", n: "Books", sub: [
-      { id: "books_fiction", n: "Fiction", sub: [
-        { id: "books_fiction_romance", n: "Romance" },
-        { id: "books_fiction_historical-fiction", n: "Historical Fiction" },
-        { id: "books_fiction_mystery-and-suspense", n: "Mystery and Suspense" },
-        { id: "books_fiction_teen-fiction", n: "Teen Fiction" }] },
-      { id: "books_gospel-voices", n: "Gospel Voices", sub: [
-        { id: "books_gospel-voices_art-books", n: "Art Books" },
-        { id: "books_gospel-voices_general-authority-books", n: "General Authority Books" },
-        { id: "books_gospel-voices_inspiration", n: "Inspiration" },
-        { id: "books_gospel-voices_temple-books", n: "Temple Books" }] },
-      { id: "books_nonfiction", n: "Nonfiction", sub: [
-        { id: "books_nonfiction_biography", n: "Biography" },
-        { id: "books_nonfiction_family-and-parenting", n: "Family and Parenting" },
-        { id: "books_nonfiction_history", n: "History" },
-        { id: "books_nonfiction_self-improvement", n: "Self-Improvement" }] }] },
-    { id: "church-resources_scriptures_scripture-essentials", n: "Scriptures" },
-    { id: "baptism", n: "Baptism" },
-    { id: "church-resources", n: "Church Resources", sub: [
-      { id: "church-resources_scriptures", n: "Scriptures", sub: [
-        { id: "church-resources_scriptures_genuine-leather-scriptures", n: "Genuine Leather Scriptures" },
-        { id: "church-resources_scriptures_simulated-leather-scriptures", n: "Simulated Leather Scriptures" },
-        { id: "church-resources_scriptures_scripture-journal-editions", n: "Scripture Journal Editions" },
-        { id: "church-resources_scriptures_scripture-totes", n: "Scripture Totes" }] },
-      { id: "church-resources_church-distribution", n: "Church Distribution" },
-      { id: "church-resources_teaching-helps", n: "Teaching Helps" },
-      { id: "church-resources_prints", n: "Prints" }] },
-    { id: "games-puzzles", n: "Games & Puzzles" },
-    { id: "art", n: "Art", sub: [
-      { id: "art_wall-art", n: "Wall Art" },
-      { id: "art_temple-art", n: "Temple Art" },
-      { id: "art_statues", n: "Statues" },
-      { id: "art_savior-art", n: "Savior Art" },
-      { id: "art_decor", n: "D\u00e9cor" }] },
-    { id: "missionary", n: "Missionary", sub: [
-      { id: "missionary_accessories", n: "Accessories" },
-      { id: "missionary_bags", n: "Bags" },
-      { id: "missionary_books", n: "Books" },
-      { id: "missionary_jewelry", n: "Jewelry" },
-      { id: "missionary_journals", n: "Journals" }] },
-    { id: "temple-worship", n: "Temple Worship", sub: [
-      { id: "temple-worship_temple-accessories", n: "Temple Accessories" },
-      { id: "temple-worship_temple-bags", n: "Temple Bags" },
-      { id: "temple-worship_temple-clothing", n: "Temple Clothing" }] },
-    { id: "all-categories", n: "Browse All" },
-    { id: "clearance", n: "Clearance" }
+    { id: "christmas", n: "Christmas", icon: "park", sub: [
+      { id: "christmas_nativities", n: "Nativities", icon: "star" },
+      { id: "christmas_christmas-ornaments", n: "Ornaments", icon: "featured_seasonal_and_gifts" },
+      { id: "christmas_christmas-cards", n: "Cards", icon: "mail" },
+      { id: "christmas_christmas-books", n: "Books", icon: "menu_book" }] },
+    { id: "books", n: "Books", icon: "menu_book", sub: [
+      { id: "books_fiction", n: "Fiction", icon: "auto_stories", sub: [
+        { id: "books_fiction_romance", n: "Romance", icon: "favorite" },
+        { id: "books_fiction_historical-fiction", n: "Historical Fiction", icon: "history_edu" },
+        { id: "books_fiction_mystery-and-suspense", n: "Mystery and Suspense", icon: "search" },
+        { id: "books_fiction_teen-fiction", n: "Teen Fiction", icon: "groups" }] },
+      { id: "books_gospel-voices", n: "Gospel Voices", icon: "record_voice_over", sub: [
+        { id: "books_gospel-voices_art-books", n: "Art Books", icon: "palette" },
+        { id: "books_gospel-voices_general-authority-books", n: "General Authority Books", icon: "person" },
+        { id: "books_gospel-voices_inspiration", n: "Inspiration", icon: "lightbulb" },
+        { id: "books_gospel-voices_temple-books", n: "Temple Books", icon: "book_2" }] },
+      { id: "books_nonfiction", n: "Nonfiction", icon: "library_books", sub: [
+        { id: "books_nonfiction_biography", n: "Biography", icon: "person" },
+        { id: "books_nonfiction_family-and-parenting", n: "Family and Parenting", icon: "family_restroom" },
+        { id: "books_nonfiction_history", n: "History", icon: "hourglass" },
+        { id: "books_nonfiction_self-improvement", n: "Self-Improvement", icon: "self_improvement" }] },
+      { id: "books_childrens-books", n: "Children's Books", icon: "child_care" }] },
+    { id: "church-resources_scriptures", n: "Scriptures", icon: "book", alias: true },
+    { id: "baptism", n: "Baptism", icon: "water_drop" },
+    { id: "church-resources", n: "Church Resources", icon: "church", sub: [
+      { id: "church-resources_scriptures", n: "Scriptures", icon: "book", sub: [
+        { id: "church-resources_scriptures_scripture-essentials", n: "Essentials", icon: "book" },
+        { id: "church-resources_scriptures_genuine-leather-scriptures", n: "Genuine Leather", icon: "workspace_premium" },
+        { id: "church-resources_scriptures_simulated-leather-scriptures", n: "Simulated Leather", icon: "layers" },
+        { id: "church-resources_scriptures_bible-translations", n: "Bible Translations", icon: "translate" },
+        { id: "church-resources_scriptures_scripture-journal-editions", n: "Journal Editions", icon: "edit_note" },
+        { id: "church-resources_scriptures_scripture-totes", n: "Scripture Totes", icon: "work" }] },
+      { id: "church-resources_church-distribution", n: "Church Distribution", icon: "inventory_2" },
+      { id: "church-resources_teaching-helps", n: "Teaching Helps", icon: "school" },
+      { id: "church-resources_prints", n: "Prints", icon: "photo_library" }] },
+    { id: "games-puzzles", n: "Games & Puzzles", icon: "extension", sub: [
+      { id: "games-puzzles_games", n: "Games", icon: "playing_cards" },
+      { id: "games-puzzles_puzzles", n: "Puzzles", icon: "extension" }] },
+    { id: "art", n: "Fine Art", icon: "palette", sub: [
+      { id: "art_wall-art", n: "Wall Art", icon: "image" },
+      { id: "art_temple-art", n: "Temple Art", icon: "account_balance" },
+      { id: "art_statues", n: "Statues", icon: "man_4" },
+      { id: "art_savior-art", n: "Savior Art", icon: "brush" },
+      { id: "art_decor", n: "D\u00e9cor", icon: "local_florist" }] },
+    { id: "missionary", n: "Missionary", icon: "travel_explore", sub: [
+      { id: "missionary_accessories", n: "Accessories", icon: "note_stack" },
+      { id: "missionary_bags", n: "Bags", icon: "luggage" },
+      { id: "missionary_books", n: "Books", icon: "menu_book" },
+      { id: "missionary_jewelry", n: "Jewelry", icon: "diamond_shine" },
+      { id: "missionary_journals", n: "Journals", icon: "edit_note" }] },
+    { id: "temple-worship", n: "Temple Worship", icon: "light_mode", sub: [
+      { id: "temple-worship_temple-accessories", n: "Accessories", icon: "note_stack" },
+      { id: "temple-worship_temple-bags", n: "Bags", icon: "luggage" },
+      { id: "temple-worship_temple-clothing", n: "Clothing", icon: "checkroom" }] },
+    { id: "all-categories", n: "Browse All", icon: "category" },
+    { id: "clearance", n: "Clearance", icon: "sell" }
   ];
-  const CLR_NAME = "Summer Clearance";
+  const CLR_NAME = "Clearance";
 
-  const AI = (p) => "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/" + p + "?s=1000x1000&t=JPEG&v=2";
+  const AI = (p) => "assets/img/pim/" + p;
   const FINE_ART = [
     { id: "P3753740", t: "Marble Christus Statue", by: "Deseret Book", price: 59.97, r: 4.9, rc: 312, cat: "home_fine-art", fmt: "Marble Resin",
       img: [AI("f7/3c/21/66/66213cf74d8f8419f6bdb33e/3753740_christus-2.png/3753740_christus-2.jpg"), AI("64/c1/d1/68/68d1c164dd14cdd9ca6842f0/P3753740_WEBGALLERY_MARBLE-CHRISTUS-STATUE_1.jpg/P3753740_WEBGALLERY_MARBLE-CHRISTUS-STATUE_1.jpg")],
@@ -352,9 +392,9 @@
   ];
   P.push.apply(P, FINE_ART);
 
-  const CAT_NAMES = { "all-categories": "Browse All Categories", clearance: "Summer Clearance", "books_gospel-voices": "Gospel Voices Conference" };
+  const CAT_NAMES = { "all-categories": "Browse All Categories", clearance: "Clearance" };
   (function walk(list, trail) {
-    list.forEach((c) => { CAT_NAMES[c.id] = c.n; if (c.sub) walk(c.sub, trail.concat(c.n)); });
+    list.forEach((c) => { if (!c.alias) CAT_NAMES[c.id] = c.n; if (c.sub) walk(c.sub, trail.concat(c.n)); });
   })(NAV, []);
   CAT_NAMES.clearance = CLR_NAME;
   CAT_NAMES["home_fine-art"] = "Fine Art";
@@ -382,6 +422,12 @@
       faq: scriptureFaq("This product is the Holy Bible.", "This product is the standard (regular) size.", "Simulated leather bibles are available in Dusty Rose, Pacific Blue, Forest Green, Walnut Brown and Black.") },
     P6073551: { d: ["The Anne Regular Scripture Tote combines smooth vegan leather with gold accents for a sleek, polished look. Featuring a spacious interior with two pockets and a leather strap pinch lock closure, this tote comfortably holds all your Church essentials."], spec: [["Dimensions", "13\"L x 12\"W x 5\"H"], ["Material", "Vegan leather with gold accents"], ["Interior", "Two pockets"], ["Closure", "Leather strap pinch lock"], ["Fits", "Regular-size scriptures"]] }
   };
+  const SIZE_RE = /\b(Pocket[- ]size|Compact|Regular|Standard|Large|Small)\b/i;
+  const SIZE_ORDER = ["Pocket-size", "Compact", "Small", "Regular", "Standard", "Large"];
+  [P, VARIANTS].forEach((arr) => arr.forEach((p) => { if (!p.full) { p.full = p.t; const m = String(p.t).match(SIZE_RE); if (m && !p.sz) p.sz = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase(); p.t = String(p.t).replace(/\s*\([^)]*\)/g, "").split(",")[0].replace(new RegExp(SIZE_RE.source, "gi"), "").replace(/\s{2,}/g, " ").trim() || p.t; } }));
+  const SZG = {};
+  P.forEach((p) => { if (p.sz) { const k = p.cat + "|" + p.t.toLowerCase(); (SZG[k] = SZG[k] || []).push(p); } });
+  Object.values(SZG).forEach((g) => { const names = new Set(g.map((p) => p.sz)); if (g.length > 1 && names.size > 1) { const ids = g.slice().sort((a, b) => SIZE_ORDER.indexOf(a.sz) - SIZE_ORDER.indexOf(b.sz)).map((p) => p.id); g.forEach((p) => { p.sizes = ids; }); } });
   window.DB_DATA = {
     products: P,
     nav: NAV,
@@ -392,10 +438,10 @@
     fineArt: ["P3753740", "6053323", "6087324", "6053281", "P6000078", "6027513"],
     trending: ["P6073551", "6017019", "5254477", "5212882", "6070661", "5255079", "6024672"],
     featuredCats: [
-      { id: "temple-worship", n: "Temple Worship", img: "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/70/5c/21/66/66215c70b1dea3bbbe48e4dd/5111199_5111199_none_base_d854a4fa.png/5111199_5111199_none_base_d854a4fa.jpg?s=1000x1000&t=JPEG&v=2" },
-      { id: "church-resources_scriptures_scripture-totes", n: "Scripture Totes", img: "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/f3/19/d7/68/68d719f3fc37617729177f30/MULTIPLE_PRODGALLERY_REGULAR-SCRIPTURE-TOTE-BACKPACK_FRONT.jpg/MULTIPLE_PRODGALLERY_REGULAR-SCRIPTURE-TOTE-BACKPACK_FRONT.jpg?s=1000x1000&t=JPEG&v=2" },
-      { id: "church-resources_scriptures_scripture-journal-editions", n: "Journal Editions", img: "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/41/06/35/66/663506414a47d8ad45ef6791/6020732_6020732_none_base_b0c63f9c.png/6020732_6020732_none_base_b0c63f9c.jpg?s=1000x1000&t=JPEG&v=2" },
-      { id: "books_fiction_romance", n: "Romance", img: "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/63/79/6b/6a/6a6b7963aecf6cfadd773d25/6095538_HERO_SEEKING-PERSEPHONE-MOVIE-TIE-IN-EDITION_PAPERBACK_1.jpg/6095538_HERO_SEEKING-PERSEPHONE-MOVIE-TIE-IN-EDITION_PAPERBACK_1.jpg?s=1000x1000&t=JPEG&v=2" },
+      { id: "temple-worship", n: "Temple Worship", img: "assets/img/pim/70/5c/21/66/66215c70b1dea3bbbe48e4dd/5111199_5111199_none_base_d854a4fa.png/5111199_5111199_none_base_d854a4fa.jpg" },
+      { id: "church-resources_scriptures_scripture-totes", n: "Scripture Totes", img: "assets/img/pim/f3/19/d7/68/68d719f3fc37617729177f30/MULTIPLE_PRODGALLERY_REGULAR-SCRIPTURE-TOTE-BACKPACK_FRONT.jpg/MULTIPLE_PRODGALLERY_REGULAR-SCRIPTURE-TOTE-BACKPACK_FRONT.jpg" },
+      { id: "church-resources_scriptures_scripture-journal-editions", n: "Journal Editions", img: "assets/img/pim/41/06/35/66/663506414a47d8ad45ef6791/6020732_6020732_none_base_b0c63f9c.png/6020732_6020732_none_base_b0c63f9c.jpg" },
+      { id: "books_fiction_romance", n: "Romance", img: "assets/img/pim/63/79/6b/6a/6a6b7963aecf6cfadd773d25/6095538_HERO_SEEKING-PERSEPHONE-MOVIE-TIE-IN-EDITION_PAPERBACK_1.jpg/6095538_HERO_SEEKING-PERSEPHONE-MOVIE-TIE-IN-EDITION_PAPERBACK_1.jpg" },
       { id: "church-resources_scriptures_genuine-leather-scriptures", n: "Genuine Leather" },
       { id: "art_temple-art", n: "Fine Art" },
       { id: "missionary", n: "Missionary" },
@@ -403,25 +449,37 @@
     ],
     featuredContent: [
       { title: "5 Ways to Embrace a Change in Christ", date: "August 29, 2025", url: "https://blog.deseretbook.com/blog/5-ways-to-embrace-a-change-in-christ", pid: "P6096125",
-        img: "https://images.squarespace-cdn.com/content/v1/5abd66f64eddecafd225c12e/1756245615727-5IJF724VA7DY32SWXMF0/BlogCover-FallCampaign-2.png?format=1000w",
+        img: "assets/img/blog/BlogCover-FallCampaign-2.webp",
         x: "If you feel like fall is approaching quicker than you planned or wanted, you are not alone. Life often shifts at paces that might not be ideal or expected. However, just like the changing seasons, these transitions can be beautiful in their own unique ways." },
       { title: "Heartfelt Ministering Gifts for Mother\u2019s Day", date: "April 23, 2025", url: "https://blog.deseretbook.com/blog/2025/04/23/heartfelt-ministering-gifts-for-mothers-day", pid: "6027513",
-        img: "https://images.squarespace-cdn.com/content/v1/5abd66f64eddecafd225c12e/1745421730900-98BCHUPV4W3M8EAZOM2K/DB_2025_MD_MinisteringGifts_BlogThumbnail_1080x1080.png?format=1000w",
+        img: "assets/img/blog/MinisteringGifts.webp",
         x: "Find the perfect Mother\u2019s Day gift for the sisters you minister to! These heartfelt gifts will help them find peace and strength in the Savior and in their divine identity as they navigate life." },
       { title: "Stunning Artwork of the Savior for Your Home", date: "March 12, 2025", url: "https://blog.deseretbook.com/blog/2025/03/12/stunning-artwork-of-the-savior-for-your-home", pid: "6087324",
-        img: "https://images.squarespace-cdn.com/content/v1/5abd66f64eddecafd225c12e/ae05b463-ff55-4bf5-8361-888461e84d38/arise-come-forth-1.jpg?format=1000w",
+        img: "assets/img/blog/arise-come-forth-1.webp",
         x: "Invite the Spirit into your life and your home by remembering the life and mission of Jesus Christ. These artistic depictions of the Savior can help you feel connected to Him and remember His role in God\u2019s plan and His love for you." }
     ],
     footer: {
+      ABOUT: ["About Deseret Book", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
       ACCOUNT: ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Platinum Rewards", "Request a Catalog"],
-      "CUSTOMER SERVICE": ["Contact Us", "Questions & Support", "Shipping & Returns", "Do Not Sell My Information", "Deseret Book Store Locations"],
-      ABOUT: ["About Deseret Book", "Careers", "Terms of Use", "Privacy Policy", "Deseret Book Events", "Deseret Book Blog", "Browse All Categories"]
+      "CUSTOMER SERVICE": ["Contact Us", "Questions & Support", "Shipping & Returns", "Do Not Sell My Information", "Deseret Book Store Locations"]
     }
   };
 })();
 
 /* src/ui.jsx */
 const DS = window.DeseretBookDesignSystem_609afa || {};
+/* DS adapters: map legacy button classes onto DS.Button variants/sizes */
+function DSB({ className = "", style, children, ...p }) {
+  const c = className, h = style && style.height;
+  let variant = "primary", size = "md", full = false;
+  if (/btn-out|btn-line|btn-white|pz-btn/.test(c)) { variant = "secondary"; size = h === 40 ? "md" : "sm"; }
+  if (/(^|\s)(rm|p-rm)(\s|$)/.test(c)) { variant = "ghost"; size = "sm"; }
+  if (/btn-teal|btn-line/.test(c)) { size = "lg"; full = true; }
+  if (/btn-gold/.test(c) && h === 48) { size = "lg"; full = true; }
+  if (/(^|\s)sub(\s|$)/.test(c)) { size = "md"; }
+  const st = Object.assign({}, style); delete st.height; delete st.padding;
+  return React.createElement(DS.Button, Object.assign({ className: c, variant, size, fullWidth: full, style: st }, p), children);
+}
 const {
   Icon
 } = DS;
@@ -432,7 +490,298 @@ const {
   useCallback
 } = React;
 const D = window.DB_DATA;
+if (window.PDPX) window.PDPX.augment(D);
+if (window.PLP) window.PLP.augment(D); /* src/plp.js: category tree, PLP configurations, product-to-category assignments */
+/* Product names are the exact names used on deseretbook.com (SITE_NAMES, applied at the end of this block), however long.
+   Details that describe the item (type such as game or puzzle, piece count, cover material, edition, size, color, fit, capacity)
+   are rows in the PDP Details tab and, when important, a short tag in the PDP meta line beside the rating (p.keyDet, rendered by PDPX.metaBits).
+   Before naming a product, look at its image: the name must say what the item is (the box or cover usually shows it).
+   Per product: t = name; fmt = Format row (also the PLP Format filter); det = extra Details rows; key = meta-line tags;
+   size = Size row and meta tag; nosz = drop a size word wrongly read from the old name. */
+(function () {
+  const SIM = { fmt: "Simulated Leather" }, GEN = { fmt: "Genuine Leather" };
+  const jig = (t, n) => ({ t, fmt: "Jigsaw Puzzle", det: [["Pieces", String(n)]], key: ["Jigsaw puzzle", n + " pieces"] });
+  const tray = (t, n) => ({ t, fmt: "Tray Puzzle", det: [["Pieces", String(n)]], key: ["Tray puzzle", n + " pieces"] });
+  const game = (t, f) => ({ t, fmt: f || "Game", key: [f || "Game"] });
+  const journal = (t, design, extra) => ({ t, det: [["Edition", "Journal edition"], ["Design", design]].concat(extra || []), key: ["Journal edition"].concat((extra || []).filter((r) => r[0] === "Paper").map((r) => r[1])) });
+  const NAMES = {
+    /* Bible Translations */
+    "6092179": { t: "NKJV Thinline Holy Bible", det: [["Cover", "Leathersoft"], ["Print", "Large print"], ["Color", "Brown"]], key: ["Leathersoft", "Large print"] },
+    "5243652": { t: "NIV Value Thinline Bible", det: [["Cover", "Faux leather"], ["Color", "Brown"]], key: ["Faux leather"] },
+    "6092167": { t: "NLT Premium Value Thinline Bible", det: [["Cover", "Faux leather"], ["Print", "Large print"], ["Color", "Brown Celtic Cross"]], key: ["Faux leather", "Large print"] },
+    "6077926": { t: "NLT Everyday Devotional Bible for Women", det: [["Cover", "Faux leather"]], key: ["Faux leather"] },
+    "5259002": { t: "KJV My Creative Holy Bible", det: [["Cover", "Faux leather"], ["Color", "Teal"]], key: ["Faux leather"] },
+    "5243647": { t: "NIV Value Thinline Bible", det: [["Cover", "Faux leather"], ["Color", "Teal"]], key: ["Faux leather"] },
+    "6097160": { t: "The New Oxford Annotated Bible", det: [["Translation", "New Revised Standard Version"]], key: ["NRSV"] },
+    "6092172": { t: "NRSVue Holy Bible", det: [["Size", "Compact"], ["Cover", "Leathersoft"], ["Typeface", "Comfort Print"], ["Color", "Brown"]], key: ["Compact", "Leathersoft"] },
+    /* Games */
+    "6096268": game("Cats Knocking Things Off Ledges"), "6091852": game("Things in Rings"), "6091227": game("General Conference Bingo"),
+    "6087108": game("Do You Even Know Me?", "Card Game"), "6099041": game("The Ticket Booth", "Card Game"), "5201866": game("Book of Mormon Memory Match"),
+    /* Puzzles */
+    "5230997": jig("He Leadeth Me", 500), "5230982": jig("From Fear to Faith", 500), "6087246": jig("The Love of God", 1000),
+    "5254872": jig("United in Love", 100), "6058448": { t: "Christmas Advent Calendar", fmt: "Jigsaw Puzzle", size: "27.25x20", det: [["Pieces", "1000"], ["Boxes", "24, one to open each day"]], key: ["Jigsaw puzzle", "1000 pieces", "24 days"] }, "6020271": jig("For Such is the Kingdom", 100),
+    "5230977": jig("I Am a Child of God", 100), "6087244": jig("Walk in the Light", 1000), "5230967": jig("Good Shepherd", 100),
+    "5243682": Object.assign(jig("I Love to See the Temples of the United States", 1000), { det: [["Pieces", "1000"], ["Includes", "Poster"]] }),
+    "6089780": tray("Christ Blesses the Children", 12), "6073642": tray("Precious in His Sight", 35), "6073641": tray("Take My Hand", 35),
+    /* Scriptures */
+    P6096125: Object.assign({ t: "Quad Combination", det: [["Cover", "Simulated leather"], ["Indexed", "Yes"], ["Edition", "Limited edition color"]], key: ["Simulated leather", "Indexed", "Limited edition color"] }, SIM),
+    P6074927: Object.assign({ t: "Quad Combination", det: [["Cover", "Simulated leather"], ["Indexed", "Yes"]], key: ["Simulated leather", "Indexed"] }, SIM),
+    P6088525: Object.assign({ t: "Quad Combination", det: [["Cover", "Simulated leather"]], key: ["Simulated leather"] }, SIM),
+    P6079208: Object.assign({ t: "Triple Combination", det: [["Cover", "Simulated leather"], ["Indexed", "Yes"]], key: ["Simulated leather", "Indexed"] }, SIM),
+    P6079204: Object.assign({ t: "Holy Bible", det: [["Cover", "Simulated leather"], ["Indexed", "Yes"]], key: ["Simulated leather", "Indexed"] }, SIM),
+    "5111165": Object.assign({ t: "Quad Combination", det: [["Cover", "Simulated leather"], ["Indexed", "Yes"]], key: ["Simulated leather", "Indexed"] }, SIM),
+    "5111190": Object.assign({ t: "Quad Combination", det: [["Cover", "Genuine leather"], ["Indexed", "Yes"]], key: ["Genuine leather", "Indexed"] }, GEN),
+    "5111199": Object.assign({ t: "Holy Bible", det: [["Cover", "Genuine leather"], ["Indexed", "Yes"]], key: ["Genuine leather", "Indexed"] }, GEN),
+    "5034651": { t: "Book of Mormon", det: [["Color", "Blue"]] },
+    "5212882": { t: "The Book of Mormon", det: [["Edition", "Legacy edition"]], key: ["Legacy edition"] },
+    "6020732": journal("The Book of Mormon", "Aqua floral", [["Indexed", "No"]]),
+    "5230632": journal("The Old Testament", "Green floral", [["Indexed", "No"]]),
+    "5255079": journal("The Old Testament", "Patterned", [["Paper", "Unlined"]]),
+    "6020726": journal("The Book of Mormon", "Mountains", [["Paper", "Lined"]]),
+    /* Books */
+    "6017019": { t: "The Candy Shop War", det: [["Edition", "Complete boxed set"]], key: ["Complete boxed set"] },
+    "6095538": { t: "Seeking Persephone", det: [["Edition", "Movie tie-in edition"]], key: ["Movie tie-in edition"] },
+    P6053751: { t: "Preach My Gospel", det: [["Edition", "Second edition"]], key: ["Second edition"] },
+    "6095629": { t: "General Conference Addresses", det: [["Edition", "Journal edition"], ["Conference", "April 2026"]], key: ["Journal edition", "April 2026"] },
+    /* Art */
+    "5098123": { t: "Lead, Kindly Light" },
+    "6088855": { t: "O Jerusalem", nosz: true, det: [["Collection", "Small and Simple"]] },
+    "6081210": { t: "Sweet is the Work", det: [["Temple", "Deseret Peak Temple"]] },
+    "5180010": { t: "Christus", size: '3"', key: ["Marble"] },
+    P3753740: { t: "Christus Statue", key: ["Marble resin"] },
+    P6000078: { t: "Christus", key: ["Crystal"] },
+    "4304303": { t: "Willow Tree Holy Family Nativity Figurines" },
+    "4304321": { t: "Willow Tree Wise Men Nativity Figurines" },
+    "5166285": { t: "The Baptism", fmt: "Print", size: "5x7" },
+    /* Other */
+    "6024672": { t: "Blessing Blanket", det: [["Style", "Cable knit"]], key: ["Cable knit"] },
+    "6071156": { t: "Navigator Sling Missionary Bag", det: [["Capacity", "6L"]], key: ["6L"] },
+    "6073204": { t: "Music for Missionaries", fmt: "MicroSD Card", det: [["Music", "Instrumental"], ["Capacity", "128 GB"]], key: ["Instrumental", "MicroSD card"] },
+    PR00001589: { t: "Loafer Temple Shoe", det: [["Fit", "Men's"], ["Color", "White"], ["Material", "Leather"]], key: ["Men's", "White leather"] },
+    P6058665: { t: "Temple Pants", det: [["Fit", "Slim fit"]], key: ["Slim fit"] },
+    PR00001982: { t: "Joseph Temple Bag", key: ["Vegan leather"] },
+    PR00001451: { t: "Temple Bag", key: ["Canvas"] }
+  };
+  /* Sizes that only lived in the old name ("(21x16 Framed Canvas Print)") move to the Size row. */
+  const SZ = /\((\d+(?:\.\d+)?)\s*x\s*(\d+(?:\.\d+)?)\b/i;
+  D.products.forEach((p) => {
+    if (!p.size) { const m = SZ.exec(p.full || ""); if (m) p.size = m[1] + '" x ' + m[2] + '"'; }
+    if (p.sz && !p.size && !(p.det || []).some((r) => r[0] === "Size")) p.det = (p.det || []).concat([["Size", p.sz]]);
+    const n = NAMES[p.id];
+    if (!n) return;
+    if (n.t) p.t = n.t;
+    if (n.fmt) p.fmt = n.fmt;
+    if (n.nosz) delete p.sz;
+    if (n.size) p.size = /"/.test(n.size) ? n.size : n.size.replace(/(\d+(?:\.\d+)?)\s*x\s*(\d+(?:\.\d+)?)/i, '$1" x $2"');
+    if (n.det) { const det = (p.det || []).slice(); n.det.forEach((r) => { if (!det.some((x) => x[0] === r[0])) det.push(r.slice()); }); p.det = det; }
+    if (n.key) p.keyDet = n.key.slice();
+  });
+  /* Product names: the exact name each product has on deseretbook.com (its product page h1), however long. Fetched October 2026.
+     These win over NAMES[].t; NAMES still supplies format, details and meta tags. */
+  const SITE_NAMES = {
+    "4304303": "Willow Tree Holy Family Resin Nativity Figurines",
+    "4304321": "Willow Tree Wise Men Resin Nativity Figurines",
+    "5034651": "The Book of Mormon, Regular Hardcover",
+    "5034652": "The Book of Mormon, Regular Paperback",
+    "5098123": "Lead, Kindly Light (26x43 Framed Giclee Canvas)",
+    "5111165": "Quad Combination Simulated Leather, Regular, Indexed Black",
+    "5111190": "Quad Combination, Genuine Leather, Regular Indexed",
+    "5111199": "Holy Bible, Genuine Leather, Regular, Indexed",
+    "5130963": "Pocket-size Scripture Set",
+    "5158265": "Tract Missionary Bag",
+    "5158580": "White Clothing Bag",
+    "5161060": "Grace and Truth (21x18 Framed Art)",
+    "5166285": "The Baptism - 5x7 Print",
+    "5180010": "Marble Christus 3\"",
+    "5201866": "Book of Mormon Memory Match Game",
+    "5212882": "The Book of Mormon Legacy Edition",
+    "5230632": "The Old Testament, Journal Edition, Green Floral (No Index)",
+    "5230967": "Good Shepherd 100 Piece Puzzle",
+    "5230977": "I Am a Child of God 100 Piece Puzzle",
+    "5230982": "From Fear to Faith 500 Piece Puzzle",
+    "5230997": "Puzzle He Leadeth Me 500 Pieces",
+    "5243647": "NIV, Value Thinline Bible, Faux Leather, Teal",
+    "5243652": "NIV, Value Thinline Bible, Faux Leather, Brown",
+    "5243682": "Temples of the United States 1000 Piece Puzzle",
+    "5254477": "And These Words Scripture Study Journal",
+    "5254872": "United in Love 100 Piece Puzzle",
+    "5255079": "The Old Testament, Journal Edition, Patterned Unlined (No Index)",
+    "5259002": "KJV My Creative Holy Bible, Faux Leather, Teal",
+    "5259557": "Doctrine and Covenants Crosswords: Sections 71-138",
+    "6001459": "Let God Prevail Necklace",
+    "6011948": "Called to Serve Pillowcase",
+    "6012360": "Captain Moroni Statue (Cultured Marble Resin)",
+    "6016730": "Abundance Vase",
+    "6017019": "The Candy Shop War Complete Boxed Set",
+    "6017077": "Elder Missionary Countdown Poster",
+    "6017078": "Sister Missionary Countdown Poster",
+    "6020271": "For Such is the Kingdom 100 Piece Puzzle",
+    "6020726": "The Book of Mormon, Journal Edition, Mountains (Lined)",
+    "6020732": "The Book of Mormon, Journal Edition, Aqua Floral (No Index)",
+    "6021463": "Blue on Blue Regular Scripture Tote",
+    "6024672": "Cable Knit Blessing Blanket",
+    "6027513": "Mother to Mother (19x16 Framed Textured Paper)",
+    "6027923": "Awesome Wonder (21x26 Framed Art)",
+    "6053281": "I See You (30X30 Framed Canvas Print)",
+    "6053323": "Come Follow Me (32x23 Framed Paper Print)",
+    "6054221": "The Art of Us",
+    "6058448": "Advent 1000 Piece Puzzle",
+    "6070661": "The Love of God (18x22 Framed Canvas Print)",
+    "6071156": "Navigator Sling Missionary 6L Bag",
+    "6073204": "MicroSD Instrumental Music for Missionaries",
+    "6073624": "Wendy's Ever After",
+    "6073641": "Take My Hand 35 Piece Tray Puzzle",
+    "6073642": "Precious in His Sight 35 Piece Tray Puzzle",
+    "6075171": "The Tender Love of Christ (19x19 Framed Art)",
+    "6077926": "NLT Everyday Devotional Bible for Women",
+    "6080309": "Expressions of Jesus",
+    "6081210": "Sweet is the Work, Deseret Peak Temple (31.5x21.5 Framed Canvas)",
+    "6086439": "Respite (22.5x30 Framed Canvas Print)",
+    "6087108": "Do You Even Know Me? Card Game",
+    "6087244": "Walk in the Light 1000 Piece Puzzle",
+    "6087246": "The Love of God 1000 Piece Puzzle",
+    "6087324": "Lamb of God (33x28 Framed Canvas Print)",
+    "6088855": "O Jerusalem, Small and Simple (2.75x3 Framed Art)",
+    "6089743": "Doctrine and Covenants Scripture Stories",
+    "6089780": "Christ Blesses the Children 12 Piece Tray Puzzle",
+    "6091227": "General Conference Bingo",
+    "6091385": "Expressions of Jesus Mini Print Collection",
+    "6091852": "Things in Rings Game",
+    "6092167": "NLT Large Print Premium Value Thinline Bible, Faux Leather, Brown Celtic Cross",
+    "6092172": "NRSVue, Holy Bible, Compact, Leathersoft, Comfort Print, Brown",
+    "6092179": "NKJV, Thinline Holy Bible, Leathersoft, Large Print",
+    "6095538": "Seeking Persephone (Movie Tie-in Edition)",
+    "6095629": "General Conference Addresses, Journal Edition, April 2026",
+    "6096268": "Cats Knocking Things Off Ledges Game",
+    "6096538": "He Leadeth Me (23x38 Framed Art)",
+    "6096539": "The Hand of God (23x38 Framed Art)",
+    "6097136": "With Me In the Way (19x16 Framed Canvas Print)",
+    "6097139": "The First Witness (21x16 Framed Canvas Print)",
+    "6097141": "Welcome Home (21x16 Framed Canvas Print)",
+    "6097160": "The New Oxford Annotated Bible: New Revised Standard Version",
+    "6097197": "Mighty Kids: An Interactive Graphic Novel of the New Testament",
+    "6099041": "The Ticket Booth Card Game",
+    "PR00001543": "Silent Strike (Luke Steele, Book 3)",
+    "P5068623": "Seeking Persephone (The Lancaster Family, Book 1)",
+    "P5043081": "Courting Miss Lancaster (The Lancaster Family, Book 2)",
+    "P5183500": "Romancing Daphne (The Lancaster Family, Book 3)",
+    "P5197705": "Loving Lieutenant Lancaster (The Lancaster Family, Book 4)",
+    "P5258117": "Charming Artemis (The Lancaster Family Book 5 & The Jonquil Brothers Book 7)",
+    "PR00001380": "Every Beat After",
+    "P6054216": "Casters and Crowns (Casters & Crowns Book 1)",
+    "PR00001397": "The Duke's Bargain",
+    "P5244938": "Forget Me Not (The Gents, Book 1)",
+    "P6001424": "Lily of the Valley (The Gents, Book 2)",
+    "P6087437": "Love in a Mist (The Gents, Book 5)",
+    "P5226193": "The Heart of a Vicar (The Jonquil Brothers, Book 6)",
+    "P5076966": "Friends and Foes (The Jonquil Brothers, Book 1)",
+    "P5117030": "As You Are (The Jonquil Brothers, Book 3)",
+    "P6027265": "Christmas at Falstone Castle",
+    "P5127561": "For Elise",
+    "P6073551": "Anne Regular Scripture Tote",
+    "P6096125": "Quad Combination Simulated Leather, Regular, Indexed (Limited Edition Color)",
+    "P6074927": "Quad Combination Simulated Leather, Regular Indexed (Color Options)",
+    "P6079208": "Triple Combination Simulated Leather, Regular Indexed (Color Options)",
+    "P6079204": "Holy Bible Simulated Leather, Regular Indexed (Color Options)",
+    "P6088525": "Quad Combination Simulated Leather, Compact (Color Options)",
+    "P6026445": "Regular Scripture Tote Backpack",
+    "PR00001434": "Enoch Large Scripture Tote",
+    "P6087552": "Regular Bow Scripture Tote",
+    "P6085110": "Double Zipper with Strap Regular Scripture Tote",
+    "PR00001860": "Learning the Great Fundamentals",
+    "PR00001661": "Direct Messages",
+    "PR00001662": "Words Matter",
+    "P5232737": "The Divine Gift of Forgiveness",
+    "PR00001477": "Learning to Listen",
+    "P3941679": "The Infinite Atonement",
+    "PR00001671": "Spy Sisters Versus Snake Ten-Fangs",
+    "PR00001045": "Forever Ripley",
+    "PR815": "The Invincible List of Lani Li",
+    "PR00001104": "War of the Wasteland (Janitors School of Garbage, Book 3)",
+    "PR00001705": "Waiting with Wonder",
+    "PR00002121": "Go and Do Missionary Bag",
+    "P6024811": "The Companion Bag 2.0",
+    "P6053198": "Classic Missionary Journal",
+    "P6018191": "Study Missionary Journal",
+    "P6053751": "Preach My Gospel (Second Edition)",
+    "PR00002126": "The Next Ten Years",
+    "PR00002139": "Preach My Gospel Mini Cover",
+    "P5192615": "MissionAid Scripture Inserts",
+    "PR00001690": "Your Guide to the Temple Endowment",
+    "P6058665": "Slim Fit Temple Pants",
+    "P6073269": "Mia Temple Dress",
+    "PR00001589": "Men's White Leather Loafer Temple Shoe",
+    "P6089266": "Abigail Temple Dress",
+    "PR00002073": "Grace Temple Skirt",
+    "PR00002077": "Tori Temple Blouse",
+    "PR00002075": "Jane Temple Skirt",
+    "P6088667": "Maggie Temple Dress",
+    "P6089261": "Bridget Temple Dress",
+    "PR00001982": "Joseph Vegan Leather Temple Bag",
+    "P6079793": "Joshua Temple Bag",
+    "P6073541": "Natalie Temple Bag",
+    "P6053838": "Terra Temple Bag",
+    "PR00001451": "Canvas Temple Bag",
+    "P5135335": "Grace Temple Bag",
+    "PR00001514": "Casey Temple Bag",
+    "P5113580": "Anna Temple Bag",
+    "P5209270": "Edwin Temple Bag Backpack",
+    "PR00001988": "Mary Temple Bag",
+    "P6070674": "Ali Temple Bag Backpack",
+    "P3753740": "Marble Christus Statue",
+    "P6000078": "Crystal Christus"
+    };
+  D.products.forEach((p) => { if (SITE_NAMES[p.id]) p.t = SITE_NAMES[p.id]; });
+  /* Scriptures with a simulated leather binding also list under Scriptures > Simulated Leather (genuine leather has its own category). */
+  const SIM_CAT = "church-resources_scriptures_simulated-leather-scriptures";
+  D.products.forEach((p) => {
+    if (p.fmt === "Simulated Leather" && p.cat.indexOf("church-resources_scriptures") === 0 && p.cat !== SIM_CAT && (p.also || []).indexOf(SIM_CAT) < 0) p.also = (p.also || []).concat(SIM_CAT);
+  });
+})();
+/* One dimension format for every product: inches with a straight inch mark, " × " between measurements, each labeled
+   (W × H for two measurements, L × W × H for three, or the source's own L/W/H letters). Single measurements: 6".
+   Applied to size/dimension fields only (not Font size); values without a unit (apparel sizes like 28x30) are left alone. */
+(function () {
+  const U = '(?:"|\u2033|\u201d|inch(?:es)?\\b|in\\b)';
+  const PART = new RegExp("(\\d+(?:\\.\\d+)?)\\s*(" + U + ")?\\s*([LWHD])?(?![a-z])", "g");
+  const CHUNK = new RegExp("\\d+(?:\\.\\d+)?\\s*" + U + "?\\s*[LWHD]?(?:\\s*[x\u00d7]\\s*\\d+(?:\\.\\d+)?\\s*" + U + "?\\s*[LWHD]?(?![a-z]))+", "g");
+  const fmt = v => {
+    if (v == null) return v;
+    const s = String(v);
+    const one = s.match(new RegExp("^\\s*(\\d+(?:\\.\\d+)?)\\s*" + U + "\\s*$"));
+    if (one) return one[1] + "\"";
+    return s.replace(CHUNK, ch => {
+      if (!new RegExp(U).test(ch) && !/\d\s*[LWHD]/.test(ch)) return ch;
+      const parts = [...ch.matchAll(PART)].map(m => ({ n: m[1], l: m[3] }));
+      const def = parts.length === 2 ? ["W", "H"] : ["L", "W", "H"];
+      return parts.map((p, i) => p.n + "\" " + (p.l || def[i] || "")).map(x => x.trim()).join(" \u00d7 ");
+    });
+  };
+  const isDim = k => /size|dimension/i.test(k) && !/font/i.test(k);
+  const fixRows = rows => (rows || []).forEach(r => { if (isDim(r[0])) r[1] = fmt(r[1]); });
+  const seen = new Set();
+  const each = p => {
+    if (!p || seen.has(p.id)) return;
+    seen.add(p.id);
+    if (p.size) p.size = fmt(p.size);
+    if (p.sz) p.sz = fmt(p.sz);
+    fixRows(p.det);
+    const ex = D.extra(p.id);
+    if (ex) fixRows(ex.spec);
+  };
+  D.products.forEach(p => { each(p); (p.sizeOpts || []).concat(p.formats || []).forEach(x => each(typeof x === "string" ? D.byId(x) : x)); });
+  window.DB_FMT_DIM = fmt;
+})();
 const money = n => "$" + n.toFixed(2);
+const initials = n => { const w = String(n || "").trim().split(/\s+/).filter(Boolean); return ((w[0] || "")[0] || "").toUpperCase() + (w.length > 1 ? w[w.length - 1][0].toUpperCase() : ""); };
+const IMPRINT_FEE = 12.99;
+window.IMPRINT_FEE = IMPRINT_FEE;
+const lineEach = x => x.p.price + (x.l.imprint ? IMPRINT_FEE : 0);
+const PriceBreak = ({ x, total, itemLabel }) => {
+  const q = x.l.q;
+  const row = (k, l, unit) => React.createElement("div", { className: "pbk-r", key: k }, React.createElement("span", null, l, q > 1 ? React.createElement("em", null, money(unit) + " \u00d7 " + q) : null), React.createElement("span", null, money(unit * q)));
+  return React.createElement("div", { className: "pbk" }, row("i", itemLabel || "Item", x.p.price), row("f", "Imprint fee", IMPRINT_FEE), total ? React.createElement("div", { className: "pbk-r pbk-t", key: "t" }, React.createElement("span", null, "Total"), React.createElement("span", null, money(lineEach(x) * q))) : null);
+};
 const priceLabel = p => p.priceHigh ? money(p.price) + " \u2013 " + money(p.priceHigh) : money(p.price);
 /* One canonical transform per asset so every request hits the same cached response. */
 const RES = u => {
@@ -452,7 +801,7 @@ const ICON_MAP = {
   menu: "menu",
   user: "person",
   "user-fill": "person",
-  "shopping-bag": "shopping_bag",
+  "shopping-bag": "shopping_cart",
   x: "close",
   "arrow-left": "arrow_back",
   "arrow-right": "arrow_forward",
@@ -464,6 +813,7 @@ const ICON_MAP = {
   check: "check",
   checkmark_alt: "check",
   "chevron-down": "keyboard_arrow_down",
+  "chevron-right": "keyboard_arrow_right",
   "chevron-up": "keyboard_arrow_up",
   "chevron-left": "chevron_left",
   chevron_left: "chevron_left",
@@ -481,18 +831,19 @@ const ICON_MAP = {
 };
 /* Material glyphs sit smaller in their box than the previous set; ICON_SCALE enlarges the glyph inside the same box so sizes match the earlier design. */
 const ICON_SCALE = 1.5;
-/* Per-glyph optical correction: shopping_bag draws taller than person, so it is reduced to match the account icon. */
+/* Per-glyph optical correction: shopping_cart draws taller than person, so it is reduced to match the account icon. */
 const GLYPH_ADJ = {
-  shopping_bag: 0.739
+  shopping_cart: 0.739
 };
 const GLYPH_WEIGHT = {
-  shopping_bag: 400,
+  shopping_cart: 400,
   local_shipping: 400
 };
 function Ico({
   name,
   size = 20,
-  style
+  style,
+  weight
 }) {
   const g = ICON_MAP[name] || name;
   const fill = /-fill$/.test(name) && name !== "xmark_circle_fill" || name === "star";
@@ -500,7 +851,7 @@ function Ico({
     name: g,
     size: size,
     filled: fill,
-    weight: GLYPH_WEIGHT[g] || 300,
+    weight: weight || GLYPH_WEIGHT[g] || 300,
     className: "f7i" + (fill ? " ico-on" : ""),
     style: {
       display: "flex",
@@ -513,75 +864,113 @@ function Ico({
   });
 }
 window.DBIco = Ico;
+window.DBStars = Stars;
+/* Star ratings: the DS StarRating. Numeric sizes from older callers map to its sm / md / lg. */
 function Stars({
   r,
-  size = 11
+  size = "sm",
+  count
 }) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "stars",
-    "aria-label": r + " out of 5"
-  }, [1, 2, 3, 4, 5].map(i => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: i <= Math.round(r) ? "" : "off"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "star",
-    size: size,
-    sw: 1
-  }))));
+  const sz = typeof size === "string" ? size : size >= 22 ? "lg" : size >= 18 ? "md" : "sm";
+  return /*#__PURE__*/React.createElement(DS.StarRating, {
+    value: r || 0,
+    size: sz,
+    count: count
+  });
 }
 
-/* Cover renders the image directly; the title-text fallback is only for a broken asset. */
-function Cover({
-  p
-}) {
-  const [bad, setBad] = useState(false);
-  const src = thumb(p.img[0]);
-  if (bad || !src) return /*#__PURE__*/React.createElement("span", {
-    className: "ph"
-  }, p.t);
-  return /*#__PURE__*/React.createElement("img", {
-    src: src,
-    alt: p.t,
-    loading: "lazy",
-    decoding: "async",
-    draggable: false,
-    onError: () => setBad(true)
-  });
+const byName = s => { const m = /^([^,]+),\s*(.+)$/.exec(s || ""); return m ? m[2] + " " + m[1] : s || ""; };
+/* Product cards: the DS ProductCard (one link, square image frame by default, the 2:3 book frame for lite cards that show the author, StarRating sm, Price md, one secondary sm action).
+   The action follows the DS rule: Pre-order, View details (options or a price range), Notify me (out of stock), else Add to cart.
+   Cards keep the DS fixed 192px at every width: grids use repeat(auto-fill, 192px) columns and rails scroll. */
+/* Covers that follow the book image rule in product cards: the product trimmed of its margins and shadow edges, then cropped
+   to the 2:3 cover shape the book images have. The result is a cropped copy of the image the card trims as usual. */
+const COVER_2_3 = { "5254477": 2, "5212882": 1 }; // 1: trim, then crop to 2:3; 2: trim the white margins only
+const coverCache = {};
+function useCover23(src, mode) {
+  const on = !!mode;
+  const [out, setOut] = React.useState(() => on && coverCache[src] || null);
+  React.useEffect(() => {
+    if (!on || !src) return;
+    if (coverCache[src]) { setOut(coverCache[src]); return; }
+    let live = true;
+    const im = new Image();
+    im.crossOrigin = "anonymous";
+    im.onload = () => {
+      try {
+        const W = im.naturalWidth, H = im.naturalHeight, c = document.createElement("canvas");
+        c.width = W; c.height = H;
+        const x = c.getContext("2d");
+        x.drawImage(im, 0, 0);
+        const d = x.getImageData(0, 0, W, H).data;
+        const bg = (i) => d[i + 3] < 24 || (d[i] > (mode === 2 ? 232 : 242) && d[i + 1] > (mode === 2 ? 232 : 242) && d[i + 2] > (mode === 2 ? 232 : 242));
+        let x0 = W, y0 = H, x1 = -1, y1 = -1;
+        for (let yy = 0; yy < H; yy++) for (let xx = 0; xx < W; xx++) if (!bg((yy * W + xx) * 4)) { if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; if (yy < y0) y0 = yy; if (yy > y1) y1 = yy; }
+        if (x1 < 0) return;
+        const ix = mode === 2 ? 0 : Math.round((x1 - x0) * 0.015), iy = mode === 2 ? 0 : Math.round((y1 - y0) * 0.015);
+        x0 += ix; x1 -= ix; y0 += iy; y1 -= iy;
+        let w = x1 - x0 + 1, h = y1 - y0 + 1;
+        if (mode === 2) { /* white margins only */ } else if (w / h > 2 / 3) { const nw = Math.round(h * 2 / 3); x0 += Math.floor((w - nw) / 2); w = nw; } else { const nh = Math.round(w * 3 / 2); y0 += Math.floor((h - nh) / 2); h = nh; }
+        const o = document.createElement("canvas");
+        o.width = w; o.height = h;
+        o.getContext("2d").drawImage(im, x0, y0, w, h, 0, 0, w, h);
+        o.toBlob((b) => { if (!b) return; const u = URL.createObjectURL(b); coverCache[src] = u; if (live) setOut(u); });
+      } catch (e) {}
+    };
+    im.src = src;
+    return () => { live = false; };
+  }, [src, on]);
+  return out;
 }
 function ProductCardBase({
   p,
   onOpen,
-  onAdd
+  onAdd,
+  lite,
+  onRemove,
+  fixed,
+  layout
 }) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "pcard"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "cover",
-    onClick: () => onOpen(p.id),
-    "aria-label": p.t
-  }, /*#__PURE__*/React.createElement(Cover, {
-    p: p
-  })), /*#__PURE__*/React.createElement("button", {
-    className: "p-t",
-    onClick: () => onOpen(p.id),
-    style: {
-      textAlign: "left"
-    }
-  }, p.t), p.rc ? /*#__PURE__*/React.createElement("div", {
-    className: "p-rate"
-  }, /*#__PURE__*/React.createElement(Stars, {
-    r: p.r
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "p-rc"
-  }, "(", p.rc, ")")) : null, /*#__PURE__*/React.createElement("div", {
-    className: "p-p"
-  }, priceLabel(p)), /*#__PURE__*/React.createElement("button", {
-    className: "btn-out",
-    style: {
-      alignSelf: "flex-start"
-    },
-    onClick: () => onAdd(p)
-  }, "Add to Bag"));
+  const cover23 = useCover23(thumb(p.img[0]), COVER_2_3[p.id]);
+  const hasOpts = !!(p.formats || p.sizeOpts || p.sizes || (p.colors && p.colors.length > 1) || p.personalize || (p.priceHigh && p.priceHigh !== p.price));
+  const pre = !!(window.PDPX && window.PDPX.isPre(p));
+  const out = !pre && !!(window.PDPX && window.PDPX.availOf && window.PDPX.availOf(p) === "out");
+  const label = pre ? "Pre-order" : hasOpts ? "View details" : out ? "Notify me" : "Add to cart";
+  return /*#__PURE__*/React.createElement(DS.ProductCard, {
+    className: p.fillImg ? "pc pc-fill" : "pc",
+    layout: layout,
+    colors: !lite && p.colors && p.colors.length > 1 ? p.colors.map(c => ({
+      name: c.n,
+      swatch: c.sw,
+      image: thumb(colorImg(p, c.n))
+    })) : undefined,
+    href: "#/p/" + p.id,
+    onOpen: () => onOpen(p.id),
+    image: cover23 || thumb(p.img[0]),
+    title: p.t,
+    frame: lite ? "book" : undefined,
+    author: lite ? byName(p.by) : undefined,
+    rating: lite ? undefined : p.rc ? p.r : 0,
+    ratingCount: lite ? undefined : p.rc || 0,
+    price: lite ? undefined : p.price,
+    priceHigh: !lite && p.priceHigh && p.priceHigh !== p.price ? p.priceHigh : undefined,
+    wasPrice: p.was,
+    preorder: pre,
+    bookshelfPlus: String(p.cat || "").indexOf("books_fiction") === 0,
+    outOfStock: !lite && out,
+    action: lite ? null : /*#__PURE__*/React.createElement(DS.Button, {
+      variant: "secondary",
+      size: "sm",
+      onClick: () => hasOpts || out ? onOpen(p.id) : onAdd(p)
+    }, label),
+    extra: onRemove ? /*#__PURE__*/React.createElement(DS.IconButton, {
+      variant: "outline",
+      size: "sm",
+      icon: "delete",
+      label: "Remove from wishlist",
+      onClick: () => onRemove(p.id)
+    }) : null
+  });
 }
 const ProductCard = React.memo(ProductCardBase);
 
@@ -595,8 +984,11 @@ function useRailDots() {
   const measure = useCallback(() => {
     const el = ref.current;
     if (!el) return;
-    const n = Math.max(1, Math.ceil(el.scrollWidth / el.clientWidth));
-    const i = Math.min(n - 1, Math.round(el.scrollLeft / el.clientWidth));
+    /* PDP gallery slides are spaced by a gap: one page = slide width + gap. Rails keep viewport-width paging. */
+    const gp = el.closest && el.closest(".pdp-gal") ? parseFloat(getComputedStyle(el).columnGap) || 0 : 0;
+    const step = el.clientWidth + gp;
+    const n = Math.max(1, gp ? Math.round((el.scrollWidth + gp) / step) : Math.ceil(el.scrollWidth / el.clientWidth));
+    const i = Math.min(n - 1, Math.round(el.scrollLeft / step));
     /* Only commit real changes: scroll fires dozens of times per swipe and every setState re-rendered the rail. */
     setState(s => s.i === i && s.n === n ? s : {
       i,
@@ -665,6 +1057,7 @@ function Header({
   search,
   onCloseSearch,
   onOpenProduct,
+  onSearchAll,
   shipMin,
   onGoCat
 }) {
@@ -678,14 +1071,14 @@ function Header({
     className: "hdr-in"
   }, /*#__PURE__*/React.createElement("div", {
     className: "hdr-ico hdr-burger"
-  }, /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement(DS.IconButton, {
     className: "iconbtn",
+    icon: ICON_MAP["menu"] || "menu",
+    label: "Open menu",
     onClick: onMenu,
-    "aria-label": "Open menu"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "menu",
-    size: 22
-  }))), /*#__PURE__*/React.createElement("button", {
+    size: "md",
+    iconSize: 22
+  })), /*#__PURE__*/React.createElement("button", {
     className: "wordmark",
     onClick: onHome,
     "aria-label": "Deseret Book home"
@@ -706,34 +1099,53 @@ function Header({
   }, user && user.name ? String(user.name).trim().split(/\s+/)[0] : "Account")), /*#__PURE__*/React.createElement("button", {
     className: "iconbtn",
     onClick: onBag,
-    "aria-label": "Bag, " + count + " items"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "bagpill" + (count > 0 ? " on" : "")
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "shopping-bag",
-    size: 20
+    "aria-label": "Cart, " + count + " items"
+  }, /*#__PURE__*/React.createElement(DS.CountBadge, {
+    variant: "pill",
+    count: count,
+    "aria-hidden": true
   }), /*#__PURE__*/React.createElement("span", {
-    className: "bagq",
-    key: count,
-    hidden: true
-  }, count)), count > 0 ? /*#__PURE__*/React.createElement("span", {
-    className: "badge"
-  }, count) : null, /*#__PURE__*/React.createElement("span", {
     className: "ico-lab"
-  }, "Bag")))), /*#__PURE__*/React.createElement("div", {
+  }, "Cart")))), /*#__PURE__*/React.createElement("div", {
     className: "hdr-srch"
   }, /*#__PURE__*/React.createElement(HeaderSearch, {
     open: search,
     onOpen: onSearch,
     onClose: onCloseSearch,
-    onOpenProduct: onOpenProduct
+    onOpenProduct: onOpenProduct,
+    onSearchAll: onSearchAll
   }))), /*#__PURE__*/React.createElement(NavBar, {
     onGo: onGoCat,
     disabled: !!search
   })));
 }
 
-/* Desktop-only category bar with a hover mega panel. Hidden below 1024px. */
+/* Desktop menu levels, mirroring deseretbook.com. Items with no counterpart category in the catalog link to their nearest parent. A "#" id is a route. */
+const DESK_MENU = (() => {
+  const m = (n, id, sub) => ({ id, n, sub });
+  return [
+    m("Christmas", "christmas", [m("Nativities", "christmas_nativities"), m("Christmas Books", "christmas_christmas-books"), m("Christmas Cards", "christmas_christmas-cards"), m("Christmas Ornaments", "christmas_christmas-ornaments")]),
+    m("Books", "books", [
+      m("Fiction", "books_fiction", [m("Romance", "books_fiction_romance"), m("Historical Fiction", "books_fiction_historical-fiction"), m("Mystery and Suspense", "books_fiction_mystery-and-suspense"), m("Teen Fiction", "books_fiction_teen-fiction")]),
+      m("Gospel Voices", "books_gospel-voices", [m("Art Books", "books_gospel-voices_art-books"), m("Foreign Language", "books_gospel-voices"), m("General Authority Books", "books_gospel-voices_general-authority-books"), m("Inspiration", "books_gospel-voices_inspiration"), m("Remembrance Books", "books_gospel-voices"), m("Temple Books", "books_gospel-voices_temple-books")]),
+      m("Nonfiction", "books_nonfiction", [m("Biography", "books_nonfiction_biography"), m("Family and Parenting", "books_nonfiction_family-and-parenting"), m("History", "books_nonfiction_history"), m("Self-Improvement", "books_nonfiction_self-improvement")])]),
+    m("Scriptures", "church-resources_scriptures"),
+    m("Baptism", "baptism"),
+    m("Church Resources", "church-resources", [
+      m("Scriptures", "church-resources_scriptures", [m("Foreign Language Scriptures", "church-resources_scriptures"), m("Genuine Leather Scriptures", "church-resources_scriptures_genuine-leather-scriptures"), m("Scripture Accessories", "church-resources_scriptures"), m("Scripture Journal Editions", "church-resources_scriptures_scripture-journal-editions"), m("Simulated Leather Scriptures", "church-resources_scriptures_simulated-leather-scriptures")]),
+      m("Church Distribution", "church-resources_church-distribution", ["Church Curriculum", "Distribution Scriptures", "Primary", "Self Reliance"].map(x => m(x, "church-resources_church-distribution"))),
+      m("Teaching Helps", "church-resources_teaching-helps", ["The Red Headed Hostess", "General Conference Resources", "Youth Theme", "Elders Quorum", "Primary", "Relief Society", "Sunday School", "Youth"].map(x => m(x, "church-resources_teaching-helps"))),
+      m("Prints", "church-resources_prints")]),
+    m("Games & Puzzles", "games-puzzles"),
+    m("Fine Art", "art", [m("Wall Art", "art_wall-art"), m("Temple Art", "art_temple-art"), m("Statues", "art_statues"), m("Savior Art", "art_savior-art"), m("D\u00e9cor", "art_decor")]),
+    m("Missionary", "missionary", [m("Accessories", "missionary_accessories"), m("Bags", "missionary_bags"), m("Books", "missionary_books"), m("Jewelry", "missionary_jewelry"), m("Journals", "missionary_journals")]),
+    m("Temple Worship", "temple-worship", [m("Temple Accessories", "temple-worship_temple-accessories", [m("Family Name Holders", "temple-worship_temple-accessories"), m("Temple Recommend Holders", "temple-worship_temple-accessories")]), m("Temple Bags", "temple-worship_temple-bags"), m("Temple Clothing", "temple-worship_temple-clothing")]),
+    m("Bookshelf+", "#/bookshelf-plus"),
+    m("Clearance", "clearance")
+  ];
+})();
+
+/* Desktop-only category bar with cascading dropdowns. Hidden below 1024px. */
 function NavBar({
   onGo,
   disabled
@@ -752,10 +1164,10 @@ function NavBar({
     "aria-label": "Shop categories"
   }, /*#__PURE__*/React.createElement("div", {
     className: "dnav-in"
-  }, D.nav.map(n => {
+  }, DESK_MENU.map((n, i) => {
     const has = n.sub && n.sub.length;
     return /*#__PURE__*/React.createElement("div", {
-      className: "dnav-i",
+      className: "dnav-i" + (i >= DESK_MENU.length - 3 ? " dd-end" : ""),
       key: n.id,
       onMouseEnter: () => setOpen(has && !disabled ? n.id : null)
     }, /*#__PURE__*/React.createElement("button", {
@@ -763,27 +1175,46 @@ function NavBar({
       onClick: () => go(n.id),
       "aria-expanded": open === n.id
     }, n.n), has && open === n.id && !disabled ? /*#__PURE__*/React.createElement("div", {
-      className: "dmega"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "dmega-in"
-    }, n.sub.map(s => /*#__PURE__*/React.createElement("div", {
-      className: "dcol",
-      key: s.id
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "dcol-h",
-      onClick: () => go(s.id)
-    }, s.n), (s.sub || []).map(x => /*#__PURE__*/React.createElement("button", {
-      className: "dcol-l",
-      key: x.id,
-      onClick: () => go(x.id)
-    }, x.n)))), /*#__PURE__*/React.createElement("button", {
-      className: "dmega-all",
-      onClick: () => go(n.id)
-    }, "Shop all ", n.n, /*#__PURE__*/React.createElement(Ico, {
-      name: "arrow-right",
-      size: 14
-    })))) : null);
+      className: "dd"
+    }, /*#__PURE__*/React.createElement(DdList, {
+      items: n.sub,
+      go: go,
+      parent: n
+    })) : null);
   })));
+}
+/* Cascading dropdown list: each level opens the next as a flyout to its right. */
+function DdList({
+  items,
+  go,
+  parent
+}) {
+  const e = React.createElement;
+  return e("ul", {
+    className: "dd-l",
+    role: "menu"
+  }, items.map(s => {
+    const kids = s.sub && s.sub.length;
+    return e("li", {
+      className: "dd-i",
+      key: s.id,
+      role: "none"
+    }, e("button", {
+      className: "dd-b",
+      role: "menuitem",
+      "aria-haspopup": kids ? "true" : undefined,
+      onClick: () => go(s.id)
+    }, e("span", null, s.n), kids ? e(Ico, {
+      name: "chevron-right",
+      size: 16
+    }) : null), kids ? e("div", {
+      className: "dd dd-fly"
+    }, e(DdList, {
+      items: s.sub,
+      go: go,
+      parent: s
+    })) : null);
+  }));
 }
 function NavNode({
   node,
@@ -825,24 +1256,20 @@ function Drawer({
   onClose,
   onGo,
   onAccount,
+  onRoute,
   user
 }) {
-  return /*#__PURE__*/React.createElement("nav", {
-    className: "drawer" + (open ? " on" : ""),
-    "aria-hidden": !open
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "drawer-h"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "wordmark"
-  }, /*#__PURE__*/React.createElement(Wordmark, null)), /*#__PURE__*/React.createElement("button", {
-    className: "iconbtn",
-    onClick: onClose,
-    "aria-label": "Close menu"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "x",
-    size: 22
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "drawer-b"
+  return /*#__PURE__*/React.createElement(DS.Drawer, {
+    open: open,
+    onClose: onClose,
+    side: "left",
+    className: "menu-d",
+    "aria-label": "Menu",
+    closeLabel: "Close menu",
+    padded: false,
+    header: /*#__PURE__*/React.createElement("span", {
+      className: "wordmark"
+    }, /*#__PURE__*/React.createElement(Wordmark, null))
   }, D.nav.map(n => /*#__PURE__*/React.createElement(NavNode, {
     key: n.id,
     node: n,
@@ -860,70 +1287,147 @@ function Drawer({
       onClose();
       onAccount();
     }
-  }, user ? "My Account" : "Sign In"), /*#__PURE__*/React.createElement("a", {
-    href: "#/wishlist",
-    onClick: onClose
-  }, "Wishlist"), /*#__PURE__*/React.createElement("a", {
-    href: "#/stores",
-    onClick: onClose
-  }, "Find My Store"))));
+  }, user ? "My Account" : "Sign In"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "nav-foot-l",
+    onClick: () => {
+      onClose();
+      onRoute("#/account/wishlist");
+    }
+  }, "Wishlist"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "nav-foot-l",
+    onClick: () => {
+      onClose();
+      onRoute("#/stores");
+    }
+  }, "Find My Store")));
 }
+/* Site search. One index per product: name, full source name, author (both "Eden, Sarah M." and "Sarah M. Eden"),
+   every category on its trail, format and details. A query matches when every word (2+ letters) starts a word somewhere
+   in the index, singular or plural ("totes" finds "Tote"). Ranked by where the words matched: name, then author, then
+   format and key details (the tags beside the rating), then category, then other details; a name that contains the whole query ranks first. Used by the header panel and #/search/<q>. */
+const SEARCH = (function () {
+  const norm = v => String(v || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’']/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+  const stem = w => w.length > 3 && /[^s]s$/.test(w) ? w.replace(/ies$/, "y").replace(/s$/, "") : w;
+  const words = v => norm(v).split(" ").filter(Boolean).map(stem);
+  let idx = null;
+  const build = () => D.products.map(p => {
+    const by = p.by && p.by !== "Deseret Book" ? p.by : "";
+    const byFlip = by.indexOf(",") > -1 ? by.split(",").slice(1).join(" ") + " " + by.split(",")[0] : "";
+    const trail = D.plp ? [p.cat].concat(p.also || []).reduce((a, c) => a.concat(D.plp.trail(c), [c]), []) : [p.cat];
+    const key = (p.keyDet || []).concat(p.fmt || "");
+    const det = (p.det || []).map(r => r[1]).concat(p.full || "");
+    return { p, t: norm(p.t), f: [[words(p.t), 10], [words(by + " " + byFlip), 6], [words(key.join(" ")), 5], [words(trail.map(c => D.catName(c)).join(" ")), 3], [words(det.join(" ")), 2]] };
+  });
+  const find = q => {
+    const qw = words(q).filter((w, i, a) => w.length > 1 || a.length === 1);
+    if (!qw.length) return [];
+    if (!idx) idx = build();
+    const phrase = norm(q);
+    const out = [];
+    idx.forEach(e => {
+      let score = 0;
+      for (const w of qw) {
+        let best = 0;
+        for (const [ws, wt] of e.f) if (wt > best && ws.some(x => x.indexOf(w) === 0)) best = wt;
+        if (!best) return;
+        score += best;
+      }
+      if (e.t.indexOf(phrase) === 0) score += 30;else if (e.t.indexOf(phrase) > -1) score += 20;
+      out.push([score, e.p]);
+    });
+    return out.sort((a, b) => b[0] - a[0] || (b[1].rc || 0) - (a[1].rc || 0)).map(x => x[1]);
+  };
+  return { find };
+})();
+window.DBSearch = SEARCH.find;
+/* Header search: the field opens a panel with popular searches, then up to 6 matches as you type and a "See all"
+   row. Enter (or See all) opens the full results page; Escape or Cancel closes; arrow keys move through the rows. */
+const SRCH_MAX = 6;
 function HeaderSearch({
   open,
   onOpen,
   onClose,
-  onOpenProduct
+  onOpenProduct,
+  onSearchAll
 }) {
   const [q, setQ] = useState("");
-  const inputRef = useRef(null);
   const wrapRef = useRef(null);
   useEffect(() => {
-    if (open && inputRef.current) inputRef.current.focus();
-    if (!open) setQ("");
+    const el = document.getElementById("hdr-q");
+    if (open && el && document.activeElement !== el) el.focus();
+    if (!open) { setQ(""); if (el && document.activeElement === el) el.blur(); }
   }, [open]);
   useEffect(() => {
     if (!open) return;
     const away = e => {
       if (wrapRef.current && !wrapRef.current.contains(e.target)) {
-        if (inputRef.current) inputRef.current.blur();
+        if (document.getElementById("hdr-q")) document.getElementById("hdr-q").blur();
         onClose();
       }
     };
     document.addEventListener("pointerdown", away, true);
     return () => document.removeEventListener("pointerdown", away, true);
   }, [open, onClose]);
-  const term = q.trim().toLowerCase();
-  const hits = term.length < 2 ? [] : D.products.filter(p => (p.t + " " + p.by + " " + D.catName(p.cat)).toLowerCase().indexOf(term) > -1).slice(0, 12);
+  const term = q.trim();
+  const all = term.length < 2 ? [] : SEARCH.find(term);
+  const hits = all.slice(0, SRCH_MAX);
   const suggestions = ["Scriptures", "Sarah M. Eden", "Scripture totes", "Journal edition", "Quad combination"];
+  const submit = e => {
+    if (e) e.preventDefault();
+    if (term.length < 2) return;
+    onSearchAll(term);
+    onClose();
+  };
+  const keys = e => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      onClose();
+      return;
+    }
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    const rows = wrapRef.current ? [...wrapRef.current.querySelectorAll(".srch-panel .srow, .srch-panel .srch-all, .srch-panel .chip")] : [];
+    if (!rows.length) return;
+    e.preventDefault();
+    const at = rows.indexOf(document.activeElement);
+    if (e.key === "ArrowDown") (rows[at + 1] || rows[0]).focus();else if (at <= 0) document.getElementById("hdr-q").focus();else rows[at - 1].focus();
+  };
   return /*#__PURE__*/React.createElement("div", {
     className: "srch",
     ref: wrapRef,
+    onKeyDown: open ? keys : undefined,
     style: {
       marginBottom: 4
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "srch-row"
-  }, open ? /*#__PURE__*/React.createElement("div", {
-    className: "srch-f open"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "search",
-    size: 20
-  }), /*#__PURE__*/React.createElement("input", {
-    ref: inputRef,
+  }, /* One DS Input in both states (search icon left, hairline pill), so opening never changes the field; focusing or typing opens the panel. */
+  /*#__PURE__*/React.createElement("form", {
+    className: "srch-f open",
+    role: "search",
+    onSubmit: submit
+  }, /*#__PURE__*/React.createElement(DS.Input, {
+    id: "hdr-q",
+    type: "search",
+    enterKeyHint: "search",
+    autoComplete: "off",
+    icon: "search",
+    style: { flex: 1 },
     value: q,
-    onChange: e => setQ(e.target.value),
+    onFocus: () => { if (!open) onOpen(); },
+    onClick: () => { if (!open) onOpen(); },
+    onChange: e => { setQ(e.target.value); if (!open) onOpen(); },
     placeholder: "Search books, scriptures, gifts",
-    "aria-label": "Search"
-  })) : /*#__PURE__*/React.createElement("button", {
-    className: "srch-f",
-    onClick: onOpen
-  }, /*#__PURE__*/React.createElement("span", null, "Search"), /*#__PURE__*/React.createElement(Ico, {
-    name: "search",
-    size: 20
+    "aria-label": "Search",
+    "aria-expanded": open,
+    "aria-controls": "hdr-srch-panel"
   })), open ? /*#__PURE__*/React.createElement("button", {
+    type: "button",
     className: "srch-cancel",
     onClick: onClose
   }, "Cancel") : null), /*#__PURE__*/React.createElement("div", {
+    id: "hdr-srch-panel",
     className: "srch-panel" + (open ? " on" : ""),
     "aria-hidden": !open
   }, term.length < 2 ? /*#__PURE__*/React.createElement("div", {
@@ -941,11 +1445,19 @@ function HeaderSearch({
       flexWrap: "wrap",
       gap: 8
     }
-  }, suggestions.map(s => /*#__PURE__*/React.createElement("button", {
-    key: s,
+  }, suggestions.map(sg => /*#__PURE__*/React.createElement(DS.Tag, {
+    key: sg,
     className: "chip",
-    onClick: () => setQ(s)
-  }, s)))) : hits.length ? hits.map(p => /*#__PURE__*/React.createElement("button", {
+    role: "button",
+    tabIndex: 0,
+    style: { cursor: "pointer" },
+    onClick: () => setQ(sg),
+    onKeyDown: e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setQ(sg); } }
+  }, sg)))) : hits.length ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+    className: "srch-n",
+    role: "status"
+  }, all.length + (all.length === 1 ? " result" : " results")), hits.map(p => /*#__PURE__*/React.createElement("button", {
+    type: "button",
     key: p.id,
     className: "srow",
     onClick: () => {
@@ -961,11 +1473,20 @@ function HeaderSearch({
     decoding: "async"
   })), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
     className: "t"
-  }, p.t), /*#__PURE__*/React.createElement("span", {
+  }, p.t), p.by && p.by !== "Deseret Book" ? /*#__PURE__*/React.createElement("span", {
     className: "p"
-  }, priceLabel(p))))) : /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement("p", null, "No results for \u201C", q, "\u201D. Try a title, an author, or a category."))));
+  }, byName(p.by)) : null, /*#__PURE__*/React.createElement("span", {
+    className: "p"
+  }, priceLabel(p))))), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "srch-all",
+    onClick: submit
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "ul-t"
+  }, all.length > SRCH_MAX ? "See all " + all.length + " results" : "View results page"), /*#__PURE__*/React.createElement(Ico, {
+    name: "arrow_forward",
+    size: 18
+  }))) : /*#__PURE__*/React.createElement(DS.EmptyState, { align: "start", role: "status" }, "No results for “", term, "”. Try a title, an author, or a category.")));
 }
 function Newsletter() {
   const [email, setEmail] = useState("");
@@ -974,7 +1495,9 @@ function Newsletter() {
   const [ask, setAsk] = useState(false);
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
+  const [phone, setPhone] = useState("");
   const [nameErr, setNameErr] = useState("");
+  const [phoneErr, setPhoneErr] = useState("");
   const submit = e => {
     e.preventDefault();
     if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)) {
@@ -990,7 +1513,12 @@ function Newsletter() {
       setNameErr("Enter your first and last name.");
       return;
     }
+    if (phone.trim() && !/^[+()\d][\d\s().+-]{6,}$/.test(phone.trim())) {
+      setPhoneErr("Enter a valid phone number, or leave it blank.");
+      return;
+    }
     setNameErr("");
+    setPhoneErr("");
     setAsk(false);
     setDone(true);
   };
@@ -1002,7 +1530,9 @@ function Newsletter() {
     className: "band-lab news-lab"
   }, /*#__PURE__*/React.createElement("span", {
     className: "news-h"
-  }, "Sign up for discounts, news and limited-time offers")), done ? /*#__PURE__*/React.createElement("span", {
+  }, "Sign up for discounts, news and limited-time offers"), /*#__PURE__*/React.createElement("span", {
+    className: "news-sub"
+  }, "New releases, member savings, and early access to sales, once a week.")), done ? /*#__PURE__*/React.createElement("span", {
     className: "news-ok"
   }, "You\u2019re on the list. We send one email a week.") : /*#__PURE__*/React.createElement("div", {
     className: "news-field"
@@ -1010,146 +1540,175 @@ function Newsletter() {
     className: "news-form",
     onSubmit: submit,
     noValidate: true
-  }, /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement(DS.Input, {
     type: "email",
-    className: err ? "err" : "",
+    error: !!(err),
     value: email,
     onChange: e => setEmail(e.target.value),
     placeholder: "Email address",
     "aria-label": "Email address",
     "aria-invalid": err ? true : undefined
-  }), /*#__PURE__*/React.createElement("button", {
+  }), /*#__PURE__*/React.createElement(DSB, {
     className: "sub",
     type: "submit"
   }, "SUBSCRIBE")), err ? /*#__PURE__*/React.createElement("span", {
     className: "field-err"
-  }, err) : null)), /*#__PURE__*/React.createElement("div", {
-    className: "pdlg news-dlg" + (ask ? " on" : ""),
-    role: "dialog",
-    "aria-modal": "true",
-    "aria-label": "Complete your subscription",
-    "aria-hidden": !ask
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "pdlg-c"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "pdlg-x",
-    onClick: () => setAsk(false),
-    "aria-label": "Close"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "xmark_circle_fill",
-    size: 24
-  })), /*#__PURE__*/React.createElement("span", {
-    className: "pdlg-eyebrow"
-  }, "Almost There"), /*#__PURE__*/React.createElement("h2", null, "Complete Your Subscription"), /*#__PURE__*/React.createElement("p", null, "Tell us your name so we can address our emails to you."), /*#__PURE__*/React.createElement("form", {
+  }, err) : null)), /*#__PURE__*/React.createElement(DS.Dialog, {
+    open: ask,
+    onClose: () => setAsk(false),
+    size: "md",
+    title: "Complete Your Subscription",
+    description: "Tell us your name so we can address our emails to you.",
+    footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(DS.Button, {
+      type: "button",
+      variant: "secondary",
+      size: "md",
+      onClick: () => setAsk(false)
+    }, "Cancel"), /*#__PURE__*/React.createElement(DS.Button, {
+      type: "submit",
+      form: "news-name-form",
+      size: "md"
+    }, "Complete subscription"))
+  }, /*#__PURE__*/React.createElement("form", {
+    id: "news-name-form",
     onSubmit: finish,
-    noValidate: true
-  }, /*#__PURE__*/React.createElement("input", {
+    noValidate: true,
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 16
+    }
+  }, /*#__PURE__*/React.createElement(DS.Input, {
+    label: "First name",
     type: "text",
-    className: nameErr && !first.trim() ? "err" : "",
+    error: nameErr && !first.trim() ? "Enter your first name." : undefined,
     value: first,
     onChange: e => setFirst(e.target.value),
-    placeholder: "First name",
-    "aria-label": "First name",
     autoComplete: "given-name"
-  }), /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement(DS.Input, {
+    label: "Last name",
     type: "text",
-    className: nameErr && !last.trim() ? "err" : "",
+    error: nameErr && !last.trim() ? "Enter your last name." : undefined,
     value: last,
     onChange: e => setLast(e.target.value),
-    placeholder: "Last name",
-    "aria-label": "Last name",
     autoComplete: "family-name"
-  }), nameErr ? /*#__PURE__*/React.createElement("span", {
-    className: "field-err"
-  }, nameErr) : null, /*#__PURE__*/React.createElement("button", {
-    className: "btn-gold",
-    type: "submit",
-    style: {
-      height: 48,
-      padding: "0 24px",
-      fontSize: 16
-    }
-  }, "COMPLETE SUBSCRIPTION")))));
+  }), /*#__PURE__*/React.createElement(DS.Input, {
+    label: "Phone number (optional)",
+    type: "tel",
+    error: phoneErr || undefined,
+    value: phone,
+    onChange: e => setPhone(e.target.value),
+    autoComplete: "tel"
+  }))));
 }
-function FootAcc({
-  title,
-  items,
-  onGo
-}) {
-  const [open, setOpen] = useState(false);
-  return /*#__PURE__*/React.createElement("div", {
-    className: "acc"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "acc-h",
-    onClick: () => setOpen(!open),
-    "aria-expanded": open
-  }, /*#__PURE__*/React.createElement("span", null, title), /*#__PURE__*/React.createElement("span", {
-    style: {
-      transform: open ? "rotate(180deg)" : "none",
-      transition: "transform 180ms",
-      display: "grid"
+function FooterNews() {
+  const [email, setEmail] = useState("");
+  const [err, setErr] = useState("");
+  const [done, setDone] = useState(false);
+  const submit = e => {
+    e.preventDefault();
+    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)) {
+      setErr("Enter a valid email address.");
+      return;
     }
+    setErr("");
+    setDone(true);
+  };
+  return /*#__PURE__*/React.createElement("form", {
+    className: "ftr-news",
+    onSubmit: submit,
+    noValidate: true
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "ftr-news-l",
+    htmlFor: "ftr-news-email"
+  }, "Sign up for discounts, news, and limited-time offers"), done ? /*#__PURE__*/React.createElement("p", {
+    className: "ftr-news-ok",
+    role: "status"
   }, /*#__PURE__*/React.createElement(Ico, {
-    name: "chevron-down",
+    name: "check_circle",
     size: 16
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "acc-b" + (open ? " on" : "")
-  }, items.map(it => /*#__PURE__*/React.createElement("a", {
-    key: it,
-    href: "#/page",
-    onClick: e => {
-      e.preventDefault();
-      onGo(it);
-    }
-  }, it))));
+  }), "Thanks. We\u2019ll send offers to " + email + ".") : /*#__PURE__*/React.createElement("div", {
+    className: "ftr-news-r"
+  }, /*#__PURE__*/React.createElement(DS.Input, {
+    id: "ftr-news-email",
+    type: "email",
+    value: email,
+    onChange: e => setEmail(e.target.value),
+    placeholder: "Email address",
+    autoComplete: "email",
+    error: err || undefined
+  }), /*#__PURE__*/React.createElement(DS.Button, {
+    type: "submit",
+    size: "md",
+    className: "ftr-news-b"
+  }, "Subscribe")));
 }
 function Footer({
   onGo,
   onStore
 }) {
   return /*#__PURE__*/React.createElement("footer", {
-    className: "ftr"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "btn-white",
+    className: "ftr fx"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "ftr-top"
+  }, /*#__PURE__*/React.createElement(FooterNews, null), /*#__PURE__*/React.createElement("div", {
+    className: "fx-acts"
+  }, /*#__PURE__*/React.createElement(DS.Button, {
+    variant: "secondary",
+    size: "md",
+    className: "ftr-store",
     onClick: onStore
-  }, "FIND MY STORE"), Object.keys(D.footer).map(k => /*#__PURE__*/React.createElement(FootAcc, {
-    key: k,
-    title: k,
-    items: D.footer[k],
-    onGo: onGo
-  })), /*#__PURE__*/React.createElement("div", {
+  }, "Find my store"), /*#__PURE__*/React.createElement("div", {
     className: "social"
   }, /*#__PURE__*/React.createElement("a", {
-    href: "#/page",
-    onClick: e => {
-      e.preventDefault();
-      onGo("Facebook");
-    },
-    "aria-label": "Facebook",
-    style: {
-      color: "#fff"
-    }
+    href: "https://www.facebook.com/DeseretBook/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    "aria-label": "Deseret Book on Facebook (opens in a new tab)"
   }, /*#__PURE__*/React.createElement(Ico, {
     name: "facebook",
     size: 18
   })), /*#__PURE__*/React.createElement("a", {
-    href: "#/page",
-    onClick: e => {
-      e.preventDefault();
-      onGo("Instagram");
-    },
-    "aria-label": "Instagram",
-    style: {
-      color: "#fff"
-    }
+    href: "https://www.instagram.com/deseretbook/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    "aria-label": "Deseret Book on Instagram (opens in a new tab)"
   }, /*#__PURE__*/React.createElement(Ico, {
     name: "instagram",
     size: 18
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "rule"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "legal"
-  }, /*#__PURE__*/React.createElement("span", null, "\xA9 1996\u20132025 Deseret Book Company. All Rights Reserved."), /*#__PURE__*/React.createElement("span", null, "Product Submission Guidelines\xA0\xA0 |\xA0\xA0 Manuscript Submissions\xA0\xA0 |\xA0\xA0 Legal")));
+  }))))), /*#__PURE__*/React.createElement("nav", {
+    className: "fx-map",
+    "aria-label": "Site map"
+  }, Object.keys(D.footer).map(k => /*#__PURE__*/React.createElement("div", {
+    className: "fx-row",
+    key: k
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "fx-k"
+  }, k), /*#__PURE__*/React.createElement("ul", {
+    className: "fx-l"
+  }, D.footer[k].map(it => /*#__PURE__*/React.createElement("li", {
+    key: it
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "#/page",
+    onClick: e => {
+      e.preventDefault();
+      onGo(it);
+    }
+  }, it))))))), /*#__PURE__*/React.createElement("div", {
+    className: "fx-base"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fx-copy"
+  }, "\xA9 1996\u20132025 Deseret Book Company. All Rights Reserved."), /*#__PURE__*/React.createElement("ul", {
+    className: "fx-legal"
+  }, ["Product Submission Guidelines", "Manuscript Submissions", "Legal"].map(it => /*#__PURE__*/React.createElement("li", {
+    key: it
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "#/page",
+    onClick: e => {
+      e.preventDefault();
+      onGo(it);
+    }
+  }, it))))));
 }
 const PROMOS = {
   SHELF10: {
@@ -1171,9 +1730,29 @@ function BagDrawer({
   go,
   ship,
   onViewBag,
-  onCheckout
+  onCheckout,
+  added
 }) {
   const s = ship || {};
+  /* Phones: an add opens the bag on the item just added (added = {k, n}); scroll its line into view and mark it briefly. */
+  const playedRef = useRef(0);
+  useEffect(() => {
+    if (!open || !added || added.n === playedRef.current) return;
+    playedRef.current = added.n;
+    const t = setTimeout(() => {
+      const el = [...document.querySelectorAll(".bag-d .line[data-lk]")].find(n => n.getAttribute("data-lk") === added.k);
+      if (!el) return;
+      el.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      el.classList.remove("just-added");
+      void el.offsetWidth;
+      el.classList.add("just-added");
+    }, 320);
+    return () => clearTimeout(t);
+  }, [open, added && added.n]);
+  /* Only the open that follows an add plays the highlight: a later open of the bag leaves the lines plain. */
+  useEffect(() => {
+    if (!open) document.querySelectorAll(".bag-d .line.just-added").forEach(n => n.classList.remove("just-added"));
+  }, [open]);
   const goal = s.threshold || 49;
   const [code, setCode] = useState("");
   const [promo, setPromo] = useState(null);
@@ -1186,7 +1765,7 @@ function BagDrawer({
     l,
     p: D.byId(l.id)
   })).filter(x => x.p);
-  const sub = lines.reduce((s, x) => s + x.p.price * x.l.q, 0);
+  const sub = lines.reduce((s, x) => s + lineEach(x) * x.l.q, 0);
   const disc = promo && promo.off ? sub * promo.off : 0;
   const net = sub - disc;
   const left = Math.max(0, goal - net);
@@ -1207,59 +1786,63 @@ function BagDrawer({
       setErr("That code isn\u2019t valid.");
     }
   };
-  return /*#__PURE__*/React.createElement("aside", {
-    className: "bagd" + (open ? " on" : ""),
-    "aria-hidden": !open,
-    "aria-label": "Shopping bag"
+  return /*#__PURE__*/React.createElement(DS.Drawer, {
+    open: open,
+    onClose: onClose,
+    className: "bag-d",
+    title: "Shopping Cart" + (lines.length ? " (" + lines.reduce((s, x) => s + x.l.q, 0) + ")" : ""),
+    closeLabel: "Close cart",
+    footer: !placed && lines.length ? /*#__PURE__*/React.createElement("div", {
+    className: "bagd-f"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "bagd-h"
-  }, /*#__PURE__*/React.createElement("h2", null, "Shopping Bag", lines.length ? " (" + lines.reduce((s, x) => s + x.l.q, 0) + ")" : ""), /*#__PURE__*/React.createElement("button", {
-    className: "iconbtn",
-    onClick: onClose,
-    "aria-label": "Close bag"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "x",
-    size: 22
-  }))), placed ? /*#__PURE__*/React.createElement("div", {
-    className: "bagd-b"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "check",
-    size: 28
-  }), /*#__PURE__*/React.createElement("h1", {
+    className: "r"
+  }, /*#__PURE__*/React.createElement("span", null, "Subtotal"), /*#__PURE__*/React.createElement("span", null, money(sub))), disc ? /*#__PURE__*/React.createElement("div", {
+    className: "r"
+  }, /*#__PURE__*/React.createElement("span", null, "Discount"), /*#__PURE__*/React.createElement("span", null, "\u2212", money(disc))) : null, /*#__PURE__*/React.createElement("div", {
+    className: "r"
+  }, /*#__PURE__*/React.createElement("span", null, "Shipping"), /*#__PURE__*/React.createElement("span", null, shipCost ? money(shipCost) : "Free")), /*#__PURE__*/React.createElement("div", {
+    className: "r grand"
+  }, /*#__PURE__*/React.createElement("span", null, "Total"), /*#__PURE__*/React.createElement("span", null, money(net + shipCost))), /*#__PURE__*/React.createElement(DSB, {
+    className: "btn-gold",
     style: {
-      fontFamily: "Lora,Georgia,serif",
-      fontWeight: 500,
-      fontSize: 24,
-      margin: 0
+      height: 48,
+      padding: "0 24px",
+      marginTop: 4
+    },
+    onClick: () => {
+      if (onCheckout) {
+        onCheckout(promo);
+        return;
+      }
+      setPlaced(true);
+      setPromo(null);
+      setCode("");
+      setErr("");
+      clear();
     }
-  }, "Order Placed"), /*#__PURE__*/React.createElement("p", null, "Thank you. A confirmation is on its way to your email, and your order will ship within two business days."), /*#__PURE__*/React.createElement("button", {
+  }, "CHECKOUT"), onViewBag ? /*#__PURE__*/React.createElement(DS.Button, {
+    variant: "ghost",
+    size: "md",
+    className: "bagd-view",
+    onClick: () => onViewBag(promo),
+    style: { alignSelf: "center" }
+  }, "View cart") : null) : null
+  }, placed ? /*#__PURE__*/React.createElement("div", {
+    className: "bagd-b"
+  }, /*#__PURE__*/React.createElement(DS.EmptyState, { icon: ICON_MAP["check"] || "check", title: "Order Placed", headingLevel: "h2", action: /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
     onClick: onClose
-  }, "KEEP SHOPPING"))) : !lines.length ? /*#__PURE__*/React.createElement("div", {
+  }, "KEEP SHOPPING") }, "Thank you. A confirmation is on its way to your email, and your order will ship within two business days.")) : !lines.length ? /*#__PURE__*/React.createElement("div", {
     className: "bagd-b"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "shopping-bag",
-    size: 28
-  }), /*#__PURE__*/React.createElement("h1", {
-    style: {
-      fontFamily: "Lora,Georgia,serif",
-      fontWeight: 500,
-      fontSize: 24,
-      margin: 0
-    }
-  }, "Your Bag Is Empty"), /*#__PURE__*/React.createElement("p", null, "Books, journals, and art and home decor are waiting on the shelves."), /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement(DS.EmptyState, { icon: ICON_MAP["shopping-bag"] || "shopping-bag", title: "Your Cart Is Empty", headingLevel: "h2", action: /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
     onClick: onClose
-  }, "START SHOPPING"))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, "START SHOPPING") }, "Books, journals, and art and home decor are waiting on the shelves.")) :  /*#__PURE__*/React.createElement("div", {
     className: "bagd-b"
   }, /*#__PURE__*/React.createElement("div", {
     className: "ship",
     style: {
-      "--ship-accent": s.accent || "var(--db-green-400)",
+      "--ship-accent": s.accent || "var(--db-yellow-300)",
       "--ship-h": (s.height || 6) + "px"
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -1268,7 +1851,8 @@ function BagDrawer({
     className: "ic"
   }, /*#__PURE__*/React.createElement(Ico, {
     name: left > 0 ? "truck" : "check",
-    size: 14
+    size: 14,
+    weight: 600
   })), left > 0 ? /*#__PURE__*/React.createElement("span", null, "You\u2019re ", money(left), " away from ", /*#__PURE__*/React.createElement("strong", null, "free shipping"), ".") : /*#__PURE__*/React.createElement("span", null, "Your order ships ", /*#__PURE__*/React.createElement("strong", null, "free"), ".")), /*#__PURE__*/React.createElement("div", {
     className: "ship-bar"
   }, s.style === "segments" ? /*#__PURE__*/React.createElement("span", {
@@ -1284,22 +1868,26 @@ function BagDrawer({
     }
   })), s.goalMark ? /*#__PURE__*/React.createElement("span", {
     className: "ship-goal"
-  }, money(goal).replace(".00", "")) : null)), lines.map((x, i) => /*#__PURE__*/React.createElement("div", {
-    className: "line",
+  }, money(goal).replace(".00", "")) : null)), lines.map((x, i) => /*#__PURE__*/React.createElement(React.Fragment, {
     key: x.l.key || i
+  }, /*#__PURE__*/React.createElement(DS.Divider, {
+    spacing: "none",
+    className: "bagd-div"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "line",
+    "data-lk": x.l.id + "|" + (x.l.color || "") + "|" + (x.l.imprint ? x.l.imprint.style + ":" + x.l.imprint.text : "")
   }, /*#__PURE__*/React.createElement("button", {
     className: "th",
     onClick: () => {
       onClose();
       go("#/p/" + x.p.id);
     }
-  }, /*#__PURE__*/React.createElement("img", {
-    src: thumb(colorImg(x.p, x.l.color)),
-    alt: "",
-    loading: "lazy",
-    decoding: "async"
+  }, /*#__PURE__*/React.createElement(window.PDPX.CardImg, {
+    src: thumb(colorImg(x.p, x.l.color))
   })), /*#__PURE__*/React.createElement("div", {
     className: "info"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bagd-top"
   }, /*#__PURE__*/React.createElement("button", {
     className: "t",
     style: {
@@ -1309,37 +1897,37 @@ function BagDrawer({
       onClose();
       go("#/p/" + x.p.id);
     }
-  }, x.p.t), x.l.color ? /*#__PURE__*/React.createElement("span", {
+  }, x.p.t), /*#__PURE__*/React.createElement("span", {
+    className: "bagd-lp"
+  }, money(lineEach(x) * x.l.q))), x.l.color ? /*#__PURE__*/React.createElement("span", {
     className: "c"
-  }, x.l.color) : null, x.l.imprint ? /*#__PURE__*/React.createElement("span", {
+  }, x.l.color) : null, window.PDPX && window.PDPX.isPre(x.p) ? /*#__PURE__*/React.createElement("span", {
+    className: "c pre-c"
+  }, window.PDPX.preLine(x.p)) : null, x.l.imprint ? /*#__PURE__*/React.createElement("span", {
     className: "c"
   }, "Imprint: \u201c" + x.l.imprint.text + "\u201d, " + x.l.imprint.style) : null, /*#__PURE__*/React.createElement("span", {
     className: "c"
-  }, money(x.p.price), " each"), /*#__PURE__*/React.createElement("div", {
+  }, money(x.p.price), " each", x.l.imprint ? " + " + money(IMPRINT_FEE) + " imprint fee" : null), /*#__PURE__*/React.createElement("div", {
     className: "r"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "qty"
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => setQty(i, x.l.q - 1),
-    "aria-label": "Decrease"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "minus",
-    size: 14
-  })), /*#__PURE__*/React.createElement("span", null, x.l.q), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setQty(i, x.l.q + 1),
-    "aria-label": "Increase"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "plus",
-    size: 14
-  }))), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 13,
-      fontWeight: 400
-    }
-  }, money(x.p.price * x.l.q))), /*#__PURE__*/React.createElement("button", {
-    className: "rm",
-    onClick: () => remove(i)
-  }, "Remove")))), /*#__PURE__*/React.createElement("form", {
+  }, /*#__PURE__*/React.createElement(DS.QuantityStepper, {
+    className: "qty-ds",
+    size: "sm",
+    min: 1,
+    max: 20,
+    value: x.l.q,
+    onChange: v => setQty(i, v),
+    label: "Quantity, " + x.p.t
+  }), /* Remove: a small outline icon button with the trash can, beside the quantity stepper. */ /*#__PURE__*/React.createElement(DS.IconButton, {
+    variant: "outline",
+    size: "sm",
+    icon: "delete",
+    className: "bagd-rm",
+    onClick: () => remove(i),
+    label: "Remove " + x.p.t
+  })))))), /*#__PURE__*/React.createElement(DS.Divider, {
+    spacing: "none",
+    className: "bagd-div bagd-div-promo"
+  }), /*#__PURE__*/React.createElement("form", {
     className: "promo-row",
     onSubmit: apply
   }, /*#__PURE__*/React.createElement("label", {
@@ -1347,13 +1935,13 @@ function BagDrawer({
     htmlFor: "promo"
   }, "Promo code"), /*#__PURE__*/React.createElement("div", {
     className: "promo-in"
-  }, /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement(DS.Input, {
     id: "promo",
     value: code,
     onChange: e => setCode(e.target.value),
     placeholder: "Enter code",
     autoComplete: "off"
-  }), /*#__PURE__*/React.createElement("button", {
+  }), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-out",
     type: "submit",
     style: {
@@ -1362,72 +1950,85 @@ function BagDrawer({
     }
   }, "APPLY")), promo ? /*#__PURE__*/React.createElement("span", {
     className: "promo-ok"
-  }, promo.code, " applied \u2014 ", promo.lab, /*#__PURE__*/React.createElement("button", {
+  }, promo.code, " applied \u2014 ", promo.lab, /*#__PURE__*/React.createElement(DS.Button, {
     type: "button",
+    variant: "ghost",
+    size: "sm",
     onClick: () => setPromo(null)
   }, "Remove")) : null, err ? /*#__PURE__*/React.createElement("span", {
     className: "promo-err"
-  }, err) : null)), /*#__PURE__*/React.createElement("div", {
-    className: "bagd-f"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "r"
-  }, /*#__PURE__*/React.createElement("span", null, "Subtotal"), /*#__PURE__*/React.createElement("span", null, money(sub))), disc ? /*#__PURE__*/React.createElement("div", {
-    className: "r"
-  }, /*#__PURE__*/React.createElement("span", null, "Discount"), /*#__PURE__*/React.createElement("span", null, "\u2212", money(disc))) : null, /*#__PURE__*/React.createElement("div", {
-    className: "r"
-  }, /*#__PURE__*/React.createElement("span", null, "Shipping"), /*#__PURE__*/React.createElement("span", null, shipCost ? money(shipCost) : "Free")), /*#__PURE__*/React.createElement("div", {
-    className: "r grand"
-  }, /*#__PURE__*/React.createElement("span", null, "Total"), /*#__PURE__*/React.createElement("span", null, money(net + shipCost))), /*#__PURE__*/React.createElement("button", {
-    className: "btn-gold",
-    style: {
-      height: 48,
-      padding: "0 24px",
-      fontSize: 16,
-      marginTop: 4
-    },
-    onClick: () => {
-      if (onCheckout) {
-        onCheckout(promo);
-        return;
-      }
-      setPlaced(true);
-      setPromo(null);
-      setCode("");
-      setErr("");
-      clear();
-    }
-  }, "CHECKOUT"), onViewBag ? /*#__PURE__*/React.createElement("button", {
-    className: "btn-out bagd-view",
-    onClick: () => onViewBag(promo)
-  }, "VIEW BAG") : null)));
+  }, err) : null)));
 }
-const ACCT_LINKS = ["Orders", "Subscriptions", "Addresses", "Payment methods", "Email preferences", "Platinum Rewards"];
-function AccountDrawer({
-  open,
-  onClose,
-  user,
-  subs,
-  onSignIn,
-  onSignOut,
-  onGo,
-  onWishlist
-}) {
+const ACCT_LINKS = ["Account Information", "Orders", "Wishlist", "Addresses", "Payment methods", "Bookshelf+", "Platinum Rewards"];
+const ACCT_GROUPS = [["Account", ["Account Information", "Addresses", "Payment methods", "Orders", "Wishlist"]], ["Subscriptions", ["Bookshelf+", "Platinum Rewards"]]];
+const ACCT_ICON = { "Account Information": "person", "Orders": "package_2", "Wishlist": "favorite", "Addresses": "location_on", "Payment methods": "credit_card", "Bookshelf+": "headphones", "Platinum Rewards": "redeem" };
+/* Account page (#/account/<section>): one page, three columns. Left column mirrors the account drawer; the right two show the selected section. */
+const ACCT_SLUG = { "Orders": "orders", "Wishlist": "wishlist", "Addresses": "addresses", "Payment methods": "payment-methods", "Account Information": "account-information", "Platinum Rewards": "platinum-rewards", "Bookshelf+": "bookshelf-plus", "Subscriptions": "bookshelf-plus" };
+const ACCT_BY_SLUG = Object.fromEntries(Object.entries(ACCT_SLUG).filter(([k]) => k !== "Subscriptions").map(([k, v]) => [v, k]));
+function acctSection(route) {
+  if (route === "#/wishlist") return "wishlist";
+  if (route === "#/account/subscriptions/platinum-rewards") return "platinum-rewards";
+  if (route === "#/account/subscriptions" || route === "#/account/subscriptions/bookshelf-plus") return "bookshelf-plus";
+  if (route !== "#/account" && route.indexOf("#/account/") !== 0) return null;
+  const seg = route.slice(10).split("/")[0];
+  return !seg ? ACCT_SLUG[ACCT_GROUPS[0][1][0]] : ACCT_BY_SLUG[seg] ? seg : null;
+}
+function AcctNav({ section, onPick, className }) {
+  const h = React.createElement;
+  return h("nav", { className: "acp-nav" + (className ? " " + className : ""), "aria-label": "Account sections" }, ACCT_GROUPS.map(([g, items]) => h("div", { key: g, className: "acp-grp", role: "group", "aria-label": g }, h("span", { className: "db-eyebrow acp-eb" }, g), items.map(l => h("button", { key: l, type: "button", className: "acp-it" + (section === ACCT_SLUG[l] ? " on" : ""), "aria-current": section === ACCT_SLUG[l] ? "page" : undefined, onClick: () => onPick(l) }, h("span", { className: "acp-icw" }, l === "Bookshelf+" ? h("span", { className: "acp-ic acp-bsp", "aria-hidden": "true" }) : [h(DS.Icon, { key: "o", name: ACCT_ICON[l], size: 20, weight: 400, className: "acp-ic acp-ic-o" }), h(DS.Icon, { key: "f", name: ACCT_ICON[l], size: 20, weight: 400, filled: true, className: "acp-ic acp-ic-f" })]), h("span", null, l))))));
+}
+function AcctAuthPage({ onSignIn, go }) {
+  const h = React.createElement;
   const [mode, setMode] = useState("signin");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [pw, setPw] = useState("");
-  const [err, setErr] = useState("");
+  const CO = window.FP && window.FP.CheckOrderBody;
+  return h("div", { className: "acp-auth acp-auth-2", "data-screen-label": mode === "create" ? "Create Account" : "Sign In" },
+    h("div", { className: "acp-col" },
+      h("h1", null, mode === "create" ? "Create Account" : "Sign In"),
+      h(AcctAuth, { mode: mode, setMode: setMode, onSignIn: onSignIn, idp: "acpa-", onForgot: () => go("#/info/" + window.FP_SLUG("Contact Us")) })),
+    CO ? h("div", { className: "acp-col acp-co" },
+      h("h2", null, "Check Order Status"),
+      h("p", { className: "acct-lede" }, "No account needed. Enter your order number and the email used at checkout to see where your shipment is."),
+      h(CO, { go: go, user: null, variant: "secondary" })) : null);
+}
+function AccountPage({ user, subs, section, go, route, onSignIn, onSignOut, children }) {
+  const h = React.createElement;
+  /* Phones (below 640px): #/account is the menu alone; a section opens as a full-screen page with a back arrow. From 640px the menu and the section sit side by side. */
+  const [mob, setMob] = useState(() => !!(window.matchMedia && window.matchMedia("(max-width:639px)").matches));
   useEffect(() => {
-    if (!open) {
-      setMode("signin");
-      setErr("");
-      setPw("");
-    } else if (!user) {
-      setName("Sarah Johnson");
-      setEmail("sarah.johnson@example.com");
-      setPw("password123");
-    }
-  }, [open, user]);
+    if (!window.matchMedia) return;
+    const mq = window.matchMedia("(max-width:639px)"), on = () => setMob(mq.matches);
+    on();
+    mq.addEventListener ? mq.addEventListener("change", on) : mq.addListener(on);
+    return () => { mq.removeEventListener ? mq.removeEventListener("change", on) : mq.removeListener(on); };
+  }, []);
+  if (!user) return h(AcctAuthPage, { onSignIn: onSignIn, go: go });
+  const root = route === "#/account";
+  const back = () => go(/^#\/account\/orders\/./.test(route || "") ? "#/account/orders" : "#/account");
+  return h("div", { className: "acp " + (root ? "is-root" : "is-sec"), "data-screen-label": "My Account" },
+    h("aside", { className: "acp-side", "aria-label": "My account" },
+      h("div", { className: "acct-id" }, h("span", { className: "acct-av" }, initials(user.name)),
+        h("span", { className: "acct-meta" }, h("strong", null, user.name), subs && subs.platinum ? h("span", { className: "acct-tier" }, SUB_POINTS + " Platinum Points") : null)),
+      h(AcctNav, { section: root && mob ? null : section, onPick: l => go("#/account/" + ACCT_SLUG[l]) }),
+      h(DSB, { className: "btn-out acct-signout", onClick: onSignOut }, "Sign out")),
+    h("div", { className: "acp-main" },
+      h("div", { className: "acp-back-bar" }, h(DS.Button, { className: "acp-back", variant: "ghost", size: "sm", icon: "arrow_back", onClick: back }, /^#\/account\/orders\/./.test(route || "") ? "Orders" : "My Account")),
+      children));
+}
+/* Sign in / create account form: used by the account drawer and by the account page when signed out. */
+function AcctAuth({
+  mode,
+  setMode,
+  onSignIn,
+  onForgot,
+  onCheckOrder,
+  idp = "acct-"
+}) {
+  const [name, setName] = useState("Sarah Johnson");
+  const [email, setEmail] = useState("sarah.johnson@example.com");
+  const [pw, setPw] = useState("password123");
+  const [birth, setBirth] = useState("");
+  const [phone, setPhone] = useState("");
+  const [err, setErr] = useState("");
   const create = mode === "create";
   const submit = e => {
     e.preventDefault();
@@ -1443,81 +2044,26 @@ function AccountDrawer({
       setErr(create ? "Choose a password of at least four characters." : "Enter your password.");
       return;
     }
+    if (create && birth && birth > new Date().toISOString().slice(0, 10)) {
+      setErr("Birthday can\u2019t be in the future.");
+      return;
+    }
+    if (create && phone.trim() && !/^[+()\d][\d\s().+-]{6,}$/.test(phone.trim())) {
+      setErr("Enter a valid phone number, or leave it blank.");
+      return;
+    }
     setErr("");
     setPw("");
+    const nm = create ? name.trim() : email.split("@")[0].replace(/[._]/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    if (create && window.AccountMock && window.AccountMock.setBirth) window.AccountMock.setBirth(birth, { name: nm, email: email });
     onSignIn({
-      name: create ? name.trim() : email.split("@")[0].replace(/[._]/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
-      email: email
+      name: nm,
+      email: email,
+      birth: create ? birth : undefined,
+      phone: create && phone.trim() ? phone.trim() : undefined
     });
   };
-  return /*#__PURE__*/React.createElement("aside", {
-    className: "acctd" + (open ? " on" : ""),
-    "aria-hidden": !open,
-    "aria-label": "My account"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "bagd-h"
-  }, /*#__PURE__*/React.createElement("h2", null, user ? "My Account" : create ? "Create Account" : "Sign In"), /*#__PURE__*/React.createElement("button", {
-    className: "iconbtn",
-    onClick: onClose,
-    "aria-label": "Close account"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "x",
-    size: 22
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "bagd-b"
-  }, user ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "acct-id"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "acct-av"
-  }, user.name.slice(0, 1)), /*#__PURE__*/React.createElement("span", {
-    className: "acct-meta"
-  }, /*#__PURE__*/React.createElement("strong", null, user.name), /*#__PURE__*/React.createElement("span", null, user.email), subs && subs.platinum ? /*#__PURE__*/React.createElement("span", {
-    className: "acct-tier"
-  }, "PLATINUM REWARDS \xB7 1,240 points") : null)), subs && subs.bookshelf ? null : /*#__PURE__*/React.createElement("button", {
-    className: "acct-bsp",
-    onClick: () => {
-      onClose();
-      onGo("Bookshelf Plus");
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "acct-bsp-t"
-  }, /*#__PURE__*/React.createElement("img", {
-    className: "acct-bsp-logo",
-    src: window.__resources && window.__resources.bsplus || "assets/bookshelfplus.svg",
-    alt: "bookshelf+"
-  }), /*#__PURE__*/React.createElement("span", null, "Your digital library and audiobooks")), /*#__PURE__*/React.createElement(Ico, {
-    name: "arrow-right",
-    size: 16
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "card-list",
-    style: {
-      marginTop: subs && subs.bookshelf ? 20 : 4
-    }
-  }, ACCT_LINKS.map(l => /*#__PURE__*/React.createElement("button", {
-    key: l,
-    onClick: () => {
-      onClose();
-      onGo(l);
-    }
-  }, /*#__PURE__*/React.createElement("span", null, l), /*#__PURE__*/React.createElement(Ico, {
-    name: "arrow-right",
-    size: 14
-  }))), /*#__PURE__*/React.createElement("button", {
-    onClick: () => {
-      onClose();
-      onWishlist();
-    }
-  }, /*#__PURE__*/React.createElement("span", null, "Wishlist"), /*#__PURE__*/React.createElement(Ico, {
-    name: "arrow-right",
-    size: 14
-  }))), /*#__PURE__*/React.createElement("button", {
-    className: "btn-out",
-    style: {
-      alignSelf: "flex-start",
-      marginTop: 20
-    },
-    onClick: onSignOut
-  }, "Sign out")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
     className: "acct-lede"
   }, create ? "Create an account to track orders, save addresses, and keep a wishlist." : "Sign in to see your orders, saved addresses, and Bookshelf Plus library."), /*#__PURE__*/React.createElement("form", {
     className: "acct-form",
@@ -1525,18 +2071,18 @@ function AccountDrawer({
     noValidate: true
   }, create ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("label", {
     className: "lab",
-    htmlFor: "acct-name"
-  }, "Full name"), /*#__PURE__*/React.createElement("input", {
-    id: "acct-name",
+    htmlFor: idp + "name"
+  }, "Full name"), /*#__PURE__*/React.createElement(DS.Input, {
+    id: idp + "name",
     value: name,
     onChange: e => setName(e.target.value),
     placeholder: "First and last name",
     autoComplete: "name"
   })) : null, /*#__PURE__*/React.createElement("label", {
     className: "lab",
-    htmlFor: "acct-email"
-  }, "Email address"), /*#__PURE__*/React.createElement("input", {
-    id: "acct-email",
+    htmlFor: idp + "email"
+  }, "Email address"), /*#__PURE__*/React.createElement(DS.Input, {
+    id: idp + "email",
     type: "email",
     value: email,
     onChange: e => setEmail(e.target.value),
@@ -1544,23 +2090,42 @@ function AccountDrawer({
     autoComplete: "email"
   }), /*#__PURE__*/React.createElement("label", {
     className: "lab",
-    htmlFor: "acct-pw"
-  }, "Password"), /*#__PURE__*/React.createElement("input", {
-    id: "acct-pw",
+    htmlFor: idp + "pw"
+  }, "Password"), /*#__PURE__*/React.createElement(DS.Input, {
+    id: idp + "pw",
     type: "password",
     value: pw,
     onChange: e => setPw(e.target.value),
     placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
     autoComplete: create ? "new-password" : "current-password"
-  }), err ? /*#__PURE__*/React.createElement("span", {
+  }), create ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("label", {
+    className: "lab",
+    htmlFor: idp + "birth"
+  }, "Birthday (optional)"), /*#__PURE__*/React.createElement(DS.Input, {
+    id: idp + "birth",
+    type: "date",
+    value: birth,
+    max: new Date().toISOString().slice(0, 10),
+    onChange: e => setBirth(e.target.value),
+    autoComplete: "bday"
+  }), /*#__PURE__*/React.createElement("label", {
+    className: "lab",
+    htmlFor: idp + "phone"
+  }, "Phone number (optional)"), /*#__PURE__*/React.createElement(DS.Input, {
+    id: idp + "phone",
+    type: "tel",
+    value: phone,
+    onChange: e => setPhone(e.target.value),
+    placeholder: "(801) 555-0123",
+    autoComplete: "tel"
+  })) : null, err ? /*#__PURE__*/React.createElement("span", {
     className: "promo-err"
-  }, err) : null, /*#__PURE__*/React.createElement("button", {
+  }, err) : null, /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
     type: "submit",
     style: {
       height: 48,
       padding: "0 24px",
-      fontSize: 16,
       marginTop: 4
     }
   }, create ? "CREATE ACCOUNT" : "SIGN IN")), /*#__PURE__*/React.createElement("div", {
@@ -1571,84 +2136,123 @@ function AccountDrawer({
       setMode(create ? "signin" : "create");
     }
   }, create ? "Already have an account? Sign in" : "Create an account"), create ? null : /*#__PURE__*/React.createElement("button", {
-    onClick: () => {
+    onClick: onForgot
+  }, "Forgot password?"), onCheckOrder ? /*#__PURE__*/React.createElement("button", {
+    onClick: onCheckOrder
+  }, "Check order") : null));
+}
+function AccountDrawer({
+  open,
+  onClose,
+  user,
+  subs,
+  onSignIn,
+  onSignOut,
+  onGo,
+  onWishlist
+}) {
+  const [mode, setMode] = useState("signin");
+  useEffect(() => {
+    if (!open) setMode("signin");
+  }, [open]);
+  const create = mode === "create";
+  return /*#__PURE__*/React.createElement(DS.Drawer, {
+    open: open,
+    onClose: onClose,
+    className: "acct-d",
+    title: user ? "My Account" : create ? "Create Account" : "Sign In",
+    closeLabel: "Close account"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bagd-b"
+  }, user ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "acct-id"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "acct-av"
+  }, initials(user.name)), /*#__PURE__*/React.createElement("span", {
+    className: "acct-meta"
+  }, /*#__PURE__*/React.createElement("strong", null, user.name), subs && subs.platinum ? /*#__PURE__*/React.createElement("span", {
+    className: "acct-tier"
+  }, SUB_POINTS + " Platinum Points") : null)), subs && subs.bookshelf ? null : /*#__PURE__*/React.createElement(window.DBPromoBand, {
+    className: "acct-pb",
+    tone: "bookshelf",
+    onClick: e => {
+      if (e.target.closest("button")) return;
+      onClose();
+      onGo("Bookshelf Plus");
+    },
+    action: /*#__PURE__*/React.createElement(DS.Button, {
+      size: "sm",
+      "aria-label": "Learn more about Bookshelf+",
+      onClick: () => {
+        onClose();
+        onGo("Bookshelf Plus");
+      }
+    }, "Learn more")
+  }, "Your digital library and audiobooks"), /*#__PURE__*/React.createElement(AcctNav, {
+    className: "acct-d-nav",
+    onPick: l => {
+      onClose();
+      onGo("acct:" + l);
+    }
+  }), /*#__PURE__*/React.createElement(DSB, {
+    className: "btn-out acct-signout",
+    style: {
+      alignSelf: "flex-end",
+      marginTop: "auto"
+    },
+    onClick: onSignOut
+  }, "Sign out")) : /*#__PURE__*/React.createElement(AcctAuth, {
+    key: open ? "open" : "closed",
+    mode: mode,
+    setMode: setMode,
+    onSignIn: onSignIn,
+    onForgot: () => {
       onClose();
       onGo("Contact Us");
+    },
+    onCheckOrder: () => {
+      onClose();
+      onGo("Check Order");
     }
-  }, "Forgot password?")))));
+  })));
 }
+/* Thin wrapper over DS.Toast: keeps the last message through the exit fade. Tones pass through to the DS ("ok" is the legacy alias for success).
+   Timing is owned by DS.Toast: temporary (default) toasts call onDismiss after `duration` (DS default 4000ms) with no close button;
+   `persistent` toasts stay until the user closes them. */
 function Toast(props) {
   const last = useRef(props);
   if (props.on) last.current = props;
   const {
     msg,
     action,
-    seq
+    seq,
+    persistent,
+    duration
   } = props.on ? props : last.current;
-  const tone = (props.on ? props : last.current).tone || "neutral";
+  const raw = (props.on ? props : last.current).tone || "neutral";
+  const tone = raw === "ok" ? "success" : raw;
   const {
     onAction,
+    onDismiss,
     on
   } = props;
-  const ref = useRef(null);
-  const wasOn = useRef(false);
-  useEffect(() => {
-    const el = ref.current,
-      visible = wasOn.current;
-    wasOn.current = on;
-    if (!el) return;
-    el.classList.remove("bump");
-    if (on && visible) {
-      void el.offsetWidth;
-      el.classList.add("bump");
-    }
-  }, [seq, on]);
-  return /*#__PURE__*/React.createElement("div", {
-    ref: ref,
-    className: "toast toast-pill toast-" + tone + (on ? " on" : ""),
-    role: "status",
-    "aria-live": "polite"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "toast-ic",
-    key: seq
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: tone === "ok" ? "check" : "info_circle",
-    size: 18
-  })), /*#__PURE__*/React.createElement("span", null, msg), action ? /*#__PURE__*/React.createElement("button", {
-    className: "toast-a",
-    onClick: onAction
-  }, action) : null);
-}
-function Accordion({
-  title,
-  children,
-  start
-}) {
-  const [open, setOpen] = useState(!!start);
-  return /*#__PURE__*/React.createElement("div", {
-    className: "acc2"
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => setOpen(!open),
-    "aria-expanded": open
-  }, /*#__PURE__*/React.createElement("span", null, title), /*#__PURE__*/React.createElement("span", {
-    style: {
-      transform: open ? "rotate(180deg)" : "none",
-      transition: "transform 180ms",
-      display: "grid"
-    }
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "chevron-down",
-    size: 16
-  }))), open ? /*#__PURE__*/React.createElement("div", {
-    className: "body"
-  }, children) : null);
+  return /*#__PURE__*/React.createElement(DS.Toast, {
+    open: !!on,
+    tone: tone,
+    message: msg,
+    seq: seq,
+    fixed: true,
+    link: action ? { label: action, onClick: onAction } : undefined,
+    onDismiss: onDismiss,
+    persistent: !!persistent,
+    duration: duration
+  });
 }
 Object.assign(window, {
   DS,
   Ico,
   colorImg,
   Stars,
-  Cover,
   ProductCard,
   useRailDots,
   Dots,
@@ -1662,7 +2266,6 @@ Object.assign(window, {
   Toast,
   BagDrawer,
   AccountDrawer,
-  Accordion,
   money,
   priceLabel,
   thumb,
@@ -1685,7 +2288,7 @@ function Home({
   const [conRef, conDots] = useRailDots();
   const trending = D.trending.map(id => D.byId(id)).filter(Boolean);
   const fineArt = D.fineArt.map(id => D.byId(id)).filter(Boolean);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, false ? /*#__PURE__*/React.createElement("section", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, true ? /*#__PURE__*/React.createElement("section", {
     className: "hero art ab-a",
     onClick: () => go(GV)
   }, /*#__PURE__*/React.createElement("div", {
@@ -1693,9 +2296,11 @@ function Home({
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("div", {
     className: "art-box"
-  }, /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h1", {
     className: "ab-offer"
-  }, "$5 Off Your Purchase of $50+ with Code: Conference50"))) : /*#__PURE__*/React.createElement("section", {
+  }, "Remember Messages That Move You"), /*#__PURE__*/React.createElement(DSB, {
+    className: "btn-gold"
+  }, "Preorder Now"))) : /*#__PURE__*/React.createElement("section", {
     className: "hero art ab-b",
     onClick: () => go(GV)
   }, /*#__PURE__*/React.createElement("div", {
@@ -1707,34 +2312,31 @@ function Home({
     className: "h-title"
   }, "Remember Messages That Move You"), /*#__PURE__*/React.createElement("p", {
     className: "hero-sub"
-  }, "$5 Off Your Purchase of $50+ with Code Conference50"), /*#__PURE__*/React.createElement("button", {
+  }, "$5 Off Your Purchase of $50+ with Code Conference50"), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
     onClick: () => go(GV)
   }, "Preorder Now"))), /*#__PURE__*/React.createElement("section", {
     className: "band"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "band-card",
-    onClick: () => go("#/bookshelf-plus"),
-    "aria-label": "Subscribe now to Bookshelf Plus"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "band-lab"
-  }, "Subscribe now and gain unlimited access to 4,000+ audiobooks & eBooks"), /*#__PURE__*/React.createElement("span", {
-    className: "band-logo"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: window.__resources && window.__resources.bsplus || "assets/bookshelfplus.svg",
-    alt: "bookshelf+"
-  })))), /*#__PURE__*/React.createElement("section", {
+  }, /*#__PURE__*/React.createElement(window.DBPromoBand, {
+    layout: "band",
+    tone: "bookshelf",
+    href: "#/bookshelf-plus",
+    onClick: e => {
+      e.preventDefault();
+      go("#/bookshelf-plus");
+    },
+    "aria-label": "Subscribe now to Bookshelf Plus",
+    label: "Subscribe now and gain unlimited access to 4,000+ audiobooks & eBooks",
+    subline: "Including books from gospel leaders, a full library of clean and compelling fiction, inspiring audiobooks, exclusive podcasts, and more."
+  })), /*#__PURE__*/React.createElement("section", {
     className: "sect"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sect-top"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "sect-h"
-  }, "New & Trending"), /*#__PURE__*/React.createElement("button", {
-    className: "sect-all",
-    onClick: () => go("#/c/new-trending")
-  }, "See All")), /*#__PURE__*/React.createElement("div", {
-    className: "rail"
-  }, trending.map(p => /*#__PURE__*/React.createElement(ProductCard, {
+  }, /*#__PURE__*/React.createElement(DS.SectionHeading, {
+    className: "sect-top",
+    title: "New & Trending",
+    href: "#/c/new-trending"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "rail r6"
+  }, trending.slice(0, 6).map(p => /*#__PURE__*/React.createElement(ProductCard, {
     key: p.id,
     p: p,
     onOpen: id => go("#/p/" + id),
@@ -1750,35 +2352,29 @@ function Home({
     className: "h-title"
   }, "Bring Home Reminders of Christ"), /*#__PURE__*/React.createElement("p", {
     className: "promo-sub"
-  }, "20% Off Art Plus Deeper Discounts on Select Art"), /*#__PURE__*/React.createElement("button", {
+  }, "20% Off Art Plus Deeper Discounts on Select Art"), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
     onClick: () => go("#/c/art")
   }, "SHOP ART")))), /*#__PURE__*/React.createElement("section", {
     className: "sect"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sect-top"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "sect-h"
-  }, "Fine Art"), /*#__PURE__*/React.createElement("button", {
-    className: "sect-all",
-    onClick: () => go("#/c/home_fine-art")
-  }, "See All")), /*#__PURE__*/React.createElement("div", {
-    className: "rail"
-  }, fineArt.map(p => /*#__PURE__*/React.createElement(ProductCard, {
+  }, /*#__PURE__*/React.createElement(DS.SectionHeading, {
+    className: "sect-top",
+    title: "Fine Art",
+    href: "#/c/home_fine-art"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "rail r6"
+  }, fineArt.slice(0, 6).map(p => /*#__PURE__*/React.createElement(ProductCard, {
     key: p.id,
     p: p,
     onOpen: id => go("#/p/" + id),
     onAdd: add
   })))), /*#__PURE__*/React.createElement("section", {
     className: "sect sect-con"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sect-top"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "sect-h"
-  }, "Featured Content"), /*#__PURE__*/React.createElement("button", {
-    className: "sect-all",
-    onClick: () => go("#/blog")
-  }, "See All")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(DS.SectionHeading, {
+    className: "sect-top",
+    title: "Featured Content",
+    href: "#/blog"
+  }), /*#__PURE__*/React.createElement("div", {
     className: "crail",
     ref: conRef
   }, D.featuredContent.map((c, i) => {
@@ -1807,7 +2403,7 @@ function Home({
       className: "ccard-t"
     }, c.title), /*#__PURE__*/React.createElement("p", {
       className: "ccard-x"
-    }, c.x), /*#__PURE__*/React.createElement("button", {
+    }, c.x), /*#__PURE__*/React.createElement(DSB, {
       className: "btn-out",
       onClick: () => go("#/blog/" + i)
     }, "Read More")));
@@ -1816,74 +2412,38 @@ function Home({
     n: conDots.n
   })));
 }
+/* Every category renders through the one PLP template in src/plp.js (fixed frame + header slot + configured modules).
+   The old single-layout body was removed; see src/plp.js for the configurations (A Standard, B Curated tiles, C Hero, D Hub). */
 function Category({
   id,
   go,
   add
 }) {
-  const [sort, setSort] = useState("featured");
-  const base = D.inCat(id);
-  const items = id === "all-categories" ? D.products.slice() : base.slice();
-  if (sort === "low") items.sort((a, b) => a.price - b.price);
-  if (sort === "high") items.sort((a, b) => b.price - a.price);
-  if (sort === "az") items.sort((a, b) => a.t.localeCompare(b.t));
-  if (sort === "rating") items.sort((a, b) => b.r - a.r);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "crumbs"
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => go("#/")
-  }, "Home"), /*#__PURE__*/React.createElement("span", null, "/"), /*#__PURE__*/React.createElement("span", null, D.catName(id))), /*#__PURE__*/React.createElement("div", {
-    className: "plp-h"
-  }, /*#__PURE__*/React.createElement("h1", null, D.catName(id))), /*#__PURE__*/React.createElement("div", {
-    className: "plp-bar"
-  }, /*#__PURE__*/React.createElement("span", null, items.length, " ", items.length === 1 ? "result" : "results"), /*#__PURE__*/React.createElement("select", {
-    value: sort,
-    onChange: e => setSort(e.target.value),
-    "aria-label": "Sort by"
-  }, /*#__PURE__*/React.createElement("option", {
-    value: "featured"
-  }, "Best Matches"), /*#__PURE__*/React.createElement("option", {
-    value: "rating"
-  }, "Top Sellers"), /*#__PURE__*/React.createElement("option", {
-    value: "low"
-  }, "Price Low To High"), /*#__PURE__*/React.createElement("option", {
-    value: "high"
-  }, "Price High to Low"), /*#__PURE__*/React.createElement("option", {
-    value: "az"
-  }, "Product Name A \u2013 Z"))), items.length ? /*#__PURE__*/React.createElement("div", {
-    className: "grid"
-  }, items.map(p => /*#__PURE__*/React.createElement(ProductCard, {
-    key: p.id,
-    p: p,
-    onOpen: pid => go("#/p/" + pid),
-    onAdd: add
-  }))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement("p", null, "Nothing on this shelf yet. Here are some of our most popular items.")), /*#__PURE__*/React.createElement("div", {
-    className: "grid"
-  }, D.trending.map(x => D.byId(x)).filter(Boolean).map(p => /*#__PURE__*/React.createElement(ProductCard, {
-    key: p.id,
-    p: p,
-    onOpen: pid => go("#/p/" + pid),
-    onAdd: add
-  })))));
+  const cid = D.plp ? D.plp.canon(id) : id;
+  if (["all-categories", "new-trending", "clearance"].indexOf(cid) < 0 && D.catName(cid) === "Products" && !D.inCat(cid).length) return /*#__PURE__*/React.createElement(NotFound, { go: go });
+  return /*#__PURE__*/React.createElement(window.PLP.Page, {
+    key: id,
+    id: id,
+    go: go,
+    add: add
+  });
 }
 const PZ_STYLES = [{
   n: "Large Script Letters",
   max: 20,
-  img: "https://www.deseretbook.com/dw/image/v2/BJJM_PRD/on/demandware.static/-/Sites-DeseretBooks-Library/default/dw311daace/images/LargeScript_Silo.jpg?sw=720&sfrm=jpg&q=80"
+  img: "assets/img/dw/LargeScript_Silo.jpg"
 }, {
   n: "Small Script Letters",
   max: 16,
-  img: "https://www.deseretbook.com/dw/image/v2/BJJM_PRD/on/demandware.static/-/Sites-DeseretBooks-Library/default/dw60a9f20c/images/SmallScript_Silo.jpg?sw=720&sfrm=jpg&q=80"
+  img: "assets/img/dw/SmallScript_Silo.jpg"
 }, {
   n: "Large Block Letters",
   max: 20,
-  img: "https://www.deseretbook.com/dw/image/v2/BJJM_PRD/on/demandware.static/-/Sites-DeseretBooks-Library/default/dwe040f233/images/LargeBlock_Silo.jpg?sw=720&sfrm=jpg&q=80"
+  img: "assets/img/dw/LargeBlock_Silo.jpg"
 }, {
   n: "Small Block Letters",
   max: 16,
-  img: "https://www.deseretbook.com/dw/image/v2/BJJM_PRD/on/demandware.static/-/Sites-DeseretBooks-Library/default/dw746539e2/images/SmallBlock_Silo.jpg?sw=720&sfrm=jpg&q=80"
+  img: "assets/img/dw/SmallBlock_Silo.jpg"
 }];
 const pzReady = z => !!(z.on && z.style && z.name.trim() && z.name === z.confirm && z.agree);
 function StyleExamples({
@@ -1905,25 +2465,18 @@ function StyleExamples({
     return () => window.removeEventListener("keydown", k);
   }, [open]);
   if (!host) return null;
-  return ReactDOM.createPortal(/*#__PURE__*/React.createElement("div", {
-    className: "pdlg pz-dlg" + (open ? " on" : ""),
-    role: "dialog",
-    "aria-modal": "true",
-    "aria-label": "Imprinting letter style examples",
-    "aria-hidden": !open,
-    onClick: e => {
-      if (e.target === e.currentTarget) onClose();
-    }
+  return /*#__PURE__*/React.createElement(DS.Dialog, {
+    open: open,
+    onClose: onClose,
+    size: "lg",
+    title: "Imprinting Letter Styles",
+    description: "Each imprint is pressed in gold foil on the lower right of the front cover.",
+    footer: /*#__PURE__*/React.createElement(DS.Button, {
+      variant: "secondary",
+      size: "md",
+      onClick: onClose
+    }, "Close")
   }, /*#__PURE__*/React.createElement("div", {
-    className: "pdlg-c"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "pdlg-x",
-    onClick: onClose,
-    "aria-label": "Close"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "xmark_circle_fill",
-    size: 24
-  })), /*#__PURE__*/React.createElement("h2", null, "Imprinting Letter Styles"), /*#__PURE__*/React.createElement("p", null, "Each imprint is pressed in gold foil on the lower right of the front cover."), /*#__PURE__*/React.createElement("div", {
     className: "pz-ex"
   }, PZ_STYLES.map(st => /*#__PURE__*/React.createElement("button", {
     key: st.n,
@@ -1940,12 +2493,7 @@ function StyleExamples({
     loading: "lazy"
   })), /*#__PURE__*/React.createElement("span", {
     className: "pz-ex-n"
-  }, st.n)))), /*#__PURE__*/React.createElement("div", {
-    className: "pz-ft"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "pz-btn out",
-    onClick: onClose
-  }, "Close")))), host);
+  }, st.n)))));
 }
 function Personalize({
   z,
@@ -1960,23 +2508,21 @@ function Personalize({
   const upd = o => set(Object.assign({}, z, o));
   return /*#__PURE__*/React.createElement("div", {
     className: "pz" + (z.on ? " on" : "")
-  }, /*#__PURE__*/React.createElement("label", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "pz-h"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "checkbox",
+  }, /*#__PURE__*/React.createElement(DS.Checkbox, {
     checked: z.on,
     onChange: e => upd({
       on: e.target.checked
-    })
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "pz-box",
-    "aria-hidden": "true"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "checkmark_alt",
-    size: 16
-  })), /*#__PURE__*/React.createElement("span", {
-    className: "pz-ht"
-  }, /*#__PURE__*/React.createElement("b", null, "Personalize This Product"), /*#__PURE__*/React.createElement("span", null, "Personalizations and imprints may take an additional business day to process."))), z.on ? /*#__PURE__*/React.createElement("div", {
+    }),
+    label: /*#__PURE__*/React.createElement("span", {
+      className: "pz-ht"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "pz-tr"
+    }, /*#__PURE__*/React.createElement("b", null, "Personalize This Product"), /*#__PURE__*/React.createElement("b", {
+      className: "pz-fee"
+    }, "+" + money(IMPRINT_FEE))), /*#__PURE__*/React.createElement("span", null, "Personalizations and imprints may take an additional business day to process. A $12.99 fee will be added to the price of the book."))
+  })), z.on ? /*#__PURE__*/React.createElement("div", {
     className: "pz-b"
   }, /*#__PURE__*/React.createElement("div", {
     className: "pz-s" + (step > 1 ? " done" : "")
@@ -2026,7 +2572,7 @@ function Personalize({
     className: "pz-f"
   }, /*#__PURE__*/React.createElement("span", {
     className: "pz-fl"
-  }, /*#__PURE__*/React.createElement("span", null, "Name"), /*#__PURE__*/React.createElement("span", null, z.name.length, "/", max)), /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement("span", null, "Name"), /*#__PURE__*/React.createElement("span", null, z.name.length, "/", max)), /*#__PURE__*/React.createElement(DS.Input, {
     value: z.name,
     maxLength: max,
     disabled: !z.style,
@@ -2039,8 +2585,8 @@ function Personalize({
     className: "pz-f"
   }, /*#__PURE__*/React.createElement("span", {
     className: "pz-fl"
-  }, /*#__PURE__*/React.createElement("span", null, "Confirm Name"), /*#__PURE__*/React.createElement("span", null, z.confirm.length, "/", max)), /*#__PURE__*/React.createElement("input", {
-    className: mismatch ? "err" : "",
+  }, /*#__PURE__*/React.createElement("span", null, "Confirm Name"), /*#__PURE__*/React.createElement("span", null, z.confirm.length, "/", max)), /*#__PURE__*/React.createElement(DS.Input, {
+    error: !!(mismatch),
     value: z.confirm,
     maxLength: max,
     disabled: !z.style,
@@ -2075,21 +2621,13 @@ function Personalize({
     className: "pz-rev-v" + (/Script/.test(z.style) ? " script" : " block")
   }, z.name), /*#__PURE__*/React.createElement("span", {
     className: "pz-rev-s"
-  }, z.style)), /*#__PURE__*/React.createElement("label", {
-    className: "pz-ag"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "checkbox",
+  }, z.style)), /*#__PURE__*/React.createElement(DS.Checkbox, {
     checked: z.agree,
     onChange: e => upd({
       agree: e.target.checked
-    })
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "pz-box",
-    "aria-hidden": "true"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "checkmark_alt",
-    size: 16
-  })), /*#__PURE__*/React.createElement("span", null, "I\u2019ve checked the spelling. Imprinted items are non-returnable."))) : /*#__PURE__*/React.createElement("p", {
+    }),
+    label: "I\u2019ve checked the spelling. Imprinted items are non-returnable."
+  })) : /*#__PURE__*/React.createElement("p", {
     className: "pz-hint"
   }, "Finish the steps above to review your imprint."))) : null, /*#__PURE__*/React.createElement(StyleExamples, {
     open: ex,
@@ -2114,6 +2652,24 @@ function FaqBlock({
     key: i
   }, x));
 }
+/* PDP meta line (beside the rating): at most META_MAX details, in this order. Anything past the cap is not lost:
+   PdpTabs adds it to the Details tab when no row there already says it. Each item: el (what the line shows), label and text (the Details row). */
+const META_MAX = 3;
+function pdpMeta(p, go) {
+  const h = React.createElement;
+  const out = [];
+  if (window.isBookProduct && window.isBookProduct(p) && p.by && p.by !== "Deseret Book") out.push({ el: h("span", { key: "by", className: "meta-by" }, "by " + byName(p.by)), label: "Author", text: p.by });
+  if (p.sz && !p.sizes) out.push({ el: h("span", { key: "sz" }, p.sz), label: "Size", text: p.sz });
+  if (p.size) out.push({ el: h("span", { key: "size" }, p.size), label: "Size", text: p.size });
+  const bits = window.PDPX.metaBits(p, go);
+  const ser = (p.det || []).find(r => r[0] === "Series");
+  bits.forEach((el, i) => {
+    const t = (function txt(n) { return n == null || typeof n === "boolean" ? "" : typeof n === "string" || typeof n === "number" ? String(n) : Array.isArray(n) ? n.map(txt).join("") : n.props ? txt(n.props.children) : ""; })(el);
+    out.push({ el: el, label: ser && i === 0 ? "Series" : "Feature", text: t });
+  });
+  if (p.online) out.push({ el: h("span", { key: "online" }, "Online exclusive"), label: "Availability", text: "Online exclusive" });
+  return out;
+}
 function PdpTabs({
   p,
   go,
@@ -2123,7 +2679,47 @@ function PdpTabs({
   const desc = ex && ex.d ? ex.d : [p.d];
   const spec = [["Item no.", p.id]].concat(p.by && p.by !== "Deseret Book" ? [["Author", p.by]] : [["Brand", p.by || "Deseret Book"]]).concat(p.fmt ? [["Format", p.fmt]] : []).concat(p.size ? [["Size", p.size]] : []).concat(p.colors ? [["Colors", p.colors.map(c => c.n).join(", ")]] : []).concat(p.personalize ? [["Personalization", "Available"]] : []).concat(p.online ? [["Availability", "Online exclusive"]] : []);
   const extraSpec = ex && ex.spec ? ex.spec : [];
-  const rows = spec.map(r => extraSpec.find(x => x[0] === r[0]) || r).concat(extraSpec.filter(r => !spec.some(x => x[0] === r[0])));
+  const par = p.parent ? D.byId(p.parent) : null;
+  const det = p.det || (par && par.det) || [];
+  const rows0 = spec.map(r => extraSpec.find(x => x[0] === r[0]) || r).concat(extraSpec.filter(r => !spec.some(x => x[0] === r[0]))).concat(det.filter(r => !spec.some(x => x[0] === r[0]) && !extraSpec.some(x => x[0] === r[0]))).filter(r => !(r[0] === "Author" && det.some(x => x[0] === "Artist")));
+  /* No duplicated details: drop a row whose value repeats another row in a different form (e.g. Size 18" x 22" vs Image size 18″ x 22″,
+     Format "Vegan Leather" vs Material "Vegan leather with gold accents"), and credits that only repeat the product name. The more specific row is kept. */
+  const GENERIC = ["Size", "Format", "Author", "Brand", "Colors", "Color"];
+  const nv = v => String(v).toLowerCase().replace(/[\u2033\u201d"]|inches|inch|\bin\b/g, "in").replace(/\s*[x\u00d7]\s*/g, "x").replace(/[^a-z0-9.x]/g, "");
+  const baseT = String(p.t || "").toLowerCase().replace(/\s*\(.*$/, "").trim();
+  const rows = rows0.filter((r, i) => {
+    if (r[0] === "Item no.") return true;
+    if (["Author", "Artist", "Brand"].indexOf(r[0]) > -1 && String(r[1]).toLowerCase().trim() === baseT) return false;
+    const a1 = nv(r[1]);
+    return !rows0.some((s, j) => {
+      if (j === i || s[0] === "Item no.") return false;
+      const b1 = nv(s[1]);
+      if (!a1 || !b1) return false;
+      const CREDIT = ["Author", "Artist", "Brand"];
+      if (CREDIT.indexOf(r[0]) > -1 !== (CREDIT.indexOf(s[0]) > -1)) return false;
+      const nums = v => (String(v).match(/\d+(?:\.\d+)?/g) || []).join(",");
+      const na = nums(r[1]), nb = nums(s[1]);
+      const same = a1 === b1 || (na && na === nb && na.indexOf(",") > -1), inside = GENERIC.indexOf(r[0]) > -1 && GENERIC.indexOf(s[0]) < 0 && a1.length > 3 && b1.indexOf(a1) > -1 && b1 !== a1;
+      if (inside) return true;
+      if (same) { const gi = GENERIC.indexOf(r[0]) > -1, gj = GENERIC.indexOf(s[0]) > -1; return gi && !gj ? true : gi === gj ? j < i : false; }
+      return false;
+    });
+  });
+  /* Meta line overflow: details past the cap of three go to this tab, unless a row already says the same thing. */
+  const nvx = v => String(v).toLowerCase().replace(/[^a-z0-9]/g, "");
+  pdpMeta(p, go).slice(META_MAX).forEach(m => {
+    const t = nvx(m.text);
+    const num = (String(m.text).match(/\d+(?:\.\d+)?/g) || []).join(",");
+    const said = r => {
+      const v = nvx(r[1]), l = nvx(r[0]);
+      if (v.indexOf(t) > -1 || l === t || (l + v).indexOf(t) > -1 || (v + l).indexOf(t) > -1) return true;
+      /* "1000 pieces" vs Pieces 1000, "24 days" vs Boxes "24, one to open each day": the same number leads the row's value. */
+      const rn = String(r[1]).match(/^\D*(\d+(?:\.\d+)?)/);
+      return !!(num && num.indexOf(",") < 0 && rn && rn[1] === num);
+    };
+    if (!t || rows.some(said)) return;
+    rows.push([m.label, m.text]);
+  });
   const hasDesc = desc.some(Boolean);
   const tabs = (hasDesc ? [["desc", "Description"]] : []).concat([["details", "Details"]]).concat(ex && ex.faq ? [["faq", "FAQ"]] : []).concat([["ship", "Shipping & Returns"]]);
   const [t, setT] = useState(hasDesc ? "desc" : "details");
@@ -2159,16 +2755,14 @@ function PdpTabs({
     role: "tabpanel",
     id: "pdp-" + t,
     "aria-label": (tabs.find(x => x[0] === t) || [])[1]
-  }, t === "desc" ? /*#__PURE__*/React.createElement(React.Fragment, null, p.cat.indexOf("books") === 0 ? /*#__PURE__*/React.createElement("div", {
-    className: "pdt-bs"
-  }, /*#__PURE__*/React.createElement("img", {
-    className: "pdt-bs-mark",
-    src: "assets/bookshelfplus-symbol.svg",
-    alt: ""
-  }), /*#__PURE__*/React.createElement("span", null, "Read for free with bookshelf+. Unlimited access to 4,000+ audiobooks and eBooks in the Deseret Bookshelf app."), /*#__PURE__*/React.createElement("button", {
-    className: "btn-out",
-    onClick: () => go(p.cat.indexOf("books_fiction") === 0 ? "#/bookshelf-plus/fiction" : "#/bookshelf-plus")
-  }, "Learn more")) : null, desc.map((x, i) => /*#__PURE__*/React.createElement("p", {
+  }, t === "desc" ? /*#__PURE__*/React.createElement(React.Fragment, null, p.cat.indexOf("books") === 0 || window.PDPX.hasDigital(p) ? /*#__PURE__*/React.createElement(window.DBPromoBand, {
+    className: "pdt-pb",
+    tone: "bookshelf",
+    action: /*#__PURE__*/React.createElement(DS.Button, {
+      size: "sm",
+      onClick: () => go(p.cat.indexOf("books_fiction") === 0 ? "#/bookshelf-plus/fiction" : "#/bookshelf-plus")
+    }, "Learn more")
+  }, "Read for free with Bookshelf+. Unlimited access to 4,000+ audiobooks and eBooks in the Deseret Bookshelf app.") : null, desc.map((x, i) => /*#__PURE__*/React.createElement("p", {
     key: i
   }, x)), ex && ex.note ? /*#__PURE__*/React.createElement("p", {
     className: "pdt-note"
@@ -2176,14 +2770,15 @@ function PdpTabs({
     className: "pdt-dl"
   }, rows.map(([k, v]) => /*#__PURE__*/React.createElement("div", {
     key: k
-  }, /*#__PURE__*/React.createElement("dt", null, k), /*#__PURE__*/React.createElement("dd", null, v)))) : null, t === "faq" ? /*#__PURE__*/React.createElement("div", {
-    className: "pdt-faq"
-  }, ex.faq.map(f => /*#__PURE__*/React.createElement(Accordion, {
-    key: f.q,
-    title: f.q
-  }, /*#__PURE__*/React.createElement(FaqBlock, {
-    a: f.a
-  })))) : null, t === "ship" ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Free shipping on orders $", shipMin || 49, "+ for standard domestic US. Surcharges still apply for large items."), /*#__PURE__*/React.createElement("p", null, "Returns are accepted within 30 days. Imprinted items are non-returnable.")) : null));
+  }, /*#__PURE__*/React.createElement("dt", null, k), /*#__PURE__*/React.createElement("dd", null, v)))) : null, t === "faq" ? /*#__PURE__*/React.createElement(DS.Accordion, {
+    className: "pdt-faq",
+    items: ex.faq.map(f => ({
+      title: f.q,
+      content: /*#__PURE__*/React.createElement(FaqBlock, {
+        a: f.a
+      })
+    }))
+  }) : null, t === "ship" ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Free shipping on orders $", shipMin || 49, "+ for standard domestic US. Surcharges still apply for large items."), /*#__PURE__*/React.createElement("p", null, "Returns are accepted within 30 days. Imprinted items are non-returnable.")) : null));
 }
 function Product({
   id,
@@ -2195,11 +2790,22 @@ function Product({
 }) {
   const p0 = D.byId(id);
   const p = p0 && p0.parent ? D.byId(p0.parent) : p0;
-  const fmt0 = p && p.formats ? p0.parent ? p0.id : p.formats[0] : null;
+  const fmt0 = p && p.formats ? p0.parent ? p0.id : window.PDPX.firstAvail(p.formats) : null;
   const [fmtSel, setFmtSel] = useState(fmt0);
   const v = p && p.formats ? D.byId(fmtSel) || D.byId(p.formats[0]) : null;
-  const [color, setColor] = useState(p && p.colors ? p.colors[0].n : null);
+  const [color, setColor] = useState(p && p.colors ? (p.colors.find(c => !c.soldOut) || p.colors[0]).n : null);
   const [qty, setQty] = useState(1);
+  /* Tablet (640px to 1023px): the buy row uses the medium stepper, button and wishlist icon button. */
+  const tabMq = "(min-width:640px) and (max-width:1023px)";
+  const [tabPdp, setTabPdp] = useState(() => window.matchMedia(tabMq).matches);
+  useEffect(() => {
+    const m = window.matchMedia(tabMq), on = () => setTabPdp(m.matches);
+    m.addEventListener ? m.addEventListener("change", on) : m.addListener(on);
+    return () => m.removeEventListener ? m.removeEventListener("change", on) : m.removeListener(on);
+  }, []);
+  const buySz = tabPdp ? "md" : "lg", buyH = tabPdp ? 40 : 48;
+  const sz0 = p && p.sizeOpts && p.sizeOpts.length <= 4 ? window.PDPX.firstAvail(p.sizeOpts) : null;
+  const [szSel, setSzSel] = useState(sz0);
   const PZ0 = {
     on: false,
     style: null,
@@ -2259,14 +2865,21 @@ function Product({
     setQty(1);
     setFmtSel(fmt0);
     setPz(PZ0);
-    setColor(p && p.colors ? p.colors[0].n : null);
+    setColor(p && p.colors ? (p.colors.find(c => !c.soldOut) || p.colors[0]).n : null);
+    setSzSel(sz0);
   }, [id]);
-  if (!p) return /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement("p", null, "That product isn\u2019t in this prototype."), /*#__PURE__*/React.createElement("button", {
-    className: "btn-out",
-    onClick: () => go("#/")
-  }, "Back to home"));
+  if (!p) return /*#__PURE__*/React.createElement(NotFound, { go: go });
+  const sv = p.sizeOpts && szSel ? D.byId(szSel) : null;
+  const buyItem = sv || v || null;
+  const needSize = !!(p.sizeOpts && !sv);
+  const avState = needSize ? "select" : p.colors && (p.colors.find(c => c.n === color) || {}).soldOut ? "out" : window.PDPX.availOf(p, buyItem);
+  const avAt = p.colors ? "color" : v ? "format" : p.sizes ? "sizes" : p.sizeOpts ? "size" : p.fmt ? "static" : "none";
+  const avEl = /*#__PURE__*/React.createElement(window.PDPX.Avail, {
+    state: avState,
+    digital: !!(buyItem && buyItem.digital),
+    note: buyItem && buyItem.availNote || p.availNote,
+    selectLabel: p.sizeLabel
+  });
   const chosen = p.colors ? p.colors.find(c => c.n === color) : null;
   const images = (chosen ? chosen.gallery || (chosen.img ? [chosen.img] : []) : []).concat(p.img);
   const related = (() => {
@@ -2341,21 +2954,15 @@ function Product({
   })))), /*#__PURE__*/React.createElement(Dots, {
     i: gal.i,
     n: gal.n
-  }), images.length > 1 ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
-    className: "gal-arr prev",
-    onClick: () => goImg(gal.i - 1),
-    "aria-label": "Previous image"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "chevron_left",
-    size: 20
-  })), /*#__PURE__*/React.createElement("button", {
-    className: "gal-arr next",
-    onClick: () => goImg(gal.i + 1),
-    "aria-label": "Next image"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "chevron_right",
-    size: 20
-  }))) : null), images.length > 1 ? /*#__PURE__*/React.createElement("div", {
+  }), images.length > 1 ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(DS.CarouselChevronButton, {
+    direction: "prev",
+    label: "Previous image",
+    onClick: () => goImg(gal.i - 1)
+  }), /*#__PURE__*/React.createElement(DS.CarouselChevronButton, {
+    direction: "next",
+    label: "Next image",
+    onClick: () => goImg(gal.i + 1)
+  })) : null), images.length > 1 ? /*#__PURE__*/React.createElement("div", {
     className: "gal-tw" + (thEdge.l ? " l" : "") + (thEdge.r ? " r" : "")
   }, /*#__PURE__*/React.createElement("div", {
     className: "gal-thumbs",
@@ -2370,47 +2977,97 @@ function Product({
     "aria-label": "Image " + (i + 1),
     className: "gal-th" + (gal.i === i ? " on" : ""),
     onClick: () => goImg(i)
-  }, /*#__PURE__*/React.createElement("img", {
+  }, window.ThumbFill ? React.createElement(window.ThumbFill, { src: thumb(src) }) : /*#__PURE__*/React.createElement("img", {
     src: thumb(src),
     alt: ""
-  })))), /*#__PURE__*/React.createElement("button", {
-    className: "gal-ta prev",
-    onClick: () => thPage(-1),
-    "aria-label": "Scroll thumbnails left",
-    tabIndex: thEdge.l ? 0 : -1
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "chevron_left",
-    size: 16
-  })), /*#__PURE__*/React.createElement("button", {
-    className: "gal-ta next",
-    onClick: () => thPage(1),
-    "aria-label": "Scroll thumbnails right",
-    tabIndex: thEdge.r ? 0 : -1
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "chevron_right",
-    size: 16
-  }))) : null), /*#__PURE__*/React.createElement("div", {
+  })))), React.createElement(DS.CarouselChevronButton, {
+    className: "gal-tc",
+    direction: "prev",
+    label: "Scroll thumbnails left",
+    disabled: !thEdge.l,
+    onClick: () => thPage(-1)
+  }), React.createElement(DS.CarouselChevronButton, {
+    className: "gal-tc",
+    direction: "next",
+    label: "Scroll thumbnails right",
+    disabled: !thEdge.r,
+    onClick: () => thPage(1)
+  })) : null), /*#__PURE__*/React.createElement("div", {
     className: "pdp"
-  }, /*#__PURE__*/React.createElement("h1", null, p.t), /*#__PURE__*/React.createElement("div", {
-    className: "pdp-row" + (p.rc ? "" : " no-rate")
-  }, p.rc ? /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h1", null, p.t), /* Rating row. Phones: the wishlist heart sits at the bottom right of the rating and meta line (hidden from 640px, where it stays in the buy row). */
+  /*#__PURE__*/React.createElement("div", {
+    className: "pdp-rate-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "pdp-row"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "rate"
-  }, /*#__PURE__*/React.createElement(Stars, {
-    r: p.r,
-    size: 13
-  }), /*#__PURE__*/React.createElement("span", {
+  }, /* Rating number first, then the stars, then the ratings count (no separator inside the rating). */
+  p.rc ? /*#__PURE__*/React.createElement("span", {
     className: "rate-n"
-  }, p.r), /*#__PURE__*/React.createElement("span", {
-    className: "rate-c"
-  }, p.rc + " ratings")) : null, /*#__PURE__*/React.createElement("div", {
+  }, p.r) : null, /*#__PURE__*/React.createElement(Stars, {
+    r: p.rc ? p.r : 0,
+    size: "md"
+  }), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "rate-c",
+    onClick: window.scrollToReviews
+  }, p.rc ? p.rc + " ratings" : "No ratings yet")), /*#__PURE__*/React.createElement("div", {
     className: "meta"
-  }, /*#__PURE__*/React.createElement("span", null, "no. " + p.id), p.size ? /*#__PURE__*/React.createElement("span", null, p.size) : null, /*#__PURE__*/React.createElement("span", null, v ? v.fmt : p.fmt), p.online ? /*#__PURE__*/React.createElement("span", null, "Online exclusive") : null)), /*#__PURE__*/React.createElement("div", {
-    className: "price"
-  }, v ? money(v.price) : priceLabel(p)), v ? /*#__PURE__*/React.createElement("div", {
+  }, pdpMeta(p, go).slice(0, META_MAX).map(m => m.el))), /*#__PURE__*/React.createElement(DS.IconButton, {
+    className: "pdp-fav-m",
+    icon: "heart",
+    label: "Add to wishlist",
+    variant: "outline",
+    size: "md",
+    filled: isFav,
+    "aria-pressed": isFav,
+    onClick: () => toggleFav(p.id),
+    style: isFav ? { color: "var(--db-red-400)" } : undefined
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "pdp-price-row"
+  }, /*#__PURE__*/React.createElement(window.PDPX.Price, {
+    p: p,
+    item: buyItem,
+    imprint: !!(p.personalize && pz.on)
+  })), /*#__PURE__*/React.createElement(window.PDPX.PreorderInfo, {
+    p: p,
+    item: buyItem
+  }), p.sizeOpts ? /*#__PURE__*/React.createElement(window.PDPX.SizeSelect, {
+    p: p,
+    value: szSel,
+    onChange: setSzSel,
+    av: avAt === "size" ? avEl : null
+  }) : null, p.sizes ? /*#__PURE__*/React.createElement("div", {
     className: "fmt"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fmt-hd"
   }, /*#__PURE__*/React.createElement("span", {
     className: "lab"
-  }, "Format \u2014 ", v.fmt), /*#__PURE__*/React.createElement("div", {
+  }, "Size \u2014 ", p.sz), avAt === "sizes" ? avEl : null), /*#__PURE__*/React.createElement("div", {
+    className: "fmt-opts",
+    role: "radiogroup",
+    "aria-label": "Size"
+  }, p.sizes.map(sid => {
+    const f = D.byId(sid);
+    const on = f.id === p.id;
+    return /*#__PURE__*/React.createElement("button", {
+      key: f.id,
+      role: "radio",
+      "aria-checked": on,
+      className: "fmt-o" + (on ? " on" : ""),
+      onClick: () => { if (!on) go("#/p/" + f.id); }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "fmt-n"
+    }, f.sz), /*#__PURE__*/React.createElement("span", {
+      className: "fmt-p"
+    }, priceLabel(f)));
+  }))) : null, v ? /*#__PURE__*/React.createElement("div", {
+    className: "fmt"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fmt-hd"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "lab"
+  }, "Format \u2014 ", v.fmt), avAt === "format" ? avEl : null), /*#__PURE__*/React.createElement("div", {
     className: "fmt-opts",
     role: "radiogroup",
     "aria-label": "Format"
@@ -2421,13 +3078,13 @@ function Product({
       key: f.id,
       role: "radio",
       "aria-checked": on,
-      className: "fmt-o" + (on ? " on" : ""),
+      className: "fmt-o" + (on ? " on" : "") + (f.soldOut ? " out" : ""),
       onClick: () => setFmtSel(f.id)
     }, /*#__PURE__*/React.createElement("span", {
       className: "fmt-n"
     }, f.fmt), /*#__PURE__*/React.createElement("span", {
       className: "fmt-p"
-    }, money(f.price)));
+    }, f.soldOut ? "Sold out" : f.price === 0 ? "Free" : money(f.price)));
   })), v.digital ? /*#__PURE__*/React.createElement("p", {
     className: "fmt-note"
   }, "Delivered instantly to the Deseret Bookshelf app. Not compatible with Kindle or other e-readers. Digital items can\u2019t be gifted, returned, or refunded.") : null) : null, p.colors ? /*#__PURE__*/React.createElement("div", {
@@ -2437,13 +3094,16 @@ function Product({
       gap: 8,
       marginTop: 4
     }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fmt-hd"
   }, /*#__PURE__*/React.createElement("span", {
     className: "lab"
-  }, "Color \u2014 ", color), /*#__PURE__*/React.createElement("div", {
+  }, "Color \u2014 ", color), avAt === "color" ? avEl : null), /*#__PURE__*/React.createElement("div", {
     className: "swatches"
   }, p.colors.map(c => /*#__PURE__*/React.createElement("button", {
     key: c.n,
-    className: "sw" + (c.n === color ? " on" : ""),
+    className: "sw" + (c.n === color ? " on" : "") + (c.soldOut ? " out" : ""),
+        title: c.n + (c.soldOut ? " (Sold out)" : ""),
     style: {
       background: c.sw
     },
@@ -2454,41 +3114,40 @@ function Product({
         behavior: "smooth"
       });
     },
-    "aria-label": c.n,
+    "aria-label": c.n + (c.soldOut ? ", sold out" : ""),
     "aria-pressed": c.n === color
-  })))) : null, p.personalize ? /*#__PURE__*/React.createElement(Personalize, {
+  })))) : null, p.personalize && avState !== "out" ? /*#__PURE__*/React.createElement(Personalize, {
     z: pz,
     set: setPz
-  }) : null, pz.on && !pzReady(pz) ? /*#__PURE__*/React.createElement("p", {
+  }) : null, pz.on && !pzReady(pz) && avState !== "out" ? /*#__PURE__*/React.createElement("p", {
     className: "pz-need"
-  }, "Please finish adding an imprint style and a name before adding this item to your bag.") : null, /*#__PURE__*/React.createElement("div", {
+  }, "Please finish adding an imprint style and a name before adding this item to your cart.") : null, /*#__PURE__*/React.createElement(window.PDPX.StaticFormat, {
+    p: p,
+    av: avAt === "static" ? avEl : null
+  }), avAt === "none" ? avEl : null, avState === "out" ? /*#__PURE__*/React.createElement(window.PDPX.Notify, {
+    p: p
+  }) : null, /*#__PURE__*/React.createElement("div", {
     className: "cta",
     style: {
       marginTop: 8
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "qty",
-    role: "group",
-    "aria-label": "Quantity"
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => setQty(Math.max(1, qty - 1)),
-    disabled: qty === 1,
-    "aria-label": "Decrease quantity"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "minus",
-    size: 16
-  })), /*#__PURE__*/React.createElement("span", {
-    "aria-live": "polite"
-  }, qty), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setQty(Math.min(20, qty + 1)),
-    "aria-label": "Increase quantity"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "plus",
-    size: 16
-  }))), /*#__PURE__*/React.createElement("button", {
+  }, v && v.digital || avState === "out" ? null : /*#__PURE__*/React.createElement(DS.QuantityStepper, {
+    className: "qty-ds",
+    size: buySz,
+    min: 1,
+    max: 20,
+    value: qty,
+    onChange: v => setQty(v),
+    label: "Quantity"
+  }), avState === "out" ? null : /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
-    disabled: pz.on && !pzReady(pz),
+    style: { height: buyH, flex: 1, maxWidth: "none" },
+    disabled: pz.on && !pzReady(pz) || needSize,
     onClick: () => {
+      if (sv) {
+        add(sv, qty, sv.sz, null);
+        return;
+      }
       if (v) {
         add(v, qty, v.fmt, null);
         return;
@@ -2499,36 +3158,41 @@ function Product({
       } : null);
       if (pz.on) setPz(PZ0);
     }
-  }, "Add to Bag"), /*#__PURE__*/React.createElement(DS.IconButton, {
+  }, window.PDPX.ctaLabel(avState)), /*#__PURE__*/React.createElement(DS.IconButton, {
+    className: "pdp-fav",
     icon: "heart",
     label: "Add to wishlist",
     variant: "outline",
-    size: "lg",
+    size: buySz,
     filled: isFav,
     "aria-pressed": isFav,
     onClick: () => toggleFav(p.id),
     style: {
-      flex: "0 0 48px",
-      ...(isFav ? {
-        color: "var(--db-red-300)"
-      } : null)
+      flex: "0 0 " + buyH + "px",
+      ...(isFav ? { color: "var(--db-red-400)" } : null)
     }
-  }))), /*#__PURE__*/React.createElement(PdpTabs, {
+  })), /*#__PURE__*/React.createElement(window.PDPX.Promo, {
+    p: p
+  })), /*#__PURE__*/React.createElement(PdpTabs, {
     p: p,
     go: go,
     shipMin: shipMin
   })), related.length ? /*#__PURE__*/React.createElement("section", {
     className: "sect sect-yml"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "sect-h"
-  }, "You May Also Like"), /*#__PURE__*/React.createElement("div", {
-    className: "rail"
+  }, /*#__PURE__*/React.createElement(DS.SectionHeading, {
+    className: "sect-top",
+    title: "You May Also Like"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "rail r6"
   }, related.map(r => /*#__PURE__*/React.createElement(ProductCard, {
     key: r.id,
     p: r,
     onOpen: pid => go("#/p/" + pid),
     onAdd: add
-  })))) : null);
+  })))) : null, window.PdpReviews ? /*#__PURE__*/React.createElement(window.PdpReviews, {
+    key: p.id,
+    p: p
+  }) : null);
 }
 function Bag({
   cart,
@@ -2541,44 +3205,20 @@ function Bag({
     l,
     p: D.byId(l.id)
   })).filter(x => x.p);
-  const sub = lines.reduce((s, x) => s + x.p.price * x.l.q, 0);
+  const sub = lines.reduce((s, x) => s + lineEach(x) * x.l.q, 0);
   const left = Math.max(0, 49 - sub);
   const ship = sub >= 49 || sub === 0 ? 0 : 5.99;
-  if (placed) return /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "check",
-    size: 28
-  }), /*#__PURE__*/React.createElement("h1", {
-    style: {
-      fontFamily: "Lora,Georgia,serif",
-      fontWeight: 500,
-      fontSize: 24,
-      margin: 0
-    }
-  }, "Order Placed"), /*#__PURE__*/React.createElement("p", null, "Thank you. A confirmation is on its way to your email, and your order will ship within two business days."), /*#__PURE__*/React.createElement("button", {
+  if (placed) return /*#__PURE__*/React.createElement(DS.EmptyState, { icon: ICON_MAP["check"] || "check", title: "Order Placed", headingLevel: "h1", action: /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
     onClick: () => go("#/")
-  }, "KEEP SHOPPING"));
-  if (!lines.length) return /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "shopping-bag",
-    size: 28
-  }), /*#__PURE__*/React.createElement("h1", {
-    style: {
-      fontFamily: "Lora,Georgia,serif",
-      fontWeight: 500,
-      fontSize: 24,
-      margin: 0
-    }
-  }, "Your Bag Is Empty"), /*#__PURE__*/React.createElement("p", null, "Books, journals, and art and home decor are waiting on the shelves."), /*#__PURE__*/React.createElement("button", {
+  }, "KEEP SHOPPING") }, "Thank you. A confirmation is on its way to your email, and your order will ship within two business days.");
+  if (!lines.length) return /*#__PURE__*/React.createElement(DS.EmptyState, { icon: ICON_MAP["shopping-bag"] || "shopping-bag", title: "Your Cart Is Empty", headingLevel: "h1", action: /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
     onClick: () => go("#/")
-  }, "START SHOPPING"));
+  }, "START SHOPPING") }, "Books, journals, and art and home decor are waiting on the shelves.");
   return /*#__PURE__*/React.createElement("div", {
     className: "bag"
-  }, /*#__PURE__*/React.createElement("h1", null, "Shopping Bag"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h1", null, "Shopping Cart"), /*#__PURE__*/React.createElement("div", {
     className: "ship"
   }, left > 0 ? /*#__PURE__*/React.createElement("span", null, "Add ", money(left), " for free shipping.") : /*#__PURE__*/React.createElement("span", null, "Your order ships free."), /*#__PURE__*/React.createElement("span", {
     className: "track"
@@ -2607,32 +3247,30 @@ function Bag({
     onClick: () => go("#/p/" + x.p.id)
   }, x.p.t), x.l.color ? /*#__PURE__*/React.createElement("span", {
     className: "c"
-  }, x.l.color) : null, x.l.imprint ? /*#__PURE__*/React.createElement("span", {
+  }, x.l.color) : null, window.PDPX && window.PDPX.isPre(x.p) ? /*#__PURE__*/React.createElement("span", {
+    className: "c pre-c"
+  }, window.PDPX.preLine(x.p)) : null, x.l.imprint ? /*#__PURE__*/React.createElement("span", {
     className: "c"
-  }, "Imprint: \u201c" + x.l.imprint.text + "\u201d, " + x.l.imprint.style) : null, /*#__PURE__*/React.createElement("span", {
+  }, "Imprint: \u201c" + x.l.imprint.text + "\u201d, " + x.l.imprint.style) : null, x.l.imprint ? /*#__PURE__*/React.createElement("span", {
+    className: "c"
+  }, "Imprint fee " + money(IMPRINT_FEE)) : null, /*#__PURE__*/React.createElement("span", {
     className: "c"
   }, money(x.p.price), " each"), /*#__PURE__*/React.createElement("div", {
     className: "r"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "qty"
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => setQty(i, x.l.q - 1),
-    "aria-label": "Decrease"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "minus",
-    size: 14
-  })), /*#__PURE__*/React.createElement("span", null, x.l.q), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setQty(i, x.l.q + 1),
-    "aria-label": "Increase"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "plus",
-    size: 14
-  }))), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(DS.QuantityStepper, {
+    className: "qty-ds",
+    size: "sm",
+    min: 1,
+    max: 20,
+    value: x.l.q,
+    onChange: v => setQty(i, v),
+    label: "Quantity, " + x.p.t
+  }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 13,
-      fontWeight: 500
+      fontWeight: 400
     }
-  }, money(x.p.price * x.l.q))), /*#__PURE__*/React.createElement("button", {
+  }, money(lineEach(x) * x.l.q))), /*#__PURE__*/React.createElement(DSB, {
     className: "rm",
     onClick: () => remove(i)
   }, "Remove"))))), /*#__PURE__*/React.createElement("div", {
@@ -2643,16 +3281,15 @@ function Bag({
     className: "r"
   }, /*#__PURE__*/React.createElement("span", null, "Shipping"), /*#__PURE__*/React.createElement("span", null, ship ? money(ship) : "Free")), /*#__PURE__*/React.createElement("div", {
     className: "r grand"
-  }, /*#__PURE__*/React.createElement("span", null, "Total"), /*#__PURE__*/React.createElement("span", null, money(sub + ship))), /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement("span", null, "Total"), /*#__PURE__*/React.createElement("span", null, money(sub + ship))), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
     style: {
       height: 48,
       padding: "0 24px",
-      fontSize: 16,
       marginTop: 8
     },
     onClick: () => setPlaced(true)
-  }, "CHECKOUT"), /*#__PURE__*/React.createElement("button", {
+  }, "CHECKOUT"), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-out",
     style: {
       alignSelf: "center"
@@ -2668,76 +3305,71 @@ function Wishlist({
   user,
   onSignIn
 }) {
-  if (!user) return /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "heart",
-    size: 28
-  }), /*#__PURE__*/React.createElement("h1", {
-    style: {
-      fontFamily: "Lora,Georgia,serif",
-      fontWeight: 500,
-      fontSize: 24,
-      margin: 0
-    }
-  }, "Sign In to See Your Wishlist"), /*#__PURE__*/React.createElement("p", null, "Your wishlist is saved to your account. Sign in to view it, add saved items to your bag, or remove them."), /*#__PURE__*/React.createElement(DS.Button, {
+  const [wq, setWq] = useState("");
+  const [wf, setWf] = useState("all");
+  const [wpg, setWpg] = useState(1);
+  /* Two full rows per page: columns follow css/account-page.css (2 / 3 / 4 at <640 / 640–1023 / ≥1024). */
+  const wlCols = () => window.innerWidth >= 1024 ? 4 : window.innerWidth >= 640 ? 3 : 2;
+  const [wcols, setWcols] = useState(wlCols);
+  useEffect(() => { const r = () => setWcols(wlCols()); window.addEventListener("resize", r); return () => window.removeEventListener("resize", r); }, []);
+  useEffect(() => { setWpg(1); }, [wq, wf]);
+  if (!user) return /*#__PURE__*/React.createElement(DS.EmptyState, { icon: ICON_MAP["heart"] || "heart", title: "Sign In to See Your Wishlist", headingLevel: "h1", action: /*#__PURE__*/React.createElement(DS.Button, {
     variant: "secondary",
     onClick: onSignIn
-  }, "Sign in"));
+  }, "Sign in") }, "Your wishlist is saved to your account. Sign in to view it, add saved items to your cart, or remove them.");
   const items = fav.map(id => D.byId(id)).filter(Boolean);
-  if (!items.length) return /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "heart",
-    size: 28
-  }), /*#__PURE__*/React.createElement("h1", {
-    style: {
-      fontFamily: "Lora,Georgia,serif",
-      fontWeight: 500,
-      fontSize: 24,
-      margin: 0
-    }
-  }, "Your Wishlist Is Empty"), /*#__PURE__*/React.createElement("p", null, "Tap the heart on any product to save it for later."), /*#__PURE__*/React.createElement("button", {
+  if (!items.length) return /*#__PURE__*/React.createElement(DS.EmptyState, { icon: ICON_MAP["heart"] || "heart", title: "Your Wishlist Is Empty", headingLevel: "h1", action: /*#__PURE__*/React.createElement(DSB, {
     className: "btn-out",
     onClick: () => go("#/")
-  }, "Browse the shelves"));
+  }, "Browse the shelves") }, "Tap the heart on any product to save it for later.");
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "plp-h"
-  }, /*#__PURE__*/React.createElement("h1", null, "Wishlist"), /*#__PURE__*/React.createElement("span", {
-    className: "wl-n"
-  }, items.length + (items.length === 1 ? " item" : " items"))), /*#__PURE__*/React.createElement("div", {
-    className: "wl-list"
-  }, items.map(p => /*#__PURE__*/React.createElement("div", {
-    className: "line",
-    key: p.id
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "th",
-    onClick: () => go("#/p/" + p.id),
-    "aria-label": p.t
-  }, /*#__PURE__*/React.createElement("img", {
-    src: thumb(p.img[0]),
-    alt: "",
-    loading: "lazy",
-    decoding: "async"
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "info"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "t",
-    style: {
-      textAlign: "left"
-    },
-    onClick: () => go("#/p/" + p.id)
-  }, p.t), /*#__PURE__*/React.createElement("span", {
-    className: "c"
-  }, priceLabel(p)), /*#__PURE__*/React.createElement("div", {
-    className: "wl-acts"
-  }, /*#__PURE__*/React.createElement(DS.Button, {
-    size: "sm",
-    onClick: () => add(p)
-  }, "Add to bag"), /*#__PURE__*/React.createElement("button", {
-    className: "rm",
-    onClick: () => toggleFav(p.id)
-  }, "Remove")))))));
+  }, /*#__PURE__*/React.createElement("h1", null, "Wishlist")), (() => {
+    const term = wq.trim().toLowerCase();
+    const segs = p => String(p.cat || "").split("_").filter(Boolean);
+    const maxD = Math.max(1, ...items.map(p => segs(p).length));
+    let depth = 0;
+    for (let d = 1; d <= maxD && !depth; d++) if (new Set(items.map(p => segs(p).slice(0, d).join("_"))).size > 1) depth = d;
+    const keyOf = p => depth ? segs(p).slice(0, depth).join("_") : String(p.fmt || "");
+    const top = keyOf;
+    const nice = k => { const n = depth ? D.catName(k) : k; return n && n !== "Products" ? n : String(k).split("_").pop().replace(/-and-/g, " & ").replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()); };
+    const hit = items.filter(p => !term || [p.t, p.by].filter(Boolean).join(" ").toLowerCase().indexOf(term) > -1).slice().reverse();
+    const tops = [];
+    items.forEach(p => { const k = top(p); if (k && tops.indexOf(k) < 0) tops.push(k); });
+    const filters = [{ id: "all", label: "All", n: hit.length }].concat(tops.map(k => ({ id: k, label: nice(k), n: hit.filter(p => top(p) === k).length })).filter(f => f.n || f.id === wf));
+    const all = wf === "all" ? hit : hit.filter(p => top(p) === wf);
+    const WL_PER = wcols * 2;
+    const wpages = Math.max(1, Math.ceil(all.length / WL_PER));
+    const wpage = Math.min(wpg, wpages);
+    const list = all.slice((wpage - 1) * WL_PER, wpage * WL_PER);
+    return React.createElement(React.Fragment, null, window.DBListBar ? React.createElement(window.DBListBar, { q: wq, setQ: setWq, label: "Search wishlist", filters: filters, filter: wf, setFilter: setWf }) : null, list.length ? React.createElement("div", { className: "grid wl-grid" }, list.map(p => React.createElement(ProductCard, { key: p.id, p: p, onOpen: id => go("#/p/" + id), onAdd: p => add(p), onRemove: toggleFav }))) : window.DBNoMatch ? React.createElement(window.DBNoMatch, { q: wq, noun: "items", onClear: () => { setWq(""); setWf("all"); } }) : null, window.DBPager ? React.createElement(window.DBPager, { page: wpage, pages: wpages, onGo: setWpg, label: "Wishlist pages", anchor: ".acp-main" }) : null);
+  })());
+}
+/* 404: every broken link (unknown route, product, category, post or info page) lands here. DS EmptyState with a search
+   field and two ways out, then a row of popular categories (DS SubcategoryCards via PLP.Tiles). */
+const NF_CATS = ["books_fiction", "games-puzzles_puzzles", "church-resources_scriptures_scripture-essentials", "christmas_nativities", "games-puzzles_games", "temple-worship_temple-accessories"];
+function NotFound({ go }) {
+  const h = React.createElement;
+  const [q, setQ] = useState("");
+  const submit = e => {
+    e.preventDefault();
+    const term = q.trim();
+    if (term.length) go("#/search/" + encodeURIComponent(term));
+  };
+  useEffect(() => { const t = document.title; document.title = "Page Not Found | Deseret Book"; return () => { document.title = t; }; }, []);
+  return h("div", { className: "nf", "data-screen-label": "Page Not Found" },
+    h(DS.EmptyState, { className: "nf-es", icon: "explore_off", title: "We Couldn\u2019t Find That Page", headingLevel: "h1",
+      action: h("div", { className: "nf-acts" },
+        h("form", { className: "nf-search", role: "search", onSubmit: submit },
+          h(DS.Input, { id: "nf-q", type: "search", icon: "search", value: q, onChange: e => setQ(e.target.value), placeholder: "Search books, scriptures, gifts", "aria-label": "Search Deseret Book" }),
+          h(DS.Button, { type: "submit", size: "md" }, "Search")),
+        h("div", { className: "nf-links" },
+          h(DS.Button, { variant: "secondary", size: "md", onClick: () => go("#/") }, "Go to home"),
+          h(DS.Button, { variant: "secondary", size: "md", onClick: () => go("#/c/all-categories") }, "Browse all categories"))) },
+      "The link may be broken, or the page may have moved. Try a search, or pick up from one of our popular categories."),
+    window.PLP ? h("section", { className: "nf-cats", "aria-labelledby": "nf-cats-t" },
+      h("h2", { id: "nf-cats-t", className: "nf-cats-t" }, "Popular Categories"),
+      h(window.PLP.Tiles, { m: { type: "tiles", source: "curated", label: "Popular categories", items: NF_CATS.map(id => ({ id })) }, id: "all-categories", go: go })) : null);
 }
 function SimplePage({
   title,
@@ -2763,6 +3395,7 @@ function Stores({
   go
 }) {
   const list = [["Deseret Book \u2014 City Creek", "50 S Main St, Salt Lake City, UT", "Open until 9:00 PM"], ["Deseret Book \u2014 Fort Union", "1110 E Fort Union Blvd, Midvale, UT", "Open until 8:00 PM"], ["Deseret Book \u2014 University Mall", "1200 Towne Centre Blvd, Orem, UT", "Open until 8:00 PM"], ["Deseret Book \u2014 Layton Hills", "1201 N Hill Field Rd, Layton, UT", "Closes at 7:00 PM"]];
+  if (window.StoreFinder && window.FP) return React.createElement(window.StoreFinder, { go: go, onGo: window.__openPage });
   return /*#__PURE__*/React.createElement("div", {
     className: "page"
   }, /*#__PURE__*/React.createElement("h1", null, "Find My Store"), /*#__PURE__*/React.createElement("p", null, "The store locator finds the closest store near you. Hours shown are for today."), /*#__PURE__*/React.createElement("div", {
@@ -2778,7 +3411,7 @@ function Stores({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontWeight: 500
+      fontWeight: 400
     }
   }, s[0]), /*#__PURE__*/React.createElement("span", {
     style: {
@@ -2844,11 +3477,7 @@ function BlogPost({
   add
 }) {
   const c = D.featuredContent[Number(i)];
-  if (!c) return /*#__PURE__*/React.createElement(SimplePage, {
-    title: "Post not found",
-    body: ["That article isn\u2019t available."],
-    go: go
-  });
+  if (!c) return /*#__PURE__*/React.createElement(NotFound, { go: go });
   const p = D.byId(c.pid);
   const src = c.img || p && p.img[0];
   const rest = D.featuredContent.map((o, k) => ({
@@ -2857,10 +3486,14 @@ function BlogPost({
   })).filter(x => x.k !== Number(i));
   return /*#__PURE__*/React.createElement("article", {
     className: "blog"
-  }, /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement(DS.Button, {
     className: "blog-back",
+    variant: "ghost",
+    size: "sm",
+    icon: "arrow_back",
+    style: { marginLeft: -12 },
     onClick: () => go("#/blog")
-  }, "\u2190 The Blog"), /*#__PURE__*/React.createElement("header", {
+  }, "The Blog"), /*#__PURE__*/React.createElement("header", {
     className: "post-head"
   }, /*#__PURE__*/React.createElement("span", {
     className: "ccard-m"
@@ -2878,19 +3511,22 @@ function BlogPost({
     className: "post-lede"
   }, c.x), /*#__PURE__*/React.createElement("p", null, "This article is a mock stand-in for the Deseret Book blog, included so the prototype stays self-contained.")), p ? /*#__PURE__*/React.createElement("section", {
     className: "post-prod"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "sect-h"
-  }, "Featured in this post"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(DS.SectionHeading, {
+    className: "sect-top",
+    title: "Featured in this post"
+  }), /*#__PURE__*/React.createElement("div", {
     className: "rail"
   }, /*#__PURE__*/React.createElement(ProductCard, {
+    fixed: true,
     p: p,
     onOpen: id => go("#/p/" + id),
     onAdd: add
   }))) : null, /*#__PURE__*/React.createElement("section", {
     className: "post-more"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "sect-h"
-  }, "More from the blog"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(DS.SectionHeading, {
+    className: "sect-top",
+    title: "More from the blog"
+  }), /*#__PURE__*/React.createElement("div", {
     className: "blog-list"
   }, rest.map(({
     o,
@@ -2951,7 +3587,7 @@ const bagMath = (cart, promo) => {
     l,
     p: D.byId(l.id)
   })).filter(x => x.p);
-  const sub = lines.reduce((s, x) => s + x.p.price * x.l.q, 0);
+  const sub = lines.reduce((s, x) => s + lineEach(x) * x.l.q, 0);
   const disc = promo && promo.off ? sub * promo.off : 0;
   return {
     lines,
@@ -2988,6 +3624,8 @@ function BagPage({
   cart,
   setQty,
   remove,
+  fav,
+  toggleFav,
   go,
   ship,
   promo,
@@ -3018,34 +3656,22 @@ function BagPage({
       setCode("");
     } else setErr("That code isn\u2019t valid.");
   };
-  if (!lines.length) return /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "shopping-bag",
-    size: 28
-  }), /*#__PURE__*/React.createElement("h1", {
-    style: {
-      fontFamily: "Lora,Georgia,serif",
-      fontWeight: 500,
-      fontSize: 24,
-      margin: 0
-    }
-  }, "Your Bag Is Empty"), /*#__PURE__*/React.createElement("p", null, "Books, journals, and art and home decor are waiting on the shelves."), /*#__PURE__*/React.createElement("button", {
+  if (!lines.length) return /*#__PURE__*/React.createElement(DS.EmptyState, { icon: ICON_MAP["shopping-bag"] || "shopping-bag", title: "Your Cart Is Empty", headingLevel: "h1", action: /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
     onClick: () => go("#/")
-  }, "START SHOPPING"));
+  }, "START SHOPPING") }, "Books, journals, and art and home decor are waiting on the shelves.");
   return /*#__PURE__*/React.createElement("div", {
     className: "bagp"
   }, /*#__PURE__*/React.createElement("div", {
     className: "bagp-h"
-  }, /*#__PURE__*/React.createElement("h1", null, "Shopping Bag"), /*#__PURE__*/React.createElement("span", null, count, " ", count === 1 ? "item" : "items")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h1", null, "Shopping Cart"), /*#__PURE__*/React.createElement("span", null, count, " ", count === 1 ? "item" : "items")), /*#__PURE__*/React.createElement("div", {
     className: "bagp-g"
   }, /*#__PURE__*/React.createElement("div", {
     className: "bagp-l"
   }, /*#__PURE__*/React.createElement("div", {
     className: "ship",
     style: {
-      "--ship-accent": s.accent || "var(--db-green-400)",
+      "--ship-accent": s.accent || "var(--db-yellow-300)",
       "--ship-h": (s.height || 6) + "px"
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -3054,7 +3680,8 @@ function BagPage({
     className: "ic"
   }, /*#__PURE__*/React.createElement(Ico, {
     name: left > 0 ? "truck" : "check",
-    size: 14
+    size: 14,
+    weight: 600
   })), left > 0 ? /*#__PURE__*/React.createElement("span", null, "You\u2019re ", money(left), " away from ", /*#__PURE__*/React.createElement("strong", null, "free shipping"), ".") : /*#__PURE__*/React.createElement("span", null, "Your order ships ", /*#__PURE__*/React.createElement("strong", null, "free"), ".")), /*#__PURE__*/React.createElement("div", {
     className: "ship-bar"
   }, /*#__PURE__*/React.createElement("span", {
@@ -3071,48 +3698,49 @@ function BagPage({
   }, /*#__PURE__*/React.createElement("button", {
     className: "th",
     onClick: () => go("#/p/" + x.p.id)
-  }, /*#__PURE__*/React.createElement("img", {
-    src: thumb(colorImg(x.p, x.l.color)),
-    alt: "",
-    loading: "lazy",
-    decoding: "async"
+  }, /*#__PURE__*/React.createElement(window.PDPX.CardImg, {
+    src: thumb(colorImg(x.p, x.l.color))
   })), /*#__PURE__*/React.createElement("div", {
     className: "info"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "bagd-top"
   }, /*#__PURE__*/React.createElement("button", {
     className: "t",
     style: {
       textAlign: "left"
     },
     onClick: () => go("#/p/" + x.p.id)
-  }, x.p.t), x.l.color ? /*#__PURE__*/React.createElement("span", {
+  }, x.p.t), /*#__PURE__*/React.createElement("span", {
+    className: "bagd-lp"
+  }, money(lineEach(x) * x.l.q))), x.l.color ? /*#__PURE__*/React.createElement("span", {
     className: "c"
-  }, x.l.color) : null, /*#__PURE__*/React.createElement("span", {
+  }, x.l.color) : null, window.PDPX && window.PDPX.isPre(x.p) ? /*#__PURE__*/React.createElement("span", {
+    className: "c pre-c"
+  }, window.PDPX.preLine(x.p)) : null, x.l.imprint ? /*#__PURE__*/React.createElement("span", {
+    className: "c"
+  }, "Imprint: \u201c" + x.l.imprint.text + "\u201d, " + x.l.imprint.style) : null, x.l.imprint ? /*#__PURE__*/React.createElement(PriceBreak, {
+    x: x,
+    itemLabel: "Item price"
+  }) : /*#__PURE__*/React.createElement("span", {
     className: "c"
   }, money(x.p.price), " each"), /*#__PURE__*/React.createElement("div", {
     className: "r"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "qty"
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => setQty(i, x.l.q - 1),
-    "aria-label": "Decrease"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "minus",
-    size: 14
-  })), /*#__PURE__*/React.createElement("span", null, x.l.q), /*#__PURE__*/React.createElement("button", {
-    onClick: () => setQty(i, x.l.q + 1),
-    "aria-label": "Increase"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "plus",
-    size: 14
-  }))), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 13,
-      fontWeight: 500
-    }
-  }, money(x.p.price * x.l.q))), /*#__PURE__*/React.createElement("button", {
-    className: "rm",
-    onClick: () => remove(i)
-  }, "Remove"))))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(DS.QuantityStepper, {
+    className: "qty-ds",
+    size: "sm",
+    min: 1,
+    max: 20,
+    value: x.l.q,
+    onChange: v => setQty(i, v),
+    label: "Quantity, " + x.p.t
+  }), /* Remove: a small outline icon button with the trash can, beside the quantity stepper. */ /*#__PURE__*/React.createElement(DS.IconButton, {
+    variant: "outline",
+    size: "sm",
+    icon: "delete",
+    className: "bagd-rm",
+    onClick: () => remove(i),
+    label: "Remove " + x.p.t
+  })))))), /*#__PURE__*/React.createElement("div", {
     className: "bagp-s"
   }, /*#__PURE__*/React.createElement("h2", null, "Order Summary"), /*#__PURE__*/React.createElement("form", {
     className: "promo-row",
@@ -3122,13 +3750,13 @@ function BagPage({
     htmlFor: "bagp-promo"
   }, "Promo code"), /*#__PURE__*/React.createElement("div", {
     className: "promo-in"
-  }, /*#__PURE__*/React.createElement("input", {
+  }, /*#__PURE__*/React.createElement(DS.Input, {
     id: "bagp-promo",
     value: code,
     onChange: e => setCode(e.target.value),
     placeholder: "Enter code",
     autoComplete: "off"
-  }), /*#__PURE__*/React.createElement("button", {
+  }), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-out",
     type: "submit",
     style: {
@@ -3137,8 +3765,10 @@ function BagPage({
     }
   }, "APPLY")), promo ? /*#__PURE__*/React.createElement("span", {
     className: "promo-ok"
-  }, promo.code, " applied \u2014 ", promo.lab, /*#__PURE__*/React.createElement("button", {
+  }, promo.code, " applied \u2014 ", promo.lab, /*#__PURE__*/React.createElement(DS.Button, {
     type: "button",
+    variant: "ghost",
+    size: "sm",
     onClick: () => setPromo(null)
   }, "Remove")) : null, err ? /*#__PURE__*/React.createElement("span", {
     className: "promo-err"
@@ -3152,17 +3782,17 @@ function BagPage({
     className: "r"
   }, /*#__PURE__*/React.createElement("span", null, "Standard shipping"), /*#__PURE__*/React.createElement("span", null, std ? money(std) : "Free")), /*#__PURE__*/React.createElement("div", {
     className: "r grand"
-  }, /*#__PURE__*/React.createElement("span", null, "Estimated total"), /*#__PURE__*/React.createElement("span", null, money(net + std))), /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement("span", null, "Estimated total"), /*#__PURE__*/React.createElement("span", null, money(net + std))), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
     style: {
       height: 48,
       padding: "0 24px",
-      fontSize: 16,
       marginTop: 8
     },
     onClick: () => go("#/checkout")
-  }, "CHECKOUT"), /*#__PURE__*/React.createElement("button", {
-    className: "btn-out",
+  }, "CHECKOUT"), /*#__PURE__*/React.createElement(DS.Button, {
+    variant: "ghost",
+    size: "sm",
     style: {
       alignSelf: "center"
     },
@@ -3178,14 +3808,11 @@ function CoField({
 }) {
   return /*#__PURE__*/React.createElement("div", {
     className: "co-f" + (half ? " half" : "")
-  }, /*#__PURE__*/React.createElement("label", {
-    htmlFor: id
-  }, label), /*#__PURE__*/React.createElement("input", _extends({
+  }, /*#__PURE__*/React.createElement(DS.Input, _extends({
     id: id,
-    className: err ? "err" : ""
-  }, rest)), err ? /*#__PURE__*/React.createElement("span", {
-    className: "field-err"
-  }, err) : null);
+    label: label,
+    error: err || undefined
+  }, rest)));
 }
 function CoSummary({
   m,
@@ -3199,19 +3826,25 @@ function CoSummary({
   }, /*#__PURE__*/React.createElement("h2", null, "Order Summary"), /*#__PURE__*/React.createElement("button", {
     className: "co-link",
     onClick: () => go("#/bag")
-  }, "Edit bag")), /*#__PURE__*/React.createElement("div", {
+  }, "Edit cart")), /*#__PURE__*/React.createElement("div", {
     className: "co-sum-b"
   }, m.lines.map((x, i) => /*#__PURE__*/React.createElement("div", {
     className: "co-li",
     key: x.l.key || i
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "co-th"
+  }, /*#__PURE__*/React.createElement(DS.CountBadge, {
+    className: "co-th",
+    count: x.l.q
   }, /*#__PURE__*/React.createElement("img", {
     src: thumb(colorImg(x.p, x.l.color)),
     alt: ""
-  }), /*#__PURE__*/React.createElement("i", null, x.l.q)), /*#__PURE__*/React.createElement("span", {
+  })), /*#__PURE__*/React.createElement("span", {
     className: "co-lt"
-  }, x.p.t, x.l.color ? /*#__PURE__*/React.createElement("em", null, x.l.color) : null), /*#__PURE__*/React.createElement("span", null, money(x.p.price * x.l.q))))), /*#__PURE__*/React.createElement("div", {
+  }, x.p.t, x.l.color ? /*#__PURE__*/React.createElement("em", null, x.l.color) : null, window.PDPX && window.PDPX.isPre(x.p) ? /*#__PURE__*/React.createElement("em", {
+    className: "pre-c"
+  }, window.PDPX.preLine(x.p)) : null, x.l.imprint ? /*#__PURE__*/React.createElement("em", null, "Imprint: \u201c" + x.l.imprint.text + "\u201d, " + x.l.imprint.style) : null), /*#__PURE__*/React.createElement("span", null, x.l.imprint ? null : money(lineEach(x) * x.l.q)), x.l.imprint ? /*#__PURE__*/React.createElement(PriceBreak, {
+    x: x,
+    total: true
+  }) : null))), /*#__PURE__*/React.createElement("div", {
     className: "co-sum-f"
   }, /*#__PURE__*/React.createElement("div", {
     className: "r"
@@ -3242,6 +3875,8 @@ function Checkout({
     name: user ? user.name : "Sarah Johnson",
     email: user ? user.email : "sarah.johnson@example.com",
     pw: user ? "" : "password123",
+    birth: "",
+    phone: "",
     addr: "57 W South Temple",
     apt: "",
     city: "Salt Lake City",
@@ -3280,13 +3915,18 @@ function Checkout({
     ev.preventDefault();
     const rules = [["email", email(f.email), "Enter a valid email address."]];
     if (!guest && tab === "create") rules.unshift(["name", f.name.trim().length > 1, "Enter your full name."]);
+    if (!guest && tab === "create") rules.push(["birth", !f.birth || f.birth <= new Date().toISOString().slice(0, 10), "Birthday can\u2019t be in the future."]);
+    if (!guest && tab === "create") rules.push(["phone", !f.phone.trim() || /^[+()\d][\d\s().+-]{6,}$/.test(f.phone.trim()), "Enter a valid phone number, or leave it blank."]);
     if (!guest) rules.push(["pw", f.pw.length >= 4, tab === "create" ? "Choose a password of at least four characters." : "Enter your password."]);
     if (!check(rules)) return;
     if (!guest) {
       const nm = tab === "create" ? f.name.trim() : f.email.split("@")[0].replace(/[._]/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      if (tab === "create" && window.AccountMock && window.AccountMock.setBirth) window.AccountMock.setBirth(f.birth, { name: nm, email: f.email });
       setUser({
         name: nm,
-        email: f.email
+        email: f.email,
+        birth: tab === "create" ? f.birth : undefined,
+        phone: tab === "create" && f.phone.trim() ? f.phone.trim() : undefined
       });
       setF(Object.assign({}, f, {
         name: nm,
@@ -3311,10 +3951,11 @@ function Checkout({
       total: m.net + shipCost,
       method: SHIP_METHODS.find(x => x.id === method),
       to: f.name + ", " + f.addr + (f.apt ? " " + f.apt : "") + ", " + f.city + ", " + f.st + " " + f.zip,
-      last4: f.card.replace(/\s/g, "").slice(-4)
+      last4: f.card.replace(/\s/g, "").slice(-4),
+      pre: !!(window.PDPX && m.lines.some(x => window.PDPX.isPre(x.p)))
     });
     const mth = SHIP_METHODS.find(x => x.id === method);
-    window.DBOrders && window.DBOrders.add({ no: ordNo, items: m.lines.map(x => ({ id: x.p.id, q: x.l.q, color: x.l.color, imprint: x.l.imprint || null })), gift: gift, sub: m.net, ship: shipCost, total: m.net + shipCost, method: mth.n, eta: mth.eta, to: f.name + ", " + f.addr + (f.apt ? " " + f.apt : "") + ", " + f.city + ", " + f.st + " " + f.zip, last4: f.card.replace(/\s/g, "").slice(-4) });
+    window.DBOrders && window.DBOrders.add({ no: ordNo, items: m.lines.map(x => ({ id: x.p.id, q: x.l.q, color: x.l.color, imprint: x.l.imprint || null, release: (window.PDPX && window.PDPX.releaseOf(x.p)) || null })), gift: gift, sub: m.net, ship: shipCost, total: m.net + shipCost, method: mth.n, eta: mth.eta, to: f.name + ", " + f.addr + (f.apt ? " " + f.apt : "") + ", " + f.city + ", " + f.st + " " + f.zip, last4: f.card.replace(/\s/g, "").slice(-4) });
     clear();
     window.scrollTo(0, 0);
   };
@@ -3329,7 +3970,7 @@ function Checkout({
     size: 24
   })), /*#__PURE__*/React.createElement("span", {
     className: "co-eb"
-  }, "Order ", done.no), /*#__PURE__*/React.createElement("h1", null, "Thank you for your order"), /*#__PURE__*/React.createElement("p", null, "A confirmation is on its way to ", done.email, ". ", done.method.n, " shipping: ", done.method.eta.replace("Arrives", "arrives")), /*#__PURE__*/React.createElement("div", {
+  }, "Order ", done.no), /*#__PURE__*/React.createElement("h1", null, "Thank you for your order"), /*#__PURE__*/React.createElement("p", null, "A confirmation is on its way to ", done.email, ". ", done.method.n, " shipping: ", done.method.eta.replace("Arrives", "arrives"), done.pre ? " Pre-order items ship on their release date, and you won’t be charged for them until they ship." : null), /*#__PURE__*/React.createElement("div", {
     className: "co-rev",
     style: { alignSelf: "stretch" }
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", { className: "co-lab" }, "Ship to"), /*#__PURE__*/React.createElement("span", null, done.to)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", { className: "co-lab" }, "Payment"), /*#__PURE__*/React.createElement("span", null, "Card ending ", done.last4))), /*#__PURE__*/React.createElement("div", {
@@ -3339,29 +3980,17 @@ function Checkout({
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "r grand"
-  }, /*#__PURE__*/React.createElement("span", null, "Total charged"), /*#__PURE__*/React.createElement("span", null, money(done.total)))), /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement("span", null, done.pre ? "Order total" : "Total charged"), /*#__PURE__*/React.createElement("span", null, money(done.total)))), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-teal",
     onClick: () => go("#/account/orders")
   }, "View orders"), /*#__PURE__*/React.createElement("button", {
     className: "co-link",
     onClick: () => go("#/")
   }, "Keep shopping")));
-  if (!m.lines.length) return /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "shopping-bag",
-    size: 28
-  }), /*#__PURE__*/React.createElement("h1", {
-    style: {
-      fontFamily: "Lora,Georgia,serif",
-      fontWeight: 500,
-      fontSize: 24,
-      margin: 0
-    }
-  }, "Your Bag Is Empty"), /*#__PURE__*/React.createElement("p", null, "Add something to your bag to check out."), /*#__PURE__*/React.createElement("button", {
+  if (!m.lines.length) return /*#__PURE__*/React.createElement(DS.EmptyState, { icon: ICON_MAP["shopping-bag"] || "shopping-bag", title: "Your Cart Is Empty", headingLevel: "h1", action: /*#__PURE__*/React.createElement(DSB, {
     className: "btn-gold",
     onClick: () => go("#/")
-  }, "START SHOPPING"));
+  }, "START SHOPPING") }, "Add something to your cart to check out.");
   const title = step === 1 ? user && !guest ? "You\u2019re signed in" : guest ? "Check out as a guest" : tab === "create" ? "Create your account" : "Welcome back" : step === 2 ? "Shipping" : "Payment & review";
   return /*#__PURE__*/React.createElement("div", {
     className: "co co-wide"
@@ -3369,13 +3998,14 @@ function Checkout({
     className: "co-main"
   }, /*#__PURE__*/React.createElement("div", {
     className: "co-top"
-  }, /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement(DS.Button, {
     className: "co-back",
+    variant: "ghost",
+    size: "sm",
+    icon: "chevron_left",
+    style: { marginLeft: -12 },
     onClick: () => step === 1 ? go("#/bag") : next(step - 1)
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "chevron-left",
-    size: 16
-  }), /*#__PURE__*/React.createElement("span", null, step === 1 ? "Back to bag" : "Back")), /*#__PURE__*/React.createElement("span", {
+  }, step === 1 ? "Back to cart" : "Back"), /*#__PURE__*/React.createElement("span", {
     className: "co-eb"
   }, "Step ", step, " of 3")), /*#__PURE__*/React.createElement("div", {
     className: "co-prog",
@@ -3391,7 +4021,7 @@ function Checkout({
     className: "co-who"
   }, /*#__PURE__*/React.createElement("span", {
     className: "acct-av"
-  }, user.name.slice(0, 1)), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, user.name), /*#__PURE__*/React.createElement("span", null, user.email))), /*#__PURE__*/React.createElement("button", {
+  }, initials(user.name)), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, user.name), /*#__PURE__*/React.createElement("span", null, user.email))), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-teal",
     type: "button",
     onClick: () => next(2)
@@ -3405,7 +4035,7 @@ function Checkout({
     err: errs.email
   }), /*#__PURE__*/React.createElement("p", {
     className: "co-note"
-  }, "We\u2019ll send your receipt and tracking here."), /*#__PURE__*/React.createElement("button", {
+  }, "We\u2019ll send your receipt and tracking here."), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-teal",
     type: "submit"
   }, "Continue"), /*#__PURE__*/React.createElement("button", {
@@ -3415,28 +4045,16 @@ function Checkout({
       setGuest(false);
       setErrs({});
     }
-  }, "Sign in or create an account instead")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, "Sign in or create an account instead")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(DS.SegmentedControl, {
     className: "co-seg",
-    role: "tablist"
-  }, /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    role: "tab",
-    "aria-selected": tab === "create",
-    className: tab === "create" ? "on" : "",
-    onClick: () => {
-      setTab("create");
+    fullWidth: true,
+    options: [{ value: "create", label: "Create account" }, { value: "signin", label: "Sign in" }],
+    value: tab,
+    onChange: v => {
+      setTab(v && v.target ? v.target.value : v);
       setErrs({});
     }
-  }, "Create account"), /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    role: "tab",
-    "aria-selected": tab === "signin",
-    className: tab === "signin" ? "on" : "",
-    onClick: () => {
-      setTab("signin");
-      setErrs({});
-    }
-  }, "Sign in")), tab === "create" ? /*#__PURE__*/React.createElement(CoField, {
+  }), tab === "create" ? /*#__PURE__*/React.createElement(CoField, {
     id: "co-name",
     label: "Full name",
     value: f.name,
@@ -3459,12 +4077,29 @@ function Checkout({
     onChange: set("pw"),
     autoComplete: tab === "create" ? "new-password" : "current-password",
     err: errs.pw
-  }), /*#__PURE__*/React.createElement("button", {
+  }), tab === "create" ? /*#__PURE__*/React.createElement(CoField, {
+    id: "co-birth",
+    label: "Birthday (optional)",
+    type: "date",
+    max: new Date().toISOString().slice(0, 10),
+    value: f.birth,
+    onChange: set("birth"),
+    autoComplete: "bday",
+    err: errs.birth
+  }) : null, tab === "create" ? /*#__PURE__*/React.createElement(CoField, {
+    id: "co-phone",
+    label: "Phone number (optional)",
+    type: "tel",
+    value: f.phone,
+    onChange: set("phone"),
+    autoComplete: "tel",
+    err: errs.phone
+  }) : null, /*#__PURE__*/React.createElement(DSB, {
     className: "btn-teal",
     type: "submit"
   }, tab === "create" ? "Create account" : "Sign in"), /*#__PURE__*/React.createElement("div", {
     className: "co-or"
-  }, /*#__PURE__*/React.createElement("span", null, "or")), /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement("span", null, "or")), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-line",
     type: "button",
     onClick: () => {
@@ -3534,38 +4169,29 @@ function Checkout({
     return /*#__PURE__*/React.createElement("div", {
       className: "co-meth",
       key: x.id
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "co-rad"
-    }, /*#__PURE__*/React.createElement("input", {
-      type: "radio",
+    }, /*#__PURE__*/React.createElement(DS.Radio, {
       name: "co-meth",
-      checked: method === x.id,
+      options: [{ value: x.id, label: x.n }],
+      value: method,
       onChange: () => setMethod(x.id)
-    }), /*#__PURE__*/React.createElement("span", {
-      className: "dot"
-    }), /*#__PURE__*/React.createElement("span", null, x.n)), /*#__PURE__*/React.createElement("button", {
+    }), /*#__PURE__*/React.createElement(DS.Tooltip, {
+      label: x.eta,
+      open: tip === x.id ? true : undefined
+    }, /*#__PURE__*/React.createElement("button", {
       type: "button",
       className: "co-i",
       "aria-label": x.n + " delivery time",
       "aria-expanded": tip === x.id,
       onClick: () => setTip(tip === x.id ? null : x.id)
-    }, /*#__PURE__*/React.createElement(InfoI, null)), /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement(InfoI, null))), /*#__PURE__*/React.createElement("span", {
       className: "co-p"
-    }, p ? money(p) : "Free"), tip === x.id ? /*#__PURE__*/React.createElement("span", {
-      className: "co-tip"
-    }, x.eta) : null);
-  }), /*#__PURE__*/React.createElement("label", {
-    className: "co-chk"
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "checkbox",
+    }, p ? money(p) : "Free"));
+  }), /*#__PURE__*/React.createElement(DS.Checkbox, {
     checked: gift,
-    onChange: e => setGift(e.target.checked)
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "box"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "check",
-    size: 14
-  })), /*#__PURE__*/React.createElement("span", null, "This is a Gift"))), /*#__PURE__*/React.createElement("button", {
+    onChange: e => setGift(e.target.checked),
+    label: "This is a Gift",
+    style: { marginTop: 18 }
+  })), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-teal",
     type: "submit"
   }, "Continue to payment")) : null, step === 3 ? /*#__PURE__*/React.createElement("form", {
@@ -3626,7 +4252,7 @@ function Checkout({
     value: f.cname,
     onChange: set("cname"),
     autoComplete: "cc-name"
-  }), /*#__PURE__*/React.createElement("button", {
+  }), /*#__PURE__*/React.createElement(DSB, {
     className: "btn-teal",
     type: "submit"
   }, "Place order")) : null), /*#__PURE__*/React.createElement("aside", {
@@ -3688,6 +4314,7 @@ function BspLogo() {
   });
 }
 function Subscriptions({
+  only,
   user,
   subs,
   go,
@@ -3703,122 +4330,50 @@ function Subscriptions({
     Card,
     Dialog
   } = DS;
-  if (!user) return /*#__PURE__*/React.createElement("div", {
-    className: "empty"
-  }, /*#__PURE__*/React.createElement(Ico, {
-    name: "user",
-    size: 28
-  }), /*#__PURE__*/React.createElement("h1", {
-    style: {
-      fontFamily: "Lora,Georgia,serif",
-      fontWeight: 500,
-      fontSize: 24,
-      margin: 0
-    }
-  }, "Sign In to See Your Subscriptions"), /*#__PURE__*/React.createElement("p", null, "Your Bookshelf+ plan and Platinum Rewards membership are managed from your account."), /*#__PURE__*/React.createElement(Button, {
+  if (!user) return /*#__PURE__*/React.createElement(DS.EmptyState, { icon: ICON_MAP["user"] || "user", title: "Sign In to See Your Subscriptions", headingLevel: "h1", action: /*#__PURE__*/React.createElement(Button, {
     variant: "secondary",
     onClick: onSignIn
-  }, "Sign in"));
+  }, "Sign in") }, "Your Bookshelf+ plan and Platinum Rewards membership are managed from your account.");
   const tier = subs.platinum ? SUB_PRICES.plat : SUB_PRICES.reg;
   const yearly = subs.bspPlan === "yearly";
   const price = yearly ? subMoney(tier.y) + "/year" : subMoney(tier.m) + "/month";
   const any = subs.bookshelf || subs.platinum;
   const all = subs.bookshelf && subs.platinum;
-  const bsp = /*#__PURE__*/React.createElement(Card, {
-    key: "bsp",
-    padding: "md",
-    className: "sub-c"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sub-top"
-  }, /*#__PURE__*/React.createElement(BspLogo, null), /*#__PURE__*/React.createElement(Badge, {
-    tone: "accent"
-  }, "Active")), /*#__PURE__*/React.createElement("dl", {
-    className: "sub-dl"
-  }, /*#__PURE__*/React.createElement(SubRow, {
-    k: "Plan",
-    v: (yearly ? "Yearly" : "Monthly") + " \u00b7 " + price
-  }), /*#__PURE__*/React.createElement(SubRow, {
-    k: "Next renewal",
-    v: SUB_RENEW
-  }), /*#__PURE__*/React.createElement(SubRow, {
-    k: "Billed to",
-    v: "Visa ending in 4242"
-  })), subs.platinum ? /*#__PURE__*/React.createElement("p", {
-    className: "sub-note"
-  }, "Platinum member price, applied automatically") : null, /*#__PURE__*/React.createElement("div", {
-    className: "sub-acts"
-  }, /*#__PURE__*/React.createElement(Button, {
-    variant: "secondary",
-    size: "sm",
-    onClick: () => go("#/account/subscriptions/bookshelf-plus")
-  }, "Manage"), /*#__PURE__*/React.createElement(Button, {
-    variant: "ghost",
-    size: "sm",
-    onClick: () => go("#/bookshelf-plus")
-  }, "Open library")));
-  const plat = /*#__PURE__*/React.createElement(Card, {
-    key: "plat",
-    padding: "md",
-    className: "sub-c"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sub-top"
-  }, /*#__PURE__*/React.createElement("h3", null, "Platinum Rewards"), /*#__PURE__*/React.createElement(Badge, {
-    tone: "charcoal"
-  }, "Member")), /*#__PURE__*/React.createElement("div", {
-    className: "sub-pts"
-  }, /*#__PURE__*/React.createElement("strong", null, SUB_POINTS), /*#__PURE__*/React.createElement("span", null, "points")), /*#__PURE__*/React.createElement("dl", {
-    className: "sub-dl"
-  }, /*#__PURE__*/React.createElement(SubRow, {
-    k: "Tier",
-    v: "Platinum"
-  }), /*#__PURE__*/React.createElement(SubRow, {
-    k: "Cost",
-    v: "Free"
-  })), /*#__PURE__*/React.createElement(SubBenefits, {
-    items: PLAT_BENEFITS
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "sub-acts"
-  }, /*#__PURE__*/React.createElement(Button, {
-    variant: "secondary",
-    size: "sm",
-    onClick: () => onGo("Platinum Rewards")
-  }, "View rewards"), /*#__PURE__*/React.createElement(Button, {
-    variant: "ghost",
-    size: "sm",
-    onClick: () => setLeave(true)
-  }, "Leave program")));
-  const bspPromo = /*#__PURE__*/React.createElement(Card, {
-    key: "bsp-p",
-    ground: "pearl",
-    bordered: false,
-    padding: "md",
-    className: "sub-c"
-  }, /*#__PURE__*/React.createElement(BspLogo, null), /*#__PURE__*/React.createElement("h3", null, "Your digital library and audiobooks"), /*#__PURE__*/React.createElement(SubBenefits, {
-    items: BSP_BENEFITS
-  }), /*#__PURE__*/React.createElement("p", {
-    className: "sub-note"
-  }, "Try it free for 14 days. Cancel before the trial ends and you won\u2019t be charged."), /*#__PURE__*/React.createElement("div", {
-    className: "sub-acts"
-  }, /*#__PURE__*/React.createElement(Button, {
-    size: "sm",
-    onClick: () => go("#/bookshelf-plus")
-  }, "Start free trial")));
-  const platPromo = /*#__PURE__*/React.createElement(Card, {
-    key: "plat-p",
-    ground: "pearl",
-    bordered: false,
-    padding: "md",
-    className: "sub-c"
-  }, /*#__PURE__*/React.createElement("h3", null, "Platinum Rewards"), /*#__PURE__*/React.createElement("p", {
-    className: "sub-lede"
-  }, "Free to join. Membership starts the moment you sign up."), /*#__PURE__*/React.createElement(SubBenefits, {
-    items: PLAT_BENEFITS
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "sub-acts"
-  }, /*#__PURE__*/React.createElement(Button, {
-    size: "sm",
-    onClick: onJoinPlatinum
-  }, "Join free")));
+  let bst = null;
+  try { bst = JSON.parse(localStorage.getItem("db-bsp-status") || "null"); } catch (e) {}
+  const bShort = d => String(d || "").replace(/^(\w{3})\w*/, "$1").replace(/, \d{4}$/, "");
+  const bBadge = bst && bst.status === "scheduled" ? ["yellow", "Ends " + bShort(bst.endDate)] : bst && bst.status === "paused" ? ["clay", "Pauses " + bShort(bst.from)] : ["accent", "Active"];
+  const bDate = bst && bst.status === "scheduled" ? ["Access until", bst.endDate] : bst && bst.status === "paused" ? ["Billing resumes", bst.resume] : ["Next renewal", SUB_RENEW];
+  const bNote = bst && bst.status === "scheduled" ? "Cancelled. You have full access until " + bst.endDate + " and won\u2019t be charged again." : bst && bst.status === "paused" ? "Paused from " + bst.from + ". Billing resumes " + bst.resume + "." : null;
+  const SubHead = ({ mark, badge }) => React.createElement("div", { className: "sub-top" }, mark, badge || null);
+  const bspMark = React.createElement(BspLogo, null);
+  const platMark = React.createElement("span", { className: "sub-ttl" }, React.createElement("span", { className: "sub-ico", "aria-hidden": "true" }, React.createElement(Ico, { name: "redeem", size: 20 })), React.createElement("h3", null, "Platinum Rewards"));
+  const bsp = React.createElement(Card, { key: "bsp", padding: "md", className: "sub-c sub-on" },
+    React.createElement(SubHead, { mark: bspMark, badge: React.createElement(Badge, { tone: bBadge[0] }, bBadge[1]) }),
+    React.createElement("dl", { className: "sub-dl" }, React.createElement(SubRow, { k: "Plan", v: (yearly ? "Yearly" : "Monthly") + " \u00b7 " + price }), React.createElement(SubRow, { k: bDate[0], v: bDate[1] }), React.createElement(SubRow, { k: "Billed to", v: "Visa ending in 4242" })),
+    React.createElement("p", { className: "sub-note" }, bNote || (subs.platinum ? "Platinum member price, applied automatically." : "Unlimited listening and reading across 4,000+ audiobooks and eBooks.")),
+    React.createElement("div", { className: "sub-acts" }, React.createElement(Button, { variant: "secondary", size: "sm", onClick: () => go("#/account/subscriptions/bookshelf-plus") }, "Manage")));
+  const plat = React.createElement(Card, { key: "plat", ground: "pearl", bordered: false, padding: "md", className: "sub-c sub-on" },
+    React.createElement(SubHead, { mark: platMark, badge: React.createElement(Badge, { tone: "charcoal" }, "Member") }),
+    React.createElement("dl", { className: "sub-dl" }, React.createElement(SubRow, { k: "Tier", v: "Platinum \u00b7 Free" }), React.createElement(SubRow, { k: "Points", v: SUB_POINTS }), React.createElement(SubRow, { k: "Renews", v: "March 3, 2027" })),
+    React.createElement("p", { className: "sub-note" }, subs.bookshelf ? "Your Platinum price is applied to Bookshelf+ automatically." : "Earn rewards on every purchase."),
+    React.createElement("div", { className: "sub-acts" }, React.createElement(Button, { variant: "secondary", size: "sm", onClick: () => go("#/account/subscriptions/platinum-rewards") }, "Manage")));
+  const bspPromo = React.createElement(Card, { key: "bsp-p", ground: "pearl", bordered: false, padding: "md", className: "sub-c sub-off" },
+    React.createElement(SubHead, { mark: bspMark }),
+    React.createElement("p", { className: "sub-lede" }, "Your digital library and audiobooks."),
+    React.createElement(SubBenefits, { items: BSP_BENEFITS }),
+    React.createElement("p", { className: "sub-note" }, "Try it free for 14 days. Cancel before the trial ends and you won\u2019t be charged."),
+    React.createElement("div", { className: "sub-acts sub-acts-split" }, React.createElement(Button, { size: "md", variant: "secondary", className: "sub-more", onClick: () => go("#/bookshelf-plus") }, "Learn More"), React.createElement(Button, { size: "md", className: "sub-trial", onClick: () => (window.BspSignup && window.BspSignup.open ? window.BspSignup.open() : go("#/bookshelf-plus")) }, "Start free trial")));
+  const platPromo = React.createElement(Card, { key: "plat-p", ground: "white", bordered: true, padding: "md", className: "sub-c sub-off sub-plat-off" },
+    React.createElement(SubHead, { mark: platMark }),
+    React.createElement("p", { className: "sub-lede" }, "Rewards and member pricing with every order."),
+    React.createElement(SubBenefits, { items: PLAT_BENEFITS }),
+    React.createElement("p", { className: "sub-note" }, "Free to join. Membership starts the moment you sign up."),
+    React.createElement("div", { className: "sub-acts sub-acts-split" }, React.createElement(Button, { size: "md", variant: "secondary", className: "sub-more", onClick: () => onGo("Platinum Rewards") }, "Learn More"), React.createElement(Button, { size: "md", className: "sub-join", onClick: onJoinPlatinum }, "Join Platinum")));
+  if (only) return React.createElement("div", { className: "subs subs-only" },
+    React.createElement("div", { className: "subs-h" }, React.createElement("h1", null, only === "bsp" ? "Bookshelf+" : "Platinum Rewards")),
+    React.createElement("div", { className: "subs-grid subs-one" }, only === "bsp" ? bspPromo : platPromo),
+    only === "bsp" && window.BspSignup ? React.createElement(window.BspSignup.Launcher, { platinum: !!subs.platinum }) : null);
   return /*#__PURE__*/React.createElement("div", {
     className: "subs"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3839,14 +4394,17 @@ function Subscriptions({
     className: "subs-grid"
   }, [!subs.bookshelf ? bspPromo : null, !subs.platinum ? platPromo : null])) : null, /*#__PURE__*/React.createElement(Dialog, {
     open: leave,
+    size: "sm",
+    tone: "warning",
     title: "Leave Platinum Rewards?",
     description: "You\u2019ll lose your " + SUB_POINTS + " points" + (subs.bookshelf ? " and the Platinum price on Bookshelf+" : "") + ". You can join again any time.",
     onClose: () => setLeave(false),
     footer: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
-      variant: "ghost",
+      variant: "secondary",
+      size: "md",
       onClick: () => setLeave(false)
     }, "Stay a member"), /*#__PURE__*/React.createElement(Button, {
-      variant: "secondary",
+      size: "md",
       onClick: () => {
         setLeave(false);
         onLeavePlatinum();
@@ -3881,15 +4439,14 @@ const STATIC_PAGES = {
   "Careers": ["Openings across retail, publishing, distribution, and technology."],
   "Terms of Use": ["The terms that govern use of this site and the purchase of physical and digital goods."],
   "Privacy Policy": ["How personal information is collected, used, and protected."],
-  "Deseret Book Events": ["Author signings, firesides, and Deseret Book Presents events through the year."],
-  "Deseret Book Blog": ["Reading lists, author interviews, and study helps, published weekly."],
-  "Browse All Categories": ["Every shelf in one place."],
+  "Events": ["Author signings, firesides, and Deseret Book Presents events through the year."],
+  "Blog": ["Reading lists, author interviews, and study helps, published weekly."], "Browse All Categories": ["Every shelf in one place."],
   "Facebook": ["Follow Deseret Book on Facebook for new releases and event news."],
   "Instagram": ["Follow Deseret Book on Instagram for new releases and event news."]
 };
 const SHIP = {
   shipStyle: "bar",
-  shipAccent: "var(--db-green-400)",
+  shipAccent: "var(--db-yellow-300)",
   shipHeight: 6,
   shipThreshold: 49,
   shipGoalMark: true
@@ -3903,13 +4460,15 @@ const BSP_ROUTES = {
   "#/bookshelf-plus/platinum": "general-platinum",
   "#/bookshelf-plus/fiction": "fiction",
   "#/bookshelf-plus/fiction-platinum": "fiction-platinum",
-  "#/account/subscriptions/bookshelf-plus": "subscriptions"
+  "#/account/subscriptions/bookshelf-plus": "subscriptions",
+  "#/bookshelf-plus/cancel": "subscriptions"
 };
 /* Subscription state comes from the Tweaks panel in Concept F.html (db-subs event). */
 const SUBS_DEFAULT = {
   platinum: true,
   bookshelf: true,
-  bspPlan: "monthly"
+  bspPlan: "monthly",
+  bspScenario: "standard"
 };
 function BookshelfPage({
   k,
@@ -3950,7 +4509,19 @@ function App() {
     sessionStorage.setItem(ROUTE_KEY, route);
   }, [route]);
   const [cart, setCart] = useState(() => load(CART_KEY, []));
-  const [fav, setFav] = useState(() => load(FAV_KEY, []));
+  const [fav, setFav] = useState(() => {
+    /* One-time demo top-up so the wishlist has enough items to show two full rows plus a second page. */
+    let f = load(FAV_KEY, []);
+    try {
+      if (!localStorage.getItem("db-fav-demo-v1")) {
+        const extra = D.products.filter(p => f.indexOf(p.id) < 0 && p.img && p.img.length).slice(0, Math.max(0, 12 - f.length)).map(p => p.id);
+        f = f.concat(extra);
+        localStorage.setItem("db-fav-demo-v1", "1");
+        localStorage.setItem(FAV_KEY, JSON.stringify(f));
+      }
+    } catch (e) {}
+    return f;
+  });
   const [menu, setMenu] = useState(false);
   const [bag, setBag] = useState(false);
   const [acct, setAcct] = useState(false);
@@ -3958,7 +4529,6 @@ function App() {
   const [search, setSearch] = useState(false);
   const [toast, setToast] = useState(null);
   const [page, setPage] = useState(null);
-  const timer = useRef(null);
   const pendingFav = useRef(null);
   const [subs, setSubs] = useState(() => Object.assign({}, SUBS_DEFAULT, window.DB_SUBS || {}));
   useEffect(() => {
@@ -3997,6 +4567,7 @@ function App() {
     window.addEventListener("db-bsp-subscribed", h);
     return () => window.removeEventListener("db-bsp-subscribed", h);
   }, []);
+  window.__dbAdd = (...args) => add(...args);
   const go = hash => {
     if (location.hash === hash) {
       setMenu(false);
@@ -4004,16 +4575,16 @@ function App() {
       window.scrollTo(0, 0);
     } else location.hash = hash;
   };
-  const flash = (msg, action, tone) => {
-    setToast({
+  const flash = (msg, action, tone, onAct, opts) => {
+    setToast(Object.assign({
       msg,
       action,
       tone,
+      onAct,
       id: Date.now()
-    });
-    clearTimeout(timer.current);
-    timer.current = setTimeout(() => setToast(null), 3200);
+    }, opts || {}));
   };
+  const [added, setAdded] = useState(null);
   const add = (p, q, color, imprint) => {
     const qty = q || 1;
     const lk = (id, col, im) => id + "|" + (col || "") + "|" + (im ? im.style + ":" + im.text : "");
@@ -4035,7 +4606,13 @@ function App() {
         key: k + "-" + Date.now()
       }]);
     });
-    flash((qty > 1 ? qty + " \u00d7 " : "") + "Added to your bag", "View bag", "ok");
+    /* Every width: open the bag on the item just added (highlighted) instead of a toast. */
+    setToast(null);
+    setMenu(false);
+    setSearch(false);
+    setAcct(false);
+    setAdded(a => ({ k: lk(p.id, color, imprint), n: (a ? a.n : 0) + 1 }));
+    setBag(true);
   };
   const setQty = (i, q) => setCart(c => q < 1 ? c.filter((_, k) => k !== i) : c.map((l, k) => k === i ? Object.assign({}, l, {
     q: Math.min(20, q)
@@ -4053,16 +4630,22 @@ function App() {
     }
     setFav(f => {
       const on = f.indexOf(id) > -1;
-      flash(on ? "Removed from wishlist" : "Saved to your wishlist", null, on ? null : "ok");
+      if (on) flash("Removed from wishlist", "Undo", "undo", () => setFav(g => g.indexOf(id) > -1 ? g : g.concat([id])));else flash("Saved to your wishlist", null, "ok");
       return on ? f.filter(x => x !== id) : f.concat([id]);
     });
   };
   const openPage = label => {
+    if (String(label).indexOf("acct:") === 0) {
+      setAcct(false);
+      go("#/account/" + ACCT_SLUG[label.slice(5)]);
+      return;
+    }
     if (label === "My Account") {
       setMenu(false);
       setSearch(false);
       setBag(false);
-      setAcct(true);
+      setAcct(false);
+      go("#/account/" + ACCT_SLUG[ACCT_GROUPS[0][1][0]]);
       return;
     }
     if (label === "Bookshelf Plus") {
@@ -4080,7 +4663,7 @@ function App() {
       go("#/account/subscriptions");
       return;
     }
-    if (label === "Deseret Book Blog") {
+    if (label === "Blog" || label === "Deseret Book Blog") {
       setMenu(false);
       setSearch(false);
       setBag(false);
@@ -4088,12 +4671,40 @@ function App() {
       go("#/blog");
       return;
     }
+    if (label === "Deseret Book Store Locations") {
+      go("#/stores");
+      return;
+    }
+    if (window.FP_PAGES && window.FP_PAGES[label]) {
+      setMenu(false);
+      setSearch(false);
+      setBag(false);
+      setAcct(false);
+      go("#/info/" + window.FP_SLUG(label));
+      return;
+    }
     setPage(label);
     go("#/page");
   };
+  window.__openPage = openPage;
   const count = cart.reduce((s, l) => s + l.q, 0);
   let body;
-  const isHome = !(route.indexOf("#/c/") === 0 || route.indexOf("#/p/") === 0 || route.indexOf("#/blog") === 0 || route.indexOf("#/page/") === 0 || route.indexOf("#/bookshelf-plus") === 0 || route.indexOf("#/account") === 0 || ["#/wishlist", "#/stores", "#/page", "#/bag", "#/checkout"].indexOf(route) >= 0);
+  const acctSec = acctSection(route);
+  const acctBody = () => {
+    const signIn = () => setAcct(true);
+    const joinP = () => { setSubs(s => Object.assign({}, s, { platinum: true })); flash("Welcome to Platinum Rewards", null, "ok"); };
+    const leaveP = () => { setSubs(s => Object.assign({}, s, { platinum: false })); flash("You\u2019ve left Platinum Rewards"); };
+    if (acctSec === "orders") return React.createElement(window.Orders, { key: route, id: route.indexOf("#/account/orders/") === 0 ? decodeURIComponent(route.slice(17)) : "", user: user, go: go, onSignIn: signIn });
+    if (acctSec === "wishlist") return React.createElement(Wishlist, { fav: fav, go: go, add: add, toggleFav: toggleFav, user: user, onSignIn: signIn });
+    if (acctSec === "bookshelf-plus") return subs.bookshelf ? React.createElement(BookshelfPage, { key: "bsp-manage", k: "subscriptions", props: { platinum: subs.platinum, plan: subs.bspPlan, scenario: subs.bspScenario || "standard", startScreen: "details", onExit: () => go("#/account/bookshelf-plus"), onStartCancel: () => go("#/bookshelf-plus/cancel") } }) : React.createElement(Subscriptions, { only: "bsp", user: user, subs: subs, go: go, onSignIn: signIn, onGo: openPage, onJoinPlatinum: joinP, onLeavePlatinum: leaveP });
+    if (acctSec === "platinum-rewards") return subs.platinum ? React.createElement(window.PlatinumManage, { user: user, subs: subs, go: go, onSignIn: signIn, onJoin: joinP, onLeave: leaveP }) : React.createElement(Subscriptions, { only: "plat", user: user, subs: subs, go: go, onSignIn: signIn, onGo: openPage, onJoinPlatinum: joinP, onLeavePlatinum: leaveP });
+    const AM = window.AccountMock || {};
+    const amKey = { "account-information": "info", "addresses": "addresses", "payment-methods": "payment" }[acctSec];
+    if (amKey && AM[amKey]) return React.createElement(AM[amKey], { key: acctSec, user: user });
+    const lbl = ACCT_BY_SLUG[acctSec];
+    return React.createElement(SimplePage, { title: lbl, body: STATIC_PAGES[lbl] || ["More detail lives on deseretbook.com."], go: go });
+  };
+  const isHome = !(route.indexOf("#/series/") === 0 || route.indexOf("#/c/") === 0 || route.indexOf("#/search/") === 0 || route.indexOf("#/p/") === 0 || route.indexOf("#/blog") === 0 || route.indexOf("#/page/") === 0 || route.indexOf("#/info/") === 0 || route.indexOf("#/bookshelf-plus") === 0 || route.indexOf("#/account") === 0 || ["#/wishlist", "#/stores", "#/page", "#/bag", "#/checkout"].indexOf(route) >= 0);
   const shipCfg = {
     style: t.shipStyle,
     accent: t.shipAccent,
@@ -4106,20 +4717,35 @@ function App() {
     id: route.slice(4),
     go: go,
     add: add
-  });else if (route.indexOf("#/p/") === 0) body = /*#__PURE__*/React.createElement(Product, {
+  });else if (route.indexOf("#/search/") === 0) {
+    let sq = route.slice(9);
+    try { sq = decodeURIComponent(sq); } catch (e) {}
+    body = /*#__PURE__*/React.createElement(window.PLP.Page, {
+      key: "search:" + sq,
+      id: "search",
+      search: sq,
+      go: go,
+      add: add
+    });
+  } else if (route.indexOf("#/p/") === 0) body = /*#__PURE__*/React.createElement(Product, {
     id: route.slice(4),
     go: go,
     add: add,
     fav: user ? fav : [],
     toggleFav: toggleFav,
     shipMin: t.shipThreshold
+  });else if (route.indexOf("#/series/") === 0) body = /*#__PURE__*/React.createElement(window.PDPX.SeriesPage, {
+    key: route,
+    slug: route.slice(9),
+    go: go,
+    add: add
   });else if (route.indexOf("#/blog/") === 0) body = /*#__PURE__*/React.createElement(BlogPost, {
     i: route.slice(7),
     go: go,
     add: add
   });else if (route === "#/blog") body = /*#__PURE__*/React.createElement(BlogIndex, {
     go: go
-  });else if (route === "#/wishlist") body = /*#__PURE__*/React.createElement(Wishlist, {
+  });else if (acctSec) body = React.createElement(AccountPage, { user: user, subs: subs, section: acctSec, go: go, route: route, onSignIn: u => { setUser(u); flash("Signed in as " + u.name, null, "ok"); }, onSignOut: () => { setUser(null); flash("Signed out"); go("#/"); } }, acctBody());else if (route === "#/wishlist") body = /*#__PURE__*/React.createElement(Wishlist, {
     fav: fav,
     go: go,
     add: add,
@@ -4130,6 +4756,8 @@ function App() {
     cart: cart,
     setQty: setQty,
     remove: remove,
+    fav: fav,
+    toggleFav: toggleFav,
     go: go,
     ship: shipCfg,
     promo: bagPromo,
@@ -4154,6 +4782,23 @@ function App() {
     user: user,
     go: go,
     onSignIn: () => setAcct(true)
+  });else if (route === "#/account/subscriptions/platinum-rewards") body = /*#__PURE__*/React.createElement(window.PlatinumManage, {
+    user: user,
+    subs: subs,
+    go: go,
+    onSignIn: () => setAcct(true),
+    onJoin: () => {
+      setSubs(s => Object.assign({}, s, {
+        platinum: true
+      }));
+      flash("Welcome to Platinum Rewards", null, "ok");
+    },
+    onLeave: () => {
+      setSubs(s => Object.assign({}, s, {
+        platinum: false
+      }));
+      flash("You\u2019ve left Platinum Rewards");
+    }
   });else if (route === "#/account/subscriptions") body = /*#__PURE__*/React.createElement(Subscriptions, {
     user: user,
     subs: subs,
@@ -4175,12 +4820,21 @@ function App() {
   });else if (BSP_ROUTES[route]) body = /*#__PURE__*/React.createElement(BookshelfPage, {
     key: route,
     k: BSP_ROUTES[route],
-    props: route === "#/account/subscriptions/bookshelf-plus" ? {
+    props: route === "#/bookshelf-plus/cancel" ? {
       platinum: subs.platinum,
       plan: subs.bspPlan,
+      scenario: subs.bspScenario || "standard",
+      startScreen: "reason",
+      flowOnly: true,
+      onExit: () => go("#/account/bookshelf-plus"),
+      onFlash: m => flash(m, null, "ok")
+    } : route === "#/account/subscriptions/bookshelf-plus" ? {
+      platinum: subs.platinum,
+      plan: subs.bspPlan,
+      scenario: subs.bspScenario || "standard",
       startScreen: "details",
       onExit: () => go("#/account/subscriptions")
-    } : null
+    } : { member: !!(user && subs.platinum) }
   });else if (route.indexOf("#/page/") === 0) {
     const pl = decodeURIComponent(route.slice(7));
     body = /*#__PURE__*/React.createElement(SimplePage, {
@@ -4188,9 +4842,27 @@ function App() {
       body: (STATIC_PAGES[pl] || ["More detail lives on deseretbook.com."]).map(s => s.split("$49").join("$" + t.shipThreshold)),
       go: go
     });
+  } else if (route.indexOf("#/info/") === 0 && window.FooterPage) {
+    /* #/info/<page>[/<sub>]: the sub path opens a deeper view (a help topic, a tab, a contact section). */
+    const sl = route.slice(7).split("/")[0];
+    const sub = decodeURIComponent(route.slice(7 + sl.length + 1));
+    const lbl = Object.keys(window.FP_PAGES || {}).find(k => window.FP_SLUG(k) === sl);
+    body = lbl ? /*#__PURE__*/React.createElement(window.FooterPage, {
+      key: lbl,
+      label: lbl,
+      sub: sub,
+      go: go,
+      onGo: openPage,
+      flash: flash,
+      user: user
+    }) : /*#__PURE__*/React.createElement(NotFound, {
+      go: go
+    });
   } else if (route === "#/page") body = /*#__PURE__*/React.createElement(SimplePage, {
     title: page || "Deseret Book",
     body: (STATIC_PAGES[page] || ["More detail lives on deseretbook.com."]).map(s => s.split("$49").join("$" + t.shipThreshold)),
+    go: go
+  });else if (route.indexOf("#/") === 0 && route !== "#/" && ["#/bag", "#/checkout"].indexOf(route) < 0) body = /*#__PURE__*/React.createElement(NotFound, {
     go: go
   });else body = /*#__PURE__*/React.createElement(Home, {
     go: go,
@@ -4199,7 +4871,7 @@ function App() {
   return /*#__PURE__*/React.createElement("div", {
     className: "phone"
   }, /*#__PURE__*/React.createElement(Header, {
-    noAnn: route.indexOf("#/bookshelf-plus") === 0 || route.indexOf("#/account") === 0 || route === "#/wishlist" || !!BSP_ROUTES[route] || (route === "#/page" && ["Addresses", "Payment methods", "Email preferences", "Platinum Rewards"].indexOf(page) > -1),
+    noAnn: route.indexOf("#/bookshelf-plus") === 0 || route.indexOf("#/account") === 0 || route === "#/wishlist" || !!BSP_ROUTES[route] || (route === "#/page" && ["Addresses", "Payment methods", "Account Information", "Platinum Rewards"].indexOf(page) > -1),
     count: count,
     user: user,
     onMenu: () => {
@@ -4230,15 +4902,16 @@ function App() {
     search: search,
     onCloseSearch: () => setSearch(false),
     onOpenProduct: id => go("#/p/" + id),
-    onGoCat: id => go("#/c/" + id),
+    onSearchAll: q => go("#/search/" + encodeURIComponent(q)),
+    onGoCat: id => go(id.charAt(0) === "#" ? id : "#/c/" + id),
     shipMin: t.shipThreshold
-  }), /*#__PURE__*/React.createElement("main", null, body), route.indexOf("#/p/") === 0 ? /*#__PURE__*/React.createElement(Newsletter, null) : null, /*#__PURE__*/React.createElement(Footer, {
+  }), /*#__PURE__*/React.createElement("main", null, body), /*#__PURE__*/React.createElement(Footer, {
     onGo: openPage,
     onStore: () => go("#/stores")
   }), /*#__PURE__*/React.createElement("div", {
     className: "ovh"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "scrim" + (menu || search || bag || acct ? " on" : ""),
+    className: "scrim" + (search ? " on" : ""),
     onClick: () => {
       setMenu(false);
       setSearch(false);
@@ -4249,11 +4922,13 @@ function App() {
     open: menu,
     onClose: () => setMenu(false),
     onGo: id => go("#/c/" + id),
-    onAccount: () => setAcct(true),
+    onAccount: () => go("#/account/" + ACCT_SLUG[ACCT_GROUPS[0][1][0]]),
+    onRoute: go,
     user: user
   }), /*#__PURE__*/React.createElement(BagDrawer, {
     open: bag,
     onClose: () => setBag(false),
+    added: added,
     cart: cart,
     setQty: setQty,
     remove: remove,
@@ -4276,10 +4951,14 @@ function App() {
     tone: toast ? toast.tone : null,
     msg: toast ? toast.msg : "",
     action: toast ? toast.action : null,
+    persistent: toast ? toast.persistent : false,
+    duration: toast ? toast.duration : undefined,
     onAction: () => {
+      const act = toast && toast.onAct;
       setToast(null);
-      setBag(true);
-    }
+      if (act) act();else setBag(true);
+    },
+    onDismiss: () => setToast(null)
   }), /*#__PURE__*/React.createElement(AccountDrawer, {
     open: acct,
     onClose: () => setAcct(false),
@@ -4300,7 +4979,7 @@ function App() {
       flash("Signed out");
     },
     onGo: openPage,
-    onWishlist: () => go("#/wishlist")
+    onWishlist: () => go("#/account/wishlist")
   })));
 }
 ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(App, null));

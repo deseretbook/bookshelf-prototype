@@ -1,9 +1,9 @@
 /* Real Deseret Book product data + image URLs (deseretbook.com / images.deseretbook.io) */
 (function () {
-  const IB = "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/";
+  const IB = "assets/img/pim/";
   const FB = IB; /* same CDN host: plytix-backed assets serve from images.deseretbook.io too */
-  const I = (p) => IB + p + "?s=1000x1000&t=JPEG&v=2";
-  const F = (p) => FB + p + "?s=1000x1000&t=JPEG&v=2";
+  const I = (p) => IB + p;
+  const F = (p) => FB + p;
   const dbl = (n) => n + "/" + n;
 
   const SS_IMG = [I("4f/cf/c6/69/69c6cf4fe1d7ade0a65677a5/" + dbl("6088361_HERO_Silent-Strike_HARDBACK.jpg")), I("4c/cf/c6/69/69c6cf4ce1d7ade0a65677a3/" + dbl("6088361_FEATURE_Silent-Strike_HARDBACK_FLAP1.jpg")), I("4d/cf/c6/69/69c6cf4de1d7ade0a65677a4/" + dbl("6088361_FEATURE_Silent-Strike_HARDBACK_FLAP2.jpg")), I("13/bf/ef/69/69efbf134fcae523f31c953f/6088361_FEATURE_SILENT-STRIKE_HARDBACK_INTERIOR.png/6088361_FEATURE_SILENT-STRIKE_HARDBACK_INTERIOR.jpg"), I("4a/cf/c6/69/69c6cf4ae1d7ade0a65677a2/" + dbl("6088361_BACK_Silent-Strike_HARDBACK.jpg")), I("91/1f/4c/6a/6a4c1f911a4cf7e9be57409e/" + dbl("6088361_PRODGALLERY_SILENT-STRIKE-LUKE-STEEL-BOOK-3_UP.jpg"))];
@@ -277,57 +277,68 @@
   const GVSUB = { PR00001860: "general-authority-books", PR00001662: "general-authority-books", P5232737: "general-authority-books", "6080309": "art-books", PR00001661: "inspiration", PR00001477: "inspiration", P3941679: "inspiration" };
   P.forEach((p) => { if (GVSUB[p.id]) p.cat = "books_gospel-voices_" + GVSUB[p.id]; });
 
+  /* Category tree and nav. Display names live here once: nav, breadcrumbs, H1s and PLP tiles all read them (PLP plan, Fix 9).
+     alias: true marks a nav shortcut to a category that lives elsewhere in the tree (it is not a second category).
+     icon is the Material Symbols Rounded name shown on the category’s PLP subcategory tile (src/plp.js falls back to "category"). */
   const NAV = [
-    { id: "books", n: "Books", sub: [
-      { id: "books_fiction", n: "Fiction", sub: [
-        { id: "books_fiction_romance", n: "Romance" },
-        { id: "books_fiction_historical-fiction", n: "Historical Fiction" },
-        { id: "books_fiction_mystery-and-suspense", n: "Mystery and Suspense" },
-        { id: "books_fiction_teen-fiction", n: "Teen Fiction" }] },
-      { id: "books_gospel-voices", n: "Gospel Voices", sub: [
-        { id: "books_gospel-voices_art-books", n: "Art Books" },
-        { id: "books_gospel-voices_general-authority-books", n: "General Authority Books" },
-        { id: "books_gospel-voices_inspiration", n: "Inspiration" },
-        { id: "books_gospel-voices_temple-books", n: "Temple Books" }] },
-      { id: "books_nonfiction", n: "Nonfiction", sub: [
-        { id: "books_nonfiction_biography", n: "Biography" },
-        { id: "books_nonfiction_family-and-parenting", n: "Family and Parenting" },
-        { id: "books_nonfiction_history", n: "History" },
-        { id: "books_nonfiction_self-improvement", n: "Self-Improvement" }] }] },
-    { id: "church-resources_scriptures_scripture-essentials", n: "Scriptures" },
-    { id: "baptism", n: "Baptism" },
-    { id: "church-resources", n: "Church Resources", sub: [
-      { id: "church-resources_scriptures", n: "Scriptures", sub: [
-        { id: "church-resources_scriptures_genuine-leather-scriptures", n: "Genuine Leather Scriptures" },
-        { id: "church-resources_scriptures_simulated-leather-scriptures", n: "Simulated Leather Scriptures" },
-        { id: "church-resources_scriptures_scripture-journal-editions", n: "Scripture Journal Editions" },
-        { id: "church-resources_scriptures_scripture-totes", n: "Scripture Totes" }] },
-      { id: "church-resources_church-distribution", n: "Church Distribution" },
-      { id: "church-resources_teaching-helps", n: "Teaching Helps" },
-      { id: "church-resources_prints", n: "Prints" }] },
-    { id: "games-puzzles", n: "Games & Puzzles" },
-    { id: "art", n: "Art", sub: [
-      { id: "art_wall-art", n: "Wall Art" },
-      { id: "art_temple-art", n: "Temple Art" },
-      { id: "art_statues", n: "Statues" },
-      { id: "art_savior-art", n: "Savior Art" },
-      { id: "art_decor", n: "D\u00e9cor" }] },
-    { id: "missionary", n: "Missionary", sub: [
-      { id: "missionary_accessories", n: "Accessories" },
-      { id: "missionary_bags", n: "Bags" },
-      { id: "missionary_books", n: "Books" },
-      { id: "missionary_jewelry", n: "Jewelry" },
-      { id: "missionary_journals", n: "Journals" }] },
-    { id: "temple-worship", n: "Temple Worship", sub: [
-      { id: "temple-worship_temple-accessories", n: "Temple Accessories" },
-      { id: "temple-worship_temple-bags", n: "Temple Bags" },
-      { id: "temple-worship_temple-clothing", n: "Temple Clothing" }] },
-    { id: "all-categories", n: "Browse All" },
-    { id: "clearance", n: "Clearance" }
+    { id: "christmas", n: "Christmas", icon: "park", sub: [
+      { id: "christmas_nativities", n: "Nativities", icon: "star" },
+      { id: "christmas_christmas-ornaments", n: "Ornaments", icon: "featured_seasonal_and_gifts" },
+      { id: "christmas_christmas-cards", n: "Cards", icon: "mail" },
+      { id: "christmas_christmas-books", n: "Books", icon: "menu_book" }] },
+    { id: "books", n: "Books", icon: "menu_book", sub: [
+      { id: "books_fiction", n: "Fiction", icon: "auto_stories", sub: [
+        { id: "books_fiction_romance", n: "Romance", icon: "favorite" },
+        { id: "books_fiction_historical-fiction", n: "Historical Fiction", icon: "history_edu" },
+        { id: "books_fiction_mystery-and-suspense", n: "Mystery and Suspense", icon: "search" },
+        { id: "books_fiction_teen-fiction", n: "Teen Fiction", icon: "groups" }] },
+      { id: "books_gospel-voices", n: "Gospel Voices", icon: "record_voice_over", sub: [
+        { id: "books_gospel-voices_art-books", n: "Art Books", icon: "palette" },
+        { id: "books_gospel-voices_general-authority-books", n: "General Authority Books", icon: "person" },
+        { id: "books_gospel-voices_inspiration", n: "Inspiration", icon: "lightbulb" },
+        { id: "books_gospel-voices_temple-books", n: "Temple Books", icon: "book_2" }] },
+      { id: "books_nonfiction", n: "Nonfiction", icon: "library_books", sub: [
+        { id: "books_nonfiction_biography", n: "Biography", icon: "person" },
+        { id: "books_nonfiction_family-and-parenting", n: "Family and Parenting", icon: "family_restroom" },
+        { id: "books_nonfiction_history", n: "History", icon: "hourglass" },
+        { id: "books_nonfiction_self-improvement", n: "Self-Improvement", icon: "self_improvement" }] }] },
+    { id: "church-resources_scriptures", n: "Scriptures", icon: "book", alias: true },
+    { id: "baptism", n: "Baptism", icon: "water_drop" },
+    { id: "church-resources", n: "Church Resources", icon: "church", sub: [
+      { id: "church-resources_scriptures", n: "Scriptures", icon: "book", sub: [
+        { id: "church-resources_scriptures_scripture-essentials", n: "Essentials", icon: "book" },
+        { id: "church-resources_scriptures_genuine-leather-scriptures", n: "Genuine Leather", icon: "workspace_premium" },
+        { id: "church-resources_scriptures_simulated-leather-scriptures", n: "Simulated Leather", icon: "layers" },
+        { id: "church-resources_scriptures_scripture-journal-editions", n: "Journal Editions", icon: "edit_note" },
+        { id: "church-resources_scriptures_scripture-totes", n: "Scripture Totes", icon: "work" }] },
+      { id: "church-resources_church-distribution", n: "Church Distribution", icon: "inventory_2" },
+      { id: "church-resources_teaching-helps", n: "Teaching Helps", icon: "school" },
+      { id: "church-resources_prints", n: "Prints", icon: "photo_library" }] },
+    { id: "games-puzzles", n: "Games & Puzzles", icon: "extension", sub: [
+      { id: "games-puzzles_games", n: "Games", icon: "playing_cards" },
+      { id: "games-puzzles_puzzles", n: "Puzzles", icon: "extension" }] },
+    { id: "art", n: "Fine Art", icon: "palette", sub: [
+      { id: "art_wall-art", n: "Wall Art", icon: "image" },
+      { id: "art_temple-art", n: "Temple Art", icon: "account_balance" },
+      { id: "art_statues", n: "Statues", icon: "man_4" },
+      { id: "art_savior-art", n: "Savior Art", icon: "brush" },
+      { id: "art_decor", n: "D\u00e9cor", icon: "local_florist" }] },
+    { id: "missionary", n: "Missionary", icon: "travel_explore", sub: [
+      { id: "missionary_accessories", n: "Accessories", icon: "note_stack" },
+      { id: "missionary_bags", n: "Bags", icon: "luggage" },
+      { id: "missionary_books", n: "Books", icon: "menu_book" },
+      { id: "missionary_jewelry", n: "Jewelry", icon: "diamond_shine" },
+      { id: "missionary_journals", n: "Journals", icon: "edit_note" }] },
+    { id: "temple-worship", n: "Temple Worship", icon: "light_mode", sub: [
+      { id: "temple-worship_temple-accessories", n: "Accessories", icon: "note_stack" },
+      { id: "temple-worship_temple-bags", n: "Bags", icon: "luggage" },
+      { id: "temple-worship_temple-clothing", n: "Clothing", icon: "checkroom" }] },
+    { id: "all-categories", n: "Browse All", icon: "category" },
+    { id: "clearance", n: "Clearance", icon: "sell" }
   ];
   const CLR_NAME = "Summer Clearance";
 
-  const AI = (p) => "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/" + p + "?s=1000x1000&t=JPEG&v=2";
+  const AI = (p) => "assets/img/pim/" + p;
   const FINE_ART = [
     { id: "P3753740", t: "Marble Christus Statue", by: "Deseret Book", price: 59.97, r: 4.9, rc: 312, cat: "home_fine-art", fmt: "Marble Resin",
       img: [AI("f7/3c/21/66/66213cf74d8f8419f6bdb33e/3753740_christus-2.png/3753740_christus-2.jpg"), AI("64/c1/d1/68/68d1c164dd14cdd9ca6842f0/P3753740_WEBGALLERY_MARBLE-CHRISTUS-STATUE_1.jpg/P3753740_WEBGALLERY_MARBLE-CHRISTUS-STATUE_1.jpg")],
@@ -350,9 +361,9 @@
   ];
   P.push.apply(P, FINE_ART);
 
-  const CAT_NAMES = { "all-categories": "Browse All Categories", clearance: "Summer Clearance", "books_gospel-voices": "Gospel Voices Conference" };
+  const CAT_NAMES = { "all-categories": "Browse All Categories", clearance: "Summer Clearance" };
   (function walk(list, trail) {
-    list.forEach((c) => { CAT_NAMES[c.id] = c.n; if (c.sub) walk(c.sub, trail.concat(c.n)); });
+    list.forEach((c) => { if (!c.alias) CAT_NAMES[c.id] = c.n; if (c.sub) walk(c.sub, trail.concat(c.n)); });
   })(NAV, []);
   CAT_NAMES.clearance = CLR_NAME;
   CAT_NAMES["home_fine-art"] = "Fine Art";
@@ -380,6 +391,12 @@
       faq: scriptureFaq("This product is the Holy Bible.", "This product is the standard (regular) size.", "Simulated leather bibles are available in Dusty Rose, Pacific Blue, Forest Green, Walnut Brown and Black.") },
     P6073551: { d: ["The Anne Regular Scripture Tote combines smooth vegan leather with gold accents for a sleek, polished look. Featuring a spacious interior with two pockets and a leather strap pinch lock closure, this tote comfortably holds all your Church essentials."], spec: [["Dimensions", "13\"L x 12\"W x 5\"H"], ["Material", "Vegan leather with gold accents"], ["Interior", "Two pockets"], ["Closure", "Leather strap pinch lock"], ["Fits", "Regular-size scriptures"]] }
   };
+  const SIZE_RE = /\b(Pocket[- ]size|Compact|Regular|Standard|Large|Small)\b/i;
+  const SIZE_ORDER = ["Pocket-size", "Compact", "Small", "Regular", "Standard", "Large"];
+  [P, VARIANTS].forEach((arr) => arr.forEach((p) => { if (!p.full) { p.full = p.t; const m = String(p.t).match(SIZE_RE); if (m && !p.sz) p.sz = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase(); p.t = String(p.t).replace(/\s*\([^)]*\)/g, "").split(",")[0].replace(new RegExp(SIZE_RE.source, "gi"), "").replace(/\s{2,}/g, " ").trim() || p.t; } }));
+  const SZG = {};
+  P.forEach((p) => { if (p.sz) { const k = p.cat + "|" + p.t.toLowerCase(); (SZG[k] = SZG[k] || []).push(p); } });
+  Object.values(SZG).forEach((g) => { const names = new Set(g.map((p) => p.sz)); if (g.length > 1 && names.size > 1) { const ids = g.slice().sort((a, b) => SIZE_ORDER.indexOf(a.sz) - SIZE_ORDER.indexOf(b.sz)).map((p) => p.id); g.forEach((p) => { p.sizes = ids; }); } });
   window.DB_DATA = {
     products: P,
     nav: NAV,
@@ -390,10 +407,10 @@
     fineArt: ["P3753740", "6053323", "6087324", "6053281", "P6000078", "6027513"],
     trending: ["P6073551", "6017019", "5254477", "5212882", "6070661", "5255079", "6024672"],
     featuredCats: [
-      { id: "temple-worship", n: "Temple Worship", img: "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/70/5c/21/66/66215c70b1dea3bbbe48e4dd/5111199_5111199_none_base_d854a4fa.png/5111199_5111199_none_base_d854a4fa.jpg?s=1000x1000&t=JPEG&v=2" },
-      { id: "church-resources_scriptures_scripture-totes", n: "Scripture Totes", img: "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/f3/19/d7/68/68d719f3fc37617729177f30/MULTIPLE_PRODGALLERY_REGULAR-SCRIPTURE-TOTE-BACKPACK_FRONT.jpg/MULTIPLE_PRODGALLERY_REGULAR-SCRIPTURE-TOTE-BACKPACK_FRONT.jpg?s=1000x1000&t=JPEG&v=2" },
-      { id: "church-resources_scriptures_scripture-journal-editions", n: "Journal Editions", img: "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/41/06/35/66/663506414a47d8ad45ef6791/6020732_6020732_none_base_b0c63f9c.png/6020732_6020732_none_base_b0c63f9c.jpg?s=1000x1000&t=JPEG&v=2" },
-      { id: "books_fiction_romance", n: "Romance", img: "https://images.deseretbook.io/api/v1.1/rn/public_files/pim/assets/3e/1e/de/64/64de1e3e6974570001d45a2c/images/63/79/6b/6a/6a6b7963aecf6cfadd773d25/6095538_HERO_SEEKING-PERSEPHONE-MOVIE-TIE-IN-EDITION_PAPERBACK_1.jpg/6095538_HERO_SEEKING-PERSEPHONE-MOVIE-TIE-IN-EDITION_PAPERBACK_1.jpg?s=1000x1000&t=JPEG&v=2" },
+      { id: "temple-worship", n: "Temple Worship", img: "assets/img/pim/70/5c/21/66/66215c70b1dea3bbbe48e4dd/5111199_5111199_none_base_d854a4fa.png/5111199_5111199_none_base_d854a4fa.jpg" },
+      { id: "church-resources_scriptures_scripture-totes", n: "Scripture Totes", img: "assets/img/pim/f3/19/d7/68/68d719f3fc37617729177f30/MULTIPLE_PRODGALLERY_REGULAR-SCRIPTURE-TOTE-BACKPACK_FRONT.jpg/MULTIPLE_PRODGALLERY_REGULAR-SCRIPTURE-TOTE-BACKPACK_FRONT.jpg" },
+      { id: "church-resources_scriptures_scripture-journal-editions", n: "Journal Editions", img: "assets/img/pim/41/06/35/66/663506414a47d8ad45ef6791/6020732_6020732_none_base_b0c63f9c.png/6020732_6020732_none_base_b0c63f9c.jpg" },
+      { id: "books_fiction_romance", n: "Romance", img: "assets/img/pim/63/79/6b/6a/6a6b7963aecf6cfadd773d25/6095538_HERO_SEEKING-PERSEPHONE-MOVIE-TIE-IN-EDITION_PAPERBACK_1.jpg/6095538_HERO_SEEKING-PERSEPHONE-MOVIE-TIE-IN-EDITION_PAPERBACK_1.jpg" },
       { id: "church-resources_scriptures_genuine-leather-scriptures", n: "Genuine Leather" },
       { id: "art_temple-art", n: "Fine Art" },
       { id: "missionary", n: "Missionary" },
@@ -401,19 +418,19 @@
     ],
     featuredContent: [
       { title: "5 Ways to Embrace a Change in Christ", date: "August 29, 2025", url: "https://blog.deseretbook.com/blog/5-ways-to-embrace-a-change-in-christ", pid: "P6096125",
-        img: "https://images.squarespace-cdn.com/content/v1/5abd66f64eddecafd225c12e/1756245615727-5IJF724VA7DY32SWXMF0/BlogCover-FallCampaign-2.png?format=1000w",
+        img: "assets/img/blog/BlogCover-FallCampaign-2.webp",
         x: "If you feel like fall is approaching quicker than you planned or wanted, you are not alone. Life often shifts at paces that might not be ideal or expected. However, just like the changing seasons, these transitions can be beautiful in their own unique ways." },
       { title: "Heartfelt Ministering Gifts for Mother\u2019s Day", date: "April 23, 2025", url: "https://blog.deseretbook.com/blog/2025/04/23/heartfelt-ministering-gifts-for-mothers-day", pid: "6027513",
-        img: "https://images.squarespace-cdn.com/content/v1/5abd66f64eddecafd225c12e/1745421730900-98BCHUPV4W3M8EAZOM2K/DB_2025_MD_MinisteringGifts_BlogThumbnail_1080x1080.png?format=1000w",
+        img: "assets/img/blog/MinisteringGifts.webp",
         x: "Find the perfect Mother\u2019s Day gift for the sisters you minister to! These heartfelt gifts will help them find peace and strength in the Savior and in their divine identity as they navigate life." },
       { title: "Stunning Artwork of the Savior for Your Home", date: "March 12, 2025", url: "https://blog.deseretbook.com/blog/2025/03/12/stunning-artwork-of-the-savior-for-your-home", pid: "6087324",
-        img: "https://images.squarespace-cdn.com/content/v1/5abd66f64eddecafd225c12e/ae05b463-ff55-4bf5-8361-888461e84d38/arise-come-forth-1.jpg?format=1000w",
+        img: "assets/img/blog/arise-come-forth-1.webp",
         x: "Invite the Spirit into your life and your home by remembering the life and mission of Jesus Christ. These artistic depictions of the Savior can help you feel connected to Him and remember His role in God\u2019s plan and His love for you." }
     ],
     footer: {
+      ABOUT: ["About Deseret Book", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
       ACCOUNT: ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Platinum Rewards", "Request a Catalog"],
-      "CUSTOMER SERVICE": ["Contact Us", "Questions & Support", "Shipping & Returns", "Do Not Sell My Information", "Deseret Book Store Locations"],
-      ABOUT: ["About Deseret Book", "Careers", "Terms of Use", "Privacy Policy", "Deseret Book Events", "Deseret Book Blog", "Browse All Categories"]
+      "CUSTOMER SERVICE": ["Contact Us", "Questions & Support", "Shipping & Returns", "Do Not Sell My Information", "Deseret Book Store Locations"]
     }
   };
 })();

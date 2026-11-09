@@ -1,0 +1,148 @@
+/* Home main hero, imported from the reference project (concept A, orange palette, "Text over image") */
+.hero.art{cursor:pointer;height:auto;background:none;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;position:relative;overflow:hidden}
+.art-img{height:260px;background:var(--stone) url("../assets/img/dw/DB-08.24-Hero-Desktop.png") center 42%/cover no-repeat}
+.art-box{background:linear-gradient(180deg in oklch,rgba(58,54,51,.72),rgba(58,54,51,.46));-webkit-backdrop-filter:blur(12px) saturate(1.05);backdrop-filter:blur(12px) saturate(1.05);--sw-t:1px;--sc-t:rgba(191,144,110,.3);border-top-width:0;border-radius:var(--db-radius-md);position:relative;z-index:1;margin:-64px var(--pad) 0;padding:20px;display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center}
+.hero.art .h-title{display:block;color:#fff;width:100%;text-wrap:normal;text-align:center;font-size:21px;line-height:1.22}
+.hero.art .art-box .hero-sub{font-family:var(--db-font-serif);font-size:21px;line-height:1.22;color:var(--ink)}
+.hero.art .art-box .btn-gold{min-height:0;height:auto;background:none;border-radius:0;padding:0;font-size:11px;letter-spacing:.16em;color:#fff;align-self:center;order:-1;margin:0}
+.hero.art .hero-sub{color:var(--ink);text-align:center;font-size:12px;line-height:1.45}
+.hero.art .art-box{gap:14px}
+.hero.art .btn-gold{margin-top:6px;align-self:stretch}
+.ab-offer{margin:0;width:100%;font-family:var(--db-font-serif);font-weight:400;color:#fff;text-align:center;font-size:clamp(19px,2.4vw,34px);line-height:1.24;overflow-wrap:anywhere}
+.hero.art.ab-b .art-box .hero-sub{color:#fff;font-family:"DM Sans",system-ui,sans-serif;font-size:clamp(13px,1.2vw,17px);line-height:1.45;text-align:center;margin:0;overflow-wrap:anywhere}
+.hero.art.ab-b .art-box .btn-gold{order:0;align-self:center;min-height:0;height:40px;background:var(--feature,#6E774F);border-radius:var(--db-radius-pill);padding:0 20px;font-size:12px;letter-spacing:.15em;color:#fff;margin-top:6px}
+.hero.art.ab-b .art-box .h-title{order:-1}
+@media (min-width:1024px){.hero.art{height:420px;display:flex;flex-direction:row;align-items:center;justify-content:flex-end;padding:0 var(--pad)}}
+@media (min-width:1024px){.art-img{position:absolute;inset:0;height:auto}}
+@media (min-width:1024px){.art-box{position:relative;z-index:1;margin:0;-webkit-backdrop-filter:blur(6px) saturate(1.05);backdrop-filter:blur(6px) saturate(1.05);width:min(460px,62%);padding:32px 30px;border-radius:var(--db-radius-md);--sw-t:1px;--sc-t:rgba(191,144,110,.3);--sw-r:1px;--sc-r:rgba(191,144,110,.3);--sw-b:1px;--sc-b:rgba(191,144,110,.3);--sw-l:1px;--sc-l:rgba(191,144,110,.3);border-width:0;align-items:center;text-align:center}}
+@media (min-width:1024px){.hero.art .h-title{display:block;font-size:34px;text-align:center}}
+@media (min-width:1024px){.hero.art .art-box .hero-sub{font-family:inherit;font-size:15px;line-height:1.4}}
+@media (min-width:1024px){.hero.art .art-box .btn-gold{align-self:center;min-height:0;height:40px;background:var(--feature,#6E774F);border-radius:var(--db-radius-pill);padding:0 20px;font-size:12px;letter-spacing:.15em;color:#fff;order:0;margin-top:6px}}
+@media (min-width:1024px){.hero.art .hero-sub{text-align:center}}
+@media (min-width:1024px){.hero.art .btn-gold{align-self:center}}
+@media (min-width:1024px){.hero.art{height:560px;padding:0 var(--pad)}}
+@media (min-width:1024px){.art-box{width:min(520px,50%);padding:40px 36px;gap:12px;align-items:center;text-align:center}}
+@media (min-width:1024px){.hero.art .h-title{text-align:center}}
+@media (min-width:1024px){.hero.art .art-box .hero-sub{text-align:center}}
+@media (min-width:1024px){.hero.art .art-box .btn-gold{align-self:center}}
+@media (min-width:1024px){.hero.art .h-title{font-size:44px}}
+@media (min-width:1024px){.hero.art .hero-sub{font-size:17px}}
+@media (max-width:1023px){.hero.art.ab-a{margin:12px var(--pad) 0;min-height:250px;justify-content:flex-end;border-radius:var(--db-radius-md);--sw-t:0px;--sc-t:currentcolor;--sw-r:0px;--sc-r:currentcolor;--sw-b:0px;--sc-b:currentcolor;--sw-l:0px;--sc-l:currentcolor;border-width:0;overflow:hidden;box-shadow:0 2px 8px rgba(58,54,51,.08),var(--db-ring-site);-webkit-transition:transform 120ms var(--db-ease-standard),box-shadow 180ms var(--db-ease-standard);transition:transform 120ms var(--db-ease-standard),box-shadow 180ms var(--db-ease-standard)}}
+@media (max-width:1023px){.hero.art.ab-a:active{-webkit-transform:scale(.98);transform:scale(.98)}}
+@media (max-width:1023px){.hero.art.ab-a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}}
+@media (max-width:1023px){.hero.art.ab-a .art-img{position:absolute;inset:0;height:auto}}
+@media (max-width:1023px){.hero.art.ab-a .art-box{align-items:flex-start;text-align:left;background:var(--feature,#6E774F);--sw-t:0px;--sc-t:currentcolor;--sw-r:0px;--sc-r:currentcolor;--sw-b:0px;--sc-b:currentcolor;--sw-l:0px;--sc-l:currentcolor;border-width:0;border-radius:0 0 var(--db-radius-md) var(--db-radius-md);position:relative;z-index:1;margin:0;padding:20px 44px 20px 20px}}
+@media (max-width:1023px){.hero.art.ab-a .art-box::after{content:"";position:absolute;right:16px;top:50%;margin-top:-20px;width:40px;height:40px;content:"chevron_right";color:#fff;font:normal 40px/40px 'Material Symbols Rounded';font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 40;font-feature-settings:'liga';text-align:center;overflow:hidden;-webkit-transition:transform 180ms var(--db-ease-standard);transition:transform 180ms var(--db-ease-standard)}}
+@media (max-width:1023px){.hero.art.ab-a:active .art-box::after{-webkit-transform:translateX(3px);transform:translateX(3px)}}
+@media (max-width:1023px){.hero.art.ab-a .ab-offer{color:#fff;text-align:left;font-size:21px;line-height:1.22}}
+.hero.art.ab-b .art-box .btn-gold{letter-spacing:.05em;font-size:13px}
+.hero.art .art-box .btn-gold{font-weight:400;letter-spacing:.05em;font-size:13px}
+.hero.art.ab-a .art-box:has(.btn-gold){padding-right:20px}
+.hero.art.ab-a .art-box:has(.btn-gold)::after{display:none}
+.hero.art.ab-a .ab-offer{margin:0}
+.hero.art.ab-a .art-box .btn-gold{order:0;align-self:flex-start;min-height:0;height:40px;margin:0;padding:0 20px;border-radius:var(--db-radius-pill);background:var(--gold);color:#fff;font-size:12px;letter-spacing:.15em}
+.hero.art.ab-a .art-box .btn-gold:hover{background:var(--gold-d)}
+@media (min-width:1024px){.hero.art.ab-a .art-box .btn-gold{align-self:center}}
+@media (min-width:1024px){.hero.art.ab-a .ab-offer{font-size:clamp(36px,4.6vw,64px)}}
+@media (max-width:1023px){.hero.art.ab-a .ab-offer{font-size:36px}}
+html .hero.art.ab-a .art-box{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;--sw-t:0px;--sc-t:currentcolor;--sw-r:0px;--sc-r:currentcolor;--sw-b:0px;--sc-b:currentcolor;--sw-l:0px;--sc-l:currentcolor;border-width:0;border-radius:0;box-shadow:var(--db-ring-site)}
+html .hero.art.ab-a .art-img::after{content:"";position:absolute;inset:0;pointer-events:none}
+@media (min-width:1024px){html .hero.art.ab-a .art-img::after{background:linear-gradient(270deg in oklch,rgba(58,54,51,.72) 0%,rgba(58,54,51,.48) 40%,rgba(58,54,51,0) 75%)}}
+@media (max-width:1023px){html .hero.art.ab-a .art-img::after{background:linear-gradient(0deg in oklch,rgba(58,54,51,.72) 0%,rgba(58,54,51,.4) 45%,rgba(58,54,51,0) 75%)}}
+@media (max-width:1023px){html .hero.art.ab-a .art-box,html .hero.art.ab-a .art-box{--sw-t:0px;--sc-t:currentcolor;border-top-width:0}}
+@media (max-width:1023px){html .hero.art.ab-a .art-box,html .hero.art.ab-a .ab-offer{color:#fff!important}}
+html .hero.art.ab-a .art-img::after{display:none}
+html .hero.art .art-box .btn-gold{margin-top:18px}
+@media (min-width:1024px){html .hero.art.ab-a .art-box.art-box:has(.btn-gold){padding-left:36px;padding-right:36px;gap:32px}}
+@media (min-width:1024px){html .hero.art.ab-a .art-box .btn-gold{margin-top:0}}
+html .hero.art.ab-b .art-box .btn-gold,html .hero.art.ab-a .art-box .btn-gold{color:var(--on)}
+@media (max-width:1023px){html .hero.art:not(.ab-a):not(.ab-b) .art-box .btn-gold{color:#fff}}
+@media (min-width:1024px){html .hero.art .art-box .btn-gold{color:var(--on)}}
+@media (max-width:1023px){html .hero.art.ab-a .art-box{--sw-t:1px;--sc-t:var(--n-200);border-top-width:0}}
+@media (max-width:1023px){html .hero.art.ab-a .art-box,html .hero.art.ab-a .art-box :not(.btn-gold),html .hero.art.ab-a .art-box::after,html .hero.art.ab-a .ab-offer{color:var(--ink)}}
+@media (max-width:1023px){html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a{min-height:250px!important;justify-content:flex-end!important}}
+@media (max-width:1023px){html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a .art-img::after{background:none!important}}
+@media (max-width:1023px){html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a .art-box{flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:14px 16px!important;background:rgba(247,244,240,.92)!important;-webkit-backdrop-filter:blur(4px)!important;backdrop-filter:blur(4px)!important;text-align:left!important}}
+@media (max-width:1023px){html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a .art-box::after{display:none!important}}
+@media (max-width:1023px){html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a .ab-offer{flex:1 1 0!important;min-width:0!important;width:auto!important;font-size:24px!important;line-height:1.2!important;color:var(--db-charcoal)!important;text-align:left!important}}
+@media (max-width:1023px){html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a .art-box .btn-gold{flex:none!important;align-self:center!important;order:1!important;margin:0!important}}
+@media (max-width:1023px){html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a{min-height:0!important;height:auto!important}}
+@media (max-width:1023px){html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a .art-img{position:relative!important;inset:auto!important;height:180px!important;flex:none!important}}
+@media (max-width:1023px){html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a .art-box{background:var(--db-pearl)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}}
+@media (max-width:639px){html:not(#_):not(#_):not(#_):not(#_):not(#_) :is(.hero.art.ab-a,.band-card:not(.news-card)),html:not(#_):not(#_):not(#_):not(#_):not(#_) :is(.hero.art.ab-a,.band-card:not(.news-card)):is(:hover,:active,:focus-visible){box-shadow:none!important}}
+@media (max-width:1023px){html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a,html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a:is(:hover,:active,:focus-visible){box-shadow:none!important}}
+@media (max-width:1023px){html:not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a .art-box .btn-gold{height:32px!important;min-height:0!important;padding:0 16px!important}}
+@media (max-width:1023px){.hero.art.ab-a{margin:12px var(--pad) 0;min-height:250px;justify-content:flex-end;border-radius:var(--db-radius-md);--sw-t:0px;--sc-t:currentcolor;--sw-r:0px;--sc-r:currentcolor;--sw-b:0px;--sc-b:currentcolor;--sw-l:0px;--sc-l:currentcolor;border-width:0;overflow:hidden;box-shadow:0 2px 8px rgba(58,54,51,.08),var(--db-ring-site);-webkit-transition:transform 120ms var(--db-ease-standard),box-shadow 180ms var(--db-ease-standard);transition:transform 120ms var(--db-ease-standard),box-shadow 180ms var(--db-ease-standard)}.hero.art.ab-a:active{-webkit-transform:scale(.98);transform:scale(.98)}.hero.art.ab-a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}.hero.art.ab-a .art-img{position:absolute;inset:0;height:auto}.hero.art.ab-a .art-box{align-items:flex-start;text-align:left;background:var(--feature,#6e774f);--sw-t:0px;--sc-t:currentcolor;--sw-r:0px;--sc-r:currentcolor;--sw-b:0px;--sc-b:currentcolor;--sw-l:0px;--sc-l:currentcolor;border-width:0;border-radius:0 0 var(--db-radius-md) var(--db-radius-md);position:relative;z-index:1;margin:0;padding:20px 44px 20px 20px}.hero.art.ab-a .art-box::after{content:"chevron_right";position:absolute;right:16px;top:50%;margin-top:-20px;width:40px;height:40px;color:#fff;font:normal 40px/40px 'Material Symbols Rounded';font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 40;font-feature-settings:'liga';text-align:center;overflow:hidden}.hero.art.ab-a .ab-offer{color:#fff;text-align:left;font-size:36px;line-height:1.22}}
+
+/* Bookshelf+ home banner, mobile: hide description, title left + logo right on one line */
+
+
+/* Art promo banner, mobile: same behavior as the mobile main hero (image on top, pearl text bar below, title left + button right) */
+@media (max-width:1023px){html:not(#_):not(#_) .promo-card{min-height:0!important;height:auto!important;box-shadow:none!important;justify-content:flex-start!important}html:not(#_):not(#_) .promo-card::before{position:relative!important;inset:auto!important;height:180px!important;flex:none!important;display:block!important}html:not(#_):not(#_) .promo-card .promo-box{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center!important;column-gap:12px;row-gap:4px;margin:0!important;padding:14px 16px!important;background:var(--db-pearl)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-radius:0!important;text-align:left!important;width:auto!important}html:not(#_):not(#_) .promo-card .promo-box .h-title{display:block!important;grid-column:1;margin:0;font-size:24px!important;line-height:1.2!important;color:var(--db-charcoal)!important;text-align:left!important}html:not(#_):not(#_) .promo-card .promo-box .promo-sub{grid-column:1;font-family:inherit!important;font-size:13px!important;line-height:1.4!important;color:var(--db-ink-muted)!important;text-align:left!important}html:not(#_):not(#_) .promo-card .promo-box .btn-gold{grid-column:2;grid-row:1 / span 2;align-self:center!important;order:0!important;margin:0!important;height:32px!important;min-height:0!important;padding:0 16px!important;border-radius:var(--db-radius-pill)!important;background:var(--gold)!important;color:#fff!important}}
+@media (max-width:1023px){html:not(#_):not(#_) .promo-card .promo-box .promo-sub{display:none!important}html:not(#_):not(#_) .promo-card .promo-box .btn-gold{grid-row:1!important}}
+
+/* Bookshelf+ fiction hero: centered text */
+html:not(#_):not(#_) :is([data-bsp="fiction"],[data-bsp="fiction-platinum"]) [data-hero-stack]{align-items:center!important;text-align:center!important;margin-left:auto!important;margin-right:auto!important}
+html:not(#_):not(#_) :is([data-bsp="fiction"],[data-bsp="fiction-platinum"]) [data-hero-stack] :is(h1,h2,p,span){text-align:center!important}
+html:not(#_):not(#_) :is([data-bsp="fiction"],[data-bsp="fiction-platinum"]) [data-hero-stack]>div,html:not(#_):not(#_) :is([data-bsp="fiction"],[data-bsp="fiction-platinum"]) [data-hero-cta]{justify-content:center!important;align-self:center!important}
+
+/* Bookshelf+ general hero, mobile: text card spans container */
+@media (max-width:639px){html:not(#_):not(#_) :is([data-bsp="general"],[data-bsp="general-v2"],[data-bsp="general-platinum"]) [data-hero-stack]{width:100%!important;max-width:none!important;box-sizing:border-box}html:not(#_):not(#_) :is([data-bsp="general"],[data-bsp="general-v2"],[data-bsp="general-platinum"]) [data-hero-banner] > div,html:not(#_):not(#_) :is([data-bsp="general"],[data-bsp="general-v2"],[data-bsp="general-platinum"]) [data-hero-banner] > div > div{width:100%!important;max-width:none!important}}
+
+/* Newsletter band: yellow Subscribe button, field + button aligned right */
+html:not(#_):not(#_) .news-card button.sub,html:not(#_):not(#_) .news-card button.sub[style]{background:var(--db-yellow-300,#ebbc4e)!important;color:var(--n-900,#23312d)!important;box-shadow:inset 0 0 0 1px var(--db-yellow-300,#ebbc4e)!important}
+html:not(#_):not(#_) .news-card button.sub *{color:var(--n-900,#23312d)!important}
+html:not(#_):not(#_) .news-card button.sub:hover{background:var(--db-yellow-400,#c18630)!important;box-shadow:inset 0 0 0 1px var(--db-yellow-400,#c18630)!important}
+html:not(#_):not(#_) .news-card .news-field,html:not(#_):not(#_) .news-card>.news-form{margin-left:auto;align-self:center}
+html:not(#_):not(#_) .news-card .news-form{justify-content:flex-end}
+@media (min-width:640px){html:not(#_):not(#_) .news-card{align-items:center!important}}
+html:not(#_):not(#_) .news-card .news-form{align-items:center}
+
+/* Phones: the newsletter band's email field and Subscribe button share one row across the full width of the card; the field takes all the room the button leaves. */
+@media (max-width:639px){
+  html:not(#_):not(#_) .news-card .news-field,html:not(#_):not(#_) .news-card>.news-form{width:100%;max-width:none;margin-left:0}
+  html:not(#_):not(#_) .news-form{flex-wrap:nowrap;width:100%}
+  html:not(#_):not(#_) .news-form>:first-child{flex:1 1 auto;width:auto;min-width:0}
+  html:not(#_):not(#_) .news-form>.sub{flex:none}
+}
+
+/* Mobile main hero and art promo banner: a DS Card on the Pearl ground. Large radius (12px), the Card's hairline
+   (Sand at 60%, drawn outside as a ring) and the text bar sits on the card's Pearl with no fill of its own.
+   isolation keeps the rounded clip intact in Safari while the card presses. */
+@media (max-width:1023px){
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) :is(.hero.art.ab-a,.promo-card),
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) :is(.hero.art.ab-a,.promo-card):is(:hover,:active,:focus-visible){background:var(--db-pearl)!important;border-radius:var(--db-radius-lg)!important;box-shadow:0 0 0 1px color-mix(in srgb,var(--db-sand) 60%,transparent)!important;overflow:hidden!important;isolation:isolate}
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a .art-box,
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .promo-card .promo-box{background:transparent!important;box-shadow:none!important;border-radius:0!important}
+}
+
+/* Tablet (640px to 1023px) uses the mobile main hero and art promo banner: clear the desktop box rules that start at 640px
+   (padding, row direction, the text box's width and the promo's end alignment) so the mobile layout fills the card. */
+@media (min-width:640px) and (max-width:1023px){
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a{padding:0!important;flex-direction:column!important;align-items:stretch!important}
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .hero.art.ab-a .art-box{width:auto!important;max-width:none!important;margin:0!important}
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .promo-card{padding:0!important;flex-direction:column!important;align-items:stretch!important}
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .promo-card .promo-box{width:auto!important;max-width:none!important}
+}
+
+/* Tablet (640px to 1023px): the newsletter banner uses the desktop layout, on one row with the field to the right. */
+@media (min-width:640px) and (max-width:1023px){
+  .news-card{flex-direction:row;flex-wrap:nowrap;align-items:center;min-height:88px;padding:16px 40px;gap:12px 24px}
+  .news-band .band-lab{flex:1 1 auto;width:auto;min-width:0}
+  .news-card .news-field{flex:0 0 320px;width:auto;max-width:420px}
+  .news-card .news-field .news-form{flex:none;width:100%;max-width:none}
+  .news-card>.news-form{flex:0 0 320px;width:auto;max-width:420px}
+  .news-h{font-size:22px}
+  .news-p{font-size:15px}
+}
+
+/* Tablet and phones (below 1024px): the art promo banner follows the main hero banner exactly: image above, Pearl text bar below with
+   the title left and the button right, DS Card ring, 12px radius, and the same press behavior. */
+@media (max-width:1023px){
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .promo-card{gap:0!important;-webkit-transition:transform 120ms var(--db-ease-standard),box-shadow 180ms var(--db-ease-standard);transition:transform 120ms var(--db-ease-standard),box-shadow 180ms var(--db-ease-standard)}
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .promo-card .promo-box{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;border:0!important}
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .promo-card .promo-box .h-title{flex:1 1 0!important;min-width:0!important}
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .promo-card .promo-box .btn-gold{flex:none!important;order:1!important}
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .promo-card:active{-webkit-transform:scale(.98);transform:scale(.98)}
+  html:not(#_):not(#_):not(#_):not(#_):not(#_):not(#_):not(#_) .promo-card:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+}

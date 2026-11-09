@@ -1,0 +1,190 @@
+/* Deseret Book Design System, generated from tokens.json */
+:root, [data-theme="light"] {
+  --db-black: #000000;
+  --db-charcoal: #3a3633;
+  --db-granite: #d8d5d2;
+  --db-granite-deep: #b5afa9;
+  --db-dove: #efefef;
+  --db-white: #ffffff;
+  --db-pearl: #f7f4f0;
+  --db-sand: #e0d5c6;
+  --db-clay: #bf906e;
+  --db-red-100: #fcdfde;
+  --db-red-200: #ffc7c7;
+  --db-red-300: #ff9da2;
+  --db-red-400: #f95a62;
+  --db-red-500: #cf3037;
+  --db-red-600: #b31f2f;
+  --db-red-700: #8e1717;
+  --db-orange-100: #ffe2cc;
+  --db-orange-200: #f8cfa9;
+  --db-orange-300: #f8ad6d;
+  --db-orange-400: #ef6f2e;
+  --db-orange-500: #af4904;
+  --db-orange-600: #833921;
+  --db-orange-700: #653024;
+  --db-yellow-100: #ffebbd;
+  --db-yellow-200: #fbd872;
+  --db-yellow-300: #ebbc4e;
+  --db-yellow-400: #c18630;
+  --db-yellow-500: #89572e;
+  --db-yellow-600: #704620;
+  --db-yellow-700: #56331c;
+  --db-green-100: #f0f9bb;
+  --db-green-200: #d6e595;
+  --db-green-300: #b6d654;
+  --db-green-400: #809f39;
+  --db-green-500: #5b722e;
+  --db-green-600: #3e5824;
+  --db-green-700: #34441f;
+  --db-teal-100: #d7fff7;
+  --db-teal-200: #a6f4e5;
+  --db-teal-300: #86dbcb;
+  --db-teal-400: #3ca495;
+  --db-teal-500: #1d8574;
+  --db-teal-600: #006d68;
+  --db-teal-700: #104949;
+  --db-blue-100: #d9faff;
+  --db-blue-200: #aee6fc;
+  --db-blue-300: #84d2ee;
+  --db-blue-400: #2ca1c2;
+  --db-blue-500: #1a7fa8;
+  --db-blue-600: #006185;
+  --db-blue-700: #004f71;
+  --db-purple-100: #ebebff;
+  --db-purple-200: #dad7f7;
+  --db-purple-300: #b9b8e5;
+  --db-purple-400: #8888ba;
+  --db-purple-500: #645a9b;
+  --db-purple-600: #4c4084;
+  --db-purple-700: #403a60;
+  --db-pink-100: #ffdef0;
+  --db-pink-200: #f9cde1;
+  --db-pink-300: #f29ec6;
+  --db-pink-400: #e05fa3;
+  --db-pink-500: #af3583;
+  --db-pink-600: #991e66;
+  --db-pink-700: #722257;
+  --db-ground: var(--db-white);
+  --db-ground-warm: var(--db-pearl);
+  --db-ground-soft: var(--db-dove);
+  --db-ground-dark: var(--db-charcoal);
+  --db-ink: var(--db-black);
+  --db-ink-muted: #56504b;
+  --db-ink-inverse: var(--db-white);
+  --db-display: var(--db-charcoal);
+  --db-hairline: var(--db-granite);
+  --db-accent: var(--db-teal-500);
+  --db-accent-soft: var(--db-teal-200);
+  --db-accent-deep: var(--db-teal-600);
+  --db-accent-ink: var(--db-white);
+  --db-link: var(--db-teal-600);
+  --db-link-hover: var(--db-charcoal);
+  --db-focus-ring: var(--db-charcoal);
+  --db-status-error: var(--db-red-500);
+  --db-status-warning: var(--db-yellow-500);
+  --db-status-success: var(--db-teal-500);
+  --db-status-info: var(--db-blue-500);
+  --db-status-error-soft: var(--db-red-100);
+  --db-status-warning-soft: var(--db-yellow-100);
+  --db-status-success-soft: var(--db-teal-100);
+  --db-status-info-soft: var(--db-blue-100);
+  --db-bsp-ground: #fbf1e8;
+  --db-scrim: rgba(58, 54, 51, 0.55);
+  --db-shadow-none: none;
+  --db-shadow-sm: 0 1px 2px rgba(58, 54, 51, 0.06);
+  --db-shadow-md: 0 2px 8px rgba(58, 54, 51, 0.08);
+  --db-shadow-lg: 0 12px 32px rgba(58, 54, 51, 0.12);
+  --db-shadow-overlay: 0 24px 64px rgba(58, 54, 51, 0.22);
+}
+:root {
+  --db-baseline: 14.4px;
+  --db-space-1: 4px;
+  --db-space-2: 8px;
+  --db-space-3: 12px;
+  --db-space-4: 16px;
+  --db-space-5: 24px;
+  --db-space-6: 32px;
+  --db-space-7: 48px;
+  --db-space-8: 64px;
+  --db-space-9: 96px;
+  --db-space-10: 128px;
+  --db-max-width: 1240px;
+  --db-max-width-narrow: 760px;
+  --db-radius-none: 0px;
+  --db-radius-sm: 4px;
+  --db-radius-md: 8px;
+  --db-radius-lg: 12px;
+  --db-radius-xl: 16px;
+  --db-radius-pill: 999px;
+  --db-weight-serif-regular: 400;
+  --db-weight-serif-bold: 700;
+  --db-weight-sans-light: 200;
+  --db-weight-sans-regular: 400;
+  --db-weight-sans-medium: 500;
+  --db-weight-sans-semibold: 600;
+  --db-weight-sans-bold: 700;
+  --db-weight-sans-black: 900;
+  --db-text-eyebrow: 0.75rem;
+  --db-text-caption: 0.8125rem;
+  --db-text-label: 0.8125rem;
+  --db-text-body: 1rem;
+  --db-text-body-lg: 1.125rem;
+  --db-text-subhead: 2rem;
+  --db-text-heading: 3rem;
+  --db-text-display: 4.5rem;
+  --db-tracking-eyebrow: 0.25em;
+  --db-tracking-label: 0.05em;
+  --db-tracking-normal: 0;
+  --db-lh-tight: 1.2;
+  --db-lh-body: 1.5;
+  --db-measure-body: 68ch;
+  --db-measure-lede: 46ch;
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --font-accent-serif: 'Fraunces', Georgia, serif;
+  --font-accent-sans: 'Josefin Sans', sans-serif;
+}
+.db-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+}
+.db-heading {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: 400;
+}
+.db-subhead {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 200;
+}
+.db-body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.db-caption {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.db-label {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+.db-button {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}

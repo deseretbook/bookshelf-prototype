@@ -1,0 +1,148 @@
+/* Account page (#/account/<section>): three columns like Customer Reviews. Left: account panel content. Right two: the selected section. */
+.acp{width:100%;max-width:calc(var(--maxw,1240px) + 2 * var(--pad));margin:0 auto;box-sizing:border-box;padding:24px var(--pad) 96px;display:grid;grid-template-columns:minmax(0,1fr);gap:32px;align-items:start}
+.acp-side{display:flex;flex-direction:column;padding:24px;border-radius:var(--db-radius-lg);background:var(--db-pearl);box-shadow:0 0 0 1px color-mix(in srgb,var(--db-sand) 60%,transparent)}
+.acp-side .acct-id{padding:0 0 20px}
+.acp-side .acct-av,.acct-d .acct-av{background:var(--db-yellow-500)}
+
+/* Account navigation: grouped items (Account, Subscriptions) with an icon each. Default, hover (Dove wash), active (Charcoal). */
+html:not(#_) .acp-side .acp-nav{display:flex;flex-direction:column;gap:24px;margin:8px -16px 24px}
+.acp-grp{display:flex;flex-direction:column;gap:2px}
+.acp-eb{display:block;padding:0 16px 8px;text-transform:uppercase;color:var(--db-clay)}
+html:not(#_) .acp-it{display:flex;align-items:center;gap:12px;width:100%;height:44px;padding:0 20px 0 16px;border:0;border-radius:var(--db-radius-pill);background:transparent;font:inherit;font-size:15px;color:var(--db-yellow-600);text-align:left;cursor:pointer;transition:background-color var(--db-duration-base,180ms) var(--db-ease-standard),color var(--db-duration-base,180ms) var(--db-ease-standard),box-shadow var(--db-duration-base,180ms) var(--db-ease-standard)}
+html:not(#_) .acp-it .acp-ic{color:var(--db-yellow-600);transition:color var(--db-duration-base,180ms) var(--db-ease-standard),opacity var(--db-duration-base,180ms) var(--db-ease-standard)}
+.acp-icw{flex:none;display:inline-grid}
+.acp-icw>.acp-ic{grid-area:1/1}
+/* Bookshelf+ item: the DS Bookshelf PLUS symbol, tinted with the item color */
+.acp-bsp{display:block;width:20px;height:20px;background-color:currentColor;-webkit-mask:url(../ds/deseret-book/assets/bookshelf-plus/bookshelf-plus-symbol.svg) center/contain no-repeat;mask:url(../ds/deseret-book/assets/bookshelf-plus/bookshelf-plus-symbol.svg) center/contain no-repeat}
+html:not(#_) .acp-it .acp-ic-f{opacity:0}
+html:not(#_) .acp-it:is(:hover,.on) .acp-ic-f{opacity:1}
+html:not(#_) .acp-it:is(:hover,.on) .acp-ic-o{opacity:0}
+html:not(#_) .acp-it:not(.on):hover{background:transparent;box-shadow:inset 0 0 0 1px var(--db-yellow-700);color:var(--db-yellow-700)}
+html:not(#_) .acp-it:not(.on):hover .acp-ic{color:var(--db-yellow-700)}
+html:not(#_) .acp-it.on{background:var(--db-charcoal);color:var(--db-white)}
+html:not(#_) .acp-it.on .acp-ic{color:var(--db-white)}
+html:not(#_) .acp-it:focus-visible{outline:2px solid var(--db-charcoal);outline-offset:2px}
+.acp-side .acct-signout{align-self:flex-start}
+.acp-main{min-width:0;display:flex;flex-direction:column}
+html:not(#_) .acp-main>:is(.subs,.page,.plp-h,.grid,main){padding:0!important;margin:0!important;max-width:none!important;width:100%;box-sizing:border-box}
+
+.acp-main .subs-eb{display:none}
+.acp-main .page h1,.acp-main .plp-h h1{font-size:clamp(28px,4vw,40px);line-height:1.2;color:var(--db-charcoal)}
+html:not(#_):not(#_) .acp-main .grid.wl-grid{grid-template-columns:repeat(auto-fill,192px)!important;justify-content:space-between}
+@media (min-width:640px){html:not(#_):not(#_) .acp-main .grid.wl-grid{grid-template-columns:repeat(auto-fill,192px)!important;justify-content:space-between}}
+/* Info pages in the footer (.fp-acp) keep the pill row below 1024px; they are not the account page. */
+@media (max-width:1023px){
+html:not(#_) .fp-acp.acp-side .acp-nav{flex-direction:row;flex-wrap:nowrap;gap:8px;overflow-x:auto;margin:4px -20px 20px;padding:1px 20px;scrollbar-width:none}
+html:not(#_) .fp-acp.acp-side .acp-nav::-webkit-scrollbar{display:none}
+.fp-acp.acp-side .acp-grp{display:contents}
+.fp-acp.acp-side .acp-eb{display:none}
+html:not(#_) .fp-acp.acp-side .acp-it{flex:0 0 auto;width:auto;height:36px;gap:8px;padding:0 16px 0 12px;border-radius:var(--db-radius-pill);background:var(--db-white);box-shadow:0 0 0 1px var(--db-granite);font-size:14px;white-space:nowrap}
+html:not(#_) .fp-acp.acp-side .acp-it .acp-ic{width:18px!important;height:18px!important;font-size:18px!important}
+html:not(#_) .fp-acp.acp-side .acp-it:not(.on):hover{background:var(--db-white);box-shadow:0 0 0 1px var(--db-yellow-700)}
+html:not(#_) .fp-acp.acp-side .acp-it.on{background:var(--db-charcoal);box-shadow:0 0 0 1px var(--db-charcoal)}
+.acp-side.fp-acp{padding:20px}
+}
+/* Navigation: the same grouped list as desktop at every width. Tablet (640px to 1023px): menu left, section right. Phones: the menu is the page, a section
+   opens full screen over it with a back arrow (the .acp-back-bar). */
+@media (min-width:640px) and (max-width:1023px){
+.acp{grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:32px}
+}
+.acp-back-bar{display:none}
+@media (max-width:639px){
+.acp.is-root .acp-main{display:none}
+.acp.is-sec{padding-top:0;padding-bottom:0}
+.acp.is-sec .acp-side{display:none}
+.acp.is-sec .acp-main{position:fixed;inset:0;z-index:80;display:block;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--db-white);box-sizing:border-box;padding:0 var(--pad) calc(48px + var(--sa-b))}
+.acp.is-sec .acp-back-bar{display:flex;align-items:center;position:sticky;top:0;z-index:2;margin:0 calc(var(--pad) * -1) 8px;padding:calc(8px + var(--sa-t)) calc(var(--pad) - 4px) 8px calc(var(--pad) - 4px + var(--sa-l));min-height:56px;box-sizing:border-box;background:var(--db-white);box-shadow:0 1px 0 var(--db-hairline)}
+html:not(#_) .acp.is-sec .acp-back-bar .acp-back{margin:0}
+}
+@media (min-width:1024px){
+.acp{grid-template-columns:repeat(3,minmax(0,1fr));gap:48px;padding-top:48px}
+.acp-main{grid-column:span 2}
+html:not(#_):not(#_) .acp-main .grid.wl-grid{grid-template-columns:repeat(auto-fill,192px)!important;justify-content:space-between}
+html:not(#_) .acp-main .ord .ord-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* Account page navigation: a hairline above each eyebrow, same color as the footer sitemap separators */
+.acp>.acp-side .acp-grp::before{content:"";display:block;height:1px;margin:0 16px 22px;background:color-mix(in srgb,var(--db-yellow-500) 30%,transparent)}
+@media (min-width:1024px){.acp-side .acp-grp::before{content:"";display:block;height:1px;margin:0 16px 22px;background:color-mix(in srgb,var(--db-yellow-500) 30%,transparent)}}
+/* Wishlist: 4 per row once the content column fits four 192px cards */
+@media (min-width:1240px){html:not(#_):not(#_) .acp-main .grid.wl-grid{grid-template-columns:repeat(4,192px)!important;column-gap:0!important;justify-content:space-between}}
+
+/* Account panel: View Account button keeps its 40px height inside the scrolling drawer column */
+
+
+/* Search + sort bar for Orders and Wishlist */
+
+
+
+
+
+/* One rhythm in every account section: title, search + filter, and content are 24px apart */
+html:not(#_) .acp-main{gap:24px}
+
+html:not(#_) .acp-main>:is(.subs,.page){gap:24px!important}
+html:not(#_) .acp-main>main>div{gap:24px!important}
+html:not(#_) .acp-main>main>[data-screen-label="Platinum Rewards Details"]>div:first-child:has(>button){display:none}
+/* Bookshelf+ management embedded in the account page */
+html:not(#_) .acp-main>.bsp-page>div{min-height:0!important;background:none!important}
+html:not(#_) .acp-main>.bsp-page main{padding:0!important;margin:0!important;max-width:none!important}
+html:not(#_) .acp-main>.bsp-page main>div{gap:24px!important}
+html:not(#_) .acp-main>.bsp-page main>[data-screen-label="Subscription Details"]>div:first-child:has(>button){display:none}
+.acp-main .subs-one{grid-template-columns:minmax(0,1fr)!important;max-width:none}
+.sub-acts.sub-acts-split{justify-content:space-between}
+/* Same title size in every account section, including the embedded Platinum Rewards and Bookshelf+ management views */
+html:not(#_) .acp-main h1{font-size:clamp(28px,4vw,40px)!important;line-height:1.2!important}
+/* Bookshelf+ management: hairline above the details list drawn outside the box (DS rule), like Platinum, so it doesn’t push content down */
+html:not(#_) .acp-main>.bsp-page main dl{border-top:0!important;box-shadow:0 -1px 0 var(--hair,var(--db-dove))}
+/* Subscribed views: status badge (Active / Member) sits at the bottom right of the title row */
+html:not(#_) .acp-main :is([data-screen-label="Subscription Details"],[data-screen-label="Platinum Rewards Details"])>div:has(>h1){display:flex!important;flex-wrap:wrap;justify-content:space-between!important;align-items:flex-end!important}
+html:not(#_) .acp-main :is([data-screen-label="Subscription Details"],[data-screen-label="Platinum Rewards Details"])>div:has(>h1)>:not(h1){margin-left:auto}
+/* Orders: one order per row, paginated */
+html:not(#_):not(#_) .ord .ord-grid.ord-rows{grid-template-columns:minmax(0,1fr)!important}
+
+@media (min-width:1024px){
+html:not(#_) .ord-rows .ord-card{display:grid;grid-template-columns:80px minmax(0,1fr) 336px 120px;align-items:center;column-gap:24px;row-gap:0;padding:16px 20px 16px 16px}
+html:not(#_) .ord-rows .ord-card-top{display:contents}
+html:not(#_) .ord-rows .ord-card-top .ord-stack{order:1;justify-self:start}
+html:not(#_) .ord-rows .ord-card-top .ord-card-h{order:2}
+html:not(#_) .ord-rows .ord-sum{order:3;display:grid;grid-template-columns:80px 72px minmax(0,1fr);column-gap:24px;width:auto;padding:0;box-shadow:none}
+html:not(#_) .ord-rows .ord-sum div{flex-direction:column;justify-content:flex-start;gap:2px}
+html:not(#_) .ord-rows .ord-sum dd{text-align:left;white-space:nowrap}
+html:not(#_) .ord-rows .ord-card-top>:last-child{order:4;align-self:center;justify-self:end}
+}
+.acct-d .acct-view{flex:none;margin-left:auto;align-self:center}
+.acct-d .acct-id .acct-meta{flex:1 1 auto}
+/* Account panel: same grouped navigation as the account page */
+/* Panel spacing: pills keep the account page padding (16px before the icon) and extend 16px past the content edge, so the drawer content (header title included) moves to a 24px edge to line up with the icons. Pills sit 8px from the drawer sides. */
+html:not(#_):not(#_) .acct-d .db-drawer-b{padding-left:24px!important;padding-right:24px!important}
+html:not(#_):not(#_) .acct-d .db-drawer-h{padding-left:24px}
+html:not(#_) .acct-d .acct-id{padding:8px 0 0}
+html:not(#_) .acct-d .acct-pb{margin-top:20px}
+html:not(#_) .acct-d .acct-d-nav{display:flex;flex-direction:column;gap:24px;margin:20px -16px 24px}
+html:not(#_):not(#_) .acct-d-nav .acp-eb{color:var(--db-granite-deep)}
+.acct-d-nav::before,.acct-d-nav .acp-grp+.acp-grp::before{content:"";display:block;height:1px;margin:0 16px;background:var(--db-granite)}
+.acct-d-nav .acp-grp+.acp-grp::before{margin-bottom:22px}
+html:not(#_):not(#_) .acct-d-nav .acp-it:not(.on),html:not(#_):not(#_) .acct-d-nav .acp-it:not(.on) .acp-ic{color:var(--db-charcoal)}
+html:not(#_):not(#_) .acct-d-nav .acp-it:not(.on):hover{box-shadow:inset 0 0 0 1px var(--db-charcoal);color:var(--db-charcoal)}
+html:not(#_):not(#_) .acct-d-nav .acp-it:not(.on):hover .acp-ic{color:var(--db-charcoal)}
+
+/* Account page, signed out: the sign in / create account form, centered */
+.acp-auth{width:100%;max-width:calc(400px + 2 * var(--pad));margin:0 auto;box-sizing:border-box;padding:48px var(--pad) 96px;display:flex;flex-direction:column}
+.acp-auth h1{margin:0 0 12px;font-family:var(--db-font-serif);font-weight:400;font-size:clamp(28px,4vw,40px);line-height:1.2;color:var(--db-charcoal)}
+.acp-auth .acct-lede{font-size:15px;max-width:none;margin-bottom:12px}
+/* Wishlist: at least two per row on tablet; columns shrink to fit the narrower content column */
+@media (min-width:640px) and (max-width:1023px){
+html:not(#_):not(#_):not(#_) .acp-main .grid.wl-grid{grid-template-columns:repeat(auto-fill,min(192px,calc((100% - var(--db-space-3)) / 2)))!important;column-gap:var(--db-space-3)!important;justify-content:space-between}
+html:not(#_):not(#_) .acp-main .grid.wl-grid .db-pc{width:auto!important;min-width:0}
+}
+
+/* Signed-out account page: sign in beside Check an Order */
+.acp-auth-2{max-width:calc(400px + 2 * var(--pad));display:grid;grid-template-columns:minmax(0,1fr);gap:48px}
+.acp-col{display:flex;flex-direction:column;min-width:0}
+.acp-co h2{margin:0 0 12px;font-family:var(--db-font-serif);font-weight:400;font-size:clamp(28px,4vw,40px);line-height:1.2;color:var(--db-charcoal)}
+.acp-co .acct-lede{font-size:15px;max-width:none;margin-bottom:12px}
+@media (min-width:900px){
+  .acp-auth-2{max-width:calc(var(--maxw,1240px) + 2 * var(--pad));grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0}
+  .acp-auth-2>.acp-col:first-child{padding-right:56px}
+  .acp-co{padding-left:56px}
+}

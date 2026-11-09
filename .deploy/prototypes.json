@@ -1,0 +1,9 @@
+{
+  "improved-ecomm": {
+    "artifact": "https://claude.ai/artifact/VG9UAyNhaNh3FZGtJTRor9",
+    "title": "Improved eComm",
+    "entry": "index.html",
+    "tweaks_doc": "project/tweaks",
+    "qa_routes": ["#/c/books_gospel-voices", "#/c/art", "#/bookshelf-plus", "#/account", "#/bag"]
+  }
+}

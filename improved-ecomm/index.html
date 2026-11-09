@@ -1,80 +1,614 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Deseret Book</title>
+<title>Improved eComm</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&amp;family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,400;0,9..40,900;1,9..40,400&amp;family=Fraunces:ital,wght@0,400;0,600;0,900;1,400&amp;family=Josefin+Sans:ital,wght@0,300;0,400;0,600;1,400&amp;display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=block">
-<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/fonts.css">
-<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/colors.css">
-<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/typography.css">
-<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/spacing.css">
-<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/surfaces.css">
-<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/motion.css">
-<link rel="stylesheet" href="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/tokens/roles.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds/deseret-book/tokens.css">
+<link rel="stylesheet" href="ds/deseret-book/components/bundle.css">
+<link rel="stylesheet" href="css/promo-band.css">
 <link rel="stylesheet" href="css/site.css">
 <style>
-.promo-box{background:linear-gradient(180deg,rgba(247,244,240,.8),rgba(248,207,169,.1));-webkit-backdrop-filter:blur(12px) saturate(1.05);backdrop-filter:blur(12px) saturate(1.05);border:1px solid rgba(191,144,110,.3);border-radius:0 0 8px 8px;position:relative;z-index:1;margin:-80px 0 0;padding:20px;gap:14px;display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;width:auto}
+.material-symbols-rounded{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased}
+.promo-box{background:linear-gradient(180deg,rgba(247,244,240,.8),rgba(248,207,169,.1));-webkit-backdrop-filter:blur(12px) saturate(1.05);backdrop-filter:blur(12px) saturate(1.05);border:1px solid rgba(191,144,110,.3);border-radius:0 0 var(--db-radius-md) var(--db-radius-md);position:relative;z-index:1;margin:-80px 0 0;padding:20px;gap:14px;display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;width:auto}
 @media (max-width:639px){
-.hero.art.ab-a{margin:12px var(--pad) 0;min-height:250px;justify-content:flex-end;border-radius:8px;border:0;overflow:hidden;box-shadow:0 2px 8px rgba(58,54,51,.08);-webkit-transition:transform 120ms cubic-bezier(.2,0,0,1),box-shadow 180ms cubic-bezier(.2,0,0,1);transition:transform 120ms cubic-bezier(.2,0,0,1),box-shadow 180ms cubic-bezier(.2,0,0,1)}
+.hero.art.ab-a{margin:12px var(--pad) 0;min-height:250px;justify-content:flex-end;border-radius:var(--db-radius-md);border:0;overflow:hidden;box-shadow:0 2px 8px rgba(58,54,51,.08);-webkit-transition:transform 120ms cubic-bezier(.2,0,0,1),box-shadow 180ms cubic-bezier(.2,0,0,1);transition:transform 120ms cubic-bezier(.2,0,0,1),box-shadow 180ms cubic-bezier(.2,0,0,1)}
 .hero.art.ab-a:active{-webkit-transform:scale(.98);transform:scale(.98)}
 .hero.art.ab-a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .hero.art.ab-a .art-img{position:absolute;inset:0;height:auto}
-.hero.art.ab-a .art-box{align-items:flex-start;text-align:left;background:#6E774F;border:0;border-radius:0 0 8px 8px;position:relative;z-index:1;margin:0;padding:20px 44px 20px 20px}
+.hero.art.ab-a .art-box{align-items:flex-start;text-align:left;background:#6E774F;border:0;border-radius:0 0 var(--db-radius-md) var(--db-radius-md);position:relative;z-index:1;margin:0;padding:20px 44px 20px 20px}
 .hero.art.ab-a .art-box::after{content:"";position:absolute;right:16px;top:50%;margin-top:-20px;width:40px;height:40px;content:"chevron_right";color:#fff;font:normal 40px/40px 'Material Symbols Rounded';font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 40;font-feature-settings:'liga';text-align:center;overflow:hidden;-webkit-transition:transform 180ms cubic-bezier(.2,0,0,1);transition:transform 180ms cubic-bezier(.2,0,0,1)}
 .hero.art.ab-a:active .art-box::after{-webkit-transform:translateX(3px);transform:translateX(3px)}
 .hero.art.ab-a .ab-offer{color:#fff;text-align:left;font-size:21px;line-height:1.22}
-.promo-card{min-height:250px;justify-content:flex-end;border-radius:8px;border:0;overflow:hidden;box-shadow:0 2px 8px rgba(58,54,51,.08);-webkit-transition:transform 120ms cubic-bezier(.2,0,0,1);transition:transform 120ms cubic-bezier(.2,0,0,1)}
+.promo-card{min-height:250px;justify-content:flex-end;border-radius:var(--db-radius-md);border:0;overflow:hidden;box-shadow:0 2px 8px rgba(58,54,51,.08);-webkit-transition:transform 120ms cubic-bezier(.2,0,0,1);transition:transform 120ms cubic-bezier(.2,0,0,1)}
 .promo-card:active{-webkit-transform:scale(.98);transform:scale(.98)}
 .promo-card:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .promo-card::before{position:absolute;inset:0;height:auto}
-.promo-box{border:0;border-radius:4px;margin:0 4px 4px;padding:12px 20px 20px}
+.promo-box{border:0;border-radius:var(--db-radius-sm);margin:0 4px 4px;padding:12px 20px 20px}
 }
 </style>
 <link rel="stylesheet" href="css/checkout.css">
-<link rel="stylesheet" href="css/bsp-fonts.css">
 <link rel="stylesheet" href="css/bookshelf-pages.css">
+<link rel="stylesheet" href="css/orange-scheme.css">
+<link rel="stylesheet" href="css/home-hero.css">
+<link rel="stylesheet" href="css/wishlist-orders.css">
+<link rel="stylesheet" href="css/account-page.css">
+<link rel="stylesheet" href="css/account-mock.css">
+<link rel="stylesheet" href="css/reviews.css">
+<link rel="stylesheet" href="css/pdp-plus.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/footer-pages.css">
+<link rel="stylesheet" href="css/buttons.css">
+<link rel="stylesheet" href="css/plp.css">
+<link rel="stylesheet" href="css/presentation.css">
+<style>
+/* Tweaks: the summer sky gradient editor (SkyStops) */
+.sky-bar{position:relative;height:22px;border-radius:6px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.sky-bar i{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:rgba(0,0,0,.7);border-radius:1px;box-shadow:0 0 0 1px rgba(255,255,255,.8);-webkit-transition:left 150ms cubic-bezier(.2,0,0,1);transition:left 150ms cubic-bezier(.2,0,0,1)}
+.sky-stop{display:flex;flex-direction:column;gap:8px;padding:10px 0 2px;border-top:1px solid rgba(0,0,0,.08)}
+.sky-sw{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.sky-sw button{appearance:none;-webkit-appearance:none;border:0;padding:0;aspect-ratio:1;border-radius:4px;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.14);-webkit-transition:transform 150ms cubic-bezier(.2,0,0,1),box-shadow 150ms cubic-bezier(.2,0,0,1);transition:transform 150ms cubic-bezier(.2,0,0,1),box-shadow 150ms cubic-bezier(.2,0,0,1)}
+.sky-sw button:hover{-webkit-transform:translateY(-1px);transform:translateY(-1px)}
+.sky-sw button[data-on="1"]{box-shadow:0 0 0 1.5px #fff,0 0 0 3px rgba(0,0,0,.85)}
+/* dark Tweaks panel */
+.bc-pick{display:flex;flex-direction:column;gap:8px}
+.bc-cur{appearance:none;display:flex;align-items:center;gap:8px;width:100%;height:30px;padding:0 6px 0 4px;border:1px solid rgba(255,255,255,.14);border-radius:var(--db-radius-md);background:rgba(255,255,255,.07);color:inherit;font:inherit;text-align:left;cursor:pointer;transition:background-color var(--db-duration-fast,150ms) var(--db-ease-standard,cubic-bezier(.2,0,0,1)),border-color var(--db-duration-fast,150ms) var(--db-ease-standard,cubic-bezier(.2,0,0,1))}
+.bc-cur:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.24)}
+.bc-cur i{width:22px;height:22px;border-radius:var(--db-radius-sm,2px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);flex-shrink:0}
+.bc-lbl{flex:1;min-width:0;color:rgba(255,255,255,.82)}
+.bc-name{color:rgba(255,255,255,.6)}
+.bc-grid{display:flex;flex-direction:column;gap:6px}
+.bc-grid .sky-sw.bc-n{grid-template-columns:repeat(8,1fr)}
+.bc-grid .sky-sw.bc-h{grid-template-columns:repeat(7,1fr)}
+.twk-panel .sky-bar{box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.twk-panel .sky-bar i{background:#fff;box-shadow:0 0 0 1px rgba(58,54,51,.9)}
+.twk-panel .sky-stop{border-top-color:rgba(255,255,255,.12)}
+.twk-panel .sky-sw button{box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.twk-panel .sky-sw button[data-on="1"]{box-shadow:0 0 0 1.5px #3a3633,0 0 0 3px #fff}
+</style>
 </head>
 <body>
 <div id="root"></div>
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><rect width="120" height="120" fill="#ece6db"/><circle cx="60" cy="60" r="26" fill="#2b2e30"/><text x="60" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="24" font-weight="600" fill="#fff">DB</text></svg></template>
-<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
-<script>window.DB_ICON_BASE="assets/icons/";</script>
-<script src="_ds/deseret-book-design-system-609afabc-5853-40d4-a5b9-72ec4060937b/_ds_bundle.js"></script>
+<script src="src/vendor/react.production.min.js"></script>
+<script src="src/vendor/react-dom.production.min.js"></script>
+<script>window.DB_ICON_BASE="ds/deseret-book/assets/icons/";</script>
+<script src="ds/deseret-book/components/bundle.js"></script>
+<script src="src/promo-band.js"></script>
 <script>window.AB_CONCEPT="A";</script>
 <script>window.CHECKOUT_FLOW=true;</script>
 <script src="src/stay.js"></script>
+<script src="src/no-underline-icons.js"></script>
+<script src="src/icon-hover-fill.js"></script>
+<script src="src/img-preload.js"></script>
 <script src="src/bsp-checkout.js"></script>
 <script src="src/orders.js"></script>
+<script src="src/account-mock.js"></script>
 <script src="src/build/bookshelf-pages.js"></script>
+<script src="src/book-crop.js"></script>
+<script src="src/reviews.js"></script>
+<script src="src/pdp-plus.js"></script>
+<script src="src/platinum.js"></script>
+<script src="src/footer-pages.js"></script>
+<script src="src/footer-pages-feature.js"></script>
+<script src="src/stores.js"></script>
+<script>window.DB_LEAVES_WAIT=true;/* the Clearance banner waits for the Tweaks panel's saved season and values */</script>
+<script src="src/presentation.js"></script>
+<script src="src/plp.js"></script>
 <script src="src/build/app.js"></script>
 <div id="tweaks-root"></div>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="src/vendor/babel.min.js"></script>
 <script type="text/babel" src="src/tweaks-panel.jsx"></script>
 <script type="text/babel">
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "platinum": false,
-  "bookshelf": false,
-  "bspPlan": "monthly"
+  "platinum": true,
+  "bookshelf": true,
+  "bspPlan": "monthly",
+  "bspScenario": "standard",
+  "season": "fall",
+  "motion": false,
+  "viewport": "desktop",
+  "fall_leafOn": true,
+  "fall_leafFar": 3,
+  "fall_leafMid": 4,
+  "fall_leafNear": 2,
+  "fall_leafSize": 200,
+  "fall_leafPhone": 100,
+  "fall_leafSpeed": 25,
+  "fall_leafDrift": 67,
+  "fall_leafSway": 82,
+  "fall_leafThick": 100,
+  "fall_leafShadow": 50,
+  "fall_leafFront1": 41,
+  "fall_leafFront2": 77,
+  "fall_leafCurl": 250,
+  "fall_leafCurl2": 250,
+  "fall_leafCurl3": 250,
+  "fall_leafCurlDir": "mixed",
+  "fall_leafRotX": -55,
+  "fall_leafRotXVar": 90,
+  "fall_leafRotY": -22,
+  "fall_leafRotYVar": 88,
+  "fall_leafRotZ": 12,
+  "fall_leafRotZVar": 75,
+  "fall_leafSpinX": 95,
+  "fall_leafSpinY": 365,
+  "fall_leafSpinZ": 255,
+  "fall_leafCols": 80,
+  "fall_leafRows": 80,
+  "fall_leafBlur": 300,
+  "fall_leafFocus": 120,
+  "fall_leafSoft": true,
+  "fall_leafSoftAmt": 16,
+  "fall_leafOpacity": 130,
+  "fall_leafPalette": "all",
+  "fall_leafClear": false,
+  "fall_leafSeed": 827,
+  "fall_leafGlint": 0,
+  "winter_leafOn": true,
+  "winter_leafFar": 5,
+  "winter_leafMid": 3,
+  "winter_leafNear": 2,
+  "winter_leafSize": 100,
+  "winter_leafPhone": 100,
+  "winter_leafSpeed": 65,
+  "winter_leafDrift": 33,
+  "winter_leafSway": 0,
+  "winter_leafThick": 0,
+  "winter_leafShadow": 50,
+  "winter_leafFront1": 2,
+  "winter_leafFront2": 76,
+  "winter_leafCurl": 0,
+  "winter_leafCurl2": 0,
+  "winter_leafCurl3": 0,
+  "winter_leafCurlDir": "mixed",
+  "winter_leafRotX": -19,
+  "winter_leafRotXVar": 35,
+  "winter_leafRotY": 0,
+  "winter_leafRotYVar": 45,
+  "winter_leafRotZ": 0,
+  "winter_leafRotZVar": 180,
+  "winter_leafSpinX": 380,
+  "winter_leafSpinY": 495,
+  "winter_leafSpinZ": 380,
+  "winter_leafCols": 4,
+  "winter_leafRows": 2,
+  "winter_leafBlur": 200,
+  "winter_leafFocus": 140,
+  "winter_leafSoft": true,
+  "winter_leafSoftAmt": 5,
+  "winter_leafOpacity": 150,
+  "winter_leafPalette": "all",
+  "winter_leafClear": true,
+  "winter_leafSeed": 480,
+  "winter_leafGlint": 300,
+  "spring_leafOn": true,
+  "spring_leafFar": 5,
+  "spring_leafMid": 4,
+  "spring_leafNear": 2,
+  "spring_leafSize": 35,
+  "spring_leafPhone": 100,
+  "spring_leafSpeed": 55,
+  "spring_leafDrift": 90,
+  "spring_leafSway": 0,
+  "spring_leafThick": 0,
+  "spring_leafShadow": 50,
+  "spring_leafFront1": 2,
+  "spring_leafFront2": 76,
+  "spring_leafCurl": 185,
+  "spring_leafCurl2": 175,
+  "spring_leafCurl3": 155,
+  "spring_leafCurlDir": "mixed",
+  "spring_leafRotX": 25,
+  "spring_leafRotXVar": 40,
+  "spring_leafRotY": 0,
+  "spring_leafRotYVar": 60,
+  "spring_leafRotZ": 0,
+  "spring_leafRotZVar": 180,
+  "spring_leafSpinX": 575,
+  "spring_leafSpinY": 455,
+  "spring_leafSpinZ": 330,
+  "spring_leafCols": 60,
+  "spring_leafRows": 60,
+  "spring_leafBlur": 240,
+  "spring_leafFocus": 100,
+  "spring_leafSoft": true,
+  "spring_leafSoftAmt": 4,
+  "spring_leafOpacity": 150,
+  "spring_leafPalette": "all",
+  "spring_leafClear": true,
+  "spring_leafSeed": 1,
+  "spring_leafGlint": 0,
+  "fall_bgS": 80,
+  "fall_bgR": 20,
+  "fall_bgY": 160,
+  "fall_bgG": "green-100",
+  "fall_bgO": 100,
+  "fall_bgN": 3,
+  "fall_bg1C": "green-100",
+  "fall_bg1M": 100,
+  "fall_bg1P": 0,
+  "fall_bg2C": "green-500",
+  "fall_bg2M": 61,
+  "fall_bg2P": 42,
+  "fall_bg3C": "green-500",
+  "fall_bg3M": 100,
+  "fall_bg3P": 89,
+  "fall_bg4C": "green-100",
+  "fall_bg4M": 12,
+  "fall_bg4P": 60,
+  "fall_bg5C": "green-100",
+  "fall_bg5M": 3,
+  "fall_bg5P": 78,
+  "fall_bg6C": "green-500",
+  "fall_bg6M": 100,
+  "fall_bg6P": 92,
+  "fall_bg7C": "green-500",
+  "fall_bg7M": 100,
+  "fall_bg7P": 100,
+  "fall_bg8C": "green-500",
+  "fall_bg8M": 100,
+  "fall_bg8P": 100,
+  "winter_bgS": 70,
+  "winter_bgR": 15,
+  "winter_bgY": 129,
+  "winter_bgG": "white",
+  "winter_bgO": 80,
+  "winter_bgN": 3,
+  "winter_bg1C": "blue-200",
+  "winter_bg1M": 80,
+  "winter_bg1P": 0,
+  "winter_bg2C": "blue-200",
+  "winter_bg2M": 26,
+  "winter_bg2P": 63,
+  "winter_bg3C": "granite",
+  "winter_bg3M": 32,
+  "winter_bg3P": 100,
+  "winter_bg4C": "blue-200",
+  "winter_bg4M": 12,
+  "winter_bg4P": 60,
+  "winter_bg5C": "blue-200",
+  "winter_bg5M": 3,
+  "winter_bg5P": 78,
+  "winter_bg6C": "dove",
+  "winter_bg6M": 0,
+  "winter_bg6P": 92,
+  "winter_bg7C": "dove",
+  "winter_bg7M": 0,
+  "winter_bg7P": 100,
+  "winter_bg8C": "dove",
+  "winter_bg8M": 0,
+  "winter_bg8P": 100,
+  "spring_bgS": 115,
+  "spring_bgR": 5,
+  "spring_bgY": 109,
+  "spring_bgG": "green-200",
+  "spring_bgO": 100,
+  "spring_bgN": 2,
+  "spring_bg1C": "teal-600",
+  "spring_bg1M": 100,
+  "spring_bg1P": 0,
+  "spring_bg2C": "green-200",
+  "spring_bg2M": 100,
+  "spring_bg2P": 100,
+  "spring_bg3C": "teal-600",
+  "spring_bg3M": 32,
+  "spring_bg3P": 38,
+  "spring_bg4C": "teal-600",
+  "spring_bg4M": 12,
+  "spring_bg4P": 60,
+  "spring_bg5C": "teal-600",
+  "spring_bg5M": 3,
+  "spring_bg5P": 78,
+  "spring_bg6C": "green-200",
+  "spring_bg6M": 100,
+  "spring_bg6P": 92,
+  "spring_bg7C": "green-200",
+  "spring_bg7M": 100,
+  "spring_bg7P": 100,
+  "spring_bg8C": "green-200",
+  "spring_bg8M": 100,
+  "spring_bg8P": 100,
+  "summer_leafOn": true,
+  "summer_leafFar": 10,
+  "summer_leafMid": 6,
+  "summer_leafNear": 3,
+  "summer_leafSize": 10,
+  "summer_leafPhone": 80,
+  "summer_leafSpeed": 30,
+  "summer_leafDrift": 15,
+  "summer_leafSway": 0,
+  "summer_leafThick": 0,
+  "summer_leafShadow": 50,
+  "summer_leafFront1": 2,
+  "summer_leafFront2": 76,
+  "summer_leafCurl": 0,
+  "summer_leafCurl2": 0,
+  "summer_leafCurl3": 0,
+  "summer_leafCurlDir": "mixed",
+  "summer_leafRotX": 0,
+  "summer_leafRotXVar": 0,
+  "summer_leafRotY": 0,
+  "summer_leafRotYVar": 0,
+  "summer_leafRotZ": 0,
+  "summer_leafRotZVar": 0,
+  "summer_leafSpinX": 0,
+  "summer_leafSpinY": 0,
+  "summer_leafSpinZ": 0,
+  "summer_leafCols": 4,
+  "summer_leafRows": 2,
+  "summer_leafBlur": 150,
+  "summer_leafFocus": 200,
+  "summer_leafSoft": false,
+  "summer_leafSoftAmt": 8,
+  "summer_leafOpacity": 150,
+  "summer_leafPalette": "all",
+  "summer_leafClear": false,
+  "summer_leafSeed": 1,
+  "summer_leafGlint": 0,
+  "summer_sunOn": true,
+  "summer_sunSize": 150,
+  "summer_sunHalos": 2,
+  "summer_sunSpeed": 30,
+  "summer_sunGlow": 100,
+  "summer_sunRays": 85,
+  "summer_sunRayCount": 21,
+  "summer_sunSky": 115,
+  "summer_bgS": 100,
+  "summer_bgR": 0,
+  "summer_bgY": 118,
+  "summer_sunBlur": 10,
+  "summer_sunGN": 5,
+  "summer_sunG1C": "white",
+  "summer_sunG1M": 100,
+  "summer_sunG1P": 0,
+  "summer_sunG2C": "white",
+  "summer_sunG2M": 100,
+  "summer_sunG2P": 18,
+  "summer_sunG3C": "yellow-200",
+  "summer_sunG3M": 39,
+  "summer_sunG3P": 31,
+  "summer_sunG4C": "yellow-200",
+  "summer_sunG4M": 100,
+  "summer_sunG4P": 45,
+  "summer_sunG5C": "orange-400",
+  "summer_sunG5M": 100,
+  "summer_sunG5P": 100,
+  "summer_sunG6C": "purple-400",
+  "summer_sunG6M": 100,
+  "summer_sunG6P": 100,
+  "summer_sunG7C": "purple-500",
+  "summer_sunG7M": 100,
+  "summer_sunG7P": 100,
+  "summer_sunG8C": "purple-500",
+  "summer_sunG8M": 100,
+  "summer_sunG8P": 100
 }/*EDITMODE-END*/;
+/* Summer sky gradient editor: each stop is a DS color token, its strength over white and its position from the sun (0%)
+   out to the banner's edge (100%). The bar previews the stops in that order. */
+const SKY_COLORS = ["white", "pearl", "yellow-100", "yellow-200", "yellow-300", "orange-100", "orange-200", "orange-300", "orange-400", "red-100", "red-200", "red-300",
+  "pink-100", "pink-200", "pink-300", "purple-100", "purple-200", "purple-300", "purple-400", "purple-500", "blue-100", "blue-200", "blue-300", "teal-100"];
+const skyName = (c) => String(c).replace(/-/g, " ").replace(/^[a-z]/, (x) => x.toUpperCase());
+function SkyStops({ t, setTweak }) {
+  const n = Math.max(2, Math.min(8, t.summer_sunGN | 0));
+  const stops = window.DB_SKY_STOPS ? window.DB_SKY_STOPS(Object.fromEntries(Object.keys(t).filter((k) => k.indexOf("summer_sunG") === 0).map((k) => [k.slice(7), t[k]]))) : "";
+  const k = (i, x) => "summer_sunG" + i + x;
+  return (<>
+    <TweakRow label="Sky gradient (sun → edge)">
+      <div className="sky-bar" style={{ background: "linear-gradient(90deg," + stops + ")" }}>
+        {Array.from({ length: n }, (_, j) => <i key={j} style={{ left: t[k(j + 1, "P")] + "%" }} />)}
+      </div>
+    </TweakRow>
+    <TweakSlider label="Color stops" value={n} min={2} max={8} step={1} onChange={(v) => setTweak("summer_sunGN", v)} />
+    {Array.from({ length: n }, (_, j) => { const i = j + 1, c = t[k(i, "C")]; return (
+      <div className="sky-stop" key={i}>
+        <BrandColorPicker label={"Stop " + i} value={c} onChange={(v) => setTweak(k(i, "C"), v)} />
+        <TweakSlider label="Strength (over white)" value={t[k(i, "M")]} min={0} max={100} step={1} unit="%" onChange={(v) => setTweak(k(i, "M"), v)} />
+        <TweakSlider label="Position" value={t[k(i, "P")]} min={0} max={100} step={1} unit="%" onChange={(v) => setTweak(k(i, "P"), v)} />
+      </div>); })}
+  </>);
+}
+/* Spring background editor: every brand color in the design system (corporate neutrals, then the variable palette's
+   8 hues x 7 values). Each stop is a color, its strength over the ground color and its position from the glow's center
+   (0%) out to the edge (100%). */
+const BRAND_NEUTRALS = ["white", "pearl", "dove", "granite", "sand", "clay", "charcoal", "black"];
+const BRAND_HUES = ["red", "orange", "yellow", "green", "teal", "blue", "purple", "pink"];
+const BRAND_VALUES = [100, 200, 300, 400, 500, 600, 700];
+function BrandColorPicker({ label, value, onChange }) {
+  const [open, setOpen] = React.useState(false);
+  const sw = (o) => <button key={o} type="button" role="radio" aria-checked={o === value} aria-label={skyName(o)} title={skyName(o)} data-on={o === value ? "1" : "0"} style={{ background: "var(--db-" + o + ")" }} onClick={() => onChange(o)} />;
+  return (
+    <div className="bc-pick">
+      <button type="button" className="bc-cur" aria-expanded={open} onClick={() => setOpen(!open)}>
+        <i style={{ background: "var(--db-" + value + ")" }} />
+        <span className="bc-lbl">{label}</span>
+        <span className="bc-name">{skyName(value)}</span>
+        <span className="twk-ico" aria-hidden="true">{open ? "expand_less" : "expand_more"}</span>
+      </button>
+      {open && (
+        <div className="bc-grid" role="radiogroup" aria-label={label + " color"}>
+          <div className="sky-sw bc-n">{BRAND_NEUTRALS.map(sw)}</div>
+          <div className="sky-sw bc-h">{BRAND_HUES.map((h) => BRAND_VALUES.map((v) => sw(h + "-" + v)))}</div>
+        </div>
+      )}
+    </div>
+  );
+}
+/* Shape of a banner's radial background: Scale, Roundness (0% = stretched to the banner's proportions, as built;
+   100% = a circle; more = taller than wide) and the glow's center. Keys "<season>_bgS/R/Y". */
+function BgShape({ t, setTweak, season }) {
+  const k = (x) => season + "_bg" + x;
+  return (<>
+    <TweakSlider label="Scale" value={t[k("S")]} min={30} max={300} step={5} unit="%" onChange={(v) => setTweak(k("S"), v)} />
+    <TweakSlider label="Roundness (stretched → circle)" value={t[k("R")]} min={0} max={200} step={5} unit="%" onChange={(v) => setTweak(k("R"), v)} />
+    <TweakSlider label="Glow center (from top)" value={t[k("Y")]} min={0} max={200} step={1} unit="%" onChange={(v) => setTweak(k("Y"), v)} />
+  </>);
+}
+/* Background editor for fall, winter and spring (keys "<season>_bg..."): shape, a ground color and its opacity, and up to 8
+   stops, each a brand color, its strength over the ground and its position from the glow's center (0%) out to the edge. */
+function BgStops({ t, setTweak, season }) {
+  const pre = season + "_bg";
+  const n = Math.max(2, Math.min(8, t[pre + "N"] | 0));
+  const k = (i, x) => pre + i + x;
+  const stops = window.DB_BG_STOPS ? window.DB_BG_STOPS(Object.fromEntries(Object.keys(t).filter((x) => x.indexOf(pre) === 0).map((x) => [x.slice(season.length + 1), t[x]]))) : "";
+  return (<>
+    <TweakRow label="Gradient (center → edge)">
+      <div className="sky-bar" style={{ background: "linear-gradient(90deg," + stops + "), #fff" }}>
+        {Array.from({ length: n }, (_, j) => <i key={j} style={{ left: t[k(j + 1, "P")] + "%" }} />)}
+      </div>
+    </TweakRow>
+    <BgShape t={t} setTweak={setTweak} season={season} />
+    <TweakSection label="Colors" />
+    <BrandColorPicker label="Ground" value={t[pre + "G"]} onChange={(v) => setTweak(pre + "G", v)} />
+    <TweakSlider label="Ground opacity" value={t[pre + "O"]} min={0} max={100} step={1} unit="%" onChange={(v) => setTweak(pre + "O", v)} />
+    <TweakSlider label="Color stops" value={n} min={2} max={8} step={1} onChange={(v) => setTweak(pre + "N", v)} />
+    {Array.from({ length: n }, (_, j) => { const i = j + 1; return (
+      <div className="sky-stop" key={i}>
+        <BrandColorPicker label={"Stop " + i} value={t[k(i, "C")]} onChange={(v) => setTweak(k(i, "C"), v)} />
+        <TweakSlider label="Strength (over the ground)" value={t[k(i, "M")]} min={0} max={100} step={1} unit="%" onChange={(v) => setTweak(k(i, "M"), v)} />
+        <TweakSlider label="Position" value={t[k(i, "P")]} min={0} max={100} step={1} unit="%" onChange={(v) => setTweak(k(i, "P"), v)} />
+      </div>); })}
+  </>);
+}
 function SubsTweaks() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  React.useEffect(() => { window.DB_SUBS = t; window.dispatchEvent(new CustomEvent("db-subs", { detail: t })); }, [t.platinum, t.bookshelf, t.bspPlan]);
+  /* Seasonal banner (the Clearance banner in src/plp.js): one set of motif settings per season (keys "<season>_leaf..."). The
+     chosen season's set goes to the banner as a db-leaves event, under the plain leaf... names plp.js reads. */
+  const SEASONS = ["fall", "winter", "spring", "summer"];
+  const season = SEASONS.indexOf(t.season) > -1 ? t.season : "fall";
+  const leafKeys = Object.keys(TWEAK_DEFAULTS).filter((k) => k.indexOf("fall_leaf") === 0).map((k) => k.slice(5));
+  const K = (k) => season + "_" + k;
+  const leafVals = [season, t.motion !== false].concat(leafKeys.map((k) => t[K(k)]));
+  /* Summer's sunrise has its own settings (keys "summer_sun..."), sent along under the plain sun... names. */
+  const sunKeys = Object.keys(TWEAK_DEFAULTS).filter((k) => k.indexOf("summer_sun") === 0).map((k) => k.slice(7));
+  sunKeys.forEach((k) => leafVals.push(t["summer_" + k]));
+  /* Spring's background gradient has its own settings (keys "spring_bg..."), sent along under the plain bg... names. */
+  /* Each season's background (keys "<season>_bg..."; summer has only its shape, bgS/R/Y, beside its sky), sent under the plain bg... names. */
+  const bgKeys = Object.keys(TWEAK_DEFAULTS).filter((k) => k.indexOf(season + "_bg") === 0).map((k) => k.slice(season.length + 1));
+  bgKeys.forEach((k) => leafVals.push(t[K(k)]));
+  leafVals.push(bgKeys.length);
+  React.useEffect(() => { const d = { season, motion: t.motion !== false }; leafKeys.forEach((k) => { d[k] = t[K(k)]; }); sunKeys.forEach((k) => { d[k] = t["summer_" + k]; }); bgKeys.forEach((k) => { d[k] = t[K(k)]; }); window.DB_LEAVES = d; window.dispatchEvent(new CustomEvent("db-leaves", { detail: d })); }, leafVals);
+  const leafReset = () => { const d = {}; (season === "summer" ? sunKeys : leafKeys).concat(bgKeys).forEach((k) => { d[K(k)] = TWEAK_DEFAULTS[K(k)]; }); setTweak(d); };
+  const [fcol, setFcol] = React.useState(() => window.DB_FRONT_COLORS || null);
+  React.useEffect(() => { const on = (e) => setFcol(e.detail); window.addEventListener("db-front-colors", on); return () => window.removeEventListener("db-front-colors", on); }, []);
+  const S = (key, label, min, max, step, unit) => <TweakSlider label={label} value={t[K(key)]} min={min} max={max} step={step || 1} unit={unit || ""} onChange={(v) => setTweak(K(key), v)} />;
+  const on = season === "summer" ? t.summer_sunOn : t[K("leafOn")];
+  const NOUN = { fall: "leaves", winter: "snowflakes", spring: "petals", summer: "fireflies" }[season];
+  const PALETTES = {
+    fall: [{ value: "all", label: "Yellows, oranges and reds" }, { value: "yellows", label: "Yellows" }, { value: "oranges", label: "Oranges" }, { value: "reds", label: "Reds" }],
+    winter: [{ value: "all", label: "Gradient: white, Dove and Blue 100" }],
+    spring: [{ value: "all", label: "Pinks and whites" }, { value: "pinks", label: "Pinks" }, { value: "whites", label: "Whites" }],
+    summer: [{ value: "all", label: "Yellows and greens" }, { value: "yellows", label: "Yellows" }, { value: "greens", label: "Greens" }]
+  }[season];
+  /* Presentation: Phone and Tablet show the site in a device frame (src/presentation.js); Desktop is the page itself. */
+  React.useEffect(() => { const d = { viewport: t.viewport || "desktop" }; window.DB_PRESENT = d; window.dispatchEvent(new CustomEvent("db-present", { detail: d })); }, [t.viewport]);
+  React.useEffect(() => { window.DB_SUBS = t; window.dispatchEvent(new CustomEvent("db-subs", { detail: t })); }, [t.platinum, t.bookshelf, t.bspPlan, t.bspScenario]);
   return (
     <TweaksPanel>
-      <TweakSection label="Subscriptions" />
-      <TweakToggle label="Platinum Rewards member" value={t.platinum} onChange={(v) => setTweak("platinum", v)} />
-      <TweakToggle label="Bookshelf+ subscriber" value={t.bookshelf} onChange={(v) => setTweak("bookshelf", v)} />
-      <TweakRadio label="Bookshelf+ plan" value={t.bspPlan} options={["monthly", "yearly"]} onChange={(v) => setTweak("bspPlan", v)} />
+      {/* Presentation viewport at the top level, as icons (it was the only control in its own menu). */}
+      <TweakRadio label="Presentation" value={t.viewport || "desktop"} options={[{ value: "phone", label: "Phone", icon: "smartphone" }, { value: "tablet", label: "Tablet", icon: "tablet" }, { value: "desktop", label: "Desktop", icon: "desktop_windows" }]} onChange={(v) => setTweak("viewport", v)} />
+      <TweakLevel id="subs" label="Subscriptions" summary={[t.platinum && "Platinum", t.bookshelf && "Bookshelf+ " + t.bspPlan].filter(Boolean).join(" \u00b7 ") || "None"}>
+        <TweakToggle label="Platinum Rewards member" value={t.platinum} onChange={(v) => setTweak("platinum", v)} />
+        <TweakLevel id="bsp" label="Bookshelf+" summary={t.bookshelf ? t.bspPlan + " \u00b7 " + { standard: "billed", trial: "trial", gift: "gift" }[t.bspScenario] : "Not subscribed"}>
+          <TweakToggle label="Bookshelf+ subscriber" value={t.bookshelf} onChange={(v) => setTweak("bookshelf", v)} />
+          <TweakRadio label="Bookshelf+ plan" value={t.bspPlan} options={["monthly", "yearly"]} onChange={(v) => setTweak("bspPlan", v)} />
+          <TweakSelect label="Bookshelf+ billing" value={t.bspScenario} options={[{ value: "standard", label: "Billed on deseretbook.com" }, { value: "trial", label: "In free trial" }, { value: "gift", label: "Gift (doesn\u2019t renew)" }]} onChange={(v) => setTweak("bspScenario", v)} />
+        </TweakLevel>
+      </TweakLevel>
+      <TweakLevel id="season" label="Seasonal banner" summary={season.charAt(0).toUpperCase() + season.slice(1) + (on ? "" : " \u00b7 off")}>
+        {/* Season switch (icons) first, then Animations: one switch for every season at once. */}
+        <TweakRadio label="Season" value={season} options={[{ value: "fall", label: "Fall", icon: "eco" }, { value: "winter", label: "Winter", icon: "ac_unit" }, { value: "spring", label: "Spring", icon: "local_florist" }, { value: "summer", label: "Summer", icon: "sunny" }]} onChange={(v) => setTweak("season", v)} />
+        <TweakToggle label="Animations" value={t.motion !== false} onChange={(v) => setTweak("motion", v)} />
+        {season === "summer" ? (<>
+          <TweakToggle label="Show the sun" value={t.summer_sunOn} onChange={(v) => setTweak("summer_sunOn", v)} />
+          <TweakLevel id="sun" label="Sun" summary={t.summer_sunSize + "%"}>
+            {S("sunSize", "Sun size", 40, 200, 5, "%")}
+            {S("sunGlow", "Glow strength", 0, 150, 5, "%")}
+            <TweakSection label="Haloes" />
+            {S("sunHalos", "Haloes", 0, 8, 1)}
+            {S("sunSpeed", "Halo speed", 25, 300, 5, "%")}
+            <TweakSection label="Rays" />
+            {S("sunRays", "Rays", 0, 100, 5, "%")}
+            {S("sunRayCount", "Ray count", 4, 60, 1)}
+          </TweakLevel>
+          <TweakLevel id="sky" label="Sky" summary={t.summer_sunGN + " stops"}>
+            {S("sunSky", "Sky gradient height", 60, 320, 5, "%")}
+            <BgShape t={t} setTweak={setTweak} season="summer" />
+            <SkyStops t={t} setTweak={setTweak} />
+          </TweakLevel>
+          {S("sunBlur", "Blur (over everything)", 0, 40, 1, "px")}
+        </>) : (<>
+          <TweakToggle label={"Show " + NOUN} value={t[K("leafOn")]} onChange={(v) => setTweak(K("leafOn"), v)} />
+          <TweakLevel id="motif" label={NOUN.charAt(0).toUpperCase() + NOUN.slice(1)} summary={(t[K("leafFar")] + t[K("leafMid")] + t[K("leafNear")]) + " \u00b7 " + t[K("leafSize")] + "%"}>
+            <TweakSection label="How many" />
+            {S("leafFar", "Far " + NOUN, 0, 10)}
+            {S("leafMid", "Middle " + NOUN, 0, 8)}
+            {S("leafNear", "Near " + NOUN, 0, 6)}
+            <TweakSection label="Look" />
+            {S("leafSize", "Size", 25, 200, 5, "%")}
+            {S("leafPhone", "Size on phones", 20, 100, 5, "%")}
+            <TweakSelect label="Colors" value={t[K("leafPalette")]} options={PALETTES} onChange={(v) => setTweak(K("leafPalette"), v)} />
+            {S("leafOpacity", "Opacity", 10, 150, 5, "%")}
+            {S("leafGlint", "Glimmer (flash in the sun)", 0, 300, 5, "%")}
+          </TweakLevel>
+          <TweakLevel id="motion" label="Motion" summary={t[K("leafSpeed")] + "% speed"}>
+            {S("leafSpeed", "Speed", 25, 300, 5, "%")}
+            {S("leafDrift", "Drift (sideways)", 0, 100, 1, "% width")}
+            {S("leafSway", "Sway (wind, back and forth)", 0, 100, 1, "%")}
+            {S("leafThick", "Thickness (thick at the center, sharp edges)", 0, 100, 1, "%")}
+            {S("leafShadow", "Shadow (distant and soft)", 0, 100, 1, "%")}
+            <TweakSection label="Spin per pass" />
+            {S("leafSpinX", "X rotation amount (per pass)", 0, 720, 5, "\u00b0")}
+            {S("leafSpinY", "Y rotation amount (per pass)", 0, 720, 5, "\u00b0")}
+            {S("leafSpinZ", "Z rotation amount (per pass)", 0, 720, 5, "\u00b0")}
+          </TweakLevel>
+          {season === "fall" && <TweakLevel id="front" label="Leaves in front of the text" summary={t.fall_leafFront1 + "% \u00b7 " + t.fall_leafFront2 + "%"}>
+            <TweakTimeline label="One whole cycle" lanes={[{ key: "leafFront1", label: "Leaf 1", value: t.fall_leafFront1, color: (fcol && fcol[0]) || "#ebbc4e" }, { key: "leafFront2", label: "Leaf 2", value: t.fall_leafFront2, color: (fcol && fcol[1]) || "#af4904" }]} onChange={(k, v) => setTweak(K(k), v)} />
+          </TweakLevel>}
+          <TweakLevel id="rotation" label="Rotation">
+            {S("leafRotX", "X rotation (tilt back)", -80, 80, 1, "\u00b0")}
+            {S("leafRotXVar", "X rotation spread", 0, 90, 1, "\u00b0")}
+            {S("leafRotY", "Y rotation (turn sideways)", -80, 80, 1, "\u00b0")}
+            {S("leafRotYVar", "Y rotation spread", 0, 90, 1, "\u00b0")}
+            {S("leafRotZ", "Z rotation (spin)", -180, 180, 1, "\u00b0")}
+            {S("leafRotZVar", "Z rotation spread", 0, 180, 1, "\u00b0")}
+          </TweakLevel>
+          {season !== "winter" && (
+          /* winter's snowflakes stay flat (no curls); their glass mesh has a fixed detail */
+          <TweakLevel id="curl" label="Curl and detail" summary={t[K("leafCurlDir")]}>
+            {S("leafCurl", "Curl across (width)", 0, 250, 5, "%")}
+            {S("leafCurl2", "Curl along (length)", 0, 250, 5, "%")}
+            {S("leafCurl3", "Curl diagonal", 0, 250, 5, "%")}
+            <TweakRadio label="Curl direction" value={t[K("leafCurlDir")]} options={["mixed", "toward", "away"]} onChange={(v) => setTweak(K("leafCurlDir"), v)} />
+            <TweakSection label="Detail" />
+            {S("leafCols", "Detail across (columns)", 4, 80, 2)}
+            {S("leafRows", "Detail along (rows)", 2, 80, 2)}
+          </TweakLevel>
+          )}
+          <TweakLevel id="focus" label="Focus and blur" summary={t[K("leafSoft")] ? "All soft" : t[K("leafBlur")] + "%"}>
+            {S("leafBlur", "Depth of field (blur)", 0, 300, 5, "%")}
+            {S("leafFocus", "Focus shift speed", 25, 300, 5, "%")}
+            <TweakToggle label="All out of focus" value={t[K("leafSoft")]} onChange={(v) => setTweak(K("leafSoft"), v)} />
+            {S("leafSoftAmt", "Out-of-focus blur", 1, 30, 1, "px")}
+          </TweakLevel>
+          <TweakLevel id="layout" label="Layout" summary={"Seed " + t[K("leafSeed")]}>
+            <TweakToggle label={"Keep near " + NOUN + " off the text"} value={t[K("leafClear")]} onChange={(v) => setTweak(K("leafClear"), v)} />
+            <TweakNumber label="Layout seed" value={t[K("leafSeed")]} min={1} max={999} step={1} onChange={(v) => setTweak(K("leafSeed"), v)} />
+            <TweakButton label="Shuffle layout" secondary onClick={() => setTweak(K("leafSeed"), 1 + Math.floor(Math.random() * 999))} />
+          </TweakLevel>
+          <TweakLevel id="background" label="Background" summary={skyName(t[K("bg1C")]) + " \u2192 " + skyName(t[K("bgG")])}>
+            <BgStops t={t} setTweak={setTweak} season={season} />
+          </TweakLevel>
+        </>)}
+        <TweakButton label={"Reset " + season} secondary onClick={leafReset} />
+      </TweakLevel>
     </TweaksPanel>
   );
 }
-ReactDOM.createRoot(document.getElementById("tweaks-root")).render(<SubsTweaks />);
+if (!window.DB_FRAME) ReactDOM.createRoot(document.getElementById("tweaks-root")).render(<SubsTweaks />);
 </script>
 </body>
 </html>
+
+</body></html>

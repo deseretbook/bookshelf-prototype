@@ -1,0 +1,49 @@
+/* Presentation viewports (src/presentation.js): the device stage for Phone and Tablet. */
+.pv-stage{position:fixed;inset:0;z-index:2147483000;overflow:hidden;background:var(--db-dove);opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity var(--db-duration-slow) var(--db-ease-standard),visibility 0s linear var(--db-duration-slow)}
+.pv-stage.on{opacity:1;visibility:visible;pointer-events:auto;transition:opacity var(--db-duration-slow) var(--db-ease-standard),visibility 0s}
+/* No will-change on the device: on Retina screens it keeps the page from being clipped to the screen's rounded corners. */
+/* The device: a Charcoal body (phone: the screen's corners have a 60pt radius, the body 12pt larger) around the screen, scaled down (--pv-k) only when the window is too small to show it whole. */
+.pv-dev{--pv-w:393px;--pv-h:852px;--pv-b:12px;--pv-r:72px;box-sizing:content-box;width:var(--pv-w);height:var(--pv-h);padding:var(--pv-b);border-radius:var(--pv-r);
+  position:absolute;left:50%;top:50%;background:var(--db-charcoal);box-shadow:var(--db-shadow-lg);transform:translate(-50%,-50%) scale(var(--pv-k,1));transform-origin:center;isolation:isolate;
+  transition:width var(--db-duration-slow) var(--db-ease-standard),height var(--db-duration-slow) var(--db-ease-standard),padding var(--db-duration-slow) var(--db-ease-standard),border-radius var(--db-duration-slow) var(--db-ease-standard),transform var(--db-duration-slow) var(--db-ease-standard)}
+.pv-stage[data-dev="tablet"] .pv-dev{--pv-w:744px;--pv-h:1133px;--pv-b:16px;--pv-r:40px}
+.pv-screen{position:relative;width:100%;height:100%;overflow:hidden;border-radius:calc(var(--pv-r) - var(--pv-b));background:var(--db-white);
+  transition:border-radius var(--db-duration-slow) var(--db-ease-standard)}
+/* The page fills the screen below the top safe area (--pv-st); Safari's controls float over its bottom edge. */
+.pv-scr{position:absolute;left:0;right:0;top:var(--pv-st,0px);bottom:0;width:100%;height:calc(100% - var(--pv-st,0px));border:0;display:block;background:var(--db-white);border-radius:0 0 calc(var(--pv-r) - var(--pv-b)) calc(var(--pv-r) - var(--pv-b));
+  transition:top var(--db-duration-slow) var(--db-ease-standard),height var(--db-duration-slow) var(--db-ease-standard)}
+
+/* iPhone (iPhone 16, 393 x 852 points): Apple's portrait safe areas are 59pt at the top (status bar and Dynamic Island)
+   and 34pt at the bottom (home indicator). Device chrome uses the system font, like iOS; it isn't site type. */
+.pv-stage[data-dev="phone"] .pv-dev{--pv-st:59px;--pv-sb:34px}
+.pv-sb,.pv-bar,.pv-home{position:absolute;left:0;right:0;z-index:2;pointer-events:none;opacity:0;transition:opacity var(--db-duration-slow) var(--db-ease-standard)}
+.pv-stage[data-dev="phone"] :is(.pv-sb,.pv-bar,.pv-home){opacity:1}
+.pv-sb{top:0;height:59px;display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 50px;box-sizing:border-box;color:var(--db-black);
+  font:600 17px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;letter-spacing:-.02em}
+/* Dynamic Island: 126 x 37pt, 11pt from the top. */
+.pv-island{position:absolute;left:50%;top:11px;width:126px;height:37px;margin-left:-63px;border-radius:var(--db-radius-pill);background:var(--db-black)}
+.pv-ics{display:flex;align-items:center;gap:5px}
+.pv-ic{font-family:'Material Symbols Rounded';font-size:19px;line-height:1;font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 20;font-feature-settings:'liga'}
+.pv-batt{font-size:24px;transform:rotate(90deg)}
+/* Safari's floating controls (iOS 26, compact): a back button, the address field and a more button just above the home
+   indicator. Shapes only, frosted: a see-through white over a background blur, with the Card hairline (Granite at 60%) as its ring. */
+/* 32pt outside the controls on every side: from the screen's left, right and bottom edges. */
+.pv-bar{left:var(--pv-b);right:var(--pv-b);bottom:calc(var(--pv-b) + 32px);height:48px;display:flex;align-items:center;gap:8px;padding:0 32px;box-sizing:border-box}
+.pv-bar>span{height:48px;border-radius:var(--db-radius-pill);background:color-mix(in srgb,var(--db-white) 45%,transparent);
+  -webkit-backdrop-filter:blur(12px) saturate(1.4);backdrop-filter:blur(12px) saturate(1.4);box-shadow:0 0 0 1px color-mix(in srgb,var(--db-granite) 60%,transparent),var(--db-shadow-md)}
+.pv-btn{flex:0 0 48px}
+.pv-url{flex:1 1 auto}
+/* Home indicator: 134 x 5pt, 8pt from the bottom, in the bottom safe area. */
+.pv-home{left:50%;right:auto;bottom:calc(var(--pv-b) + 8px);width:134px;height:5px;margin-left:-67px;border-radius:var(--db-radius-pill);background:var(--db-black)}
+/* The screen's rounded corners, drawn by the body: a ring in the body color over the screen's corners, so they stay
+   round even where the browser composites the page or the blur past its rounded clip. The body clips the ring. */
+.pv-dev{overflow:hidden}
+.pv-mask{position:absolute;inset:var(--pv-b);z-index:1;pointer-events:none;border-radius:calc(var(--pv-r) - var(--pv-b));box-shadow:0 0 0 32px var(--db-charcoal);
+  transition:inset var(--db-duration-slow) var(--db-ease-standard),border-radius var(--db-duration-slow) var(--db-ease-standard)}
+/* While a device shows, the page behind it holds still. */
+html.pv-on{overflow:hidden}
+html.pv-on #root{visibility:hidden}
+/* Inside the device: no scrollbar, like the real thing. */
+html.pv-in-frame{scrollbar-width:none}
+html.pv-in-frame::-webkit-scrollbar{display:none}

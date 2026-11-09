@@ -1,0 +1,55 @@
+html:not(#_):not(#_) .ftr.fx{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:40px var(--pad) 32px;overflow:hidden}
+html:not(#_):not(#_) .ftr.fx .ftr-top{padding-bottom:40px}
+html:not(#_):not(#_) .ftr.fx .ftr-top{row-gap:var(--db-space-6)}
+.fx-map{display:flex;flex-direction:column;margin:24px 0}
+.fx-row{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;padding:20px 0}
+.fx-row+.fx-row{box-shadow:0 -1px 0 color-mix(in srgb,var(--db-yellow-500) 30%,transparent)}
+.fx-row:first-child{padding-top:0}
+.fx-row:last-child{padding-bottom:0}
+.fx-k{margin:0;font-family:var(--db-font-sans,'DM Sans',sans-serif);font-weight:400;font-size:11px;line-height:1.5;letter-spacing:.3em;text-transform:uppercase;color:var(--db-clay)}
+.fx-l,.fx-legal{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap}
+.fx-l{gap:10px 28px}
+/* Phones and tablets (below 1024px): each sitemap group is a vertical list, one link per line. */
+@media (max-width:1023px){.fx-l{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:12px}}
+html:not(#_):not(#_):not(#_) .ftr.fx .fx-l a{font-family:var(--db-font-serif);font-size:18px;line-height:1.3;color:var(--db-yellow-600);text-decoration:underline;text-decoration-color:transparent;text-underline-offset:5px;text-decoration-thickness:1px;transition:text-decoration-color 180ms var(--db-ease-standard)}
+html:not(#_):not(#_):not(#_) .ftr.fx .fx-l a:hover{color:var(--db-yellow-600);text-decoration-color:currentColor}
+.fx-base{margin-top:56px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px}
+.fx-copy{font-size:12px;line-height:1.5;color:var(--ink-2)}
+.fx-legal{gap:6px 20px;flex:1 1 auto}
+html:not(#_):not(#_):not(#_) .ftr.fx .fx-legal a{font-size:12px;line-height:1.5;color:var(--ink-2)}
+html:not(#_):not(#_):not(#_) .ftr.fx .fx-legal a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.fx-acts{display:flex;align-items:center;gap:12px;flex:none}
+html:not(#_):not(#_) .ftr.fx .social{margin:0;gap:12px}
+html:not(#_):not(#_):not(#_) .ftr.fx .social a,html:not(#_):not(#_):not(#_) .ftr.fx .social a[style]{width:40px;height:40px;border-radius:var(--db-radius-pill);display:grid;place-items:center;background:var(--db-yellow-600);color:#fff!important;transition:background-color 180ms var(--db-ease-standard),transform 120ms var(--db-ease-standard)}
+html:not(#_):not(#_):not(#_) .ftr.fx .social a:hover{background:var(--db-yellow-700);color:#fff!important}
+html:not(#_):not(#_):not(#_) .ftr.fx .social a:active{transform:scale(.98)}
+html:not(#_):not(#_):not(#_) .ftr.fx .social a *{color:#fff!important}
+@media (min-width:640px){
+html:not(#_):not(#_) .ftr.fx{padding:56px var(--pad) 36px}
+}
+@media (min-width:1024px){
+.fx-row{gap:14px;padding:24px 0}
+}
+@media (min-width:1024px){
+html:not(#_):not(#_) .ftr.fx{padding-top:72px}
+.fx-l{gap:12px 24px}
+html:not(#_):not(#_):not(#_) .ftr.fx .fx-l a{font-size:16px}
+}
+html:not(#_):not(#_):not(#_) .ftr.fx .ftr-store{color:var(--db-yellow-600)!important;box-shadow:inset 0 0 0 1px var(--db-yellow-600)!important;border-color:var(--db-yellow-600)!important}
+html:not(#_):not(#_):not(#_) .ftr.fx .ftr-store *{color:var(--db-yellow-600)!important}
+html:not(#_):not(#_):not(#_) .ftr.fx .ftr-store:hover{color:var(--db-yellow-700)!important;box-shadow:inset 0 0 0 1px var(--db-yellow-700)!important;border-color:var(--db-yellow-700)!important}
+html:not(#_):not(#_):not(#_) .ftr.fx .ftr-store:hover *{color:var(--db-yellow-700)!important}
+/* Phones: newsletter first, then Find my store (fills the row) + social icons */
+@media (max-width:639px){
+html:not(#_):not(#_) .ftr.fx .ftr-top{flex-direction:column;align-items:stretch;gap:var(--db-space-7)}
+html:not(#_):not(#_) .ftr.fx .ftr-top .fx-acts{flex:none;width:100%}
+html:not(#_):not(#_) .ftr.fx .ftr-top .ftr-news{flex:none}
+html:not(#_):not(#_):not(#_) .ftr.fx .ftr-top .ftr-store{flex:1 1 auto;min-width:0}
+html:not(#_):not(#_) .ftr.fx .ftr-top .social{flex:none}
+}
+/* Tablet: the three sitemap groups sit side by side as columns */
+@media (min-width:640px) and (max-width:1023px){
+.fx-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.fx-row,.fx-row:first-child,.fx-row:last-child{padding:0}
+.fx-row+.fx-row{box-shadow:none}
+}
