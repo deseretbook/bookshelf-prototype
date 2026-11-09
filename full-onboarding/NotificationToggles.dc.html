@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Notification Toggles</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/deseret-bookshelf/styles.css">
+<link rel="stylesheet" href="ds/deseret-bookshelf/tokens/fonts.css">
+<link rel="stylesheet" href="ds/deseret-bookshelf/tokens/fig-tokens.css">
+<link rel="stylesheet" href="ds/deseret-bookshelf/tokens/semantic.css">
+<link rel="stylesheet" href="ds/deseret-bookshelf/tokens/typography.css">
+<link rel="stylesheet" href="ds/deseret-bookshelf/tokens/icons.css">
+<script src="ds/deseret-bookshelf/_ds_bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body { margin: 0; font-family: -apple-system, 'SF Pro Text', 'Inter', system-ui, sans-serif; }
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #fff; display: flex; flex-direction: column; position: relative;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 24px 0; font-size: 15px; font-weight: 600; color: #1c1c1e;">
+    <span>9:41</span>
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <svg width="17" height="12" viewBox="0 0 17 12"><path d="M15.5 0.5h-1c-0.28 0-0.5 0.22-0.5 0.5v10c0 0.28 0.22 0.5 0.5 0.5h1c0.28 0 0.5-0.22 0.5-0.5V1c0-0.28-0.22-0.5-0.5-0.5z" fill="#1c1c1e"></path><path d="M11.5 2.5h-1c-0.28 0-0.5 0.22-0.5 0.5v8c0 0.28 0.22 0.5 0.5 0.5h1c0.28 0 0.5-0.22 0.5-0.5V3c0-0.28-0.22-0.5-0.5-0.5z" fill="#1c1c1e"></path><path d="M7.5 4.5h-1c-0.28 0-0.5 0.22-0.5 0.5v6c0 0.28 0.22 0.5 0.5 0.5h1c0.28 0 0.5-0.22 0.5-0.5V5c0-0.28-0.22-0.5-0.5-0.5z" fill="#1c1c1e"></path><path d="M3.5 6.5h-1c-0.28 0-0.5 0.22-0.5 0.5v4c0 0.28 0.22 0.5 0.5 0.5h1c0.28 0 0.5-0.22 0.5-0.5V7c0-0.28-0.22-0.5-0.5-0.5z" fill="#1c1c1e"></path></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 3.6c1.8 0 3.4 0.7 4.6 1.9l1.4-1.4C12.2 2.3 10.2 1.4 8 1.4S3.8 2.3 2 4.1l1.4 1.4C4.6 4.3 6.2 3.6 8 3.6z" fill="#1c1c1e"></path><path d="M8 7.2c1 0 2 0.4 2.7 1.1l1.4-1.4C10.8 5.6 9.5 5 8 5s-2.8 0.6-4.1 1.9l1.4 1.4C6 7.6 7 7.2 8 7.2z" fill="#1c1c1e"></path><circle cx="8" cy="10.5" r="1.5" fill="#1c1c1e"></circle></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2" stroke="#1c1c1e" stroke-width="1" fill="none"></rect><rect x="2" y="3" width="16" height="6" rx="1" fill="#1c1c1e"></rect><path d="M23 4.5v3c0.8-0.3 1.3-1 1.3-1.5s-0.5-1.2-1.3-1.5z" fill="#1c1c1e"></path></svg>
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 16px 8px;">
+    <a href="PushPermission-8eur.dc.html" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+      <svg width="12" height="20" viewBox="0 0 12 20" fill="none"><path d="M10 2L2 10l8 8" stroke="var(--brand, #0C958B)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </a>
+    <a href="Subscription-77kp.dc.html" style="font-size: 16px; font-weight: 500; color: #8e8e93; text-decoration: none; padding: 8px 0;">Skip</a>
+  </div>
+
+  <div style="display: flex; gap: 4px; padding: 0 24px 16px;">
+    <div style="flex: 1; height: 4px; border-radius: 2px; background: var(--brand, #0C958B);"></div>
+    <div style="flex: 1; height: 4px; border-radius: 2px; background: var(--brand, #0C958B);"></div>
+  </div>
+
+  <div style="padding: 0 24px 8px;">
+    <h1 style="margin: 0 0 8px; font-size: 28px; font-weight: 700; color: #1c1c1e; letter-spacing: -0.4px;">Stay in the Loop</h1>
+    <p style="margin: 0; font-size: 15px; color: #8e8e93; line-height: 1.5;">Choose what's worth a notification. You can change this anytime in settings.</p>
+  </div>
+
+  <div style="flex: 1; overflow-y: auto; padding: 8px 0 0;">
+
+    <div style="padding: 4px 16px 10px;">
+      <div style="font-size: 13px; font-weight: 600; color: #8e8e93; text-transform: uppercase; letter-spacing: 0.5px;">Push Notifications</div>
+    </div>
+
+    <div style="margin: 0 16px 12px; background: #fff; border-radius: 12px; border: 0.5px solid rgba(60,60,67,0.12); overflow: hidden;">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px;">
+        <div style="flex: 1; margin-right: 12px;">
+          <div style="font-size: 16px; font-weight: 400; color: #1c1c1e">Personalized Recommendations</div>
+          <div style="font-size: 13px; color: #8e8e93; line-height: 1.4;">Occasional picks based on what you love.</div>
+        </div>
+        <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Toggle" checked="{{recsChecked}}" onChange="{{toggleRecs}}" tint="var(--brand, #0C958B)"></x-import>
+      </div>
+    </div>
+
+    <div style="margin: 0 16px 12px; background: #fff; border-radius: 12px; border: 0.5px solid rgba(60,60,67,0.12); overflow: hidden;">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px;">
+        <div style="flex: 1; margin-right: 12px;">
+          <div style="font-size: 16px; font-weight: 400; color: #1c1c1e">New Releases</div>
+          <div style="font-size: 13px; color: #8e8e93; line-height: 1.4;">Be the first to know when a favorite author drops something new.</div>
+        </div>
+        <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Toggle" checked="{{releasesChecked}}" onChange="{{toggleReleases}}" tint="var(--brand, #0C958B)"></x-import>
+      </div>
+    </div>
+
+    <div style="margin: 0 16px 12px; background: #fff; border-radius: 12px; border: 0.5px solid rgba(60,60,67,0.12); overflow: hidden;">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px;">
+        <div style="flex: 1; margin-right: 12px;">
+          <div style="font-size: 16px; font-weight: 400; color: #1c1c1e">New Episodes &amp; Classes</div>
+          <div style="font-size: 13px; color: #8e8e93; line-height: 1.4;">Get notified when podcasts or classes you follow release new content.</div>
+        </div>
+        <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Toggle" checked="{{episodesChecked}}" onChange="{{toggleEpisodes}}" tint="var(--brand, #0C958B)"></x-import>
+      </div>
+    </div>
+
+    <div style="margin: 0 16px 12px; background: #fff; border-radius: 12px; border: 0.5px solid rgba(60,60,67,0.12); overflow: hidden;">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px;">
+        <div style="flex: 1; margin-right: 12px;">
+          <div style="font-size: 16px; font-weight: 400; color: #1c1c1e">Daily Quote or Verse</div>
+          <div style="font-size: 13px; color: #8e8e93; line-height: 1.4;">A short moment of inspiration, delivered once a day.</div>
+        </div>
+        <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Toggle" checked="{{quoteChecked}}" onChange="{{toggleQuote}}" tint="var(--brand, #0C958B)"></x-import>
+      </div>
+    </div>
+
+    <div style="padding: 12px 16px 10px;">
+      <div style="font-size: 13px; font-weight: 600; color: #8e8e93; text-transform: uppercase; letter-spacing: 0.5px;">More Ways to Stay in Touch</div>
+    </div>
+
+    <div style="margin: 0 16px 12px; background: #fff; border-radius: 12px; border: 0.5px solid rgba(60,60,67,0.12); overflow: hidden;">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px;">
+        <div style="flex: 1; margin-right: 12px;">
+          <div style="font-size: 16px; font-weight: 400; color: #1c1c1e; margin-bottom: 4px">SMS Notifications</div>
+          <sc-if value="{{smsOff}}">
+            <div style="font-size: 13px; color: #8e8e93; line-height: 1.4;">Get texts about roundups and updates. <span onClick="{{openConsent}}" style="color: var(--brand, #0C958B); text-decoration: underline; cursor: pointer;">See Consent Details</span></div>
+          </sc-if>
+          <sc-if value="{{smsEnabled}}">
+            <div style="font-size: 13px; color: #8e8e93; line-height: 1.4;">Texts go to {{phoneDisplay}}. <span onClick="{{openEditPhone}}" style="color: var(--brand, #0C958B); text-decoration: underline; cursor: pointer;">Change Number</span></div>
+          </sc-if>
+        </div>
+        <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Toggle" checked="{{smsEnabled}}" onChange="{{toggleSms}}" tint="var(--brand, #0C958B)"></x-import>
+      </div>
+    </div>
+
+    <div style="margin: 0 16px 12px; background: #fff; border-radius: 12px; border: 0.5px solid rgba(60,60,67,0.12); overflow: hidden;">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px;">
+        <div style="flex: 1; margin-right: 12px;">
+          <div style="font-size: 16px; font-weight: 400; color: #1c1c1e; margin-bottom: 4px">Email Notifications</div>
+          <div style="font-size: 13px; color: #8e8e93; line-height: 1.4;">We'll email you the occasional roundup and updates</div>
+        </div>
+        <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Toggle" checked="{{emailEnabled}}" onChange="{{toggleEmail}}" tint="var(--brand, #0C958B)"></x-import>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="padding: 12px 24px 40px;">
+    <a href="Subscription-77kp.dc.html" style="display: block; width: 100%; height: 50px; border-radius: 25px; background: var(--brand, #0C958B); color: #fff; font-size: 17px; font-weight: 600; text-align: center; line-height: 50px; text-decoration: none;">Continue</a>
+  </div>
+
+  <!-- Consent bottom sheet -->
+  <sc-if value="{{consentVisible}}">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 10; display: flex; flex-direction: column; justify-content: flex-end;">
+      <div style="background: #fff; border-radius: 16px 16px 0 0; box-sizing: border-box;">
+        <div style="display: flex; justify-content: center; padding: 10px 0 0;">
+          <div style="width: 36px; height: 5px; border-radius: 3px; background: #d1d1d6;"></div>
+        </div>
+        <div style="padding: 16px 24px 40px;">
+          <div style="font-size: 20px; font-weight: 700; color: #1c1c1e; margin-bottom: 16px;">Bookshelf+ Text Message Consent</div>
+          <div style="font-size: 14px; color: #1c1c1e; line-height: 1.6; margin-bottom: 12px;">By toggling on, you are providing consent to receive automated recurring marketing text messages from Deseret Book at the mobile number you have provided.</div>
+          <div style="font-size: 14px; color: #1c1c1e; line-height: 1.6; margin-bottom: 12px;">Consent is not required for purchase. Message and data rates may apply.</div>
+          <div style="font-size: 14px; color: #1c1c1e; line-height: 1.6; margin-bottom: 16px;">Message frequency may vary depending on your interactions with us. Text "STOP" to unsubscribe at any time.</div>
+          <div style="margin-bottom: 24px;">
+            <span style="font-size: 14px; color: var(--brand, #0C958B); text-decoration: underline;">Privacy Policy</span>
+            <span style="font-size: 14px; color: #8e8e93;"> · </span>
+            <span style="font-size: 14px; color: var(--brand, #0C958B); text-decoration: underline;">Terms</span>
+          </div>
+          <button onClick="{{allowConsent}}" style="width: 100%; height: 50px; border-radius: 12px; background: var(--brand, #0C958B); font-size: 17px; font-weight: 600; color: #fff; border: none; cursor: pointer; font-family: inherit; margin-bottom: 12px;">Allow</button>
+          <div onClick="{{denyConsent}}" style="text-align: center; padding: 10px; cursor: pointer;">
+            <span style="font-size: 17px; color: #1c1c1e;">Don't Allow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Add Phone bottom sheet -->
+  <sc-if value="{{addPhoneVisible}}">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 10; display: flex; flex-direction: column; justify-content: flex-end;">
+      <div style="background: #fff; border-radius: 16px 16px 0 0; box-sizing: border-box;">
+        <div style="display: flex; justify-content: center; padding: 10px 0 0;">
+          <div style="width: 36px; height: 5px; border-radius: 3px; background: #d1d1d6;"></div>
+        </div>
+        <div style="padding: 16px 24px 40px;">
+          <div style="font-size: 20px; font-weight: 700; color: #1c1c1e; margin-bottom: 8px;">Add Your Mobile Number</div>
+          <div style="font-size: 14px; color: #8e8e93; line-height: 1.5; margin-bottom: 24px;">We don't have a mobile number on your account yet. Add one to get text messages.</div>
+          <div onClick="{{tapPhoneInput}}" style="background: #fff; border: 1px solid #d1d1d6; border-radius: 10px; padding: 14px 16px; margin-bottom: 24px; cursor: pointer;">
+            <sc-if value="{{phoneInputEmpty}}">
+              <span style="font-size: 16px; color: #c7c7cc;">Mobile Number</span>
+            </sc-if>
+            <sc-if value="{{phoneInputFilled}}">
+              <span style="font-size: 16px; color: #1c1c1e;">(801) 555-0134</span>
+            </sc-if>
+          </div>
+          <button onClick="{{submitPhone}}" style="width: 100%; height: 50px; border-radius: 12px; background: {{continueBackground}}; font-size: 17px; font-weight: 600; color: #fff; border: none; cursor: pointer; font-family: inherit; margin-bottom: 12px;">Continue</button>
+          <div onClick="{{cancelAddPhone}}" style="text-align: center; padding: 10px; cursor: pointer;">
+            <span style="font-size: 17px; color: #1c1c1e;">Cancel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Edit Phone bottom sheet -->
+  <sc-if value="{{editPhoneVisible}}">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 10; display: flex; flex-direction: column; justify-content: flex-end;">
+      <div style="background: #fff; border-radius: 16px 16px 0 0; box-sizing: border-box;">
+        <div style="display: flex; justify-content: center; padding: 10px 0 0;">
+          <div style="width: 36px; height: 5px; border-radius: 3px; background: #d1d1d6;"></div>
+        </div>
+        <div style="padding: 16px 24px 40px;">
+          <div style="font-size: 20px; font-weight: 700; color: #1c1c1e; margin-bottom: 24px;">Edit Mobile Number</div>
+          <div style="background: #fff; border: 1px solid #d1d1d6; border-radius: 10px; padding: 14px 16px; margin-bottom: 24px;">
+            <span style="font-size: 16px; color: #1c1c1e;">{{phoneDisplay}}</span>
+          </div>
+          <button onClick="{{submitEditPhone}}" style="width: 100%; height: 50px; border-radius: 12px; background: var(--brand, #0C958B); font-size: 17px; font-weight: 600; color: #fff; border: none; cursor: pointer; font-family: inherit; margin-bottom: 12px;">Continue</button>
+          <div onClick="{{cancelEditPhone}}" style="text-align: center; padding: 10px; cursor: pointer;">
+            <span style="font-size: 17px; color: #1c1c1e;">Cancel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor() {
+    super();
+    this.state = {
+      recs: true,
+      releases: true,
+      episodes: true,
+      quote: true,
+      sms: false,
+      email: false,
+      hasPhone: false,
+      phoneNumber: '(801) 555-0134',
+      showConsent: false,
+      showAddPhone: false,
+      showEditPhone: false,
+      phoneInputFilled: false
+    };
+  }
+  renderVals() {
+    const phoneFilled = this.state.phoneInputFilled;
+    const sms = this.state.sms;
+    return {
+      recsChecked: this.state.recs,
+      releasesChecked: this.state.releases,
+      episodesChecked: this.state.episodes,
+      quoteChecked: this.state.quote,
+      smsEnabled: sms,
+      smsOff: !sms,
+      emailEnabled: this.state.email,
+      phoneDisplay: this.state.phoneNumber,
+      consentVisible: this.state.showConsent,
+      addPhoneVisible: this.state.showAddPhone,
+      editPhoneVisible: this.state.showEditPhone,
+      phoneInputFilled: phoneFilled,
+      phoneInputEmpty: !phoneFilled,
+      continueBackground: phoneFilled ? 'var(--brand, #0C958B)' : 'rgba(12,149,139,0.3)',
+      toggleRecs: (v) => this.setState({ recs: v }),
+      toggleReleases: (v) => this.setState({ releases: v }),
+      toggleEpisodes: (v) => this.setState({ episodes: v }),
+      toggleQuote: (v) => this.setState({ quote: v }),
+      toggleSms: (v) => {
+        if (v) {
+          this.setState({ showConsent: true });
+        } else {
+          this.setState({ sms: false });
+        }
+      },
+      toggleEmail: (v) => this.setState({ email: v }),
+      openConsent: () => this.setState({ showConsent: true }),
+      allowConsent: () => {
+        if (!this.state.hasPhone) {
+          this.setState({ showConsent: false, showAddPhone: true, phoneInputFilled: false });
+        } else {
+          this.setState({ sms: true, showConsent: false });
+        }
+      },
+      denyConsent: () => this.setState({ showConsent: false }),
+      tapPhoneInput: () => this.setState({ phoneInputFilled: true }),
+      submitPhone: () => {
+        if (phoneFilled) {
+          this.setState({ sms: true, hasPhone: true, showAddPhone: false });
+        }
+      },
+      cancelAddPhone: () => this.setState({ showAddPhone: false, phoneInputFilled: false }),
+      openEditPhone: () => this.setState({ showEditPhone: true }),
+      submitEditPhone: () => this.setState({ showEditPhone: false }),
+      cancelEditPhone: () => this.setState({ showEditPhone: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

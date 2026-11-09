@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Create Account</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/deseret-bookshelf/styles.css">
+<link rel="stylesheet" href="ds/deseret-bookshelf/tokens/fonts.css">
+<link rel="stylesheet" href="ds/deseret-bookshelf/tokens/fig-tokens.css">
+<link rel="stylesheet" href="ds/deseret-bookshelf/tokens/semantic.css">
+<link rel="stylesheet" href="ds/deseret-bookshelf/tokens/typography.css">
+<link rel="stylesheet" href="ds/deseret-bookshelf/tokens/icons.css">
+<script src="ds/deseret-bookshelf/_ds_bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body { margin: 0; font-family: -apple-system, 'SF Pro Text', 'Inter', system-ui, sans-serif; }
+a { color: var(--brand, #0C958B); text-decoration: none; }
+a:hover { color: #0a7d75; }
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #fff; display: flex; flex-direction: column; overflow-y: auto; position: relative;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 24px 0; font-size: 15px; font-weight: 600; color: #1c1c1e;">
+    <span>9:41</span>
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <svg width="17" height="12" viewBox="0 0 17 12"><path d="M15.5 0.5h-1c-0.28 0-0.5 0.22-0.5 0.5v10c0 0.28 0.22 0.5 0.5 0.5h1c0.28 0 0.5-0.22 0.5-0.5V1c0-0.28-0.22-0.5-0.5-0.5z" fill="#1c1c1e"></path><path d="M11.5 2.5h-1c-0.28 0-0.5 0.22-0.5 0.5v8c0 0.28 0.22 0.5 0.5 0.5h1c0.28 0 0.5-0.22 0.5-0.5V3c0-0.28-0.22-0.5-0.5-0.5z" fill="#1c1c1e"></path><path d="M7.5 4.5h-1c-0.28 0-0.5 0.22-0.5 0.5v6c0 0.28 0.22 0.5 0.5 0.5h1c0.28 0 0.5-0.22 0.5-0.5V5c0-0.28-0.22-0.5-0.5-0.5z" fill="#1c1c1e"></path><path d="M3.5 6.5h-1c-0.28 0-0.5 0.22-0.5 0.5v4c0 0.28 0.22 0.5 0.5 0.5h1c0.28 0 0.5-0.22 0.5-0.5V7c0-0.28-0.22-0.5-0.5-0.5z" fill="#1c1c1e"></path></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 3.6c1.8 0 3.4 0.7 4.6 1.9l1.4-1.4C12.2 2.3 10.2 1.4 8 1.4S3.8 2.3 2 4.1l1.4 1.4C4.6 4.3 6.2 3.6 8 3.6z" fill="#1c1c1e"></path><path d="M8 7.2c1 0 2 0.4 2.7 1.1l1.4-1.4C10.8 5.6 9.5 5 8 5s-2.8 0.6-4.1 1.9l1.4 1.4C6 7.6 7 7.2 8 7.2z" fill="#1c1c1e"></path><circle cx="8" cy="10.5" r="1.5" fill="#1c1c1e"></circle></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2" stroke="#1c1c1e" stroke-width="1" fill="none"></rect><rect x="2" y="3" width="16" height="6" rx="1" fill="#1c1c1e"></rect><path d="M23 4.5v3c0.8-0.3 1.3-1 1.3-1.5s-0.5-1.2-1.3-1.5z" fill="#1c1c1e"></path></svg>
+    </div>
+  </div>
+
+  <div style="flex: 1; padding: 0 24px 24px; display: flex; flex-direction: column; gap: 0;">
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px 0 12px;">
+      <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--brand, #0C958B); display: flex; align-items: center; justify-content: center;">
+        <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="menu_book" size="{{iconSize}}" color="#fff" fill="{{yes}}"></x-import>
+      </div>
+      <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.2px; color: #1c1c1e;">deseret<span style="color: var(--brand, #0C958B);">bookshelf</span></span>
+    </div>
+
+    <p style="margin: 0 0 16px; font-size: 13px; color: #8e8e93; text-align: center; line-height: 1.4;"><span></span><span></span><span style="white-space: pre-wrap">Create an account and receive free eBooks!</span></p>
+
+    <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 16px"><div style="display: flex; gap: 8px; margin-bottom: 8px">
+      <div style="flex: 1; height: 100%; width: 145px">
+        <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.TextField" placeholder="First Name" variant="filled"></x-import>
+      </div>
+      <div style="flex: 1; height: 100%; width: 171px">
+        <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.TextField" placeholder="Last Name" variant="filled"></x-import>
+      </div>
+    </div><div style="margin-bottom: 8px">
+      <button onClick="{{openDatePicker}}" style="width: 100%; height: 44px; border-radius: 10px; border: none; background: rgba(120,120,128,0.12); padding: 0 12px; font-size: 15px; text-align: left; display: flex; align-items: center; cursor: pointer; font-family: inherit;">
+        <sc-if value="{{birthdateSet}}">
+          <span style="color: #1c1c1e;">{{birthdateDisplay}}</span>
+        </sc-if>
+        <sc-if value="{{birthdateEmpty}}">
+          <span style="color: #8e8e93;">Birthdate</span>
+        </sc-if>
+      </button>
+    </div><div style="margin-bottom: 8px">
+      <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.TextField" placeholder="Email Address" type="email" variant="filled"></x-import>
+    </div><div style="margin-bottom: 8px">
+      <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.TextField" placeholder="Phone Number (Optional)" type="tel" variant="filled"></x-import>
+    </div><div style="margin-bottom: 8px">
+      <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.TextField" placeholder="Password" type="password" variant="filled"></x-import>
+    </div><div style="margin-bottom: 8px">
+      <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.TextField" placeholder="Confirm Password" type="password" variant="filled"></x-import>
+    </div><div style="margin-bottom: 16px; position: relative;">
+      <button onClick="{{toggleDropdown}}" style="width: 100%; height: 44px; border-radius: 10px; border: none; background: rgba(120,120,128,0.12); padding: 0 12px; font-size: 15px; color: #8e8e93; text-align: left; display: flex; align-items: center; justify-content: space-between; cursor: pointer; font-family: inherit;">
+        <sc-if value="{{dropdownSelected}}">
+          <span style="color: #1c1c1e;">{{dropdownSelected}}</span>
+        </sc-if>
+        <sc-if value="{{showDropdownPlaceholder}}">
+          <span>How Did You Hear About Us?</span>
+        </sc-if>
+        <x-import component-from-global-scope="DeseretBookshelfDesignSystem_2ad643.Icon" name="expand_more" size="{{smallIcon}}"></x-import>
+      </button>
+      <sc-if value="{{dropdownOpen}}" hint-placeholder-val="{{no}}">
+        <div style="position: absolute; top: 48px; left: 0; right: 0; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.15); z-index: 10; max-height: 240px; overflow-y: auto;">
+          <sc-for list="{{dropdownOptions}}" as="opt">
+            <button onClick="{{opt.select}}" style="width: 100%; padding: 12px 16px; border: none; background: none; font-size: 15px; color: #1c1c1e; text-align: left; cursor: pointer; font-family: inherit; border-bottom: 0.5px solid rgba(60,60,67,0.12);">{{opt.label}}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div></div>
+
+    <a href="Welcome-mpdj.dc.html" style="display: block; width: 100%; height: 50px; border-radius: 25px; background: var(--brand, #0C958B); color: #fff; font-size: 17px; font-weight: 600; text-align: center; line-height: 50px; margin-bottom: 12px;">Create Free Account</a>
+
+    <p style="margin: 0 0 16px; font-size: 11px; color: #8e8e93; text-align: center; line-height: 1.4;">By continuing you agree to Deseret Bookshelf <a href="#" style="font-size: 11px;">Terms of Service</a> and <a href="#" style="font-size: 11px;">Privacy Policy</a></p>
+
+    <p style="margin: 0; font-size: 14px; text-align: center;"><a href="#" style="font-size: 14px;">Already have a Deseret Book account?</a></p>
+
+  </div>
+
+  <!-- Date Picker - Drum/Wheel Style -->
+  <sc-if value="{{datePickerVisible}}">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 50; display: flex; flex-direction: column; justify-content: flex-end;">
+      <div style="background: #fff; border-radius: 16px 16px 0 0; padding: 0 0 34px; display: flex; flex-direction: column;">
+
+        <div style="display: flex; justify-content: center; padding: 10px 0 4px;">
+          <div style="width: 36px; height: 5px; border-radius: 3px; background: rgba(0,0,0,0.15);"></div>
+        </div>
+
+        <div style="padding: 8px 24px 20px;">
+          <span style="font-size: 20px; font-weight: 600; color: #1c1c1e;">Birthdate</span>
+        </div>
+
+        <!-- Wheel picker -->
+        <div style="position: relative; height: 220px; padding: 0 24px;">
+          <!-- Highlight band behind center row -->
+          <div style="position: absolute; top: 88px; left: 24px; right: 24px; height: 44px; background: rgba(120,120,128,0.12); border-radius: 10px; z-index: 0;"></div>
+
+          <div style="display: flex; height: 220px; position: relative; z-index: 1;">
+            <!-- Day column -->
+            <div style="flex: 0.7; display: flex; flex-direction: column;">
+              <sc-for list="{{dayWheel}}" as="item">
+                <button onClick="{{item.select}}" style="height: 44px; border: none; background: none; font-size: {{item.fontSize}}; font-weight: {{item.fontWeight}}; color: {{item.color}}; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; padding: 0; width: 100%;">{{item.label}}</button>
+              </sc-for>
+            </div>
+            <!-- Month column -->
+            <div style="flex: 1.4; display: flex; flex-direction: column;">
+              <sc-for list="{{monthWheel}}" as="item">
+                <button onClick="{{item.select}}" style="height: 44px; border: none; background: none; font-size: {{item.fontSize}}; font-weight: {{item.fontWeight}}; color: {{item.color}}; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; padding: 0; width: 100%;">{{item.label}}</button>
+              </sc-for>
+            </div>
+            <!-- Year column -->
+            <div style="flex: 0.9; display: flex; flex-direction: column;">
+              <sc-for list="{{yearWheel}}" as="item">
+                <button onClick="{{item.select}}" style="height: 44px; border: none; background: none; font-size: {{item.fontSize}}; font-weight: {{item.fontWeight}}; color: {{item.color}}; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; padding: 0; width: 100%;">{{item.label}}</button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <!-- Set button -->
+        <div style="padding: 24px 24px 0;">
+          <button onClick="{{confirmDate}}" style="width: 100%; height: 50px; border-radius: 12px; border: none; background: var(--brand, #0C958B); color: #fff; font-size: 17px; font-weight: 600; cursor: pointer; font-family: inherit;">Set</button>
+        </div>
+
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor() {
+    super();
+    this.state = {
+      dropdownOpen: false,
+      selected: '',
+      datePickerOpen: false,
+      dayIdx: 0,
+      monthIdx: 0,
+      yearIdx: 15,
+      dateConfirmed: false
+    };
+  }
+  renderVals() {
+    const options = [
+      'Deseret Book Store', 'Social Media', 'Blog or Article',
+      'Deseret Book Mobile', 'Social Media Influencer',
+      'Events/Conferences', 'Family/Friends', 'Church Leader', 'Other'
+    ];
+
+    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const allYears = [];
+    for (let y = 2015; y >= 1930; y--) allYears.push(y);
+
+    const di = this.state.dayIdx;
+    const mi = this.state.monthIdx;
+    const yi = this.state.yearIdx;
+    const curYear = allYears[yi] || 2000;
+    const curMonth = mi + 1;
+    const maxDays = new Date(curYear, curMonth, 0).getDate();
+    const safeDi = Math.min(di, maxDays - 1);
+
+    const allDays = [];
+    for (let d = 1; d <= maxDays; d++) allDays.push(d);
+
+    const makeWheel = (items, selIdx, setFn) => {
+      const result = [];
+      for (let off = -2; off <= 2; off++) {
+        const idx = selIdx + off;
+        const abs = Math.abs(off);
+        if (idx >= 0 && idx < items.length) {
+          result.push({
+            label: '' + items[idx],
+            color: off === 0 ? '#1c1c1e' : abs === 1 ? 'rgba(60,60,67,0.4)' : 'rgba(60,60,67,0.18)',
+            fontSize: off === 0 ? '22px' : '17px',
+            fontWeight: off === 0 ? '600' : '400',
+            select: () => setFn(idx)
+          });
+        } else {
+          result.push({
+            label: ' ',
+            color: 'transparent',
+            fontSize: '17px',
+            fontWeight: '400',
+            select: () => {}
+          });
+        }
+      }
+      return result;
+    };
+
+    const confirmed = this.state.dateConfirmed;
+    const displayDay = allDays[safeDi] || 1;
+
+    return {
+      yes: true,
+      no: false,
+      iconSize: 22,
+      smallIcon: 20,
+      dropdownOpen: this.state.dropdownOpen,
+      dropdownSelected: this.state.selected || '',
+      showDropdownPlaceholder: !this.state.selected,
+      toggleDropdown: () => this.setState({ dropdownOpen: !this.state.dropdownOpen }),
+      dropdownOptions: options.map(label => ({
+        label,
+        select: () => this.setState({ selected: label, dropdownOpen: false })
+      })),
+
+      datePickerVisible: this.state.datePickerOpen,
+      birthdateSet: confirmed,
+      birthdateEmpty: !confirmed,
+      birthdateDisplay: confirmed ? String(curMonth).padStart(2, '0') + ' / ' + String(displayDay).padStart(2, '0') + ' / ' + curYear : '',
+      dayWheel: makeWheel(allDays, safeDi, (idx) => this.setState({ dayIdx: idx })),
+      monthWheel: makeWheel(monthNames, mi, (idx) => this.setState({ monthIdx: idx })),
+      yearWheel: makeWheel(allYears, yi, (idx) => this.setState({ yearIdx: idx })),
+      openDatePicker: () => this.setState({ datePickerOpen: true }),
+      closeDatePicker: () => this.setState({ datePickerOpen: false }),
+      confirmDate: () => this.setState({ datePickerOpen: false, dateConfirmed: true, dayIdx: safeDi })
+    };
+  }
+}
+</script>
+</body>
+</html>

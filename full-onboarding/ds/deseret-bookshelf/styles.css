@@ -1,0 +1,7 @@
+/* Deseret Bookshelf+ Design System — global CSS entry point.
+   Consumers link ONLY this file. It is a manifest of @imports; add rules elsewhere. */
+@import './tokens/fonts.css';
+@import './tokens/fig-tokens.css';
+@import './tokens/semantic.css';
+@import './tokens/typography.css';
+@import './tokens/icons.css';
