@@ -183,6 +183,9 @@ def push(a):
 
 def wait(a):
     """Poll until the live copy of a file matches the local one."""
+    if not a.file:  # a file the last deploy changed; index.html may be identical to what is already live
+        changed = sh("git", "diff", "--name-only", "--diff-filter=AM", "HEAD~1", "HEAD", "--", a.slug, cwd=a.repo).splitlines()
+        a.file = changed[0][len(a.slug) + 1:] if changed else "index.html"
     want = open(os.path.join(a.repo, a.slug, a.file), "rb").read()
     url = PAGES + urllib.parse.quote(a.slug + "/" + a.file)
     for i in range(a.tries):
@@ -208,7 +211,7 @@ q.add_argument("--shots")
 p_ = sp.add_parser("push"); p_.add_argument("--slug", default=FOLDER); p_.add_argument("--repo", default=".")
 p_.add_argument("--message", required=True); p_.add_argument("--session")
 w = sp.add_parser("wait"); w.add_argument("--slug", default=FOLDER); w.add_argument("--repo", default=".")
-w.add_argument("--file", default="index.html"); w.add_argument("--tries", type=int, default=40)
+w.add_argument("--file"); w.add_argument("--tries", type=int, default=40)
 w.add_argument("--every", type=int, default=15)
 a = ap.parse_args()
 {"build": build, "qa": qa, "push": push, "wait": wait}[a.cmd](a)
