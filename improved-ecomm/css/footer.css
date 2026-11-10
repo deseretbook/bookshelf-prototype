@@ -1,4 +1,4 @@
-html:not(#_):not(#_) .ftr.fx{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:40px var(--pad) 32px;overflow:hidden}
+html:not(#_):not(#_) .ftr.fx{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:40px max(var(--pad),var(--sa-r)) calc(32px + var(--sa-b) + var(--sa-gap)) max(var(--pad),var(--sa-l));overflow:hidden}
 html:not(#_):not(#_) .ftr.fx .ftr-top{padding-bottom:40px}
 html:not(#_):not(#_) .ftr.fx .ftr-top{row-gap:var(--db-space-6)}
 .fx-map{display:flex;flex-direction:column;margin:24px 0}
@@ -25,7 +25,7 @@ html:not(#_):not(#_):not(#_) .ftr.fx .social a:hover{background:var(--db-yellow-
 html:not(#_):not(#_):not(#_) .ftr.fx .social a:active{transform:scale(.98)}
 html:not(#_):not(#_):not(#_) .ftr.fx .social a *{color:#fff!important}
 @media (min-width:640px){
-html:not(#_):not(#_) .ftr.fx{padding:56px var(--pad) 36px}
+html:not(#_):not(#_) .ftr.fx{padding:56px max(var(--pad),var(--sa-r)) calc(36px + var(--sa-b) + var(--sa-gap)) max(var(--pad),var(--sa-l))}
 }
 @media (min-width:1024px){
 .fx-row{gap:14px;padding:24px 0}

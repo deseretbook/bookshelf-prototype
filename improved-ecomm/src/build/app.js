@@ -4819,7 +4819,8 @@ function App() {
     }
   });else if (BSP_ROUTES[route]) body = /*#__PURE__*/React.createElement(BookshelfPage, {
     key: route,
-    k: BSP_ROUTES[route],
+    /* Platinum pricing only shows when we know the visitor is a Platinum member; everyone else gets the regular page. */
+    k: /-platinum$/.test(BSP_ROUTES[route]) && !(user && subs.platinum) ? BSP_ROUTES[route].replace(/-platinum$/, "") : BSP_ROUTES[route],
     props: route === "#/bookshelf-plus/cancel" ? {
       platinum: subs.platinum,
       plan: subs.bspPlan,

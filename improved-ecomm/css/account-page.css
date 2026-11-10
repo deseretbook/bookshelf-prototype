@@ -30,18 +30,8 @@ html:not(#_) .acp-main>:is(.subs,.page,.plp-h,.grid,main){padding:0!important;ma
 .acp-main .page h1,.acp-main .plp-h h1{font-size:clamp(28px,4vw,40px);line-height:1.2;color:var(--db-charcoal)}
 html:not(#_):not(#_) .acp-main .grid.wl-grid{grid-template-columns:repeat(auto-fill,192px)!important;justify-content:space-between}
 @media (min-width:640px){html:not(#_):not(#_) .acp-main .grid.wl-grid{grid-template-columns:repeat(auto-fill,192px)!important;justify-content:space-between}}
-/* Info pages in the footer (.fp-acp) keep the pill row below 1024px; they are not the account page. */
-@media (max-width:1023px){
-html:not(#_) .fp-acp.acp-side .acp-nav{flex-direction:row;flex-wrap:nowrap;gap:8px;overflow-x:auto;margin:4px -20px 20px;padding:1px 20px;scrollbar-width:none}
-html:not(#_) .fp-acp.acp-side .acp-nav::-webkit-scrollbar{display:none}
-.fp-acp.acp-side .acp-grp{display:contents}
-.fp-acp.acp-side .acp-eb{display:none}
-html:not(#_) .fp-acp.acp-side .acp-it{flex:0 0 auto;width:auto;height:36px;gap:8px;padding:0 16px 0 12px;border-radius:var(--db-radius-pill);background:var(--db-white);box-shadow:0 0 0 1px var(--db-granite);font-size:14px;white-space:nowrap}
-html:not(#_) .fp-acp.acp-side .acp-it .acp-ic{width:18px!important;height:18px!important;font-size:18px!important}
-html:not(#_) .fp-acp.acp-side .acp-it:not(.on):hover{background:var(--db-white);box-shadow:0 0 0 1px var(--db-yellow-700)}
-html:not(#_) .fp-acp.acp-side .acp-it.on{background:var(--db-charcoal);box-shadow:0 0 0 1px var(--db-charcoal)}
+/* Info pages in the footer (.fp-acp): the same grouped vertical menu card as desktop at every width (stacked above the content on phones, beside it from 640px). */
 .acp-side.fp-acp{padding:20px}
-}
 /* Navigation: the same grouped list as desktop at every width. Tablet (640px to 1023px): menu left, section right. Phones: the menu is the page, a section
    opens full screen over it with a back arrow (the .acp-back-bar). */
 @media (min-width:640px) and (max-width:1023px){

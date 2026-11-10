@@ -6,6 +6,7 @@
   const GROUPS = {
     "About": ["About Deseret Book", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
     "Account": ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Platinum Rewards", "Request a Catalog"],
+    "Submissions & Legal": ["Product Submission Guidelines", "Manuscript Submissions", "Legal", "SMS Terms and Conditions", "Bookshelf Plus Terms of Use"],
     "Customer Service": ["Contact Us", "Questions & Support", "Shipping & Returns", "Do Not Sell My Information", "Deseret Book Store Locations"]
   };
   const slug = (s) => s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -122,12 +123,12 @@
     ["Choice of Law and Venue", "All matters relating to the Site and these Terms of Use, and any dispute or claim arising therefrom or related thereto (in each case, including non-contractual disputes or claims), shall be governed by and construed in accordance with the internal laws of the State of Utah, without giving effect to any choice or conflicts of law provision or rule (whether of the State of Utah or any other Jurisdiction)."],
     ["Contact Information", "Questions concerning these Terms of Use or the Site should be directed to permissions@deseretbook.com."]
   ];
-  function Legal({ label, title, onGo, lede, meta, items }) {
+  function Legal({ label, title, onGo, lede, meta, items, contact, note }) {
     return h(Shell, { label, title, onGo, lede },
       meta ? h("p", { className: "fp-meta" }, meta) : null,
       h("ol", { className: "fp-toc" }, items.map((s) => h("li", { key: s[0] }, h("a", { href: "#" + slug(s[0]), onClick: (e) => { e.preventDefault(); const t = document.getElementById(slug(s[0])); if (t) window.scrollTo(0, t.getBoundingClientRect().top + window.scrollY - 96); } }, s[0])))),
       items.map((s) => h(Sec, { key: s[0], id: slug(s[0]), title: s[0] }, [].concat(s[1]).map((p, i) => typeof p === "string" ? h("p", { key: i }, p) : h(React.Fragment, { key: i }, p)))),
-      h("p", { className: "fp-meta" }, "This page shows key sections. The full text is available on request from ", Mail(label === "Privacy Policy" ? "privacy@deseretbook.com" : "permissions@deseretbook.com"), "."));
+      h("p", { className: "fp-meta" }, note || "This page shows key sections. The full text is available on request from ", Mail(contact || (label === "Privacy Policy" ? "privacy@deseretbook.com" : "permissions@deseretbook.com")), "."));
   }
   function Terms({ onGo }) {
     return h(Legal, { label: "Terms of Use", onGo, items: TERMS, lede: "Please read the Terms of Use carefully before you start to use the Site. By using this Site, you agree to be bound by all of the terms, conditions and notices contained or referenced in these Terms of Use." });
@@ -422,7 +423,122 @@
         h("div", { className: "fp-acts" }, h(Button, { type: "submit", size: "md" }, "Submit request"))));
   }
 
-  const PAGES = { "Careers": Careers, "Terms of Use": Terms, "Privacy Policy": Privacy, "Check Order": CheckOrder, "Gift Card Balance": GiftBalance, "Request a Catalog": Catalog, "Contact Us": Contact, "Questions & Support": Support, "Shipping & Returns": ShipReturns, "Do Not Sell My Information": DoNotSell };
+
+  /* ---------- Submissions & Legal group (content summarized from deseretbook.com) ---------- */
+  const SUBMIT_GO = (onGo, l) => h("a", { href: "#/info/" + slug(l), onClick: (e) => { e.preventDefault(); onGo(l); } }, l);
+  const EXT = (href, t) => h("a", { href, target: "_blank", rel: "noopener" }, t);
+
+  function ProductSubmissions({ onGo }) {
+    const [sel, setSel] = useState("ps-email");
+    const secs = [
+      h(Sec, { key: "ps-email", id: "ps-email", title: "Submit by Email" },
+        P("Email is the preferred way to send a product. Include everything the buying team needs to evaluate it in one message, and send it to:"),
+        h("p", null, Mail("retailbuying@deseretbook.com"))),
+      h(Sec, { key: "ps-include", id: "ps-include", title: "What to Include" },
+        UL(["Retail price and your cost price", "Your company’s terms and policies", "A contact person for the product", "A product description and any marketing plans", "Images of the product"]),
+        h("h3", { className: "fp-h4" }, "Books"),
+        P("Attach a cover image and the manuscript as a Word or PDF file."),
+        h("h3", { className: "fp-h4" }, "Other products"),
+        P("Attach a product image, and the dimensions if they apply.")),
+      h(Sec, { key: "ps-art", id: "ps-art", title: "Art Submissions" },
+        h("p", null, "Art is submitted through the Art Submission Form instead of email. The form is linked on the ", EXT("https://www.deseretbook.com/retail-product-submissions.html", "Retail Product Submission page on deseretbook.com"), ". No separate email is needed when you use the form.")),
+      h(Sec, { key: "ps-samples", id: "ps-samples", title: "Physical Samples" },
+        P("Samples are not kept and are not returned, so send only what you can part with. Mail them to the Retail Buying Team at the address that matches your carrier."),
+        h(Tbl, { head: ["Carrier", "Address"], rows: [
+          ["UPS or FedEx", h("address", { className: "fp-addr" }, "Deseret Book Company", h("br"), "Attn: Retail Buying Team", h("br"), "55 N 300 W #300", h("br"), "Salt Lake City, UT 84101")],
+          ["USPS", h("address", { className: "fp-addr" }, "Attn: Retail Buying Team", h("br"), "PO Box 30178", h("br"), "Salt Lake City, UT 84130-0178")]] })),
+      h(Sec, { key: "ps-review", id: "ps-review", title: "Review & Replies" },
+        P("A buying committee reviews each product within 6 to 8 weeks of receiving it. The team replies only about products it selects. If you do not hear back, the product was not chosen.")),
+      h(Sec, { key: "ps-faq", id: "ps-faq", title: "Good to Know" },
+        UL(["The team reviews finished products only and does not give feedback on ideas or concepts.", "Meeting requests and walk-ins are not accepted before the submission process has been followed.", "Purchasing is handled by the corporate office, so please do not contact store staff about a submission.", h(React.Fragment, null, "Looking to publish a book instead? See ", SUBMIT_GO(onGo, "Manuscript Submissions"), ".")]))];
+    const navGroups = [["Submit a Product", [["ps-email", "Submit by Email", "mail"], ["ps-include", "What to Include", "checklist"], ["ps-art", "Art Submissions", "palette"]]], ["After You Submit", [["ps-samples", "Physical Samples", "inventory_2"], ["ps-review", "Review & Replies", "schedule"], ["ps-faq", "Good to Know", "info"]]]];
+    return h(Shell, { label: "Product Submission Guidelines", title: "Retail Product Submission Process", onGo, sel, onSel: setSel, navGroups,
+      lede: "How to pitch a product for sale in Deseret Book stores and on deseretbook.com. Every submission goes to the Retail Buying Team." }, secs.filter((x) => x.key === sel));
+  }
+
+  function ManuscriptSubmissions({ onGo }) {
+    const [sel, setSel] = useState("ms-what");
+    const secs = [
+      h(Sec, { key: "ms-what", id: "ms-what", title: "What We Publish" },
+        UL(["Gospel teaching", "Inspiration", "Scripture reference", "Help and hope", "History, biography, and family or parenting books, only occasionally"])),
+      h(Sec, { key: "ms-not", id: "ms-not", title: "What We Don’t Accept" },
+        UL(["Family histories, memoirs, and autobiographies", "Journals, workbooks, daily devotionals, and poetry", "Health and wellness or financial advice", "Fantasy and science fiction"]),
+        P("Books for the general market belong with our national imprint, Shadow Mountain. Its guidelines are on the Shadow Mountain site."),
+        h("p", null, EXT("https://shadowmountain.com/submission-guidelines", "Shadow Mountain submission guidelines"))),
+      h(Sec, { key: "ms-policies", id: "ms-policies", title: "Policies" },
+        UL(["We do not consider previously published or self-published works.", "Please do not submit the same manuscript to both Deseret Book and Shadow Mountain.", "We do not hold in-person or phone meetings about submissions.", "We cannot give writing advice by email.", "Rights and royalties are discussed only after a manuscript is accepted."])),
+      h(Sec, { key: "ms-how", id: "ms-how", title: "How to Submit" },
+        P("Use the online submission portal. Manuscripts sent by email or mail are discarded."),
+        h("div", { className: "fp-acts" }, h(DS().Button, { href: "https://querymanager.com/3663", target: "_blank", rel: "noopener", size: "md", iconAfter: "open_in_new" }, "Open the submission portal")),
+        h("h3", { className: "fp-h4" }, "Query letter"),
+        UL(["Title, genre, audience, and word count", "A synopsis and a two- to three-sentence pitch", "What makes your book different", "An outline of the contents"]),
+        h("h3", { className: "fp-h4" }, "About the author"),
+        P("A short bio, your contact information, and any background that is relevant to the manuscript."),
+        h("h3", { className: "fp-h4" }, "Manuscript format"),
+        UL(["One Word document", "12-point font, single or double spaced", "Spell-checked", "Complete source documentation and a bibliography for nonfiction"]),
+        P("The portal asks for the first 50 pages, but please submit the entire manuscript.")),
+      h(Sec, { key: "ms-review", id: "ms-review", title: "Review" },
+        P("Reviews take up to sixteen weeks. There are three possible outcomes: acceptance, an invitation to revise and resubmit, or a decline. We do not provide detailed critiques.")),
+      h(Sec, { key: "ms-contact", id: "ms-contact", title: "Questions or Withdrawals" },
+        P("For questions about a submission, or to withdraw one, email:"),
+        h("p", null, Mail("submissionquestions@deseretbook.com")))];
+    const navGroups = [["Before You Submit", [["ms-what", "What We Publish", "menu_book"], ["ms-not", "What We Don’t Accept", "block"], ["ms-policies", "Policies", "gavel"]]], ["Submitting", [["ms-how", "How to Submit", "upload_file"], ["ms-review", "Review", "schedule"], ["ms-contact", "Questions or Withdrawals", "mail"]]]];
+    return h(Shell, { label: "Manuscript Submissions", onGo, sel, onSel: setSel, navGroups,
+      lede: "Deseret Book publishes values-based nonfiction for a Latter-day Saint audience. We look for manuscripts that are relevant, have a clear premise and a logical structure, and are uplifting in tone." }, secs.filter((x) => x.key === sel));
+  }
+
+  function LegalHub({ onGo }) {
+    const [sel, setSel] = useState("lg-docs");
+    const docs = [
+      ["Terms of Use", "The rules for using deseretbook.com, including purchases, returns, pricing, and intellectual property."],
+      ["Privacy Policy", "How Deseret Book collects, uses, and protects personal information, and the rights you have over it."],
+      ["SMS Terms and Conditions", "What you agree to when you sign up for Deseret Book text messages, and how to opt out."],
+      ["Bookshelf Plus Terms of Use", "The license, subscription, and billing terms for the Deseret Bookshelf app and Bookshelf+."]];
+    const secs = [
+      h(Sec, { key: "lg-docs", id: "lg-docs", title: "Policies & Terms" },
+        h("ul", { className: "fp-ul fp-docs" }, docs.map(([l, d]) => h("li", { key: l }, h("strong", null, SUBMIT_GO(onGo, l)), h("br"), d)))),
+      h(Sec, { key: "lg-access", id: "lg-access", title: "Accessibility" },
+        P("If you have trouble using this site with a screen reader, call 1-800-453-4532."))];
+    const navGroups = [["Legal", [["lg-docs", "Policies & Terms", "gavel"], ["lg-access", "Accessibility", "accessibility_new"]]]];
+    return h(Shell, { label: "Legal", title: "Policies, Terms & Conditions", onGo, sel, onSel: setSel, navGroups,
+      lede: "The policies and terms that apply to shopping at Deseret Book, texting with us, and using Bookshelf+." }, secs.filter((x) => x.key === sel));
+  }
+
+  const SMS = [
+    ["Your Agreement", "When you opt in, you agree to receive both marketing and non-marketing text messages from Deseret Book at the number you provide. They may be sent with an automated dialing system. Agreeing to receive marketing texts is not required to buy anything."],
+    ["Message Frequency and Cost", "The number of messages varies. Standard message and data rates from your carrier may apply. Deseret Book does not charge a separate fee for the program."],
+    ["Opting In", "Reply YES to confirm your sign-up. Reply HELP at any time for help. Opting in applies even if your number is on a Do Not Call list."],
+    ["Opting Out", "Reply STOP to end messages. Replying STOP opts you out of the program you replied to, so you may need to reply to each program separately."],
+    ["Supported Carriers", "Messages are supported by major U.S. carriers. Carriers are not liable for messages that are delayed or not delivered."],
+    ["If Your Number Changes", "Let us know through a Contact Us request when you change your mobile number, so messages don’t go to someone else."],
+    ["Privacy", "Mobile information collected through short code campaigns is not shared outside the company."],
+    ["Eligibility", "The program is for U.S. residents who are 18 or older."],
+    ["Liability and Governing Law", "The program is provided as is, and Deseret Book’s liability is limited as described in the full terms. Utah law governs these terms."],
+    ["Contact", ["Questions about text messaging can go to ", Mail("service@deseretbook.com"), "."]]
+  ];
+  function SmsTerms({ onGo }) {
+    return h(Legal, { label: "SMS Terms and Conditions", onGo, items: SMS, contact: "service@deseretbook.com", meta: "Last modified June 3, 2026",
+      note: "This page summarizes the SMS terms. Questions can go to ",
+      lede: "These terms apply when you sign up to receive text messages from Deseret Book." });
+  }
+
+  const BSP_TERMS = [
+    ["What These Terms Cover", "These terms cover the Deseret Bookshelf service for audiobooks, e-books, and podcasts, and the Bookshelf+ subscription."],
+    ["Your License", "You receive a limited, revocable license to use digital content, not ownership of it. Availability can depend on the number of devices, time, region, and your subscription status. Content is not compatible with Kindle or other e-readers."],
+    ["Subscriptions and Renewal", "Bookshelf+ plans renew automatically, monthly or yearly, until you cancel. Cancel any time in My Account under My Subscriptions. Partial billing periods are not refunded."],
+    ["Free Trial", "New subscribers may be offered a one-month free trial. Trials are offered at Deseret Book’s discretion."],
+    ["Age Requirement", "The service is not intended for anyone under 18."],
+    ["Calls and Texts", "Standard rates apply to text messages. Phone calls with us may be monitored or recorded."],
+    ["Warranties, Liability, and Disputes", "The service is provided as is. Liability is limited, you agree to indemnify Deseret Book as described in the full terms, and claims must be brought within one year unless the law sets a shorter period. Utah law governs, and disputes are heard in federal or Utah courts in Salt Lake City."],
+    ["Contact", ["Send permission requests and questions to ", Mail("permissions@deseretbook.com"), ", and copyright complaints to ", Mail("rights@deseretbook.com"), ". Mail: PO Box 30178, Salt Lake City, UT 84130."]]
+  ];
+  function BspTerms({ onGo }) {
+    return h(Legal, { label: "Bookshelf Plus Terms of Use", onGo, items: BSP_TERMS,
+      note: "This page summarizes the Bookshelf+ terms. The full terms are available on request from ",
+      lede: "These terms apply to the Deseret Bookshelf app and the Bookshelf+ subscription." });
+  }
+
+  const PAGES = { "Product Submission Guidelines": ProductSubmissions, "Manuscript Submissions": ManuscriptSubmissions, "Legal": LegalHub, "SMS Terms and Conditions": SmsTerms, "Bookshelf Plus Terms of Use": BspTerms, "Careers": Careers, "Terms of Use": Terms, "Privacy Policy": Privacy, "Check Order": CheckOrder, "Gift Card Balance": GiftBalance, "Request a Catalog": Catalog, "Contact Us": Contact, "Questions & Support": Support, "Shipping & Returns": ShipReturns, "Do Not Sell My Information": DoNotSell };
   function FooterPage(props) {
     const C = (window.FP_PAGES || {})[props.label];
     return C ? h(C, props) : null;

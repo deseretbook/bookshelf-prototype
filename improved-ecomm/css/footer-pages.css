@@ -1,7 +1,7 @@
 .fp{font-family:var(--db-font-sans)}
 .fp{--fp-acc:var(--db-teal-500,#1d8574)}
 .fp-note,.fp-toc,.fp-ok,.fp-card,.fp-band,.fe-join{--fp-acc:var(--db-teal-600,#006d68)}
-.fp{width:100%;max-width:none;margin:0;padding:clamp(32px,6vw,64px) var(--pad,20px) 96px;box-sizing:border-box;display:flex;flex-direction:column;gap:48px;color:var(--db-ink,#3a3633)}
+.fp{width:100%;max-width:none;margin:0;padding:clamp(32px,6vw,64px) max(var(--pad,20px),var(--sa-r)) calc(96px + var(--sa-b)) max(var(--pad,20px),var(--sa-l));box-sizing:border-box;display:flex;flex-direction:column;gap:48px;color:var(--db-ink,#3a3633)}
 .fp a{color:var(--fp-acc);text-decoration:underline;text-underline-offset:3px}
 .fp a:hover{color:var(--db-charcoal,#3a3633)}
 .fp p{margin:0;font-family:var(--db-font-sans);font-weight:var(--db-weight-sans-regular,400);font-size:var(--db-text-body,1rem);line-height:var(--db-lh-body,1.5);text-wrap:pretty}
@@ -166,6 +166,7 @@ html:not(#_) .fp a[style*="radius-pill"]{text-decoration:none}
 .fp-acp .acp-grp:first-child::before{display:none!important}
 html:not(#_) .fp-acp.acp-side .acp-nav{margin:0 -20px}
 @media (min-width:1024px){html:not(#_) .fp-acp.acp-side .acp-nav{margin:0 -16px}}
+@media (min-width:640px) and (max-width:1023px){.fp .fp-grid.fp-acp-grid{grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:32px}html:not(#_) .fp-acp.acp-side .acp-nav{margin:0 -16px}}
 @media (min-width:1024px){.fp .fp-grid.fp-acp-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:48px}.fp-acp-grid>.fp-body{grid-column:span 2}}
 /* Questions & Support topic tiles are links (each topic has its own URL) */
 .fp a.fp-tile{color:var(--db-charcoal,#3a3633);text-decoration:none}
