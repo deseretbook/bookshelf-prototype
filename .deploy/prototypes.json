@@ -4,6 +4,32 @@
     "title": "Improved eComm",
     "entry": "index.html",
     "tweaks_doc": "project/tweaks",
-    "qa_routes": ["#/c/books_gospel-voices", "#/c/art", "#/bookshelf-plus", "#/account", "#/bag"]
+    "qa_routes": [
+      "#/c/books_gospel-voices",
+      "#/c/art",
+      "#/bookshelf-plus",
+      "#/account",
+      "#/bag"
+    ]
+  },
+  "user-testing": {
+    "artifact": "https://claude.ai/artifact/ALDf76uzhYcfT9SG2roaCn",
+    "title": "User Testing Dashboard",
+    "entry": "index.html",
+    "plain": true,
+    "qa_routes": [
+      "#cart-drawer-mobile",
+      "#bookshelf-cancellation",
+      "#bookshelf-ab-mobile",
+      "#bookshelf-ab-desktop",
+      "#banner-as-button",
+      "#copy-ab-test",
+      "#ecomm-v2",
+      "#ecomm-v1"
+    ],
+    "direct_links": {
+      "Cart drawer mobile test": "#cart-drawer-mobile",
+      "Bookshelf cancellation test": "#bookshelf-cancellation"
+    }
   }
 }

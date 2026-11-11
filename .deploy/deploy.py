@@ -83,6 +83,10 @@ def build(a):
         shutil.copy2(entry, os.path.join(dst, "index.html"))
     notes = [f"{n} files copied"]
 
+    if a.plain:  # a project without Tweaks or site state (e.g. the user testing dashboard): copy only
+        print("\n".join(notes + ["plain copy: no Tweaks, sign-in or banner changes"]))
+        return
+
     saved = {}
     if a.tweaks:
         saved = json.load(open(a.tweaks))
@@ -140,7 +144,7 @@ def qa(a):
                     os.makedirs(a.shots, exist_ok=True)
                     name = (route.strip("#/").replace("/", "_") or "home") + f"-{label}.png"
                     pg.screenshot(path=os.path.join(a.shots, name))
-            if label == "desktop":
+            if label == "desktop" and not a.plain:
                 # The deployed state: no Tweaks panel, signed out, every plan, one banner, no animated elements.
                 pg.goto(a.url + "#/c/clearance", wait_until="networkidle", timeout=90000)
                 pg.wait_for_timeout(2000)
@@ -218,9 +222,10 @@ sp = ap.add_subparsers(dest="cmd", required=True)
 b = sp.add_parser("build"); b.add_argument("--src", required=True); b.add_argument("--slug", default=FOLDER)
 b.add_argument("--repo", default="."); b.add_argument("--entry", default="index.html")
 b.add_argument("--tweaks"); b.add_argument("--signed-in", action="store_true", help="visitor starts signed in as the sample account")
+b.add_argument("--plain", action="store_true", help="copy only, no Improved eComm state changes")
 b.add_argument("--prune", action="store_true", help="delete files the artifact no longer has (ask first)")
 q = sp.add_parser("qa"); q.add_argument("--url", required=True); q.add_argument("--routes", nargs="*")
-q.add_argument("--shots"); q.add_argument("--signed-in", action="store_true", help="expect a signed-in visitor")
+q.add_argument("--shots"); q.add_argument("--plain", action="store_true", help="skip the Improved eComm state checks"); q.add_argument("--signed-in", action="store_true", help="expect a signed-in visitor")
 p_ = sp.add_parser("push"); p_.add_argument("--slug", default=FOLDER); p_.add_argument("--repo", default=".")
 p_.add_argument("--message", required=True); p_.add_argument("--session")
 w = sp.add_parser("wait"); w.add_argument("--slug", default=FOLDER); w.add_argument("--repo", default=".")
