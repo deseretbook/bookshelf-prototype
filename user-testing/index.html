@@ -13,11 +13,71 @@
   a { color: #0071e3; text-decoration: none; }
   a:hover { color: #0058b0; }
   ::selection { background: rgba(0, 113, 227, 0.18); }
+
+  /* Grid children may shrink below their content's min width; long words wrap instead of widening the page */
+  .ut-finding, .ut-card, .ut-step { min-width: 0; overflow-wrap: anywhere; }
+
+  /* Who we talked to: a table while every word fits whole, stacked participant cards below that.
+     Switches on the table's own width, so the sidebar being open or collapsed is accounted for. */
+  .ut-pt-wrap { container-type: inline-size; }
+  .ut-pt-group { display: contents; }
+  @container (max-width: 859px) {
+    .ut-pt { display: block !important; }
+    .ut-pt-head { display: none !important; }
+    .ut-pt-row { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; grid-column: auto !important; column-gap: 24px; padding: 20px 28px 22px !important; }
+    .ut-pt-name { grid-column: 1 / -1; padding: 0 0 4px !important; }
+    .ut-pt-cell { padding: 12px 0 0 !important; }
+    .ut-pt-cell::before { content: attr(data-label); display: block; margin-bottom: 3px; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #8e8e93; }
+  }
+  @container (max-width: 540px) {
+    .ut-pt-row { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; column-gap: 16px; padding: 18px 20px 20px !important; }
+  }
+
+  /* Tablet: stack the overview so the title has the full width */
+  @media (max-width: 1100px) {
+    .ut-overview { grid-template-columns: minmax(0, 1fr) !important; gap: 36px !important; padding: 56px 0 48px !important; }
+    .ut-h1 { font-size: 48px !important; }
+  }
+
+  /* Phone: single column, tighter cards, participant table as stacked cards */
+  @media (max-width: 760px) {
+    .ut-head { padding: 10px 16px !important; gap: 12px !important; }
+    .ut-crumb { display: none !important; }
+    .ut-linkbox { width: 100% !important; order: 2; }
+    .ut-wrap { padding-left: 16px !important; padding-right: 16px !important; }
+    .ut-overview { gap: 24px !important; padding: 32px 0 32px !important; }
+    .ut-eyebrow { font-size: 12px !important; margin-bottom: 14px !important; line-height: 1.6; }
+    .ut-h1 { font-size: 34px !important; letter-spacing: -0.03em !important; margin-bottom: 16px !important; }
+    .ut-lede { font-size: 17px !important; }
+    .ut-stat { padding: 18px !important; border-radius: 16px !important; }
+    .ut-h2 { font-size: 24px !important; }
+    .ut-pad-card { padding: 24px 20px !important; border-radius: 20px !important; }
+    .ut-quote { font-size: 19px !important; }
+    .ut-finding { padding: 22px 18px !important; border-radius: 20px !important; }
+    .ut-fq { font-size: 21px !important; }
+    .ut-fhead { flex-direction: column-reverse; align-items: flex-start !important; gap: 14px !important; }
+    .ut-fhead > div { width: 100%; }
+    .ut-two { grid-template-columns: minmax(0, 1fr) !important; gap: 22px !important; }
+    .ut-card { padding: 22px 20px !important; }
+    .ut-unp-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 6px !important; }
+    .ut-unp-q { min-width: 0 !important; flex-basis: 100% !important; }
+    .ut-compare { padding: 36px 20px !important; border-radius: 22px !important; margin: 24px 0 56px !important; }
+    .ut-compare-h { font-size: 28px !important; }
+    .ut-compare-p { font-size: 17px !important; margin-bottom: 28px !important; }
+    .ut-three { grid-template-columns: minmax(0, 1fr) !important; }
+    .ut-step { grid-template-columns: 34px minmax(0, 1fr) !important; gap: 8px 14px !important; padding: 22px 20px !important; }
+    .ut-step-n { font-size: 20px !important; }
+    .ut-refs { grid-column: 2; text-align: left !important; padding-top: 0 !important; }
+    .ut-notes { padding: 48px 0 72px !important; }
+    .ut-section-pad { padding-top: 24px !important; padding-bottom: 56px !important; }
+    [aria-label="Show results for"] button { font-size: 13px !important; padding: 9px 4px !important; gap: 5px !important; }
+  }
 </style>
 </helmet>
 
 <div style="background: #f5f5f7; min-height: 100vh">
 
+  <div aria-hidden="true" onClick="{{ closeDrawer }}" style="{{ backdropStyle }}"></div>
   <aside style="{{ sidebarStyle }}">
     <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 13px 14px; border-bottom: 1px solid rgba(0, 0, 0, 0.07); box-sizing: border-box; min-height: 58px">
       <sc-if value="{{ sidebarOpen }}" hint-placeholder-val="{{ true }}">
@@ -55,29 +115,40 @@
   <div style="{{ mainStyle }}">
 
   <header style="position: sticky; top: 0; z-index: 20; background: rgba(245, 245, 247, 0.78); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0, 0, 0, 0.07)">
-    <div style="max-width: 1240px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px">
-      <div style="font-family: 'Zalando Sans Expanded', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; color: #1d1d1f">Deseret Book</div>
+    <div class="ut-head" style="max-width: 1240px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+      <div style="display: flex; align-items: center; gap: 12px; min-width: 0; flex: none">
+        <sc-if value="{{ showMenuButton }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ openDrawer }}" aria-label="Open studies" aria-expanded="{{ drawerOpenAttr }}" style="width: 36px; height: 36px; flex: none; display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 1px solid #e0e0e5; border-radius: 10px; background: #ffffff; color: #1d1d1f; cursor: pointer; transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1)" style-hover="background: #f5f5f7; border-color: #c7c7cc">
+            <span style="display: grid; gap: 3px">
+              <span style="display: block; width: 16px; height: 2px; border-radius: 2px; background: currentColor"></span>
+              <span style="display: block; width: 16px; height: 2px; border-radius: 2px; background: currentColor"></span>
+              <span style="display: block; width: 16px; height: 2px; border-radius: 2px; background: currentColor"></span>
+            </span>
+          </button>
+        </sc-if>
+        <div style="font-family: 'Zalando Sans Expanded', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; color: #1d1d1f; white-space: nowrap">Deseret Book</div>
+      </div>
       <div style="display: flex; align-items: center; justify-content: flex-end; gap: 16px; min-width: 0; flex-wrap: wrap">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #8e8e93">{{ breadcrumb }}</div>
+        <div class="ut-crumb" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #8e8e93">{{ breadcrumb }}</div>
         <sc-if value="{{ showLinkText }}" hint-placeholder-val="{{ false }}">
-          <input id="study-link" readOnly="{{ true }}" value="{{ studyLink }}" aria-label="Link to this study" onFocus="{{ selectLink }}" style="width: 300px; max-width: 100%; box-sizing: border-box; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #1d1d1f; background: #ffffff; border: 1px solid #e0e0e5; border-radius: 999px; padding: 7px 12px"></input>
+          <input id="study-link" class="ut-linkbox" readOnly="{{ true }}" value="{{ studyLink }}" aria-label="Link to this study" onFocus="{{ selectLink }}" style="width: 300px; max-width: 100%; box-sizing: border-box; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #1d1d1f; background: #ffffff; border: 1px solid #e0e0e5; border-radius: 999px; padding: 7px 12px"></input>
         </sc-if>
         <button type="button" onClick="{{ copyLink }}" aria-live="polite" style="flex: none; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; color: #1d1d1f; background: #ffffff; border: 1px solid #e0e0e5; border-radius: 999px; padding: 7px 12px; cursor: pointer; transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1)" style-hover="background: #f5f5f7; border-color: #c7c7cc">{{ copyLabel }}</button>
       </div>
     </div>
   </header>
 
-  <div style="max-width: 1240px; margin: 0 auto; padding: 0 32px">
+  <div class="ut-wrap" style="max-width: 1240px; margin: 0 auto; padding: 0 32px">
 
-    <section id="overview" style="scroll-margin-top: 80px; padding: 88px 0 64px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 72px; align-items: end">
-      <div>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #0071e3; margin-bottom: 22px">{{ eyebrow }}</div>
-        <h1 style="font-family: 'Zalando Sans Expanded', sans-serif; font-weight: 700; font-size: 62px; line-height: 1.06; letter-spacing: -0.035em; margin: 0 0 22px; color: #1d1d1f; text-wrap: pretty">{{ studyTitle }}</h1>
-        <p style="font-size: 19px; line-height: 1.55; margin: 0; max-width: 46ch; color: #6e6e73; text-wrap: pretty">{{ lede }}</p>
+    <section id="overview" class="ut-overview" style="scroll-margin-top: 80px; padding: 88px 0 64px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 72px; align-items: end">
+      <div style="min-width: 0">
+        <div class="ut-eyebrow" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #0071e3; margin-bottom: 22px">{{ eyebrow }}</div>
+        <h1 class="ut-h1" style="font-family: 'Zalando Sans Expanded', sans-serif; font-weight: 700; font-size: 62px; line-height: 1.06; letter-spacing: -0.035em; margin: 0 0 22px; color: #1d1d1f; text-wrap: pretty">{{ studyTitle }}</h1>
+        <p class="ut-lede" style="font-size: 19px; line-height: 1.55; margin: 0; max-width: 46ch; color: #6e6e73; text-wrap: pretty">{{ lede }}</p>
       </div>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
         <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
-          <div style="background: #ffffff; border-radius: 18px; padding: 22px 24px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
+          <div class="ut-stat" style="background: #ffffff; border-radius: 18px; padding: 22px 24px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
             <div style="{{ s.numStyle }}">{{ s.n }}</div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #8e8e93; margin-top: 10px">{{ s.label }}</div>
           </div>
@@ -94,20 +165,20 @@
 
     <section id="participants" style="scroll-margin-top: 80px; padding-bottom: 48px">
       <h2 style="font-family: 'Zalando Sans Expanded', sans-serif; font-weight: 600; font-size: 30px; letter-spacing: -0.025em; margin: 0 0 24px; color: #1d1d1f">Who we talked to</h2>
-      <div style="background: #ffffff; border-radius: 20px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
-        <div role="table" aria-label="Participants">
-          <div role="rowgroup">
-            <div role="row" style="{{ ptHeadStyle }}">
+      <div class="ut-pt-wrap" style="background: #ffffff; border-radius: 20px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
+        <div role="table" aria-label="Participants" class="ut-pt" style="{{ ptTableStyle }}">
+          <div role="rowgroup" class="ut-pt-group">
+            <div role="row" class="ut-pt-head" style="{{ ptHeadStyle }}">
               <div role="columnheader" style="padding: 20px 20px 16px 28px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #8e8e93; white-space: nowrap; align-self: end">Participant</div>
               <sc-for list="{{ participantCols }}" as="c" hint-placeholder-count="5">
                 <div role="columnheader" style="{{ c.style }}">{{ c.label }}</div>
               </sc-for>
             </div>
           </div>
-          <div role="rowgroup">
+          <div role="rowgroup" class="ut-pt-group">
             <sc-for list="{{ participantRows }}" as="r" hint-placeholder-count="3">
-              <div role="row" style="{{ r.rowStyle }}">
-                <div role="rowheader" style="padding: 20px 20px 20px 28px">
+              <div role="row" class="ut-pt-row" style="{{ r.rowStyle }}">
+                <div role="rowheader" class="ut-pt-name" style="padding: 20px 20px 20px 28px; min-width: 0">
                   <div style="display: flex; align-items: center; gap: 8px; flex-wrap: nowrap">
                     <div style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: -0.015em; color: #1d1d1f; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ r.name }}</div>
                     <sc-if value="{{ r.hasOrder }}" hint-placeholder-val="{{ false }}">
@@ -117,7 +188,7 @@
                   <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.5; color: #6e6e73; margin-top: 4px">{{ r.line }}</div>
                 </div>
                 <sc-for list="{{ r.cells }}" as="cell" hint-placeholder-count="5">
-                  <div role="cell" style="{{ cell.style }}">{{ cell.value }}</div>
+                  <div role="cell" class="ut-pt-cell" data-label="{{ cell.label }}" style="{{ cell.style }}">{{ cell.value }}</div>
                 </sc-for>
               </div>
             </sc-for>
@@ -128,9 +199,9 @@
 
     <sc-if value="{{ showScenario }}" hint-placeholder-val="{{ true }}">
       <section id="scenario" style="scroll-margin-top: 80px; padding-bottom: 56px">
-        <div style="background: #ffffff; border-radius: 24px; padding: 40px 44px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
+        <div class="ut-pad-card" style="background: #ffffff; border-radius: 24px; padding: 40px 44px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #0071e3; margin-bottom: 18px">Scenario</div>
-          <p style="font-family: 'Inter', sans-serif; font-weight: 500; font-size: 23px; line-height: 1.45; letter-spacing: -0.018em; color: #1d1d1f; margin: 0 0 22px; max-width: 62ch; text-wrap: pretty">{{ scenarioQuote }}</p>
+          <p class="ut-quote" style="font-family: 'Inter', sans-serif; font-weight: 500; font-size: 23px; line-height: 1.45; letter-spacing: -0.018em; color: #1d1d1f; margin: 0 0 22px; max-width: 62ch; text-wrap: pretty">{{ scenarioQuote }}</p>
           <p style="font-size: 16px; line-height: 1.55; color: #6e6e73; margin: 0; max-width: 68ch; text-wrap: pretty">{{ scenarioNote }}</p>
         </div>
       </section>
@@ -140,7 +211,7 @@
       <section id="designs" style="scroll-margin-top: 80px; padding-bottom: 56px">
         <h2 style="font-family: 'Zalando Sans Expanded', sans-serif; font-weight: 600; font-size: 30px; letter-spacing: -0.025em; margin: 0 0 8px; color: #1d1d1f">Designs tested</h2>
         <p style="font-size: 16px; line-height: 1.55; color: #6e6e73; margin: 0 0 24px; max-width: 68ch; text-wrap: pretty">{{ designsNote }}</p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 12px">
           <sc-for list="{{ designs }}" as="d" hint-placeholder-count="0">
             <figure style="margin: 0; background: #ffffff; border-radius: 20px; padding: 20px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 16px">
               <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap">
@@ -160,8 +231,8 @@
     </sc-if>
 
     <section id="findings" style="scroll-margin-top: 80px; padding-bottom: 48px">
-      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 24px">
-        <h2 style="font-family: 'Zalando Sans Expanded', sans-serif; font-weight: 600; font-size: 30px; letter-spacing: -0.025em; margin: 0; color: #1d1d1f">Findings by task</h2>
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 24px; flex-wrap: wrap">
+        <h2 class="ut-h2" style="font-family: 'Zalando Sans Expanded', sans-serif; font-weight: 600; font-size: 30px; letter-spacing: -0.025em; margin: 0; color: #1d1d1f">Findings by task</h2>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #8e8e93">{{ shownLabel }}</div>
       </div>
 
@@ -202,12 +273,12 @@
 
       <div style="display: grid; gap: 28px">
         <sc-for list="{{ shown }}" as="f" hint-placeholder-count="4">
-          <div id="{{ f.anchor }}" style="scroll-margin-top: 80px; background: #ffffff; border-radius: 24px; padding: 36px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
-            <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; flex-wrap: wrap">
+          <div id="{{ f.anchor }}" class="ut-finding" style="scroll-margin-top: 80px; background: #ffffff; border-radius: 24px; padding: 36px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
+            <div class="ut-fhead" style="display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; flex-wrap: wrap">
               <div style="min-width: 0; flex: 1">
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #0071e3">{{ f.theme }}</div>
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #8e8e93; margin-top: 18px">Asked</div>
-                <h3 style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.3; letter-spacing: -0.025em; margin: 8px 0 0; color: #1d1d1f; max-width: 62ch; text-wrap: pretty">{{ f.question }}</h3>
+                <h3 class="ut-fq" style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.3; letter-spacing: -0.025em; margin: 8px 0 0; color: #1d1d1f; max-width: 62ch; text-wrap: pretty">{{ f.question }}</h3>
                 <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 14px; max-width: 74ch">
                   <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8e8e93; white-space: nowrap">{{ f.id }}</span>
                   <p style="font-size: 15px; line-height: 1.55; margin: 0; color: #6e6e73; text-wrap: pretty">{{ f.statement }}</p>
@@ -270,7 +341,7 @@
               </div>
             </sc-if>
 
-            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 30px">
+            <div class="ut-two" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 30px">
               <div>
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #a1a1a8; margin-bottom: 10px">What we saw</div>
                 <p style="font-size: 16px; line-height: 1.55; margin: 0; color: #1d1d1f; text-wrap: pretty">{{ f.saw }}</p>
@@ -289,21 +360,21 @@
     </section>
 
     <sc-if value="{{ showUnprompted }}" hint-placeholder-val="{{ true }}">
-      <section id="unprompted" style="scroll-margin-top: 80px; padding: 40px 0 88px">
+      <section id="unprompted" class="ut-section-pad" style="scroll-margin-top: 80px; padding: 40px 0 88px">
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #FF8D28; margin-bottom: 18px">Volunteered, not asked</div>
         <h2 style="font-family: 'Zalando Sans Expanded', sans-serif; font-weight: 600; font-size: 30px; letter-spacing: -0.025em; margin: 0 0 10px; color: #1d1d1f">Unprompted insights</h2>
         <p style="font-size: 17px; line-height: 1.55; color: #6e6e73; margin: 0 0 28px; max-width: 68ch; text-wrap: pretty">{{ unpromptedIntro }}</p>
         <div style="display: grid; gap: 12px">
           <sc-for list="{{ unprompted }}" as="u" hint-placeholder-count="4">
-            <div style="background: #ffffff; border-radius: 20px; padding: 30px 34px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
-              <div style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; align-items: start">
+            <div class="ut-card" style="background: #ffffff; border-radius: 20px; padding: 30px 34px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
+              <div class="ut-unp-grid" style="display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 28px; align-items: start">
                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 500; color: #FF8D28; letter-spacing: 0.04em; padding-top: 5px">{{ u.n }}</div>
                 <div>
                   <h3 style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.35; letter-spacing: -0.022em; margin: 0 0 8px; color: #1d1d1f; text-wrap: pretty">{{ u.title }}</h3>
                   <p style="font-size: 16px; line-height: 1.55; margin: 0 0 22px; color: #6e6e73; text-wrap: pretty">{{ u.body }}</p>
                   <div style="display: flex; flex-wrap: wrap; gap: 10px">
                     <sc-for list="{{ u.quotes }}" as="q" hint-placeholder-count="3">
-                      <div style="flex: 1 1 210px; min-width: 210px; background: #f5f5f7; border-radius: 14px; padding: 18px 20px">
+                      <div class="ut-unp-q" style="flex: 1 1 210px; min-width: 210px; background: #f5f5f7; border-radius: 14px; padding: 18px 20px">
                         <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: nowrap; margin-bottom: 10px">
                           <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; color: #6e6e73; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ q.who }}</div>
                           <sc-if value="{{ q.hasOrder }}" hint-placeholder-val="{{ false }}">
@@ -323,11 +394,11 @@
     </sc-if>
 
     <sc-if value="{{ showComparison }}" hint-placeholder-val="{{ true }}">
-      <section id="comparison" style="scroll-margin-top: 80px; background: #1d1d1f; border-radius: 28px; padding: 72px 56px; margin: 40px 0 88px">
+      <section id="comparison" class="ut-compare" style="scroll-margin-top: 80px; background: #1d1d1f; border-radius: 28px; padding: 72px 56px; margin: 40px 0 88px">
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6da8ff; margin-bottom: 22px">Tasks 7&ndash;8 &nbsp;/&nbsp; Prototype vs. the live site</div>
-        <h2 style="font-family: 'Zalando Sans Expanded', sans-serif; font-weight: 700; font-size: 44px; line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 22px; color: #f5f5f7; max-width: 28ch; text-wrap: pretty">All three preferred the current deseretbook.com</h2>
-        <p style="font-size: 19px; line-height: 1.55; margin: 0 0 52px; max-width: 68ch; color: #a1a1a8; text-wrap: pretty">After the prototype walkthrough, participants were sent to the live site and asked to compare. Each of them chose the live version, and each named the same reason: imagery large enough to read, and a page that feels organized rather than crowded. Their criticisms of the live site are the more useful half of the answer.</p>
-        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+        <h2 class="ut-compare-h" style="font-family: 'Zalando Sans Expanded', sans-serif; font-weight: 700; font-size: 44px; line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 22px; color: #f5f5f7; max-width: 28ch; text-wrap: pretty">All three preferred the current deseretbook.com</h2>
+        <p class="ut-compare-p" style="font-size: 19px; line-height: 1.55; margin: 0 0 52px; max-width: 68ch; color: #a1a1a8; text-wrap: pretty">After the prototype walkthrough, participants were sent to the live site and asked to compare. Each of them chose the live version, and each named the same reason: imagery large enough to read, and a page that feels organized rather than crowded. Their criticisms of the live site are the more useful half of the answer.</p>
+        <div class="ut-three" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
           <sc-for list="{{ comparison }}" as="c" hint-placeholder-count="3">
             <div style="background: #2c2c2e; border-radius: 20px; padding: 28px">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: nowrap">
@@ -350,21 +421,21 @@
       <p style="font-size: 17px; line-height: 1.55; color: #6e6e73; margin: 0 0 28px; max-width: 68ch">Ordered by how much evidence this round produced, strongest first.</p>
       <div style="display: grid; gap: 12px">
         <sc-for list="{{ nextSteps }}" as="s" hint-placeholder-count="7">
-          <div style="background: #ffffff; border-radius: 20px; padding: 30px 34px; display: grid; grid-template-columns: 52px minmax(0, 1fr) 130px; gap: 28px; align-items: start; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 500; color: #0071e3; line-height: 1.1; letter-spacing: -0.03em">{{ s.n }}</div>
+          <div class="ut-step" style="background: #ffffff; border-radius: 20px; padding: 30px 34px; display: grid; grid-template-columns: 52px minmax(0, 1fr) 130px; gap: 28px; align-items: start; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.04)">
+            <div class="ut-step-n" style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 500; color: #0071e3; line-height: 1.1; letter-spacing: -0.03em">{{ s.n }}</div>
             <div>
               <h3 style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.35; letter-spacing: -0.022em; margin: 0 0 8px; color: #1d1d1f; text-wrap: pretty">{{ s.title }}</h3>
               <p style="font-size: 16px; line-height: 1.55; margin: 0; color: #6e6e73; text-wrap: pretty">{{ s.body }}</p>
             </div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.04em; color: #a1a1a8; text-align: right; padding-top: 6px">{{ s.refs }}</div>
+            <div class="ut-refs" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.04em; color: #a1a1a8; text-align: right; padding-top: 6px">{{ s.refs }}</div>
           </div>
         </sc-for>
       </div>
     </section>
 
-    <section id="notes" style="scroll-margin-top: 80px; padding: 72px 0 120px">
+    <section id="notes" class="ut-notes" style="scroll-margin-top: 80px; padding: 72px 0 120px">
       <div style="height: 1px; background: #e8e8ed; margin-bottom: 28px"></div>
-      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px">
+      <div class="ut-two" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px">
         <div>
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #a1a1a8; margin-bottom: 14px">Notes on the data</div>
           <ol style="font-size: 14px; line-height: 1.65; color: #6e6e73; margin: 0; padding-left: 20px; display: grid; gap: 10px">
@@ -403,7 +474,9 @@ const V = {
   early: { label: 'Early signal \u00b7 n=1', bg: '#8e8e93' }
 };
 
-const PT_GRID = n => ({ display: 'grid', gridTemplateColumns: 'minmax(0, 1.2fr) repeat(' + n + ', minmax(0, 1fr))', overflowWrap: 'anywhere' });
+// The table is one grid; header and rows are subgrids, so every column is shared and never narrower than its longest word.
+const PT_GRID = n => ({ display: 'grid', gridTemplateColumns: 'subgrid', gridColumn: '1 / -1', overflowWrap: 'break-word' });
+const PT_TABLE = n => ({ display: 'grid', gridTemplateColumns: 'minmax(min-content, 1.2fr) repeat(' + n + ', minmax(min-content, 1fr))' });
 
 const P = { 1: 'Gilbert, 36 M', 2: 'Janine, 44 F', 3: 'Jose, 42 M' };
 
@@ -1983,11 +2056,15 @@ const studyLinkFor = id => {
   return base + '#' + SLUG[id];
 };
 
+// Below this width the sidebar becomes a slide-in drawer opened from the header.
+const NARROW_MQ = '(max-width: 900px)';
+const isNarrow = () => { try { return window.matchMedia(NARROW_MQ).matches; } catch (e) { return false; } };
+
 const SIDEBAR_W = 268;
 const SIDEBAR_W_COLLAPSED = 64;
 
 class Component extends DCLogic {
-  state = { theme: 'all', verdict: null, sidebarOpen: true, study: studyFromHash() || 'cd', openDesigns: {}, copyState: 'idle' };
+  state = { theme: 'all', verdict: null, sidebarOpen: true, study: studyFromHash() || 'cd', openDesigns: {}, copyState: 'idle', narrow: isNarrow(), drawerOpen: false };
 
   renderVals() {
     if (this.state.verdict === null) this.state.verdict = 'all';
@@ -2105,14 +2182,36 @@ class Component extends DCLogic {
       })
     }));
 
-    const open = this.state.sidebarOpen;
+    const narrow = this.state.narrow;
+    const drawer = narrow && this.state.drawerOpen;
+    const open = narrow ? true : this.state.sidebarOpen;
     const w = open ? SIDEBAR_W : SIDEBAR_W_COLLAPSED;
+    const SLIDE = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
     return {
       sidebarOpen: open,
-      toggleGlyph: open ? '\u2039\u2039' : '\u203a\u203a',
-      toggleSidebar: () => this.setState(s => ({ sidebarOpen: !s.sidebarOpen })),
-      sidebarStyle: {
+      showMenuButton: narrow,
+      drawerOpenAttr: drawer ? 'true' : 'false',
+      openDrawer: () => this.setState({ drawerOpen: true }),
+      closeDrawer: () => this.setState({ drawerOpen: false }),
+      toggleGlyph: narrow ? '\u00d7' : (open ? '\u2039\u2039' : '\u203a\u203a'),
+      toggleSidebar: () => narrow ? this.setState({ drawerOpen: false }) : this.setState(s => ({ sidebarOpen: !s.sidebarOpen })),
+      backdropStyle: {
+        position: 'fixed', top: 0, right: 0, bottom: 0, left: 0, zIndex: 35,
+        background: 'rgba(0, 0, 0, 0.32)', opacity: drawer ? 1 : 0, pointerEvents: drawer ? 'auto' : 'none',
+        visibility: drawer ? 'visible' : 'hidden',
+        transition: 'opacity 280ms ' + SLIDE + ', visibility 0s linear ' + (drawer ? '0s' : '280ms')
+      },
+      sidebarStyle: narrow ? {
+        position: 'fixed', top: 0, left: 0, bottom: 0, width: 'min(300px, 86vw)', zIndex: 40,
+        background: 'rgba(255, 255, 255, 0.96)', backdropFilter: 'saturate(180%) blur(20px)',
+        WebkitBackdropFilter: 'saturate(180%) blur(20px)',
+        borderRight: '1px solid rgba(0, 0, 0, 0.07)', overflowY: 'auto', overflowX: 'hidden',
+        boxShadow: drawer ? '0 12px 40px rgba(0, 0, 0, 0.18)' : 'none',
+        transform: drawer ? 'translateX(0)' : 'translateX(-100%)', WebkitTransform: drawer ? 'translateX(0)' : 'translateX(-100%)',
+        visibility: drawer ? 'visible' : 'hidden',
+        transition: 'transform 280ms ' + SLIDE + ', -webkit-transform 280ms ' + SLIDE + ', box-shadow 280ms ' + SLIDE + ', visibility 0s linear ' + (drawer ? '0s' : '280ms')
+      } : {
         position: 'fixed', top: 0, left: 0, bottom: 0, width: w + 'px', zIndex: 30,
         background: 'rgba(255, 255, 255, 0.82)', backdropFilter: 'saturate(180%) blur(20px)',
         WebkitBackdropFilter: 'saturate(180%) blur(20px)',
@@ -2120,7 +2219,7 @@ class Component extends DCLogic {
         transition: 'width 280ms cubic-bezier(0.4, 0, 0.2, 1)'
       },
       mainStyle: {
-        marginLeft: w + 'px', paddingBottom: '0',
+        marginLeft: narrow ? '0px' : w + 'px', paddingBottom: '0',
         transition: 'margin-left 280ms cubic-bezier(0.4, 0, 0.2, 1)'
       },
       tests: ORDER.map(id => STUDIES[id]).map(t => {
@@ -2128,7 +2227,7 @@ class Component extends DCLogic {
         return {
           name: t.name, meta: t.meta, initials: t.badge,
           onClick: () => {
-            this.setState({ study: t.id, theme: 'all', verdict: 'all', variant: 'all', copyState: 'idle' });
+            this.setState({ study: t.id, theme: 'all', verdict: 'all', variant: 'all', copyState: 'idle', drawerOpen: false });
             try { if (location.hash !== '#' + SLUG[t.id]) location.hash = SLUG[t.id]; } catch (e) {}
             window.scrollTo({ top: 0 });
           },
@@ -2218,7 +2317,9 @@ class Component extends DCLogic {
           cells: cols.map((c, j) => {
             const f = p.facts.find(x => x.label === c);
             return {
-              value: f ? f.value : 'Not stated',
+              label: ({ 'Faith affiliation': 'Faith', 'Household income': 'Income' })[c] || c,
+              // Income ranges and hyphenated words (full-time, SM-S918U) stay whole: word joiners stop a wrap at the dash.
+              value: f ? (c === 'Household income' ? f.value.replace(/\s*[–-]\s*/g, '⁠–⁠') : f.value.replace(/(\S)-(?=\S)/g, '$1⁠-⁠')) : 'Not stated',
               style: {
                 padding: j === cols.length - 1 ? '20px 28px 20px 20px' : '20px',
                 fontSize: '14px', lineHeight: 1.5, color: f ? '#1d1d1f' : '#8e8e93'
@@ -2227,6 +2328,7 @@ class Component extends DCLogic {
           })
         };
       }),
+      ptTableStyle: PT_TABLE(ST.participants[0] ? ST.participants[0].facts.length : 1),
       ptHeadStyle: { ...PT_GRID(ST.participants[0] ? ST.participants[0].facts.length : 1), borderBottom: '1px solid #e8e8ed' },
       comparison: (ST.comparison || []).map(c => ({ ...c, who: PEOPLE[c.p], order: orderOf(c.p), hasOrder: !!orderOf(c.p) })),
       nextSteps: ST.nextSteps,
@@ -2310,19 +2412,32 @@ class Component extends DCLogic {
       const el = id && document.getElementById(id);
       if (!el) return;
       e.preventDefault();
+      if (this.state.drawerOpen) this.setState({ drawerOpen: false });
       let smooth = true;
       try { smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (err) {}
       el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
     };
     document.addEventListener('click', this._onClick);
+    this._onKey = e => { if (e.key === 'Escape' && this.state.drawerOpen) this.setState({ drawerOpen: false }); };
+    document.addEventListener('keydown', this._onKey);
+    try {
+      this._mq = window.matchMedia(NARROW_MQ);
+      this._onMq = e => this.setState({ narrow: e.matches, drawerOpen: false });
+      if (this._mq.addEventListener) this._mq.addEventListener('change', this._onMq); else this._mq.addListener(this._onMq);
+    } catch (e) {}
   }
   componentWillUnmount() {
     window.removeEventListener('hashchange', this._onHash);
     document.removeEventListener('click', this._onClick);
+    document.removeEventListener('keydown', this._onKey);
+    try { if (this._mq.removeEventListener) this._mq.removeEventListener('change', this._onMq); else this._mq.removeListener(this._onMq); } catch (e) {}
+    document.body.style.overflow = '';
     clearTimeout(this._copyTimer);
   }
   componentDidUpdate() {
     this.syncChips();
+    // Keep the page from scrolling behind the open drawer.
+    document.body.style.overflow = (this.state.narrow && this.state.drawerOpen) ? 'hidden' : '';
     if (this.state.copyState === 'failed' && !this._linkSelected) {
       const i = document.getElementById('study-link');
       if (i) { i.focus(); i.select(); this._linkSelected = true; }
