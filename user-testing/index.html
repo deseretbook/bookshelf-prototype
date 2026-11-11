@@ -1511,7 +1511,7 @@ const CX_FINDINGS = [
       { p: 4, text: '“Oh, here we go. Subscriptions. I didn’t see that, for some reason. Subscriptions is at the bottom.”' }
     ],
     saw: 'Confirmed: three of four (75%) passed over Subscriptions before selecting it, above the 40% threshold. Mindy, Victor and Megan opened Account information or Payment methods first. None of them blamed the label. They blamed the position: Subscriptions sits in its own section at the bottom of the account menu, below Wishlist.',
-    rec: 'Move Subscriptions up into the main Account list, or put Bookshelf+ near the top of the menu. The label can stay.' },
+    rec: 'Make the Subscriptions section clearer, and increase its contrast so it stands out in the account menu.' },
   { id: 'H-03', theme: 'Task 3 · Findability · Help-center fallback', task: 'Task 3', verdict: 'mixed',
     statement: 'Participants who can’t find cancellation within about a minute turn to help, FAQ or contact support.',
     question: CX_TASK,
@@ -1531,7 +1531,7 @@ const CX_FINDINGS = [
       { p: 4, text: '“Your cancellation is scheduled. Okay.”' }
     ],
     saw: 'Completion confirmed, speed not. All four (100%) scheduled the cancellation without help, but only Megan came close to two minutes (120 seconds exactly). Median time was 151 seconds. Time on task includes reading the prompt and, for Brad, thinking aloud about a reason to cancel. Victor’s 248 seconds and 25 clicks include removing two cards.',
-    rec: 'Fix the account-menu position first (H-02). It accounts for most of the extra time.' },
+    rec: 'Help people find the menu quickly by improving its accessibility.' },
   { id: 'H-06', theme: 'Task 4 · Retention offers · Offer perception', task: 'Task 4', verdict: 'risk',
     statement: 'Participants who have decided to cancel see a discount or pause offer as an obstacle, not a benefit.',
     question: 'Was there anything that felt like it was trying to stop you?',
@@ -1542,7 +1542,7 @@ const CX_FINDINGS = [
       { p: 4, text: '“Yes, I did feel like it was trying to stop me, but depending on the answer I chose… It really did try to keep me hanging on.”' }
     ],
     saw: 'Confirmed: three of four said the flow tried to stop them, and everyone who saw an offer skipped it. Brad and Megan declined the pause, and Mindy declined both the 25% discount and the pause. Victor was the exception and did not mention an offer. The test had no rating scale, so the “trying to stop me” rating in the threshold could not be scored. This verdict rests on what participants said.',
-    rec: 'Show one offer at most, and keep Cancel subscription visible next to it.' },
+    rec: 'Keep the offers as they are. No changes needed.' },
   { id: 'H-07', theme: 'Task 3 · Retention offers · Offer clarity', task: 'Task 3', verdict: 'mixed',
     statement: 'Some participants confuse “accept the offer” with “continue cancelling.”',
     question: CX_TASK,
@@ -1551,16 +1551,18 @@ const CX_FINDINGS = [
       { p: 4, text: '“I chose not using it enough, and then it said, well, you can use it for maybe two months at a time or whatever. And if I said I just don’t want to, it says, well, why?”' }
     ],
     saw: 'Not confirmed as written: nobody accepted an offer by mistake or mixed up the two buttons. A different problem showed up at the same step. Picking “I’m not using it enough” opens a panel whose only button is Pause my membership. Cancel subscription sits below the whole reason list. Brad read that as having no way to cancel, and switched to “Something else” to get through.',
-    rec: 'Put a Continue cancelling link inside each reason panel, right under the offer.' },
+    rec: 'Keep the offers as they are. No changes needed.' },
   { id: 'H-08', theme: 'Task 4 · Retention offers · Pause appeal', task: 'Task 4', verdict: 'risk',
     statement: 'A pause option appeals more than a discount to participants whose reason is low usage.',
     question: 'Was there anything that felt like it was trying to stop you?',
     quotes: [
-      { p: 1, text: '“There’s a pause. I don’t want to pause, so I don’t want to do that.”' },
-      { p: 2, text: '“It is giving me an offer to get a lower price for two months, but I’m still not interested in it… It shows me an offer to pause it. So I don’t want to do that.”' }
+      { p: 1, text: '“There’s a pause. I don’t want to pause, so I don’t want to do that. I can just say something else… It wouldn’t let me do that unless I wanted to just pause it. So then I just had to click another one that would allow me to cancel it.”' },
+      { p: 2, text: '“It is giving me an offer to get a lower price for two months, but I’m still not interested in it… It shows me an offer to pause it. So I don’t want to do that. So I’m just gonna cancel the subscription.”' },
+      { p: 3, text: '“I’m not using it enough. Okay… I can’t find enough. So let me click on one option and click on Cancel subscription.”' },
+      { p: 4, text: '“I chose not using it enough, and then it said, well, you can use it for maybe two months at a time… It wasn’t a clear-cut way to just cancel. It really did try to keep me hanging on.”' }
     ],
-    saw: 'Not confirmed. Brad, Victor and Megan all gave low usage as their reason, and none of them spoke favourably about the pause. Brad and Megan turned it down, and Victor did not mention it. Mindy, the only one who saw both offers, declined both without preferring either.',
-    rec: 'Do not count on the pause to retain low-usage leavers. If it stays, keep it to one line with Cancel subscription beside it.' },
+    saw: 'Not confirmed: nobody who reached the pause offer wanted it. What separates the four is whether they knew they could still cancel. Not interested: Mindy turned down the 25% discount under “It’s too expensive”, then the pause under “I’m not using it enough”, and cancelled from that same panel. Megan also cancelled from the “not using it enough” panel; she felt the flow was trying to keep her, but she found the way through. Took the pause as mandatory: Brad read the “not using it enough” panel as allowing only a pause, switched his reason to “Something else” to cancel, and said he would otherwise make up a reason. Unclear: Victor picked “I’m not using it enough”, switched to “I can’t find enough to read or listen to” without saying why, and later said nothing tried to stop him. Only Brad gave low usage as his reason before starting; Victor and Megan chose it inside the flow.',
+    rec: 'Keep the offer. One user thought that the pause was mandatory because they didn’t scroll down enough.' },
   { id: 'H-09', theme: 'Task 4 · Confirmation and trust · Confidence gap', task: 'Task 4', verdict: 'validated',
     statement: 'Some participants finish the flow but remain unsure they won’t be charged again.',
     question: 'How confident are you that you won’t be charged again? What made you feel that way?',
@@ -1599,10 +1601,10 @@ const CX_UNPROMPTED = [
 ];
 
 const CX_NEXT_STEPS = [
-  { n: '01', title: 'Move Subscriptions up the account menu',
-    body: 'Three of four passed it over because it sits in its own section at the bottom. Put it in the main Account list or near the top.', refs: 'H-02, H-04' },
-  { n: '02', title: 'Keep a way to cancel inside every reason panel',
-    body: 'The “not using it enough” panel offers only Pause, and Brad changed his reason to get past it. Add Continue cancelling under each offer.', refs: 'H-06, H-07, H-08' },
+  { n: '01', title: 'Make Subscriptions stand out in the account menu',
+    body: 'Three of four passed it over before selecting it. Make the section clearer and increase its contrast, and improve the menu’s accessibility so people find it quickly.', refs: 'H-02, H-04' },
+  { n: '02', title: 'Keep the retention offers as they are',
+    body: 'Everyone who saw an offer declined it and still cancelled without help. The discount and pause offers stay unchanged.', refs: 'H-06, H-07, H-08' },
   { n: '03', title: 'Say on Payment methods that removing a card doesn’t cancel',
     body: 'Two participants went there first and one removed both cards. Add a line that points to Subscriptions.', refs: 'H-03' },
   { n: '04', title: 'Take Platinum Rewards out of Subscriptions',
@@ -1805,7 +1807,7 @@ const STUDIES = {
       { n: '3 of 4', label: 'Missed Subscriptions at first', accent: true }
     ],
     scenarioQuote: '\u201cYou signed up for a monthly subscription a few months ago\u2026 Now that you\u2019ve decided you no longer want this service, starting from the homepage, do whatever you would normally do to make sure you won\u2019t be charged for this subscription again.\u201d',
-    scenarioNote: 'Participants started logged in as a user called Sarah and first said aloud why they would cancel: Mindy because it was too expensive, the other three because they were not using it enough. Task 3 ran on the prototype; Task 4 asked them to talk through the experience afterwards.',
+    scenarioNote: 'Participants started logged in as a user called Sarah and were asked to say why they would cancel. Brad said he would not have time to read, and Mindy that it was too expensive; Victor’s and Megan’s recordings cut off before they gave a reason. Task 3 ran on the prototype; Task 4 asked them to talk through the experience afterwards.',
     themeLabel: { all: 'All tasks' },
     sessionRows: [
       { label: 'Study', value: 'Bookshelf Cancelling \u2013 Mobile \u00b7 Test 6260525' },
