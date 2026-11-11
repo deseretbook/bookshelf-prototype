@@ -429,7 +429,7 @@
     ],
     footer: {
       ABOUT: ["About Deseret Book", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
-      ACCOUNT: ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Platinum Rewards", "Request a Catalog"],
+      ACCOUNT: ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Gift a Subscription", "Redeem a Gifted Subscription", "Platinum Rewards", "Request a Catalog"],
       "CUSTOMER SERVICE": ["Contact Us", "Questions & Support", "Shipping & Returns", "Do Not Sell My Information", "Deseret Book Store Locations"]
     }
   };

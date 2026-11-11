@@ -47,6 +47,18 @@ def sh(*cmd, cwd=None, check=True):
     return r.stdout.strip()
 
 
+# --signed-in: every visit starts signed in as the prototype's sample account instead.
+SAMPLE_USER = {"name": "Sarah Johnson", "email": "sarah.johnson@example.com"}
+
+
+def reset_script(signed_in):
+    if not signed_in:
+        return RESET
+    return RESET.replace("start signed out with the baked state", "start signed in with the baked state").replace(
+        "['db-mobile-user','db-bsp-status'].forEach(function(k){localStorage.removeItem(k)});",
+        "localStorage.removeItem('db-bsp-status');localStorage.setItem('db-mobile-user',JSON.stringify(%s));" % json.dumps(SAMPLE_USER))
+
+
 def build(a):
     src, dst = os.path.abspath(a.src), os.path.join(a.repo, a.slug)
     if not os.path.isfile(os.path.join(src, a.entry)):
@@ -86,13 +98,14 @@ def build(a):
                 continue
             merged = {**json.loads(m.group(2)), **saved, **DEPLOY_STATE}
             html = html[: m.start(2)] + json.dumps(merged, indent=2) + html[m.end(2):]
-            if RESET not in html:
-                html = html.replace("<head>", "<head>" + RESET, 1)
+            rs = reset_script(a.signed_in)
+            if rs not in html:
+                html = html.replace("<head>", "<head>" + rs, 1)
             if HOLD not in html:
                 i = html.rfind("</body>"); html = html[:i] + HOLD + html[i:]
             open(p, "w", encoding="utf-8").write(html)
             notes.append(f"{os.path.relpath(p, dst)}: {len(saved)} saved Tweaks values, season {merged.get('season')}, "
-                         f"banner without animated elements, Platinum + Bookshelf+ {merged.get('bspPlan')}, starts signed out")
+                         f"banner without animated elements, Platinum + Bookshelf+ {merged.get('bspPlan')}, " + ("starts signed in as " + SAMPLE_USER["name"] if a.signed_in else "starts signed out"))
 
     hits = 0
     for root, _, files in os.walk(dst):
@@ -142,7 +155,7 @@ def qa(a):
                   running: document.getAnimations().filter(x => x.playState === 'running' && x.effect && x.effect.target && x.effect.target.closest && x.effect.target.closest('.plp-banner')).length })""")
                 problems = []
                 if st["panel"]: problems.append("Tweaks panel is on the page")
-                if st["signedIn"]: problems.append("visitor starts signed in")
+                if st["signedIn"] != a.signed_in: problems.append("visitor starts " + ("signed in" if st["signedIn"] else "signed out"))
                 if st["subs"] != {"platinum": True, "bookshelf": True}: problems.append(f"subscriptions are {st['subs']}")
                 if st["banners"] != 1 or st["still"] != 1: problems.append(f"{st['banners']} banners, {st['still']} still")
                 if st["motif"]: problems.append(f"{st['motif']} animated banner elements visible")
@@ -204,10 +217,10 @@ ap = argparse.ArgumentParser()
 sp = ap.add_subparsers(dest="cmd", required=True)
 b = sp.add_parser("build"); b.add_argument("--src", required=True); b.add_argument("--slug", default=FOLDER)
 b.add_argument("--repo", default="."); b.add_argument("--entry", default="index.html")
-b.add_argument("--tweaks")
+b.add_argument("--tweaks"); b.add_argument("--signed-in", action="store_true", help="visitor starts signed in as the sample account")
 b.add_argument("--prune", action="store_true", help="delete files the artifact no longer has (ask first)")
 q = sp.add_parser("qa"); q.add_argument("--url", required=True); q.add_argument("--routes", nargs="*")
-q.add_argument("--shots")
+q.add_argument("--shots"); q.add_argument("--signed-in", action="store_true", help="expect a signed-in visitor")
 p_ = sp.add_parser("push"); p_.add_argument("--slug", default=FOLDER); p_.add_argument("--repo", default=".")
 p_.add_argument("--message", required=True); p_.add_argument("--session")
 w = sp.add_parser("wait"); w.add_argument("--slug", default=FOLDER); w.add_argument("--repo", default=".")

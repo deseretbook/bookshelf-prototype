@@ -5,7 +5,7 @@
   const DS = () => window.DeseretBookDesignSystem_609afa || {};
   const GROUPS = {
     "About": ["About Deseret Book", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
-    "Account": ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Platinum Rewards", "Request a Catalog"],
+    "Account": ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Gift a Subscription", "Redeem a Gifted Subscription", "Platinum Rewards", "Request a Catalog"],
     "Submissions & Legal": ["Product Submission Guidelines", "Manuscript Submissions", "Legal", "SMS Terms and Conditions", "Bookshelf Plus Terms of Use"],
     "Customer Service": ["Contact Us", "Questions & Support", "Shipping & Returns", "Do Not Sell My Information", "Deseret Book Store Locations"]
   };
@@ -538,7 +538,45 @@
       lede: "These terms apply to the Deseret Bookshelf app and the Bookshelf+ subscription." });
   }
 
-  const PAGES = { "Product Submission Guidelines": ProductSubmissions, "Manuscript Submissions": ManuscriptSubmissions, "Legal": LegalHub, "SMS Terms and Conditions": SmsTerms, "Bookshelf Plus Terms of Use": BspTerms, "Careers": Careers, "Terms of Use": Terms, "Privacy Policy": Privacy, "Check Order": CheckOrder, "Gift Card Balance": GiftBalance, "Request a Catalog": Catalog, "Contact Us": Contact, "Questions & Support": Support, "Shipping & Returns": ShipReturns, "Do Not Sell My Information": DoNotSell };
+
+  /* ---------- Gift a Subscription / Redeem a Gifted Subscription ---------- */
+  function GiftSub({ onGo }) {
+    const { Button } = DS();
+    const plans = [{ value: "year", label: "12 months of Bookshelf+ — $99.00" }, { value: "month", label: "1 month of Bookshelf+ — $9.99" }];
+    const f = useForm({ plan: "year", rname: "", remail: "", name: "", email: "", msg: "" });
+    return h(Shell, { label: "Gift a Subscription", onGo,
+      lede: "Give someone unlimited access to 4,000+ audiobooks and eBooks in the Deseret Bookshelf app. The gift arrives by email, and the recipient redeems it with a code. A gift doesn’t renew." },
+      h(Sec, { title: "Send a gift" },
+        f.done ? h(Ok, { title: "Gift on its way", again: "Send another gift", onAgain: f.reset }, h("p", null, "We’ll email the gift to " + f.v.remail.trim() + ", and send you a receipt at " + f.v.email.trim() + ".")) :
+        h("form", { className: "fp-form", noValidate: true, onSubmit: f.submit({ rname: req("Enter the recipient’s name."), remail: email, name: req("Enter your name."), email }) },
+          h(Pick, { label: "Gift length", value: f.v.plan, onChange: f.set("plan"), options: plans }),
+          h(Row, null, h(Field, { label: "Recipient name", value: f.v.rname, onChange: f.set("rname"), error: f.e.rname }), h(Field, { label: "Recipient email", type: "email", value: f.v.remail, onChange: f.set("remail"), error: f.e.remail })),
+          h(Row, null, h(Field, { label: "Your name", value: f.v.name, onChange: f.set("name"), error: f.e.name, autoComplete: "name" }), h(Field, { label: "Your email", type: "email", value: f.v.email, onChange: f.set("email"), error: f.e.email, autoComplete: "email" })),
+          h(Field, { label: "Message (optional)", multiline: true, rows: 4, value: f.v.msg, onChange: f.set("msg") }),
+          h("div", { className: "fp-acts" }, h(Button, { type: "submit", size: "md" }, "Continue to payment"), h(Button, { variant: "ghost", size: "md", onClick: () => onGo("Redeem a Gifted Subscription") }, "Redeem a gift instead")))));
+  }
+
+  function RedeemGift({ onGo }) {
+    const { Button } = DS();
+    const f = useForm({ code: "" });
+    return h(Shell, { label: "Redeem a Gifted Subscription", onGo,
+      lede: "Got a Bookshelf+ gift? Enter the code from your gift email to start your subscription. Sign in to the account you’ll use with the Deseret Bookshelf app." },
+      h(Sec, { title: "Enter your gift code" },
+        f.done ? h(Ok, { title: "Gift redeemed", again: "Redeem another code", onAgain: f.reset }, h("p", null, "Your Bookshelf+ gift is now on your account. Open the Deseret Bookshelf app to start listening.")) :
+        h("form", { className: "fp-form", noValidate: true, onSubmit: f.submit({ code: (x) => !x || !String(x).trim() ? "Enter your gift code." : String(x).replace(/[\s-]/g, "").length < 8 ? "Gift codes are at least 8 characters. Check your gift email and try again." : null }) },
+          h(Field, { label: "Gift code", value: f.v.code, onChange: f.set("code"), error: f.e.code, autoComplete: "off" }),
+          h("div", { className: "fp-acts" }, h(Button, { type: "submit", size: "md" }, "Redeem gift"), h(Button, { variant: "ghost", size: "md", onClick: () => onGo("Gift a Subscription") }, "Gift a subscription instead")))));
+  }
+
+  /* Two links in the Bookshelf+ pages' sand section, after the FAQ (same card style as the About page's Store Finder / Careers links). */
+  function BspGiftLinks() {
+    const go = (l) => { location.hash = "#/info/" + slug(l); };
+    return h("nav", { className: "fa-more bsp-gift-links", "aria-label": "Bookshelf+ gifts" },
+      ["Gift a Subscription", "Redeem a Gifted Subscription"].map((l) => h("button", { key: l, type: "button", onClick: () => go(l) }, h("span", null, l), h(DS().Icon, { name: "arrow_forward", size: 20 }))));
+  }
+  window.BspGiftLinks = BspGiftLinks;
+
+  const PAGES = { "Gift a Subscription": GiftSub, "Redeem a Gifted Subscription": RedeemGift, "Product Submission Guidelines": ProductSubmissions, "Manuscript Submissions": ManuscriptSubmissions, "Legal": LegalHub, "SMS Terms and Conditions": SmsTerms, "Bookshelf Plus Terms of Use": BspTerms, "Careers": Careers, "Terms of Use": Terms, "Privacy Policy": Privacy, "Check Order": CheckOrder, "Gift Card Balance": GiftBalance, "Request a Catalog": Catalog, "Contact Us": Contact, "Questions & Support": Support, "Shipping & Returns": ShipReturns, "Do Not Sell My Information": DoNotSell };
   function FooterPage(props) {
     const C = (window.FP_PAGES || {})[props.label];
     return C ? h(C, props) : null;

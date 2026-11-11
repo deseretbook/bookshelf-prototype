@@ -460,7 +460,7 @@
     ],
     footer: {
       ABOUT: ["About Deseret Book", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
-      ACCOUNT: ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Platinum Rewards", "Request a Catalog"],
+      ACCOUNT: ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Gift a Subscription", "Redeem a Gifted Subscription", "Platinum Rewards", "Request a Catalog"],
       "CUSTOMER SERVICE": ["Contact Us", "Questions & Support", "Shipping & Returns", "Do Not Sell My Information", "Deseret Book Store Locations"]
     }
   };
@@ -1140,7 +1140,7 @@ const DESK_MENU = (() => {
     m("Fine Art", "art", [m("Wall Art", "art_wall-art"), m("Temple Art", "art_temple-art"), m("Statues", "art_statues"), m("Savior Art", "art_savior-art"), m("D\u00e9cor", "art_decor")]),
     m("Missionary", "missionary", [m("Accessories", "missionary_accessories"), m("Bags", "missionary_bags"), m("Books", "missionary_books"), m("Jewelry", "missionary_jewelry"), m("Journals", "missionary_journals")]),
     m("Temple Worship", "temple-worship", [m("Temple Accessories", "temple-worship_temple-accessories", [m("Family Name Holders", "temple-worship_temple-accessories"), m("Temple Recommend Holders", "temple-worship_temple-accessories")]), m("Temple Bags", "temple-worship_temple-bags"), m("Temple Clothing", "temple-worship_temple-clothing")]),
-    m("Bookshelf+", "#/bookshelf-plus"),
+    m("Bookshelf+", "#/bookshelf-plus", [m("Gift a Subscription", "#/info/gift-a-subscription"), m("Redeem a Gifted Subscription", "#/info/redeem-a-gifted-subscription")]),
     m("Clearance", "clearance")
   ];
 })();
