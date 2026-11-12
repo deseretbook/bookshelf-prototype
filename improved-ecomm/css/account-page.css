@@ -109,7 +109,7 @@ html:not(#_):not(#_) .acct-d .db-drawer-h{padding-left:24px}
 html:not(#_) .acct-d .acct-id{padding:8px 0 0}
 html:not(#_) .acct-d .acct-pb{margin-top:20px}
 html:not(#_) .acct-d .acct-d-nav{display:flex;flex-direction:column;gap:24px;margin:20px -16px 24px}
-html:not(#_):not(#_) .acct-d-nav .acp-eb{color:var(--db-granite-deep)}
+html:not(#_):not(#_) .acct-d-nav .acp-eb{color:color-mix(in srgb,var(--db-charcoal) 60%,transparent)}
 .acct-d-nav::before,.acct-d-nav .acp-grp+.acp-grp::before{content:"";display:block;height:1px;margin:0 16px;background:var(--db-granite)}
 .acct-d-nav .acp-grp+.acp-grp::before{margin-bottom:22px}
 html:not(#_):not(#_) .acct-d-nav .acp-it:not(.on),html:not(#_):not(#_) .acct-d-nav .acp-it:not(.on) .acp-ic{color:var(--db-charcoal)}

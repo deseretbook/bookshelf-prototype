@@ -1960,7 +1960,8 @@ function BagDrawer({
   }, err) : null)));
 }
 const ACCT_LINKS = ["Account Information", "Orders", "Wishlist", "Addresses", "Payment methods", "Bookshelf+", "Platinum Rewards"];
-const ACCT_GROUPS = [["Account", ["Account Information", "Addresses", "Payment methods", "Orders", "Wishlist"]], ["Subscriptions", ["Bookshelf+", "Platinum Rewards"]]];
+const ACCT_GROUPS = [["Account", ["Account Information", "Addresses", "Payment methods", "Orders", "Wishlist", "Bookshelf+", "Platinum Rewards"]]];
+const ACCT_LABEL = { "Bookshelf+": "Bookshelf+ Subscription", "Platinum Rewards": "Platinum Rewards Membership" };
 const ACCT_ICON = { "Account Information": "person", "Orders": "package_2", "Wishlist": "favorite", "Addresses": "location_on", "Payment methods": "credit_card", "Bookshelf+": "headphones", "Platinum Rewards": "redeem" };
 /* Account page (#/account/<section>): one page, three columns. Left column mirrors the account drawer; the right two show the selected section. */
 const ACCT_SLUG = { "Orders": "orders", "Wishlist": "wishlist", "Addresses": "addresses", "Payment methods": "payment-methods", "Account Information": "account-information", "Platinum Rewards": "platinum-rewards", "Bookshelf+": "bookshelf-plus", "Subscriptions": "bookshelf-plus" };
@@ -1975,7 +1976,7 @@ function acctSection(route) {
 }
 function AcctNav({ section, onPick, className }) {
   const h = React.createElement;
-  return h("nav", { className: "acp-nav" + (className ? " " + className : ""), "aria-label": "Account sections" }, ACCT_GROUPS.map(([g, items]) => h("div", { key: g, className: "acp-grp", role: "group", "aria-label": g }, h("span", { className: "db-eyebrow acp-eb" }, g), items.map(l => h("button", { key: l, type: "button", className: "acp-it" + (section === ACCT_SLUG[l] ? " on" : ""), "aria-current": section === ACCT_SLUG[l] ? "page" : undefined, onClick: () => onPick(l) }, h("span", { className: "acp-icw" }, l === "Bookshelf+" ? h("span", { className: "acp-ic acp-bsp", "aria-hidden": "true" }) : [h(DS.Icon, { key: "o", name: ACCT_ICON[l], size: 20, weight: 400, className: "acp-ic acp-ic-o" }), h(DS.Icon, { key: "f", name: ACCT_ICON[l], size: 20, weight: 400, filled: true, className: "acp-ic acp-ic-f" })]), h("span", null, l))))));
+  return h("nav", { className: "acp-nav" + (className ? " " + className : ""), "aria-label": "Account sections" }, ACCT_GROUPS.map(([g, items]) => h("div", { key: g, className: "acp-grp", role: "group", "aria-label": g }, g === "Subscriptions" ? null : h("span", { className: "db-eyebrow acp-eb" }, g), items.map(l => h("button", { key: l, type: "button", className: "acp-it" + (section === ACCT_SLUG[l] ? " on" : ""), "aria-current": section === ACCT_SLUG[l] ? "page" : undefined, onClick: () => onPick(l) }, h("span", { className: "acp-icw" }, l === "Bookshelf+" ? h("span", { className: "acp-ic acp-bsp", "aria-hidden": "true" }) : [h(DS.Icon, { key: "o", name: ACCT_ICON[l], size: 20, weight: 400, className: "acp-ic acp-ic-o" }), h(DS.Icon, { key: "f", name: ACCT_ICON[l], size: 20, weight: 400, filled: true, className: "acp-ic acp-ic-f" })]), h("span", null, ACCT_LABEL[l] || l))))));
 }
 function AcctAuthPage({ onSignIn, go }) {
   const h = React.createElement;
