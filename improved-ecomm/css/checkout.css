@@ -30,7 +30,7 @@
 .co-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .co-back{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--teal)}
 .co-back svg{transform:rotate(90deg)}
-.co-eb{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.co-eb{color:var(--muted)}
 .co-prog{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:-4px}
 .co-prog i{height:4px;border-radius:var(--db-radius-pill);background:var(--db-dove);-webkit-transition:background-color 280ms var(--db-ease-standard);transition:background-color 280ms var(--db-ease-standard)}
 .co-prog i.on{background:var(--db-teal-400)}
@@ -164,7 +164,7 @@ input:focus-visible+.pz-box{outline:2px solid var(--db-charcoal);outline-offset:
 .pz-hint{margin:0;font-size:13px;color:var(--db-ink-muted)}
 .pz-rev{display:flex;flex-direction:column;gap:12px}
 .pz-rev-t{display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:var(--db-radius-sm);background:var(--db-pearl);border:1px solid var(--hair)}
-.pz-rev-l{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--db-ink-muted)}
+.pz-rev-l{color:var(--db-ink-muted)}
 .pz-rev-v{font-size:22px;line-height:1.25;color:var(--db-charcoal);overflow-wrap:anywhere}
 .pz-rev-v.script{font-family:var(--db-font-serif);font-style:italic}
 .pz-rev-v.block{font-family:var(--db-font-sans),'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:18px}
@@ -207,6 +207,8 @@ input:focus-visible+.pz-box{outline:2px solid var(--db-charcoal);outline-offset:
 
 .pdt{margin-top:24px;display:flex;flex-direction:column;gap:20px}
 .pdt-bar{overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+/* overflow-x:auto also clips vertically, which cut off the DS tab indicator (it sits at top:100%); keep it inside the 2px of bottom padding */
+.pdt-bar>span[aria-hidden]{top:auto!important;bottom:0}
 .pdt-bar::-webkit-scrollbar{display:none}
 .pdt-p{display:flex;flex-direction:column;gap:12px;font-size:15px;line-height:1.5;color:var(--db-charcoal)}
 .pdt-p p{margin:0;max-width:68ch;text-wrap:pretty}

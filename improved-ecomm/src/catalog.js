@@ -428,7 +428,7 @@
         x: "Invite the Spirit into your life and your home by remembering the life and mission of Jesus Christ. These artistic depictions of the Savior can help you feel connected to Him and remember His role in God\u2019s plan and His love for you." }
     ],
     footer: {
-      ABOUT: ["About Deseret Book", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
+      ABOUT: ["About Deseret Book", "Temple Open House", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
       ACCOUNT: ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Gift a Subscription", "Redeem a Gifted Subscription", "Platinum Rewards", "Request a Catalog"],
       "CUSTOMER SERVICE": ["Contact Us", "Questions & Support", "Shipping & Returns", "Do Not Sell My Information", "Deseret Book Store Locations"]
     }

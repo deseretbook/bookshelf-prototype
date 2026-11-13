@@ -273,7 +273,7 @@ html:not(#_) .plp-tiles-row .db-sc-tw{max-width:calc(100% / var(--sc-s,1));trans
 .plp-hero{margin:0 var(--pad);display:grid;grid-template-columns:minmax(0,1fr);overflow:hidden;border-radius:var(--db-radius-sm);background:var(--db-pearl)}
 .plp-hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:var(--db-space-3);padding:var(--db-space-6) var(--db-space-5)}
 .plp-hero.a-center .plp-hero-copy{align-items:center;text-align:center;margin:0 auto}
-.plp-hero-eb{font-size:var(--db-text-eyebrow);font-weight:700;letter-spacing:var(--db-tracking-eyebrow);text-transform:uppercase;color:var(--db-accent-deep)}
+.plp-hero-eb{color:var(--db-accent-deep)}
 .plp-hero-t{margin:0;font-family:var(--db-font-serif);font-weight:400;font-size:clamp(28px,4vw,40px);line-height:1.2;color:var(--db-display);text-wrap:pretty}
 .plp-hero-x{margin:0;max-width:var(--db-measure-lede);font-size:var(--db-text-body);line-height:var(--db-lh-body);color:var(--db-ink)}
 .plp-hero-copy>button,.plp-hero-copy>a{margin-top:var(--db-space-2)}
@@ -435,3 +435,6 @@ html:not(#_) .nf-es>p{max-width:44ch!important}
 /* Phones: the banner subtitle is a little smaller */
 /* each sentence stays on one line (the only break is the one after the first period), so the size follows the banner's width: it is the 17px, or less on narrower phones, at which the longest line fits */
 @media (max-width:639px){.plp-banner .plp-banner-x{font-size:clamp(11px,calc((100cqw - 48px) / 21),17px)}.plp-banner .plp-banner-x .plp-banner-l{white-space:nowrap}}
+
+/* Temple Open House hero: the summer sky and sun (SunMotif) behind the copy, on the Temple tweaks (TempleBackdrop in plp.js). */
+/* Sun height (Tweaks: Temple > Sun): every part of the sun (core, glow, rays, haloes) shares one origin, so they all move together. */

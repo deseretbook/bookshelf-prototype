@@ -383,24 +383,63 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "summer_sunG7P": 100,
   "summer_sunG8C": "purple-500",
   "summer_sunG8M": 100,
-  "summer_sunG8P": 100
+  "summer_sunG8P": 100,
+  "temple_bgR": 0,
+  "temple_bgS": 125,
+  "temple_bgY": 0,
+  "temple_motion": false,
+  "temple_sunBlur": 10,
+  "temple_sunG1C": "white",
+  "temple_sunG1M": 100,
+  "temple_sunG1P": 0,
+  "temple_sunG2C": "white",
+  "temple_sunG2M": 100,
+  "temple_sunG2P": 0,
+  "temple_sunG3C": "yellow-200",
+  "temple_sunG3M": 50,
+  "temple_sunG3P": 0,
+  "temple_sunG4C": "white",
+  "temple_sunG4M": 0,
+  "temple_sunG4P": 100,
+  "temple_sunG5C": "white",
+  "temple_sunG5M": 100,
+  "temple_sunG5P": 100,
+  "temple_sunG6C": "purple-400",
+  "temple_sunG6M": 100,
+  "temple_sunG6P": 100,
+  "temple_sunG7C": "purple-500",
+  "temple_sunG7M": 100,
+  "temple_sunG7P": 100,
+  "temple_sunG8C": "purple-500",
+  "temple_sunG8M": 100,
+  "temple_sunG8P": 100,
+  "temple_sunGN": 4,
+  "temple_sunGlow": 100,
+  "temple_sunHalos": 2,
+  "temple_sunOn": true,
+  "temple_sunRayCount": 21,
+  "temple_sunRays": 85,
+  "temple_sunSize": 200,
+  "temple_sunSky": 60,
+  "temple_sunSpeed": 30,
+  "temple_sunY": 96
 }/*EDITMODE-END*/;
 /* Summer sky gradient editor: each stop is a DS color token, its strength over white and its position from the sun (0%)
    out to the banner's edge (100%). The bar previews the stops in that order. */
 const SKY_COLORS = ["white", "pearl", "yellow-100", "yellow-200", "yellow-300", "orange-100", "orange-200", "orange-300", "orange-400", "red-100", "red-200", "red-300",
   "pink-100", "pink-200", "pink-300", "purple-100", "purple-200", "purple-300", "purple-400", "purple-500", "blue-100", "blue-200", "blue-300", "teal-100"];
 const skyName = (c) => String(c).replace(/-/g, " ").replace(/^[a-z]/, (x) => x.toUpperCase());
-function SkyStops({ t, setTweak }) {
-  const n = Math.max(2, Math.min(8, t.summer_sunGN | 0));
-  const stops = window.DB_SKY_STOPS ? window.DB_SKY_STOPS(Object.fromEntries(Object.keys(t).filter((k) => k.indexOf("summer_sunG") === 0).map((k) => [k.slice(7), t[k]]))) : "";
-  const k = (i, x) => "summer_sunG" + i + x;
+function SkyStops({ t, setTweak, pre = "summer" }) {
+  const n = Math.max(2, Math.min(8, t[pre + "_sunGN"] | 0));
+  const stops = window.DB_SKY_STOPS ? window.DB_SKY_STOPS(Object.fromEntries(Object.keys(t).filter((k) => k.indexOf(pre + "_sunG") === 0).map((k) => [k.slice(pre.length + 1), t[k]]))) : "";
+  const k = (i, x) => pre + "_sunG" + i + x;
   return (<>
     <TweakRow label="Sky gradient (sun → edge)">
       <div className="sky-bar" style={{ background: "linear-gradient(90deg," + stops + ")" }}>
         {Array.from({ length: n }, (_, j) => <i key={j} style={{ left: t[k(j + 1, "P")] + "%" }} />)}
       </div>
     </TweakRow>
-    <TweakSlider label="Color stops" value={n} min={2} max={8} step={1} onChange={(v) => setTweak("summer_sunGN", v)} />
+    <TweakSlider label="Color stops" value={n} min={2} max={8} step={1} onChange={(v) => setTweak(pre + "_sunGN", v)} />
     {Array.from({ length: n }, (_, j) => { const i = j + 1, c = t[k(i, "C")]; return (
       <div className="sky-stop" key={i}>
         <BrandColorPicker label={"Stop " + i} value={c} onChange={(v) => setTweak(k(i, "C"), v)} />

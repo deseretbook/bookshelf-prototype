@@ -42,12 +42,20 @@
   --db-duration-slow:  280ms; /* @kind other */
   --db-ease-standard: cubic-bezier(0.2, 0, 0, 1); /* @kind other */
   --db-ease-out:      cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --db-ease-in-out:   cubic-bezier(0.77, 0, 0.175, 1); /* @kind other */ /* things already on screen that move or resize */
+  --db-ease-in:       cubic-bezier(0.55, 0, 1, 0.45); /* @kind other */ /* exits that leave the screen */
+  --db-duration-press: 100ms; /* @kind other */
+  --db-duration-out-base: 144ms; /* @kind other */ /* exits are 20% shorter than their entrance */
+  --db-duration-out-slow: 224ms; /* @kind other */
+  --db-duration-tip-in: 150ms; /* @kind other */ /* tooltips keep a short opacity fade under reduced motion */
+  --db-duration-tip-out: 120ms; /* @kind other */
+  --db-tip-scale: .95; /* @kind other */
   --db-transition: color var(--db-duration-base) var(--db-ease-standard),
                    background-color var(--db-duration-base) var(--db-ease-standard),
                    border-color var(--db-duration-base) var(--db-ease-standard),
                    box-shadow var(--db-duration-base) var(--db-ease-standard),
                    opacity var(--db-duration-base) var(--db-ease-standard),
-                   transform var(--db-duration-base) var(--db-ease-standard),
+                   transform var(--db-duration-press) var(--db-ease-out),
                    outline-color var(--db-duration-base) var(--db-ease-standard),
                    text-decoration-color var(--db-duration-base) var(--db-ease-standard),
                    fill var(--db-duration-base) var(--db-ease-standard),
@@ -69,6 +77,10 @@
     --db-duration-fast: 0ms; /* @kind other */
     --db-duration-base: 0ms; /* @kind other */
     --db-duration-slow: 0ms; /* @kind other */
+    --db-duration-press: 0ms; /* @kind other */
+    --db-duration-out-base: 0ms; /* @kind other */
+    --db-duration-out-slow: 0ms; /* @kind other */
+    --db-tip-scale: 1; /* @kind other */
   }
 }
 
@@ -130,7 +142,7 @@ a:hover { color: var(--db-link-hover); }
 
 /* StarRating picker: hover wash and visible focus (inline styles can’t express these). */
 .db-star-pick:hover{background:var(--db-dove)}
-.db-star-pick:active{transform:scale(0.98)}
+.db-star-pick:active{transform:scale(.97)}
 .db-star-pick{outline:2px solid transparent;outline-offset:2px}
 .db-star-pick:focus-visible{outline-color:var(--db-focus-ring)}
 
@@ -149,13 +161,13 @@ a:hover { color: var(--db-link-hover); }
   .db-btn-dark:hover{background:var(--db-black)}
   .db-btn-inverse:hover{background:var(--db-pearl)}
 }
-.db-btn:active{transform:scale(.98)}
+.db-btn:active{transform:scale(.97)}
 .db-btn:focus-visible{outline-color:var(--db-focus-ring)}
 @media (prefers-reduced-motion:reduce){.db-btn:active{transform:none}}
 
 /* Pagination: hover wash, press and focus (inline styles can’t express these). */
 .db-pg:hover{background:var(--db-dove) !important}
-.db-pg:active{transform:scale(0.98)}
+.db-pg:active{transform:scale(.97)}
 .db-pg{outline:2px solid transparent;outline-offset:2px}
 .db-pg:focus-visible{outline-color:var(--db-focus-ring)}
 
@@ -166,17 +178,17 @@ a:hover { color: var(--db-link-hover); }
 /* ProductCard: one link whose click area covers the card, responsive type, hover lift. */
 .db-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .db-pc{outline:2px solid transparent;outline-offset:4px;border-radius:var(--db-radius-sm);transition:outline-color var(--db-duration-base) var(--db-ease-standard)}
-.db-pc-title{font-size:16px;text-decoration-line:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:2px}
+.db-pc-title{--tlh:21px;line-height:var(--tlh);font-size:16px;text-decoration-line:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:2px}
 .db-pc-title::after{content:"";position:absolute;inset:0}
 .db-pc-title:focus-visible{outline:none}
 .db-pc:has(.db-pc-title:focus-visible){outline-color:var(--db-focus-ring)}
 .db-pc-actions{position:relative;z-index:1}
 .db-pc-rating .db-caption{font-size:var(--db-text-eyebrow)}
-.db-pc-cover{transition:transform var(--db-duration-slow) var(--db-ease-standard);will-change:transform}
+.db-pc-cover{transition:transform var(--db-duration-slow) var(--db-ease-standard)}
 .db-pc-img{isolation:isolate}
-.db-pc:hover .db-pc-cover{transform:translate3d(0,-4px,0)}
+.db-pc:hover .db-pc-cover{transform:translate3d(0,-4px,0);will-change:transform}
 .db-pc:hover .db-pc-title{text-decoration-color:currentColor}
-@media (min-width:640px){.db-pc-title{font-size:18px}}
+@media (min-width:640px){.db-pc-title{--tlh:23px;font-size:18px}}
 @media (prefers-reduced-motion:reduce){.db-pc:hover .db-pc-cover{transform:none}}
 /* ProductCard layout="row": phone list rows. Rating above the price bottom left, action bottom right, 24px above and below. Too narrow for the price and action side by side: the whole row scales down (ProductCard measures it). No image lift in a list. Wrap the rows in .db-pc-list for the hairline between them. */
 .db-pc-row:hover .db-pc-cover{transform:none}
@@ -185,9 +197,9 @@ a:hover { color: var(--db-link-hover); }
 .db-pc-list>*+*{box-shadow:0 -1px 0 var(--db-hairline)}
 
 /* SectionHeading: title steps up with the screen; "See all" is a real link. */
-.db-sh-t{font-size:24px}
-@media (min-width:640px){.db-sh-t{font-size:28px}}
-@media (min-width:1024px){.db-sh-t{font-size:32px}}
+.db-sh-t{font-size:24px;line-height:29px}
+@media (min-width:640px){.db-sh-t{font-size:28px;line-height:34px}}
+@media (min-width:1024px){.db-sh-t{font-size:32px;line-height:38px}}
 .db-sh-all{outline:2px solid transparent;outline-offset:2px;border-radius:2px;text-decoration-line:underline;text-decoration-color:transparent;flex:0 0 auto;font-family:var(--db-font-sans);font-size:var(--db-text-eyebrow);font-weight:800;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;color:var(--db-link);text-underline-offset:.2em}
 .db-sh-all:hover{color:var(--db-link);text-decoration-color:currentColor}
 .db-sh-all:focus-visible{outline-color:var(--db-focus-ring)}
@@ -205,8 +217,8 @@ a:hover { color: var(--db-link-hover); }
 .db-cb-pill:hover .db-cb-ic,button:hover>.db-cb-pill .db-cb-ic,a:hover>.db-cb-pill .db-cb-ic{color:var(--db-black)}
 /* Pill: every property moves. Padding and fill, the number's width and its fade transition both ways
    (filling, emptying, and 9 to 10); a new number also rises in. Motion tokens go to 0ms for reduced motion. */
-.db-cb-pill{transition:padding var(--db-duration-slow) var(--db-ease-standard),background-color var(--db-duration-slow) var(--db-ease-standard)}
-.db-cb-numwrap{transition:width var(--db-duration-slow) var(--db-ease-standard)}
+.db-cb-pill{transition:padding var(--db-duration-slow) var(--db-ease-in-out),background-color var(--db-duration-slow) var(--db-ease-standard)}
+.db-cb-numwrap{transition:width var(--db-duration-slow) var(--db-ease-in-out)}
 .db-cb-numfade{transition:opacity var(--db-duration-slow) var(--db-ease-standard),transform var(--db-duration-slow) var(--db-ease-standard)}
 .db-cb-pill.on .db-cb-num{animation:db-cb-num var(--db-duration-slow) var(--db-ease-standard)}
 @keyframes db-cb-num{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
@@ -220,14 +232,14 @@ a:hover { color: var(--db-link-hover); }
 .db-sc{outline:2px solid transparent;outline-offset:2px}
 .db-sc:focus-visible{outline-color:var(--db-focus-ring)}
 /* The card (image, radius and outline) grows on hover and shrinks on press; the pill is a sibling, so it stays still. */
-.db-sc-img{display:block;aspect-ratio:1/1;overflow:hidden;border-radius:var(--db-radius-lg);background:var(--db-pearl);box-shadow:0 0 0 1px color-mix(in srgb, var(--db-granite) 60%, transparent);transition:transform var(--db-duration-slow) var(--db-ease-standard);isolation:isolate;will-change:transform}
-.db-sc:hover .db-sc-img{transform:scale(1.02)}
-.db-sc:active .db-sc-img{transform:scale(.98)}
+.db-sc-img{display:block;aspect-ratio:1/1;overflow:hidden;border-radius:var(--db-radius-lg);background:var(--db-pearl);box-shadow:0 0 0 1px color-mix(in srgb, var(--db-granite) 60%, transparent);transition:transform var(--db-duration-slow) var(--db-ease-standard);isolation:isolate}
+.db-sc:hover .db-sc-img{transform:scale(1.02);will-change:transform}
+.db-sc:active .db-sc-img{transform:scale(.98);transition-duration:var(--db-duration-press);transition-timing-function:var(--db-ease-out)}
 @media (prefers-reduced-motion:reduce){.db-sc:hover .db-sc-img,.db-sc:active .db-sc-img{transform:none}}
 /* The image bleeds 1px past every edge (clipped by the rounded frame), so no sliver of the Pearl ground shows at the corners or while scaling. */
 .db-sc-img img{display:block;width:calc(100% + 2px);height:calc(100% + 2px);margin:-1px;max-width:none;object-fit:cover;object-position:center}
 .db-sc-tw{position:absolute;z-index:1;left:50%;bottom:0;transform:translate(-50%,50%);display:flex;align-items:center;justify-content:center;box-sizing:border-box;max-width:100%;height:40px;padding:0 20px;border-radius:var(--db-radius-pill);background:color-mix(in srgb, var(--db-pearl) 60%, transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);font-family:var(--db-font-serif);font-size:var(--db-text-body);font-weight:400;line-height:1.3}
-.db-sc-t{display:block;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center}
+.db-sc-t{display:block;line-height:24px;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center}
 .db-sc-tw.has-ic{gap:var(--db-space-2);padding-left:10px}
 .db-sc-ic{flex:none;color:var(--db-charcoal)}
 /* SubcategoryCard variant "below" (the default): same total height as the pill card (its width + 20px).
@@ -238,11 +250,12 @@ a:hover { color: var(--db-link-hover); }
 .db-sc-cap{display:block;margin-top:var(--db-space-2);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;font-family:var(--db-font-serif);font-size:var(--db-text-body);font-weight:400;line-height:24px;color:var(--db-ink)}
 
 /* Price sizes: sm cards, md cart and summaries, lg product page (Lora). */
-.db-price{line-height:1.3}
-.db-price-sm{font-size:12px}
-.db-price-md{font-size:16px}
-.db-price-lg .db-price-now{font-family:var(--db-font-serif);font-size:20px;font-weight:400}
-@media (min-width:1024px){.db-price-sm{font-size:14px}.db-price-lg .db-price-now{font-size:24px}}
+/* Whole-pixel line heights (about 1.3x), so heights and the positions below them stay on whole pixels. */
+.db-price-sm{font-size:12px;line-height:16px}
+.db-price-md{font-size:16px;line-height:21px}
+.db-price-lg{line-height:20px}
+.db-price-lg .db-price-now{font-family:var(--db-font-serif);font-size:20px;line-height:26px;font-weight:400}
+@media (min-width:1024px){.db-price-sm{font-size:14px;line-height:18px}.db-price-lg .db-price-now{font-size:24px;line-height:31px}}
 
 /* Accordion: hairline rings between items, 16px weight 500 triggers, height animates open. */
 .db-acc-item+.db-acc-item{box-shadow:0 -1px 0 var(--db-hairline)}
@@ -250,7 +263,7 @@ a:hover { color: var(--db-link-hover); }
 .db-acc-btn:hover{background:var(--db-ground-soft)}
 .db-acc-btn{outline:2px solid transparent;outline-offset:-2px}
 .db-acc-btn:focus-visible{outline-color:var(--db-focus-ring)}
-.db-acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--db-duration-slow) var(--db-ease-standard)}
+.db-acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--db-duration-slow) var(--db-ease-in-out)}
 .db-acc-panel.on{grid-template-rows:1fr}
 .db-acc-body{padding:0 var(--db-space-5) var(--db-space-5);color:var(--db-charcoal)}
 .db-acc{background:var(--db-white);border-radius:var(--db-radius-lg);box-shadow:0 0 0 1px color-mix(in srgb, var(--db-granite) 60%, transparent);overflow:hidden}
@@ -261,17 +274,17 @@ a:hover { color: var(--db-link-hover); }
 [data-db-field]:focus-visible{outline-color:var(--db-focus-ring)}
 
 /* Drawer: scrim fades, panel slides from its side; one width rule for every drawer. */
-.db-drawer-scrim{position:fixed;inset:0;z-index:100;background:var(--db-scrim);opacity:0;transition:opacity var(--db-duration-base) var(--db-ease-standard)}
-.db-drawer-scrim.on{opacity:1}
-.db-drawer{position:absolute;top:0;bottom:0;width:min(360px,92%);display:flex;flex-direction:column;background:var(--db-white);color:var(--db-ink);box-shadow:var(--db-shadow-overlay);outline:none;transition:transform var(--db-duration-slow) var(--db-ease-standard)}
+.db-drawer-scrim{position:fixed;inset:0;z-index:100;background:var(--db-scrim);opacity:0;transition:opacity var(--db-duration-out-base) var(--db-ease-in)}
+.db-drawer-scrim.on{opacity:1;transition:opacity var(--db-duration-base) var(--db-ease-standard)}
+.db-drawer{position:absolute;top:0;bottom:0;width:min(360px,92%);display:flex;flex-direction:column;background:var(--db-white);color:var(--db-ink);box-shadow:var(--db-shadow-overlay);outline:none;transition:transform var(--db-duration-out-slow) var(--db-ease-in)}
 .db-drawer-right{right:0;transform:translate3d(100%,0,0)}
 .db-drawer-left{left:0;transform:translate3d(-100%,0,0)}
-.db-drawer.on{transform:translate3d(0,0,0)}
+.db-drawer.on{transform:translate3d(0,0,0);transition:transform var(--db-duration-slow) var(--db-ease-standard)}
 .db-drawer-h{flex:0 0 auto;display:flex;align-items:center;gap:var(--db-space-3);padding:var(--db-space-2) var(--db-space-2) var(--db-space-2) var(--db-space-4);min-height:56px;box-sizing:border-box;position:relative;z-index:1;box-shadow:0 1px 0 var(--db-hairline)}
 .db-drawer-b{flex:1 1 auto;overflow:auto;overscroll-behavior:contain}
 .db-drawer-f{flex:0 0 auto;padding:var(--db-space-4);position:relative;z-index:1;box-shadow:0 -1px 0 var(--db-hairline)}
 @media (min-width:640px){.db-drawer{width:min(420px,100%)}}
-@media (prefers-reduced-motion:reduce){.db-drawer,.db-drawer.on{transform:none;opacity:0;transition:opacity 120ms var(--db-ease-standard)}.db-drawer.on{opacity:1}}
+@media (prefers-reduced-motion:reduce){.db-drawer,.db-drawer.on{transform:none;opacity:0;transition:opacity 120ms var(--db-ease-standard)}.db-drawer.on{opacity:1}.db-drawer-scrim,.db-drawer-scrim.on{transition-duration:120ms}}
 
 /* ProductCard color swatches: a 24px row under the cover (cards always keep it, empty when there are no colors, so a grid's
    cards stay one height). Each color is a 24px target holding a 16px dot; the row starts 4px left so the first dot lines up
@@ -307,3 +320,56 @@ a:hover { color: var(--db-link-hover); }
   .db-pc-dot{width:20px;height:20px}
   .db-pc-more{margin-left:2px;font-size:13px}
 }
+
+/* Corner smoothing (Apple-style continuous corners; Figma "corner smoothing").
+   Where the browser has CSS corner-shape (Chrome and Edge 139+), the non-pill radii are drawn as a superellipse instead of a circular arc.
+   Kept subtle on purpose: superellipse(1.35) at 1.2x the radius, which fits Figma's corner smoothing at 20% to about 1px per 100px of radius
+   and keeps the corner's 45-degree point within about 1px (per 100px of radius) of the plain circular radius, so a 12px radius still reads as 12px.
+   (Figma's 60% would be superellipse(1.85) at 1.6x, but its corners read about a third larger.) The tokens are scaled here, and the plain
+   4/8/12/16px values stay everywhere else (Safari, Firefox), where corners fall back to ordinary circular radii. Pills (999px) get the same curve at their natural half-height radius; circles (50%) are never smoothed. The scaled values below repeat the base radii in tokens.json: change both together. */
+@supports (corner-shape: squircle) {
+  html:root{
+    --db-corner-scale:1.2;
+    --db-corner:superellipse(1.35);
+    --db-corner-pill:superellipse(1.05);
+    --db-radius-sm:calc(4px * var(--db-corner-scale));
+    --db-radius-md:calc(8px * var(--db-corner-scale));
+    --db-radius-lg:calc(12px * var(--db-corner-scale));
+    --db-radius-xl:calc(16px * var(--db-corner-scale));
+  }
+  .db-pc,.db-sc,.db-sc-img,.db-acc,
+  [style*="--db-radius-sm"],[style*="--db-radius-md"],[style*="--db-radius-lg"],[style*="--db-radius-xl"],
+  [style*="--db-corner-scale"],
+  /* Pills too, with a much gentler curve (superellipse(1.05): the end cap stays a semicircle to within a quarter pixel at 40px tall, only the join with the flat top and bottom eases). The radius is the full half-height, so the scale above doesn't apply. Round controls (icon buttons, knobs, radio) use 50% and stay circles. */
+  [style*="--db-radius-pill"],.db-sc-tw,.db-pc-bsp{corner-shape:var(--db-corner-pill)}
+}
+
+/* Press (motion rule 4): pressable controls scale to .97 over 100ms ease-out (cards .98, above). Opt in with data-db-press. */
+[data-db-press]:not(:disabled):active{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){[data-db-press]:active{transform:none}}
+/* Press on the content inside a control whose own box must not move (SegmentedControl: the sliding pill is measured from it). */
+[data-db-press-in]:not(:disabled):active>.db-press-in{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){[data-db-press-in]:active>.db-press-in{transform:none}}
+/* Switch: the track gives on press; the knob stretches 12% as it travels, anchored on its trailing edge. */
+.db-sw:active .db-sw-track{transform:scale(.97)}
+.db-sw-go-on .db-sw-knob{transform-origin:0 50%;animation:db-sw-stretch-on var(--db-duration-base) var(--db-ease-in-out)}
+.db-sw-go-off .db-sw-knob{transform-origin:100% 50%;animation:db-sw-stretch-off var(--db-duration-base) var(--db-ease-in-out)}
+@keyframes db-sw-stretch-on{50%{scale:1.12 1}}
+@keyframes db-sw-stretch-off{50%{scale:1.12 1}}
+@media (prefers-reduced-motion:reduce){.db-sw:active .db-sw-track{transform:none}.db-sw-go-on .db-sw-knob,.db-sw-go-off .db-sw-knob{animation:none}}
+/* Reduced motion keeps short opacity fades (tokens are 0ms, so these two restate 120ms). */
+@media (prefers-reduced-motion:reduce){.db-pc-swap,.db-bc-in{animation-duration:120ms}}
+
+/* IconButton states, one property each so they never interfere: hover (mouse only) = background wash, press = scale (data-db-press), focus-visible = ring. */
+.db-ib{outline:2px solid transparent;outline-offset:2px;-webkit-tap-highlight-color:transparent}
+.db-ib-ghost{background:transparent;color:var(--db-charcoal);box-shadow:inset 0 0 0 1px transparent}
+.db-ib-outline{background:transparent;color:var(--db-charcoal);box-shadow:inset 0 0 0 1px var(--db-hairline)}
+.db-ib-filled{background:var(--db-accent);color:var(--db-accent-ink);box-shadow:inset 0 0 0 1px transparent}
+.db-ib-inverse{background:transparent;color:var(--db-white);box-shadow:inset 0 0 0 1px transparent}
+@media (hover:hover){
+  .db-ib-ghost:not(:disabled):hover,.db-ib-outline:not(:disabled):hover{background:var(--db-dove)}
+  .db-ib-filled:not(:disabled):hover{background:var(--db-accent-deep)}
+  .db-ib-inverse:not(:disabled):hover{background:rgba(255,255,255,.14)}
+  .db-ib.db-ib-bare:not(:disabled):hover{background:transparent}
+}
+.db-ib:focus-visible{outline-color:var(--db-focus-ring)}

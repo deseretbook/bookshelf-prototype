@@ -1120,6 +1120,9 @@
         h("p", { className: "plp-banner-t" }, bannerLines(copy.title)),
         h("p", { className: "plp-banner-x" }, bannerLines(copy.text))));
   }
+  /* Temple Open House hero background (#/info/temple-open-house): the summer sunrise (SunMotif) and sky on settings of its own
+     (Tweaks: Temple, keys "temple_...", sent as a db-temple event under the plain sun.../bg... names), separate from the seasonal
+     banner. Until the panel's values arrive the layer waits invisibly (4s at most), so it never shows the defaults first. */
   const TILE_MIN_S = 0.75;
   function TilesRow({ items, go }) {
     const ref = React.useRef(null);
@@ -1174,7 +1177,7 @@
     if (expired(m)) return null;
     const { Button } = DSX();
     const copy = h("div", { className: "plp-hero-copy" },
-      m.eyebrow ? h("span", { className: "plp-hero-eb" }, m.eyebrow) : null,
+      m.eyebrow ? h("span", { className: "db-eyebrow plp-hero-eb" }, m.eyebrow) : null,
       h("h2", { className: "plp-hero-t" }, m.title),
       m.text ? h("p", { className: "plp-hero-x" }, m.text) : null,
       m.cta && Button ? h(Button, { variant: m.kind === "promo" ? "inverse" : "primary", size: "md", onClick: () => follow(go, m.cta.to) }, m.cta.label) : null);

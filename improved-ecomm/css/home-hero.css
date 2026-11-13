@@ -2,7 +2,7 @@
 .hero.art{cursor:pointer;height:auto;background:none;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;position:relative;overflow:hidden}
 .art-img{height:260px;background:var(--stone) url("../assets/img/dw/DB-08.24-Hero-Desktop.webp") center 42%/cover no-repeat}
 .art-box{background:linear-gradient(180deg in oklch,rgba(58,54,51,.72),rgba(58,54,51,.46));-webkit-backdrop-filter:blur(12px) saturate(1.05);backdrop-filter:blur(12px) saturate(1.05);--sw-t:1px;--sc-t:rgba(191,144,110,.3);border-top-width:0;border-radius:var(--db-radius-md);position:relative;z-index:1;margin:-64px var(--pad) 0;padding:20px;display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center}
-.hero.art .h-title{display:block;color:#fff;width:100%;text-wrap:normal;text-align:center;font-size:21px;line-height:1.22}
+.hero.art .h-title{display:block;color:#fff;width:100%;text-wrap:normal;text-align:center;font-size:21px;line-height:1.22;line-height:round(up,1.22em,1px)}
 .hero.art .art-box .hero-sub{font-family:var(--db-font-serif);font-size:21px;line-height:1.22;color:var(--ink)}
 .hero.art .art-box .btn-gold{min-height:0;height:auto;background:none;border-radius:0;padding:0;font-size:11px;letter-spacing:.16em;color:#fff;align-self:center;order:-1;margin:0}
 .hero.art .hero-sub{color:var(--ink);text-align:center;font-size:12px;line-height:1.45}

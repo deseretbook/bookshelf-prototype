@@ -4,16 +4,16 @@
 .db-pb-bookshelf{background:var(--db-bsp-ground);box-shadow:0 0 0 1px color-mix(in srgb, var(--db-orange-200) 60%, transparent)}
 .db-pb-dove{background:var(--db-dove);box-shadow:0 0 0 1px color-mix(in srgb, var(--db-granite) 60%, transparent)}
 .db-pb-panel{display:flex;flex-wrap:wrap;align-items:center;gap:var(--db-space-3) var(--db-space-4);padding:var(--db-space-4)}
-.db-pb-title{margin:0;font-family:var(--db-font-serif);font-weight:400;font-size:18px;line-height:1.2;color:var(--db-display)}
+.db-pb-title{margin:0;font-family:var(--db-font-serif);font-weight:400;font-size:18px;line-height:1.2;line-height:round(up,1.2em,1px);color:var(--db-display)}
 .db-pb-bookshelf .db-pb-title{font-size:24px;color:var(--db-teal-500)}
 .db-pb-text{font-size:14px;line-height:1.5}
 .db-pb-band{display:flex;align-items:center;justify-content:space-between;gap:var(--db-space-4);width:100%;min-height:56px;padding:14px 20px;border:0;text-align:left;text-decoration:none;cursor:pointer;transition:var(--db-transition)}
 .db-pb-band:focus-visible{outline:2px solid var(--db-focus-ring);outline-offset:2px}
 .db-pb-txt{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:var(--db-space-1)}
-.db-pb-label{font-weight:900;font-size:clamp(10px,2.6vw,12px);letter-spacing:.1em;text-transform:uppercase;color:var(--db-teal-500)}
+.db-pb-label{line-height:1.3;line-height:round(up,1.3em,1px);font-weight:900;font-size:clamp(10px,2.6vw,12px);letter-spacing:.1em;text-transform:uppercase;color:var(--db-teal-500)}
 .db-pb-logo,.db-pb-mark{display:block;flex:0 0 auto;background-color:var(--db-orange-400);-webkit-mask:var(--bsp-svg) center/contain no-repeat;mask:var(--bsp-svg) center/contain no-repeat}
 .db-pb-logo{--bsp-svg:url(../ds/deseret-book/assets/bookshelf-plus/bookshelf-plus-horizontal.svg);aspect-ratio:768/132;width:clamp(110px,26vw,140px)}
 .db-pb-mark{--bsp-svg:url(../ds/deseret-book/assets/bookshelf-plus/bookshelf-plus-symbol.svg);aspect-ratio:180/132;width:48px}
-.db-pb-sub{display:none;font-size:14px;line-height:1.4;color:var(--db-charcoal)}
+.db-pb-sub{display:none;font-size:14px;line-height:20px;color:var(--db-charcoal)}
 @media (min-width:640px){.db-pb-band{min-height:72px;padding:16px 24px}.db-pb-sub{display:block}.db-pb-logo{width:175px}}
 @media (min-width:1024px){.db-pb-band{min-height:88px;padding:16px 40px}.db-pb-label{font-size:14px;letter-spacing:.15em}}

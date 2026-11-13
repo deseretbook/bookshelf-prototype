@@ -459,7 +459,7 @@
         x: "Invite the Spirit into your life and your home by remembering the life and mission of Jesus Christ. These artistic depictions of the Savior can help you feel connected to Him and remember His role in God\u2019s plan and His love for you." }
     ],
     footer: {
-      ABOUT: ["About Deseret Book", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
+      ABOUT: ["About Deseret Book", "Temple Open House", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
       ACCOUNT: ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Gift a Subscription", "Redeem a Gifted Subscription", "Platinum Rewards", "Request a Catalog"],
       "CUSTOMER SERVICE": ["Contact Us", "Questions & Support", "Shipping & Returns", "Do Not Sell My Information", "Deseret Book Store Locations"]
     }
@@ -1683,7 +1683,7 @@ function Footer({
     className: "fx-row",
     key: k
   }, /*#__PURE__*/React.createElement("h2", {
-    className: "fx-k"
+    className: "db-eyebrow fx-k"
   }, k), /*#__PURE__*/React.createElement("ul", {
     className: "fx-l"
   }, D.footer[k].map(it => /*#__PURE__*/React.createElement("li", {
@@ -2617,7 +2617,7 @@ function Personalize({
   }, /*#__PURE__*/React.createElement("div", {
     className: "pz-rev-t"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "pz-rev-l"
+    className: "db-eyebrow pz-rev-l"
   }, "Your imprint"), /*#__PURE__*/React.createElement("span", {
     className: "pz-rev-v" + (/Script/.test(z.style) ? " script" : " block")
   }, z.name), /*#__PURE__*/React.createElement("span", {
@@ -3970,7 +3970,7 @@ function Checkout({
     name: "check",
     size: 24
   })), /*#__PURE__*/React.createElement("span", {
-    className: "co-eb"
+    className: "db-eyebrow co-eb"
   }, "Order ", done.no), /*#__PURE__*/React.createElement("h1", null, "Thank you for your order"), /*#__PURE__*/React.createElement("p", null, "A confirmation is on its way to ", done.email, ". ", done.method.n, " shipping: ", done.method.eta.replace("Arrives", "arrives"), done.pre ? " Pre-order items ship on their release date, and you won’t be charged for them until they ship." : null), /*#__PURE__*/React.createElement("div", {
     className: "co-rev",
     style: { alignSelf: "stretch" }
@@ -4007,7 +4007,7 @@ function Checkout({
     style: { marginLeft: -12 },
     onClick: () => step === 1 ? go("#/bag") : next(step - 1)
   }, step === 1 ? "Back to cart" : "Back"), /*#__PURE__*/React.createElement("span", {
-    className: "co-eb"
+    className: "db-eyebrow co-eb"
   }, "Step ", step, " of 3")), /*#__PURE__*/React.createElement("div", {
     className: "co-prog",
     "aria-hidden": "true"
@@ -4380,17 +4380,17 @@ function Subscriptions({
   }, /*#__PURE__*/React.createElement("div", {
     className: "subs-h"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "subs-eb"
+    className: "db-eyebrow subs-eb"
   }, "My Account"), /*#__PURE__*/React.createElement("h1", null, "Subscriptions"), !any ? /*#__PURE__*/React.createElement("p", null, "You don\u2019t have any subscriptions yet. Both are available with your account.") : null), any ? /*#__PURE__*/React.createElement("section", {
     className: "subs-sec"
   }, /*#__PURE__*/React.createElement("h2", {
-    className: "subs-lab"
+    className: "db-eyebrow subs-lab"
   }, "Your subscriptions"), /*#__PURE__*/React.createElement("div", {
     className: "subs-grid"
   }, [subs.bookshelf ? bsp : null, subs.platinum ? plat : null])) : null, !all ? /*#__PURE__*/React.createElement("section", {
     className: "subs-sec"
   }, /*#__PURE__*/React.createElement("h2", {
-    className: "subs-lab"
+    className: "db-eyebrow subs-lab"
   }, any ? "Also available" : "Available to you"), /*#__PURE__*/React.createElement("div", {
     className: "subs-grid"
   }, [!subs.bookshelf ? bspPromo : null, !subs.platinum ? platPromo : null])) : null, /*#__PURE__*/React.createElement(Dialog, {

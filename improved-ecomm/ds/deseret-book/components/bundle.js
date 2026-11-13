@@ -303,7 +303,9 @@ const sizes = {
 /* The heart's drawn shape sits high in its box; inside the round button it drops 6% of the icon size to sit in the circle's visual center. */
 const HEART_DY = 0.06;
 
-/** A square-tapped, round icon-only control for toolbars and headers. */
+/** A square-tapped, round icon-only control for toolbars and headers.
+ *  Each state owns one thing, so they never fight: hover (mouse only) washes the background, press scales it, keyboard focus draws the ring
+ *  (CSS in bundle.css, .db-ib-*). Add className="db-ib-bare" where the glyph is the whole control (a filled circle on a colored ground) to skip the wash. */
 function IconButton({
   icon,
   label,
@@ -312,33 +314,12 @@ function IconButton({
   iconSize,
   filled = false,
   disabled = false,
+  className,
   style,
   ...rest
 }) {
   const box = sizes[size];
   const glyph = iconSize || (size === 'sm' ? 18 : size === 'lg' ? 24 : 20);
-  const skin = {
-    ghost: {
-      background: 'transparent',
-      color: 'var(--db-charcoal)',
-      boxShadow: 'inset 0 0 0 1px transparent'
-    },
-    outline: {
-      background: 'transparent',
-      color: 'var(--db-charcoal)',
-      boxShadow: 'inset 0 0 0 1px var(--db-hairline)'
-    },
-    filled: {
-      background: 'var(--db-accent)',
-      color: 'var(--db-accent-ink)',
-      boxShadow: 'inset 0 0 0 1px transparent'
-    },
-    inverse: {
-      background: 'transparent',
-      color: 'var(--db-white)',
-      boxShadow: 'inset 0 0 0 1px transparent'
-    }
-  }[variant];
   const nudge = icon === 'heart' || icon === 'favorite' ? {
     transform: 'translateY(' + (glyph * HEART_DY).toFixed(2) + 'px)'
   } : undefined;
@@ -346,21 +327,22 @@ function IconButton({
     type: "button",
     "aria-label": label,
     title: label,
-    disabled: disabled
+    disabled: disabled,
+    "data-db-press": true
   }, rest, {
+    className: 'db-ib db-ib-' + variant + (className ? ' ' + className : ''),
     style: {
       width: box,
       height: box,
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 'var(--db-radius-pill)',
+      borderRadius: '50%',
       border: 0,
       padding: 0,
       cursor: 'pointer',
       transition: 'var(--db-transition)',
       opacity: disabled ? 0.4 : 1,
-      ...skin,
       ...style
     }
   }), /*#__PURE__*/React.createElement(__ds_scope.Icon, {
@@ -376,10 +358,10 @@ Object.assign(__ds_scope, { IconButton });
 // components/feedback/dialog/dialog-motion.js
 try { (() => {
 const CSS = `
-.db-dialog{opacity:0;transform:translate3d(0,12px,0) scale(.96);transition:opacity 200ms var(--db-ease-standard),transform 200ms var(--db-ease-standard)}
-.db-dialog.is-on{opacity:1;transform:translate3d(0,0,0) scale(1);transition-duration:280ms}
-.db-dialog-scrim{opacity:0;transition:opacity 200ms var(--db-ease-standard)}
-.db-dialog-scrim.is-on{opacity:1;transition-duration:280ms}
+.db-dialog{opacity:0;transform:translate3d(0,12px,0) scale(.96);transition:opacity 224ms var(--db-ease-in),transform 224ms var(--db-ease-in)}
+.db-dialog.is-on{opacity:1;transform:translate3d(0,0,0) scale(1);transition:opacity 280ms var(--db-ease-standard),transform 280ms var(--db-ease-standard)}
+.db-dialog-scrim{opacity:0;transition:opacity 224ms var(--db-ease-in)}
+.db-dialog-scrim.is-on{opacity:1;transition:opacity 280ms var(--db-ease-standard)}
 @media (prefers-reduced-motion:reduce){.db-dialog,.db-dialog.is-on{transform:none;transition:opacity 120ms var(--db-ease-standard)}}
 `;
 
@@ -393,7 +375,7 @@ function ensureDialogMotion() {
 }
 
 /** Keeps an element mounted through its exit transition. Returns [mounted, visible]. */
-function useDialogPresence(React, open, exitMs = 200) {
+function useDialogPresence(React, open, exitMs = 224) {
   const [mounted, setMounted] = React.useState(open);
   const [visible, setVisible] = React.useState(false);
   React.useEffect(() => {
@@ -583,6 +565,7 @@ function Dialog({
     label: "Close",
     size: "lg",
     iconSize: 28,
+    className: "db-ib-bare",
     onClick: onClose,
     style: {
       position: 'absolute',
@@ -640,11 +623,11 @@ Object.assign(__ds_scope, { Dialog });
 // components/feedback/toast/toast-motion.js
 try { (() => {
 const CSS = `
-.db-toast{opacity:0;transform:translate3d(0,12px,0) scale(.96);transition:opacity 200ms var(--db-ease-standard),transform 200ms var(--db-ease-standard)}
-.db-toast.is-on{opacity:1;transform:translate3d(0,0,0) scale(1);transition-duration:280ms}
-.db-toast.is-on.is-bump{animation:db-toast-bump 280ms var(--db-ease-standard)}
+.db-toast{opacity:0;transform:translate3d(0,12px,0) scale(.96);transition:opacity 224ms var(--db-ease-in),transform 224ms var(--db-ease-in)}
+.db-toast.is-on{opacity:1;transform:translate3d(0,0,0) scale(1);transition:opacity 280ms var(--db-ease-standard),transform 280ms var(--db-ease-standard)}
+.db-toast.is-on.is-bump{animation:db-toast-bump 300ms var(--db-ease-out)}
 .db-toast-ic{animation:db-toast-ic 280ms var(--db-ease-standard) both}
-@keyframes db-toast-bump{0%,100%{opacity:1;transform:translate3d(0,0,0) scale(1)}40%{opacity:1;transform:translate3d(0,-2px,0) scale(1.03)}}
+@keyframes db-toast-bump{0%,100%{opacity:1;transform:translate3d(0,0,0) scale(1)}40%{opacity:1;transform:translate3d(0,-2px,0) scale(1.06)}}
 @keyframes db-toast-ic{0%{opacity:0;transform:scale(.6)}100%{opacity:1;transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.db-toast,.db-toast.is-on{transform:none;transition:opacity 120ms var(--db-ease-standard)}.db-toast.is-on.is-bump,.db-toast-ic{animation:none}}
 `;
@@ -659,7 +642,7 @@ function ensureToastMotion() {
 }
 
 /** Keeps an element mounted through its exit transition. Returns [mounted, visible]. */
-function useToastPresence(React, open, exitMs = 200) {
+function useToastPresence(React, open, exitMs = 224) {
   const [mounted, setMounted] = React.useState(open);
   const [visible, setVisible] = React.useState(false);
   React.useEffect(() => {
@@ -695,7 +678,13 @@ const TOAST_TONES = {
   },
   success: st('teal', 'check'),
   error: st('red', 'alert-circle'),
-  warning: st('yellow', 'warning'),
+  // Warning is the exception: Yellow 200 fill with dark text (charcoal on it is 8.6:1), border one shade lighter (100).
+  warning: {
+    icon: 'warning',
+    fill: 'var(--db-yellow-200)',
+    edge: 'var(--db-yellow-100)',
+    on: 'var(--db-charcoal)'
+  },
   info: st('blue', 'info'),
   // Reports an action that was undone (e.g. removed from favorites). Nothing was destroyed.
   undo: {
@@ -716,6 +705,13 @@ const BLUR = 'blur(12px) saturate(140%)';
 const GAP = 6,
   ARROW = 7,
   PAD_Y = 6;
+// Grows out of the side the trigger is on (and shrinks back into it).
+const ORIGIN = {
+  top: 'bottom center',
+  bottom: 'top center',
+  left: 'right center',
+  right: 'left center'
+};
 
 /**
  * Tooltip: translucent charcoal (80%) with a background blur, caption type, on hover or focus.
@@ -830,8 +826,10 @@ function Tooltip({
       textAlign: single ? 'center' : 'left',
       textWrap: 'pretty',
       opacity: shown ? 1 : 0,
+      scale: shown ? '1' : 'var(--db-tip-scale, .95)',
+      transformOrigin: ORIGIN[placement],
       pointerEvents: 'none',
-      transition: 'opacity var(--db-duration-fast) var(--db-ease-standard)',
+      transition: shown ? 'opacity var(--db-duration-tip-in) var(--db-ease-out), scale var(--db-duration-tip-in) var(--db-ease-out)' : 'opacity var(--db-duration-tip-out) var(--db-ease-in), scale var(--db-duration-tip-out) var(--db-ease-in)',
       zIndex: 20
     }
   }, label, /*#__PURE__*/React.createElement("span", {
@@ -850,7 +848,7 @@ Object.assign(__ds_scope, { Tooltip });
 // components/forms/checkbox/Checkbox.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-/** Square checkbox, 6px radius, charcoal fill when checked.
+/** Square checkbox, 6px radius (smoothed like the other radii where the browser supports it), charcoal fill when checked.
  *  Label lines are 24px; the 20px box sits 2px down so it centers on the first line, however many lines wrap. */
 function Checkbox({
   label,
@@ -898,7 +896,7 @@ function Checkbox({
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 6,
+      borderRadius: 'calc(6px * var(--db-corner-scale, 1))',
       boxShadow: checked ? 'var(--db-ring-strong)' : 'var(--db-ring-hairline)',
       background: checked ? 'var(--db-charcoal)' : 'var(--db-white)',
       color: 'var(--db-white)',
@@ -910,8 +908,10 @@ function Checkbox({
     weight: 400,
     style: {
       opacity: checked ? 1 : 0,
-      transform: checked ? 'scale(1)' : 'scale(0.6)',
-      transition: 'var(--db-transition)'
+      transform: checked ? 'scale(1)' : 'scale(0.25)',
+      filter: checked ? 'blur(0)' : 'blur(4px)',
+      willChange: 'transform, opacity, filter',
+      transition: 'opacity var(--db-duration-base) var(--db-ease-out), transform var(--db-duration-base) var(--db-ease-out), filter var(--db-duration-base) var(--db-ease-out)'
     }
   })), /*#__PURE__*/React.createElement("span", {
     style: {
@@ -1083,6 +1083,7 @@ function QuantityStepper({
       type: "button",
       "aria-label": dir < 0 ? 'Decrease ' + label.toLowerCase() : 'Increase ' + label.toLowerCase(),
       disabled: off,
+      "data-db-press": true,
       onClick: () => set(v + dir * step),
       style: {
         width: s.h,
@@ -1093,7 +1094,7 @@ function QuantityStepper({
         justifyContent: 'center',
         padding: 0,
         border: 0,
-        borderRadius: 'var(--db-radius-pill)',
+        borderRadius: '50%',
         background: 'transparent',
         color: 'var(--db-charcoal)',
         cursor: off ? 'default' : 'pointer',
@@ -1217,7 +1218,7 @@ function Radio({
         width: 20,
         height: 20,
         flex: '0 0 auto',
-        borderRadius: 'var(--db-radius-pill)',
+        borderRadius: '50%',
         boxShadow: selected ? 'var(--db-ring-strong)' : 'var(--db-ring-hairline)',
         background: 'var(--db-white)',
         display: 'inline-flex',
@@ -1229,11 +1230,13 @@ function Radio({
       style: {
         width: 10,
         height: 10,
-        borderRadius: 'var(--db-radius-pill)',
+        borderRadius: '50%',
         background: 'var(--db-charcoal)',
         opacity: selected ? 1 : 0,
-        transform: selected ? 'scale(1)' : 'scale(0.4)',
-        transition: 'var(--db-transition)'
+        transform: selected ? 'scale(1)' : 'scale(0.25)',
+        filter: selected ? 'blur(0)' : 'blur(4px)',
+        willChange: 'transform, opacity, filter',
+        transition: 'opacity var(--db-duration-base) var(--db-ease-out), transform var(--db-duration-base) var(--db-ease-out), filter var(--db-duration-base) var(--db-ease-out)'
       }
     })), labelText);
   }));
@@ -1333,7 +1336,8 @@ Object.assign(__ds_scope, { Select });
 // components/forms/switch/Switch.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-/** Switch — an immediate on/off setting. Uses the lead color when on. */
+/** Switch — an immediate on/off setting. Uses the lead color when on. The track gives a little on press; the knob eases
+ *  in-out and stretches 12% while it travels, anchored on its trailing edge (CSS in bundle.css: .db-sw-go-on / -off). */
 function Switch({
   label,
   checked = false,
@@ -1342,7 +1346,14 @@ function Switch({
   style,
   ...rest
 }) {
+  const prev = React.useRef(checked);
+  const go = React.useRef('');
+  if (prev.current !== checked) {
+    go.current = checked ? ' db-sw-go-on' : ' db-sw-go-off';
+    prev.current = checked;
+  }
   return /*#__PURE__*/React.createElement("label", {
+    className: 'db-sw' + go.current,
     style: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -1368,6 +1379,7 @@ function Switch({
       height: 1
     }
   })), /*#__PURE__*/React.createElement("span", {
+    className: "db-sw-track",
     style: {
       width: 44,
       height: 24,
@@ -1380,14 +1392,15 @@ function Switch({
       transition: 'var(--db-transition)'
     }
   }, /*#__PURE__*/React.createElement("span", {
+    className: "db-sw-knob",
     style: {
       width: 20,
       height: 20,
-      borderRadius: 'var(--db-radius-pill)',
+      borderRadius: '50%',
       background: 'var(--db-white)',
       boxShadow: 'var(--db-shadow-sm)',
       transform: checked ? 'translateX(20px)' : 'translateX(0)',
-      transition: 'var(--db-transition)'
+      transition: 'background-color var(--db-duration-base) var(--db-ease-standard), box-shadow var(--db-duration-base) var(--db-ease-standard), transform var(--db-duration-base) var(--db-ease-in-out)'
     }
   })), label);
 }
@@ -1398,12 +1411,12 @@ Object.assign(__ds_scope, { Switch });
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 /* Verbatim from the Carousel Chevron Button spec (uploads/carousel-chevron-button.md). */
-const CSS = `.carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;padding:0;display:grid;place-items:center;border:0;border-radius:999px;background:rgba(239,239,239,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:var(--db-charcoal);cursor:pointer;z-index:2;outline:2px solid transparent;outline-offset:2px;transition:background-color var(--db-duration-base) var(--db-ease-standard),color var(--db-duration-base) var(--db-ease-standard),opacity var(--db-duration-base) var(--db-ease-standard),outline-color var(--db-duration-base) var(--db-ease-standard),transform var(--db-duration-fast) var(--db-ease-standard)}
+const CSS = `.carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;padding:0;display:grid;place-items:center;border:0;border-radius:999px;background:rgba(239,239,239,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:var(--db-charcoal);cursor:pointer;z-index:2;outline:2px solid transparent;outline-offset:2px;transition:background-color var(--db-duration-base) var(--db-ease-standard),color var(--db-duration-base) var(--db-ease-standard),opacity var(--db-duration-base) var(--db-ease-standard),outline-color var(--db-duration-base) var(--db-ease-standard),transform var(--db-duration-press) var(--db-ease-out)}
 .carousel-arrow.prev{left:12px}.carousel-arrow.next{right:12px}
 .carousel-arrow>*{font-size:26px;line-height:1;font-variation-settings:"FILL" 0,"wght" 400,"opsz" 24}
 .carousel-arrow.prev>*{transform:translateX(-1px)}.carousel-arrow.next>*{transform:translateX(1px)}
 .carousel-arrow:hover{background:rgba(239,239,239,.7)}
-.carousel-arrow:active{transform:translateY(-50%) scale(.98)}
+.carousel-arrow:active{transform:translateY(-50%) scale(.97)}
 .carousel-arrow:focus-visible{outline-color:var(--db-charcoal)}
 .carousel-arrow:disabled{opacity:0;pointer-events:none}
 @media (hover:none){.carousel-arrow:hover{background:rgba(239,239,239,.45)}}
@@ -1463,7 +1476,8 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 /** Tabs — ALL CAPS DM Sans labels over a granite hairline, charcoal underline for the active tab.
  *  Each tab is always as wide as its bold (active) label: a hidden bold copy sits in the same grid cell in every state, labels
  *  never wrap and tabs never shrink, so neither the row, the underline nor a tab's box moves between states. The visible label
- *  eases its weight inside that fixed box, centered, so it grows evenly from its middle. */
+ *  eases its weight inside that fixed box, centered, so it grows evenly from its middle.
+ *  The underline is one shared element that slides (and resizes) from the old tab to the new one, ease in-out. */
 function Tabs({
   tabs = [],
   value,
@@ -1471,8 +1485,46 @@ function Tabs({
   style,
   ...rest
 }) {
+  const ref = React.useRef(null);
+  const [box, setBox] = React.useState(null);
+  const [live, setLive] = React.useState(false);
+  const measure = React.useCallback(() => {
+    const root = ref.current;
+    const el = root && root.querySelector('[aria-selected="true"]');
+    if (!el) {
+      setBox(null);
+      return;
+    }
+    const a = root.getBoundingClientRect(),
+      b = el.getBoundingClientRect();
+    const n = {
+      x: b.left - a.left - root.clientLeft,
+      w: b.width
+    };
+    setBox(p => p && Math.abs(p.x - n.x) < 0.01 && Math.abs(p.w - n.w) < 0.01 ? p : n);
+  }, []);
+  React.useLayoutEffect(measure, [value, tabs.length, measure]);
+  React.useEffect(() => {
+    const root = ref.current;
+    if (!root) return undefined;
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
+    if (ro) {
+      ro.observe(root);
+      Array.prototype.forEach.call(root.children, c => ro.observe(c));
+    }
+    if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    return () => {
+      if (ro) ro.disconnect();
+    };
+  }, [tabs.length, measure]);
+  React.useEffect(() => {
+    if (!box || live) return undefined;
+    const r = requestAnimationFrame(() => setLive(true));
+    return () => cancelAnimationFrame(r);
+  }, [box, live]);
   return /*#__PURE__*/React.createElement("div", _extends({
-    role: "tablist"
+    role: "tablist",
+    ref: ref
   }, rest, {
     style: {
       boxShadow: '0 1px 0 var(--db-hairline)',
@@ -1504,7 +1556,6 @@ function Tabs({
         padding: '0 0 var(--db-space-3)',
         position: 'relative',
         zIndex: 1,
-        boxShadow: active ? '0 2px 0 var(--db-charcoal)' : '0 2px 0 transparent',
         transition: 'var(--db-transition)',
         display: 'inline-grid',
         justifyItems: 'center',
@@ -1528,7 +1579,21 @@ function Tabs({
         transition: 'font-weight var(--db-duration-base) var(--db-ease-standard)'
       }
     }, labelText));
-  }));
+  }), box ? /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      position: 'absolute',
+      left: 0,
+      top: '100%',
+      height: 2,
+      width: box.w,
+      zIndex: 1,
+      pointerEvents: 'none',
+      background: 'var(--db-charcoal)',
+      transform: 'translateX(' + box.x + 'px)',
+      transition: live ? 'transform var(--db-duration-slow) var(--db-ease-in-out), width var(--db-duration-slow) var(--db-ease-in-out)' : 'none'
+    }
+  }) : null);
 }
 Object.assign(__ds_scope, { Tabs });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/navigation/tabs/Tabs.jsx", error: String((e && e.message) || e) }); }
@@ -1692,7 +1757,7 @@ function StarRating({
       justifyContent: 'center',
       border: 0,
       padding: 0,
-      borderRadius: 'var(--db-radius-pill)',
+      borderRadius: '50%',
       background: 'transparent',
       color: 'inherit',
       cursor: 'pointer',
@@ -1747,7 +1812,7 @@ const btn = {
   lineHeight: 1,
   color: 'var(--db-ink)',
   cursor: 'pointer',
-  transition: 'color var(--db-duration-fast) var(--db-ease-standard), outline-color var(--db-duration-fast) var(--db-ease-standard), background-color var(--db-duration-fast) var(--db-ease-standard), box-shadow var(--db-duration-fast) var(--db-ease-standard), transform var(--db-duration-fast) var(--db-ease-standard)'
+  transition: 'color var(--db-duration-fast) var(--db-ease-standard), outline-color var(--db-duration-fast) var(--db-ease-standard), background-color var(--db-duration-fast) var(--db-ease-standard), box-shadow var(--db-duration-fast) var(--db-ease-standard), transform var(--db-duration-press) var(--db-ease-out)'
 };
 
 /** Page navigation for long lists: numbered pills with chevrons, ellipses for long ranges,
@@ -1891,7 +1956,7 @@ function EmptyState({
         fontFamily: 'var(--db-font-serif)',
         fontWeight: 400,
         fontSize: 24,
-        lineHeight: 1.2,
+        lineHeight: '29px',
         color: 'var(--db-display)'
       }
     }, title) : null, children ? /*#__PURE__*/React.createElement("p", {
@@ -1925,7 +1990,7 @@ function EmptyState({
       fontFamily: 'var(--db-font-serif)',
       fontWeight: 400,
       fontSize: 24,
-      lineHeight: 1.2,
+      lineHeight: '29px',
       color: 'var(--db-display)',
       textWrap: 'balance'
     }
@@ -2424,6 +2489,42 @@ function ProductCard({
       textOverflow: 'ellipsis'
     }
   }, "Pre-order") : null, bookshelfPlus ? /*#__PURE__*/React.createElement(BookshelfPlusBadge, null) : null) : null;
+  const imgStyle = !trim ? null : fill ? {
+    position: 'absolute',
+    display: 'block',
+    maxWidth: 'none',
+    left: 0,
+    top: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center'
+  } : {
+    position: 'absolute',
+    display: 'block',
+    maxWidth: 'none',
+    left: -trim.x / trim.w * 100 + '%',
+    top: -trim.y / trim.h * 100 + '%',
+    width: 100 / trim.w + '%',
+    height: 100 / trim.h + '%'
+  };
+  // The image a swatch swap replaces (with the layout it had), kept under the new one while that fades in.
+  const curImg = React.useRef(null);
+  const prevImg = React.useRef(null);
+  const [settled, setSettled] = React.useState(null);
+  React.useEffect(() => {
+    if (!img || !imgStyle) return;
+    const c = curImg.current;
+    if (!c || c.img !== img) {
+      prevImg.current = c;
+      curImg.current = {
+        img,
+        style: imgStyle
+      };
+    } else c.style = imgStyle;
+  });
+  const lastShown = curImg.current && curImg.current.img !== img ? curImg.current : prevImg.current;
+  const outgoing = swapped && lastShown && lastShown.img !== img && settled !== img ? lastShown : null;
   const cover = /*#__PURE__*/React.createElement("div", {
     className: "db-pc-cover",
     style: {
@@ -2468,32 +2569,21 @@ function ProductCard({
       borderRadius: 'var(--db-radius-sm)',
       isolation: 'isolate'
     }
-  }, /*#__PURE__*/React.createElement("img", {
+  }, outgoing ? /*#__PURE__*/React.createElement("img", {
+    key: 'out-' + outgoing.img,
+    src: outgoing.img,
+    alt: "",
+    "aria-hidden": "true",
+    style: outgoing.style
+  }) : null, /*#__PURE__*/React.createElement("img", {
     key: img,
     src: img,
     alt: imgAlt,
     loading: "lazy",
     onError: setBroken,
     className: swapped ? 'db-pc-swap' : undefined,
-    style: fill ? {
-      position: 'absolute',
-      display: 'block',
-      maxWidth: 'none',
-      left: 0,
-      top: 0,
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover',
-      objectPosition: 'center'
-    } : {
-      position: 'absolute',
-      display: 'block',
-      maxWidth: 'none',
-      left: -trim.x / trim.w * 100 + '%',
-      top: -trim.y / trim.h * 100 + '%',
-      width: 100 / trim.w + '%',
-      height: 100 / trim.h + '%'
-    }
+    onAnimationEnd: () => setSettled(img),
+    style: imgStyle
   })), badge) : img && !broken ? /*#__PURE__*/React.createElement("img", {
     src: img,
     alt: imgAlt,
@@ -2537,7 +2627,7 @@ function ProductCard({
       textAlign: 'center',
       fontFamily: 'var(--db-font-serif)',
       fontSize: 13,
-      lineHeight: 1.3,
+      lineHeight: '17px',
       color: 'var(--db-ink-muted)'
     }
   }, title), badge), img && !broken && trim === null ? badge : null);
@@ -2549,19 +2639,18 @@ function ProductCard({
     style: {
       fontFamily: 'var(--db-font-serif)',
       fontWeight: 400,
-      lineHeight: 1.3,
       color: 'var(--db-ink)',
-      // Always two lines tall (2 x 1.3em), so one-line titles keep the same height; longer titles end in an ellipsis.
+      // Always two lines tall (2 x the whole-pixel line height, --tlh: 21px, 23px from 640px), so one-line titles keep the same height; longer titles end in an ellipsis.
       // In a row the title takes only the lines it needs, up to three; rows don't have to line up.
       display: '-webkit-box',
       WebkitBoxOrient: 'vertical',
       WebkitLineClamp: row ? 3 : 2,
       overflow: 'hidden',
       ...(row ? {
-        maxHeight: '3.9em',
+        maxHeight: 'calc(var(--tlh) * 3)',
         gridArea: 'title'
       } : {
-        height: '2.6em'
+        height: 'calc(var(--tlh) * 2)'
       })
     }
   }, title);
@@ -2746,7 +2835,6 @@ function SectionHeading({
       margin: 0,
       fontFamily: 'var(--db-font-serif)',
       fontWeight: 400,
-      lineHeight: 1.2,
       color: 'var(--db-display)',
       minWidth: 0
     }
@@ -2911,7 +2999,7 @@ function CountBadge({
       className: "db-cb-ic",
       style: {
         height: 26,
-        fontSize: 21.3,
+        fontSize: 21,
         overflow: 'visible',
         display: 'flex',
         alignItems: 'center',
@@ -3105,7 +3193,7 @@ function ProgressTracker({
       className: "db-caption",
       style: {
         color: reached ? 'var(--db-charcoal)' : 'var(--db-ink-muted)',
-        lineHeight: 1.3,
+        lineHeight: '21px',
         minWidth: 0
       }
     }, s, /*#__PURE__*/React.createElement("span", {
@@ -3187,7 +3275,7 @@ function Accordion({
         display: 'flex',
         color: 'var(--db-charcoal)',
         transform: on ? 'rotate(180deg)' : 'none',
-        transition: 'transform var(--db-duration-base) var(--db-ease-standard)'
+        transition: 'transform var(--db-duration-base) var(--db-ease-in-out)'
       }
     }, /*#__PURE__*/React.createElement(__ds_scope.Icon, {
       name: "keyboard_arrow_down",
@@ -3357,7 +3445,7 @@ Object.assign(__ds_scope, { SearchFilterBar });
 // components/feedback/drawer/Drawer.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const EXIT_MS = 280;
+const EXIT_MS = 224; // = --db-duration-out-slow
 const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 let uid = 0;
 
@@ -3638,7 +3726,9 @@ function Tag({
   style,
   ...rest
 }) {
-  return /*#__PURE__*/React.createElement("span", _extends({}, rest, {
+  return /*#__PURE__*/React.createElement("span", _extends({
+    "data-db-press": true
+  }, rest, {
     style: {
       fontFamily: 'var(--db-font-sans)',
       fontSize: 'var(--db-text-caption)',
@@ -3697,10 +3787,10 @@ const ICON = 22,
 /**
  * Toast: brief, non-blocking confirmation pill, 52px, fixed bottom-center. Independent of Dialog:
  * its own tones, motion and file.
- * - variant "solid" (default): value-400 tone fill, 1px border one shade lighter (value 300), white text and icon, overlay shadow.
+ * - variant "solid" (default): value-400 tone fill, 1px border one shade lighter (value 300), white text and icon, overlay shadow. Warning is the exception: Yellow 200 fill, Yellow 100 border, charcoal text and icon.
  * - variant "outline": white pill, tone-colored border and icon (neutral uses light gray granite), md shadow.
  * Motion: fade, 12px rise, scale .96 to 1 (280ms in, 200ms out). Changing `seq` replays a bump.
- * Links: `link` ({ label, href } or { label, onClick }) renders a small white Button with charcoal text.
+ * Links: `link` ({ label, href } or { label, onClick }) renders a small white __ds_scope.Button with charcoal text.
  * Duration: temporary (default) has no close button and calls onDismiss after `duration` ms;
  * `persistent` stays until closed and shows the close button. The app decides which per use.
  * Padding follows the pill rule.
@@ -3800,6 +3890,7 @@ function Toast({
     filled: true,
     label: "Dismiss",
     size: "md",
+    className: "db-ib-bare",
     onClick: onDismiss,
     style: {
       color: solid ? t.on : 'rgba(58, 54, 51, 0.6)',
@@ -3845,7 +3936,8 @@ const SIZES = {
   }
 };
 
-/** Pill-shaped segmented control. One option is always active, shown as a dark (charcoal) pill on a light track. */
+/** Pill-shaped segmented control. One option is always active, shown as a dark (charcoal) pill on a light track.
+ *  The pill is one shared element that slides (and resizes) to the chosen option, ease in-out. */
 function SegmentedControl({
   options = [],
   value,
@@ -3857,15 +3949,55 @@ function SegmentedControl({
   ...rest
 }) {
   const s = SIZES[size] || SIZES.md;
+  const ref = React.useRef(null);
+  const [box, setBox] = React.useState(null);
+  const [live, setLive] = React.useState(false);
+  // Measured from the real rects. The press scale is on the content inside each button, so the button's own box never moves and one measurement is exact.
+  const measure = React.useCallback(() => {
+    const root = ref.current;
+    const el = root && root.querySelector('[aria-checked="true"]');
+    if (!el) {
+      setBox(null);
+      return;
+    }
+    const a = root.getBoundingClientRect(),
+      r = el.getBoundingClientRect();
+    const n = {
+      x: r.left - a.left - root.clientLeft,
+      w: r.width
+    };
+    setBox(p => p && Math.abs(p.x - n.x) < 0.01 && Math.abs(p.w - n.w) < 0.01 ? p : n);
+  }, []);
+  React.useLayoutEffect(measure, [value, options.length, fullWidth, size, measure]);
+  React.useEffect(() => {
+    const root = ref.current;
+    if (!root) return undefined;
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
+    if (ro) {
+      ro.observe(root);
+      Array.prototype.forEach.call(root.children, c => ro.observe(c));
+    }
+    if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    return () => {
+      if (ro) ro.disconnect();
+    };
+  }, [options.length, measure]);
+  React.useEffect(() => {
+    if (!box || live) return undefined;
+    const r = requestAnimationFrame(() => setLive(true));
+    return () => cancelAnimationFrame(r);
+  }, [box, live]);
   const items = options.map(o => typeof o === 'string' ? {
     value: o,
     label: o
   } : o);
   const segH = s.h - s.inset * 2;
   return /*#__PURE__*/React.createElement("div", _extends({
-    role: "radiogroup"
+    role: "radiogroup",
+    ref: ref
   }, rest, {
     style: {
+      position: 'relative',
       display: fullWidth ? 'flex' : 'inline-flex',
       width: fullWidth ? '100%' : undefined,
       gap: 2,
@@ -3877,7 +4009,21 @@ function SegmentedControl({
       opacity: disabled ? 0.5 : 1,
       ...style
     }
-  }), items.map(it => {
+  }), box ? /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      position: 'absolute',
+      top: s.inset,
+      left: 0,
+      width: box.w,
+      height: segH,
+      pointerEvents: 'none',
+      borderRadius: 'var(--db-radius-pill)',
+      background: 'var(--db-charcoal)',
+      transform: 'translateX(' + box.x + 'px)',
+      transition: live ? 'transform var(--db-duration-slow) var(--db-ease-in-out), width var(--db-duration-slow) var(--db-ease-in-out)' : 'none'
+    }
+  }) : null, items.map(it => {
     const active = it.value === value;
     const iconOnly = it.icon && !it.label;
     return /*#__PURE__*/React.createElement("button", {
@@ -3887,6 +4033,7 @@ function SegmentedControl({
       "aria-checked": active,
       "aria-label": iconOnly ? it.ariaLabel || it.value : undefined,
       disabled: disabled || it.disabled,
+      "data-db-press-in": true,
       onClick: () => !active && onChange && onChange(it.value),
       style: {
         ...__ds_scope.pillPadding(segH, {
@@ -3902,7 +4049,9 @@ function SegmentedControl({
         border: 0,
         borderRadius: 'var(--db-radius-pill)',
         margin: 0,
-        background: active ? 'var(--db-charcoal)' : 'transparent',
+        position: 'relative',
+        zIndex: 1,
+        background: 'transparent',
         color: active ? 'var(--db-white)' : 'var(--db-charcoal)',
         fontFamily: 'var(--db-font-sans)',
         fontSize: s.font,
@@ -3910,16 +4059,27 @@ function SegmentedControl({
         lineHeight: 1,
         whiteSpace: 'nowrap',
         cursor: disabled || it.disabled ? 'default' : 'pointer',
-        transition: 'var(--db-transition)'
+        /* The label turns white and dark at the pace the pill travels, so it never goes white before the pill is under it. */
+        transition: 'color var(--db-duration-slow) var(--db-ease-in-out)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "db-press-in",
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 'var(--db-space-2)',
+        transition: 'transform var(--db-duration-press) var(--db-ease-out)'
       }
     }, it.icon ? /*#__PURE__*/React.createElement(__ds_scope.Icon, {
       name: it.icon,
       size: s.icon,
       filled: active,
       style: {
-        display: 'block'
+        display: 'block',
+        transition: 'font-variation-settings var(--db-duration-slow) var(--db-ease-in-out)'
       }
-    }) : null, it.label ? /*#__PURE__*/React.createElement("span", null, it.label) : null);
+    }) : null, it.label ? /*#__PURE__*/React.createElement("span", null, it.label) : null));
   }));
 }
 Object.assign(__ds_scope, { SegmentedControl });

@@ -4,7 +4,7 @@
   const { useState, useEffect, useMemo } = React;
   const DS = () => window.DeseretBookDesignSystem_609afa || {};
   const GROUPS = {
-    "About": ["About Deseret Book", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
+    "About": ["About Deseret Book", "Temple Open House", "Careers", "Terms of Use", "Privacy Policy", "Events", "Blog"],
     "Account": ["My Account", "Check Order", "Purchase an eGift Card", "Gift Card Balance", "Bookshelf Plus", "Gift a Subscription", "Redeem a Gifted Subscription", "Platinum Rewards", "Request a Catalog"],
     "Submissions & Legal": ["Product Submission Guidelines", "Manuscript Submissions", "Legal", "SMS Terms and Conditions", "Bookshelf Plus Terms of Use"],
     "Customer Service": ["Contact Us", "Questions & Support", "Shipping & Returns", "Do Not Sell My Information", "Deseret Book Store Locations"]
@@ -76,7 +76,7 @@
     return h("main", { className: "fp", "data-screen-label": label },
       h("header", { className: "fp-hd" },
         crumbs && DS().Breadcrumb ? h(DS().Breadcrumb, { className: "fp-crumbs", items: crumbs }) : null,
-        h("span", { className: "fp-eb" }, eyebrow || g),
+        h("span", { className: "db-eyebrow fp-eb" }, eyebrow || g),
         h("h1", { className: "fp-h1" }, title || label),
         lede ? h("p", { className: "fp-lede" }, lede) : null),
       navGroups ? h("div", { className: "fp-grid fp-acp-grid" },
@@ -156,7 +156,7 @@
     const steps = ["Order placed", "Processing", "Shipped", "Delivered"];
     return (
       f.done ? h("div", { className: "fp-card" },
-        h("div", { className: "fp-ord-h" }, h("div", null, h("span", { className: "fp-k" }, "Order"), h("strong", null, "#" + f.v.order.trim())), h("div", null, h("span", { className: "fp-k" }, "Status"), h("strong", null, "Shipped"))),
+        h("div", { className: "fp-ord-h" }, h("div", null, h("span", { className: "db-eyebrow fp-k" }, "Order"), h("strong", null, "#" + f.v.order.trim())), h("div", null, h("span", { className: "db-eyebrow fp-k" }, "Status"), h("strong", null, "Shipped"))),
         h("ol", { className: "fp-steps" }, steps.map((s, i) => h("li", { key: s, className: i <= 2 ? "on" : "" }, Icon ? h(Icon, { name: i <= 2 ? "check_circle" : "radio_button_unchecked", size: 18, filled: i <= 2 }) : null, h("span", null, s)))),
         h("p", { className: "fp-meta" }, "Shipped by Standard delivery, typically 5\u201310 business days. Tracking details were sent to " + f.v.email.trim() + "."),
         h("div", { className: "fp-acts" }, h(Button, { variant: "secondary", size: "md", onClick: f.reset }, "Check another order"), user ? h(Button, { variant: "ghost", size: "md", onClick: () => go("#/account/orders") }, "See all my orders") : null)) :

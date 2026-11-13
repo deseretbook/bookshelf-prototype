@@ -13,13 +13,13 @@
     return h("main", { className: "fp fx-about", "data-screen-label": "About Deseret Book" },
       h("section", { className: "fa-hero" },
         h("div", { className: "fa-hero-t" },
-          h("span", { className: "fp-eb" }, "About"),
+          h("span", { className: "db-eyebrow fp-eb" }, "About"),
           h("h1", { className: "fp-h1" }, "About Our Company"),
           P("Since 1866, Deseret Book Company has been the market leader in providing content and lifestyle products to support members of The Church of Jesus Christ of Latter-day Saints through its retail and publishing imprints. Deseret Book is committed to creating and offering resources to build faith, strengthen families, and promote personal virtues."),
           P("Deseret Book\u2019s purpose is to provide quality products that build faith, strengthen homes and families, ennoble personal virtues, and offer practical advice to religious and non-religious alike.")),
         Ph("Photo: Deseret Book store", "tall")),
       h("section", { className: "fa-hist" },
-        h("div", { className: "fa-hist-h" }, h("span", { className: "fp-eb" }, "Since 1866"), h("h2", { className: "fp-h2" }, "Our History")),
+        h("div", { className: "fa-hist-h" }, h("span", { className: "db-eyebrow fp-eb" }, "Since 1866"), h("h2", { className: "fp-h2" }, "Our History")),
         h("ol", { className: "fa-tl" }, T.map((t) => h("li", { key: t[0] }, h("span", { className: "fa-y" }, t[0]), h("span", null, t[1])))),
         h("div", { className: "fa-hist-b" },
           Ph("Archive photo: company history"),
@@ -41,7 +41,7 @@
     const f = useForm({ first: "", last: "", email: "", zip: "" });
     return h("main", { className: "fp fx-ev", "data-screen-label": "Events" },
       h("section", { className: "fe-hero" },
-        h("span", { className: "fp-eb" }, "Deseret Book Presents"),
+        h("span", { className: "db-eyebrow fp-eb" }, "Deseret Book Presents"),
         h("h1", { className: "fp-h1" }, "Deseret Book brings your favorite Latter-day Saint speakers and performers to stage."),
         h("p", { className: "fp-lede" }, "Come explore gospel insights and delight in powerful music at an upcoming event."),
         Ph("Photo: Deseret Book Presents event on stage", "wide")),
@@ -75,7 +75,7 @@
     return h("main", { className: "fp fx-pl", "data-screen-label": "Platinum Rewards" },
       h("section", { className: "fpl-hero" },
         h("div", { className: "fpl-hero-t" },
-          h("span", { className: "fp-eb" }, "Account"),
+          h("span", { className: "db-eyebrow fp-eb" }, "Account"),
           h("h1", { className: "fp-h1" }, "Platinum Rewards"),
           h("p", { className: "fp-lede" }, "Get points on purchases and exclusive discounts, including a discount on a Bookshelf+ subscription and more. Start your membership today!"),
           h("div", { className: "fp-acts" }, h(Button, { size: "lg", onClick: join }, "Start now"), h("span", { className: "fp-meta" }, "$25 per year. Cancel anytime."))),
@@ -104,7 +104,7 @@
     const rules = { from: req("Enter your name."), to: req("Enter your friend\u2019s name."), toEmail: email, toEmail2: (x, v) => !x || !x.trim() ? "Confirm your friend\u2019s email." : x.trim().toLowerCase() !== v.toEmail.trim().toLowerCase() ? "The emails don\u2019t match." : null, other: (x, v) => v.amt === "other" && !(amount >= 10 && amount <= 500) ? "Enter an amount from $10 to $500." : null };
     const ok = () => { flash && flash("eGift card added to your cart"); };
     return h("main", { className: "fp fx-eg", "data-screen-label": "Purchase an eGift Card" },
-      h("header", { className: "fp-hd" }, h("span", { className: "fp-eb" }, "Account"), h("h1", { className: "fp-h1" }, "Purchase an eGift Card"), h("p", { className: "fp-lede" }, "Send a Deseret Book eGift card by email, in any amount from $10 to $500.")),
+      h("header", { className: "fp-hd" }, h("span", { className: "db-eyebrow fp-eb" }, "Account"), h("h1", { className: "fp-h1" }, "Purchase an eGift Card"), h("p", { className: "fp-lede" }, "Send a Deseret Book eGift card by email, in any amount from $10 to $500.")),
       h("div", { className: "feg-grid" },
         h("div", { className: "feg-prev" },
           h("div", { className: "feg-card", "aria-hidden": "true" },
@@ -127,5 +127,118 @@
           h("div", { className: "fp-acts" }, h(Button, { type: "submit", size: "md" }, "Add to cart \u00b7 " + (amount ? money(amount) : "$0.00"))))));
   }
 
-  window.FP_PAGES = Object.assign(window.FP_PAGES || {}, { "About Deseret Book": About, "Events": Events, "Platinum Rewards": Platinum, "Purchase an eGift Card": EGift });
+
+  /* ---------- Temple Open House (DBD-43): the online version of the flagship "Look Again" experience ---------- */
+  function TempleOpenHouse({ onGo, go }) {
+    const { Button, Icon, Card, Tag } = DS();
+    useEffect(top, []);
+    const D = window.DB_DATA || { inCat: () => [], featuredContent: [] };
+    const cat = (id, a, b) => { try { return D.inCat(id).slice(a, b); } catch (e) { return []; } };
+    const th = (u) => (typeof thumb === "function" ? thumb(u) : u);
+    const f = useForm({ email: "" });
+    const art = cat("art_savior-art", 0, 4), know = cat("books_gospel-voices", 0, 4), live = cat("books_gospel-voices", 4, 8);
+    const posts = D.featuredContent || [];
+    const tile = (p) => h("li", { key: p.id }, h("a", { className: "toh-pt", href: "#/p/" + p.id, onClick: (e) => { e.preventDefault(); go("#/p/" + p.id); } },
+      h("span", { className: "toh-pi" }, p.img && p.img[0] ? h("img", { src: th(p.img[0]), alt: "", loading: "lazy", decoding: "async" }) : null),
+      h("span", { className: "toh-pn" }, p.t),
+      h("span", { className: "toh-pg" }, h("span", { className: "ul-t" }, "View details"), h(Icon, { name: "arrow_forward", size: 18 }))));
+    const prods = (list, cls) => list.length ? h("ul", { className: "toh-pl" + (cls ? " " + cls : ""), "aria-label": "Featured products" }, list.map(tile)) : null;
+    const rail = (label, off) => posts.length ? h("ul", { className: "toh-rail", "aria-label": label }, posts.map((_, i) => posts[(i + off) % posts.length]).map((a, i) => h("li", { key: i },
+      h("a", { className: "toh-art", href: a.url, target: "_blank", rel: "noopener" },
+        h("span", { className: "toh-ai" }, a.img ? h("img", { src: a.img, alt: "", loading: "lazy", decoding: "async" }) : null),
+        h("span", { className: "toh-ad" }, a.date),
+        h("span", { className: "toh-at" }, a.title))))) : null;
+    const hd = (eb, t, sub) => h("div", { className: "toh-hd" }, h("span", { className: "db-eyebrow fp-eb" }, eb), h("h2", { className: "fp-h2" }, t), sub ? h("p", { className: "toh-sub" }, sub) : null);
+    const pillar = (n, t, sub) => h("div", { className: "toh-hd toh-pillar" }, h("span", { className: "toh-n", "aria-hidden": "true" }, n), h("h2", { className: "fp-h2" }, t), h("p", { className: "toh-sub" }, sub));
+    const ext = (href, t) => h("a", { href, target: "_blank", rel: "noopener" }, h("span", { className: "ul-t" }, t));
+    const artists = [["Greg Olsen", "greg-olsen"], ["Kate Lee", "kate-lee"], ["Robert Boyd", "robert-boyd"], ["Simon Dewey", "simon-dewey"], ["Yongsung Kim", "yongsung-kim"]];
+    const notes = ["In the quiet", "Looking back at me", "Walking beside me", "Right where I am", "In the small things", "Close enough to touch"];
+    return h("main", { className: "fp fx-toh", "data-screen-label": "Temple Open House" },
+      h("section", { className: "toh-hero" },
+        
+        h("div", { className: "toh-hero-t" },
+          h("span", { className: "db-eyebrow fp-eb" }, "Salt Lake Temple Open House · April 5 – October 1, 2027"),
+          h("h1", { className: "fp-h1" }, h("span", { className: "toh-ln" }, "See Him. Know Him."), " ", h("span", { className: "toh-ln" }, "Live Like Him.")),
+          h("p", { className: "fp-lede" }, "Let this moment draw you closer to Christ. Explore the art and stories from our flagship store experience, wherever you are."),
+          h("div", { className: "fp-acts" }, h(Button, { size: "md", onClick: () => { const el = document.getElementById("toh-see"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); } }, "Experience now")))),
+      h("section", { className: "toh-hang-sec" },
+        h("ul", { className: "toh-hang", "aria-label": "Featured artists" }, artists.map(([n, sl]) => h("li", { key: sl }, h("a", { href: "#/c/featured-authors-artists_" + sl, onClick: (e) => { e.preventDefault(); go("#/c/featured-authors-artists_" + sl); } },
+          h("span", { className: "toh-hi" }, h("img", { src: "assets/img/cat/featured-authors-artists_" + sl + ".jpg", alt: "", loading: "lazy", decoding: "async" })), h("span", { className: "toh-an" }, n)))))),
+      h("section", { className: "toh-tie" },
+        h("div", null, h("h2", { className: "fp-h3" }, "The Salt Lake Temple Celebration"), P("The Salt Lake Temple reopens after years of renovation, and all of Temple Square is part of the celebration. From April 5 to October 1, 2027, there are events, exhibits and experiences on the Square and online, all inviting people to come closer to Jesus Christ.")),
+        h("div", { className: "fp-acts" }, h(Button, { variant: "secondary", size: "md", href: "https://www.templesquare.org/eng/home", target: "_blank", rel: "noopener", iconAfter: "open_in_new" }, "Visit templesquare.org"))),
+
+      h("section", { className: "toh-sec", id: "toh-see" },
+        pillar("1", "See Him", "Art that keeps Christ visible. Each piece shows the Savior as many people see Him."),
+        h("div", { className: "toh-lead" }, Ph("Video: How the World Sees Him", "wide"), h("div", null, h("h3", { className: "fp-h4" }, "How the World Sees Him"), P("A look at the inclusive Christ art in our flagship gallery, with prints ($12) and postcards ($3) you can take home."))),
+        rail("See Him articles", 0),
+        h(Card, { className: "toh-dl", bordered: false, padding: "none", style: { background: "var(--toh-y-soft)", padding: "clamp(24px,3vw,40px)" } }, h("span", { className: "toh-dl-i" }, h(Icon, { name: "download", size: 24 })), h("div", null, h("h3", { className: "fp-h4" }, "Family Discussion Guide"), P("A free download with questions to talk about together as you look at the art.")), h(Button, { variant: "secondary", size: "md", onClick: () => {} }, "Download the guide")),
+        prods(art)),
+
+      h("section", { className: "toh-sec toh-sec-alt" },
+        pillar("2", "Know Him", "Learning that deepens understanding."),
+        h("figure", { className: "toh-quote" }, h("blockquote", null, "Quote from President D. Todd Christofferson, to be supplied by Content."), h("figcaption", null, "President D. Todd Christofferson")),
+        rail("Know Him articles", 1),
+        prods(know)),
+
+      h("section", { className: "toh-sec" },
+        pillar("3", "Live Like Him", "Everyday faith."),
+        h("div", { className: "toh-lead" }, Ph("Video: DB Conversations", "wide"), h("div", null, h("h3", { className: "fp-h4" }, "DB Conversations"), P("Real conversations about what faith looks like in ordinary days."))),
+        h("h3", { className: "fp-h3 toh-vh" }, "What does it look like for you?"),
+        h("ul", { className: "toh-voices" }, ["Steve Young", "Sharon Eubank", "Camille Fronk Olson", "Thomas Griffith"].map((n) => h("li", { key: n }, Ph("Portrait: " + n, "toh-vp"), h("span", { className: "toh-vn" }, n), h("span", { className: "toh-vq" }, "Short reflection to come")))),
+        rail("Live Like Him articles", 2),
+        prods(live)),
+
+      h("section", { className: "toh-sec toh-sec-alt toh-prod" },
+        hd("Temple Collection", "Carry the moment with you"),
+        h("ul", { className: "toh-pl", "aria-label": "Temple collection categories" }, [["temple-worship_temple-clothing", "Clothing"], ["temple-worship_temple-bags", "Bags"], ["temple-worship_temple-accessories", "Accessories"], ["books_gospel-voices_temple-books", "Books"]].map(([id, n]) => h("li", { key: id }, h("a", { className: "toh-pt", href: "#/c/" + id, onClick: (e) => { e.preventDefault(); go("#/c/" + id); } },
+          h("span", { className: "toh-pi" }, h("img", { src: "assets/img/cat/" + id + ".jpg", alt: "", loading: "lazy", decoding: "async" })),
+          h("span", { className: "toh-pn" }, n),
+          h("span", { className: "toh-pg" }, h("span", { className: "ul-t" }, "Shop temple " + n.toLowerCase()), h(Icon, { name: "arrow_forward", size: 18 })))))),
+        h("div", { className: "fp-acts" }, h(Button, { size: "md", onClick: () => go("#/c/temple-worship") }, "Shop all temple products"))),
+
+      h("section", { className: "toh-sec" },
+        hd("Experience It In Person", "Visit the flagship store across from Temple Square"),
+        h("div", { className: "toh-inp" },
+          h("ul", { className: "toh-chips" }, ["Gallery", "Speaker series", "Conversations", "Children’s story time", "Live artist demos"].map((x) => h("li", { key: x }, h(Tag, { style: { background: "var(--toh-y-soft)", boxShadow: "none", cursor: "default" } }, x)))),
+          h("div", { className: "toh-store" },
+            h("h3", { className: "fp-h4" }, "Deseret Book Salt Lake Downtown"),
+            h("address", { className: "fp-addr" }, "45 W South Temple", h("br"), "Salt Lake City, UT 84101"),
+            P("Across from Temple Square, with a window display, the “How the World Sees Him” gallery and the “How do you see Him?” wall."),
+            h("div", { className: "fp-acts" }, h(Button, { variant: "secondary", size: "md", onClick: () => go("#/stores") }, "Store hours and directions"))))),
+
+      h("section", { className: "toh-sec toh-sec-alt" },
+        hd("Meet the artists", "Five artists from the How the World Sees Him gallery"),
+        h("ul", { className: "toh-artists" }, artists.map(([n, sl]) => h("li", { key: sl }, h("a", { href: "#/c/featured-authors-artists_" + sl, onClick: (e) => { e.preventDefault(); go("#/c/featured-authors-artists_" + sl); } },
+          h("span", { className: "toh-ap" }, h("img", { src: "assets/img/cat/featured-authors-artists_" + sl + ".jpg", alt: "", loading: "lazy", decoding: "async" })), h("span", { className: "toh-an" }, n)))))),
+
+      h("section", { className: "toh-sec" },
+        hd("How do you see Him?", "From the wall at our flagship store", "A curated set of sample notes. The final set comes from Content."),
+        h("ul", { className: "toh-wall" }, notes.map((n, i) => h("li", { key: n, className: "w" + (i % 3) }, n)))),
+
+      h("section", { className: "toh-sec toh-sec-alt" },
+        hd("Temple Square", "More to see during the celebration"),
+        h("ul", { className: "toh-ts" }, [
+          ["Tabernacle Dome presentations", "A Christ-centered show of light, music and imagery in the Salt Lake Tabernacle."],
+          ["Joseph Smith Memorial Building", "Experiences for children and families about the life and mission of Jesus Christ."],
+          ["Music and performances", "Free live music in venues across Temple Square."],
+          ["Church History Museum", "Family-friendly exhibits and art, including the Extraordinary Women exhibit."],
+          ["Temple Square Visitors’ Center", "Displays on Jesus Christ and the temple experience. Reservations are recommended."],
+          ["The Temple Square app", "Maps, schedules and tickets on site."]].map(([t, d]) => h("li", { key: t }, h("h3", { className: "fp-h4" }, t), P(d)))),
+        P(h(React.Fragment, null, "Tickets, dates and visit planning are managed by The Church of Jesus Christ of Latter-day Saints at ", ext("https://www.templesquare.org/eng/home", "templesquare.org"), "."))),
+
+      h("section", { className: "toh-sec toh-new" },
+        hd("New to Deseret Book?", "Faith-building books, art and gifts since 1866", null),
+        P("Deseret Book offers books, scriptures, music, art and gifts that help people build faith, strengthen homes and families, and live like Christ. You can shop online, find a store near you, or join Bookshelf+ for unlimited audiobooks and eBooks."),
+        h("div", { className: "fp-acts" }, h(Button, { variant: "secondary", size: "md", onClick: () => onGo("About Deseret Book") }, "About Deseret Book"), h(Button, { variant: "ghost", size: "md", onClick: () => go("#/bookshelf-plus") }, "Explore Bookshelf+"))),
+
+      h("section", { className: "toh-sec toh-mail" },
+        hd("Stay in the loop", "Get updates from the Look Again experience"),
+        f.done ? h(Ok, { title: "You’re on the list", again: "Use another email", onAgain: f.reset }, h("p", null, "We’ll send updates to " + f.v.email.trim() + ".")) :
+        h("form", { className: "fp-form toh-form", noValidate: true, onSubmit: f.submit({ email }) },
+          h(Field, { label: "Email", type: "email", value: f.v.email, onChange: f.set("email"), error: f.e.email, autoComplete: "email" }),
+          h("div", { className: "fp-acts" }, h(Button, { type: "submit", size: "md" }, "Sign up")))));
+  }
+
+  window.FP_PAGES = Object.assign(window.FP_PAGES || {}, { "Temple Open House": TempleOpenHouse, "About Deseret Book": About, "Events": Events, "Platinum Rewards": Platinum, "Purchase an eGift Card": EGift });
 })();

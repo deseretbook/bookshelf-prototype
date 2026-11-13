@@ -7,7 +7,7 @@
 /* Account navigation: grouped items (Account, Subscriptions) with an icon each. Default, hover (Dove wash), active (Charcoal). */
 html:not(#_) .acp-side .acp-nav{display:flex;flex-direction:column;gap:24px;margin:8px -16px 24px}
 .acp-grp{display:flex;flex-direction:column;gap:2px}
-.acp-eb{display:block;padding:0 16px 8px;text-transform:uppercase;color:var(--db-clay)}
+.acp-eb{display:block;padding:0 16px 8px;color:var(--db-yellow-500)}
 html:not(#_) .acp-it{display:flex;align-items:center;gap:12px;width:100%;height:44px;padding:0 20px 0 16px;border:0;border-radius:var(--db-radius-pill);background:transparent;font:inherit;font-size:15px;color:var(--db-yellow-600);text-align:left;cursor:pointer;transition:background-color var(--db-duration-base,180ms) var(--db-ease-standard),color var(--db-duration-base,180ms) var(--db-ease-standard),box-shadow var(--db-duration-base,180ms) var(--db-ease-standard)}
 html:not(#_) .acp-it .acp-ic{color:var(--db-yellow-600);transition:color var(--db-duration-base,180ms) var(--db-ease-standard),opacity var(--db-duration-base,180ms) var(--db-ease-standard)}
 .acp-icw{flex:none;display:inline-grid}
@@ -19,7 +19,7 @@ html:not(#_) .acp-it:is(:hover,.on) .acp-ic-f{opacity:1}
 html:not(#_) .acp-it:is(:hover,.on) .acp-ic-o{opacity:0}
 html:not(#_) .acp-it:not(.on):hover{background:transparent;box-shadow:inset 0 0 0 1px var(--db-yellow-700);color:var(--db-yellow-700)}
 html:not(#_) .acp-it:not(.on):hover .acp-ic{color:var(--db-yellow-700)}
-html:not(#_) .acp-it.on{background:var(--db-charcoal);color:var(--db-white)}
+html:not(#_) .acp-it.on{background:var(--db-yellow-700);color:var(--db-white)}
 html:not(#_) .acp-it.on .acp-ic{color:var(--db-white)}
 html:not(#_) .acp-it:focus-visible{outline:2px solid var(--db-charcoal);outline-offset:2px}
 .acp-side .acct-signout{align-self:flex-start}
@@ -115,6 +115,7 @@ html:not(#_):not(#_) .acct-d-nav .acp-eb{color:color-mix(in srgb,var(--db-charco
 html:not(#_):not(#_) .acct-d-nav .acp-it:not(.on),html:not(#_):not(#_) .acct-d-nav .acp-it:not(.on) .acp-ic{color:var(--db-charcoal)}
 html:not(#_):not(#_) .acct-d-nav .acp-it:not(.on):hover{box-shadow:inset 0 0 0 1px var(--db-charcoal);color:var(--db-charcoal)}
 html:not(#_):not(#_) .acct-d-nav .acp-it:not(.on):hover .acp-ic{color:var(--db-charcoal)}
+html:not(#_):not(#_) .acct-d-nav .acp-it.on{background:var(--db-charcoal)}
 
 /* Account page, signed out: the sign in / create account form, centered */
 .acp-auth{width:100%;max-width:calc(400px + 2 * var(--pad));margin:0 auto;box-sizing:border-box;padding:48px var(--pad) 96px;display:flex;flex-direction:column}

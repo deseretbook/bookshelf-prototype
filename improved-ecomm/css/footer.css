@@ -6,7 +6,7 @@ html:not(#_):not(#_) .ftr.fx .ftr-top{row-gap:var(--db-space-6)}
 .fx-row+.fx-row{box-shadow:0 -1px 0 color-mix(in srgb,var(--db-yellow-500) 30%,transparent)}
 .fx-row:first-child{padding-top:0}
 .fx-row:last-child{padding-bottom:0}
-.fx-k{margin:0;font-family:var(--db-font-sans,'DM Sans',sans-serif);font-weight:400;font-size:11px;line-height:1.5;letter-spacing:.3em;text-transform:uppercase;color:var(--db-clay)}
+.fx-k{margin:0;color:var(--db-clay)}
 .fx-l,.fx-legal{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap}
 .fx-l{gap:10px 28px}
 /* Phones and tablets (below 1024px): each sitemap group is a vertical list, one link per line. */

@@ -6,7 +6,7 @@
 .fp a:hover{color:var(--db-charcoal,#3a3633)}
 .fp p{margin:0;font-family:var(--db-font-sans);font-weight:var(--db-weight-sans-regular,400);font-size:var(--db-text-body,1rem);line-height:var(--db-lh-body,1.5);text-wrap:pretty}
 .fp-hd{display:flex;flex-direction:column;gap:12px}
-.fp-eb{font-family:var(--db-font-sans);font-weight:var(--db-weight-sans-bold,700);font-size:var(--db-text-eyebrow,.75rem);line-height:var(--db-lh-tight,1.2);letter-spacing:var(--db-tracking-eyebrow,.25em);text-transform:uppercase;color:var(--fp-acc)}
+.fp-eb{color:var(--fp-acc)}
 .fp-h1{margin:0;font-family:var(--db-font-serif,Lora,serif);font-weight:var(--db-weight-serif-regular,400);font-size:clamp(2.25rem,5vw,var(--db-text-heading,3rem));line-height:var(--db-lh-tight,1.2);color:var(--db-display,#3a3633);text-wrap:balance}
 .fp-h2{margin:0;font-family:var(--db-font-serif,Lora,serif);font-weight:var(--db-weight-serif-regular,400);font-size:clamp(1.5rem,2.4vw,1.75rem);line-height:var(--db-lh-tight,1.2);color:var(--db-display,#3a3633);text-wrap:balance}
 .fp-h3{margin:0;font-family:var(--db-font-serif,Lora,serif);font-weight:var(--db-weight-serif-regular,400);font-size:var(--db-text-body-lg,1.125rem);line-height:var(--db-lh-tight,1.2);color:var(--db-display,#3a3633)}
@@ -48,7 +48,7 @@
 .fp-ok,.fp-card{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:24px;border-radius:var(--db-radius-lg);background:var(--db-pearl,#f7f4f0);box-shadow:0 0 0 1px color-mix(in srgb,var(--db-sand) 60%,transparent);max-width:40rem}
 .fp-ok .fp-acts,.fp-ok>div:last-child{margin-top:8px}
 .fp-ord-h{display:flex;gap:40px;flex-wrap:wrap}.fp-ord-h>div{display:flex;flex-direction:column;gap:2px}
-.fp-k{font-weight:var(--db-weight-sans-bold,700);font-size:var(--db-text-eyebrow,.75rem);line-height:var(--db-lh-tight,1.2);letter-spacing:var(--db-tracking-eyebrow,.25em);text-transform:uppercase;color:var(--db-ink-muted,#56504b)}
+.fp-k{color:var(--db-ink-muted,#56504b)}
 .fp-ord-h strong{font-weight:400;font-family:var(--db-font-serif,Lora,serif);font-size:var(--db-text-body-lg,1.125rem)}
 .fp-steps{list-style:none;margin:8px 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%}
 .fp-steps li{display:flex;flex-direction:column;gap:6px;font-size:var(--db-text-caption,.8125rem);color:var(--db-ink-muted,#56504b);padding-top:10px;box-shadow:0 -2px 0 var(--db-granite,#e2ddd6)}
@@ -156,7 +156,6 @@
 .fs-list li>.fs-n{grid-row:1;grid-column:2;align-self:center}
 .fs-list li>a,.fs-list li>button{grid-column:1 / -1;grid-row:3;justify-self:start}
 /* Eyebrows site-wide: latest design-system spec (DM Sans Bold 700, 12px, 0.25em tracking, caps, 1.2 leading) */
-html:not(#_):not(#_) :is(.fx-k,.pdlg-eyebrow,.subs-eb,.subs-lab,.pz-rev-l,.ser-eb,.ser-lab,.ser-n,.fp-eb,.fp-k,.db-eyebrow){font-family:var(--db-font-sans);font-weight:var(--db-weight-sans-bold,700);font-size:var(--db-text-eyebrow,.75rem);line-height:var(--db-lh-tight,1.2);letter-spacing:var(--db-tracking-eyebrow,.25em);text-transform:uppercase}
 
 /* DS Buttons rendered as links inside footer pages are buttons, not text links: no underline (keeps icons clear of it in Safari) */
 html:not(#_) .fp a[style*="radius-pill"]{text-decoration:none}
@@ -164,8 +163,7 @@ html:not(#_) .fp a[style*="radius-pill"]{text-decoration:none}
 /* Contact Us: in-page navigation uses the account page layout (Pearl side card, grouped pill items with icons; styles in account-page.css) */
 .fp .fp-grid.fp-acp-grid{grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}
 .fp-acp .acp-grp:first-child::before{display:none!important}
-html:not(#_) .fp-acp.acp-side .acp-nav{margin:0 -20px}
-@media (min-width:1024px){html:not(#_) .fp-acp.acp-side .acp-nav{margin:0 -16px}}
+html:not(#_) .fp-acp.acp-side .acp-nav{margin:0 -16px}
 @media (min-width:640px) and (max-width:1023px){.fp .fp-grid.fp-acp-grid{grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:32px}html:not(#_) .fp-acp.acp-side .acp-nav{margin:0 -16px}}
 @media (min-width:1024px){.fp .fp-grid.fp-acp-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:48px}.fp-acp-grid>.fp-body{grid-column:span 2}}
 /* Questions & Support topic tiles are links (each topic has its own URL) */
@@ -175,3 +173,181 @@ html:not(#_) .fp-acp.acp-side .acp-nav{margin:0 -20px}
 /* Bookshelf+ pages: gift links after the FAQ */
 .bsp-gift-links{margin:32px 0 0;width:100%;grid-template-columns:minmax(0,1fr)}
 @media (min-width:640px){.bsp-gift-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Temple Open House (#/info/temple-open-house) */
+.fx-toh{gap:0;padding-left:0;padding-right:0}
+.fx-toh>section{padding-left:max(var(--pad,20px),var(--sa-l));padding-right:max(var(--pad,20px),var(--sa-r))}
+.toh-hero{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;align-items:center;padding-top:clamp(32px,6vw,64px);padding-bottom:48px}
+.toh-hero-t{display:flex;flex-direction:column;gap:16px;max-width:36rem}
+@media (min-width:900px){.toh-hero{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px}}
+.toh-tie{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:center;padding-top:32px;padding-bottom:32px;background:var(--db-pearl)}
+@media (min-width:900px){.toh-tie{grid-template-columns:minmax(0,1fr) auto;gap:48px}}
+.toh-sec{display:flex;flex-direction:column;gap:32px;padding-top:56px;padding-bottom:56px}
+.toh-sec-alt{background:var(--db-pearl)}
+.toh-hd{display:flex;flex-direction:column;gap:8px}
+.toh-sub{margin:0;color:var(--db-charcoal)}
+.toh-lead{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:center}
+@media (min-width:900px){.toh-lead{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px}}
+.toh-rail{list-style:none;margin:0;padding:0;display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.toh-rail::-webkit-scrollbar{display:none}
+.toh-rail>li{flex:0 0 min(280px,78%);scroll-snap-align:start}
+@media (min-width:900px){.toh-rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;overflow:visible}.toh-rail>li{flex:none}}
+.toh-art{display:flex;flex-direction:column;gap:8px;color:inherit;text-decoration:none}
+.toh-ai{display:block;aspect-ratio:16/10;overflow:hidden;border-radius:var(--db-radius-lg);background:var(--db-pearl)}
+.toh-ai img{width:100%;height:100%;object-fit:cover;display:block}
+.toh-ad{font-size:12px;line-height:16px;color:var(--db-charcoal)}
+.toh-at{font-family:var(--db-font-serif);font-size:18px;line-height:23px}
+.toh-art:hover .toh-at{text-decoration:underline;text-underline-offset:3px}
+.toh-dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px 20px;align-items:center}
+.toh-dl .db-btn,.toh-dl>button{grid-column:1/-1;justify-self:start}
+@media (min-width:640px){.toh-dl{grid-template-columns:auto minmax(0,1fr) auto}.toh-dl .db-btn,.toh-dl>button{grid-column:auto}}
+.toh-dl-i{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--db-radius-pill);background:var(--db-pearl)}
+.toh-dl p{margin:0}
+.toh-pl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px}
+@media (min-width:900px){.toh-pl{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}.toh-pl-6{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (min-width:640px) and (max-width:899px){.toh-pl-6{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.toh-pt{display:flex;flex-direction:column;gap:10px;color:inherit;text-decoration:none}
+.toh-pi{display:block;aspect-ratio:1/1;overflow:hidden;border-radius:var(--db-radius-lg);background:var(--db-white);box-shadow:0 0 0 1px color-mix(in srgb,var(--db-granite) 60%,transparent)}
+.toh-pi img{width:100%;height:100%;object-fit:contain;display:block}
+.toh-pn{font-family:var(--db-font-serif);font-size:16px;line-height:21px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.toh-pg{display:inline-flex;align-items:center;gap:6px;font-size:14px;line-height:20px;color:var(--db-link)}
+.toh-pt:hover .toh-pg .ul-t{text-decoration:underline;text-underline-offset:3px}
+.toh-quote{margin:0;padding:8px 0 8px 28px;border-left:3px solid var(--db-clay);max-width:880px}
+.toh-quote blockquote{margin:0 0 16px;font-family:var(--db-font-serif);font-size:clamp(24px,3.4vw,36px);line-height:1.3;line-height:round(up,1.3em,1px)}
+.toh-quote figcaption{font-size:14px;line-height:20px;color:var(--db-charcoal)}
+.toh-vh{margin:8px 0 -8px}
+.toh-voices{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px}
+@media (min-width:900px){.toh-voices{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}}
+.toh-voices li{display:flex;flex-direction:column;gap:6px}
+.toh-vp{aspect-ratio:1/1;border-radius:var(--db-radius-lg)}
+.toh-vn{font-family:var(--db-font-serif);font-size:18px;line-height:23px}
+.toh-vq{font-size:14px;line-height:20px;color:var(--db-charcoal)}
+.toh-inp{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+@media (min-width:900px){.toh-inp{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}}
+.toh-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.toh-store{display:flex;flex-direction:column;gap:12px}
+.toh-store p{margin:0}
+.toh-artists{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px}
+@media (min-width:640px){.toh-artists{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:900px){.toh-artists{grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}}
+.toh-artists a{display:flex;flex-direction:column;gap:10px;color:inherit;text-decoration:none}
+.toh-ap{display:block;aspect-ratio:1/1;overflow:hidden;border-radius:var(--db-radius-lg);background:var(--db-white)}
+.toh-ap img{width:100%;height:100%;object-fit:cover;display:block}
+.toh-an{font-family:var(--db-font-serif);font-size:18px;line-height:23px}
+.toh-artists a:hover .toh-an{text-decoration:underline;text-underline-offset:3px}
+.toh-wall{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (min-width:900px){.toh-wall{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}
+.toh-wall li{padding:24px 20px;border-radius:var(--db-radius-lg);font-family:var(--db-font-serif);font-size:clamp(18px,2.4vw,24px);line-height:1.3;line-height:round(up,1.3em,1px);min-height:96px;display:flex;align-items:center}
+.toh-wall .w0{background:var(--db-pearl)}
+.toh-wall .w1{background:var(--db-pearl)}
+.toh-wall .w2{background:var(--db-pearl)}
+.toh-ts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+@media (min-width:640px){.toh-ts{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 32px}}
+@media (min-width:900px){.toh-ts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.toh-ts p{margin:4px 0 0}
+.toh-new>p,.toh-mail .toh-form{max-width:40rem}
+.toh-sec>p{margin:0}
+html:not(#_):not(#_) .fx-toh :is(.toh-pt,.toh-art,.toh-artists a){color:var(--db-charcoal);text-decoration:none}
+html:not(#_):not(#_) .fx-toh :is(.toh-pt,.toh-art,.toh-artists a):hover :is(.toh-pn,.toh-at,.toh-an){text-decoration:underline;text-underline-offset:3px}
+html:not(#_):not(#_) .fx-toh .toh-pg{color:var(--db-link)}
+html:not(#_):not(#_) .fx-toh .toh-ad{text-decoration:none}
+.fx-toh .toh-hero .fp-ph{aspect-ratio:4/3}
+.fx-toh{padding-top:0}
+html:not(#_):not(#_) .fx-toh :is(.toh-lead h3,.toh-dl h3,.toh-store h3){font-family:var(--db-font-serif);font-weight:400;font-size:22px;line-height:28px;margin:0 0 8px}
+html:not(#_):not(#_) .fx-toh :is(.toh-tie h2,.toh-vh){font-family:var(--db-font-serif);font-weight:400;font-size:24px;line-height:30px;margin:0 0 8px}
+.fx-toh .toh-ts h3{font-family:var(--db-font-serif);font-weight:400;font-size:20px;line-height:26px;margin:0}
+.toh-sec .fp-acts{margin-top:0}
+
+/* Temple Open House: Gallery Label direction (white base, yellow highlights and actions) */
+.fx-toh{--toh-y:var(--db-yellow-200);--toh-y-soft:var(--db-yellow-100);--toh-y-deep:var(--db-yellow-300)}
+.fx-toh .db-btn-primary{--db-accent:var(--toh-y);--db-accent-ink:var(--db-charcoal);--db-accent-deep:var(--toh-y-deep)}
+.fx-toh .toh-hero{grid-template-columns:minmax(0,1fr);gap:40px;align-items:start}
+.fx-toh .toh-hero-t{max-width:44rem}
+.toh-hang{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px;align-items:end}
+.toh-hang li:last-child{grid-column:1/-1}
+.toh-hang a{display:flex;flex-direction:column;gap:8px;color:inherit;text-decoration:none}
+.toh-hi{display:block;aspect-ratio:3/4;overflow:hidden;background:var(--db-pearl)}
+.toh-hi img{width:100%;height:100%;object-fit:cover;display:block}
+.toh-hang li:last-child .toh-hi{aspect-ratio:16/10}
+@media (min-width:900px){.toh-hang{grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}.toh-hang li:last-child{grid-column:auto}.toh-hang li:last-child .toh-hi{aspect-ratio:3/4}.toh-hang li:nth-child(even) .toh-hi{aspect-ratio:1/1}}
+html:not(#_):not(#_) .fx-toh .toh-hang a:hover .toh-an{text-decoration:underline;text-underline-offset:3px}
+.fx-toh .toh-hang .toh-an{font-size:15px;line-height:20px}
+.fx-toh .toh-pillar{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 20px;align-items:baseline;border-top:1px solid var(--db-charcoal);padding-top:20px}
+.fx-toh .toh-n{grid-row:span 2;font-family:var(--db-font-serif);font-size:40px;line-height:44px;color:var(--db-yellow-400)}
+.fx-toh .toh-pillar .toh-sub{grid-column:2}
+.fx-toh .toh-hd .fp-eb{color:color-mix(in srgb,var(--db-charcoal) 75%,transparent)}
+.fx-toh .toh-quote{border-left-color:var(--toh-y);border-left-width:4px}
+.fx-toh .toh-quote blockquote{font-style:italic}
+html:not(#_):not(#_) .fx-toh .toh-pg{color:var(--db-charcoal)}
+html:not(#_):not(#_) .fx-toh .toh-pg .ul-t{text-decoration:underline;text-decoration-color:var(--toh-y);text-decoration-thickness:2px;text-underline-offset:4px}
+html:not(#_):not(#_) .fx-toh .toh-pt:hover .toh-pg .ul-t{text-decoration-color:var(--toh-y-deep)}
+.fx-toh .toh-wall li{background:var(--db-white);box-shadow:inset 0 0 0 1px var(--db-granite)}
+.fx-toh .toh-wall .w0{background:var(--toh-y-soft);box-shadow:none}
+.fx-toh .toh-wall .w1,.fx-toh .toh-wall .w2{background:var(--db-white)}
+.fx-toh .toh-hero-t .fp-eb{color:color-mix(in srgb,var(--db-charcoal) 75%,transparent)}
+html:not(#_):not(#_) .fx-toh .toh-pillar h2{font-size:clamp(30px,4vw,44px);line-height:1.12;line-height:round(up,1.12em,1px)}
+
+/* Unslop pass */
+.fx-toh :is(h1,h2,h3){text-wrap:balance}
+.fx-toh :is(p,address,li){text-wrap:pretty}
+.fx-toh .toh-ln{display:inline-block}
+.fx-toh .toh-ad{font-variant-numeric:tabular-nums}
+/* hierarchy: the temple piece leads the hang */
+@media (min-width:900px){.toh-hang{grid-template-columns:1fr 1fr 1.7fr 1fr 1fr}.toh-hang li:nth-child(3) .toh-hi{aspect-ratio:4/5}}
+/* spacing groups instead of boxes */
+.fx-toh .toh-dl-i{background:var(--db-white)}
+html:not(#_):not(#_) .fx-toh :is(.toh-pg .ul-t,.toh-art .toh-at,.toh-pn){transition:text-decoration-color .2s ease}
+@media (min-width:900px){.toh-hang{align-items:center}}
+/* Lighter hierarchy: bigger leads, more air, fewer tinted bands */
+.fx-toh .toh-hero{padding-top:clamp(48px,9vw,128px);padding-bottom:clamp(48px,7vw,96px);gap:clamp(40px,6vw,80px)}
+.fx-toh .toh-hero-t{gap:20px;max-width:56rem}
+html:not(#_):not(#_) .fx-toh .toh-hero h1{font-size:clamp(44px,8.5vw,104px);line-height:1.02;line-height:round(up,1.02em,1px);margin:0}
+.fx-toh .toh-hero .fp-lede{font-size:clamp(19px,2vw,24px);line-height:1.5;max-width:36rem;margin:4px 0 12px}
+.fx-toh .toh-tie{padding-top:clamp(40px,6vw,72px);padding-bottom:clamp(40px,6vw,72px)}
+.fx-toh .toh-sec{gap:clamp(32px,5vw,56px);padding-top:clamp(72px,10vw,144px);padding-bottom:0}
+.fx-toh .toh-sec-alt{background:none}
+.fx-toh .toh-prod{background:var(--db-pearl);margin-top:clamp(72px,10vw,144px);padding-top:clamp(56px,8vw,112px);padding-bottom:clamp(56px,8vw,112px)}
+.fx-toh .toh-prod+.toh-sec{padding-top:clamp(72px,10vw,144px)}
+.fx-toh .toh-mail{padding-bottom:clamp(72px,10vw,144px)}
+html:not(#_):not(#_) .fx-toh .toh-pillar h2{font-size:clamp(36px,5.4vw,68px);line-height:1.05;line-height:round(up,1.05em,1px)}
+.fx-toh .toh-n{font-size:clamp(40px,5.4vw,68px);line-height:1.05}
+.fx-toh .toh-pillar{padding-top:clamp(20px,3vw,32px)}
+.fx-toh .toh-pillar .toh-sub{font-size:clamp(17px,1.6vw,20px);line-height:1.5;max-width:40rem}
+@media (min-width:900px){.fx-toh .toh-lead{grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:56px}}
+.fx-toh .toh-quote{max-width:56rem;padding-left:clamp(20px,3vw,40px)}
+.fx-toh .toh-quote blockquote{font-size:clamp(28px,4.4vw,52px);line-height:1.2;line-height:round(up,1.2em,1px);max-width:24ch}
+.fx-toh .toh-rail{margin-top:clamp(0px,2vw,16px)}
+.fx-toh .toh-pl{margin-top:clamp(0px,2vw,16px)}
+.fx-toh .toh-pn{font-size:15px;line-height:20px}
+.fx-toh .toh-wall li{padding:clamp(28px,4vw,44px) 24px;min-height:clamp(120px,14vw,168px)}
+.fx-toh :is(.toh-ts,.toh-artists,.toh-voices){row-gap:clamp(32px,4vw,56px)}
+.fx-toh .toh-n{min-width:.8em;text-align:left}
+@media (min-width:900px){.toh-hang{align-items:end}}
+
+/* Hero background: the Temple sunrise (TempleBackdrop) fills the hero; the copy and the artist strip sit above it. */
+.fx-toh .toh-hero{position:relative;isolation:isolate;overflow:hidden}
+.fx-toh .toh-hero>:not(.toh-sky){position:relative;z-index:1}
+.fx-toh .toh-hero-t .fp-eb{color:var(--db-charcoal)}
+/* The artist strip is its own white section under the sunrise hero. */
+.fx-toh .toh-hang-sec{background:var(--db-white);padding-top:clamp(40px,6vw,88px);padding-bottom:clamp(8px,2vw,24px)}
+.fx-toh .toh-hero{padding-bottom:clamp(64px,9vw,128px)}
+.fx-toh .toh-hero .db-btn-primary{--db-accent:var(--db-charcoal);--db-accent-ink:var(--db-white);--db-accent-deep:var(--db-black)}
+/* Card images always fill their frame and run 1px past every edge (no hairline gap from rounding); the frame clips them. */
+.fx-toh :is(.toh-ai,.toh-pi,.toh-ap,.toh-hi){position:relative;overflow:hidden}
+.fx-toh :is(.toh-ai,.toh-pi,.toh-ap,.toh-hi) img{position:absolute;left:-1px;top:-1px;width:calc(100% + 2px);height:calc(100% + 2px);max-width:none;object-fit:cover;object-position:center}
+.fx-toh .toh-hi{border-radius:var(--db-radius-sm)}
+.fx-toh .toh-hang-sec{padding-top:clamp(16px,2.5vw,32px)}
+.fx-toh .toh-hero{padding-bottom:clamp(32px,4vw,56px)}
+.fx-toh .toh-hang-sec{padding-top:clamp(8px,1.2vw,16px)}
+/* Temple Open House: titles and eyebrows in the darker yellows (DS yellow-600/700), body copy stays charcoal */
+html:not(#_):not(#_) .fx-toh :is(.toh-hd h2,.toh-pillar h2){color:var(--db-yellow-700)}
+html:not(#_):not(#_) .fx-toh :is(.toh-hd,.toh-hero-t,.toh-pillar) .fp-eb{color:var(--db-yellow-600)}
+html:not(#_):not(#_) .fx-toh .toh-hero-t .fp-eb{color:var(--db-yellow-700)}
+html:not(#_):not(#_) .fx-toh .toh-hero-t h1 .toh-ln:first-child{color:var(--db-charcoal)}
+html:not(#_):not(#_) .fx-toh .toh-hero-t h1 .toh-ln:last-child{color:var(--db-yellow-700)}
+/* Temple Open House title, desktop: two lines, "See Him. Know Him." then "Live Like Him." */
+@media (min-width:900px){
+.fx-toh .toh-hero-t{max-width:none}
+.fx-toh .toh-hero-t h1 .toh-ln{display:block;white-space:nowrap}
+.fx-toh .toh-hero-t :is(.fp-lede,.fp-eb,p){max-width:40rem}
+}
