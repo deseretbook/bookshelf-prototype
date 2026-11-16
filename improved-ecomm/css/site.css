@@ -153,7 +153,7 @@ input.err,.acct-form input.err,.pdlg-c input.err{border-color:var(--db-status-er
 .news input:focus{outline:2px solid #fff;outline-offset:2px}
 .news .sub{width:117px;height:45px;border-radius:var(--db-radius-pill);background:#fff;display:grid;place-items:center;font-size:13px;font-weight:400;letter-spacing:.15em;color:var(--teal)}
 .news .ok{font-size:13px;color:#fff;text-align:center;margin:0}
-.ftr{background:var(--ink-2);padding:36px max(var(--pad),env(safe-area-inset-right,0px)) calc(100px + env(safe-area-inset-bottom,0px)) max(var(--pad),env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:28px}
+.ftr{background:var(--ink-2);padding:36px max(var(--pad),0px) calc(100px + 0px) max(var(--pad),0px);display:flex;flex-direction:column;gap:28px}
 
 
 
@@ -397,7 +397,7 @@ html:not(#_):not(#_) .acct-pb:hover button,html:not(#_):not(#_) .acct-pb button:
 .news h2{font-size:30px;text-align:left}
 .news p{text-align:left;font-size:14px}
 .news form{max-width:520px}
-.ftr{padding:56px max(var(--pad),env(safe-area-inset-right,0px)) calc(72px + env(safe-area-inset-bottom,0px)) max(var(--pad),env(safe-area-inset-left,0px));display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 32px;align-items:start}
+.ftr{padding:56px max(var(--pad),0px) calc(72px + 0px) max(var(--pad),0px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 32px;align-items:start}
 .ftr>.btn-white,.ftr .rule,.ftr .legal,.ftr .social{grid-column:1/-1}
 
 
@@ -500,7 +500,7 @@ html:not(#_):not(#_) .acct-pb:hover button,html:not(#_):not(#_) .acct-pb button:
 .news>div{max-width:38ch}
 .news h2{font-size:34px}
 .news form{flex:1;max-width:480px}
-.ftr{padding:72px max(var(--pad),env(safe-area-inset-right,0px)) calc(88px + env(safe-area-inset-bottom,0px)) max(var(--pad),env(safe-area-inset-left,0px));gap:40px 32px}
+.ftr{padding:72px max(var(--pad),0px) calc(88px + 0px) max(var(--pad),0px);gap:40px 32px}
 .plp-h{padding:32px var(--pad) 16px}
 .plp-h h1{font-size:40px}
 .plp-bar{padding-bottom:20px;font-size:13px}
