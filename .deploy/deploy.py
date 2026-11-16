@@ -22,7 +22,7 @@ EDIT_RE = re.compile(r"(/\*EDITMODE-BEGIN\*/)(\{.*?\})(/\*EDITMODE-END\*/)", re.
 FOLDER = "improved-ecomm"  # every deploy goes to this one folder
 # Deployed state: a signed-out visitor who has every plan (Platinum Rewards + Bookshelf+), and one
 # seasonal Clearance banner (the saved season), animations off. Applied after the saved Tweaks values.
-DEPLOY_STATE = {"platinum": True, "bookshelf": True, "motion": False}
+DEPLOY_STATE = {"platinum": True, "bookshelf": True, "motion": False, "viewport": "desktop"}  # viewport: the real page, never the Phone/Tablet presentation frame
 # The Tweaks panel is left out: its launcher never renders and it can never open. The component stays
 # mounted only because it hands the baked values to the page.
 PANEL_PATCHES = [
