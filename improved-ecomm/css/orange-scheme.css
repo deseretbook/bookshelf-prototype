@@ -534,3 +534,5 @@ html:not(#_) .db-sc,html:not(#_) .db-sc:is(:hover,:focus-visible){color:var(--db
 @media (min-width:640px){html:not(#_):not(#_):not(#_) :is([data-bsp="fiction"],[data-bsp="fiction-platinum"]) [data-hero-stack]{width:auto!important;max-width:900px!important}}
 html:not(#_):not(#_):not(#_) :is([data-bsp="fiction"],[data-bsp="fiction-platinum"]) [data-hero-cta] a,
 html:not(#_):not(#_):not(#_) :is([data-bsp="fiction"],[data-bsp="fiction-platinum"]) [data-hero-cta] a *{color:var(--db-white)!important}
+/* Hero text on the cover collage: between phone and wide desktop the collage shrinks under the centered headline, so the stack gets a Pearl panel (the phone layout already uses a card) */
+@media (min-width:640px) and (max-width:1199px){html:not(#_) :is([data-bsp="general"],[data-bsp="general-v2"],[data-bsp="fiction"],[data-bsp="fiction-platinum"]) [data-hero-stack]{background:rgba(247,244,240,.92)!important;backdrop-filter:blur(4px)!important;-webkit-backdrop-filter:blur(4px)!important;border-radius:var(--db-radius-lg)!important}}

@@ -937,7 +937,7 @@
          crossings are spread evenly through the cycle: all leaves, every layer mixed in turn, one slot each (a little jitter
          from the leaf's own draw). The phone set (fewer leaves) is picked evenly from that order, so phones stay even too. */
       if (S.even && out.length) {
-        const N = out.length, order = out.slice().sort((a, b) => a.pos - b.pos || a.layer - b.layer);
+        const N = out.length, order = out.toSorted((a, b) => a.pos - b.pos || a.layer - b.layer);
         const np = out.filter((l) => l.phone).length;
         order.forEach((l, k) => {
           l.style["--dl"] = (-((k + 0.5 + (l.jr - 0.5) * 0.3) / N) * l.d).toFixed(2) + "s";
@@ -947,7 +947,7 @@
       /* Winter: the phone set is picked evenly from the flakes in order of their start x, so the few that show still spread across the banner. */
       if ((S.glass || S.toRight || S.even)) {
         const N = out.length, np = out.filter((l) => l.phone).length;
-        out.slice().sort((a, b) => parseFloat(a.style["--x"]) - parseFloat(b.style["--x"])).forEach((l, k) => { l.phone = Math.floor((k + 1) * np / N) > Math.floor(k * np / N); });
+        out.toSorted((a, b) => parseFloat(a.style["--x"]) - parseFloat(b.style["--x"])).forEach((l, k) => { l.phone = Math.floor((k + 1) * np / N) > Math.floor(k * np / N); });
       }
       /* One flake, leaf or petal in front of the copy (winter, fall, spring): now and then a single one falls across the text, in the near colors. It falls in the
          first 60% of a long cycle and waits below the banner for the rest (plp-leaf-rare), from its own seeded sequence. */

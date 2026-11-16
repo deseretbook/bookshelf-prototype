@@ -304,7 +304,7 @@ const TwkStore = (() => {
     if (!shared || !sDirty) return;
     if (sWriting) { sTimer = setTimeout(pushShared, 250); return; }
     sDirty = false;
-    const body = { values: JSON.parse(JSON.stringify(state.values || {})), vts: state.vts || Date.now() };
+    const body = { values: structuredClone(state.values || {}), vts: state.vts || Date.now() };
     sWriting = shared.set(body).catch((e) => {
       if (e && e.code === 'unavailable') { sDirty = true; sTimer = setTimeout(pushShared, 1000 + Math.random() * 1000); }
       else shared = null; // not allowed to write the project record here: keep the private record only
@@ -316,7 +316,7 @@ const TwkStore = (() => {
     if (!ref || !dirty) return;
     if (writing) { timer = setTimeout(push, 250); return; }
     dirty = false;
-    const body = JSON.parse(JSON.stringify(state));
+    const body = structuredClone(state);
     writing = ref.set(body).catch((e) => {
       if (e && e.code === 'unavailable') { dirty = true; timer = setTimeout(push, 1000 + Math.random() * 1000); }
       else if (e && (e.code === 'invalid_argument' || e.code === 'revoked' || e.code === 'not_granted')) ref = null; // can't save here: keep localStorage only
@@ -339,7 +339,7 @@ const TwkStore = (() => {
       const remote = snap.exists ? snap.data() : null;
       ref = r;
       if (remote && (+remote.ts || 0) > (+state.ts || 0)) {
-        state = JSON.parse(JSON.stringify(remote));
+        state = structuredClone(remote);
         writeLocal();
         subs.forEach((fn) => fn(state));
       } else if (!remote || (+state.ts || 0) > (+remote.ts || 0)) {
@@ -352,7 +352,7 @@ const TwkStore = (() => {
       sr.onSnapshot((snap) => {
         const p = snap.exists ? snap.data() : null;
         if (p && p.values && (+p.vts || 0) > (+state.vts || 0)) {
-          state = Object.assign({}, state, { values: JSON.parse(JSON.stringify(p.values)), vts: +p.vts });
+          state = Object.assign({}, state, { values: structuredClone(p.values), vts: +p.vts });
           writeLocal();
           subs.forEach((fn) => fn(state));
         } else if (first && canEdit && state.values && (!p || (+state.vts || 0) > (+p.vts || 0))) {

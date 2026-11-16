@@ -2728,6 +2728,7 @@ function PdpTabs({
     setT(hasDesc ? "desc" : "details");
   }, [p.id]);
   const onKey = e => {
+    if (Object.hasOwn(HTMLElement.prototype, 'focusGroup')) return; /* the DS Tabs' native focusgroup moves focus and selection */
     const i = tabs.findIndex(x => x[0] === t);
     const n = e.key === "ArrowRight" ? i + 1 : e.key === "ArrowLeft" ? i - 1 : null;
     if (n == null) return;
@@ -2949,9 +2950,15 @@ function Product({
     }
   }, images.map((src, i) => /*#__PURE__*/React.createElement("div", {
     key: i
-  }, /*#__PURE__*/React.createElement("img", {
+  }, /*#__PURE__*/React.createElement("img", i === 0 ? {
     src: thumb(src),
-    alt: p.t + " image " + (i + 1)
+    alt: p.t + " image " + (i + 1),
+    fetchpriority: "high"
+  } : {
+    src: thumb(src),
+    alt: p.t + " image " + (i + 1),
+    loading: "lazy",
+    decoding: "async"
   })))), /*#__PURE__*/React.createElement(Dots, {
     i: gal.i,
     n: gal.n

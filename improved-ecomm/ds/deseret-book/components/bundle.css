@@ -157,7 +157,8 @@ a:hover { color: var(--db-link-hover); }
 .db-btn-inverse{background:var(--db-white);color:var(--db-charcoal);box-shadow:inset 0 0 0 1px transparent}
 @media (hover:hover){
   .db-btn-primary:hover{background:var(--db-accent-deep)}
-  .db-btn-secondary:hover,.db-btn-ghost:hover{background:var(--db-dove)}
+  .db-btn-secondary:hover{background:var(--db-pearl)}
+  .db-btn-ghost:hover{background:var(--db-dove)}
   .db-btn-dark:hover{background:var(--db-black)}
   .db-btn-inverse:hover{background:var(--db-pearl)}
 }
@@ -276,6 +277,9 @@ a:hover { color: var(--db-link-hover); }
 /* Drawer: scrim fades, panel slides from its side; one width rule for every drawer. */
 .db-drawer-scrim{position:fixed;inset:0;z-index:100;background:var(--db-scrim);opacity:0;transition:opacity var(--db-duration-out-base) var(--db-ease-in)}
 .db-drawer-scrim.on{opacity:1;transition:opacity var(--db-duration-base) var(--db-ease-standard)}
+dialog.db-drawer-scrim{display:none;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;color:inherit;overflow:hidden;overscroll-behavior:contain;touch-action:none}
+dialog.db-drawer-scrim[open]{display:block}
+dialog.db-drawer-scrim::backdrop{background:transparent;overflow:hidden;overscroll-behavior:contain}
 .db-drawer{position:absolute;top:0;bottom:0;width:min(360px,92%);display:flex;flex-direction:column;background:var(--db-white);color:var(--db-ink);box-shadow:var(--db-shadow-overlay);outline:none;transition:transform var(--db-duration-out-slow) var(--db-ease-in)}
 .db-drawer-right{right:0;transform:translate3d(100%,0,0)}
 .db-drawer-left{left:0;transform:translate3d(-100%,0,0)}
@@ -367,9 +371,19 @@ a:hover { color: var(--db-link-hover); }
 .db-ib-filled{background:var(--db-accent);color:var(--db-accent-ink);box-shadow:inset 0 0 0 1px transparent}
 .db-ib-inverse{background:transparent;color:var(--db-white);box-shadow:inset 0 0 0 1px transparent}
 @media (hover:hover){
-  .db-ib-ghost:not(:disabled):hover,.db-ib-outline:not(:disabled):hover{background:var(--db-dove)}
+  .db-ib-ghost:not(:disabled):hover{background:var(--db-dove)}
+  .db-ib-outline:not(:disabled):hover{background:var(--db-pearl)}
   .db-ib-filled:not(:disabled):hover{background:var(--db-accent-deep)}
   .db-ib-inverse:not(:disabled):hover{background:rgba(255,255,255,.14)}
   .db-ib.db-ib-bare:not(:disabled):hover{background:transparent}
 }
 .db-ib:focus-visible{outline-color:var(--db-focus-ring)}
+
+/* Tabs: the underline is a ::before on the tablist, tethered to the selected tab (CSS anchor positioning) and drawn as a border. */
+.db-tabs{anchor-scope:--db-tab}
+.db-tabs>[aria-selected="true"]{anchor-name:--db-tab}
+@supports (position-anchor:--db-tab){
+.db-tabs::before{content:"";position:absolute;position-anchor:--db-tab;inset-block-start:anchor(bottom);inset-inline-start:anchor(left);inset-inline-end:anchor(right);border-block-end:2px solid var(--db-charcoal);z-index:1;pointer-events:none}
+.db-tabs:not(:has(>[aria-selected="true"]))::before{display:none}
+@media (prefers-reduced-motion:no-preference){.db-tabs::before{transition:inset var(--db-duration-slow) var(--db-ease-in-out)}}
+}

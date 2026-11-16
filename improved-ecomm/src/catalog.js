@@ -396,7 +396,7 @@
   [P, VARIANTS].forEach((arr) => arr.forEach((p) => { if (!p.full) { p.full = p.t; const m = String(p.t).match(SIZE_RE); if (m && !p.sz) p.sz = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase(); p.t = String(p.t).replace(/\s*\([^)]*\)/g, "").split(",")[0].replace(new RegExp(SIZE_RE.source, "gi"), "").replace(/\s{2,}/g, " ").trim() || p.t; } }));
   const SZG = {};
   P.forEach((p) => { if (p.sz) { const k = p.cat + "|" + p.t.toLowerCase(); (SZG[k] = SZG[k] || []).push(p); } });
-  Object.values(SZG).forEach((g) => { const names = new Set(g.map((p) => p.sz)); if (g.length > 1 && names.size > 1) { const ids = g.slice().sort((a, b) => SIZE_ORDER.indexOf(a.sz) - SIZE_ORDER.indexOf(b.sz)).map((p) => p.id); g.forEach((p) => { p.sizes = ids; }); } });
+  Object.values(SZG).forEach((g) => { const names = new Set(g.map((p) => p.sz)); if (g.length > 1 && names.size > 1) { const ids = g.toSorted((a, b) => SIZE_ORDER.indexOf(a.sz) - SIZE_ORDER.indexOf(b.sz)).map((p) => p.id); g.forEach((p) => { p.sizes = ids; }); } });
   window.DB_DATA = {
     products: P,
     nav: NAV,

@@ -322,7 +322,7 @@ html:not(#_):not(#_) .acct-pb:hover button,html:not(#_):not(#_) .acct-pb button:
 .card-list a,.card-list button{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--hair);font-size:13px;color:var(--ink);width:100%;text-align:left}
 .skipback{display:flex;align-items:center;gap:6px;padding:14px var(--pad) 14px;font-size:12px;color:var(--muted)}
 /* ===== responsive base (mobile-first defaults for the new pieces) ===== */
-:root{--pad:clamp(16px,3.5vw,24px);--maxw:1240px}
+:root{--pad:max(clamp(16px,3.5vw,24px),var(--sa-l,0px),var(--sa-r,0px));--maxw:1240px}
 .hdr-bar{display:block}
 .dnav{display:none}
 .ico-lab{display:none}
@@ -332,7 +332,7 @@ html:not(#_):not(#_) .acct-pb:hover button,html:not(#_):not(#_) .acct-pb button:
 
 /* ===== 640px+ : tablet ===== */
 @media (min-width:640px){
-:root{--pad:max(24px,calc((100% - var(--maxw))/2))}
+:root{--pad:max(24px,calc((100% - var(--maxw))/2),var(--sa-l,0px),var(--sa-r,0px))}
 .hdr-in{padding:10px var(--pad)}
 .hdr-ico{width:auto}
 .hdr-acts{gap:26px}

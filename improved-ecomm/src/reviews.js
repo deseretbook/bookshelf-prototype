@@ -146,7 +146,7 @@
     const all = useMemo(() => {
       const list = mine.concat(base);
       const by = { "Most recent": (a, b) => b.date - a.date, "Most helpful": (a, b) => b.helpful - a.helpful || b.date - a.date, "Highest rated": (a, b) => b.rating - a.rating || b.date - a.date, "Lowest rated": (a, b) => a.rating - b.rating || b.date - a.date };
-      return list.slice().sort(by[sort]);
+      return list.toSorted(by[sort]);
     }, [base, mine, sort]);
     const total = all.length;
     const counts = [5, 4, 3, 2, 1].map((s) => all.filter((x) => x.rating === s).length);

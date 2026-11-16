@@ -363,18 +363,17 @@ const CSS = `
 .db-dialog-scrim{opacity:0;transition:opacity 224ms var(--db-ease-in)}
 .db-dialog-scrim.is-on{opacity:1;transition:opacity 280ms var(--db-ease-standard)}
 @media (prefers-reduced-motion:reduce){.db-dialog,.db-dialog.is-on{transform:none;transition:opacity 120ms var(--db-ease-standard)}}
+dialog.db-dialog-scrim{display:none;position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;border:0;color:inherit;background:var(--db-scrim);overflow:hidden;overscroll-behavior:contain;touch-action:none}
+dialog.db-dialog-scrim[open]{display:flex;align-items:center;justify-content:center}
+dialog.db-dialog-scrim::backdrop{background:transparent;overflow:hidden;overscroll-behavior:contain}
 `;
-
-/** Dialog-only motion, injected once per document. */
 function ensureDialogMotion() {
-  if (typeof document === 'undefined' || document.getElementById('db-dialog-motion')) return;
-  const s = document.createElement('style');
-  s.id = 'db-dialog-motion';
+  if (typeof document === "undefined" || document.getElementById("db-dialog-motion")) return;
+  const s = document.createElement("style");
+  s.id = "db-dialog-motion";
   s.textContent = CSS;
   document.head.appendChild(s);
 }
-
-/** Keeps an element mounted through its exit transition. Returns [mounted, visible]. */
 function useDialogPresence(React, open, exitMs = 224) {
   const [mounted, setMounted] = React.useState(open);
   const [visible, setVisible] = React.useState(false);
@@ -390,232 +389,102 @@ function useDialogPresence(React, open, exitMs = 224) {
   }, [open]);
   return [mounted, visible];
 }
-
-/** Dialog tones set the sm icon only: filled circle glyphs in brand value 400 (neutral: Charcoal). The panel is always white. */
 const DIALOG_TONES = {
-  neutral: {
-    icon: null,
-    color: 'var(--db-charcoal)'
-  },
-  success: {
-    icon: 'check_circle',
-    color: 'var(--db-teal-400)'
-  },
-  error: {
-    icon: 'cancel',
-    color: 'var(--db-red-400)'
-  },
-  warning: {
-    icon: 'error',
-    color: 'var(--db-yellow-400)'
-  },
-  info: {
-    icon: 'info',
-    color: 'var(--db-blue-400)'
-  }
+  neutral: { icon: null, color: "var(--db-charcoal)" },
+  success: { icon: "check_circle", color: "var(--db-teal-400)" },
+  error: { icon: "cancel", color: "var(--db-red-400)" },
+  warning: { icon: "error", color: "var(--db-yellow-400)" },
+  info: { icon: "info", color: "var(--db-blue-400)" }
 };
 Object.assign(__ds_scope, { ensureDialogMotion, useDialogPresence, DIALOG_TONES });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/feedback/dialog/dialog-motion.js", error: String((e && e.message) || e) }); }
 
 // components/feedback/dialog/Dialog.jsx
 try { (() => {
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const WIDTHS = {
-  sm: 400,
-  md: 560,
-  lg: 760
-};
-
-/**
- * Modal dialog. Independent of Toast: its own tones, motion and file.
- * - Always a white panel, Granite hairline, 16px radius (--db-radius-xl), overlay elevation, 20px padding.
- * - sm 400: compact confirmation. Optional 56px icon (weight 400) centered above a centered title,
- *   centered text, actions side by side sharing the full width, no close button (the user answers with an action). Used sparingly, so the whole panel
- *   scrolls as one if it ever overflows; the title is not pinned.
- * - md 560 (default) / lg 760: left-aligned title with no icon. Close button pinned 8px from the
- *   top and right edges. Header and footer stay put, separated from the scrolling body by Granite
- *   hairlines so content never cuts off against a bare edge.
- * - `tone` sets the sm icon: a filled circle glyph in brand value 400 (neutral: Charcoal). Ignored by md and lg.
- *   A custom `icon` should also be a filled circle glyph where one exists.
- * Motion: fade, 12px rise, scale .96 to 1 (280ms); exits in reverse (200ms). Reduced motion: fade only.
- */
+const { Icon, IconButton, ensureDialogMotion, useDialogPresence, DIALOG_TONES } = __ds_scope;
+const WIDTHS = { sm: 400, md: 560, lg: 760 };
 function Dialog({
   open = false,
-  tone = 'neutral',
+  tone = "neutral",
   icon,
   title,
   description,
   onClose,
   footer,
-  size = 'md',
+  size = "md",
   width,
   children,
   style,
-  className = '',
+  className = "",
+  "aria-label": ariaLabel,
+  "aria-labelledby": labelledBy,
   ...rest
 }) {
-  __ds_scope.ensureDialogMotion();
-  const [mounted, visible] = __ds_scope.useDialogPresence(React, open);
-  // Escape closes the dialog, like a click on the scrim.
-  React.useEffect(() => {
-    if (!open || !onClose) return undefined;
-    const onKey = e => {
-      if (e.key === 'Escape') onClose();
+  ensureDialogMotion();
+  const [mounted, visible] = useDialogPresence(React, open);
+  const dlg = React.useRef(null);
+  React.useLayoutEffect(() => {
+    const d = dlg.current;
+    if (!mounted || !d) return void 0;
+    const opener = document.activeElement;
+    if (!d.open) d.showModal();
+    return () => {
+      if (d.open) d.close();
+      if (opener && typeof opener.focus === "function" && opener.isConnected) opener.focus({ preventScroll: true });
     };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [open, onClose]);
+  }, [mounted]);
   if (!mounted) return null;
-  const compact = size === 'sm';
-  const t = __ds_scope.DIALOG_TONES[tone] || __ds_scope.DIALOG_TONES.neutral;
+  const compact = size === "sm";
+  const t = DIALOG_TONES[tone] || DIALOG_TONES.neutral;
   const glyph = compact ? icon || t.icon : null;
   const showClose = !compact && onClose;
-  const on = visible ? ' is-on' : '';
+  const on = visible ? " is-on" : "";
   const PAD = 20;
-  // sm: footer buttons sit side by side and share the full width equally.
-  const footerItems = compact && footer ? React.Children.toArray(footer && footer.type === React.Fragment ? footer.props.children : footer).map(el => React.isValidElement(el) ? React.cloneElement(el, {
-    fullWidth: true
-  }) : el) : null;
-  const titleEl = title ? /*#__PURE__*/React.createElement("h2", {
-    style: {
-      margin: 0,
-      minWidth: 0,
-      fontFamily: 'var(--db-font-serif)',
-      fontWeight: 400,
-      fontSize: '1.5rem',
-      lineHeight: 'var(--db-lh-tight)',
-      color: 'var(--db-display)',
-      textWrap: 'pretty',
-      textAlign: compact ? 'center' : 'left'
-    }
-  }, title) : null;
-  return /*#__PURE__*/React.createElement("div", {
-    role: "presentation",
-    onClick: onClose,
-    className: `db-dialog-scrim${on}`,
-    style: {
-      position: 'fixed',
-      inset: 0,
-      background: 'var(--db-scrim)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 'var(--db-space-5)',
-      boxSizing: 'border-box',
-      zIndex: 100
-    }
-  }, /*#__PURE__*/React.createElement("div", _extends({
-    role: "dialog",
-    "aria-modal": "true",
-    "aria-label": title,
-    onClick: e => e.stopPropagation()
-  }, rest, {
-    className: `db-dialog${on} ${className}`,
-    style: {
-      position: 'relative',
-      background: 'var(--db-white)',
-      color: 'var(--db-ink)',
-      borderRadius: 'var(--db-radius-xl)',
-      boxShadow: '0 0 0 1px var(--db-granite), var(--db-shadow-overlay)',
-      width: '100%',
-      maxWidth: width || WIDTHS[size] || WIDTHS.md,
-      maxHeight: '100%',
-      boxSizing: 'border-box',
-      display: 'flex',
-      flexDirection: 'column',
-      overflow: compact ? 'auto' : 'hidden',
-      ...style
-    }
-  }), compact ? /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: '0 0 auto',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: 'var(--db-space-3)',
-      padding: PAD,
-      paddingBottom: description || children || footer ? 'var(--db-space-3)' : PAD
-    }
-  }, glyph ? /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: t.color,
-      display: 'inline-grid'
-    }
-  }, /*#__PURE__*/React.createElement(__ds_scope.Icon, {
-    name: glyph,
-    size: 56,
-    weight: 400,
-    filled: true
-  })) : null, titleEl) : /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: '0 0 auto',
-      display: 'flex',
-      alignItems: 'center',
-      padding: PAD,
-      paddingRight: showClose ? 56 : PAD,
-      minHeight: 56,
-      boxSizing: 'border-box',
-      position: 'relative',
-      zIndex: 1,
-      boxShadow: '0 1px 0 var(--db-granite)'
-    }
-  }, titleEl), showClose ? /*#__PURE__*/React.createElement(__ds_scope.IconButton, {
-    icon: "cancel-circle",
-    filled: true,
-    label: "Close",
-    size: "lg",
-    iconSize: 28,
-    className: "db-ib-bare",
-    onClick: onClose,
-    style: {
-      position: 'absolute',
-      top: 8,
-      right: 8,
-      zIndex: 2,
-      color: 'rgba(58, 54, 51, 0.6)'
-    }
-  }) : null, description || children ? /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: compact ? '0 0 auto' : '1 1 auto',
-      minHeight: 0,
-      overflowY: compact ? 'visible' : 'auto',
-      padding: compact ? `0 ${PAD}px` : PAD,
-      paddingBottom: compact && footer ? 0 : PAD,
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 'var(--db-space-4)',
-      textAlign: compact ? 'center' : 'left'
-    }
-  }, description ? /*#__PURE__*/React.createElement("p", {
-    className: "db-body",
-    style: {
-      margin: 0,
-      color: 'var(--db-ink-muted)',
-      textWrap: 'pretty',
-      textAlign: compact ? 'center' : 'left'
-    }
-  }, description) : null, children) : null, footer && compact ? /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: '0 0 auto',
-      display: 'grid',
-      gridAutoFlow: 'column',
-      gridAutoColumns: 'minmax(0, 1fr)',
-      gap: 'var(--db-space-3)',
-      padding: PAD
-    }
-  }, footerItems) : null, footer && !compact ? /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: '0 0 auto',
-      display: 'flex',
-      gap: 'var(--db-space-3)',
-      justifyContent: compact ? 'center' : 'flex-end',
-      flexWrap: 'wrap',
-      padding: PAD,
-      position: 'relative',
-      zIndex: 1,
-      boxShadow: compact ? 'none' : '0 -1px 0 var(--db-granite)'
-    }
-  }, footer) : null));
+  const footerItems = compact && footer ? React.Children.toArray(footer && footer.type === React.Fragment ? footer.props.children : footer).map((el) => React.isValidElement(el) ? React.cloneElement(el, { fullWidth: true }) : el) : null;
+  const titleEl = title ? /* @__PURE__ */ React.createElement("h2", { style: { margin: 0, minWidth: 0, fontFamily: "var(--db-font-serif)", fontWeight: 400, fontSize: "1.5rem", lineHeight: "var(--db-lh-tight)", color: "var(--db-display)", textWrap: "pretty", textAlign: compact ? "center" : "left" } }, title) : null;
+  return /* @__PURE__ */ React.createElement(
+    "dialog",
+    {
+      ref: dlg,
+      onClick: onClose,
+      onCancel: (e) => {
+        e.preventDefault();
+        if (onClose) onClose();
+      },
+      "aria-label": ariaLabel || (labelledBy ? void 0 : typeof title === "string" ? title : void 0),
+      "aria-labelledby": labelledBy,
+      className: `db-dialog-scrim${on}`,
+      style: { padding: "var(--db-space-5)", boxSizing: "border-box" }
+    },
+    /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        onClick: (e) => e.stopPropagation(),
+        ...rest,
+        className: `db-dialog${on} ${className}`,
+        style: {
+          position: "relative",
+          background: "var(--db-white)",
+          color: "var(--db-ink)",
+          borderRadius: "var(--db-radius-xl)",
+          boxShadow: "0 0 0 1px var(--db-granite), var(--db-shadow-overlay)",
+          width: "100%",
+          maxWidth: width || WIDTHS[size] || WIDTHS.md,
+          maxHeight: "100%",
+          boxSizing: "border-box",
+          display: "flex",
+          flexDirection: "column",
+          overflow: compact ? "auto" : "hidden",
+          ...style
+        }
+      },
+      compact ? /* @__PURE__ */ React.createElement("div", { style: { flex: "0 0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--db-space-3)", padding: PAD, paddingBottom: description || children || footer ? "var(--db-space-3)" : PAD } }, glyph ? /* @__PURE__ */ React.createElement("span", { style: { color: t.color, display: "inline-grid" } }, /* @__PURE__ */ React.createElement(Icon, { name: glyph, size: 56, weight: 400, filled: true })) : null, titleEl) : /* @__PURE__ */ React.createElement("div", { style: { flex: "0 0 auto", display: "flex", alignItems: "center", padding: PAD, paddingRight: showClose ? 56 : PAD, minHeight: 56, boxSizing: "border-box", position: "relative", zIndex: 1, boxShadow: "0 1px 0 var(--db-granite)" } }, titleEl),
+      showClose ? /* @__PURE__ */ React.createElement(IconButton, { icon: "cancel-circle", filled: true, label: "Close", size: "lg", iconSize: 28, className: "db-ib-bare", onClick: onClose, style: { position: "absolute", top: 8, right: 8, zIndex: 2, color: "rgba(58, 54, 51, 0.6)" } }) : null,
+      description || children ? /* @__PURE__ */ React.createElement("div", { style: { flex: compact ? "0 0 auto" : "1 1 auto", minHeight: 0, overflowY: compact ? "visible" : "auto", padding: compact ? `0 ${PAD}px` : PAD, paddingBottom: compact && footer ? 0 : PAD, display: "flex", flexDirection: "column", gap: "var(--db-space-4)", textAlign: compact ? "center" : "left" } }, description ? /* @__PURE__ */ React.createElement("p", { className: "db-body", style: { margin: 0, color: "var(--db-ink-muted)", textWrap: "pretty", textAlign: compact ? "center" : "left" } }, description) : null, children) : null,
+      footer && compact ? /* @__PURE__ */ React.createElement("div", { style: { flex: "0 0 auto", display: "grid", gridAutoFlow: "column", gridAutoColumns: "minmax(0, 1fr)", gap: "var(--db-space-3)", padding: PAD } }, footerItems) : null,
+      footer && !compact ? /* @__PURE__ */ React.createElement("div", { style: { flex: "0 0 auto", display: "flex", gap: "var(--db-space-3)", justifyContent: compact ? "center" : "flex-end", flexWrap: "wrap", padding: PAD, position: "relative", zIndex: 1, boxShadow: compact ? "none" : "0 -1px 0 var(--db-granite)" } }, footer) : null
+    )
+  );
 }
 Object.assign(__ds_scope, { Dialog });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/feedback/dialog/Dialog.jsx", error: String((e && e.message) || e) }); }
@@ -1472,128 +1341,93 @@ Object.assign(__ds_scope, { CarouselChevronButton });
 
 // components/navigation/tabs/Tabs.jsx
 try { (() => {
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-/** Tabs — ALL CAPS DM Sans labels over a granite hairline, charcoal underline for the active tab.
- *  Each tab is always as wide as its bold (active) label: a hidden bold copy sits in the same grid cell in every state, labels
- *  never wrap and tabs never shrink, so neither the row, the underline nor a tab's box moves between states. The visible label
- *  eases its weight inside that fixed box, centered, so it grows evenly from its middle.
- *  The underline is one shared element that slides (and resizes) from the old tab to the new one, ease in-out. */
-function Tabs({
-  tabs = [],
-  value,
-  onChange,
-  style,
-  ...rest
-}) {
+function Tabs({ tabs = [], value, onChange, style, className, ...rest }) {
+  const anchored = typeof CSS !== "undefined" && !!CSS.supports && CSS.supports("position-anchor", "--db-tab");
+  const fg = typeof HTMLElement !== "undefined" && Object.hasOwn(HTMLElement.prototype, "focusGroup");
   const ref = React.useRef(null);
   const [box, setBox] = React.useState(null);
   const [live, setLive] = React.useState(false);
   const measure = React.useCallback(() => {
+    if (anchored) return;
     const root = ref.current;
     const el = root && root.querySelector('[aria-selected="true"]');
     if (!el) {
       setBox(null);
       return;
     }
-    const a = root.getBoundingClientRect(),
-      b = el.getBoundingClientRect();
-    const n = {
-      x: b.left - a.left - root.clientLeft,
-      w: b.width
-    };
-    setBox(p => p && Math.abs(p.x - n.x) < 0.01 && Math.abs(p.w - n.w) < 0.01 ? p : n);
-  }, []);
+    const a = root.getBoundingClientRect(), b = el.getBoundingClientRect();
+    const n = { x: b.left - a.left - root.clientLeft, w: b.width };
+    setBox((p) => p && Math.abs(p.x - n.x) < 0.01 && Math.abs(p.w - n.w) < 0.01 ? p : n);
+  }, [anchored]);
   React.useLayoutEffect(measure, [value, tabs.length, measure]);
   React.useEffect(() => {
     const root = ref.current;
-    if (!root) return undefined;
-    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
+    if (!root) return void 0;
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(measure) : null;
     if (ro) {
       ro.observe(root);
-      Array.prototype.forEach.call(root.children, c => ro.observe(c));
+      Array.prototype.forEach.call(root.children, (c) => ro.observe(c));
     }
-    if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    if (typeof document !== "undefined" && document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     return () => {
       if (ro) ro.disconnect();
     };
   }, [tabs.length, measure]);
   React.useEffect(() => {
-    if (!box || live) return undefined;
+    if (!box || live) return void 0;
     const r = requestAnimationFrame(() => setLive(true));
     return () => cancelAnimationFrame(r);
   }, [box, live]);
-  return /*#__PURE__*/React.createElement("div", _extends({
-    role: "tablist",
-    ref: ref
-  }, rest, {
-    style: {
-      boxShadow: '0 1px 0 var(--db-hairline)',
-      position: 'relative',
-      isolation: 'isolate',
-      display: 'flex',
-      gap: 'var(--db-space-6)',
-      ...style
-    }
-  }), tabs.map(t => {
-    const val = typeof t === 'string' ? t : t.value;
-    const labelText = typeof t === 'string' ? t : t.label;
+  return /* @__PURE__ */ React.createElement("div", { role: "tablist", ref, focusgroup: "tablist nomemory", ...rest, className: "db-tabs" + (className ? " " + className : ""), style: { boxShadow: "0 1px 0 var(--db-hairline)", position: "relative", isolation: "isolate", display: "flex", gap: "var(--db-space-6)", ...style } }, tabs.map((t) => {
+    const val = typeof t === "string" ? t : t.value;
+    const labelText = typeof t === "string" ? t : t.label;
     const active = value === val;
-    return /*#__PURE__*/React.createElement("button", {
-      key: val,
-      type: "button",
-      onClick: () => onChange && onChange(val),
-      "aria-selected": active,
-      role: "tab",
-      style: {
-        fontFamily: 'var(--db-font-sans)',
-        fontSize: 'var(--db-text-label)',
-        textTransform: 'uppercase',
-        letterSpacing: 'var(--db-tracking-label)',
-        color: active ? 'var(--db-charcoal)' : 'var(--db-ink-muted)',
-        background: 'transparent',
-        border: 0,
-        cursor: 'pointer',
-        padding: '0 0 var(--db-space-3)',
-        position: 'relative',
-        zIndex: 1,
-        transition: 'var(--db-transition)',
-        display: 'inline-grid',
-        justifyItems: 'center',
-        flex: '0 0 auto',
-        whiteSpace: 'nowrap'
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      "aria-hidden": "true",
-      style: {
-        gridArea: '1 / 1',
-        fontWeight: 'var(--db-weight-sans-black)',
-        visibility: 'hidden',
-        height: 0,
-        overflow: 'hidden',
-        whiteSpace: 'nowrap'
-      }
-    }, labelText), /*#__PURE__*/React.createElement("span", {
-      style: {
-        gridArea: '1 / 1',
-        fontWeight: active ? 'var(--db-weight-sans-black)' : 'var(--db-weight-sans-regular)',
-        transition: 'font-weight var(--db-duration-base) var(--db-ease-standard)'
-      }
-    }, labelText));
-  }), box ? /*#__PURE__*/React.createElement("span", {
-    "aria-hidden": "true",
-    style: {
-      position: 'absolute',
-      left: 0,
-      top: '100%',
-      height: 2,
-      width: box.w,
-      zIndex: 1,
-      pointerEvents: 'none',
-      background: 'var(--db-charcoal)',
-      transform: 'translateX(' + box.x + 'px)',
-      transition: live ? 'transform var(--db-duration-slow) var(--db-ease-in-out), width var(--db-duration-slow) var(--db-ease-in-out)' : 'none'
-    }
-  }) : null);
+    return /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: val,
+        type: "button",
+        onClick: () => onChange && onChange(val),
+        onFocus: () => {
+          if (fg && !active && onChange) onChange(val);
+        },
+        focusgroupstart: active ? "" : void 0,
+        "aria-selected": active,
+        role: "tab",
+        style: {
+          fontFamily: "var(--db-font-sans)",
+          fontSize: "var(--db-text-label)",
+          textTransform: "uppercase",
+          letterSpacing: "var(--db-tracking-label)",
+          color: active ? "var(--db-charcoal)" : "var(--db-ink-muted)",
+          background: "transparent",
+          border: 0,
+          cursor: "pointer",
+          padding: "0 0 var(--db-space-3)",
+          position: "relative",
+          zIndex: 1,
+          transition: "var(--db-transition)",
+          display: "inline-grid",
+          justifyItems: "center",
+          flex: "0 0 auto",
+          whiteSpace: "nowrap"
+        }
+      },
+      /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true", style: { gridArea: "1 / 1", fontWeight: "var(--db-weight-sans-black)", visibility: "hidden", height: 0, overflow: "hidden", whiteSpace: "nowrap" } }, labelText),
+      /* @__PURE__ */ React.createElement("span", { style: { gridArea: "1 / 1", fontWeight: active ? "var(--db-weight-sans-black)" : "var(--db-weight-sans-regular)", transition: "font-weight var(--db-duration-base) var(--db-ease-standard)" } }, labelText)
+    );
+  }), !anchored && box ? /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true", style: {
+    position: "absolute",
+    left: 0,
+    top: "100%",
+    height: 2,
+    width: box.w,
+    zIndex: 1,
+    pointerEvents: "none",
+    background: "var(--db-charcoal)",
+    transform: "translateX(" + box.x + "px)",
+    transition: live ? "transform var(--db-duration-slow) var(--db-ease-in-out), width var(--db-duration-slow) var(--db-ease-in-out)" : "none"
+  } }) : null);
 }
 Object.assign(__ds_scope, { Tabs });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/navigation/tabs/Tabs.jsx", error: String((e && e.message) || e) }); }
@@ -3444,32 +3278,30 @@ Object.assign(__ds_scope, { SearchFilterBar });
 
 // components/feedback/drawer/Drawer.jsx
 try { (() => {
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const EXIT_MS = 224; // = --db-duration-out-slow
-const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+const { IconButton } = __ds_scope;
+const EXIT_MS = 224;
 let uid = 0;
-
-/** Side sheet for the menu, cart and account. Modal: Escape and the scrim close it, focus moves in,
- *  stays inside and returns on close, page scroll is locked. Width: min(360px, 92%), 420px from 640px. */
 function Drawer({
   open = false,
   onClose,
-  side = 'right',
+  side = "right",
   title,
   header,
   footer,
-  closeLabel = 'Close',
+  closeLabel = "Close",
   padded = true,
   children,
   className,
   style,
+  "aria-label": ariaLabel,
+  "aria-labelledby": labelledBy,
   ...rest
 }) {
   const [mounted, setMounted] = React.useState(open);
   const [visible, setVisible] = React.useState(false);
   const panel = React.useRef(null);
-  const back = React.useRef(null);
-  const titleId = React.useRef('db-drawer-t' + ++uid).current;
+  const dlg = React.useRef(null);
+  const titleId = React.useRef("db-drawer-t" + ++uid).current;
   React.useEffect(() => {
     if (open) {
       setMounted(true);
@@ -3480,97 +3312,47 @@ function Drawer({
     const t = setTimeout(() => setMounted(false), EXIT_MS);
     return () => clearTimeout(t);
   }, [open]);
-  React.useEffect(() => {
-    if (!open || !mounted) return undefined;
-    back.current = document.activeElement;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    const p = panel.current;
-    if (p) p.focus({
-      preventScroll: true
-    });
-    const onKey = e => {
-      if (e.key === 'Escape') {
-        e.stopPropagation();
-        if (onClose) onClose();
-        return;
-      }
-      if (e.key !== 'Tab' || !p) return;
-      const items = Array.prototype.filter.call(p.querySelectorAll(FOCUSABLE), el => el.offsetParent !== null);
-      if (!items.length) {
-        e.preventDefault();
-        return;
-      }
-      const first = items[0],
-        last = items[items.length - 1];
-      if (e.shiftKey && (document.activeElement === first || document.activeElement === p)) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
-    document.addEventListener('keydown', onKey);
+  React.useLayoutEffect(() => {
+    const d = dlg.current;
+    if (!mounted || !d) return void 0;
+    if (panel.current) panel.current.setAttribute("autofocus", "");
+    const opener = document.activeElement;
+    if (!d.open) d.showModal();
     return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prevOverflow;
-      const b = back.current;
-      if (b && typeof b.focus === 'function') b.focus({
-        preventScroll: true
-      });
+      if (d.open) d.close();
+      if (opener && typeof opener.focus === "function" && opener.isConnected) opener.focus({ preventScroll: true });
     };
-  }, [open, mounted]);
+  }, [mounted]);
   if (!mounted) return null;
-  const on = visible ? ' on' : '';
-  return /*#__PURE__*/React.createElement("div", {
-    className: 'db-drawer-scrim' + on,
-    onClick: onClose,
-    role: "presentation"
-  }, /*#__PURE__*/React.createElement("div", _extends({
-    ref: panel,
-    role: "dialog",
-    "aria-modal": "true",
-    "aria-labelledby": title ? titleId : undefined,
-    tabIndex: -1,
-    onClick: e => e.stopPropagation()
-  }, rest, {
-    className: 'db-drawer db-drawer-' + (side === 'left' ? 'left' : 'right') + on + (className ? ' ' + className : ''),
-    style: style
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "db-drawer-h"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      minWidth: 0,
-      display: 'flex',
-      alignItems: 'center'
-    }
-  }, header || (title ? /*#__PURE__*/React.createElement("h2", {
-    id: titleId,
-    style: {
-      margin: 0,
-      fontFamily: 'var(--db-font-serif)',
-      fontWeight: 400,
-      fontSize: 20,
-      lineHeight: 1.2,
-      color: 'var(--db-display)'
-    }
-  }, title) : null)), /*#__PURE__*/React.createElement(__ds_scope.IconButton, {
-    icon: "close",
-    label: closeLabel,
-    variant: "ghost",
-    size: "md",
-    iconSize: 22,
-    onClick: onClose
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "db-drawer-b",
-    style: {
-      padding: padded ? 'var(--db-space-4) var(--db-space-4) var(--db-space-5)' : 0
-    }
-  }, children), footer ? /*#__PURE__*/React.createElement("div", {
-    className: "db-drawer-f"
-  }, footer) : null));
+  const on = visible ? " on" : "";
+  return /* @__PURE__ */ React.createElement(
+    "dialog",
+    {
+      ref: dlg,
+      className: "db-drawer-scrim" + on,
+      onClick: onClose,
+      onCancel: (e) => {
+        e.preventDefault();
+        if (onClose) onClose();
+      },
+      "aria-label": ariaLabel,
+      "aria-labelledby": labelledBy || (!ariaLabel && title ? titleId : void 0)
+    },
+    /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        ref: panel,
+        tabIndex: -1,
+        onClick: (e) => e.stopPropagation(),
+        ...rest,
+        className: "db-drawer db-drawer-" + (side === "left" ? "left" : "right") + on + (className ? " " + className : ""),
+        style
+      },
+      /* @__PURE__ */ React.createElement("div", { className: "db-drawer-h" }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0, display: "flex", alignItems: "center" } }, header || (title ? /* @__PURE__ */ React.createElement("h2", { id: titleId, style: { margin: 0, fontFamily: "var(--db-font-serif)", fontWeight: 400, fontSize: 20, lineHeight: 1.2, color: "var(--db-display)" } }, title) : null)), /* @__PURE__ */ React.createElement(IconButton, { icon: "close", label: closeLabel, variant: "ghost", size: "md", iconSize: 22, onClick: onClose })),
+      /* @__PURE__ */ React.createElement("div", { className: "db-drawer-b", style: { padding: padded ? "var(--db-space-4) var(--db-space-4) var(--db-space-5)" : 0 } }, children),
+      footer ? /* @__PURE__ */ React.createElement("div", { className: "db-drawer-f" }, footer) : null
+    )
+  );
 }
 Object.assign(__ds_scope, { Drawer });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/feedback/drawer/Drawer.jsx", error: String((e && e.message) || e) }); }
