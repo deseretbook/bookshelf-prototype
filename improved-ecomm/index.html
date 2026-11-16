@@ -3,7 +3,7 @@
 <head><script>/* deploy: start signed out with the baked state */try{if(!sessionStorage.getItem('db-deploy-fresh')){sessionStorage.setItem('db-deploy-fresh','1');['db-mobile-user','db-bsp-status'].forEach(function(k){localStorage.removeItem(k)});Object.keys(localStorage).forEach(function(k){if(k.indexOf('db-tweaks')===0)localStorage.removeItem(k)})}}catch(e){}</script>
 <meta charset="utf-8">
 <title>Improved eComm</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="ds/deseret-book/tokens.css">
 <link rel="stylesheet" href="ds/deseret-book/components/bundle.css">
 <link rel="stylesheet" href="css/promo-band.css">
@@ -65,7 +65,7 @@
 .twk-panel .sky-sw button{box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
 .twk-panel .sky-sw button[data-on="1"]{box-shadow:0 0 0 1.5px #3a3633,0 0 0 3px #fff}
 </style>
-<style>/* deploy: no device mocks (phone/tablet preview, safe-area spacing); the responsive page adapts by itself */:root,html:root{--sa-t:0px!important;--sa-b:0px!important;--sa-l:0px!important;--sa-r:0px!important;--sa-gap:0px!important;padding-top:0!important;padding-bottom:0!important}html{scroll-padding-top:0!important}#root::before,.hdr::before{height:0!important}.pv-stage{display:none!important}</style></head>
+</head>
 <body>
 <div id="root"></div>
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><rect width="120" height="120" fill="#ece6db"/><circle cx="60" cy="60" r="26" fill="#2b2e30"/><text x="60" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="24" font-weight="600" fill="#fff">DB</text></svg></template>
@@ -77,6 +77,7 @@
 <script>window.AB_CONCEPT="A";</script>
 <script>window.CHECKOUT_FLOW=true;</script>
 <script src="src/stay.js"></script>
+<script src="src/safe-area.js"></script>
 <script src="src/no-underline-icons.js"></script>
 <script src="src/icon-hover-fill.js"></script>
 <script src="src/img-preload.js"></script>

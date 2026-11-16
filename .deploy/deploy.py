@@ -60,26 +60,22 @@ def reset_script(signed_in):
         "localStorage.removeItem('db-bsp-status');localStorage.setItem('db-mobile-user',JSON.stringify(%s));" % json.dumps(SAMPLE_USER))
 
 
-# The live site is the plain responsive page: none of the Tweaks phone/tablet mocking ships.
-NO_MOCKS = ("<style>/* deploy: no device mocks (phone/tablet preview, safe-area spacing); the responsive page adapts by itself */"
-            ":root,html:root{--sa-t:0px!important;--sa-b:0px!important;--sa-l:0px!important;--sa-r:0px!important;--sa-gap:0px!important;"
-            "padding-top:0!important;padding-bottom:0!important}html{scroll-padding-top:0!important}"
-            "#root::before,.hdr::before{height:0!important}.pv-stage{display:none!important}</style>")
+# The Tweaks phone/tablet preview never ships. Everything the site itself says about the viewport stays: the edge-to-edge
+# viewport (viewport-fit=cover), the safe-area spacing (--sa-* from env()) and src/safe-area.js.
 MOCK_TAGS = [
-    (re.compile(r'[ \t]*<script[^>]*\bsrc="src/presentation\.js"[^>]*>\s*</script>\s*\n?'), "phone/tablet preview frame (src/presentation.js)"),
+    (re.compile(r'[ \t]*<script[^>]*\bsrc="src/presentation\.js"[^>]*>\s*</script>\s*\n?'), "Tweaks phone/tablet preview frame (src/presentation.js)"),
     (re.compile(r'[ \t]*<link[^>]*\bhref="css/presentation\.css"[^>]*>\s*\n?'), "preview frame styles (css/presentation.css)"),
-    (re.compile(r'[ \t]*<script[^>]*\bsrc="src/safe-area\.js"[^>]*>\s*</script>\s*\n?'), "status-bar header lip (src/safe-area.js)"),
 ]
 
 
 def strip_device_mocks(html):
-    """Remove the Tweaks device mocking from a page: the artifact viewer's document wrapper, the phone/tablet preview,
-    the safe-area spacing and the edge-to-edge viewport. Returns (html, list of what was removed)."""
+    """Remove the Tweaks device preview from a page, and the artifact viewer's document wrapper around the real document
+    (the page keeps its own head, viewport meta included). Returns (html, list of what was removed)."""
     gone = []
     low = html.lower()
     second = low.find("<!doctype html", 1)
     if low.lstrip().startswith("<!doctype html") and second > 0 and "<body>" in low[:second]:
-        html = html[second:]  # the viewer's skeleton around the real document
+        html = html[second:]
         tail = html.rstrip()
         while tail.lower().count("</html>") > 1 and tail.lower().endswith("</body></html>"):
             tail = tail[: -len("</body></html>")].rstrip()
@@ -89,13 +85,6 @@ def strip_device_mocks(html):
         html, n = rx.subn("", html)
         if n:
             gone.append(label)
-    html, n = re.subn(r",\s*viewport-fit=cover", "", html)
-    if n:
-        gone.append("edge-to-edge viewport (viewport-fit=cover)")
-    if NO_MOCKS not in html:
-        i = html.lower().find("</head>")
-        html = html[:i] + NO_MOCKS + html[i:]
-        gone.append("safe-area spacing")
     return html, gone
 
 
