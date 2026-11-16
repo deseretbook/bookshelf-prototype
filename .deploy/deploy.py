@@ -12,6 +12,7 @@ Steps (each is a subcommand, run in order by the deploy-prototype skill):
 Stdlib only, plus Playwright for `qa`.
 """
 import argparse, json, os, re, shutil, subprocess, sys, time, urllib.parse, urllib.request
+from pathlib import Path
 
 PAGES = "https://deseretbook.github.io/bookshelf-prototype/"
 # Artifact bookkeeping files that never belong on the public site.
@@ -218,6 +219,38 @@ def wait(a):
 
 
 ap = argparse.ArgumentParser()
+def verify(a):
+    """Every downloaded artifact file must be in the folder byte-for-byte (index.html and the Tweaks panel are the deploy's own edits),
+    and with --live every file must also match on GitHub Pages."""
+    import hashlib, ssl, urllib.request, urllib.parse, concurrent.futures as cf
+    src, dst = Path(a.src), Path(a.repo) / a.slug
+    files = sorted(str(f.relative_to(src)) for f in src.rglob("*") if f.is_file())
+    files = [f for f in files if f not in SKIP_FILES and f.split("/")[0] not in SKIP_DIRS]
+    own = {"index.html", "src/tweaks-panel.jsx"} if not a.plain else set()
+    sha = lambda b: hashlib.sha256(b).hexdigest()
+    bad = []
+    for f in files:
+        d = dst / f
+        if not d.exists(): bad.append("missing " + f)
+        elif f not in own and sha(d.read_bytes()) != sha((src / f).read_bytes()): bad.append("differs " + f)
+    print(f"{len(files)} artifact files: {len(files) - len(bad)} in place" + (f", {len(own)} edited by the deploy" if own else ""))
+    if a.live:
+        ctx = ssl.create_default_context(cafile="/root/.ccr/ca-bundle.crt") if Path("/root/.ccr/ca-bundle.crt").exists() else None
+        base = PAGES + a.slug + "/"
+        def chk(f):
+            ok = False
+            for _ in range(3):  # retry network blips
+                try: ok = sha(urllib.request.urlopen(base + urllib.parse.quote(f), context=ctx, timeout=60).read()) == sha((dst / f).read_bytes())
+                except Exception: ok = False
+                if ok: break
+                time.sleep(2)
+            return f, ok
+        with cf.ThreadPoolExecutor(16) as ex: res = list(ex.map(chk, files))
+        live_bad = ["not live " + f for f, ok in res if not ok]
+        print(f"live: {len(files) - len(live_bad)}/{len(files)} match"); bad += live_bad
+    for x in bad[:30]: print("  " + x)
+    sys.exit(1 if bad else 0)
+
 sp = ap.add_subparsers(dest="cmd", required=True)
 b = sp.add_parser("build"); b.add_argument("--src", required=True); b.add_argument("--slug", default=FOLDER)
 b.add_argument("--repo", default="."); b.add_argument("--entry", default="index.html")
@@ -231,5 +264,7 @@ p_.add_argument("--message", required=True); p_.add_argument("--session")
 w = sp.add_parser("wait"); w.add_argument("--slug", default=FOLDER); w.add_argument("--repo", default=".")
 w.add_argument("--file"); w.add_argument("--tries", type=int, default=40)
 w.add_argument("--every", type=int, default=15)
+v = sp.add_parser("verify"); v.add_argument("--src", required=True); v.add_argument("--slug", default=FOLDER); v.add_argument("--repo", default=".")
+v.add_argument("--live", action="store_true"); v.add_argument("--plain", action="store_true")
 a = ap.parse_args()
-{"build": build, "qa": qa, "push": push, "wait": wait}[a.cmd](a)
+{"build": build, "qa": qa, "push": push, "wait": wait, "verify": verify}[a.cmd](a)
