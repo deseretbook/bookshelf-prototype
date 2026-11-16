@@ -20,11 +20,11 @@
 .pv-sb,.pv-bar,.pv-home{position:absolute;left:0;right:0;z-index:2;pointer-events:none;opacity:0;transition:opacity var(--db-duration-slow) var(--db-ease-standard)}
 .pv-stage[data-dev="phone"] :is(.pv-sb,.pv-bar,.pv-home){opacity:1}
 .pv-sb{top:0;height:59px;display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 50px;box-sizing:border-box;color:var(--db-black);
-  font:600 17px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;letter-spacing:-.02em}
+  font:600 17px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;letter-spacing:-.02em}
 /* Dynamic Island: 126 x 37pt, 11pt from the top. */
 .pv-island{position:absolute;left:50%;top:11px;width:126px;height:37px;margin-left:-63px;border-radius:var(--db-radius-pill);background:var(--db-black)}
 .pv-ics{display:flex;align-items:center;gap:5px}
-.pv-ic{font-family:'Material Symbols Rounded';font-size:19px;line-height:1;font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 20;font-feature-settings:'liga'}
+.pv-ic{font-family:"Material Symbols Rounded";font-size:19px;line-height:1;font-variation-settings:"FILL" 1,"wght" 500,"GRAD" 0,"opsz" 20;font-feature-settings:"liga"}
 .pv-batt{font-size:24px;transform:rotate(90deg)}
 /* Safari's floating controls (iOS 26, compact): a back button, the address field and a more button just above the home
    indicator. Shapes only, frosted: a see-through white over a background blur, with the Card hairline (Granite at 60%) as its ring. */

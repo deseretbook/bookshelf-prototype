@@ -47,6 +47,9 @@
   --db-duration-press: 100ms; /* @kind other */
   --db-duration-out-base: 144ms; /* @kind other */ /* exits are 20% shorter than their entrance */
   --db-duration-out-slow: 224ms; /* @kind other */
+  --db-ease-fade:     cubic-bezier(0.25, 0.46, 0.45, 0.94); /* @kind other */ /* a soft fade-out: leaves at once, lands gently */
+  --db-duration-out-scrim: 160ms; /* @kind other */
+  --db-duration-out-fade: 180ms; /* @kind other */ /* drawer: panel and scrim hit 0% opacity this long into the 224ms exit, before the panel finishes moving */
   --db-duration-tip-in: 150ms; /* @kind other */ /* tooltips keep a short opacity fade under reduced motion */
   --db-duration-tip-out: 120ms; /* @kind other */
   --db-tip-scale: .95; /* @kind other */
@@ -80,6 +83,8 @@
     --db-duration-press: 0ms; /* @kind other */
     --db-duration-out-base: 0ms; /* @kind other */
     --db-duration-out-slow: 0ms; /* @kind other */
+    --db-duration-out-fade: 0ms; /* @kind other */
+    --db-duration-out-scrim: 0ms; /* @kind other */
     --db-tip-scale: 1; /* @kind other */
   }
 }
@@ -274,15 +279,16 @@ a:hover { color: var(--db-link-hover); }
 [data-db-field]:focus-visible{outline-color:var(--db-focus-ring)}
 
 /* Drawer: scrim fades, panel slides from its side; one width rule for every drawer. */
-.db-drawer-scrim{position:fixed;inset:0;z-index:100;background:var(--db-scrim);opacity:0;transition:opacity var(--db-duration-out-base) var(--db-ease-in)}
-.db-drawer-scrim.on{opacity:1;transition:opacity var(--db-duration-base) var(--db-ease-standard)}
-dialog.db-drawer-scrim{display:none;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;color:inherit;overflow:hidden;overscroll-behavior:contain;touch-action:none}
+.db-drawer-scrim{position:fixed;inset:0;z-index:100;background:var(--db-scrim);opacity:0;transition:opacity var(--db-duration-out-scrim) var(--db-ease-fade)}
+.db-drawer-scrim.on{opacity:1;transition:opacity var(--db-duration-slow) var(--db-ease-standard)}
+dialog.db-drawer-scrim{display:none;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;color:inherit;overflow:hidden;overflow:clip;overscroll-behavior:contain;touch-action:none}
+/* overflow:clip, not hidden: focusing the off-screen panel used to scroll this box (scrollLeft ran 420 to 0), a second motion on top of the slide that read as chopped and overshooting. */
 dialog.db-drawer-scrim[open]{display:block}
 dialog.db-drawer-scrim::backdrop{background:transparent;overflow:hidden;overscroll-behavior:contain}
-.db-drawer{position:absolute;top:0;bottom:0;width:min(360px,92%);display:flex;flex-direction:column;background:var(--db-white);color:var(--db-ink);box-shadow:var(--db-shadow-overlay);outline:none;transition:transform var(--db-duration-out-slow) var(--db-ease-in)}
+.db-drawer{position:absolute;top:0;bottom:0;width:min(360px,92%);display:flex;flex-direction:column;background:var(--db-white);color:var(--db-ink);box-shadow:var(--db-shadow-overlay);outline:none;opacity:0;transition:transform var(--db-duration-out-slow) var(--db-ease-in),opacity var(--db-duration-out-fade) var(--db-ease-in)}
 .db-drawer-right{right:0;transform:translate3d(100%,0,0)}
 .db-drawer-left{left:0;transform:translate3d(-100%,0,0)}
-.db-drawer.on{transform:translate3d(0,0,0);transition:transform var(--db-duration-slow) var(--db-ease-standard)}
+.db-drawer.on{opacity:1;transform:translate3d(0,0,0);transition:transform var(--db-duration-slow) var(--db-ease-standard),opacity 0s}
 .db-drawer-h{flex:0 0 auto;display:flex;align-items:center;gap:var(--db-space-3);padding:var(--db-space-2) var(--db-space-2) var(--db-space-2) var(--db-space-4);min-height:56px;box-sizing:border-box;position:relative;z-index:1;box-shadow:0 1px 0 var(--db-hairline)}
 .db-drawer-b{flex:1 1 auto;overflow:auto;overscroll-behavior:contain}
 .db-drawer-f{flex:0 0 auto;padding:var(--db-space-4);position:relative;z-index:1;box-shadow:0 -1px 0 var(--db-hairline)}

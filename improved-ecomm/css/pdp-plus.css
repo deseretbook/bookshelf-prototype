@@ -61,16 +61,16 @@
 .pdpx-av.ok{color:var(--db-teal-600,#0f6a64)}
 .pdpx-av.out{color:var(--db-red-600,#9b3a2f)}
 .pdpx-av-note{display:block;margin-top:4px;font-size:13px;line-height:1.5;color:var(--db-ink-muted)}
-html:not(#_):not(#_):not(#_):not(#_) .bsp-su-pri{background:var(--db-orange-400)!important;background-color:var(--db-orange-400)!important;box-shadow:0 0 0 1px var(--db-orange-400)!important;border-color:var(--db-orange-400)!important;color:#fff!important}
-html:not(#_):not(#_):not(#_):not(#_) .bsp-su-pri *{color:#fff!important}
+html:not(#_):not(#_):not(#_):not(#_) .bsp-su-pri{background:var(--db-orange-400)!important;background-color:var(--db-orange-400)!important;box-shadow:0 0 0 1px var(--db-orange-400)!important;border-color:var(--db-orange-400)!important;color:var(--db-white)!important}
+html:not(#_):not(#_):not(#_):not(#_) .bsp-su-pri *{color:var(--db-white)!important}
 html:not(#_):not(#_):not(#_):not(#_) .bsp-su-pri:is(:hover,:active){background:var(--db-orange-500)!important;background-color:var(--db-orange-500)!important;box-shadow:0 0 0 1px var(--db-orange-500)!important;border-color:var(--db-orange-500)!important}
 html:not(#_) .acct-d .card-list,html:not(#_) .card-list{border-top:0!important;box-shadow:none}
 html:not(#_) .card-list>a,html:not(#_) .card-list>button{border-bottom:0!important;box-shadow:none}
 html:not(#_) .card-list>:is(a,button)+:is(a,button){box-shadow:0 -1px 0 var(--hair,var(--db-dove))}
-html:not(#_):not(#_):not(#_):not(#_) :is(.art-box,.promo-box,.bagd-f) .btn-gold{background:var(--db-teal-500)!important;background-color:var(--db-teal-500)!important;border-color:var(--db-teal-500)!important;color:#fff!important;transition:background-color var(--db-duration-base,180ms) var(--db-ease-standard,var(--db-ease-standard)),border-color var(--db-duration-base,180ms) var(--db-ease-standard,var(--db-ease-standard)),transform 120ms}
+html:not(#_):not(#_):not(#_):not(#_) :is(.art-box,.promo-box,.bagd-f) .btn-gold{background:var(--db-teal-500)!important;background-color:var(--db-teal-500)!important;border-color:var(--db-teal-500)!important;color:var(--db-white)!important;transition:background-color var(--db-duration-base,180ms) var(--db-ease-standard,var(--db-ease-standard)),border-color var(--db-duration-base,180ms) var(--db-ease-standard,var(--db-ease-standard)),transform 120ms}
 html:not(#_):not(#_):not(#_):not(#_) :is(.art-box,.promo-box,.bagd-f) .btn-gold:is(:hover,:active){background:var(--db-teal-600)!important;background-color:var(--db-teal-600)!important;border-color:var(--db-teal-600)!important}
 html:not(#_):not(#_):not(#_):not(#_) :is(.art-box,.promo-box,.bagd-f) .btn-gold:active{transform:scale(.98)}
-html:not(#_):not(#_):not(#_):not(#_) :is(.art-box,.promo-box,.bagd-f) .btn-gold *{color:#fff!important}
+html:not(#_):not(#_):not(#_):not(#_) :is(.art-box,.promo-box,.bagd-f) .btn-gold *{color:var(--db-white)!important}
 /* Bag line image container and image: the ProductCard's specs (transparent container, product trimmed and kept at its own shape, bottom-left, small radius, no ground or border). */
 html:not(#_):not(#_) :is(.bagd-b,.bagp) .line .th{width:80px;height:80px;position:relative;display:flex;align-items:flex-end;justify-content:flex-start;padding:0;border:0!important;background:transparent!important;box-shadow:none;overflow:visible}
 .fill-img{position:relative;display:block;width:100%;height:100%;overflow:hidden;background:var(--db-pearl)}
@@ -78,7 +78,7 @@ html:not(#_):not(#_) :is(.bagd-b,.bagp) .line .th{width:80px;height:80px;positio
 html:not(#_):not(#_) .bagp-l .line .bagd-top,html:not(#_):not(#_) .bagd-b .line .bagd-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 html:not(#_):not(#_) .bagp-l .line .bagd-top .t,html:not(#_):not(#_) .bagd-b .line .bagd-top .t{flex:1;min-width:0}
 html:not(#_):not(#_) .bagp-l .line .bagd-lp,html:not(#_):not(#_) .bagd-b .line .bagd-lp{flex:none;font-size:13px;line-height:1.3;color:var(--db-ink);white-space:nowrap}
-html:not(#_):not(#_) .bagp-l .line .r,html:not(#_):not(#_) .bagd-b .line .r{display:flex;align-items:center;justify-content:space-between;gap:12px}
+html:not(#_):not(#_) .bagp-l .line .r,html:not(#_):not(#_) .bagd-b .line .r{display:flex;align-items:center;justify-content:space-between}
 html:not(#_):not(#_) .bagp-l .line .t,html:not(#_):not(#_) .bagp-l .line .bagd-lp{font-size:16px}
 html:not(#_):not(#_) .bagp-l .line .c,html:not(#_):not(#_) .bagp-l .line .pbk{font-size:13px}
 /* Item row: the trash (outline icon button) sits at the right, 8px before the quantity stepper; on the bag page an outline
@@ -92,7 +92,7 @@ html:not(#_):not(#_) .promo-in>:last-child{flex:none}
 
 
 
-html:not(#_):not(#_):not(#_):not(#_) .sub-trial{background:var(--db-teal-500)!important;background-color:var(--db-teal-500)!important;border-color:var(--db-teal-500)!important;color:#fff!important}
+html:not(#_):not(#_):not(#_):not(#_) .sub-trial{background:var(--db-teal-500)!important;background-color:var(--db-teal-500)!important;border-color:var(--db-teal-500)!important;color:var(--db-white)!important}
 html:not(#_):not(#_):not(#_):not(#_) .sub-trial:is(:hover,:active){background:var(--db-teal-600)!important;background-color:var(--db-teal-600)!important;border-color:var(--db-teal-600)!important}
 html:not(#_):not(#_):not(#_):not(#_) .sub-trial:active{transform:scale(.98)}
 html:not(#_):not(#_):not(#_):not(#_) .acct-tier{color:var(--db-teal-600)!important}
@@ -116,13 +116,13 @@ html:not(#_) .ftr{padding-top:24px}
 /* Pre-order: DS Badge (violator) on PLP covers and the PDP, release date and charge note, bag and order lines. */
 
 
-.p-rel{font-size:13px;line-height:1.3;color:var(--db-ink-muted)}
+
 .pre-pdp{display:flex;flex-wrap:wrap;align-items:center;gap:var(--db-space-1) var(--db-space-3);margin:var(--db-space-1) 0 0}
 .pre-pdp-d{margin:0;font-size:var(--db-text-body);line-height:var(--db-lh-body);color:var(--db-ink)}
 .pre-pdp-n{flex-basis:100%;margin:0;font-size:var(--db-text-caption);line-height:var(--db-lh-body);color:var(--db-ink-muted)}
 .pre-c{color:var(--db-ink)}
-.ord-pre{display:inline-flex;align-items:center;gap:var(--db-space-1);margin-top:var(--db-space-1);font-size:13px;line-height:1.4;color:var(--db-ink)}
-html:not(#_):not(#_) .acct-d .bagd-b{display:flex;flex-direction:column;min-height:calc(100% - var(--sa-b) - var(--sa-gap))}
+
+html:not(#_):not(#_) .acct-d .bagd-b{display:flex;flex-direction:column;min-height:100%}
 html:not(#_):not(#_) .acct-d .acct-signout{align-self:flex-end;margin-top:auto;margin-bottom:0}
 html:not(#_):not(#_) .acct-d .card-list{margin-bottom:24px}
 
@@ -140,40 +140,40 @@ html:not(#_):not(#_) .acct-d .card-list{margin-bottom:24px}
 :root{--sa-b:max(0px,calc(env(safe-area-inset-bottom,0px) - 10px))}
 /* Shopping bag drawer: the sticky checkout footer keeps its content inside the bottom safe area; its white ground still
    runs to the screen's edge behind the system UI. */
-.bag-d .db-drawer-f{padding-bottom:max(var(--db-space-4),calc(var(--sa-b) + 12px))}
 /* Modals stay inside the safe area (notch, rounded corners, home indicator, landscape side bars): the scrim and the white ground of a
    drawer still run to the screen's edge, but dialogs, drawer headers, bodies and footers keep their controls and content inside it.
    --sa-t/-r/-l are the system's env() insets (--sa-b above; the Tweaks presentation phone overrides both). --sa-gap is the 16px (DS space 4) of room every control keeps
    above the bottom inset (nothing when there is no inset), so controls never sit flush on the system bar. */
 :root{--sa-gap:min(var(--sa-b),var(--db-space-4));--sa-t:env(safe-area-inset-top,0px);--sa-r:env(safe-area-inset-right,0px);--sa-l:env(safe-area-inset-left,0px)}
 /* Edge to edge: the page file's wrapper pads the root by the env() insets, which paints a bare box behind the system UI that scrims can't dim, so that padding is
-   zeroed. The top inset is painted by whatever opens the page (the band's own ground, or the header's white lip when the header is first), and the sticky header draws the same lip above it while stuck (src/safe-area.js toggles
-   .is-stuck), and overlays are fixed at inset 0 so they cover the whole screen, safe areas included. */
+   zeroed. The page itself runs under the system areas; see the frost rule below for what they show. */
 html:root{padding-top:0;padding-bottom:0}
 .phone>.ann:first-child{padding-top:calc(8px + var(--sa-t,0px))}
-.phone>.hdr:first-child{margin-top:var(--sa-t,0px)}
-.phone>.hdr:first-child::before{opacity:1}
-.hdr::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:var(--sa-t,0px);background:var(--db-white);opacity:0;pointer-events:none}
-.hdr.is-stuck:not(.srch-on)::before{opacity:1}
+/* At the top of a page the system area carries the shipping band's ground (Teal 300), whether or not the band is there; it scrolls away with the page. */
+.phone:has(>.hdr:first-child)::before{content:"";display:block;height:var(--sa-t,0px);background:var(--db-teal-300)}
+/* The system areas are never a solid color: nothing opaque ever sits in them (no white lip on the header, no drawer, dialog, buy bar or full-screen
+   page ground reaching the screen's edge). Scrolled content and the dimmed page show through, and a see-through frost (blur plus a faint fade, never a
+   fill) keeps the clock and the home indicator legible. */
+html::before,html::after{content:"";position:fixed;left:0;right:0;z-index:90;pointer-events:none;-webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2)}
+html::before{top:0;height:var(--sa-t,0px);background:linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,0));-webkit-mask-image:linear-gradient(var(--db-black) 55%,transparent);mask-image:linear-gradient(var(--db-black) 55%,transparent)}
+html::after{bottom:0;height:calc(var(--sa-b,0px) + 10px);background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.35));-webkit-mask-image:linear-gradient(transparent,var(--db-black) 45%);mask-image:linear-gradient(transparent,var(--db-black) 45%)}
 /* DS Dialog: its fixed scrim centers the panel with 20px of room; never less than the safe area on any side. */
 html:not(#_) .db-dialog-scrim{padding:max(var(--db-space-5),var(--sa-t)) max(var(--db-space-5),var(--sa-r)) max(var(--db-space-5),calc(var(--sa-b) + var(--sa-gap))) max(var(--db-space-5),var(--sa-l))!important}
 /* Project dialogs (.pdlg: newsletter, personalization, and the rest). */
-html:not(#_) .pdlg{padding:max(24px,var(--sa-t)) max(24px,var(--sa-r)) max(24px,calc(var(--sa-b) + var(--sa-gap))) max(24px,var(--sa-l))}
-html:not(#_) .pz-dlg .pdlg-c{max-height:100%}
+
+
 /* DS Drawer: the side next to the screen edge keeps off the side bar; the header clears the top inset; the last block (footer, or the body
    when there is none; the account panel's Sign out included) keeps its content above the bottom inset, with a spacer so it holds
    whatever padding the body has. */
 html:not(#_) .db-drawer-right{padding-right:var(--sa-r)}
 html:not(#_) .db-drawer-left{padding-left:var(--sa-l)}
-html:not(#_) .db-drawer-h{padding-top:calc(var(--db-space-2) + var(--sa-t));min-height:calc(56px + var(--sa-t))}
-html:not(#_) .db-drawer-f{padding-bottom:max(var(--db-space-4),calc(var(--sa-b) + 12px))}
-html:not(#_) .db-drawer-b:last-child::after{content:"";display:block;flex:none;height:calc(var(--sa-b) + var(--sa-gap))}
+html:not(#_) .db-drawer{top:var(--sa-t);bottom:var(--sa-b)}
 /* Toasts (DS Toast's fixed wrapper, bottom center): 24px up from the bottom, or above the bottom inset with the same 24px of room as the other
    modals, whichever is higher, and clear of any landscape side bar. The buy bar rule below lifts it further on phone product pages. */
 html:not(#_) div:has(>div>.db-toast){bottom:calc(var(--sa-b) + var(--db-space-5))!important;padding-left:var(--sa-l);padding-right:var(--sa-r);box-sizing:border-box}
 @media (max-width:639px){
-  .pdp>.cta{position:fixed;left:0;right:0;bottom:0;z-index:60;margin:0!important;box-sizing:border-box;width:auto;
-    padding:var(--db-space-3) var(--pad) calc(12px + var(--sa-b));
+  .pdp>.cta{position:fixed;left:0;right:0;bottom:var(--sa-b);z-index:60;margin:0!important;box-sizing:border-box;width:auto;
+    padding:var(--db-space-3) var(--pad) 12px;
     background:var(--db-white);box-shadow:0 -1px 0 var(--db-hairline),0 -8px 24px rgba(58,54,51,.08)}
   .phone:has(.pdp>.cta){padding-bottom:calc(72px + var(--sa-b))}
   /* Toasts (DS Toast, fixed wrapper) rise above the buy bar instead of covering it: bar height plus 16px. */
@@ -233,3 +233,13 @@ html:not(#_):not(#_) .bagp-l .line:last-child{border-bottom:1px solid var(--hair
    the trim cuts them, so the photo fills the whole image container, cropped from the center, instead of sitting in the bottom-left corner. */
 html:not(#_) .pc.pc-fill .db-pc-img{aspect-ratio:auto!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important}
 html:not(#_) .pc.pc-fill .db-pc-img img{left:0!important;top:0!important;width:100%!important;height:100%!important;object-fit:cover;object-position:center}
+
+/* Drawer entrance never skipped. The DS slides the panel by flipping a class two animation frames after mount, so when a frame is dropped
+   (busy page, dialog just promoted to the top layer) the panel and scrim land open with no motion. A keyframe entrance starts the moment the
+   dialog opens, whatever the class timing, and ends on the same resting state the DS transition reaches. */
+@keyframes db-drawer-in-r{from{transform:translate3d(100%,0,0);opacity:1}to{transform:translate3d(0,0,0);opacity:1}}
+@keyframes db-drawer-in-l{from{transform:translate3d(-100%,0,0);opacity:1}to{transform:translate3d(0,0,0);opacity:1}}
+@keyframes db-scrim-in{from{opacity:0}to{opacity:1}}
+html:not(#_) dialog.db-drawer-scrim[open]{animation:db-scrim-in var(--db-duration-slow) var(--db-ease-standard)}
+html:not(#_) dialog.db-drawer-scrim[open] .db-drawer-right{animation:db-drawer-in-r var(--db-duration-slow) var(--db-ease-standard)}
+html:not(#_) dialog.db-drawer-scrim[open] .db-drawer-left{animation:db-drawer-in-l var(--db-duration-slow) var(--db-ease-standard)}

@@ -4,7 +4,7 @@ app.js              The main site (catalog data, shell UI, screens, checkout, su
                     It was originally compiled from src/catalog.js + ui.jsx + screens.jsx + checkout.jsx + subscriptions.jsx + app.jsx,
                     but has since been edited in place. The old .jsx sources are out of date and were moved to archive/stale-jsx/
                     for reference only. Rebuilding from them would erase current work.
-                    src/catalog.js mirrors the catalog section of app.js; keep the two in step if you change product data.
+                    The catalog data lives only here (the old src/catalog.js mirror was removed; it was never loaded).
 bookshelf-pages.js  The six Bookshelf+ pages (originals in archive/bookshelf-pages/*.dc.html, also out of date). Edit directly.
                     Pages register on window.BSP_PAGES and render at #/bookshelf-plus/* and #/account/subscriptions/bookshelf-plus.
 

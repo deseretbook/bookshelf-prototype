@@ -124,18 +124,18 @@
 .plp-sun{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;border-radius:inherit;-webkit-filter:blur(var(--sun-blur,0px));filter:blur(var(--sun-blur,0px));-webkit-animation:plp-leaves-in 1.2s cubic-bezier(.2,0,0,1) both;animation:plp-leaves-in 1.2s cubic-bezier(.2,0,0,1) both}
 .plp-sun>span{position:absolute;left:50%;bottom:0;border-radius:50%;will-change:transform,opacity}
 .plp-sun-core{width:calc(150px * var(--sun-s) * var(--sun-k,1));height:calc(150px * var(--sun-s) * var(--sun-k,1));-webkit-transform:translate(-50%,50%);transform:translate(-50%,50%);
-  background:radial-gradient(closest-side,#fff 0%,#fff 60%,rgba(255,255,255,.85) 72%,color-mix(in srgb,var(--db-yellow-100) 30%,transparent) 86%,transparent 100%)}
+  background:radial-gradient(closest-side,var(--db-white) 0%,var(--db-white) 60%,rgba(255,255,255,.85) 72%,color-mix(in srgb,var(--db-yellow-100) 30%,transparent) 86%,transparent 100%)}
 .plp-sun-glow{width:calc(1000px * var(--sun-s) * var(--sun-k,1));height:calc(1000px * var(--sun-s) * var(--sun-k,1));opacity:var(--sun-g);-webkit-transform:translate(-50%,50%);transform:translate(-50%,50%);
   background:radial-gradient(closest-side,rgba(255,255,255,.95) 0%,rgba(255,255,255,.7) 14%,color-mix(in srgb,var(--db-yellow-200) 45%,rgba(255,255,255,.3)) 30%,color-mix(in srgb,var(--db-yellow-200) 18%,transparent) 52%,transparent 78%);
   -webkit-animation:plp-sun-breathe 7s cubic-bezier(.45,0,.55,1) infinite alternate both;animation:plp-sun-breathe 7s cubic-bezier(.45,0,.55,1) infinite alternate both}
 .plp-sun-rays{width:calc(1400px * var(--sun-s) * var(--sun-k,1));height:calc(1400px * var(--sun-s) * var(--sun-k,1));opacity:var(--sun-r);-webkit-transform:translate(-50%,50%);transform:translate(-50%,50%);
-  -webkit-mask-image:radial-gradient(closest-side,#000 6%,rgba(0,0,0,.5) 30%,transparent 70%);mask-image:radial-gradient(closest-side,#000 6%,rgba(0,0,0,.5) 30%,transparent 70%);
+  -webkit-mask-image:radial-gradient(closest-side,var(--db-black) 6%,rgba(0,0,0,.5) 30%,transparent 70%);mask-image:radial-gradient(closest-side,var(--db-black) 6%,rgba(0,0,0,.5) 30%,transparent 70%);
   -webkit-animation:plp-sun-turn 160s linear infinite;animation:plp-sun-turn 160s linear infinite}
 .plp-sun-rays.b{width:calc(1100px * var(--sun-s) * var(--sun-k,1));height:calc(1100px * var(--sun-s) * var(--sun-k,1));-webkit-animation-duration:230s;animation-duration:230s;-webkit-animation-direction:reverse;animation-direction:reverse}
 .plp-sun-halo{width:calc(220px * var(--sun-s) * var(--sun-k,1));height:calc(220px * var(--sun-s) * var(--sun-k,1));opacity:0;-webkit-transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(.5);transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(.5);
   /* a crescent: a soft Yellow 100 disc with a Yellow 200 rim with an offset circle cut out toward the sun, tipped per halo (--halo-rot) */
   background:radial-gradient(closest-side,color-mix(in srgb,var(--db-yellow-100) 55%,rgba(255,255,255,.6)) 0%,color-mix(in srgb,var(--db-yellow-100) 55%,rgba(255,255,255,.6)) 66%,color-mix(in srgb,var(--db-yellow-200) 55%,transparent) 84%,transparent 100%);
-  -webkit-mask-image:radial-gradient(45% 45% at 50% 64%,transparent 88%,#000 100%);mask-image:radial-gradient(45% 45% at 50% 64%,transparent 88%,#000 100%);
+  -webkit-mask-image:radial-gradient(45% 45% at 50% 64%,transparent 88%,var(--db-black) 100%);mask-image:radial-gradient(45% 45% at 50% 64%,transparent 88%,var(--db-black) 100%);
   -webkit-animation:plp-sun-halo var(--halo-d) cubic-bezier(.25,.1,.3,1) var(--halo-dl) infinite both;animation:plp-sun-halo var(--halo-d) cubic-bezier(.25,.1,.3,1) var(--halo-dl) infinite both}
 @-webkit-keyframes plp-sun-halo{0%{-webkit-transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(.5);opacity:0}18%{opacity:calc(.9 * var(--sun-g))}100%{-webkit-transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(5.5);opacity:0}}
 @keyframes plp-sun-halo{0%{transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(.5);opacity:0}18%{opacity:calc(.9 * var(--sun-g))}100%{transform:translate(-50%,50%) rotate(var(--halo-rot,0deg)) scale(5.5);opacity:0}}

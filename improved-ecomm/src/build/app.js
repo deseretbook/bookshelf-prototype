@@ -1,5 +1,5 @@
 /* SOURCE OF TRUTH: edit this file directly. Originally compiled from .jsx sources that are now stale (archived in archive/stale-jsx/). See src/build/README.md. */
-/* src/catalog.js */
+/* catalog */
 /* Real Deseret Book product data + image URLs (deseretbook.com / images.deseretbook.io) */
 (function () {
   const IB = "assets/img/pim/";
@@ -883,45 +883,10 @@ const byName = s => { const m = /^([^,]+),\s*(.+)$/.exec(s || ""); return m ? m[
 /* Product cards: the DS ProductCard (one link, square image frame by default, the 2:3 book frame for lite cards that show the author, StarRating sm, Price md, one secondary sm action).
    The action follows the DS rule: Pre-order, View details (options or a price range), Notify me (out of stock), else Add to cart.
    Cards keep the DS fixed 192px at every width: grids use repeat(auto-fill, 192px) columns and rails scroll. */
-/* Covers that follow the book image rule in product cards: the product trimmed of its margins and shadow edges, then cropped
-   to the 2:3 cover shape the book images have. The result is a cropped copy of the image the card trims as usual. */
-const COVER_2_3 = { "5254477": 2, "5212882": 1 }; // 1: trim, then crop to 2:3; 2: trim the white margins only
-const coverCache = {};
-function useCover23(src, mode) {
-  const on = !!mode;
-  const [out, setOut] = React.useState(() => on && coverCache[src] || null);
-  React.useEffect(() => {
-    if (!on || !src) return;
-    if (coverCache[src]) { setOut(coverCache[src]); return; }
-    let live = true;
-    const im = new Image();
-    im.crossOrigin = "anonymous";
-    im.onload = () => {
-      try {
-        const W = im.naturalWidth, H = im.naturalHeight, c = document.createElement("canvas");
-        c.width = W; c.height = H;
-        const x = c.getContext("2d");
-        x.drawImage(im, 0, 0);
-        const d = x.getImageData(0, 0, W, H).data;
-        const bg = (i) => d[i + 3] < 24 || (d[i] > (mode === 2 ? 232 : 242) && d[i + 1] > (mode === 2 ? 232 : 242) && d[i + 2] > (mode === 2 ? 232 : 242));
-        let x0 = W, y0 = H, x1 = -1, y1 = -1;
-        for (let yy = 0; yy < H; yy++) for (let xx = 0; xx < W; xx++) if (!bg((yy * W + xx) * 4)) { if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; if (yy < y0) y0 = yy; if (yy > y1) y1 = yy; }
-        if (x1 < 0) return;
-        const ix = mode === 2 ? 0 : Math.round((x1 - x0) * 0.015), iy = mode === 2 ? 0 : Math.round((y1 - y0) * 0.015);
-        x0 += ix; x1 -= ix; y0 += iy; y1 -= iy;
-        let w = x1 - x0 + 1, h = y1 - y0 + 1;
-        if (mode === 2) { /* white margins only */ } else if (w / h > 2 / 3) { const nw = Math.round(h * 2 / 3); x0 += Math.floor((w - nw) / 2); w = nw; } else { const nh = Math.round(w * 3 / 2); y0 += Math.floor((h - nh) / 2); h = nh; }
-        const o = document.createElement("canvas");
-        o.width = w; o.height = h;
-        o.getContext("2d").drawImage(im, x0, y0, w, h, 0, 0, w, h);
-        o.toBlob((b) => { if (!b) return; const u = URL.createObjectURL(b); coverCache[src] = u; if (live) setOut(u); });
-      } catch (e) {}
-    };
-    im.src = src;
-    return () => { live = false; };
-  }, [src, on]);
-  return out;
-}
+/* Covers that follow the book image rule in product cards: the product trimmed of its margins and shadow edges, then (5212882) cropped
+   to the 2:3 cover shape the book images have, or (5254477) trimmed of its white margins only. These crops used to be computed in the
+   browser on every load (download, pixel scan, lossless re-encode, about 3 MB of PNG); they are now static files in assets/covers/. */
+const COVER_STATIC = { "5254477": "assets/covers/5254477.jpg", "5212882": "assets/covers/5212882.jpg" };
 function ProductCardBase({
   p,
   onOpen,
@@ -931,7 +896,7 @@ function ProductCardBase({
   fixed,
   layout
 }) {
-  const cover23 = useCover23(thumb(p.img[0]), COVER_2_3[p.id]);
+  const cover23 = COVER_STATIC[p.id] || null;
   const hasOpts = !!(p.formats || p.sizeOpts || p.sizes || (p.colors && p.colors.length > 1) || p.personalize || (p.priceHigh && p.priceHigh !== p.price));
   const pre = !!(window.PDPX && window.PDPX.isPre(p));
   const out = !pre && !!(window.PDPX && window.PDPX.availOf && window.PDPX.availOf(p) === "out");

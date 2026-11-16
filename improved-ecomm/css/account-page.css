@@ -42,8 +42,8 @@ html:not(#_):not(#_) .acp-main .grid.wl-grid{grid-template-columns:repeat(auto-f
 .acp.is-root .acp-main{display:none}
 .acp.is-sec{padding-top:0;padding-bottom:0}
 .acp.is-sec .acp-side{display:none}
-.acp.is-sec .acp-main{position:fixed;inset:0;z-index:80;display:block;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--db-white);box-sizing:border-box;padding:0 var(--pad) calc(48px + var(--sa-b))}
-.acp.is-sec .acp-back-bar{display:flex;align-items:center;position:sticky;top:0;z-index:2;margin:0 calc(var(--pad) * -1) 8px;padding:calc(8px + var(--sa-t)) calc(var(--pad) - 4px) 8px calc(var(--pad) - 4px + var(--sa-l));min-height:56px;box-sizing:border-box;background:var(--db-white);box-shadow:0 1px 0 var(--db-hairline)}
+.acp.is-sec .acp-main{position:fixed;inset:var(--sa-t,0px) 0 var(--sa-b,0px) 0;z-index:80;display:block;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--db-white);box-sizing:border-box;padding:0 var(--pad) 48px}
+.acp.is-sec .acp-back-bar{display:flex;align-items:center;position:sticky;top:0;z-index:2;margin:0 calc(var(--pad) * -1) 8px;padding:8px calc(var(--pad) - 4px) 8px calc(var(--pad) - 4px + var(--sa-l));min-height:56px;box-sizing:border-box;background:var(--db-white);box-shadow:0 1px 0 var(--db-hairline)}
 html:not(#_) .acp.is-sec .acp-back-bar .acp-back{margin:0}
 }
 @media (min-width:1024px){
@@ -100,7 +100,7 @@ html:not(#_) .ord-rows .ord-sum div{flex-direction:column;justify-content:flex-s
 html:not(#_) .ord-rows .ord-sum dd{text-align:left;white-space:nowrap}
 html:not(#_) .ord-rows .ord-card-top>:last-child{order:4;align-self:center;justify-self:end}
 }
-.acct-d .acct-view{flex:none;margin-left:auto;align-self:center}
+
 .acct-d .acct-id .acct-meta{flex:1 1 auto}
 /* Account panel: same grouped navigation as the account page */
 /* Panel spacing: pills keep the account page padding (16px before the icon) and extend 16px past the content edge, so the drawer content (header title included) moves to a 24px edge to line up with the icons. Pills sit 8px from the drawer sides. */
