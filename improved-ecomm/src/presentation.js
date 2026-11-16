@@ -67,7 +67,7 @@
      env(safe-area-inset-bottom), since an iframe reports 0): on the phone, everything below the top edge of Safari's
      floating controls (32px gap + 48px controls = 80px); the tablet has no system UI over the page. */
   function insets() {
-    try { frame.contentDocument.documentElement.style.setProperty("--sa-b", cur === "phone" ? "80px" : "0px"); } catch (e) {}
+    try { var de = frame.contentDocument.documentElement; de.style.setProperty("--sa-b", cur === "phone" ? "80px" : "0px"); de.style.setProperty("--sa-t", cur === "phone" ? "59px" : "0px"); } catch (e) {}
   }
   function frameSrc() {
     var u = location.pathname + (location.search ? location.search + "&" : "?") + "present=1&tweaks=0" + (location.hash || "");

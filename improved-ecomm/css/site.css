@@ -11,8 +11,11 @@ a{color:var(--teal);text-decoration:none}
 a:hover{color:var(--ink)}
 img{display:block}
 .phone{width:100%;margin:0 auto;background:#fff;min-height:100vh;position:relative;overflow-x:clip}
-.hdr{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--hair)}
+.hdr{position:sticky;top:var(--sa-t,0px);z-index:40;background:#fff;border-bottom:1px solid var(--hair)}
 .hdr.srch-on{z-index:80}
+/* The open search sits above everything: the header lifts above the page's fixed layers, and the panel above the category nav and its menus inside the header. */
+.hdr.srch-on{z-index:90}
+.hdr.srch-on .srch-panel{z-index:70}
 .hdr-in{height:42px;display:flex;align-items:center;justify-content:space-between;padding:8px var(--pad)}
 .hdr-ico{display:flex;align-items:center;gap:16px;width:68px}
 .iconbtn{width:26px;height:26px;display:grid;place-items:center;color:var(--ink);position:relative}

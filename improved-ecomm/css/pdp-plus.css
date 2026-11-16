@@ -146,6 +146,13 @@ html:not(#_):not(#_) .acct-d .card-list{margin-bottom:24px}
    --sa-t/-r/-l are the system's env() insets (--sa-b above, which the Tweaks presentation phone overrides). --sa-gap is the 24px (DS space 5) of room every control keeps
    above the bottom inset (nothing when there is no inset), so controls never sit flush on the system bar. */
 :root{--sa-gap:min(var(--sa-b),var(--db-space-5));--sa-t:env(safe-area-inset-top,0px);--sa-r:env(safe-area-inset-right,0px);--sa-l:env(safe-area-inset-left,0px)}
+/* Safe areas stay invisible. The page paints them itself: the root pads by --sa-t (the page's own white, not the wrapper's bare strip) so the shipping band
+   starts below the status bar, and the sticky header draws a white lip above it only while stuck (src/safe-area.js toggles .is-stuck), so scrolled content
+   never shows behind the system UI. Overlays are fixed at inset 0 and cover everything, safe areas included, so a scrim dims the whole screen and leaves
+   nothing behind when it unmounts. */
+html:root{padding-top:var(--sa-t,0px);padding-bottom:0}
+.hdr::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:var(--sa-t,0px);background:var(--db-white);opacity:0;pointer-events:none}
+.hdr.is-stuck::before{opacity:1}
 /* DS Dialog: its fixed scrim centers the panel with 20px of room; never less than the safe area on any side. */
 html:not(#_) .db-dialog-scrim{padding:max(var(--db-space-5),var(--sa-t)) max(var(--db-space-5),var(--sa-r)) max(var(--db-space-5),calc(var(--sa-b) + var(--sa-gap))) max(var(--db-space-5),var(--sa-l))!important}
 /* Project dialogs (.pdlg: newsletter, personalization, and the rest). */

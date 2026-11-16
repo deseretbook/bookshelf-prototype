@@ -10,8 +10,8 @@
 .pv-stage[data-dev="tablet"] .pv-dev{--pv-w:744px;--pv-h:1133px;--pv-b:16px;--pv-r:40px}
 .pv-screen{position:relative;width:100%;height:100%;overflow:hidden;border-radius:calc(var(--pv-r) - var(--pv-b));background:var(--db-white);
   transition:border-radius var(--db-duration-slow) var(--db-ease-standard)}
-/* The page fills the screen below the top safe area (--pv-st); Safari's controls float over its bottom edge. */
-.pv-scr{position:absolute;left:0;right:0;top:var(--pv-st,0px);bottom:0;width:100%;height:calc(100% - var(--pv-st,0px));border:0;display:block;background:var(--db-white);border-radius:0 0 calc(var(--pv-r) - var(--pv-b)) calc(var(--pv-r) - var(--pv-b));
+/* The page fills the whole screen, under the status bar and the home area like on the device: it pads itself with --sa-t / --sa-b, and overlays paint across both. */
+.pv-scr{position:absolute;left:0;right:0;top:0;bottom:0;width:100%;height:100%;border:0;display:block;background:var(--db-white);border-radius:calc(var(--pv-r) - var(--pv-b));
   transition:top var(--db-duration-slow) var(--db-ease-standard),height var(--db-duration-slow) var(--db-ease-standard)}
 
 /* iPhone (iPhone 16, 393 x 852 points): Apple's portrait safe areas are 59pt at the top (status bar and Dynamic Island)

@@ -20,7 +20,7 @@
 .fp .fp-side a:hover{color:var(--db-charcoal,#3a3633);text-decoration:underline}
 .fp .fp-side a[aria-current]{color:var(--fp-acc);text-decoration:underline;text-decoration-thickness:1px}
 .fp-body{display:flex;flex-direction:column;gap:40px;min-width:0}
-@media (min-width:960px){.fp-grid{grid-template-columns:200px minmax(0,1fr);gap:64px}.fp-grid.nos{grid-template-columns:minmax(0,1fr)}.fp-side{position:sticky;top:calc(var(--hdr-h,93px) + 32px);align-self:start}.fp-side ul{flex-direction:column;gap:12px}}
+@media (min-width:960px){.fp-grid{grid-template-columns:200px minmax(0,1fr);gap:64px}.fp-grid.nos{grid-template-columns:minmax(0,1fr)}.fp-side{position:sticky;top:calc(var(--hdr-h,93px) + var(--sa-t,0px) + 32px);align-self:start}.fp-side ul{flex-direction:column;gap:12px}}
 .fp-sec{display:flex;flex-direction:column;gap:16px;scroll-margin-top:96px}
 .fp-sec+.fp-sec{padding-top:24px}
 .fp-tw{overflow-x:auto;margin:0 -1px;padding:1px}
@@ -137,7 +137,7 @@
 .feg-chip[aria-checked="true"]{background:var(--db-charcoal,#3a3633);color:#fff;box-shadow:0 0 0 1px var(--db-charcoal,#3a3633)}
 @media (min-width:900px){.feg-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px}.feg-prev{position:sticky;top:120px}}
 .fp-sec{scroll-margin-top:120px}
-@media (max-width:959px){.fp-side{position:sticky;top:var(--hdr-h,93px);z-index:30;background:#fff;margin:0 calc(-1*var(--pad,20px));padding:12px var(--pad,20px);box-shadow:0 1px 0 var(--db-granite,#e2ddd6);overflow-x:auto}.fp-side ul{flex-wrap:nowrap}.fp-side li{flex:none}}
+@media (max-width:959px){.fp-side{position:sticky;top:calc(var(--hdr-h,93px) + var(--sa-t,0px));z-index:30;background:#fff;margin:0 calc(-1*var(--pad,20px));padding:12px var(--pad,20px);box-shadow:0 1px 0 var(--db-granite,#e2ddd6);overflow-x:auto}.fp-side ul{flex-wrap:nowrap}.fp-side li{flex:none}}
 .fs-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 .fs-list li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto 1fr auto;align-items:start;gap:16px 14px;padding:20px;border-radius:var(--db-radius-lg);background:var(--db-white);box-shadow:0 0 0 1px color-mix(in srgb,var(--db-granite) 60%,transparent)}
 .fs-ic{width:48px;height:48px;border-radius:var(--db-radius-pill);display:grid;place-items:center;background:var(--db-pearl,#f7f4f0);color:var(--fp-acc);box-shadow:0 0 0 1px var(--db-granite,#e2ddd6)}
