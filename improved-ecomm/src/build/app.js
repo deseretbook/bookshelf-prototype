@@ -2404,9 +2404,14 @@ function Home({
       className: "ccard-t"
     }, c.title), /*#__PURE__*/React.createElement("p", {
       className: "ccard-x"
-    }, c.x), /*#__PURE__*/React.createElement(DSB, {
-      className: "btn-out",
-      onClick: () => go("#/blog/" + i)
+    }, c.x), /*#__PURE__*/React.createElement(DS.Button, {
+      variant: "secondary",
+      size: "sm",
+      className: "blog-more",
+      onClick: e => {
+        e.stopPropagation();
+        go("#/blog/" + i);
+      }
     }, "Read More")));
   })), /*#__PURE__*/React.createElement(Dots, {
     i: conDots.i,
@@ -3474,8 +3479,14 @@ function BlogIndex({
       className: "blog-item-t"
     }, c.title), /*#__PURE__*/React.createElement("p", {
       className: "ccard-x"
-    }, c.x), /*#__PURE__*/React.createElement("span", {
-      className: "blog-more"
+    }, c.x), /*#__PURE__*/React.createElement(DS.Button, {
+      variant: "secondary",
+      size: "sm",
+      className: "blog-more",
+      onClick: e => {
+        e.stopPropagation();
+        go("#/blog/" + i);
+      }
     }, "Read More")));
   })));
 }
@@ -3556,8 +3567,14 @@ function BlogPost({
     className: "ccard-m"
   }, o.date), /*#__PURE__*/React.createElement("h3", {
     className: "blog-item-t"
-  }, o.title), /*#__PURE__*/React.createElement("span", {
-    className: "blog-more"
+  }, o.title), /*#__PURE__*/React.createElement(DS.Button, {
+    variant: "secondary",
+    size: "sm",
+    className: "blog-more",
+    onClick: e => {
+      e.stopPropagation();
+      go("#/blog/" + k);
+    }
   }, "Read More")))))));
 }
 Object.assign(window, {

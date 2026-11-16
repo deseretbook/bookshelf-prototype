@@ -147,10 +147,12 @@ html:not(#_):not(#_) .acct-d .card-list{margin-bottom:24px}
    above the bottom inset (nothing when there is no inset), so controls never sit flush on the system bar. */
 :root{--sa-gap:min(var(--sa-b),var(--db-space-4));--sa-t:env(safe-area-inset-top,0px);--sa-r:env(safe-area-inset-right,0px);--sa-l:env(safe-area-inset-left,0px)}
 /* Edge to edge: the page file's wrapper pads the root by the env() insets, which paints a bare box behind the system UI that scrims can't dim, so that padding is
-   zeroed. The top inset is plain scrolling space at the head of the page, the sticky header draws a white lip above it only while stuck (src/safe-area.js toggles
+   zeroed. The top inset is painted by whatever opens the page (the band's own ground, or the header's white lip when the header is first), and the sticky header draws the same lip above it while stuck (src/safe-area.js toggles
    .is-stuck), and overlays are fixed at inset 0 so they cover the whole screen, safe areas included. */
 html:root{padding-top:0;padding-bottom:0}
-#root::before{content:"";display:block;height:var(--sa-t,0px)}
+.phone>.ann:first-child{padding-top:calc(8px + var(--sa-t,0px))}
+.phone>.hdr:first-child{margin-top:var(--sa-t,0px)}
+.phone>.hdr:first-child::before{opacity:1}
 .hdr::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:var(--sa-t,0px);background:var(--db-white);opacity:0;pointer-events:none}
 .hdr.is-stuck:not(.srch-on)::before{opacity:1}
 /* DS Dialog: its fixed scrim centers the panel with 20px of room; never less than the safe area on any side. */

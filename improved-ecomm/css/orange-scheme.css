@@ -4,7 +4,6 @@
    Source order preserved; order matters for overrides. */
 /* Flattened: palette attributes removed, applies unconditionally. */
 html a:hover{color:var(--p-700)}
-html .blog-more:hover{color:var(--p-700)}
 html .heart .ico-on,html .fav .ico-on{color:var(--hl)!important}
 html .acct-tier,html .pdlg-eyebrow{color:var(--hl-t)!important}
 
