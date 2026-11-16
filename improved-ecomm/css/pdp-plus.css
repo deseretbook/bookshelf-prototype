@@ -135,22 +135,24 @@ html:not(#_):not(#_) .acct-d .card-list{margin-bottom:24px}
    frame fixed to the bottom of the viewport: white, a hairline above, safe-area aware, the row filling the width inside
    the page margins. The page gets matching room at the bottom so the footer is never hidden behind it. From 640px the
    row stays in place under the options. */
-/* Safe areas exist only in the Tweaks phone preview (src/presentation.js sets --sa-t and --sa-b inside the device frame, where the page can't see the real
-   insets). Everywhere else every inset is 0 and the page file's own wrapper handles the device. */
-:root{--sa-b:0px}
+/* Safe areas: the page opts into edge-to-edge (viewport-fit=cover) and reads the device's insets through env(). --sa-b is the bottom inset less 10px (the device already pads
+   its own home area). The Tweaks phone preview can't see real insets in its iframe, so src/presentation.js sets --sa-t and --sa-b inline there. */
+:root{--sa-b:max(0px,calc(env(safe-area-inset-bottom,0px) - 10px))}
 /* Shopping bag drawer: the sticky checkout footer keeps its content inside the bottom safe area; its white ground still
    runs to the screen's edge behind the system UI. */
 .bag-d .db-drawer-f{padding-bottom:max(var(--db-space-4),calc(var(--sa-b) + 12px))}
 /* Modals stay inside the safe area (notch, rounded corners, home indicator, landscape side bars): the scrim and the white ground of a
    drawer still run to the screen's edge, but dialogs, drawer headers, bodies and footers keep their controls and content inside it.
-   --sa-t/-r/-l and --sa-b are 0 except in the Tweaks presentation phone. --sa-gap is the 16px (DS space 4) of room every control keeps
+   --sa-t/-r/-l are the system's env() insets (--sa-b above; the Tweaks presentation phone overrides both). --sa-gap is the 16px (DS space 4) of room every control keeps
    above the bottom inset (nothing when there is no inset), so controls never sit flush on the system bar. */
-:root{--sa-gap:min(var(--sa-b),var(--db-space-4));--sa-t:0px;--sa-r:0px;--sa-l:0px}
-/* Phone preview only: the top inset is plain scrolling space at the head of the page, and the sticky header draws a white lip above it only while it is stuck
-   (src/safe-area.js toggles .is-stuck). */
-.pv-in-frame #root::before{content:"";display:block;height:var(--sa-t,0px)}
-.pv-in-frame .hdr::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:var(--sa-t,0px);background:var(--db-white);opacity:0;pointer-events:none}
-.pv-in-frame .hdr.is-stuck:not(.srch-on)::before{opacity:1}
+:root{--sa-gap:min(var(--sa-b),var(--db-space-4));--sa-t:env(safe-area-inset-top,0px);--sa-r:env(safe-area-inset-right,0px);--sa-l:env(safe-area-inset-left,0px)}
+/* Edge to edge: the page file's wrapper pads the root by the env() insets, which paints a bare box behind the system UI that scrims can't dim, so that padding is
+   zeroed. The top inset is plain scrolling space at the head of the page, the sticky header draws a white lip above it only while stuck (src/safe-area.js toggles
+   .is-stuck), and overlays are fixed at inset 0 so they cover the whole screen, safe areas included. */
+html:root{padding-top:0;padding-bottom:0}
+#root::before{content:"";display:block;height:var(--sa-t,0px)}
+.hdr::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:var(--sa-t,0px);background:var(--db-white);opacity:0;pointer-events:none}
+.hdr.is-stuck:not(.srch-on)::before{opacity:1}
 /* DS Dialog: its fixed scrim centers the panel with 20px of room; never less than the safe area on any side. */
 html:not(#_) .db-dialog-scrim{padding:max(var(--db-space-5),var(--sa-t)) max(var(--db-space-5),var(--sa-r)) max(var(--db-space-5),calc(var(--sa-b) + var(--sa-gap))) max(var(--db-space-5),var(--sa-l))!important}
 /* Project dialogs (.pdlg: newsletter, personalization, and the rest). */
