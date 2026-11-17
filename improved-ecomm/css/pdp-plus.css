@@ -158,6 +158,7 @@ html{background:linear-gradient(var(--db-teal-300),var(--db-teal-300)) top/100% 
    page ground reaching the screen's edge). Scrolled content and the dimmed page show through, and a see-through frost (no blur and no white fade, never a
    fill) keeps the clock and the home indicator legible. */
 html:not(:has(.pdp>.cta))::before,html:not(:has(.pdp>.cta))::after{content:"";position:fixed;left:0;right:0;z-index:90;pointer-events:none;-webkit-backdrop-filter:blur(0px) saturate(1.2);backdrop-filter:blur(0px) saturate(1.2)}
+html.frost-refresh:not(#_)::before,html.frost-refresh:not(#_)::after{content:none!important}
 html:not(:has(.pdp>.cta))::before{top:0;height:var(--sa-t,0px);background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,0));-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
 html:not(:has(.pdp>.cta))::after{bottom:0;height:calc(max(var(--sa-b,0px),var(--sa-tb,0px)) + 10px);transform:translateY(var(--sa-tb,0px));background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,0));-webkit-mask-image:linear-gradient(transparent,#000 45%);mask-image:linear-gradient(transparent,#000 45%)}
 /* Real phones: the layout viewport can end above a floating browser toolbar while the page still paints underneath it. --sa-tb is that hidden strip
