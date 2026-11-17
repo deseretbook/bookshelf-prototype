@@ -1,0 +1,58 @@
+/* Alternative eComm: project layout only. Colors, type, spacing, motion and components come from the Deseret Book Design System. */
+:root{--pad:var(--db-space-4)}
+@media (min-width:640px){:root{--pad:var(--db-space-6)}}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--db-safe-top) + 64px)}
+body{margin:0;background:var(--db-ground);color:var(--db-ink);font-family:var(--font-sans);font-size:var(--db-text-body);line-height:var(--db-lh-body)}
+img{display:block;max-width:100%}
+
+/* Header: burger (below 1024px), wordmark, menu (from 1024px), cart. Always one row. */
+.hdr{position:sticky;top:0;z-index:40;background:var(--db-white);padding-top:var(--db-safe-top);box-shadow:0 1px 0 var(--db-hairline)}
+.hdr-in{max-width:var(--db-max-width);margin:0 auto;min-height:56px;display:flex;align-items:center;gap:var(--db-space-2);padding:var(--db-space-2) calc(var(--pad) + var(--db-safe-right)) var(--db-space-2) calc(var(--pad) + var(--db-safe-left))}
+.hdr-burger{display:flex;margin-left:calc(-1 * var(--db-space-2));flex:none}
+.hdr .hdr-cart{margin-left:auto;flex:none}
+
+/* Wordmark: emblem and wordmark. Link home. */
+.wm{display:inline-flex;align-items:center;gap:var(--db-space-2);color:var(--db-charcoal);text-decoration:none;border-radius:var(--db-radius-sm);outline:2px solid transparent;outline-offset:4px}
+.wm:focus-visible{outline-color:var(--db-focus-ring)}
+.wm-e{width:28px;height:28px}
+.wm-w{width:127px;height:auto}
+
+/* Desktop menu: one row of links. Hidden below 1024px, where the menu is a drawer. */
+.nav{display:none}
+@media (min-width:1024px){
+  .hdr-in{min-height:72px;gap:var(--db-space-6)}
+  .hdr-burger{display:none}
+  .wm-e{width:32px;height:32px}
+  .wm-w{width:146px}
+  .nav{display:block}
+  .nav ul{display:flex;align-items:center;gap:var(--db-space-1);margin:0;padding:0;list-style:none}
+}
+.nav a{display:inline-flex;align-items:center;height:40px;padding:0 var(--db-space-3);border-radius:var(--db-radius-pill);font-size:var(--db-text-label);letter-spacing:var(--db-tracking-label);text-transform:uppercase;color:var(--db-charcoal);text-decoration:none;outline:2px solid transparent;outline-offset:2px;transition:background-color var(--db-duration-base) var(--db-ease-standard),color var(--db-duration-base) var(--db-ease-standard)}
+@media (hover:hover){.nav a:hover{background:var(--db-pearl);color:var(--db-black)}}
+.nav a:focus-visible{outline-color:var(--db-focus-ring)}
+.nav a[aria-current=page]{color:var(--db-black);box-shadow:inset 0 -2px 0 var(--db-accent);border-radius:0}
+
+/* Cart button: a bare button around the DS CountBadge pill. */
+.cart-btn{display:inline-flex;align-items:center;min-height:40px;margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;cursor:pointer;border-radius:var(--db-radius-pill);outline:2px solid transparent;outline-offset:2px;-webkit-tap-highlight-color:transparent}
+.cart-btn:focus-visible{outline-color:var(--db-focus-ring)}
+
+/* Menu drawer rows: edge to edge, hairline between. */
+.mnav{margin:0;padding:0;list-style:none}
+.mnav a{display:flex;align-items:center;min-height:52px;padding:var(--db-space-3) calc(var(--db-space-4) + var(--db-safe-left)) var(--db-space-3) var(--db-space-4);font-size:var(--db-text-body);color:var(--db-ink);text-decoration:none;box-shadow:0 1px 0 var(--db-hairline);outline:2px solid transparent;outline-offset:-2px;transition:background-color var(--db-duration-base) var(--db-ease-standard)}
+@media (hover:hover){.mnav a:hover{background:var(--db-pearl)}}
+.mnav a:focus-visible{outline-color:var(--db-focus-ring)}
+.mnav a[aria-current=page]{font-weight:var(--db-weight-sans-medium);box-shadow:inset 3px 0 0 var(--db-accent),0 1px 0 var(--db-hairline)}
+
+/* Page body placeholder */
+.main{max-width:var(--db-max-width);margin:0 auto;padding:var(--db-space-7) calc(var(--pad) + var(--db-safe-right)) calc(var(--db-space-9) + var(--db-safe-bottom)) calc(var(--pad) + var(--db-safe-left))}
+.main h1{margin:0 0 var(--db-space-3);font-family:var(--font-serif);font-weight:var(--db-weight-serif-regular);font-size:2rem;line-height:var(--db-lh-tight);color:var(--db-display)}
+.main p{margin:0;max-width:var(--db-measure-lede);color:var(--db-ink-muted)}
+@media (min-width:1024px){.main h1{font-size:var(--db-text-heading)}}
+
+/* Icons fade from outline to filled on hover and keyboard focus (src/icon-hover-fill.js). */
+html:not(#_) .db-ic[data-hf-g]{position:relative;transition:font-variation-settings var(--db-duration-base) var(--db-ease-standard),-webkit-text-fill-color var(--db-duration-base) var(--db-ease-standard)}
+html:not(#_) .db-ic[data-hf-g][data-hf-on]{-webkit-text-fill-color:transparent}
+html:not(#_) .db-ic[data-hf-g]::after{content:attr(data-hf-g);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;font:inherit;white-space:nowrap;font-variation-settings:var(--hf-fv);-webkit-text-fill-color:currentColor;opacity:0;pointer-events:none;transition:opacity var(--db-duration-base) var(--db-ease-standard)}
+html:not(#_) .db-ic[data-hf-g][data-hf-on]::after{opacity:1}
+@media (prefers-reduced-motion:reduce){html:not(#_) .db-ic[data-hf-g],html:not(#_) .db-ic[data-hf-g]::after{transition-duration:.01ms}}

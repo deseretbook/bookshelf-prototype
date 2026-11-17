@@ -31,5 +31,16 @@
       "Cart drawer mobile test": "#cart-drawer-mobile",
       "Bookshelf cancellation test": "#bookshelf-cancellation"
     }
+  },
+  "alternative-ecomm": {
+    "artifact": "https://claude.ai/artifact/URGCXA11ZKM8eQas4hGtn4",
+    "title": "Alternative eComm",
+    "entry": "index.html",
+    "plain": true,
+    "qa_routes": [
+      "#",
+      "#books",
+      "#deals"
+    ]
   }
 }
