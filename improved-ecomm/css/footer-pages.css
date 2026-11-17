@@ -173,6 +173,8 @@ html:not(#_) .fp-acp.acp-side .acp-nav{margin:0 -16px}
 /* Bookshelf+ pages: gift links after the FAQ */
 .bsp-gift-links{margin:32px 0 0;width:100%;grid-template-columns:minmax(0,1fr)}
 @media (min-width:640px){.bsp-gift-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* The Bookshelf+ gift links sit on the sand section: Pearl cards, not white (the About page's .fa-more links stay white). */
+.bsp-gift-links button{background:var(--db-pearl)}
 
 /* Temple Open House (#/info/temple-open-house) */
 .fx-toh{gap:0;padding-left:0;padding-right:0}
@@ -272,8 +274,8 @@ html:not(#_):not(#_) .fx-toh :is(.toh-tie h2,.toh-vh){font-family:var(--db-font-
 @media (min-width:900px){.toh-hang{gap:20px}.toh-hang li:last-child{grid-column:auto}.toh-hang li:last-child .toh-hi{aspect-ratio:3/4}.toh-hang li:nth-child(even) .toh-hi{aspect-ratio:1/1}}
 html:not(#_):not(#_) .fx-toh .toh-hang a:hover .toh-an{text-decoration:underline;text-underline-offset:3px}
 .fx-toh .toh-hang .toh-an{font-size:15px;line-height:20px}
-.fx-toh .toh-pillar{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 20px;align-items:baseline;border-top:1px solid var(--db-charcoal)}
-.fx-toh .toh-n{grid-row:span 2;font-family:var(--db-font-serif);color:var(--db-yellow-400)}
+.fx-toh .toh-pillar{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 20px;align-items:baseline;border-top:1px solid var(--db-granite)}
+.fx-toh .toh-n{grid-row:span 2;font-family:var(--db-font-serif);color:var(--db-yellow-300)}
 .fx-toh .toh-pillar .toh-sub{grid-column:2}
 .fx-toh .toh-hd .fp-eb{color:color-mix(in srgb,var(--db-charcoal) 75%,transparent)}
 .fx-toh .toh-quote{border-left-color:var(--toh-y);border-left-width:4px}
@@ -358,3 +360,7 @@ html:not(#_):not(#_) .fx-toh :is(.db-eyebrow,.fp-eb,.toh-hd,.toh-hero-t,.toh-pil
 html:not(#_):not(#_) .fx-toh .toh-sub{color:var(--db-blue-700)}
 /* Temple Open House hero: lede uses Blue 700 (headline lines set above) */
 html:not(#_):not(#_) .fx-toh .toh-hero .fp-lede{color:var(--db-blue-700)}
+/* Book product images (Know Him, Live Like Him) keep 24px of room inside their frame so the cover never touches the border. */
+/* The cover sits in a 24px-inset wrapper that carries a small elevation (drop-shadow follows the clipped, rounded cover; a filter can't read the DS shadow tokens, so the values are literal: DS shadow-md's color, a touch stronger). */
+html:not(#_):not(#_) .fx-toh .toh-books .toh-pi .toh-cv{position:absolute;left:24px;top:24px;right:24px;bottom:24px;display:block;filter:drop-shadow(0 3px 6px rgba(58,54,51,.26))}
+html:not(#_):not(#_) .fx-toh .toh-books .toh-pi .toh-cv img{left:0;top:0;width:100%;height:100%;object-fit:contain}

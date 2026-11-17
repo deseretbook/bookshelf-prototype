@@ -138,11 +138,29 @@
     const f = useForm({ email: "" });
     const art = cat("art_savior-art", 0, 4), know = cat("books_gospel-voices", 0, 4), live = cat("books_gospel-voices", 4, 8);
     const posts = D.featuredContent || [];
-    const tile = (p) => h("li", { key: p.id }, h("a", { className: "toh-pt", href: "#/p/" + p.id, onClick: (e) => { e.preventDefault(); go("#/p/" + p.id); } },
-      h("span", { className: "toh-pi" }, p.img && p.img[0] ? h("img", { src: th(p.img[0]), alt: "", loading: "lazy", decoding: "async" }) : null),
+    /* Book covers come as squares with white side margins: clip the image to the cover's own edges so the small corner radius lands on the cover, not the margins. */
+    const coverClip = (el) => {
+      if (!el) return;
+      const fit = () => { try {
+        const S = 500, c = document.createElement("canvas"); c.width = S; c.height = S;
+        const x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(el, 0, 0, S, S);
+        const d = x.getImageData(0, 0, S, S).data, col = new Array(S).fill(0), row = new Array(S).fill(0);
+        for (let y = 0; y < S; y++) for (let i = 0; i < S; i++) { const k = (y * S + i) * 4; if (d[k + 3] > 20 && (d[k] < 240 || d[k + 1] < 240 || d[k + 2] < 240)) { col[i]++; row[y]++; } }
+        /* Two readings of each edge: loose (a few cover pixels on the line) and firm (15% of the line). Firm ignores shadows, JPEG fringe and specks; loose is for light covers whose edge lines are mostly pale. Use firm unless loose sits clearly further out (more than 2%), then shave 2px (of 500) of anti-aliased fringe. */
+        const idx = (a, n, rev) => { if (rev) { for (let i = a.length - 1; i >= 0; i--) if (a[i] >= n) return i; return -1; } return a.findIndex((v) => v >= n); };
+        const pick = (a, rev) => { const f = idx(a, S * 0.15, rev), lo = idx(a, 3, rev); return (rev ? lo - f : f - lo) > S * 0.02 ? lo : f; };
+        const SH = 2, l = pick(col, false) + SH, r = pick(col, true) - SH, t = pick(row, false) + SH, b = pick(row, true) - SH;
+        if (l < SH || r < 0 || t < SH || b < 0 || r <= l || b <= t) return;
+        const pc = (n) => (Math.round(n * 1000) / 10) + "%";
+        el.style.clipPath = "inset(" + pc(t / S) + " " + pc((S - 1 - r) / S) + " " + pc((S - 1 - b) / S) + " " + pc(l / S) + " round var(--db-radius-sm))";
+      } catch (e) {} };
+      if (el.complete && el.naturalWidth) fit(); else el.addEventListener("load", fit, { once: true });
+    };
+    const tile = (p, books) => h("li", { key: p.id }, h("a", { className: "toh-pt", href: "#/p/" + p.id, onClick: (e) => { e.preventDefault(); go("#/p/" + p.id); } },
+      h("span", { className: "toh-pi" }, p.img && p.img[0] ? (() => { const im = h("img", { src: th(p.img[0]), alt: "", loading: "lazy", decoding: "async", ref: books ? coverClip : undefined }); return books ? h("span", { className: "toh-cv" }, im) : im; })() : null),
       h("span", { className: "toh-pn" }, p.t),
       h("span", { className: "toh-pg" }, h("span", { className: "ul-t" }, "View details"), h(Icon, { name: "arrow_forward", size: 18 }))));
-    const prods = (list, cls) => list.length ? h("ul", { className: "toh-pl" + (cls ? " " + cls : ""), "aria-label": "Featured products" }, list.map(tile)) : null;
+    const prods = (list, cls) => list.length ? h("ul", { className: "toh-pl" + (cls ? " " + cls : ""), "aria-label": "Featured products" }, list.map((p) => tile(p, cls === "toh-books"))) : null;
     const rail = (label, off) => posts.length ? h("ul", { className: "toh-rail", "aria-label": label }, posts.map((_, i) => posts[(i + off) % posts.length]).map((a, i) => h("li", { key: i },
       h("a", { className: "toh-art", href: a.url, target: "_blank", rel: "noopener" },
         h("span", { className: "toh-ai" }, a.img ? h("img", { src: a.img, alt: "", loading: "lazy", decoding: "async" }) : null),
@@ -179,7 +197,7 @@
         pillar("2", "Know Him", "Learning that deepens understanding."),
         h("figure", { className: "toh-quote" }, h("blockquote", null, "Quote from President D. Todd Christofferson, to be supplied by Content."), h("figcaption", null, "President D. Todd Christofferson")),
         rail("Know Him articles", 1),
-        prods(know)),
+        prods(know, "toh-books")),
 
       h("section", { className: "toh-sec" },
         pillar("3", "Live Like Him", "Everyday faith."),
@@ -187,7 +205,7 @@
         h("h3", { className: "fp-h3 toh-vh" }, "What does it look like for you?"),
         h("ul", { className: "toh-voices" }, ["Steve Young", "Sharon Eubank", "Camille Fronk Olson", "Thomas Griffith"].map((n) => h("li", { key: n }, Ph("Portrait: " + n, "toh-vp"), h("span", { className: "toh-vn" }, n), h("span", { className: "toh-vq" }, "Short reflection to come")))),
         rail("Live Like Him articles", 2),
-        prods(live)),
+        prods(live, "toh-books")),
 
       h("section", { className: "toh-sec toh-sec-alt toh-prod" },
         hd("Temple Collection", "Carry the moment with you"),

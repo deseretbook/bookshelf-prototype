@@ -148,8 +148,9 @@ html:not(#_):not(#_) .acct-d .card-list{margin-bottom:24px}
 /* Edge to edge: the page file's wrapper pads the root by the env() insets, which paints a bare box behind the system UI that scrims can't dim, so that padding is
    zeroed. The page itself runs under the system areas. */
 html:root{padding-top:0;padding-bottom:0}
-/* The teal pencil banner is only the banner: it doesn't extend into the top safe area, which shows the page behind it. */
-.phone>.ann:first-child{margin-top:var(--sa-t,0px)}
+.phone>.ann:first-child{padding-top:calc(8px + var(--sa-t,0px))}
+/* At the top of a page the system area carries the shipping band's ground (Teal 300), whether or not the band is there, so the status bar never sits on a white band; it scrolls away with the page. */
+.phone:has(>.hdr:first-child)::before{content:"";display:block;height:var(--sa-t,0px);background:var(--db-teal-300)}
 /* The header sticks below the top inset; nothing opaque fills the inset itself. */
 /* The system areas are never a solid color: nothing opaque ever sits in them (no white lip on the header, no drawer, dialog, buy bar or full-screen
    page ground reaching the screen's edge). Scrolled content and the dimmed page show through; no overlay is added on top of them. */
