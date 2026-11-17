@@ -151,9 +151,12 @@ html:root{padding-top:0;padding-bottom:0}
 .phone>.ann:first-child{padding-top:calc(8px + var(--sa-t,0px))}
 /* At the top of a page the system area carries the shipping band's ground (Teal 300), whether or not the band is there, so the status bar never sits on a white band; it scrolls away with the page. */
 .phone:has(>.hdr:first-child)::before{content:"";display:block;height:var(--sa-t,0px);background:var(--db-teal-300)}
-/* The header sticks below the top inset; nothing opaque fills the inset itself. */
 /* The system areas are never a solid color: nothing opaque ever sits in them (no white lip on the header, no drawer, dialog, buy bar or full-screen
-   page ground reaching the screen's edge). Scrolled content and the dimmed page show through; no overlay is added on top of them. */
+   page ground reaching the screen's edge). Scrolled content and the dimmed page show through, and a see-through frost (blur plus a faint fade, never a
+   fill) keeps the clock and the home indicator legible. */
+html::before,html::after{content:"";position:fixed;left:0;right:0;z-index:90;pointer-events:none;-webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2)}
+html::before{top:0;height:var(--sa-t,0px);background:linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,0));-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+html::after{bottom:0;height:calc(var(--sa-b,0px) + 10px);background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.35));-webkit-mask-image:linear-gradient(transparent,#000 45%);mask-image:linear-gradient(transparent,#000 45%)}
 /* DS Dialog: its fixed scrim centers the panel with 20px of room; never less than the safe area on any side. */
 html:not(#_) .db-dialog-scrim{padding:max(var(--db-space-5),var(--sa-t)) max(var(--db-space-5),var(--sa-r)) max(var(--db-space-5),calc(var(--sa-b) + var(--sa-gap))) max(var(--db-space-5),var(--sa-l))!important}
 /* Project dialogs (.pdlg: newsletter, personalization, and the rest). */
