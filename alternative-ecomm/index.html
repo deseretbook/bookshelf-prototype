@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Alternative eComm</title>
-<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/styles.css">
 <script src="js/app.js" defer></script>
 </head>
 <body>
@@ -35,7 +35,7 @@
   <p>A new store, built from scratch. The menu sits in the header on wide screens and opens as a drawer on small ones. The cart always opens as a drawer.</p>
 </main>
 
-<dialog class="drawer drawer-left" id="menu" aria-label="Menu">
+<dialog class="drawer drawer-left" id="menu" autofocus aria-label="Menu">
   <div class="drawer-h">
     <a class="logo" href="#">Alternative</a>
     <button class="ibtn" type="button" aria-label="Close menu" data-close><svg class="ic"><use href="#i-close"/></svg></button>
@@ -45,7 +45,7 @@
   </nav>
 </dialog>
 
-<dialog class="drawer drawer-right" id="cart" aria-labelledby="cart-title">
+<dialog class="drawer drawer-right" id="cart" autofocus aria-labelledby="cart-title">
   <div class="drawer-h">
     <h2 class="drawer-title" id="cart-title">Cart (0)</h2>
     <button class="ibtn" type="button" aria-label="Close cart" data-close><svg class="ic"><use href="#i-close"/></svg></button>
