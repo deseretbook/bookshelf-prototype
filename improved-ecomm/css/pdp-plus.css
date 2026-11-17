@@ -148,19 +148,28 @@ html:not(#_):not(#_) .acct-d .card-list{margin-bottom:24px}
 /* Edge to edge: the page file's wrapper pads the root by the env() insets, which paints a bare box behind the system UI that scrims can't dim, so that padding is
    zeroed. The page itself runs under the system areas. */
 html:root{padding-top:0;padding-bottom:0}
+/* Past the ends of the page (rubber-band overscroll, the strip under a floating browser toolbar at the very bottom) the browser paints the root's background:
+   Teal 300 at the top, Pearl (the footer's ground) at the bottom, so those edges continue the page instead of showing a white band. The body keeps its own white ground. */
+html{background:linear-gradient(var(--db-teal-300),var(--db-teal-300)) top/100% 480px no-repeat,linear-gradient(var(--db-pearl),var(--db-pearl)) bottom/100% 640px no-repeat,var(--db-white)}
 .phone>.ann:first-child{padding-top:calc(8px + var(--sa-t,0px))}
 /* At the top of a page the system area carries the shipping band's ground (Teal 300), whether or not the band is there, so the status bar never sits on a white band; it scrolls away with the page. */
 .phone:has(>.hdr:first-child)::before{content:"";display:block;height:var(--sa-t,0px);background:var(--db-teal-300)}
 /* The system areas are never a solid color: nothing opaque ever sits in them (no white lip on the header, no drawer, dialog, buy bar or full-screen
-   page ground reaching the screen's edge). Scrolled content and the dimmed page show through, and a see-through frost (blur plus a faint fade, never a
+   page ground reaching the screen's edge). Scrolled content and the dimmed page show through, and a see-through frost (a faint fade with no blur, never a
    fill) keeps the clock and the home indicator legible. */
-html::before,html::after{content:"";position:fixed;left:0;right:0;z-index:90;pointer-events:none;-webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2)}
+html::before,html::after{content:"";position:fixed;left:0;right:0;z-index:90;pointer-events:none;-webkit-backdrop-filter:blur(0px) saturate(1.2);backdrop-filter:blur(0px) saturate(1.2)}
 html::before{top:0;height:var(--sa-t,0px);background:linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,0));-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
 html::after{bottom:0;height:calc(max(var(--sa-b,0px),var(--sa-tb,0px)) + 10px);transform:translateY(var(--sa-tb,0px));background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.35));-webkit-mask-image:linear-gradient(transparent,#000 45%);mask-image:linear-gradient(transparent,#000 45%)}
 /* Real phones: the layout viewport can end above a floating browser toolbar while the page still paints underneath it. --sa-tb is that hidden strip
    (large minus dynamic viewport; 0 where they match). Everything that has to reach the true bottom edge (frost, scrims, the buy bar) is anchored with it. */
 :root{--sa-tb:calc(100lvh - 100dvh)}
-html:not(#_) dialog.db-drawer-scrim,html:not(#_) .db-dialog-scrim{height:100lvh;bottom:auto}
+html:not(#_) .db-dialog-scrim{height:100lvh;bottom:auto}
+/* Drawer scrim and panel bleed 64px past every screen edge (top, bottom), so a browser that reports a viewport a little short of the real screen can never leave a gap
+   or clip the panel; the drawer's header, footer and scrolling body add the same 64px back, so text and buttons stay inside the safe areas. */
+:root{--db-bleed:64px}
+html:not(#_) dialog.db-drawer-scrim{top:calc(-1*var(--db-bleed));bottom:auto;height:calc(100lvh + 2*var(--db-bleed))}
+/* The dark overlay reaches every edge of the screen: the scrim's own shadow spills past its box on all four sides, over whatever the browser paints beyond the layout viewport (under the status bar, a floating toolbar, the home indicator). */
+html:not(#_) dialog.db-drawer-scrim[open]{box-shadow:0 0 0 100vmax var(--db-scrim)}
 /* DS Dialog: its fixed scrim centers the panel with 20px of room; never less than the safe area on any side. */
 html:not(#_) .db-dialog-scrim{padding:max(var(--db-space-5),var(--sa-t)) max(var(--db-space-5),var(--sa-r)) max(var(--db-space-5),calc(var(--sa-b) + var(--sa-gap))) max(var(--db-space-5),var(--sa-l))!important}
 /* Project dialogs (.pdlg: newsletter, personalization, and the rest). */
@@ -174,9 +183,9 @@ html:not(#_) .db-drawer-left{padding-left:var(--sa-l)}
 /* The drawer panel runs to the screen's edges (the dialog behind it already covers the full height); its content stays inside the safe areas: the header
    clears the top inset, and the footer (or the scrolling body when there is none) stops above the bottom inset, so long content scrolls inside it. */
 html:not(#_) .db-drawer{top:0;bottom:0}
-html:not(#_) .db-drawer-h{padding-top:calc(var(--db-space-2) + var(--sa-t,0px));min-height:calc(56px + var(--sa-t,0px))}
-html:not(#_) .db-drawer-f{padding-bottom:calc(var(--db-space-4) + max(var(--sa-b,0px),var(--sa-tb,0px)))}
-html:not(#_) .db-drawer-b:last-child{margin-bottom:max(var(--sa-b,0px),var(--sa-tb,0px))}
+html:not(#_) .db-drawer-h{padding-top:calc(var(--db-space-2) + var(--sa-t,0px) + var(--db-bleed));min-height:calc(56px + var(--sa-t,0px) + var(--db-bleed))}
+html:not(#_) .db-drawer-f{padding-bottom:calc(var(--db-space-4) + max(var(--sa-b,0px),var(--sa-tb,0px)) + var(--db-bleed))}
+html:not(#_) .db-drawer-b:last-child{margin-bottom:calc(max(var(--sa-b,0px),var(--sa-tb,0px)) + var(--db-bleed))}
 /* Toasts (DS Toast's fixed wrapper, bottom center): 24px up from the bottom, or above the bottom inset with the same 24px of room as the other
    modals, whichever is higher, and clear of any landscape side bar. The buy bar rule below lifts it further on phone product pages. */
 html:not(#_) div:has(>div>.db-toast){bottom:calc(var(--sa-b) + var(--db-space-5))!important;padding-left:var(--sa-l);padding-right:var(--sa-r);box-sizing:border-box}
