@@ -191,13 +191,13 @@ html:not(#_) .db-drawer-b:last-child{margin-bottom:calc(max(var(--sa-b,0px),var(
    modals, whichever is higher, and clear of any landscape side bar. The buy bar rule below lifts it further on phone product pages. */
 html:not(#_) div:has(>div>.db-toast){bottom:calc(var(--sa-b) + var(--db-space-5))!important;padding-left:var(--sa-l);padding-right:var(--sa-r);box-sizing:border-box}
 @media (max-width:639px){
-  .pdp>.cta{position:fixed;left:0;right:0;bottom:0;transform:translateY(var(--sa-tb,0px));z-index:60;margin:0!important;box-sizing:border-box;width:auto;
+  .pdp>.cta{position:fixed;left:0;right:0;bottom:calc(-1*var(--db-bleed-b));transform:translateY(var(--sa-tb,0px));z-index:60;margin:0!important;box-sizing:border-box;width:auto;
     /* The white panel runs to the screen's bottom edge; the stepper and button stay above the inset. */
-    padding:var(--db-space-3) max(var(--pad),var(--sa-r)) calc(12px + max(var(--sa-b),var(--sa-tb))) max(var(--pad),var(--sa-l));
+    padding:var(--db-space-3) max(var(--pad),var(--sa-r)) calc(12px + max(var(--sa-b),var(--sa-tb)) + var(--db-bleed-b)) max(var(--pad),var(--sa-l));
     background:var(--db-white);box-shadow:0 -1px 0 var(--db-hairline),0 -8px 24px rgba(58,54,51,.08)}
   /* Same installed-PWA quirk as the drawers: 100dvh leaves out the bottom inset, so a fixed bar can end that far above the screen's edge. The bar carries its white
      ground down past its own bottom (off-screen where the viewport already reaches the edge), and its content stays above the inset. */
-  .pdp>.cta::after{content:"";position:absolute;left:0;right:0;top:100%;height:calc(env(safe-area-inset-bottom,0px) + var(--db-bleed,64px));background:var(--db-white);pointer-events:none}
+  /* The panel itself reaches past the bottom edge (bottom:-bleed, padding adds it back), so the white runs under the frost layer to the screen's edge. */
   .phone:has(.pdp>.cta){padding-bottom:calc(72px + max(var(--sa-b),var(--sa-tb)))}
   /* Toasts (DS Toast, fixed wrapper) rise above the buy bar instead of covering it: bar height plus 16px. */
   html:not(#_):has(.pdp>.cta) div:has(>div>.db-toast){bottom:calc(72px + var(--db-space-4) + var(--sa-b))!important}

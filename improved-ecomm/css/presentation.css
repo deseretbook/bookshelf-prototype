@@ -19,7 +19,7 @@
 .pv-stage[data-dev="phone"] .pv-dev{--pv-st:59px;--pv-sb:34px}
 .pv-sb,.pv-bar,.pv-home{position:absolute;left:0;right:0;z-index:2;pointer-events:none;opacity:0;transition:opacity var(--db-duration-slow) var(--db-ease-standard)}
 .pv-stage[data-dev="phone"] :is(.pv-sb,.pv-bar,.pv-home){opacity:1}
-.pv-sb{top:0;height:59px;display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 50px;box-sizing:border-box;color:var(--db-black);
+.pv-sb{top:0;height:59px;background:var(--db-white);display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 50px;box-sizing:border-box;color:var(--db-black);
   font:600 17px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;letter-spacing:-.02em}
 /* Dynamic Island: 126 x 37pt, 11pt from the top. */
 .pv-island{position:absolute;left:50%;top:11px;width:126px;height:37px;margin-left:-63px;border-radius:var(--db-radius-pill);background:var(--db-black)}
