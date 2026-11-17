@@ -728,6 +728,8 @@ html:not(#_):not(#_) .sub-plat-off .sub-join:is(:hover,:active){background:var(-
 
 
 [data-launch-grid].grid{align-items:end}
+/* Latest Launches: the book-frame cards (224px inline) always fill their grid column (2 per row on phones, 3 on tablets), so the section spans the full width of its container at every breakpoint. */
+[data-launch-grid]>.db-pc{width:100%!important;min-width:0}
 
 
 
