@@ -156,7 +156,11 @@ html:root{padding-top:0;padding-bottom:0}
    fill) keeps the clock and the home indicator legible. */
 html::before,html::after{content:"";position:fixed;left:0;right:0;z-index:90;pointer-events:none;-webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2)}
 html::before{top:0;height:var(--sa-t,0px);background:linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,0));-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
-html::after{bottom:0;height:calc(var(--sa-b,0px) + 10px);background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.35));-webkit-mask-image:linear-gradient(transparent,#000 45%);mask-image:linear-gradient(transparent,#000 45%)}
+html::after{bottom:0;height:calc(max(var(--sa-b,0px),var(--sa-tb,0px)) + 10px);transform:translateY(var(--sa-tb,0px));background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.35));-webkit-mask-image:linear-gradient(transparent,#000 45%);mask-image:linear-gradient(transparent,#000 45%)}
+/* Real phones: the layout viewport can end above a floating browser toolbar while the page still paints underneath it. --sa-tb is that hidden strip
+   (large minus dynamic viewport; 0 where they match). Everything that has to reach the true bottom edge (frost, scrims, the buy bar) is anchored with it. */
+:root{--sa-tb:calc(100lvh - 100dvh)}
+html:not(#_) dialog.db-drawer-scrim,html:not(#_) .db-dialog-scrim{height:100lvh;bottom:auto}
 /* DS Dialog: its fixed scrim centers the panel with 20px of room; never less than the safe area on any side. */
 html:not(#_) .db-dialog-scrim{padding:max(var(--db-space-5),var(--sa-t)) max(var(--db-space-5),var(--sa-r)) max(var(--db-space-5),calc(var(--sa-b) + var(--sa-gap))) max(var(--db-space-5),var(--sa-l))!important}
 /* Project dialogs (.pdlg: newsletter, personalization, and the rest). */
@@ -167,16 +171,21 @@ html:not(#_) .db-dialog-scrim{padding:max(var(--db-space-5),var(--sa-t)) max(var
    whatever padding the body has. */
 html:not(#_) .db-drawer-right{padding-right:var(--sa-r)}
 html:not(#_) .db-drawer-left{padding-left:var(--sa-l)}
-/* The panel stays inside the insets, so the system areas show the dimmed page, never a white panel. */
-html:not(#_) .db-drawer{top:var(--sa-t);bottom:var(--sa-b)}
+/* The drawer panel runs to the screen's edges (the dialog behind it already covers the full height); its content stays inside the safe areas: the header
+   clears the top inset, and the footer (or the scrolling body when there is none) stops above the bottom inset, so long content scrolls inside it. */
+html:not(#_) .db-drawer{top:0;bottom:0}
+html:not(#_) .db-drawer-h{padding-top:calc(var(--db-space-2) + var(--sa-t,0px));min-height:calc(56px + var(--sa-t,0px))}
+html:not(#_) .db-drawer-f{padding-bottom:calc(var(--db-space-4) + max(var(--sa-b,0px),var(--sa-tb,0px)))}
+html:not(#_) .db-drawer-b:last-child{margin-bottom:max(var(--sa-b,0px),var(--sa-tb,0px))}
 /* Toasts (DS Toast's fixed wrapper, bottom center): 24px up from the bottom, or above the bottom inset with the same 24px of room as the other
    modals, whichever is higher, and clear of any landscape side bar. The buy bar rule below lifts it further on phone product pages. */
 html:not(#_) div:has(>div>.db-toast){bottom:calc(var(--sa-b) + var(--db-space-5))!important;padding-left:var(--sa-l);padding-right:var(--sa-r);box-sizing:border-box}
 @media (max-width:639px){
-  .pdp>.cta{position:fixed;left:0;right:0;bottom:var(--sa-b);z-index:60;margin:0!important;box-sizing:border-box;width:auto;
-    padding:var(--db-space-3) var(--pad) 12px;
+  .pdp>.cta{position:fixed;left:0;right:0;bottom:0;transform:translateY(var(--sa-tb,0px));z-index:60;margin:0!important;box-sizing:border-box;width:auto;
+    /* The white panel runs to the screen's bottom edge; the stepper and button stay above the inset. */
+    padding:var(--db-space-3) max(var(--pad),var(--sa-r)) calc(12px + max(var(--sa-b),var(--sa-tb))) max(var(--pad),var(--sa-l));
     background:var(--db-white);box-shadow:0 -1px 0 var(--db-hairline),0 -8px 24px rgba(58,54,51,.08)}
-  .phone:has(.pdp>.cta){padding-bottom:calc(72px + var(--sa-b))}
+  .phone:has(.pdp>.cta){padding-bottom:calc(72px + max(var(--sa-b),var(--sa-tb)))}
   /* Toasts (DS Toast, fixed wrapper) rise above the buy bar instead of covering it: bar height plus 16px. */
   html:not(#_):has(.pdp>.cta) div:has(>div>.db-toast){bottom:calc(72px + var(--db-space-4) + var(--sa-b))!important}
 }
