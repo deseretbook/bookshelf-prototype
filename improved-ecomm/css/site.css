@@ -774,7 +774,8 @@ html:not(#_):not(#_) .sub-plat-off .sub-join:is(:hover,:active){background:var(-
 
 
 /* Sticky footer: on short pages the content area grows so the footer always sits at the bottom of the viewport (no blank space below it). No fixed min-height on content. */
-.phone{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;min-height:100dvh}
+.phone{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;min-height:calc(100dvh + env(safe-area-inset-bottom,0px))}
+/* Application shell: 100dvh leaves out the bottom inset in a Home Screen web app with viewport-fit=cover (a WebKit quirk), so the shell adds env(safe-area-inset-bottom) to reach the physical screen edge. Safe-area padding stays inside the content (footer, bars, drawers), never on body. */
 .phone>main{flex:1 0 auto;min-width:0}
 
 /* Hover lift for every product list (grids, wishlist, related): the resting transform above (.pcard:not([data-launch-grid] .pcard) .bk) out-ranks .pcard:hover .bk, so the lift needs the same specificity. */

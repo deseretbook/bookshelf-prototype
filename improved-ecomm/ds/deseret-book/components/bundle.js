@@ -3278,30 +3278,35 @@ Object.assign(__ds_scope, { SearchFilterBar });
 
 // components/feedback/drawer/Drawer.jsx
 try { (() => {
-const { IconButton } = __ds_scope;
-const EXIT_MS = 224;
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+const EXIT_MS = 224; // = --db-duration-out-slow
 let uid = 0;
+
+/** Side sheet for the menu, cart and account. A native modal <dialog> (showModal): Escape and the scrim close it,
+ *  focus moves in, stays inside and returns on close, the page behind is inert and doesn't scroll. Width: min(360px, 92%), 420px from 640px.
+ *  Edge to edge: the panel and scrim run to every screen edge and the content is padded by --db-safe-* (notch, home indicator), so nothing is
+ *  clipped by the safe area or the viewport. The page needs viewport-fit=cover. */
 function Drawer({
   open = false,
   onClose,
-  side = "right",
+  side = 'right',
   title,
   header,
   footer,
-  closeLabel = "Close",
+  closeLabel = 'Close',
   padded = true,
   children,
   className,
   style,
-  "aria-label": ariaLabel,
-  "aria-labelledby": labelledBy,
+  'aria-label': ariaLabel,
+  'aria-labelledby': labelledBy,
   ...rest
 }) {
   const [mounted, setMounted] = React.useState(open);
   const [visible, setVisible] = React.useState(false);
   const panel = React.useRef(null);
   const dlg = React.useRef(null);
-  const titleId = React.useRef("db-drawer-t" + ++uid).current;
+  const titleId = React.useRef('db-drawer-t' + ++uid).current;
   React.useEffect(() => {
     if (open) {
       setMounted(true);
@@ -3314,45 +3319,72 @@ function Drawer({
   }, [open]);
   React.useLayoutEffect(() => {
     const d = dlg.current;
-    if (!mounted || !d) return void 0;
-    if (panel.current) panel.current.setAttribute("autofocus", "");
+    if (!mounted || !d) return undefined;
+    // The panel takes focus on open (as before); the browser returns focus to the opener on close.
+    if (panel.current) panel.current.setAttribute('autofocus', '');
+    // The dialog leaves the DOM after its exit animation, so close() can't return focus by itself: do it here.
     const opener = document.activeElement;
     if (!d.open) d.showModal();
     return () => {
       if (d.open) d.close();
-      if (opener && typeof opener.focus === "function" && opener.isConnected) opener.focus({ preventScroll: true });
+      if (opener && typeof opener.focus === 'function' && opener.isConnected) opener.focus({
+        preventScroll: true
+      });
     };
   }, [mounted]);
   if (!mounted) return null;
-  const on = visible ? " on" : "";
-  return /* @__PURE__ */ React.createElement(
-    "dialog",
-    {
-      ref: dlg,
-      className: "db-drawer-scrim" + on,
-      onClick: onClose,
-      onCancel: (e) => {
-        e.preventDefault();
-        if (onClose) onClose();
-      },
-      "aria-label": ariaLabel,
-      "aria-labelledby": labelledBy || (!ariaLabel && title ? titleId : void 0)
+  const on = visible ? ' on' : '';
+  return /*#__PURE__*/React.createElement("dialog", {
+    ref: dlg,
+    className: 'db-drawer-scrim' + on,
+    onClick: onClose,
+    onCancel: e => {
+      e.preventDefault();
+      if (onClose) onClose();
     },
-    /* @__PURE__ */ React.createElement(
-      "div",
-      {
-        ref: panel,
-        tabIndex: -1,
-        onClick: (e) => e.stopPropagation(),
-        ...rest,
-        className: "db-drawer db-drawer-" + (side === "left" ? "left" : "right") + on + (className ? " " + className : ""),
-        style
-      },
-      /* @__PURE__ */ React.createElement("div", { className: "db-drawer-h" }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0, display: "flex", alignItems: "center" } }, header || (title ? /* @__PURE__ */ React.createElement("h2", { id: titleId, style: { margin: 0, fontFamily: "var(--db-font-serif)", fontWeight: 400, fontSize: 20, lineHeight: 1.2, color: "var(--db-display)" } }, title) : null)), /* @__PURE__ */ React.createElement(IconButton, { icon: "close", label: closeLabel, variant: "ghost", size: "md", iconSize: 22, onClick: onClose })),
-      /* @__PURE__ */ React.createElement("div", { className: "db-drawer-b", style: { padding: padded ? "var(--db-space-4) var(--db-space-4) var(--db-space-5)" : 0 } }, children),
-      footer ? /* @__PURE__ */ React.createElement("div", { className: "db-drawer-f" }, footer) : null
-    )
-  );
+    "aria-label": ariaLabel,
+    "aria-labelledby": labelledBy || (!ariaLabel && title ? titleId : undefined)
+  }, /*#__PURE__*/React.createElement("div", _extends({
+    ref: panel,
+    tabIndex: -1,
+    onClick: e => e.stopPropagation()
+  }, rest, {
+    className: 'db-drawer db-drawer-' + (side === 'left' ? 'left' : 'right') + on + (className ? ' ' + className : ''),
+    style: style
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "db-drawer-h"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0,
+      display: 'flex',
+      alignItems: 'center'
+    }
+  }, header || (title ? /*#__PURE__*/React.createElement("h2", {
+    id: titleId,
+    style: {
+      margin: 0,
+      fontFamily: 'var(--db-font-serif)',
+      fontWeight: 400,
+      fontSize: 20,
+      lineHeight: 1.2,
+      color: 'var(--db-display)'
+    }
+  }, title) : null)), /*#__PURE__*/React.createElement(__ds_scope.IconButton, {
+    icon: "close",
+    label: closeLabel,
+    variant: "ghost",
+    size: "md",
+    iconSize: 22,
+    onClick: onClose
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "db-drawer-b",
+    style: {
+      padding: padded ? 'var(--db-space-4) var(--db-space-4) calc(var(--db-space-5) + ' + (footer ? '0px' : 'var(--db-safe-bottom)') + ')' : footer ? 0 : '0 0 var(--db-safe-bottom)'
+    }
+  }, children), footer ? /*#__PURE__*/React.createElement("div", {
+    className: "db-drawer-f"
+  }, footer) : null));
 }
 Object.assign(__ds_scope, { Drawer });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/feedback/drawer/Drawer.jsx", error: String((e && e.message) || e) }); }
