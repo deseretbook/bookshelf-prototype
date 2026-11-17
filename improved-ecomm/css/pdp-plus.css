@@ -150,10 +150,7 @@ html:not(#_):not(#_) .acct-d .card-list{margin-bottom:24px}
 html:root{padding-top:0;padding-bottom:0}
 /* The teal pencil banner is only the banner: it doesn't extend into the top safe area, which shows the page behind it. */
 .phone>.ann:first-child{margin-top:var(--sa-t,0px)}
-/* The header's white panel runs to the top and side edges of the screen: the header sticks below the top inset and carries a fixed white strip
-   across the inset itself, above whatever scrolls (the banner included); its content stays inside the safe areas. */
-html:not(#_) .hdr{padding-left:var(--sa-l,0px);padding-right:var(--sa-r,0px);box-sizing:border-box}
-html:not(#_) .hdr::before{content:"";position:fixed;top:0;left:0;right:0;height:var(--sa-t,0px);background:var(--db-white);pointer-events:none}
+/* The header sticks below the top inset; nothing opaque fills the inset itself. */
 /* The system areas are never a solid color: nothing opaque ever sits in them (no white lip on the header, no drawer, dialog, buy bar or full-screen
    page ground reaching the screen's edge). Scrolled content and the dimmed page show through; no overlay is added on top of them. */
 /* DS Dialog: its fixed scrim centers the panel with 20px of room; never less than the safe area on any side. */
@@ -166,19 +163,14 @@ html:not(#_) .db-dialog-scrim{padding:max(var(--db-space-5),var(--sa-t)) max(var
    whatever padding the body has. */
 html:not(#_) .db-drawer-right{padding-right:var(--sa-r)}
 html:not(#_) .db-drawer-left{padding-left:var(--sa-l)}
-/* Drawer panel runs to the viewport edges; its content sits inside the safe areas */
-html:not(#_) .db-drawer{top:0;bottom:0}
-html:not(#_) .db-drawer-h{padding-top:calc(var(--db-space-2) + var(--sa-t,0px));min-height:calc(56px + var(--sa-t,0px))}
-html:not(#_) .db-drawer-f{padding-bottom:calc(var(--db-space-4) + var(--sa-b,0px))}
-/* With no footer the scrolling body stops at the bottom inset, so its content scrolls inside the safe area and never under it. */
-html:not(#_) .db-drawer-b:last-child{margin-bottom:var(--sa-b,0px)}
+/* The panel stays inside the insets, so the system areas show the dimmed page, never a white panel. */
+html:not(#_) .db-drawer{top:var(--sa-t);bottom:var(--sa-b)}
 /* Toasts (DS Toast's fixed wrapper, bottom center): 24px up from the bottom, or above the bottom inset with the same 24px of room as the other
    modals, whichever is higher, and clear of any landscape side bar. The buy bar rule below lifts it further on phone product pages. */
 html:not(#_) div:has(>div>.db-toast){bottom:calc(var(--sa-b) + var(--db-space-5))!important;padding-left:var(--sa-l);padding-right:var(--sa-r);box-sizing:border-box}
 @media (max-width:639px){
-  .pdp>.cta{position:fixed;left:0;right:0;bottom:0;z-index:60;margin:0!important;box-sizing:border-box;width:auto;
-    /* The panel runs to the screen's bottom and side edges; the stepper and button stay inside the safe areas. */
-    padding:var(--db-space-3) max(var(--pad),var(--sa-r)) calc(12px + var(--sa-b)) max(var(--pad),var(--sa-l));
+  .pdp>.cta{position:fixed;left:0;right:0;bottom:var(--sa-b);z-index:60;margin:0!important;box-sizing:border-box;width:auto;
+    padding:var(--db-space-3) var(--pad) 12px;
     background:var(--db-white);box-shadow:0 -1px 0 var(--db-hairline),0 -8px 24px rgba(58,54,51,.08)}
   .phone:has(.pdp>.cta){padding-bottom:calc(72px + var(--sa-b))}
   /* Toasts (DS Toast, fixed wrapper) rise above the buy bar instead of covering it: bar height plus 16px. */
