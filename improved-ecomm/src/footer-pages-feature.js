@@ -2,6 +2,7 @@
 (function () {
   const { h, DS, Shell, Sec, Ok, Field, Row, useForm, req, email, P } = window.FP;
   const { useState, useEffect } = React;
+  const Pic = (src, alt, cls) => h("img", { className: "toh-img" + (cls ? " " + cls : ""), src, alt, loading: "lazy", decoding: "async" });
   const Ph = (label, cls) => h("div", { className: "fp-ph" + (cls ? " " + cls : ""), role: "img", "aria-label": label }, h("span", null, label));
   const top = () => { window.scrollTo(0, 0); };
   const lnk = (onGo, label, text) => h("a", { href: "#", onClick: (e) => { e.preventDefault(); onGo(label); } }, text || label);
@@ -161,16 +162,33 @@
       h("span", { className: "toh-pn" }, p.t),
       h("span", { className: "toh-pg" }, h("span", { className: "ul-t" }, "View details"), h(Icon, { name: "arrow_forward", size: 18 }))));
     const prods = (list, cls) => list.length ? h("ul", { className: "toh-pl" + (cls ? " " + cls : ""), "aria-label": "Featured products" }, list.map((p) => tile(p, cls === "toh-books"))) : null;
+    const railImgs = { 0: ["storefront", "wall", "still-a"], 1: ["still-c", "still-d", "still-b"], 2: ["world-sees-him", "still-e", "still-f"] };
     const rail = (label, off) => posts.length ? h("ul", { className: "toh-rail", "aria-label": label }, posts.map((_, i) => posts[(i + off) % posts.length]).map((a, i) => h("li", { key: i },
       h("a", { className: "toh-art", href: a.url, target: "_blank", rel: "noopener" },
-        h("span", { className: "toh-ai" }, a.img ? h("img", { src: a.img, alt: "", loading: "lazy", decoding: "async" }) : null),
+        h("span", { className: "toh-ai" }, a.img ? h("img", { src: railImgs[off] && railImgs[off][i % 3] ? "assets/img/toh/" + railImgs[off][i % 3] + ".jpg" : a.img, alt: "", loading: "lazy", decoding: "async" }) : null),
         h("span", { className: "toh-ad" }, a.date),
         h("span", { className: "toh-at" }, a.title))))) : null;
     const hd = (eb, t, sub) => h("div", { className: "toh-hd" }, h("span", { className: "db-eyebrow fp-eb" }, eb), h("h2", { className: "fp-h2" }, t), sub ? h("p", { className: "toh-sub" }, sub) : null);
     const pillar = (n, t, sub) => h("div", { className: "toh-hd toh-pillar" }, h("span", { className: "toh-n", "aria-hidden": "true" }, n), h("h2", { className: "fp-h2" }, t), h("p", { className: "toh-sub" }, sub));
     const ext = (href, t) => h("a", { href, target: "_blank", rel: "noopener" }, h("span", { className: "ul-t" }, t));
+    /* A sticky note is a real 3D object: fourteen strips, each hinged to the one above, each carrying its slice of the text. At rest they lie flat and read as one note; on hover they turn a little more
+       than the strip above, so the whole note bows toward you from the tape down (css/footer-pages.css). The real text stays for screen readers and for the flat state. */
+    // Each note is a static top (one element, never curls) plus thin hinged strips only where the paper can bend: 14 elements instead of 36.
+    const NSTRIP = 28, NBASE = 14, NSHINE = 22;
+    const noteStrips = () => { let el = null; for (let k = NSTRIP - 1; k >= NBASE; k--) el = h("i", { className: k >= NSHINE ? "s sh" : "s", style: { "--j": k }, "aria-hidden": "true" }, el); return h("i", { className: "s b", style: { "--j": 0 }, "aria-hidden": "true" }, el); };
+    // The breeze only runs on notes that are on screen (the rest stay paused), so it costs nothing while you read elsewhere on the page.
+    const wallRef = (el) => {
+      if (wallRef.io) { wallRef.io.disconnect(); wallRef.io = null; }
+      if (!el) return;
+      const lis = el.querySelectorAll("li");
+      if (!("IntersectionObserver" in window)) { lis.forEach((l) => l.classList.add("live")); return; }
+      const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("live", e.isIntersecting)), { rootMargin: "60px" });
+      lis.forEach((l) => io.observe(l));
+      wallRef.io = io;
+    };
     const artists = [["Greg Olsen", "greg-olsen"], ["Kate Lee", "kate-lee"], ["Robert Boyd", "robert-boyd"], ["Simon Dewey", "simon-dewey"], ["Yongsung Kim", "yongsung-kim"]];
-    const notes = ["In the quiet", "Looking back at me", "Walking beside me", "Right where I am", "In the small things", "Close enough to touch"];
+    /* Sample sticky notes from the "How do you see Him?" wall: [text, color]. Colors: 0 navy, 1 pink, 2 yellow, 3 orange, 4 cream. */
+    const notes = [["Kind", 1], ["Present in the ordinary", 4], ["Love", 2], ["Hope", 3], ["A friend", 0], ["Always with me", 0], ["Faithful always", 4], ["He makes all things new", 0], ["Jesus is Love", 1], ["My Savior", 3], ["Peace", 1], ["A good Father", 4], ["Gentle and strong", 2], ["He knows my name", 4], ["Light in the darkness", 1], ["Grace", 4], ["You are enough", 0], ["My refuge", 2], ["Real", 0], ["The Way", 2], ["He sees me.", 0], ["He listens", 2], ["My King", 1], ["For everyone", 1], ["Patient with me", 1], ["Love without limits", 1], ["Healer", 4], ["Hope", 3], ["Mercy", 4], ["A better story", 2]];
     return h("main", { className: "fp fx-toh", "data-screen-label": "Temple Open House" },
       h("section", { className: "toh-hero" },
         
@@ -188,7 +206,7 @@
 
       h("section", { className: "toh-sec", id: "toh-see" },
         pillar("1", "See Him", "Art that keeps Christ visible. Each piece shows the Savior as many people see Him."),
-        h("div", { className: "toh-lead" }, Ph("Video: How the World Sees Him", "wide"), h("div", null, h("h3", { className: "fp-h4" }, "How the World Sees Him"), P("A look at the inclusive Christ art in our flagship gallery, with prints ($12) and postcards ($3) you can take home."))),
+        h("div", { className: "toh-lead" }, Pic("assets/img/toh/world-sees-him.jpg", "The How the World Sees Him gallery in the Deseret Book flagship store, with a family looking at framed Christ art"), h("div", null, h("h3", { className: "fp-h4" }, "How the World Sees Him"), P("A look at the inclusive Christ art in our flagship gallery, with prints ($12) and postcards ($3) you can take home."))),
         rail("See Him articles", 0),
         h(Card, { className: "toh-dl", bordered: false, padding: "none", style: { background: "var(--toh-y-soft)", padding: "clamp(24px,3vw,40px)" } }, h("span", { className: "toh-dl-i" }, h(Icon, { name: "download", size: 24 })), h("div", null, h("h3", { className: "fp-h4" }, "Family Discussion Guide"), P("A free download with questions to talk about together as you look at the art.")), h(Button, { variant: "secondary", size: "md", onClick: () => {} }, "Download the guide")),
         prods(art)),
@@ -201,7 +219,7 @@
 
       h("section", { className: "toh-sec" },
         pillar("3", "Live Like Him", "Everyday faith."),
-        h("div", { className: "toh-lead" }, Ph("Video: DB Conversations", "wide"), h("div", null, h("h3", { className: "fp-h4" }, "DB Conversations"), P("Real conversations about what faith looks like in ordinary days."))),
+        h("div", { className: "toh-lead" }, Pic("assets/img/toh/conversations.jpg", "An artist smiling during a DB Conversations interview, beside a painting of the Savior", "toh-img-conv"), h("div", null, h("h3", { className: "fp-h4" }, "DB Conversations"), P("Real conversations about what faith looks like in ordinary days."))),
         h("h3", { className: "fp-h3 toh-vh" }, "What does it look like for you?"),
         h("ul", { className: "toh-voices" }, ["Steve Young", "Sharon Eubank", "Camille Fronk Olson", "Thomas Griffith"].map((n) => h("li", { key: n }, Ph("Portrait: " + n, "toh-vp"), h("span", { className: "toh-vn" }, n), h("span", { className: "toh-vq" }, "Short reflection to come")))),
         rail("Live Like Him articles", 2),
@@ -217,6 +235,7 @@
 
       h("section", { className: "toh-sec" },
         hd("Experience It In Person", "Visit the flagship store across from Temple Square"),
+        Pic("assets/img/toh/storefront.jpg", "The Deseret Book flagship store window display for the Look again campaign", "toh-img-store"),
         h("div", { className: "toh-inp" },
           h("ul", { className: "toh-chips" }, ["Gallery", "Speaker series", "Conversations", "Children’s story time", "Live artist demos"].map((x) => h("li", { key: x }, h(Tag, { style: { background: "var(--toh-y-soft)", boxShadow: "none", cursor: "default" } }, x)))),
           h("div", { className: "toh-store" },
@@ -232,7 +251,7 @@
 
       h("section", { className: "toh-sec" },
         hd("How do you see Him?", "From the wall at our flagship store", "A curated set of sample notes. The final set comes from Content."),
-        h("ul", { className: "toh-wall" }, notes.map((n, i) => h("li", { key: n, className: "w" + (i % 3) }, n)))),
+        h("ul", { className: "toh-wall", ref: wallRef }, notes.map((n, i) => h("li", { key: i, className: "w" + n[1] }, h("span", { className: "tx" }, n[0]), noteStrips())))),
 
       h("section", { className: "toh-sec toh-sec-alt" },
         hd("Temple Square", "More to see during the celebration"),

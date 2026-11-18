@@ -364,3 +364,80 @@ html:not(#_):not(#_) .fx-toh .toh-hero .fp-lede{color:var(--db-blue-700)}
 /* The cover sits in a 24px-inset wrapper that carries a small elevation (drop-shadow follows the clipped, rounded cover; a filter can't read the DS shadow tokens, so the values are literal: DS shadow-md's color, a touch stronger). */
 html:not(#_):not(#_) .fx-toh .toh-books .toh-pi .toh-cv{position:absolute;left:24px;top:24px;right:24px;bottom:24px;display:block;filter:drop-shadow(0 3px 6px rgba(58,54,51,.26))}
 html:not(#_):not(#_) .fx-toh .toh-books .toh-pi .toh-cv img{left:0;top:0;width:100%;height:100%;object-fit:contain}
+
+/* Temple Open House photos from the campaign presentation (replace the video and photo placeholders). */
+.fx-toh .toh-img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:var(--db-radius-lg);background:var(--db-sand)}
+.fx-toh .toh-img-conv{aspect-ratio:16/9;object-position:50% 30%}
+.fx-toh .toh-img-store{aspect-ratio:21/9;margin:0 0 clamp(24px,3vw,40px)}
+@media (max-width:639px){.fx-toh .toh-img-store{aspect-ratio:16/10}}
+
+/* "How do you see Him?" wall: colorful sticky notes pinned with a small gold clip, a little off square, like the flagship store's wall.
+   Each note is one bendable object: 36 thin strips hinged top to bottom, so the lower part of the paper really bends (the tape, the upper part and the text stay put).
+   --p (0 to 1) drives every strip's turn, its light and the shadow. It is animated by a soft breeze: every note always holds its own small curl, and a soft breeze keeps easing it between a loose and a deeper curl, each with its own start (--j0), amount (--th, --a), period (--bd) and offset (--bw). */
+@property --p{syntax:"<number>";inherits:true;initial-value:0}
+html:not(#_):not(#_) .fx-toh .toh-wall{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 12px;padding:8px 0;background:none;box-shadow:none;border-radius:0;align-items:start}
+@media (min-width:640px){html:not(#_):not(#_) .fx-toh .toh-wall{grid-template-columns:repeat(5,minmax(0,1fr));gap:26px 16px}}
+@media (min-width:1024px){html:not(#_):not(#_) .fx-toh .toh-wall{grid-template-columns:repeat(8,minmax(0,1fr));gap:28px 18px}}
+/* Four rows of notes at every width. */
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(n+13){display:none}
+@media (min-width:640px){html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(n+13){display:flex}html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(n+21){display:none}}
+@media (min-width:1024px){html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(n+21){display:flex}html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(n+33){display:none}}
+html:not(#_):not(#_) .fx-toh .toh-wall li{--p0:var(--lo,.2);--p1:calc(var(--lo,.2) + (var(--hi,.6) - var(--lo,.2)) * .35);--p2:var(--hi,.6);--p3:calc(var(--lo,.2) + (var(--hi,.6) - var(--lo,.2)) * .2);--p4:calc(var(--lo,.2) + (var(--hi,.6) - var(--lo,.2)) * .55);--j0:7;--th:22;--tw:1;--ry:2;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;min-height:0;aspect-ratio:1/.92;padding:0;border-radius:0;background:none;box-shadow:none;container-type:size;
+  font-family:var(--db-font-serif);font-style:italic;font-size:clamp(16px,1.7vw,20px);line-height:1.25;color:var(--db-charcoal);perspective:560px;perspective-origin:50% 55%;
+  transform:rotate(var(--r,0deg));transform-origin:50% 0;}
+html:not(#_):not(#_) .fx-toh .toh-wall li::before{content:"";position:absolute;top:-7px;left:50%;width:18px;height:14px;margin-left:-9px;border-radius:2px;background:color-mix(in srgb,var(--db-pearl) 60%,transparent);box-shadow:0 1px 2px rgba(58,54,51,.2);z-index:8}
+html:not(#_):not(#_) .fx-toh .toh-wall li>.tx{position:relative;z-index:7;display:block;padding:20px 8px 12px}
+/* The strips: each hangs from the bottom of the one above (1px overlap hides the seams). Strip j curls by --th times how far it is below the start strip, scaled by its own progress (the bottom starts first). */
+html:not(#_):not(#_) .fx-toh .toh-wall li .s{--k:calc(var(--j) + 1);--m:max(0, var(--j) - var(--j0));--u:min(1, calc(var(--m) / 2));
+  position:absolute;left:0;width:100%;top:calc(100% - 1.5px);height:calc(100cqh / 28 + 2px);background-color:var(--bg);transform-style:preserve-3d;transform-origin:50% 0;pointer-events:none;
+  animation:toh-bend var(--bd,11s) cubic-bezier(.45,0,.55,1) var(--bw,0s) infinite;animation-play-state:inherit;transform:rotateX(calc(var(--th) * var(--u) * clamp(0, calc(var(--p0) * 1.5 - (1 - var(--j) / 27) * .5), 1) * 1deg))}
+html:not(#_):not(#_) .fx-toh .toh-wall li>.s{top:0;border-radius:var(--db-radius-xs,2px) var(--db-radius-xs,2px) 0 0;animation-name:none;transform:rotateY(calc(var(--ry) * .4deg))}
+html:not(#_):not(#_) .fx-toh .toh-wall li .s .s:last-child:not(:has(.s)){border-radius:0 0 var(--db-radius-xs,2px) var(--db-radius-xs,2px)}
+html:not(#_):not(#_) .fx-toh .toh-wall .w0{--bg:var(--db-blue-700);color:var(--db-white)}
+html:not(#_):not(#_) .fx-toh .toh-wall .w1{--bg:var(--db-red-200)}
+html:not(#_):not(#_) .fx-toh .toh-wall .w2{--bg:var(--db-yellow-300)}
+html:not(#_):not(#_) .fx-toh .toh-wall .w3{--bg:var(--db-orange-400)}
+html:not(#_):not(#_) .fx-toh .toh-wall .w4{--bg:var(--db-pearl)}
+html:not(#_):not(#_) .fx-toh .toh-wall .w4::after{box-shadow:0 0 0 .5px var(--db-granite),0 1px 2px rgba(58,54,51,.18),0 12px 16px -2px rgba(58,54,51,.2),0 22px 30px -8px rgba(58,54,51,.12)}
+/* Each note has its own tilt, size and curl. */
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(7n+1){--r:1.4deg;aspect-ratio:1/.86}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(7n+2){--r:-1.8deg;aspect-ratio:1/1.08}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(7n+3){--r:0.7deg}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(7n+4){--r:-0.9deg;aspect-ratio:1/.8}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(7n+5){--r:2deg;aspect-ratio:1/1.02}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(7n+6){--r:-1.3deg;aspect-ratio:1/.88}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(7n){--r:0.5deg;aspect-ratio:1/1.12}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(4n+3){margin-top:10px}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+1){--j0:16;--th:7.55;--tw:0.21;--ry:4}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+2){--j0:19;--th:12.51;--tw:-0.23;--ry:-5}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+3){--j0:16;--th:5.4;--tw:-0.15;--ry:3}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+4){--j0:17;--th:9.68;--tw:0.25;--ry:-4}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+5){--j0:20;--th:17.14;--tw:-0.19;--ry:5}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+6){--j0:16;--th:7.03;--tw:0.06;--ry:-2}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+7){--j0:14;--th:4.46;--tw:-0.26;--ry:3}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+8){--j0:19;--th:11.83;--tw:0.17;--ry:-5}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+9){--j0:17;--th:7.46;--tw:0.0;--ry:0}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+10){--j0:20;--th:15.6;--tw:-0.21;--ry:4}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n){--j0:16;--th:7.2;--tw:0.26;--ry:-3}
+@media (prefers-reduced-motion:reduce){html:not(#_):not(#_) .fx-toh .toh-wall li{transition-duration:.01s}}
+/* Performance: the base is one static element, the shadow is a flat layer behind (no filter re-rasterising while the paper bends), and a note only animates while it is on screen. */
+html:not(#_):not(#_) .fx-toh .toh-wall li .s.b{height:calc(100cqh * 14 / 28 + 2px)}
+html:not(#_):not(#_) .fx-toh .toh-wall li::after{content:"";position:absolute;inset:0;z-index:-1;transform-origin:50% 0;animation:toh-lift var(--bd,11s) cubic-bezier(.45,0,.55,1) var(--bw,0s) infinite;animation-play-state:inherit;border-radius:var(--db-radius-xs,2px);box-shadow:0 1px 2px rgba(58,54,51,.22),0 16px 18px -2px rgba(58,54,51,.27),0 28px 32px -8px rgba(58,54,51,.16);pointer-events:none}
+html:not(#_):not(#_) .fx-toh .toh-wall li{animation-play-state:paused}
+html:not(#_):not(#_) .fx-toh .toh-wall li.live{animation-play-state:running}
+html:not(#_):not(#_) .fx-toh .toh-wall li .s.sh::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;--ss:max(1, calc(var(--j) - 21));background-image:linear-gradient(rgba(255,255,255,calc((var(--ss) - 1) / var(--ss))),#fff);opacity:0;animation:toh-shine var(--bd,11s) cubic-bezier(.45,0,.55,1) var(--bw,0s) infinite;animation-play-state:inherit}
+@keyframes toh-lift{0%,100%{transform:scaleY(calc(1 - var(--p0) * .17))}40%{transform:scaleY(calc(1 - var(--p1) * .17))}46%{transform:scaleY(calc(1 - var(--p2) * .17))}52%{transform:scaleY(calc(1 - var(--p3) * .17))}58%{transform:scaleY(calc(1 - var(--p4) * .17))}}
+@keyframes toh-bend{0%,100%{transform:rotateX(calc(var(--th) * var(--u) * clamp(0, calc(var(--p0) * 1.5 - (1 - var(--j) / 27) * .5), 1) * 1deg))}40%{transform:rotateX(calc(var(--th) * var(--u) * clamp(0, calc(var(--p1) * 1.5 - (1 - var(--j) / 27) * .5), 1) * 1deg))}46%{transform:rotateX(calc(var(--th) * var(--u) * clamp(0, calc(var(--p2) * 1.5 - (1 - var(--j) / 27) * .5), 1) * 1deg))}52%{transform:rotateX(calc(var(--th) * var(--u) * clamp(0, calc(var(--p3) * 1.5 - (1 - var(--j) / 27) * .5), 1) * 1deg))}58%{transform:rotateX(calc(var(--th) * var(--u) * clamp(0, calc(var(--p4) * 1.5 - (1 - var(--j) / 27) * .5), 1) * 1deg))}}
+@keyframes toh-shine{0%,100%{opacity:clamp(0, calc(var(--th) * clamp(0, calc(var(--p0) * 1.5 - (1 - var(--j) / 27) * .5), 1) * var(--ss) / 100), .55)}40%{opacity:clamp(0, calc(var(--th) * clamp(0, calc(var(--p1) * 1.5 - (1 - var(--j) / 27) * .5), 1) * var(--ss) / 100), .55)}46%{opacity:clamp(0, calc(var(--th) * clamp(0, calc(var(--p2) * 1.5 - (1 - var(--j) / 27) * .5), 1) * var(--ss) / 100), .55)}52%{opacity:clamp(0, calc(var(--th) * clamp(0, calc(var(--p3) * 1.5 - (1 - var(--j) / 27) * .5), 1) * var(--ss) / 100), .55)}58%{opacity:clamp(0, calc(var(--th) * clamp(0, calc(var(--p4) * 1.5 - (1 - var(--j) / 27) * .5), 1) * var(--ss) / 100), .55)}}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+1){--lo:0.22;--hi:0.55;--bd:9.5s;--bw:-1s}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+2){--lo:0.35;--hi:0.7;--bd:13s;--bw:-6s}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+3){--lo:0.12;--hi:0.4;--bd:11s;--bw:-3s}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+4){--lo:0.28;--hi:0.62;--bd:15s;--bw:-9s}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+5){--lo:0.4;--hi:0.8;--bd:12s;--bw:-4s}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+6){--lo:0.18;--hi:0.5;--bd:10s;--bw:-7s}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+7){--lo:0.3;--hi:0.65;--bd:14s;--bw:-2s}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+8){--lo:0.1;--hi:0.36;--bd:8.5s;--bw:-5s}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+9){--lo:0.38;--hi:0.75;--bd:16s;--bw:-11s}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+10){--lo:0.2;--hi:0.48;--bd:12.5s;--bw:-8s}
+html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n){--lo:0.3;--hi:0.58;--bd:9s;--bw:-10s}
+@media (prefers-reduced-motion:reduce){html:not(#_):not(#_) .fx-toh .toh-wall li .s,html:not(#_):not(#_) .fx-toh .toh-wall li .s::before,html:not(#_):not(#_) .fx-toh .toh-wall li::after{animation:none}}
