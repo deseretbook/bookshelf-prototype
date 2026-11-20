@@ -189,6 +189,78 @@
     const artists = [["Greg Olsen", "greg-olsen"], ["Kate Lee", "kate-lee"], ["Robert Boyd", "robert-boyd"], ["Simon Dewey", "simon-dewey"], ["Yongsung Kim", "yongsung-kim"]];
     /* Sample sticky notes from the "How do you see Him?" wall: [text, color]. Colors: 0 navy, 1 pink, 2 yellow, 3 orange, 4 cream. */
     const notes = [["Kind", 1], ["Present in the ordinary", 4], ["Love", 2], ["Hope", 3], ["A friend", 0], ["Always with me", 0], ["Faithful always", 4], ["He makes all things new", 0], ["Jesus is Love", 1], ["My Savior", 3], ["Peace", 1], ["A good Father", 4], ["Gentle and strong", 2], ["He knows my name", 4], ["Light in the darkness", 1], ["Grace", 4], ["You are enough", 0], ["My refuge", 2], ["Real", 0], ["The Way", 2], ["He sees me.", 0], ["He listens", 2], ["My King", 1], ["For everyone", 1], ["Patient with me", 1], ["Love without limits", 1], ["Healer", 4], ["Hope", 3], ["Mercy", 4], ["A better story", 2]];
+    /* The art wall: framed art from the store hung like a salon wall (trimmed product photos in assets/img/wall, true proportions): [id, width, height].
+       The hang is worked out for the width of the wall: many seeded trials of sizes and order are packed into the space, and the tightest hang wins,
+       so it always fits closely but never looks gridded. Each piece links to its product page; Shop appears on hover or focus. */
+    const WALL = [["6087324", 711, 843], ["6081210", 900, 614], ["6053281", 899, 900], ["6096538", 536, 891], ["6070661", 880, 700], ["6027923", 900, 759], ["6086439", 900, 675], ["6027513", 760, 900], ["6097141", 651, 849], ["6075171", 621, 623], ["6096539", 532, 890], ["5098123", 506, 848], ["6097136", 727, 862], ["5161060", 779, 900], ["6097139", 650, 848], ["5166285", 674, 900]];
+    const rng = (a) => () => { a |= 0; a = a + 0x6D2B79F5 | 0; let x = Math.imul(a ^ a >>> 15, 1 | a); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; };
+    const hangCache = {};
+    const hang = (items, W) => {
+      const key = W + ":" + items.length; if (hangCache[key]) return hangCache[key];
+      const cols = W >= 1024 ? 5.2 : W >= 640 ? 3.8 : 2.1, gap = W >= 1024 ? 18 : W >= 640 ? 14 : 10, U = 6, N = Math.floor(W / U), bw = (W - gap * (cols - 1)) / cols;
+      const SC = [0.6, 0.72, 0.84, 0.96, 1.08, 1.22, 1.4], R = rng(W * 31 + items.length);
+      let best = null;
+      for (let tr = 0; tr < 900; tr++) {
+        const ps = items.map((it, i) => { const asp = it.w / it.h, sc = SC[Math.floor(R() * SC.length)], w = Math.min(W * (W < 640 ? 0.55 : 0.46), Math.round(bw * sc * Math.sqrt(asp))), im = Math.round(w / asp), cap = Math.ceil(it.cl * 7 / w) * 16 + (it.by ? 15 : 0) + 10; return { i, w, asp, cap, cl: it.cl, by: it.by, h: im + cap, im, wu: Math.ceil((w + gap) / U), k: (im + cap) * (0.55 + R() * 0.9) }; });
+        ps.sort((x, y) => y.k - x.k);
+        const sky = new Array(N).fill(0); let area = 0;
+        for (const p of ps) {
+          let by = 1e9, bx = 0; const wu = Math.min(p.wu, N);
+          for (let x = 0; x + wu <= N; x++) { let m = 0; for (let j = x; j < x + wu; j++) if (sky[j] > m) m = sky[j]; const y = m + x * 0.015; if (y < by) { by = y; bx = x; } }
+          let m = 0; for (let j = bx; j < bx + wu; j++) if (sky[j] > m) m = sky[j];
+          p.x = bx * U; p.y = m; for (let j = bx; j < bx + wu; j++) sky[j] = m + p.h + gap; area += p.w * p.h;
+        }
+        const H = Math.max(...sky) - gap, right = Math.max(...ps.map((p) => p.x + p.w)), rag = sky.reduce((s, v) => s + (H + gap - v), 0) / N / H;
+        const score = (1 - area / (right * H)) + rag * 0.6 + Math.abs(right - W) / W * 0.8;
+        if (!best || score < best.score) best = { score, ps, H, right };
+      }
+      /* Settle: any piece that has room beside or below it grows until it nearly touches its neighbours, so no gap is left that a frame could fill. */
+      const P = best.ps, hit = (a, b) => a.x < b.x + b.w + gap && b.x < a.x + a.w + gap && a.y < b.y + b.h + gap && b.y < a.y + a.h + gap;
+      const free = (q, p) => q.x >= 0 && q.y >= 0 && q.x + q.w <= W && !P.some((o) => o !== p && hit(q, o));
+      for (let round = 0; round < 4; round++) {
+        for (let pass = 0; pass < 30; pass++) { let moved = false;           // gravity: slide each piece up, then left, until it rests on a neighbour
+          for (const p of [...P].sort((a, b) => a.y - b.y || a.x - b.x)) {
+            for (let s = 24; s >= 1; s = s >> 1) { while (free({ x: p.x, y: p.y - s, w: p.w, h: p.h }, p)) { p.y -= s; moved = true; } while (free({ x: p.x - s, y: p.y, w: p.w, h: p.h }, p)) { p.x -= s; moved = true; } } }
+          if (!moved) break; }
+        let grew = false;
+        for (let pass = 0; pass < 40; pass++) { let g = false;                 // growth: any piece with room beside or below it swells until it nearly touches its neighbours
+          for (const p of P) { const w2 = Math.round(p.w * 1.03) + 1, im2 = Math.round(w2 / p.asp), cap2 = Math.ceil(p.cl * 7 / w2) * 16 + (p.by ? 15 : 0) + 10, q = { x: p.x, y: p.y, w: w2, h: im2 + cap2 };
+            if (q.w > W * (W < 640 ? 0.58 : 0.5) || !free(q, p)) continue;
+            p.w = w2; p.im = im2; p.h = im2 + cap2; g = true; grew = true; }
+          if (!g) break; }
+        if (!grew && round) break; }
+      best.H = Math.max(...P.map((p) => p.y + p.h)); best.right = Math.max(...P.map((p) => p.x + p.w));
+      const off = Math.max(0, Math.floor((W - best.right) / 2)), J = rng(W + 7);
+      best.ps.forEach((p) => { p.x += off + Math.round((J() - 0.5) * 6); p.y += Math.round((J() - 0.5) * 6); if (p.x < 0) p.x = 0; if (p.x + p.w > W) p.x = W - p.w; if (p.y < 0) p.y = 0; });
+      return hangCache[key] = best;
+    };
+    const wallArt = (ul) => {
+      if (!ul) return;
+      const items = WALL.map(([id, w, ht]) => ({ w, h: ht, cl: 20, by: false })), lis = ul.children;
+      const D0 = window.DB_DATA; WALL.forEach(([id], i) => { const p = D0 && D0.byId(id); if (p) { items[i].cl = p.t.replace(/\s*\([^)]*\)\s*$/, "").length; items[i].by = !!(p.by && !/^(Deseret Book|Various)$/i.test(p.by)); } });
+      const run = () => { const W = Math.round(ul.clientWidth); if (!W || ul.dataset.w === String(W)) return; ul.dataset.w = W; const r = hang(items, W);
+        r.ps.forEach((p) => { const li = lis[p.i]; if (!li) return; li.style.left = p.x + "px"; li.style.top = p.y + "px"; li.style.width = p.w + "px"; });
+        ul.style.height = Math.ceil(r.H + 8) + "px"; ul.classList.add("is-hung"); };
+      run();
+      if (wallArt.ro) wallArt.ro.disconnect();
+      if (window.ResizeObserver) { let tm; wallArt.ro = new ResizeObserver(() => { clearTimeout(tm); tm = setTimeout(run, 120); }); wallArt.ro.observe(ul); }
+    };
+    const artWall = () => {
+      const pieces = WALL.map(([id, w, ht]) => { const p = D.byId(id); return p ? { p, w, ht } : null; }).filter(Boolean);
+      if (!pieces.length) return null;
+      return h("section", { className: "toh-gw-sec", "aria-label": "Art from the store" },
+        h("ul", { className: "toh-gw", ref: wallArt }, pieces.map(({ p, w, ht }) => {
+          const name = p.t.replace(/\s*\([^)]*\)\s*$/, ""), by = p.by && !/^(Deseret Book|Various)$/i.test(p.by) ? p.by.replace(/^([^,]+),\s*(.+)$/, "$2 $1") : "";
+          return h("li", { key: p.id, className: "toh-gp" },
+            h("a", { href: "#/p/" + p.id, onClick: (e) => { e.preventDefault(); go("#/p/" + p.id); } },
+              h("span", { className: "toh-gf" }, h("img", { src: "assets/img/wall/" + p.id + ".jpg", width: w, height: ht, alt: name + (by ? ", " + by : ""), loading: "lazy", decoding: "async" })),
+              h("span", { className: "toh-gc" },
+                h("span", { className: "toh-gl" },
+                  h("span", { className: "toh-gn" }, name),
+                  by ? h("span", { className: "toh-gb" }, by) : null),
+                h("span", { className: "toh-gs" }, h("span", { className: "ul-t" }, "Shop")))));
+        })));
+    };
     return h("main", { className: "fp fx-toh", "data-screen-label": "Temple Open House" },
       h("section", { className: "toh-hero" },
         
@@ -197,9 +269,7 @@
           h("h1", { className: "fp-h1" }, h("span", { className: "toh-ln" }, "See Him. Know Him."), " ", h("span", { className: "toh-ln" }, "Live Like Him.")),
           h("p", { className: "fp-lede" }, "Let this moment draw you closer to Christ. Explore the art and stories from our flagship store experience, wherever you are."),
           h("div", { className: "fp-acts" }, h(Button, { size: "md", onClick: () => { const el = document.getElementById("toh-see"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); } }, "Experience now")))),
-      h("section", { className: "toh-hang-sec" },
-        h("ul", { className: "toh-hang", "aria-label": "Featured artists" }, artists.map(([n, sl]) => h("li", { key: sl }, h("a", { href: "#/c/featured-authors-artists_" + sl, onClick: (e) => { e.preventDefault(); go("#/c/featured-authors-artists_" + sl); } },
-          h("span", { className: "toh-hi" }, h("img", { src: "assets/img/cat/featured-authors-artists_" + sl + ".jpg", alt: "", loading: "lazy", decoding: "async" })), h("span", { className: "toh-an" }, n)))))),
+      artWall(),
       h("section", { className: "toh-tie" },
         h("div", null, h("h2", { className: "fp-h3" }, "The Salt Lake Temple Celebration"), P("The Salt Lake Temple reopens after years of renovation, and all of Temple Square is part of the celebration. From April 5 to October 1, 2027, there are events, exhibits and experiences on the Square and online, all inviting people to come closer to Jesus Christ.")),
         h("div", { className: "fp-acts" }, h(Button, { variant: "secondary", size: "md", href: "https://www.templesquare.org/eng/home", target: "_blank", rel: "noopener", iconAfter: "open_in_new" }, "Visit templesquare.org"))),

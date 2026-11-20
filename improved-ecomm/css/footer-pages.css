@@ -441,3 +441,24 @@ html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+9){--lo:0.38;--hi:0.75;-
 html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n+10){--lo:0.2;--hi:0.48;--bd:12.5s;--bw:-8s}
 html:not(#_):not(#_) .fx-toh .toh-wall li:nth-child(11n){--lo:0.3;--hi:0.58;--bd:9s;--bw:-10s}
 @media (prefers-reduced-motion:reduce){html:not(#_):not(#_) .fx-toh .toh-wall li .s,html:not(#_):not(#_) .fx-toh .toh-wall li .s::before,html:not(#_):not(#_) .fx-toh .toh-wall li::after{animation:none}}
+
+/* Art wall (Temple Open House): framed art from the store hung like a salon wall. A pearl wall, pieces at their true proportions in a staggered masonry, each a little off the column's edge so it never reads as a grid.
+   Four pieces keep their caption under them; the others show it over the lower edge on hover or focus. */
+.fx-toh .toh-gw-sec{background:var(--db-pearl);padding-top:clamp(32px,5vw,72px);padding-bottom:clamp(40px,6vw,88px)}
+.toh-gw{list-style:none;margin:0 auto;padding:0;max-width:1480px;position:relative;min-height:320px}
+.toh-gp{position:absolute;margin:0;opacity:0;transition:opacity .4s ease}
+.toh-gw.is-hung .toh-gp{opacity:1}
+.toh-gp>a{display:block;position:relative;color:var(--db-charcoal);text-decoration:none}
+.toh-gf{display:block;position:relative;line-height:0;box-shadow:0 1px 2px rgba(58,54,51,.18),0 10px 18px -12px rgba(58,54,51,.35);transition:transform .35s var(--db-ease-standard,ease),box-shadow .35s var(--db-ease-standard,ease)}
+.toh-gf img{display:block;width:100%;height:auto}
+.toh-gp>a:hover .toh-gf,.toh-gp>a:focus-visible .toh-gf{transform:translateY(-3px);box-shadow:0 1px 2px rgba(58,54,51,.18),0 16px 24px -12px rgba(58,54,51,.4)}
+.toh-gp>a:focus-visible{outline:2px solid var(--db-blue-700);outline-offset:3px}
+.toh-gc{display:block;position:relative;margin-top:8px;font-family:var(--db-font-sans);font-size:11px;line-height:14px;color:var(--db-charcoal)}
+.toh-gl{display:flex;flex-direction:column;gap:1px;min-width:0;padding:0}
+.toh-gn{font-family:var(--db-font-serif);font-size:13px;line-height:16px;color:var(--db-blue-700);text-wrap:balance}
+.toh-gb{color:color-mix(in srgb,var(--db-charcoal) 75%,transparent)}
+.toh-gs{position:absolute;right:0;top:0;padding:0 0 0 18px;background:linear-gradient(90deg,transparent,var(--db-pearl) 45%);opacity:0;transform:translateX(-4px);transition:opacity .25s var(--db-ease-standard,ease),transform .25s var(--db-ease-standard,ease);font-size:12px;line-height:16px;font-weight:700;color:var(--db-blue-700)}
+.toh-gp>a:hover .toh-gs,.toh-gp>a:focus-visible .toh-gs{opacity:1;transform:none}
+@media (hover:none){.toh-gs{display:none}}
+.toh-gp>a:hover .toh-gs .ul-t{text-decoration:underline;text-underline-offset:3px}
+@media (prefers-reduced-motion:reduce){.toh-gf,.toh-gs{transition:none!important}.toh-gp>a:hover .toh-gf{transform:none}}
