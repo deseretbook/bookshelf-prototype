@@ -154,6 +154,7 @@
         if (l < SH || r < 0 || t < SH || b < 0 || r <= l || b <= t) return;
         const pc = (n) => (Math.round(n * 1000) / 10) + "%";
         el.style.clipPath = "inset(" + pc(t / S) + " " + pc((S - 1 - r) / S) + " " + pc((S - 1 - b) / S) + " " + pc(l / S) + " round var(--db-radius-sm))";
+        if (el.parentElement && el.parentElement.classList.contains("toh-cv")) el.style.transform = "translate(" + (-Math.round(l / S * 1000) / 10) + "%," + (Math.round((S - 1 - b) / S * 1000) / 10) + "%)";   /* the cover's left edge sits on the text edge */
       } catch (e) {} };
       if (el.complete && el.naturalWidth) fit(); else el.addEventListener("load", fit, { once: true });
     };
@@ -248,6 +249,13 @@
     const artWall = () => {
       const pieces = WALL.map(([id, w, ht]) => { const p = D.byId(id); return p ? { p, w, ht } : null; }).filter(Boolean);
       if (!pieces.length) return null;
+      const ini = (n) => n.split(" ").map((w) => w[0]).join("");
+      const meet = h("div", { className: "tx-meet" },
+        h("div", { className: "tx-bh" }, h("span", { className: "db-eyebrow fp-eb" }, "Meet the artists"), h("h2", { className: "fp-h2" }, "Five artists from the gallery")),
+        h("ul", { className: "tx-artists" }, artists.map(([n, sl], i) => h("li", { key: sl },
+          h("a", { href: "#/c/featured-authors-artists_" + sl, onClick: (e) => { e.preventDefault(); go("#/c/featured-authors-artists_" + sl); } },
+            h("span", { className: "tx-av", role: "img", "aria-label": "Placeholder profile photo of " + n }, ini(n)),
+            h("span", { className: "toh-an" }, n))))));
       return h("section", { className: "toh-gw-sec", "aria-label": "Art from the store" },
         h("ul", { className: "toh-gw", ref: wallArt }, pieces.map(({ p, w, ht }) => {
           const name = p.t.replace(/\s*\([^)]*\)\s*$/, ""), by = p.by && !/^(Deseret Book|Various)$/i.test(p.by) ? p.by.replace(/^([^,]+),\s*(.+)$/, "$2 $1") : "";
@@ -259,51 +267,99 @@
                   h("span", { className: "toh-gn" }, name),
                   by ? h("span", { className: "toh-gb" }, by) : null),
                 h("span", { className: "toh-gs" }, h("span", { className: "ul-t" }, "Shop")))));
-        })));
+        })),
+        meet);
     };
+    /* ---- Bolder layout: mixed-width splits, big imagery and video. Imagery that does not exist yet is mocked and labelled so Ecomm can request the photography. ---- */
+    const Mock = (label, cls, kids) => h("div", { className: "tx-mock " + (cls || ""), role: "img", "aria-label": "Placeholder image: " + label }, kids || null, h("span", { className: "tx-chip" }, "Mock · " + label));
+    const vidRef = (el) => {
+      if (!el) return;
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el.muted = true;
+      if (reduce) { el.removeAttribute("autoplay"); el.pause(); return; }
+      if (el._io) return;
+      if (!("IntersectionObserver" in window)) { el.play().catch(() => {}); return; }
+      el._io = new IntersectionObserver((es) => es.forEach((e) => { if (el.dataset.live === "1") return; if (e.isIntersecting) el.play().catch(() => {}); else el.pause(); }), { threshold: 0.15 });
+      el._io.observe(el);
+    };
+    const Vid = (name, poster, label) => h("video", { className: "tx-v", ref: vidRef, muted: true, loop: true, playsInline: true, autoPlay: true, preload: "metadata", poster, "aria-label": label },
+      h("source", { src: "assets/video/" + name + ".webm", type: "video/webm" }), h("source", { src: "assets/video/" + name + ".mp4", type: "video/mp4" }));
+    const watch = (e) => { const box = e.currentTarget.closest(".tx-player"), v = box && box.querySelector("video"); if (!v) return; v.dataset.live = "1"; v.muted = false; v.controls = true; v.currentTime = 0; v.play().catch(() => {}); box.classList.add("is-on"); };
+    const Player = (name, poster, label, title, len, cls) => h("div", { className: "tx-player" + (cls ? " " + cls : "") }, h("div", { className: "tx-pv" }, Vid(name, poster, label)),
+      h("button", { type: "button", className: "tx-play", onClick: watch, "aria-label": "Play " + title }, h("span", { className: "tx-play-i" }, h("span", { className: "tx-tri", "aria-hidden": "true" })), h("span", { className: "tx-play-t" }, h("b", null, title), h("small", null, "Watch · " + len))),
+      h("span", { className: "tx-chip" }, "Mock video"));
+    const head = (n, t, sub, cls) => h("div", { className: "tx-head " + (cls || "") }, h("span", { className: "tx-n", "aria-hidden": "true" }, n), h("div", null, h("h2", { className: "fp-h2" }, t), h("p", { className: "tx-sub" }, sub)));
+    const arts3 = (label, off) => posts.length ? h("ul", { className: "tx-arts", "aria-label": label }, [0, 1, 2].map((i) => posts[(i + off) % posts.length]).map((a, i) => h("li", { key: i, className: "tx-a" + i },
+      h("a", { className: "toh-art", href: a.url, target: "_blank", rel: "noopener" },
+        h("span", { className: "tx-ai" }, a.img ? h("img", { src: a.img, alt: "", loading: "lazy", decoding: "async" }) : null),
+        h("span", { className: "toh-ad" }, a.date),
+        h("span", { className: "toh-at" }, a.title))))) : null;
+    const shelf = (list, cls) => list.length ? h("ul", { className: "toh-pl tx-shelf" + (cls ? " " + cls : ""), "aria-label": "Featured products" }, list.map((p) => tile(p, cls && cls.indexOf("toh-books") >= 0))) : null;
+    const rays = h("span", { className: "tx-rays", "aria-hidden": "true" });
+    const TSQ = [["Tabernacle Dome presentations", "A Christ-centered show of light, music and imagery in the Salt Lake Tabernacle.", "auto_awesome"], ["Joseph Smith Memorial Building", "Experiences for children and families about the life and mission of Jesus Christ.", "family_restroom"], ["Music and performances", "Free live music in venues across Temple Square.", "music_note"], ["Church History Museum", "Family-friendly exhibits and art, including the Extraordinary Women exhibit.", "museum"], ["Temple Square Visitors’ Center", "Displays on Jesus Christ and the temple experience. Reservations are recommended.", "info"], ["The Temple Square app", "Maps, schedules and tickets on site.", "smartphone"]];
+    const VOICES = [["Steve Young", "a"], ["Sharon Eubank", "b"], ["Camille Fronk Olson", "c"], ["Thomas Griffith", "d"]];
+    const CATS = [["temple-worship_temple-clothing", "Clothing"], ["temple-worship_temple-bags", "Bags"], ["temple-worship_temple-accessories", "Accessories"], ["books_gospel-voices_temple-books", "Books"]];
     return h("main", { className: "fp fx-toh", "data-screen-label": "Temple Open House" },
-      h("section", { className: "toh-hero" },
-        
-        h("div", { className: "toh-hero-t" },
+      h("section", { className: "tx-hero" },
+        h("div", { className: "tx-hero-bg", "aria-hidden": "true" }, Vid("hero-reel", "assets/img/toh/world-sees-him.jpg", "")),
+        h("div", { className: "tx-hero-t" },
           h("span", { className: "db-eyebrow fp-eb" }, "Salt Lake Temple Open House · April 5 – October 1, 2027"),
           h("h1", { className: "fp-h1" }, h("span", { className: "toh-ln" }, "See Him. Know Him."), " ", h("span", { className: "toh-ln" }, "Live Like Him.")),
           h("p", { className: "fp-lede" }, "Let this moment draw you closer to Christ. Explore the art and stories from our flagship store experience, wherever you are."),
-          h("div", { className: "fp-acts" }, h(Button, { size: "md", onClick: () => { const el = document.getElementById("toh-see"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); } }, "Experience now")))),
+          h("div", { className: "fp-acts" }, h(Button, { size: "md", onClick: () => { const el = document.getElementById("toh-see"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); } }, "Experience now"))),
+        h("span", { className: "tx-chip tx-chip-br" }, "Mock video · hero reel")),
       artWall(),
-      h("section", { className: "toh-tie" },
-        h("div", null, h("h2", { className: "fp-h3" }, "The Salt Lake Temple Celebration"), P("The Salt Lake Temple reopens after years of renovation, and all of Temple Square is part of the celebration. From April 5 to October 1, 2027, there are events, exhibits and experiences on the Square and online, all inviting people to come closer to Jesus Christ.")),
-        h("div", { className: "fp-acts" }, h(Button, { variant: "secondary", size: "md", href: "https://www.templesquare.org/eng/home", target: "_blank", rel: "noopener", iconAfter: "open_in_new" }, "Visit templesquare.org"))),
+      h("section", { className: "tx-tie" },
+        h("div", { className: "tx-tie-l" }, h("span", { className: "db-eyebrow fp-eb" }, "The celebration"), h("h2", { className: "fp-h2" }, "The Salt Lake Temple Celebration"), P("The Salt Lake Temple reopens after years of renovation, and all of Temple Square is part of the celebration. From April 5 to October 1, 2027, there are events, exhibits and experiences on the Square and online, all inviting people to come closer to Jesus Christ.")),
+        h("aside", { className: "tx-tie-r" }, h("span", { className: "tx-date" }, "Apr 5 – Oct 1"), h("span", { className: "tx-year" }, "2027"), h("p", null, "On Temple Square and online."), h(Button, { variant: "secondary", size: "md", href: "https://www.templesquare.org/eng/home", target: "_blank", rel: "noopener", iconAfter: "open_in_new" }, "Visit templesquare.org"))),
 
-      h("section", { className: "toh-sec", id: "toh-see" },
-        pillar("1", "See Him", "Art that keeps Christ visible. Each piece shows the Savior as many people see Him."),
-        h("div", { className: "toh-lead" }, Pic("assets/img/toh/world-sees-him.jpg", "The How the World Sees Him gallery in the Deseret Book flagship store, with a family looking at framed Christ art"), h("div", null, h("h3", { className: "fp-h4" }, "How the World Sees Him"), P("A look at the inclusive Christ art in our flagship gallery, with prints ($12) and postcards ($3) you can take home."))),
-        rail("See Him articles", 0),
-        h(Card, { className: "toh-dl", bordered: false, padding: "none", style: { background: "var(--toh-y-soft)", padding: "clamp(24px,3vw,40px)" } }, h("span", { className: "toh-dl-i" }, h(Icon, { name: "download", size: 24 })), h("div", null, h("h3", { className: "fp-h4" }, "Family Discussion Guide"), P("A free download with questions to talk about together as you look at the art.")), h(Button, { variant: "secondary", size: "md", onClick: () => {} }, "Download the guide")),
-        prods(art)),
-
-      h("section", { className: "toh-sec toh-sec-alt" },
-        pillar("2", "Know Him", "Learning that deepens understanding."),
-        h("figure", { className: "toh-quote" }, h("blockquote", null, "Quote from President D. Todd Christofferson, to be supplied by Content."), h("figcaption", null, "President D. Todd Christofferson")),
-        rail("Know Him articles", 1),
-        prods(know, "toh-books")),
+      h("section", { className: "tx-sec tx-p1", id: "toh-see" },
+        h("div", { className: "tx-split tx-split-73" },
+          h("figure", { className: "tx-fig" }, Pic("assets/img/toh/world-sees-him.jpg", "The How the World Sees Him gallery in the Deseret Book flagship store, with a family looking at framed Christ art"), h("figcaption", null, "How the World Sees Him, in our flagship gallery")),
+          h("div", { className: "tx-side" }, head("1", "See Him", "Art that keeps Christ visible. Each piece shows the Savior as many people see Him."),
+            h("div", { className: "tx-note" }, h("h3", { className: "fp-h4" }, "How the World Sees Him"), P("A look at the inclusive Christ art in our flagship gallery, with prints ($12) and postcards ($3) you can take home.")))),
+        arts3("See Him articles", 0)),
 
       h("section", { className: "toh-sec" },
-        pillar("3", "Live Like Him", "Everyday faith."),
-        h("div", { className: "toh-lead" }, Pic("assets/img/toh/conversations.jpg", "An artist smiling during a DB Conversations interview, beside a painting of the Savior", "toh-img-conv"), h("div", null, h("h3", { className: "fp-h4" }, "DB Conversations"), P("Real conversations about what faith looks like in ordinary days."))),
-        h("h3", { className: "fp-h3 toh-vh" }, "What does it look like for you?"),
-        h("ul", { className: "toh-voices" }, ["Steve Young", "Sharon Eubank", "Camille Fronk Olson", "Thomas Griffith"].map((n) => h("li", { key: n }, Ph("Portrait: " + n, "toh-vp"), h("span", { className: "toh-vn" }, n), h("span", { className: "toh-vq" }, "Short reflection to come")))),
-        rail("Live Like Him articles", 2),
-        prods(live, "toh-books")),
+        hd("How do you see Him?", "From the wall at our flagship store", "A curated set of sample notes. The final set comes from Content."),
+        h("ul", { className: "toh-wall", ref: wallRef }, notes.map((n, i) => h("li", { key: i, className: "w" + n[1] }, h("span", { className: "tx" }, n[0]), noteStrips())))),
 
-      h("section", { className: "toh-sec toh-sec-alt toh-prod" },
+      h("section", { className: "tx-sec tx-guide" },
+        h("div", { className: "tx-split tx-split-37" },
+          h(Card, { className: "toh-dl tx-dl", bordered: false, padding: "none" }, h("div", null, h("h3", { className: "fp-h4" }, "Family Discussion Guide"), P("A free download with questions to talk about together as you look at the art.")), h(Button, { variant: "secondary", size: "md", icon: "download", onClick: () => {} }, "Download the guide")),
+          Mock("Family around the art, flagship store", "tx-m-fam", [rays, ...["6097136:fa", "6053281:fb", "6096539:fc", "6075171:fd"].map((s) => { const [id, k] = s.split(":"); return h("img", { key: id, className: "tx-fr tx-" + k, src: "assets/img/wall/" + id + ".jpg", alt: "", loading: "lazy", decoding: "async" }); }), h("span", { className: "tx-bench", "aria-hidden": "true" })]))),
+
+      h("section", { className: "tx-sec tx-dark tx-p2" },
+        h("div", { className: "tx-split tx-split-46" },
+          h("div", { className: "tx-side" }, head("2", "Know Him", "Learning that deepens understanding.")),
+          h("figure", { className: "toh-quote tx-quote" }, h("blockquote", null, "Quote from President D. Todd Christofferson, to be supplied by Content."), h("figcaption", null, "President D. Todd Christofferson"))),
+        h("div", { className: "tx-split tx-split-64" },
+          Mock("Books on the table, morning light", "tx-m-book", know.slice(0, 3).map((p, i) => p.img && p.img[0] ? h("img", { key: p.id, className: "tx-bk tx-bk" + i, src: th(p.img[0]), alt: "", loading: "lazy", decoding: "async", ref: coverClip }) : null)),
+          h("div", { className: "tx-stack" }, arts3("Know Him articles", 1))),
+        shelf(know, "toh-books")),
+
+      h("section", { className: "tx-sec tx-p3" },
+        head("3", "Live Like Him", "Everyday faith."),
+        Player("conv-reel", "assets/img/toh/conversations.jpg", "DB Conversations trailer, a preview loop", "DB Conversations", "2:14", "tx-player-w"),
+        h("div", { className: "tx-split tx-split-37 tx-conv" },
+          h("div", { className: "tx-note" }, h("h3", { className: "fp-h4" }, "DB Conversations"), P("Real conversations about what faith looks like in ordinary days.")),
+          h("ul", { className: "tx-pl", "aria-label": "More conversations" }, [["still-a", "Steve Young", "12 min"], ["still-c", "Sharon Eubank", "9 min"], ["still-f", "Camille Fronk Olson", "14 min"]].map(([im, n, len]) => h("li", { key: n }, h("a", { href: "#", onClick: (e) => e.preventDefault() }, h("span", { className: "tx-pt" }, h("img", { src: "assets/img/toh/" + im + ".jpg", alt: "", loading: "lazy", decoding: "async" }), h("i", null, h("span", { className: "tx-tri tx-tri-s", "aria-hidden": "true" }))), h("span", { className: "tx-pn" }, n, h("small", null, "Sample title · " + len))))))),
+        h("h3", { className: "fp-h3 tx-vh" }, "What does it look like for you?"),
+        h("ul", { className: "tx-voices" }, VOICES.map(([n, k], i) => h("li", { key: n, className: "tx-v" + i },
+          Mock("Portrait: " + n, "tx-m-por tx-por-" + k, h("span", { className: "tx-ini", "aria-hidden": "true" }, n.split(" ").map((w) => w[0]).slice(0, 2).join(""))),
+          h("span", { className: "toh-vn" }, n), h("span", { className: "toh-vq" }, "Short reflection to come")))),
+        arts3("Live Like Him articles", 2),
+        shelf(live, "toh-books")),
+
+      h("section", { className: "toh-sec toh-sec-alt toh-prod tx-yel" },
         hd("Temple Collection", "Carry the moment with you"),
-        h("ul", { className: "toh-pl", "aria-label": "Temple collection categories" }, [["temple-worship_temple-clothing", "Clothing"], ["temple-worship_temple-bags", "Bags"], ["temple-worship_temple-accessories", "Accessories"], ["books_gospel-voices_temple-books", "Books"]].map(([id, n]) => h("li", { key: id }, h("a", { className: "toh-pt", href: "#/c/" + id, onClick: (e) => { e.preventDefault(); go("#/c/" + id); } },
+        h("ul", { className: "toh-pl", "aria-label": "Temple collection categories" }, CATS.map(([id, n]) => h("li", { key: id }, h("a", { className: "toh-pt", href: "#/c/" + id, onClick: (e) => { e.preventDefault(); go("#/c/" + id); } },
           h("span", { className: "toh-pi" }, h("img", { src: "assets/img/cat/" + id + ".jpg", alt: "", loading: "lazy", decoding: "async" })),
           h("span", { className: "toh-pn" }, n),
           h("span", { className: "toh-pg" }, h("span", { className: "ul-t" }, "Shop temple " + n.toLowerCase()), h(Icon, { name: "arrow_forward", size: 18 })))))),
         h("div", { className: "fp-acts" }, h(Button, { size: "md", onClick: () => go("#/c/temple-worship") }, "Shop all temple products"))),
 
-      h("section", { className: "toh-sec" },
+      h("section", { className: "toh-sec tx-yel" },
         hd("Experience It In Person", "Visit the flagship store across from Temple Square"),
         Pic("assets/img/toh/storefront.jpg", "The Deseret Book flagship store window display for the Look again campaign", "toh-img-store"),
         h("div", { className: "toh-inp" },
@@ -314,37 +370,21 @@
             P("Across from Temple Square, with a window display, the “How the World Sees Him” gallery and the “How do you see Him?” wall."),
             h("div", { className: "fp-acts" }, h(Button, { variant: "secondary", size: "md", onClick: () => go("#/stores") }, "Store hours and directions"))))),
 
-      h("section", { className: "toh-sec toh-sec-alt" },
-        hd("Meet the artists", "Five artists from the How the World Sees Him gallery"),
-        h("ul", { className: "toh-artists" }, artists.map(([n, sl]) => h("li", { key: sl }, h("a", { href: "#/c/featured-authors-artists_" + sl, onClick: (e) => { e.preventDefault(); go("#/c/featured-authors-artists_" + sl); } },
-          h("span", { className: "toh-ap" }, h("img", { src: "assets/img/cat/featured-authors-artists_" + sl + ".jpg", alt: "", loading: "lazy", decoding: "async" })), h("span", { className: "toh-an" }, n)))))),
-
-      h("section", { className: "toh-sec" },
-        hd("How do you see Him?", "From the wall at our flagship store", "A curated set of sample notes. The final set comes from Content."),
-        h("ul", { className: "toh-wall", ref: wallRef }, notes.map((n, i) => h("li", { key: i, className: "w" + n[1] }, h("span", { className: "tx" }, n[0]), noteStrips())))),
-
-      h("section", { className: "toh-sec toh-sec-alt" },
-        hd("Temple Square", "More to see during the celebration"),
-        h("ul", { className: "toh-ts" }, [
-          ["Tabernacle Dome presentations", "A Christ-centered show of light, music and imagery in the Salt Lake Tabernacle."],
-          ["Joseph Smith Memorial Building", "Experiences for children and families about the life and mission of Jesus Christ."],
-          ["Music and performances", "Free live music in venues across Temple Square."],
-          ["Church History Museum", "Family-friendly exhibits and art, including the Extraordinary Women exhibit."],
-          ["Temple Square Visitors’ Center", "Displays on Jesus Christ and the temple experience. Reservations are recommended."],
-          ["The Temple Square app", "Maps, schedules and tickets on site."]].map(([t, d]) => h("li", { key: t }, h("h3", { className: "fp-h4" }, t), P(d)))),
+      h("section", { className: "tx-sec tx-sq" },
+        h("div", { className: "tx-bh" }, h("span", { className: "db-eyebrow fp-eb" }, "Temple Square"), h("h2", { className: "fp-h2" }, "More to see during the celebration")),
+        h("ul", { className: "tx-sqg" }, TSQ.map(([ti, d, ic], i) => h("li", { key: ti, className: "tx-s" + i }, i === 0 ? Mock("Tabernacle Dome presentation still", "tx-m-dome", rays) : i === 1 ? Mock("Families at the Joseph Smith Memorial Building", "tx-m-jsmb", rays) : h("span", { className: "tx-si", "aria-hidden": "true" }, h(Icon, { name: ic, size: 28 })), h("div", { className: "tx-st" }, h("h3", { className: "fp-h4" }, ti), P(d))))),
         P(h(React.Fragment, null, "Tickets, dates and visit planning are managed by The Church of Jesus Christ of Latter-day Saints at ", ext("https://www.templesquare.org/eng/home", "templesquare.org"), "."))),
 
-      h("section", { className: "toh-sec toh-new" },
-        hd("New to Deseret Book?", "Faith-building books, art and gifts since 1866", null),
-        P("Deseret Book offers books, scriptures, music, art and gifts that help people build faith, strengthen homes and families, and live like Christ. You can shop online, find a store near you, or join Bookshelf+ for unlimited audiobooks and eBooks."),
-        h("div", { className: "fp-acts" }, h(Button, { variant: "secondary", size: "md", onClick: () => onGo("About Deseret Book") }, "About Deseret Book"), h(Button, { variant: "ghost", size: "md", onClick: () => go("#/bookshelf-plus") }, "Explore Bookshelf+"))),
-
-      h("section", { className: "toh-sec toh-mail" },
-        hd("Stay in the loop", "Get updates from the Look Again experience"),
-        f.done ? h(Ok, { title: "You’re on the list", again: "Use another email", onAgain: f.reset }, h("p", null, "We’ll send updates to " + f.v.email.trim() + ".")) :
-        h("form", { className: "fp-form toh-form", noValidate: true, onSubmit: f.submit({ email }) },
-          h(Field, { label: "Email", type: "email", value: f.v.email, onChange: f.set("email"), error: f.e.email, autoComplete: "email" }),
-          h("div", { className: "fp-acts" }, h(Button, { type: "submit", size: "md" }, "Sign up")))));
+      h("section", { className: "tx-sec tx-end" },
+        h("div", { className: "tx-split tx-split-55" },
+          h("div", { className: "tx-new" }, h("span", { className: "db-eyebrow fp-eb" }, "New to Deseret Book?"), h("h2", { className: "fp-h2" }, "Faith-building books, art and gifts since 1866"),
+            P("Deseret Book offers books, scriptures, music, art and gifts that help people build faith, strengthen homes and families, and live like Christ. You can shop online, find a store near you, or join Bookshelf+ for unlimited audiobooks and eBooks."),
+            h("div", { className: "fp-acts" }, h(Button, { variant: "secondary", size: "md", onClick: () => onGo("About Deseret Book") }, "About Deseret Book"), h(Button, { variant: "ghost", size: "md", onClick: () => go("#/bookshelf-plus") }, "Explore Bookshelf+"))),
+          h("div", { className: "tx-mail" }, h("span", { className: "db-eyebrow fp-eb" }, "Stay in the loop"), h("h2", { className: "fp-h3" }, "Get updates from the Look Again experience"),
+            f.done ? h(Ok, { title: "You’re on the list", again: "Use another email", onAgain: f.reset }, h("p", null, "We’ll send updates to " + f.v.email.trim() + ".")) :
+            h("form", { className: "fp-form toh-form", noValidate: true, onSubmit: f.submit({ email }) },
+              h(Field, { label: "Email", type: "email", value: f.v.email, onChange: f.set("email"), error: f.e.email, autoComplete: "email" }),
+              h("div", { className: "fp-acts" }, h(Button, { type: "submit", size: "md" }, "Sign up")))))));
   }
 
   window.FP_PAGES = Object.assign(window.FP_PAGES || {}, { "Temple Open House": TempleOpenHouse, "About Deseret Book": About, "Events": Events, "Platinum Rewards": Platinum, "Purchase an eGift Card": EGift });
