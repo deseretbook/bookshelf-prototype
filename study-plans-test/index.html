@@ -462,6 +462,7 @@ html, body { height: 100%; margin: 0; }
 
 /* User-test links (#link-a, #link-b): reviewer controls are hidden */
 .test-mode .tweak-fab, .test-mode .tweak-panel { display: none !important; }
+.member-gate-test .hub-topbar { display: none !important; } /* Library option test: the flame lives on Home only */
 .plan-only .tab-bar { display: none !important; }
 .plan-only .hero-btn[aria-label="Back"] { visibility: hidden; pointer-events: none; }
 
@@ -3628,6 +3629,7 @@ if (libLike()) { setTabActive('home'); navigateTo('home'); }
   }
   userType = 'premium'; notificationsOn = true; dayDoneRule = 'all'; afterItem = 'next'; daysLayout = (h === 'layout-b' || h === 'plan-days') ? 'strip' : 'weeks';
   plansHome = libraryOption ? 'library' : 'discover'; memberGateTest = libraryOption; memberStarted = true; homeOtherFirst = h !== 'link-a' && !libraryOption;
+  if (libraryOption) document.documentElement.classList.add('member-gate-test');
   if (libraryOption) streakCount = 0; // a new member: the flame starts at 0 and the first check makes it 1
   if (h === 'link-a' || libraryOption) {
     setLibraryNewUser(true); // no started, saved or finished plans: starting one turns on the flame and the Continue card
