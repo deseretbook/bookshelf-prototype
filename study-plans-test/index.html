@@ -2495,7 +2495,8 @@ function primaryAction() {
     startedPlans.add(id);
     startDates[id] = TODAY_DATE;
     delete selectedDay[id];
-    doneSet(id);
+    doneItems[id] = new Set(); // a new start has nothing done (demo progress seeded for the default member must not carry over)
+    paceShift[id] = 0;
     openGroups[id] = new Set();
     renderDetail();
     renderHub();
