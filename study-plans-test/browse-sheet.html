@@ -2564,11 +2564,11 @@ function activeFilters() {
   return out;
 }
 function sheetBar() {
-  const act = activeFilters(), n = act.length;
+  // The icon button carries the only indicator: a badge with the number of filters on (a sort other than Recommended counts as one)
+  const n = activeFilters().length + (sheetSort !== 'recommended' ? 1 : 0);
   const badge = document.getElementById('hubFilterBadge');
   if (badge) { badge.hidden = !n; badge.textContent = n; }
-  return (sheetSort !== 'recommended' ? `<div class="fs-bar"><span class="fs-sorted">Sorted by ${SORTS[sheetSort].toLowerCase()}</span></div>` : '') +
-    (n ? `<div class="fs-active">${act.map(([l, call]) => `<button class="pf-chip on" aria-label="Remove ${l}" onclick="${call}">${l}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`).join('')}</div>` : '');
+  return '';
 }
 function renderBrowse(containerId) {
   const box = document.getElementById(containerId);
