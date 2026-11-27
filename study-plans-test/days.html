@@ -460,8 +460,23 @@ html, body { height: 100%; margin: 0; }
 .sp-body { font-size: 14px; line-height: 1.4; color: var(--fg-secondary); margin-top: 6px; }
 .sp-btn { margin-top: 12px; width: 100%; border: none; border-radius: 100px; background: var(--accent); color: #fff; font-family: var(--font-body); font-size: 15px; font-weight: 600; padding: 10px 0; cursor: pointer; }
 
+/* Study Plans tab: category filters (chips wrap, no sideways scroll) */
+.pf { padding: 4px 20px 6px; }
+.pf-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.pf-row + .pf-row { margin-top: 10px; }
+.pf-chip { border: 1px solid var(--border); background: var(--bg-card); color: var(--fg); font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 7px 14px; border-radius: 100px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.pf-chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.pf-sub-label { font-size: 12px; font-weight: 600; color: var(--fg-tertiary); letter-spacing: 0.6px; text-transform: uppercase; margin: 12px 0 8px; }
+.pf-chip.sub { background: var(--card-muted); border-color: transparent; }
+.pf-chip.sub.on { background: var(--accent-light); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.pf-count { padding: 10px 20px 2px; font-size: 13px; color: var(--fg-secondary); }
+.pf-empty { padding: 28px 20px; text-align: center; color: var(--fg-secondary); font-size: 14px; }
+.pf-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.pf-tag { font-size: 12px; font-weight: 600; color: var(--fg-secondary); background: var(--card-muted); padding: 3px 9px; border-radius: 100px; }
+
 /* User-test links (#link-a, #link-b): reviewer controls are hidden */
 .test-mode .tweak-fab, .test-mode .tweak-panel { display: none !important; }
+.member-gate-test .hub-topbar { display: none !important; } /* Library option test: the flame lives on Home only */
 .plan-only .tab-bar { display: none !important; }
 .plan-only .hero-btn[aria-label="Back"] { visibility: hidden; pointer-events: none; }
 
@@ -1113,6 +1128,8 @@ html, body { height: 100%; margin: 0; }
 
       <div id="browseSection">
         <div class="section-label" id="browseLabel" style="margin-top: 8px;">Browse Plans</div>
+        <div class="pf" id="planFilters" role="group" aria-label="Filter study plans"></div>
+        <div class="pf-count" id="planFilterCount" aria-live="polite"></div>
         <div id="hubBrowse" style="padding: 0 20px 24px; display: flex; flex-direction: column; gap: 12px;"></div>
       </div>
     </div>
@@ -1533,7 +1550,6 @@ html, body { height: 100%; margin: 0; }
     <div id="weekDoneReflect"></div>
     <div class="sheet-actions">
       <button class="btn btn-primary" onclick="dismissMoment()">Back to plan</button>
-      <button class="btn btn-outline" id="weekDoneLesson">Open next week's lesson</button>
     </div>
   </div>
 
@@ -1723,43 +1739,12 @@ html, body { height: 100%; margin: 0; }
 const S = 'scripture', EB = 'ebook', AB = 'audiobook', M = 'song'; // reflections live in the Ponder link, not the checklist
 
 const PLANS = {
-  cfm: {
-    title: 'Come, Follow Me 2027',
-    kicker: 'Curriculum · 365 days',
-    tagline: 'New Testament · Daily scripture study',
-    desc: 'Follow the Church\'s official curriculum for 2027 with daily New Testament readings, audiobooks, music, and a weekly moment to reflect.',
-    duration: 365, timePerDay: 15, focus: 'Curriculum', curriculum: true, availableWeeks: 1, people: 18400,
-    weekTitles: ['The Word Was Made Flesh', 'Prepare Ye the Way', 'Follow Me'],
-    days: [
-      [[S, 'John 1:1–14', 'In the beginning was the Word', 8], [AB, 'Jesus the Christ, ch. 2', 'James E. Talmage', 7]],
-      [[S, 'Luke 1:26–38', 'The annunciation', 6], [M, '"Joy to the World"', 'Tabernacle Choir', 4]],
-      [[S, 'Luke 2:1–20', 'The birth of Jesus', 10], [M, '"Silent Night"', 'Tabernacle Choir', 4]],
-      [[S, 'Luke 2:41–52', 'Jesus in the temple', 6], [EB, 'Jesus the Christ, ch. 11', 'James E. Talmage', 8]],
-      [[S, 'Matthew 2:1–12', 'The wise men', 6], [AB, 'The Wise Men\'s Journey, ch. 2', 'Gifts for the King', 10]],
-      [[S, 'Isaiah 9:6–7', 'Unto us a child is born', 3], [M, '"Far, Far Away on Judea\'s Plains"', 'Hymns', 4]],
-      [[S, 'Luke 2:8–14', 'Glory to God in the highest', 4], [M, '"O Little Town of Bethlehem"', 'Hymns', 4]],
-      [[S, 'Matthew 3:1–12', 'John the Baptist', 8], [AB, 'Prepare Ye the Way, ch. 1', 'The ministry of John the Baptist', 7]],
-      [[S, 'Matthew 3:13–17', 'The baptism of Jesus', 5], [M, '"Baptism"', 'Children\'s Songbook', 3]],
-      [[S, 'Mark 1:1–11', 'The beginning of the gospel', 6], [M, '"Come, Follow Me"', 'Hymns', 4]],
-      [[S, 'John 1:19–34', 'Behold the Lamb of God', 8], [EB, 'Behold the Lamb, ch. 2', 'Preparing the way', 10]],
-      [[S, 'Matthew 4:1–11', 'The temptation of Jesus', 6], [AB, 'Jesus the Christ, ch. 10', 'James E. Talmage', 6], [M, '"Consider the Lilies"', 'Tabernacle Choir', 4, 'gone']],
-      [[S, 'Luke 4:16–30', 'Rejected at Nazareth', 8], [EB, 'The Anointed One, ch. 4', 'Isaiah\'s words fulfilled', 5]],
-      [[S, 'Psalm 119:105', 'A lamp unto my feet', 2], [M, '"Lead, Kindly Light"', 'Hymns', 4]],
-      [[S, 'Matthew 4:17–25', 'Fishers of men', 6], [AB, 'Fishers of Men, ch. 1', 'Leaving the nets', 7]],
-      [[S, 'John 1:35–51', 'Come and see', 8], [M, '"Lord, I Would Follow Thee"', 'Hymns', 4]],
-      [[S, 'Luke 5:1–11', 'The great catch of fish', 6], [M, '"I\'ll Go Where You Want Me to Go"', 'Hymns', 4]],
-      [[S, 'John 2:1–11', 'The wedding at Cana', 6], [EB, 'Small Miracles, ch. 3', 'Water into wine', 10]],
-      [[S, 'John 3:1–17', 'Born again', 8], [AB, 'Believing Christ, ch. 1', 'Stephen E. Robinson', 8]],
-      [[S, 'John 4:5–26', 'Living water', 8], [M, '"I Need Thee Every Hour"', 'Hymns', 4]],
-      [[S, 'Mark 1:16–20', 'They forsook their nets', 3], [AB, 'Fishers of Men, ch. 2', 'Leaving everything behind', 8]]
-    ]
-  },
   anxiety: {
     title: 'Finding Peace in Anxious Times',
     kicker: 'Topical · 14 days',
     tagline: 'Scripture, audio & music for daily calm',
     desc: 'A gentle two-week journey through scriptures, books, and music chosen to bring calm and reassurance. Each day is short enough for even the busiest schedule.',
-    duration: 14, timePerDay: 12, focus: 'Topical', people: 2340,
+    duration: 14, timePerDay: 12, focus: 'Mood', tags: ['Mood:Anxiety', 'Mood:Peace'], people: 2340,
     weekTitles: ['Come Unto Me', 'Peace I Leave With You'],
     days: [
       [[S, 'Matthew 11:28–30', 'Come unto me', 4], [M, '"Be Still, My Soul"', 'Hymns', 4]],
@@ -1783,7 +1768,7 @@ const PLANS = {
     kicker: 'General Spiritual · 30 days',
     tagline: 'A month of daily devotionals',
     desc: 'A month-long devotional journey to deepen your relationship with the Savior through daily scripture study, prophetic teachings, and moments of reflection.',
-    duration: 30, timePerDay: 10, focus: 'General Spiritual', people: 5200,
+    duration: 30, timePerDay: 10, focus: 'Gospel', tags: ['Gospel'], people: 5200,
     weekTitles: ['Who He Is', 'Come Unto Him', 'His Ministry', 'His Atonement', 'Living as His Disciple'],
     days: [
       [[S, 'John 3:16–17', 'For God so loved the world', 3], [M, '"I Know That My Redeemer Lives"', 'Hymns', 4]],
@@ -1823,7 +1808,7 @@ const PLANS = {
     kicker: 'Topical · 21 days',
     tagline: 'Scripture & stories for families',
     desc: 'Three weeks of scripture stories, family books, and music designed to bring families closer together and closer to Christ.',
-    duration: 21, timePerDay: 12, focus: 'Topical', people: 64,
+    duration: 21, timePerDay: 12, focus: 'Family', tags: ['Family:Kids', 'Family:Marriage'], people: 64,
     weekTitles: ['Goodly Parents', 'Hearts Turned Together', 'A House of Faith'],
     days: [
       [[S, '1 Nephi 1:1', 'Born of goodly parents', 3], [M, '"Love at Home"', 'Hymns', 3]],
@@ -1854,7 +1839,7 @@ const PLANS = {
     kicker: 'Genre/Mood · 10 days',
     tagline: 'Finding joy in everyday moments',
     desc: 'A short, uplifting plan that pairs joyful scriptures with music and books to help you find happiness in the everyday.',
-    duration: 10, timePerDay: 10, focus: 'Genre/Mood', people: 1125,
+    duration: 10, timePerDay: 10, focus: 'Mood', tags: ['Mood:Happiness'], people: 1125,
     weekTitles: ['Fulness of Joy', 'Carry It Forward'],
     days: [
       [[S, '2 Nephi 2:25', 'Men are, that they might have joy', 2], [M, '"Come, Thou Fount of Every Blessing"', 'Tabernacle Choir', 4]],
@@ -1867,6 +1852,118 @@ const PLANS = {
       [[S, 'Philippians 4:4', 'Rejoice in the Lord alway', 2], [M, '"Count Your Blessings"', 'Hymns', 3]],
       [[S, '3 Nephi 17:20', 'Now behold, my joy is full', 2], [M, '"I Feel My Savior\'s Love"', 'Children\'s Songbook', 4]],
       [[S, 'D&C 18:15–16', 'How great will be your joy', 3], [M, '"Joy to the World"', 'Tabernacle Choir', 4]]
+    ]
+  },
+  love: {
+    title: 'Learning to Love Like the Savior',
+    tagline: 'A week on loving others as He does',
+    desc: 'Seven short days of scripture, music and reflection on charity, kindness and seeing the people around you the way the Savior does.',
+    duration: 7, timePerDay: 10, focus: 'Mood', tags: ['Mood:Love', 'Gospel'], people: 820,
+    weekTitles: ['Love One Another'],
+    days: [
+      [[S, '1 John 4:7–11', 'Let us love one another', 3], [M, '"Love One Another"', 'Hymns', 3]],
+      [[S, 'John 13:34–35', 'As I have loved you', 3], [AB, 'Love Like Christ, ch. 1', 'Love as He loved', 8]],
+      [[S, 'Moroni 7:45–48', 'Charity never faileth', 4], [M, '"I Feel My Savior\'s Love"', 'Children\'s Songbook', 4]],
+      [[S, 'Matthew 22:37–39', 'Love thy neighbour', 3], [AB, 'Love Like Christ, ch. 2', 'Seeing others as He does', 8]],
+      [[S, 'Luke 10:25–37', 'The good Samaritan', 6], [M, '"As I Have Loved You"', 'Hymns', 3]],
+      [[S, 'Romans 8:38–39', 'Nothing can separate us', 3], [AB, 'Love Like Christ, ch. 3', 'Love that stays', 7]],
+      [[S, 'John 15:12–13', 'Greater love hath no man', 3], [M, '"Because I Have Been Given Much"', 'Hymns', 3]]
+    ]
+  },
+  sadness: {
+    title: 'Light in the Hard Days',
+    tagline: 'Comfort for when you are hurting',
+    desc: 'A gentle week for sad days. Short scriptures, calm music and honest reading that make room for grief and point toward hope.',
+    duration: 7, timePerDay: 10, focus: 'Mood', tags: ['Mood:Sadness'], people: 940,
+    weekTitles: ['Comfort in Sorrow'],
+    days: [
+      [[S, 'Psalm 34:18', 'Nigh unto the brokenhearted', 2], [M, '"Abide with Me; \'Tis Eventide"', 'Hymns', 4]],
+      [[S, 'Matthew 5:4', 'Blessed are they that mourn', 3], [AB, 'Hope on Hard Days, ch. 1', 'You can hurt and still hope', 8]],
+      [[S, 'John 11:35', 'Jesus wept', 2], [M, '"Be Still, My Soul"', 'Hymns', 4]],
+      [[S, 'Isaiah 61:1–3', 'Beauty for ashes', 4], [EB, 'Hope on Hard Days, ch. 2', 'Beauty for ashes', 8]],
+      [[S, '2 Corinthians 1:3–4', 'The God of all comfort', 3], [M, '"Where Can I Turn for Peace?"', 'Hymns', 4]],
+      [[S, 'Psalm 30:5', 'Joy cometh in the morning', 2], [AB, 'Hope on Hard Days, ch. 3', 'Morning will come', 6]],
+      [[S, 'Revelation 21:4', 'God shall wipe away all tears', 3], [M, '"Come, Ye Disconsolate"', 'Hymns', 4]]
+    ]
+  },
+  lonely: {
+    title: 'You Are Not Alone',
+    tagline: 'A week of company for lonely days',
+    desc: 'Scriptures, music and short readings about being known by God, and small ways to reach toward other people.',
+    duration: 7, timePerDay: 10, focus: 'Mood', tags: ['Mood:Loneliness'], people: 610,
+    weekTitles: ['Never Alone'],
+    days: [
+      [[S, 'Joshua 1:9', 'The Lord thy God is with thee', 2], [M, '"I Am a Child of God"', 'Hymns', 3]],
+      [[S, 'Isaiah 49:15–16', 'Graven upon the palms of my hands', 3], [AB, 'Never Alone, ch. 1', 'Known by name', 7]],
+      [[S, 'John 14:18', 'I will not leave you comfortless', 2], [M, '"Lead, Kindly Light"', 'Hymns', 4]],
+      [[S, 'Psalm 139:7–10', 'Whither shall I flee from thy presence', 4], [EB, 'Never Alone, ch. 2', 'Finding connection', 8]],
+      [[S, 'Matthew 28:20', 'I am with you alway', 2], [M, '"Jesus, Savior, Pilot Me"', 'Hymns', 3]],
+      [[S, 'Hebrews 13:5', 'I will never leave thee', 2], [AB, 'Never Alone, ch. 3', 'Small ways to reach out', 6]],
+      [[S, 'Mosiah 18:8–9', 'Bear one another\'s burdens', 3], [M, '"Called to Serve"', 'Hymns', 3]]
+    ]
+  },
+  loss: {
+    title: 'Peace After Loss',
+    tagline: 'Comfort and hope after losing someone',
+    desc: 'A quiet week for a family that is grieving. Scriptures on the Resurrection, music, and gentle reading about grief and hope.',
+    duration: 7, timePerDay: 12, focus: 'Family', tags: ['Family', 'Mood:Sadness', 'Mood:Peace'], people: 380,
+    weekTitles: ['Hope After Loss'],
+    days: [
+      [[S, 'John 14:27', 'Peace I leave with you', 3], [M, '"Families Can Be Together Forever"', 'Hymns', 3]],
+      [[S, 'Alma 40:11–12', 'Between death and the resurrection', 4], [EB, 'Peace After Loss, ch. 1', 'When someone you love is gone', 10]],
+      [[S, 'D&C 42:45–46', 'Thou shalt live together in love', 3], [M, '"Be Still, My Soul"', 'Hymns', 4]],
+      [[S, '1 Corinthians 15:20–22', 'In Christ shall all be made alive', 4], [AB, 'Peace After Loss, ch. 2', 'Grief and hope', 8]],
+      [[S, 'Alma 11:42–44', 'Restored to its perfect frame', 4], [M, '"I Know That My Redeemer Lives"', 'Hymns', 4]],
+      [[S, 'Psalm 23:4', 'Thou art with me', 2], [EB, 'Peace After Loss, ch. 3', 'Carrying grief together', 8]],
+      [[S, 'Isaiah 25:8', 'He will swallow up death in victory', 3], [AB, 'Peace After Loss, ch. 4', 'Hope that holds', 7]]
+    ]
+  },
+  marriage: {
+    title: 'Building a Marriage on Christ',
+    tagline: 'A week for couples to study together',
+    desc: 'Seven days of scripture, music and short reading about patience, kindness and choosing each other, each day short enough to share over dinner.',
+    duration: 7, timePerDay: 12, focus: 'Family', tags: ['Family:Marriage', 'Mood:Love'], people: 510,
+    weekTitles: ['Two as One'],
+    days: [
+      [[S, 'Genesis 2:24', 'They shall be one flesh', 2], [M, '"Love at Home"', 'Hymns', 3]],
+      [[S, 'Ephesians 4:2–3', 'Forbearing one another in love', 3], [EB, 'Marriage and Christ, ch. 1', 'Two as one', 8]],
+      [[S, 'Proverbs 15:1', 'A soft answer', 2], [AB, 'Marriage and Christ, ch. 2', 'Gentle words', 8]],
+      [[S, 'Ecclesiastes 4:9–12', 'A threefold cord', 3], [M, '"Families Can Be Together Forever"', 'Hymns', 3]],
+      [[S, 'Colossians 3:12–14', 'Put on charity', 3], [EB, 'Marriage and Christ, ch. 3', 'Serving each other', 8]],
+      [[S, '1 Corinthians 13:4–7', 'Charity suffereth long', 4], [M, '"Love One Another"', 'Hymns', 3]],
+      [[S, 'Philippians 2:3–4', 'Look also on the things of others', 3], [AB, 'Marriage and Christ, ch. 4', 'Choosing each other', 8]]
+    ]
+  },
+  kids: {
+    title: 'Raising Children in Faith',
+    tagline: 'Simple ways to teach faith at home',
+    desc: 'A week of short scriptures, stories and songs for parents and children, built around small daily habits that make faith part of home life.',
+    duration: 7, timePerDay: 12, focus: 'Family', tags: ['Family:Kids'], people: 1480,
+    weekTitles: ['Faith at Home'],
+    days: [
+      [[S, 'Deuteronomy 6:6–7', 'Teach them diligently', 3], [M, '"Teach Me to Walk in the Light"', 'Children\'s Songbook', 3]],
+      [[S, 'Psalm 127:3', 'Children are an heritage of the Lord', 2], [EB, 'Faith at Home, ch. 1', 'Faith starts small', 8]],
+      [[S, 'Matthew 19:14', 'Suffer little children', 2], [M, '"Jesus Wants Me for a Sunbeam"', 'Children\'s Songbook', 3]],
+      [[S, '3 Nephi 17:21–24', 'He took their little children', 5], [AB, 'Stories of Faith at Home, ch. 5', 'Bedtime scripture stories', 12]],
+      [[S, 'Luke 2:52', 'Increased in wisdom and stature', 2], [M, '"I Am a Child of God"', 'Children\'s Songbook', 3]],
+      [[S, 'Ephesians 6:1–4', 'Provoke not your children to wrath', 3], [EB, 'Faith at Home, ch. 2', 'Patience at bedtime', 8]],
+      [[S, 'Mark 10:13–16', 'Of such is the kingdom of God', 3], [AB, 'Stories of Faith at Home, ch. 6', 'Praying together', 10]]
+    ]
+  },
+  gospel: {
+    title: 'The Plan of Happiness',
+    tagline: 'A week on why we are here',
+    desc: 'Seven days exploring the plan of salvation in the scriptures: where we came from, why we are here and where we are going.',
+    duration: 7, timePerDay: 12, focus: 'Gospel', tags: ['Gospel', 'Mood:Happiness'], people: 2750,
+    weekTitles: ['Why We Are Here'],
+    days: [
+      [[S, 'Moses 1:39', 'This is my work and my glory', 2], [M, '"O My Father"', 'Hymns', 4]],
+      [[S, 'Alma 42:8', 'The great plan of happiness', 3], [EB, 'The Plan, ch. 1', 'Why we are here', 10]],
+      [[S, '2 Nephi 2:22–25', 'Men are, that they might have joy', 4], [M, '"Know This, That Every Soul Is Free"', 'Hymns', 4]],
+      [[S, 'Abraham 3:24–26', 'We will prove them herewith', 4], [AB, 'The Plan, ch. 2', 'A time to prepare', 8]],
+      [[S, '2 Nephi 9:6–9', 'The resurrection of the dead', 4], [EB, 'The Plan, ch. 3', 'The Atonement', 8]],
+      [[S, 'Moroni 10:4–5', 'Ask God', 3], [M, '"Press Forward, Saints"', 'Hymns', 4]],
+      [[S, '2 Nephi 31:20', 'Press forward with a steadfastness in Christ', 3], [AB, 'The Plan, ch. 4', 'A witness of truth', 8]]
     ]
   }
 };
@@ -1884,29 +1981,6 @@ const VERSE_START = { 'Matthew 4:1–11': 1, 'Philippians 4:6–7': 6, 'John 3:1
 
 // Each day opens with a short intro and one question to ponder (the prompt for the optional reflection).
 const DAY_NOTES = {
-  cfm: [
-    ['John opens his testimony before time began, with Jesus as the Word who brings light and life.', 'Where have you seen His light in your life lately?'],
-    ['Mary hears an unexpected message and answers with quiet trust.', 'What would it look like to say "be it unto me" today?'],
-    ['Shepherds working through the night are the first to hear the news.', 'What helps you make room for Him in a busy season?'],
-    ['At twelve, Jesus is found in the temple, about His Father\'s business.', 'Where do you feel closest to your Heavenly Father?'],
-    ['Wise men follow a star a long way to bring their gifts.', 'What gift could you bring Him this week?'],
-    ['Centuries before His birth, Isaiah names who the child would be.', 'Which of His names means the most to you right now?'],
-    ['A quiet day to look back on this week\'s readings.', 'What does His birth mean to you?'],
-    ['John the Baptist calls people to prepare their hearts.', 'What is one way you could prepare your heart this week?'],
-    ['Jesus is baptized, and the Father\'s voice is heard.', 'What do you remember about a promise you have made with God?'],
-    ['Mark starts quickly: the good news is here.', 'What does "the gospel" mean to you in one sentence?'],
-    ['John points away from himself and toward the Lamb of God.', 'Who has pointed you toward the Savior?'],
-    ['In the wilderness, Jesus answers each temptation with scripture.', 'Which verse would you want ready on a hard day?'],
-    ['In His hometown synagogue, Jesus reads from Isaiah and declares who He is.', 'How do you respond when a truth is hard to hear?'],
-    ['A quiet day to gather what you have learned.', 'Where do you need strength this week?'],
-    ['Fishermen leave their nets to follow Him.', 'What does following Him look like in your day?'],
-    ['"Come and see," Jesus says, and Philip invites a friend.', 'Who could you invite to "come and see"?'],
-    ['After a long, empty night, Peter tries once more at the Lord\'s word.', 'Where could you try again because He asked?'],
-    ['At a wedding in Cana, Jesus quietly turns water into wine.', 'What small miracle have you noticed recently?'],
-    ['Nicodemus comes by night with honest questions.', 'What question would you bring to the Savior?'],
-    ['At a well, Jesus offers a woman living water.', 'What fills you up when you feel spiritually dry?'],
-    ['A quiet day to look back on the week.', 'What is He asking you to leave behind?']
-  ],
   anxiety: [
     ['Today begins with an invitation: come as you are and find rest.', 'What feels heavy for you right now?'],
     ['Psalm 46 reminds us that God is a refuge, even when the world is noisy.', 'Where could you find five quiet minutes today?'],
@@ -1989,15 +2063,74 @@ const DAY_NOTES = {
     ['Rejoice in the Lord always.', 'What blessing might you have overlooked?'],
     ['Jesus blesses the children one by one, and His joy is full.', 'Who brings you joy just by being who they are?'],
     ['The last day: decide what joy you will carry forward.', 'What will you carry forward?']
+  ],
+  love: [
+    ['The plan opens with where love comes from: God.', "Who has shown you God's love?"],
+    ['The Savior gives a new commandment: love as He loved.', 'Who could you love a little more today?'],
+    ['Mormon calls charity the pure love of Christ.', 'Where have you felt that kind of love?'],
+    ['Two commandments hold everything else: love God, love your neighbour.', 'Who is your neighbour this week?'],
+    ['A stranger stops to help when others pass by.', 'Where could you stop for someone today?'],
+    ['Nothing can separate us from the love of God.', 'How does it feel to know that love does not change?'],
+    ['The last day: the greatest love is given for others.', 'How will you keep loving this week?']
+  ],
+  sadness: [
+    ['The Lord is close to those with a broken heart.', 'What is weighing on you today?'],
+    ['Jesus says those who mourn will be comforted.', 'Where have you found comfort lately?'],
+    ['Jesus weeps with Mary and Martha before He raises Lazarus.', 'What does it mean that He weeps with us?'],
+    ['Isaiah promises beauty in place of ashes.', 'What would you want to be made new?'],
+    ['Paul describes a God who comforts us so we can comfort others.', 'Who comforted you when you needed it?'],
+    ['The night does not last forever.', 'What small sign of morning have you noticed?'],
+    ['A promise to end the week: He will wipe away every tear.', 'What do you want to hold on to from this week?']
+  ],
+  lonely: [
+    ['God is with you wherever you go.', 'Where do you feel least alone?'],
+    ['God has not forgotten you. You are engraved on His hands.', 'What does it mean to be known by name?'],
+    ['The Savior promises He will not leave us alone.', 'When have you felt someone near you?'],
+    ['There is nowhere you can go that He is not.', 'Where do you wish you felt more connected?'],
+    ['He is with you always, even to the end.', 'What helps you remember He is near?'],
+    ['A promise that He will never leave you.', 'Who could you reach out to today?'],
+    ["The last day: we bear one another's burdens.", 'Who could you serve or invite this week?']
+  ],
+  loss: [
+    ['The week begins with a promise of peace.', 'What do you most want to remember about the person you lost?'],
+    ['Alma teaches that those who die are still cared for.', 'What gives you comfort about where they are?'],
+    ['Weeping is part of loving.', 'What would you like to say to them today?'],
+    ['Paul teaches that all will live again through Christ.', 'What does the Resurrection mean to you?'],
+    ['Alma describes everyone being restored.', 'What do you hope for most?'],
+    ['Even in the valley, you are not alone.', 'Who has walked with you through this?'],
+    ['The last day: death is not the end.', 'What will you carry forward from this week?']
+  ],
+  marriage: [
+    ['Marriage begins with two becoming one.', 'What do you value most about your marriage?'],
+    ['Paul asks for patience and love.', 'Where could you be more patient this week?'],
+    ['A gentle answer turns away anger.', 'What gentle word could you say today?'],
+    ['Two are better than one, and three strands are not quickly broken.', 'How does Christ strengthen your marriage?'],
+    ['Paul names charity as the bond of perfection.', 'How could you serve your spouse today?'],
+    ['The best-known description of love.', 'Which part of this verse is hardest for you?'],
+    ['The last day: look out for each other.', 'What will you keep doing together?']
+  ],
+  kids: [
+    ['Parents are invited to teach, a little at a time.', 'What is one way you teach faith at home?'],
+    ['Children are a gift.', 'What does your child teach you about faith?'],
+    ['The Savior welcomes children.', "How could you welcome your child's questions?"],
+    ['The Savior blesses each child one by one.', 'What would you want your child to feel from Him?'],
+    ['Jesus grew up step by step.', 'What small step could your family take this week?'],
+    ['Parents are asked to teach with patience.', 'What helps you stay patient at bedtime?'],
+    ['The last day: the kingdom belongs to the humble.', 'What will your family keep doing?']
+  ],
+  gospel: [
+    ['God shares His work: to bring us happiness.', 'What do you know about why you are here?'],
+    ['Alma calls it the great plan of happiness.', 'What part of the plan means the most to you?'],
+    ['Lehi teaches that we are here to have joy.', 'Where have you found joy through challenge?'],
+    ['We are placed here to be tested and to learn.', 'What have you learned from a hard time?'],
+    ['The Atonement makes the resurrection possible.', 'What does being redeemed mean to you?'],
+    ['Moroni invites anyone to ask God.', 'What would you like to ask Him this week?'],
+    ['The last day: press forward with hope.', 'How will you keep pressing forward?']
   ]
 };
 
 // Optional extras: listed under "Go deeper (optional)" and never counted toward the day being done
 const GO_DEEPER = {
-  cfm: {
-    0: [[S, '3 Nephi 9:18', 'I am the light and the life', 2], [AB, 'Behold the Lamb, ch. 1', 'The Word made flesh', 8]],
-    11: [[S, 'Deuteronomy 8:3', 'Not by bread alone', 2]]
-  },
   anxiety: { 0: [[S, 'Psalm 55:22', 'Cast thy burden upon the Lord', 2]], 4: [[S, 'Psalm 55:22', 'Cast thy burden upon the Lord', 2], [EB, 'Finding Peace, ch. 6', 'Small steps toward calm', 8]] },
   closer: { 0: [[S, '1 John 4:9–10', 'Herein is love', 2]] },
   family: { 0: [[AB, 'Stories of Faith at Home, ch. 3', 'Our family\'s first stories', 8]] },
@@ -2017,7 +2150,6 @@ const BOOK_OF_MORMON = ['1 Nephi', '2 Nephi', 'Jacob', 'Enos', 'Mosiah', 'Alma',
 const DAY_LETTERS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 const TODAY_DATE = new Date(2026, 10, 18); // prototype "today": Wed, Nov 18
 const TODAY_WEEKDAY = 2; // Monday-based index for Wednesday
-const CFM_TODAY_INDEX = 4; // Come, Follow Me follows the Church schedule; only week one is available, so the prototype sits on Day 5
 const TYPE_LABEL = { scripture: 'Scripture', ebook: 'Ebook', audiobook: 'Audiobook', song: 'Music', reflection: 'Reflection' };
 const TYPE_ICON = {
   scripture: '<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 3v7l2-1.5L13 10V3"/>',
@@ -2030,7 +2162,7 @@ const LOCK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
 const PLAYABLE = new Set(['audiobook', 'song']);
 
 let currentScreen = 'hub';
-let currentPlan = 'cfm';
+let currentPlan = 'anxiety';
 let currentItem = null; // { day, item }
 let detailReturn = 'hub';
 let streakCount = 2;
@@ -2046,18 +2178,19 @@ let momentQueue = [];      // popups after finishing an item, shown one at a tim
 let libraryNewUser = false; // tweak: a new user with no plans (clears started, saved and completed plans; restores them on "Has plans")
 let plansSnapshot = null;
 const savedPlans = new Set();
-const startedPlans = new Set(['cfm', 'anxiety', 'joy']);
+const startedPlans = new Set(['anxiety', 'joy']);
 const finishedPlans = new Set(['family']); // demo: one completed plan, so the Completed lists aren't empty
 const downloadedPlans = new Set(['anxiety']); // demo: downloaded plans get a small icon
 let plansHome = 'library';
 const libLike = () => plansHome === 'library' || plansHome === 'discover';
+let memberGateTest = false; // test link on the Library option: Home also uses the member rules (banner until a plan is started, then the flame and its helper)
+const memberGate = () => plansHome === 'discover' || memberGateTest;
 let memberStarted = true; // tweak (Discover option): member has started a plan
 let streakHelpSeen = false; // the flame helper opens on its own once
 const FEATURED_PLAN = 'closer'; // not started in the default demo, so the Home banner and Discover hero show // tweak: 'rows' (Study Plans tab, Library-style My plans) or 'library'
 const startDates = { anxiety: addDays(TODAY_DATE, -4), joy: addDays(TODAY_DATE, -2) };
-const reminders = { cfm: '7:00 AM' };
+const reminders = { anxiety: '7:00 AM' };
 const doneItems = {
-  cfm: keysForDays('cfm', 4),
   anxiety: keysForDays('anxiety', 4),
   joy: keysForDays('joy', 2)
 };
@@ -2086,8 +2219,7 @@ function planStart(id) {
 }
 function todayIndex(id) {
   const plan = PLANS[id];
-  // Curriculum plans follow the Church's schedule and never shift; self-paced plans can (missed days, Catch me up)
-  const idx = plan.curriculum ? CFM_TODAY_INDEX : daysBetween(planStart(id), TODAY_DATE) + (isStarted(id) ? paceShift[id] || 0 : 0);
+  const idx = daysBetween(planStart(id), TODAY_DATE) + (isStarted(id) ? paceShift[id] || 0 : 0);
   return Math.max(0, Math.min(idx, plan.days.length - 1));
 }
 function dayDone(id, d) {
@@ -2107,8 +2239,7 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(
 
 /* ---------- Illustrations (unique gradient ids per instance) ---------- */
 // Plan art follows the plan page header: a solid color plus one large, faint line mark.
-// Two variants: Come, Follow Me (curriculum) uses the green and the scripture mark; every other plan
-// uses the warm clay color and a simple mark for its theme. New plans only need a color + a mark.
+// Each plan has a color (by its main category) and a simple mark for its theme. New plans only need a category + a mark.
 const MARKS = {
   scripture: '<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 3v7l2-1.5L13 10V3"/>',
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/>',
@@ -2116,12 +2247,12 @@ const MARKS = {
   home: '<path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9.5 21v-6h5v6"/>',
   heart: '<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0112 7.1a4.3 4.3 0 017.5 2.7C19.5 15.4 12 20 12 20z"/>'
 };
-const PLAN_MARK = { cfm: 'scripture', closer: 'sun', anxiety: 'sprout', family: 'home', joy: 'heart' };
-// Each plan type has its own color: Curriculum green, Topical clay, General Spiritual slate blue, Genre/Mood plum
-const FOCUS_ART = { 'Curriculum': 'curriculum', 'Topical': 'topical', 'General Spiritual': 'spiritual', 'Genre/Mood': 'mood' };
+const PLAN_MARK = { closer: 'sun', anxiety: 'sprout', family: 'home', joy: 'heart', love: 'heart', sadness: 'sun', lonely: 'sprout', loss: 'home', marriage: 'heart', kids: 'home', gospel: 'scripture' };
+// Each main category has its own color: Mood plum, Family clay, Gospel slate blue
+const FOCUS_ART = { 'Mood': 'mood', 'Family': 'topical', 'Gospel': 'spiritual' };
 function planArt(planId) {
   const p = PLANS[planId];
-  return { variant: FOCUS_ART[p.focus] || 'topical', mark: MARKS[PLAN_MARK[planId] || (p.curriculum ? 'scripture' : 'sprout')] };
+  return { variant: FOCUS_ART[p.focus] || 'topical', mark: MARKS[PLAN_MARK[planId] || 'sprout'] };
 }
 function markSvg(path, cls) {
   return `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
@@ -2207,16 +2338,53 @@ function renderHub() {
   renderBrowse('hubBrowse');
 }
 
+/* Filters: Mood and Gospel are separate on purpose, because a plan can be in both. Family has two kinds. */
+const PLAN_CATS = [
+  { key: 'Mood', subs: ['Anxiety', 'Love', 'Happiness', 'Sadness', 'Peace', 'Loneliness'] },
+  { key: 'Family', subs: ['Kids', 'Marriage'] },
+  { key: 'Gospel', subs: [] }
+];
+let planFilter = { cat: 'All', sub: null };
+function tagPills(p) {
+  return p.tags.map(t => t.includes(':') ? t.split(':')[1] : t).map(x => `<span class="pf-tag">${x}</span>`).join('');
+}
+function planMatches(p) {
+  const { cat, sub } = planFilter;
+  if (cat === 'All') return true;
+  return p.tags.some(t => { const [c, sb] = t.split(':'); return c === cat && (!sub || sb === sub); });
+}
+function setPlanFilter(cat, sub) {
+  // tapping the chip that is already on goes back to All
+  if (cat !== 'All' && planFilter.cat === cat && !sub) planFilter = { cat: 'All', sub: null };
+  else if (sub && planFilter.cat === cat && planFilter.sub === sub) planFilter = { cat, sub: null };
+  else planFilter = { cat, sub: sub || null };
+  renderBrowse('hubBrowse');
+}
+function renderFilters() {
+  const f = planFilter, cur = PLAN_CATS.find(c => c.key === f.cat);
+  const chip = (label, on, call, cls = '') => `<button class="pf-chip ${cls} ${on ? 'on' : ''}" aria-pressed="${on}" onclick="${call}">${label}</button>`;
+  let h = `<div class="pf-row">${chip('All', f.cat === 'All', "setPlanFilter('All')")}${PLAN_CATS.map(c => chip(c.key, f.cat === c.key, `setPlanFilter('${c.key}')`)).join('')}</div>`;
+  if (cur && cur.subs.length) h += `<div class="pf-sub-label">${cur.key}</div><div class="pf-row">${cur.subs.map(x => chip(x, f.sub === x, `setPlanFilter('${cur.key}','${x}')`, 'sub')).join('')}</div>`;
+  const box = document.getElementById('planFilters');
+  if (box) box.innerHTML = h;
+}
 function renderBrowse(containerId) {
-  document.getElementById(containerId).innerHTML = Object.entries(PLANS).map(([id, p]) => `
+  const filterable = containerId === 'hubBrowse';
+  const entries = Object.entries(PLANS).filter(([, p]) => !filterable || planMatches(p));
+  if (filterable) {
+    renderFilters();
+    document.getElementById('planFilterCount').textContent = `${entries.length} ${entries.length === 1 ? 'plan' : 'plans'}`;
+  }
+  document.getElementById(containerId).innerHTML = entries.length ? entries.map(([id, p]) => `
     <div class="card browse-card" onclick="navigateTo('detail', '${id}')">
       ${illus(id)}
       <div class="browse-card-body">
-        <div class="browse-kicker">${p.kicker}</div>
+        <div class="browse-kicker">${p.duration} days · ${p.timePerDay} min a day</div>
         <div class="browse-title">${p.title}</div>
         <div class="browse-tagline">${p.tagline}</div>
+        <div class="pf-tags">${tagPills(p)}</div>
       </div>
-    </div>`).join('');
+    </div>`).join('') : '<div class="pf-empty">No study plans match this filter yet.</div>';
 }
 
 /* ---------- Study Plan page ---------- */
@@ -2341,7 +2509,7 @@ function renderStrip(id, active) {
   const lockNote = !isPremium() ? lockCallout(plan) : '';
   const soonNote = plan.availableWeeks ? `<div class="strip-soon">Day ${plan.availableWeeks * 7 + 1} and later: coming soon</div>` : '';
   const more = plan.duration > plan.days.length
-    ? `<div class="more-weeks">${plan.availableWeeks ? `+ ${plan.duration - plan.days.length} more days, coming soon` : plan.curriculum ? `+ ${plan.duration - plan.days.length} more days, following the Church's Come, Follow Me schedule` : `+ ${plan.duration - plan.days.length} more days`}</div>` : '';
+    ? `<div class="more-weeks">${plan.availableWeeks ? `+ ${plan.duration - plan.days.length} more days, coming soon` : `+ ${plan.duration - plan.days.length} more days`}</div>` : '';
   return `${lockNote}<div class="day-strip" id="dayStrip" role="group" aria-label="Days">${tiles}</div>${soonNote}${head}${list}${more}`;
 }
 
@@ -2466,7 +2634,7 @@ function renderDays(id, active) {
   if (!isPremium()) html = lockCallout(plan) + html;
   if (remainingDays > 0) {
     const weeksLeft = Math.ceil(remainingDays / 7);
-    html += `<div class="more-weeks">${plan.availableWeeks ? `+ ${weeksLeft} more weeks, coming soon` : plan.curriculum ? `+ ${weeksLeft} more weeks, following the Church's Come, Follow Me schedule` : `+ ${remainingDays} more days`}</div>`;
+    html += `<div class="more-weeks">${plan.availableWeeks ? `+ ${weeksLeft} more weeks, coming soon` : `+ ${remainingDays} more days`}</div>`;
   }
   return html;
 }
@@ -2492,7 +2660,8 @@ function primaryAction() {
     startedPlans.add(id);
     startDates[id] = TODAY_DATE;
     delete selectedDay[id];
-    doneSet(id);
+    doneItems[id] = new Set(); // a new start has nothing done (demo progress seeded for the default member must not carry over)
+    paceShift[id] = 0;
     openGroups[id] = new Set();
     renderDetail();
     renderHub();
@@ -2682,9 +2851,15 @@ function showNextPrompt(id, nx) {
 const SIMILAR = {
   anxiety: ['joy', 'closer', 'family'],
   joy: ['anxiety', 'closer', 'family'],
-  closer: ['cfm', 'anxiety', 'joy', 'family'],
+  closer: ['anxiety', 'joy', 'family'],
   family: ['closer', 'joy', 'anxiety'],
-  cfm: ['closer', 'family', 'anxiety']
+  love: ['marriage', 'closer', 'joy'],
+  sadness: ['loss', 'lonely', 'anxiety'],
+  lonely: ['sadness', 'anxiety', 'love'],
+  loss: ['sadness', 'family', 'anxiety'],
+  marriage: ['love', 'family', 'kids'],
+  kids: ['family', 'marriage', 'closer'],
+  gospel: ['closer', 'love', 'joy']
 };
 function suggestNext(id) {
   const sameFocus = Object.keys(PLANS).filter(p => p !== id && PLANS[p].focus === PLANS[id].focus);
@@ -2916,19 +3091,8 @@ function dayBottomHtml(id, d, interactive) {
   if (extra.length) {
     h += `<div class="deeper-label">Go deeper <span>(optional)</span></div>` + extra.map((it, k) => itemRow(id, d, 'g' + k, it, interactive)).join('');
   }
-  if (PLANS[id].curriculum) h += lessonLink(d);
   return h;
 }
-function lessonLink(d) {
-  const w = Math.floor(d / 7) + 1;
-  return `<button class="lesson-link" onclick="event.stopPropagation(); openLesson(${w})">
-    <span class="ll-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h5v17H6a2 2 0 00-2 1.5z"/><path d="M20 5a2 2 0 00-2-2h-5v17h5a2 2 0 012 1.5z"/></svg></span>
-    <span class="ll-text"><b>This week's lesson</b><span class="ll-sub">Come, Follow Me · Open in Gospel Library</span></span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/></svg>
-  </button>`;
-}
-function openLesson(w) { showToast(`Opening the Week ${w} lesson in Gospel Library…`); }
-
 /* ---------- Week complete (curriculum plans) ---------- */
 function weekDone(id, w) {
   const days = PLANS[id].days;
@@ -2943,23 +3107,20 @@ function showWeekComplete(id, w) {
   document.getElementById('weekDoneTitle').textContent = `Week ${w + 1} complete`;
   document.getElementById('weekDoneBody').textContent =
     `Well done. You finished "${title}." ${plan.availableWeeks && w + 1 >= plan.availableWeeks ? 'The next week is coming soon.' : next ? `Next week's study, "${next}," begins tomorrow.` : 'Next week\'s study begins tomorrow.'}`;
-  document.getElementById('weekDoneLesson').hidden = !!(plan.availableWeeks && w + 1 >= plan.availableWeeks);
   document.getElementById('weekDoneReflect').innerHTML = reflectCardHtml(id, 'w' + w, 'Before next week: what will you carry with you?', "document.getElementById('weekDoneReflect').innerHTML = ''");
-  document.getElementById('weekDoneLesson').onclick = () => { closeSheets(); momentQueue = []; openLesson(w + 2); };
   openSheet('weekDoneSheet');
 }
 function previewWeekComplete() {
   toggleTweaks(false);
   if (!isPremium()) setUserType('premium');
   setTabActive('studyplans');
-  navigateTo('detail', 'cfm');
-  setTimeout(() => showWeekComplete('cfm', 0), 300);
+  navigateTo('detail', 'anxiety');
+  setTimeout(() => showWeekComplete('anxiety', 0), 300);
 }
 
 /* ---------- Missed days + Catch me up ---------- */
 function missedDays(id) {
-  // Come, Follow Me: earlier days stay open to read anytime, with no counter or catch-up
-  if (!isStarted(id) || PLANS[id].curriculum) return 0;
+  if (!isStarted(id)) return 0;
   const t = todayIndex(id);
   let n = 0;
   for (let d = 0; d < t; d++) if (!dayDone(id, d)) n++;
@@ -2981,7 +3142,6 @@ function openCatchUp() {
 }
 function doCatchUp() {
   const id = currentPlan;
-  if (PLANS[id].curriculum) { closeSheets(); return; }
   const shift = firstOpenDay(id) - todayIndex(id);
   paceShift[id] = (paceShift[id] || 0) + shift;
   openGroups[id] = new Set();
@@ -3041,7 +3201,7 @@ function shareTo(target) {
 
 /* ---------- Daily reminder notification ---------- */
 function reminderPlan() {
-  return Object.keys(reminders).find(id => startedPlans.has(id) && !finishedPlans.has(id)) || 'cfm';
+  return Object.keys(reminders).find(id => startedPlans.has(id) && !finishedPlans.has(id)) || 'anxiety';
 }
 function showLockScreen() {
   toggleTweaks(false);
@@ -3245,12 +3405,7 @@ function restartPlan() {
 
 /* ---------- My reflection: optional, private, never counts toward progress ---------- */
 // reflections[planId] = [{ key: 'd3' | 'w1' | 'plan', date, text }]
-const reflections = {
-  cfm: [
-    { key: 'd0', date: addDays(TODAY_DATE, -4), text: 'I saw it this morning when my daughter prayed for her friend without being asked. Small, but it was light.' },
-    { key: 'd2', date: addDays(TODAY_DATE, -2), text: 'I want to keep making room for Him in the noise. Ten quiet minutes before the kids wake up worked better than I expected.' }
-  ]
-};
+const reflections = {};
 const reflectOpen = new Set(); // plans whose "My reflections" section is expanded
 let reflectDraft = null;       // { id, key }
 
@@ -3387,7 +3542,7 @@ function setLibraryNewUser(v) {
 
 
 /* ---------- Home (Library option) ---------- */
-let lastPlanOpened = 'cfm';
+let lastPlanOpened = 'anxiety';
 const HOME_ICONS = {
   song: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
   audiobook: '<path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/>',
@@ -3431,9 +3586,15 @@ function homeCoversRow(title, sub, type, items) {
   return `<div class="home-row-head"><div><h3>${title}</h3><p>${sub}</p></div><button onclick="showToast('See All')">See All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button></div>
     <div class="home-covers">${items.map(i => `<div class="hc" role="button" tabindex="0" data-t="${esc(i.t)}" onclick="showToast('Opening ' + this.dataset.t)"><div class="hc-tag">${homeSvg(type)}bookshelf+</div><div class="hc-cover" style="background:${i.c}">${i.t}</div></div>`).join('')}</div>`;
 }
+// A regular content shelf, like New Music: plans the member has not started yet (shows for a new member and for one with plans)
+function homePlansShelf() {
+  const ids = Object.keys(PLANS).filter(id => !startedPlans.has(id) && !finishedPlans.has(id)).slice(0, 6);
+  return `<div class="home-row-head"><div><h3>Study Plans</h3><p>Daily study, one day at a time</p></div><button onclick="goBrowse()">See All <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button></div>
+    <div class="home-covers">${ids.map(id => { const p = PLANS[id]; return `<div class="hc" role="button" tabindex="0" onclick="openPlanFromHome('${id}')" aria-label="${esc(p.title)}, study plan, ${p.duration} days"><div class="hc-cover plan">${illus(id)}</div><div class="hc-name">${p.title}</div><div class="hc-sub">${p.duration} days</div></div>`; }).join('')}</div>`;
+}
 function renderHome() {
   // Continue mixes everything in progress. The most recent study plan comes first so it shows without scrolling
-  const dsc = plansHome === 'discover';
+  const dsc = memberGate();
   const started = !dsc || hasStartedPlan();
   const plans = (started ? plansInProgress() : []).sort((a, b) => (a === lastPlanOpened ? -1 : 0) - (b === lastPlanOpened ? -1 : 0));
   const other = ['song', 'audiobook', 'ebook', 'podcast'].map(homeOtherCard);
@@ -3452,12 +3613,13 @@ function renderHome() {
   }
   plans.slice(2).forEach(id => cards.push(homePlanCard(id)));
   document.getElementById('homeContinue').innerHTML = cards.join('');
-  document.getElementById('homeTry').innerHTML = dsc && !started && !tryDismissed ? tryBanner(true) : '';
+  document.getElementById('homeTry').innerHTML = '';
   document.getElementById('homeStreak').hidden = !(dsc && started);
   if (!(dsc && started)) closeStreakPop();
   else if (!streakHelpSeen) setTimeout(() => { if (currentScreen === 'home' && !streakHelpSeen) openStreakPop(); }, 350);
   document.getElementById('homeRows').innerHTML =
     homeCoversRow('New Music', 'Based on what you listen to', 'song', HOME_NEW_MUSIC) +
+    homePlansShelf() +
     homeCoversRow('New Audiobooks', 'Checkout the latest titles', 'audiobook', HOME_NEW_AUDIO);
 }
 
@@ -3496,7 +3658,7 @@ function setMemberStarted(v) {
   tryDismissed = false;
   if (v) streakHelpSeen = false;
   renderTweaks();
-  if (plansHome === 'discover') { setTabActive('home'); navigateTo('home'); }
+  if (memberGate()) { setTabActive('home'); navigateTo('home'); }
 }
 let dscPill = 'All';
 const DSC_PILLS = ['All', 'Audiobooks', 'Music', 'Study Plans', 'Summer Reading'];
@@ -3610,12 +3772,14 @@ if (libLike()) { setTabActive('home'); navigateTo('home'); }
    Both: Premium, notifications on, "Next" prompt on, a day is done when every item is done, no Tweaks. */
 (function () {
   // Hosted builds (GitHub Pages) bake the mode into the file as window.TEST_PRESET: general, week or days
-  const PRESETS = { general: 'link-a', week: 'plan-week', days: 'plan-days' };
+  const PRESETS = { general: 'link-lib', reminder: 'link-rem', week: 'plan-week', days: 'plan-days' };
   const h = window.TEST_PRESET ? PRESETS[window.TEST_PRESET] : location.hash.replace('#', '');
+  const remLink = h === 'link-rem'; // Task 6: Library option, Home, one plan started (Finding Peace, Day 1, nothing done, Day strip), no reminder yet, full navigation
+  const libraryOption = h === 'link-lib' || remLink; // general link on the Library option: Study Plans tab for browsing, Account at the top of Home, My Library for the lists
   const planOnly = h === 'plan-week' || h === 'plan-days'; // Day 1, fresh start; testers can only use the plan page and its readings
   const layoutLink = h === 'layout-a' || h === 'layout-b' || planOnly; // days layout A/B: layout-a = week list, layout-b = day strip, both on Finding Peace in Anxious Times
   const homeReturn = h === 'home-return'; // Task 2: opens on Home, member with plans, Week list, Finding Peace is the second Continue card
-  if (h !== 'link-a' && h !== 'link-b' && !layoutLink && !homeReturn) return;
+  if (h !== 'link-a' && h !== 'link-b' && !layoutLink && !homeReturn && !libraryOption) return;
   document.documentElement.classList.add('test-mode');
   if (planOnly) {
     document.documentElement.classList.add('plan-only');
@@ -3623,13 +3787,20 @@ if (libLike()) { setTabActive('home'); navigateTo('home'); }
     const nav = navigateTo;
     navigateTo = function (screen, planId) { return nav(['detail', 'reader'].includes(screen) ? screen : 'detail', planId); };
   }
-  userType = 'premium'; notificationsOn = true; dayDoneRule = 'all'; afterItem = 'next'; daysLayout = (h === 'layout-b' || h === 'plan-days') ? 'strip' : 'weeks';
-  plansHome = 'discover'; memberStarted = true; homeOtherFirst = h !== 'link-a';
-  if (h === 'link-a') {
+  userType = 'premium'; notificationsOn = true; dayDoneRule = 'all'; afterItem = 'next'; daysLayout = (h === 'layout-b' || h === 'plan-days' || remLink) ? 'strip' : 'weeks';
+  plansHome = libraryOption ? 'library' : 'discover'; memberGateTest = libraryOption; memberStarted = true; homeOtherFirst = h !== 'link-a' && !libraryOption;
+  if (libraryOption) document.documentElement.classList.add('member-gate-test');
+  if (libraryOption) streakCount = 0; // a new member: the flame starts at 0 and the first check makes it 1
+  if (h === 'link-a' || libraryOption) {
     setLibraryNewUser(true); // no started, saved or finished plans: starting one turns on the flame and the Continue card
   } else {
     savedPlans.add('closer'); // 3 in progress (default), 1 saved, 1 finished (default)
     streakHelpSeen = true; // an existing member: no first-time streak helper
+  }
+  if (remLink) {
+    startedPlans.add('anxiety'); startDates.anxiety = TODAY_DATE; doneItems.anxiety = new Set(); paceShift.anxiety = 0;
+    Object.keys(reminders).forEach(k => delete reminders[k]); // no reminder set yet
+    lastPlanOpened = 'anxiety'; streakHelpSeen = true; // an existing member: no first-time helper
   }
   applyPlansHome(); renderTweaks();
   setTabActive('home');
@@ -3640,7 +3811,7 @@ if (libLike()) { setTabActive('home'); navigateTo('home'); }
     detailReturn = 'detail'; lastPlanOpened = 'anxiety'; navigateTo('detail', 'anxiety');
   }
   else if (layoutLink) { detailReturn = 'home'; lastPlanOpened = 'anxiety'; navigateTo('detail', 'anxiety'); }
-  else if (h === 'link-b') { detailReturn = 'home'; lastPlanOpened = 'cfm'; navigateTo('detail', 'cfm'); }
+  else if (h === 'link-b') { detailReturn = 'home'; lastPlanOpened = 'anxiety'; navigateTo('detail', 'anxiety'); }
   else navigateTo('home');
 })();
 window.addEventListener('hashchange', () => location.reload());
