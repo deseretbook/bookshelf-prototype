@@ -514,6 +514,30 @@ html, body { height: 100%; margin: 0; }
 .fs-switch i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform .15s; }
 .fs-switch input:checked + i { background: var(--accent); }
 .fs-switch input:checked + i::after { transform: translateX(18px); }
+/* filter sheet controls */
+.fs-seg { display: flex; background: var(--card-muted); border-radius: 10px; padding: 3px; }
+.fs-seg button { flex: 1; border: none; background: transparent; border-radius: 8px; padding: 8px 4px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--fg-secondary); cursor: pointer; }
+.fs-seg button.on { background: var(--bg-card); color: var(--fg); box-shadow: 0 1px 3px rgba(0,0,0,.14); }
+.fs-checks { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.fs-check { display: flex; align-items: center; gap: 12px; padding: 12px 14px; font-size: 15px; cursor: pointer; border-top: 1px solid var(--border-light); }
+.fs-check:first-child { border-top: none; }
+.fs-check input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.fs-check i { width: 22px; height: 22px; border-radius: 6px; border: 1.8px solid var(--day-dot-edge); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.fs-check input:checked + i { background: var(--accent); border-color: var(--accent); }
+.fs-check input:checked + i::after { content: ""; width: 6px; height: 11px; border: solid #fff; border-width: 0 2.2px 2.2px 0; transform: rotate(45deg) translate(-1px, -1px); }
+.fs-check input:focus-visible + i { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fs-plain { margin-top: 0; padding-top: 0; border-top: none; }
+.fs-slider-head { text-align: right; font-size: 15px; margin-bottom: 4px; }
+.fs-range { width: 100%; margin: 0; accent-color: var(--accent); height: 28px; }
+.fs-ticks { display: flex; justify-content: space-between; font-size: 12px; color: var(--fg-tertiary); padding: 0 6px; }
+.fs-stepper { display: flex; align-items: center; justify-content: space-between; background: var(--card-muted); border-radius: 12px; padding: 4px; }
+.fs-stepper b { font-size: 15px; font-weight: 600; }
+.fs-stepper button { width: 44px; height: 40px; border: none; border-radius: 9px; background: var(--bg-card); font-size: 22px; line-height: 1; color: var(--fg); cursor: pointer; box-shadow: 0 1px 2px rgba(0,0,0,.1); }
+.fs-stepper button:disabled { opacity: .35; cursor: default; }
+.fs-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fs-card { display: flex; align-items: center; gap: 10px; border: 1.5px solid var(--border); background: var(--bg-card); border-radius: 12px; padding: 12px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--fg); cursor: pointer; text-align: left; }
+.fs-card.on { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+.fs-card-icon { width: 22px; height: 22px; flex: 0 0 auto; }
 .fs-switch input:focus-visible + i { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* User-test links (#link-a, #link-b): reviewer controls are hidden */
@@ -2434,7 +2458,7 @@ function setPlanFilter(cat, sub) {
 function openCat(cat, sub) { planFilter = { cat, sub: sub || null, view: 'list' }; renderBrowse('hubBrowse'); document.getElementById('screenContent').scrollTop = 0; }
 function backToCats() { planFilter = { cat: 'All', sub: null, view: 'home' }; renderBrowse('hubBrowse'); document.getElementById('screenContent').scrollTop = 0; }
 function setPlanBrowse(v) {
-  planBrowse = v; sheetTags.clear(); sheetSort = 'recommended';
+  planBrowse = v; sheetTags.clear(); sheetInc.clear(); sheetSort = 'recommended'; sheetLen = 4; sheetTime = 2;
   planFilter = { cat: 'All', sub: null, view: catScreens() ? 'home' : 'list' };
   renderTweaks();
   if (currentScreen === 'hub') renderHub(); else goBrowse();
@@ -2459,32 +2483,29 @@ function chipsFilters() {
   return h;
 }
 /* Filter sheet */
-/* Filter sheet: Sort by, Mood, Family, Gospel, Length, Time per day, Includes, Hide plans I've started.
-   Picks inside a group mean "any of", and every group that has a pick must match. */
+/* Filter sheet, one control type per filter:
+   Sort by = segmented control · Mood = chips · Family = checkbox list · Gospel = switch ·
+   Length = slider · Time per day = stepper · Includes = icon cards · Hide started = switch.
+   Different filters must all match; inside Mood or Family any pick matches; Includes needs every pick. */
 const TYPES_OF = p => { const t = new Set(); p.days.forEach(d => d.forEach(it => t.add(it[0]))); return t; };
 const TYPE_PLURAL = { scripture: 'Scriptures', ebook: 'Ebooks', audiobook: 'Audiobooks', song: 'Music' };
-const SHEET_GROUPS = [
-  { title: 'Length', opts: [['Len:week', '1 week', p => p.duration <= 7], ['Len:mid', '10 to 14 days', p => p.duration > 7 && p.duration <= 14], ['Len:long', '3 weeks or more', p => p.duration >= 15]] },
-  { title: 'Time per day', opts: [['Time:lte10', 'Up to 10 min', p => p.timePerDay <= 10], ['Time:lte15', '11 to 15 min', p => p.timePerDay > 10 && p.timePerDay <= 15]] },
-  { title: 'Includes', opts: Object.entries(TYPE_PLURAL).map(([k, label]) => ['Inc:' + k, label, p => TYPES_OF(p).has(k)]) }
-];
 const SORTS = { recommended: 'Recommended', popular: 'Most popular', shortest: 'Shortest' };
-let sheetSort = 'recommended';
-let hideStarted = false;
-const tagLabel = t => {
-  for (const g of SHEET_GROUPS) { const o = g.opts.find(x => x[0] === t); if (o) return o[1]; }
-  if (t === 'Hide:started') return "Hide plans I've started";
-  return t.includes(':') ? t.split(':')[1] : (t === 'Family' ? 'All Family' : t);
-};
+const LEN_STEPS = [7, 10, 14, 21, 30];    // slider stops, in days; the last stop means any length
+const TIME_STEPS = [10, 15, Infinity];    // stepper values, in minutes a day; the last means any
+let sheetSort = 'recommended', sheetLen = 4, sheetTime = 2;
+const sheetInc = new Set();
+const FAMILY_OPTS = [['Family', 'All Family'], ['Family:Kids', 'Kids'], ['Family:Marriage', 'Marriage']];
+const lenLabel = () => sheetLen === 4 ? 'Any length' : `Up to ${LEN_STEPS[sheetLen]} days`;
+const timeLabel = () => TIME_STEPS[sheetTime] === Infinity ? 'Any' : `Up to ${TIME_STEPS[sheetTime]} min`;
 function sheetMatches(p) {
-  const catsOk = PLAN_CATS.every(c => {
-    const picked = [...sheetTags].filter(t => t.split(':')[0] === c.key);
-    return !picked.length || p.tags.some(t => picked.includes(t) || (picked.includes(c.key) && t.split(':')[0] === c.key));
-  });
-  const groupsOk = SHEET_GROUPS.every(g => { const picked = g.opts.filter(o => sheetTags.has(o[0])); return !picked.length || picked.some(o => o[2](p)); });
+  const picked = c => [...sheetTags].filter(t => t.split(':')[0] === c);
+  const catOk = c => { const pk = picked(c); return !pk.length || p.tags.some(t => pk.includes(t) || (pk.includes(c) && t.split(':')[0] === c)); };
   const idOf = Object.keys(PLANS).find(k => PLANS[k] === p);
-  const hideOk = !sheetTags.has('Hide:started') || !(startedPlans.has(idOf) || finishedPlans.has(idOf));
-  return catsOk && groupsOk && hideOk;
+  const types = TYPES_OF(p);
+  return catOk('Mood') && catOk('Family') && catOk('Gospel') &&
+    p.duration <= LEN_STEPS[sheetLen] && p.timePerDay <= TIME_STEPS[sheetTime] &&
+    [...sheetInc].every(k => types.has(k)) &&
+    (!sheetTags.has('Hide:started') || !(startedPlans.has(idOf) || finishedPlans.has(idOf)));
 }
 function sortedEntries(entries) {
   const e = [...entries];
@@ -2492,24 +2513,46 @@ function sortedEntries(entries) {
   if (planBrowse === 'sheet' && sheetSort === 'shortest') e.sort((a, b) => a[1].duration - b[1].duration);
   return e;
 }
+const refreshSheet = () => { renderFilterSheet(); renderBrowse('hubBrowse'); };
 function sheetCount() { return Object.values(PLANS).filter(planMatches).length; }
-function toggleSheetTag(t) { sheetTags.has(t) ? sheetTags.delete(t) : sheetTags.add(t); renderFilterSheet(); renderBrowse('hubBrowse'); }
-function setSheetSort(k) { sheetSort = k; renderFilterSheet(); renderBrowse('hubBrowse'); }
-function clearSheetTags() { sheetTags.clear(); sheetSort = 'recommended'; renderFilterSheet(); renderBrowse('hubBrowse'); }
+function toggleSheetTag(t) { sheetTags.has(t) ? sheetTags.delete(t) : sheetTags.add(t); refreshSheet(); }
+function toggleInc(k) { sheetInc.has(k) ? sheetInc.delete(k) : sheetInc.add(k); refreshSheet(); }
+function setSheetSort(k) { sheetSort = k; refreshSheet(); }
+function setSheetLen(v) {
+  // no re-render of the sheet body here, so the slider keeps its drag
+  sheetLen = +v;
+  const h = document.querySelector('.fs-slider-head b'); if (h) h.textContent = lenLabel();
+  document.getElementById('filterShowBtn').textContent = `Show ${plural(sheetCount())}`;
+  renderBrowse('hubBrowse');
+}
+function stepTime(d) { sheetTime = Math.max(0, Math.min(TIME_STEPS.length - 1, sheetTime + d)); refreshSheet(); }
+function clearSheetTags() { sheetTags.clear(); sheetInc.clear(); sheetSort = 'recommended'; sheetLen = 4; sheetTime = 2; refreshSheet(); }
 function openFilterSheet() { renderFilterSheet(); openSheet('filterSheet'); }
 function renderFilterSheet() {
-  const chip = (t, label) => `<button class="pf-chip ${sheetTags.has(t) ? 'on' : ''}" aria-pressed="${sheetTags.has(t)}" onclick="toggleSheetTag('${t}')">${label || tagLabel(t)}</button>`;
-  const sortChips = Object.entries(SORTS).map(([k, l]) => `<button class="pf-chip ${sheetSort === k ? 'on' : ''}" aria-pressed="${sheetSort === k}" onclick="setSheetSort('${k}')">${l}</button>`).join('');
-  const cats = PLAN_CATS.map(c => `<div class="pf-sub-label">${c.key}</div><div class="pf-row">${(c.subs.length ? [...(c.key === 'Family' ? ['Family'] : []), ...c.subs.map(x => c.key + ':' + x)] : [c.key]).map(t => chip(t)).join('')}</div>`).join('');
-  const more = SHEET_GROUPS.map(g => `<div class="pf-sub-label">${g.title}</div><div class="pf-row">${g.opts.map(o => chip(o[0], o[1])).join('')}</div>`).join('');
+  const lab = t => `<div class="pf-sub-label">${t}</div>`;
+  const seg = `<div class="fs-seg" role="radiogroup" aria-label="Sort by">${Object.entries(SORTS).map(([k, l]) => `<button role="radio" aria-checked="${sheetSort === k}" class="${sheetSort === k ? 'on' : ''}" onclick="setSheetSort('${k}')">${l}</button>`).join('')}</div>`;
+  const mood = `<div class="pf-row">${PLAN_CATS[0].subs.map(x => { const t = 'Mood:' + x; return `<button class="pf-chip ${sheetTags.has(t) ? 'on' : ''}" aria-pressed="${sheetTags.has(t)}" onclick="toggleSheetTag('${t}')">${x}</button>`; }).join('')}</div>`;
+  const family = `<div class="fs-checks">${FAMILY_OPTS.map(([t, l]) => `<label class="fs-check"><input type="checkbox" ${sheetTags.has(t) ? 'checked' : ''} onchange="toggleSheetTag('${t}')"><i></i><span>${l}</span></label>`).join('')}</div>`;
+  const gospel = `<label class="fs-switch fs-plain"><span>Gospel plans only</span><input type="checkbox" ${sheetTags.has('Gospel') ? 'checked' : ''} onchange="toggleSheetTag('Gospel')"><i></i></label>`;
+  const slider = `<div class="fs-slider-head"><b>${lenLabel()}</b></div><input class="fs-range" type="range" min="0" max="4" step="1" value="${sheetLen}" aria-label="Length" oninput="setSheetLen(this.value)" style="--pct:${sheetLen * 25}%"><div class="fs-ticks"><span>7</span><span>10</span><span>14</span><span>21</span><span>30+</span></div>`;
+  const stepper = `<div class="fs-stepper"><button aria-label="Less time" onclick="stepTime(-1)" ${sheetTime === 0 ? 'disabled' : ''}>−</button><b>${timeLabel()}</b><button aria-label="More time" onclick="stepTime(1)" ${sheetTime === TIME_STEPS.length - 1 ? 'disabled' : ''}>+</button></div>`;
+  const cards = `<div class="fs-cards">${Object.entries(TYPE_PLURAL).map(([k, l]) => `<button class="fs-card ${sheetInc.has(k) ? 'on' : ''}" aria-pressed="${sheetInc.has(k)}" onclick="toggleInc('${k}')">${icon(k, 'fs-card-icon')}<span>${l}</span></button>`).join('')}</div>`;
   const hide = `<label class="fs-switch"><span>Hide plans I've started</span><input type="checkbox" ${sheetTags.has('Hide:started') ? 'checked' : ''} onchange="toggleSheetTag('Hide:started')"><i></i></label>`;
-  document.getElementById('filterSheetBody').innerHTML = `<div class="pf-sub-label">Sort by</div><div class="pf-row">${sortChips}</div>` + cats + more + hide;
+  document.getElementById('filterSheetBody').innerHTML = lab('Sort by') + seg + lab('Mood') + mood + lab('Family') + family + lab('Gospel') + gospel + lab('Length') + slider + lab('Time per day') + stepper + lab('Includes') + cards + hide;
   document.getElementById('filterShowBtn').textContent = `Show ${plural(sheetCount())}`;
 }
+function activeFilters() {
+  const out = [];
+  [...sheetTags].forEach(t => out.push([t === 'Hide:started' ? "Hide plans I've started" : t === 'Family' ? 'All Family' : t === 'Gospel' ? 'Gospel only' : t.split(':')[1], `toggleSheetTag('${t}')`]));
+  if (sheetLen < 4) out.push([lenLabel(), 'setSheetLen(4)']);
+  if (TIME_STEPS[sheetTime] !== Infinity) out.push([timeLabel() + ' a day', `sheetTime=2;refreshSheet()`]);
+  sheetInc.forEach(k => out.push([TYPE_PLURAL[k], `toggleInc('${k}')`]));
+  return out;
+}
 function sheetBar() {
-  const n = sheetTags.size;
+  const act = activeFilters(), n = act.length;
   return `<div class="fs-bar"><button class="fs-btn" onclick="openFilterSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>Filter${n ? `<span class="fs-badge">${n}</span>` : ''}</button>${sheetSort !== 'recommended' ? `<span class="fs-sorted">Sorted by ${SORTS[sheetSort].toLowerCase()}</span>` : ''}</div>` +
-    (n ? `<div class="fs-active">${[...sheetTags].map(t => `<button class="pf-chip on" aria-label="Remove ${tagLabel(t)}" onclick="toggleSheetTag('${t}')">${tagLabel(t)}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`).join('')}</div>` : '');
+    (n ? `<div class="fs-active">${act.map(([l, call]) => `<button class="pf-chip on" aria-label="Remove ${l}" onclick="${call}">${l}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`).join('')}</div>` : '');
 }
 function renderBrowse(containerId) {
   const box = document.getElementById(containerId);
