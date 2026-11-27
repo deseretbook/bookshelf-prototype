@@ -4005,10 +4005,11 @@ if (libLike()) { setTabActive('home'); navigateTo('home'); }
    Both: Premium, notifications on, "Next" prompt on, a day is done when every item is done, no Tweaks. */
 (function () {
   // Hosted builds (GitHub Pages) bake the mode into the file as window.TEST_PRESET: general, week or days
-  const PRESETS = { general: 'link-lib', reminder: 'link-rem', week: 'plan-week', days: 'plan-days' };
+  const PRESETS = { general: 'link-lib', reminder: 'link-rem', return: 'link-ret', week: 'plan-week', days: 'plan-days' };
   const h = window.TEST_PRESET ? PRESETS[window.TEST_PRESET] : location.hash.replace('#', '');
   const remLink = h === 'link-rem'; // Task 6: Library option, Home, one plan started (Finding Peace, Day 1, nothing done, Day strip), no reminder yet, full navigation
-  const libraryOption = h === 'link-lib' || remLink; // general link on the Library option: Study Plans tab for browsing, Account at the top of Home, My Library for the lists
+  const retLink = h === 'link-ret'; // Task 2: a member coming back the next day. Home, Finding Peace started 4 days ago (Days 1-4 done), streak already 4, today not done yet, Week list, full navigation
+  const libraryOption = h === 'link-lib' || remLink || retLink; // general link on the Library option: Study Plans tab for browsing, Account at the top of Home, My Library for the lists
   const planOnly = h === 'plan-week' || h === 'plan-days'; // Day 1, fresh start; testers can only use the plan page and its readings
   const layoutLink = h === 'layout-a' || h === 'layout-b' || planOnly; // days layout A/B: layout-a = week list, layout-b = day strip, both on Finding Peace in Anxious Times
   const homeReturn = h === 'home-return'; // Task 2: opens on Home, member with plans, Week list, Finding Peace is the second Continue card
@@ -4029,6 +4030,11 @@ if (libLike()) { setTabActive('home'); navigateTo('home'); }
   } else {
     savedPlans.add('love'); // 3 in progress (default), 1 saved, 1 finished (default)
     streakHelpSeen = true; // an existing member: no first-time streak helper
+  }
+  if (retLink) {
+    startedPlans.add('anxiety'); startDates.anxiety = addDays(TODAY_DATE, -4); doneItems.anxiety = keysForDays('anxiety', 4); paceShift.anxiety = 0;
+    Object.keys(reminders).forEach(k => delete reminders[k]);
+    streakCount = 4; streakEarnedToday = false; lastPlanOpened = 'anxiety'; streakHelpSeen = true;
   }
   if (remLink) {
     startedPlans.add('anxiety'); startDates.anxiety = TODAY_DATE; doneItems.anxiety = new Set(); paceShift.anxiety = 0;
