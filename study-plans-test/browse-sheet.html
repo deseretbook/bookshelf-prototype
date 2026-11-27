@@ -518,9 +518,17 @@ html, body { height: 100%; margin: 0; }
 .fs-seg { display: flex; background: var(--card-muted); border-radius: 10px; padding: 3px; }
 .fs-seg button { flex: 1; border: none; background: transparent; border-radius: 8px; padding: 8px 4px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--fg-secondary); cursor: pointer; }
 .fs-seg button.on { background: var(--bg-card); color: var(--fg); box-shadow: 0 1px 3px rgba(0,0,0,.14); }
-.fs-radios { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-.fs-radio { display: flex; align-items: center; gap: 12px; padding: 12px 14px; font-size: 15px; cursor: pointer; border-top: 1px solid var(--border-light); }
-.fs-radio:first-child { border-top: none; }
+.fs-sec { padding: 18px 0; border-top: 1px solid var(--border); }
+.fs-sec:first-child { border-top: none; padding-top: 10px; }
+.fs-h { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-family: var(--font-body); font-size: 14px; font-weight: 700; }
+.fs-h svg { width: 18px; height: 18px; color: var(--fg-secondary); }
+.fs-match { text-align: center; font-size: 13px; color: var(--fg-secondary); padding: 12px 0 10px; border-top: 1px solid var(--border); }
+.fs-match b { color: var(--accent); font-size: 14px; }
+.fs-foot { display: flex; gap: 12px; }
+.fs-foot .btn { flex: 1; }
+.fs-foot .btn-primary { flex: 1.3; }
+.fs-radios { background: none; }
+.fs-radio { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 0; font-size: 15px; cursor: pointer; }
 .fs-radio input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .fs-radio i { width: 22px; height: 22px; border-radius: 50%; border: 1.8px solid var(--day-dot-edge); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
 .fs-radio input:checked + i { border-color: var(--accent); }
@@ -1604,7 +1612,8 @@ html, body { height: 100%; margin: 0; }
     <div class="sheet-grip"></div>
     <div class="sheet-title">Filter</div>
     <div id="filterSheetBody"></div>
-    <div class="sheet-actions"><button class="btn btn-primary" id="filterShowBtn" onclick="closeSheets()">Show plans</button><button class="btn btn-outline" onclick="clearSheetTags()">Clear</button></div>
+    <div class="fs-match" id="filterMatch" aria-live="polite"></div>
+    <div class="fs-foot"><button class="btn btn-outline" onclick="clearSheetTags()">Clear all</button><button class="btn btn-primary" onclick="closeSheets()">Apply filters</button></div>
   </div>
   <div class="sheet" id="upgradeSheet" role="dialog" aria-modal="true" aria-labelledby="upgradeTitle">
     <div class="sheet-grip"></div>
@@ -2520,22 +2529,23 @@ function setSheetLen(v) {
   // no re-render of the sheet body here, so the slider keeps its drag
   sheetLen = +v;
   const h = document.querySelector('.fs-slider-head b'); if (h) h.textContent = lenLabel();
-  document.getElementById('filterShowBtn').textContent = `Show ${plural(sheetCount())}`;
+  document.getElementById('filterMatch').innerHTML = `<b>${sheetCount()}</b> ${sheetCount() === 1 ? 'plan matches' : 'plans match'}`;
   renderBrowse('hubBrowse');
 }
 function clearSheetTags() { sheetTags.clear(); sheetSort = 'recommended'; sheetLen = 4; refreshSheet(); }
 function openFilterSheet() { renderFilterSheet(); openSheet('filterSheet'); }
 function renderFilterSheet() {
-  const lab = t => `<div class="pf-sub-label">${t}</div>`;
-  const seg = `<div class="fs-radios" role="radiogroup" aria-label="Sort by">${Object.entries(SORTS).map(([k, l]) => `<label class="fs-radio"><input type="radio" name="sheetSort" ${sheetSort === k ? 'checked' : ''} onchange="setSheetSort('${k}')"><i></i><span>${l}</span></label>`).join('')}</div>`;
+  const SI = { sort: '<path d="M7 4v16M3.5 16.5L7 20l3.5-3.5M17 20V4M13.5 7.5L17 4l3.5 3.5"/>', mood: '<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0112 7.1a4.3 4.3 0 017.5 2.7C19.5 15.4 12 20 12 20z"/>', family: '<path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9.5 21v-6h5v6"/>', gospel: '<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 3v7l2-1.5L13 10V3"/>', length: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', status: '<circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/>' };
+  const sec = (k, title, body) => `<section class="fs-sec"><h4 class="fs-h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SI[k]}</svg>${title}</h4>${body}</section>`;
+  const seg = `<div class="fs-radios" role="radiogroup" aria-label="Sort by">${Object.entries(SORTS).map(([k, l]) => `<label class="fs-radio"><span>${l}</span><input type="radio" name="sheetSort" ${sheetSort === k ? 'checked' : ''} onchange="setSheetSort('${k}')"><i></i></label>`).join('')}</div>`;
   const mood = `<div class="pf-row">${PLAN_CATS[0].subs.map(x => { const t = 'Mood:' + x; return `<button class="pf-chip ${sheetTags.has(t) ? 'on' : ''}" aria-pressed="${sheetTags.has(t)}" onclick="toggleSheetTag('${t}')">${x}</button>`; }).join('')}</div>`;
   const pill = (t, l) => `<button class="pf-chip ${sheetTags.has(t) ? 'on' : ''}" aria-pressed="${sheetTags.has(t)}" onclick="toggleSheetTag('${t}')">${l}</button>`;
   const family = `<div class="pf-row">${FAMILY_OPTS.map(([t, l]) => pill(t, l)).join('')}</div>`;
   const gospel = `<div class="pf-row">${pill('Gospel', 'Gospel')}</div>`;
   const slider = `<div class="fs-slider-head"><b>${lenLabel()}</b></div><input class="fs-range" type="range" min="0" max="4" step="1" value="${sheetLen}" aria-label="Length" oninput="setSheetLen(this.value)" style="--pct:${sheetLen * 25}%"><div class="fs-ticks"><span>7</span><span>10</span><span>14</span><span>21</span><span>30+</span></div>`;
-  const hide = `<label class="fs-switch"><span>Hide plans I've started</span><input type="checkbox" ${sheetTags.has('Hide:started') ? 'checked' : ''} onchange="toggleSheetTag('Hide:started')"><i></i></label>`;
-  document.getElementById('filterSheetBody').innerHTML = lab('Sort by') + seg + lab('Mood') + mood + lab('Family') + family + lab('Gospel') + gospel + lab('Length') + slider + hide;
-  document.getElementById('filterShowBtn').textContent = `Show ${plural(sheetCount())}`;
+  const hide = `<label class="fs-switch fs-plain"><span>Hide plans I've started</span><input type="checkbox" ${sheetTags.has('Hide:started') ? 'checked' : ''} onchange="toggleSheetTag('Hide:started')"><i></i></label>`;
+  document.getElementById('filterSheetBody').innerHTML = sec('sort', 'Sort by', seg) + sec('mood', 'Mood', mood) + sec('family', 'Family', family) + sec('gospel', 'Gospel', gospel) + sec('length', 'Length', slider) + sec('status', 'Status', hide);
+  document.getElementById('filterMatch').innerHTML = `<b>${sheetCount()}</b> ${sheetCount() === 1 ? 'plan matches' : 'plans match'}`;
 }
 function activeFilters() {
   const out = [];
