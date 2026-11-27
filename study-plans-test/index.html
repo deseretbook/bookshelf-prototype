@@ -567,6 +567,15 @@ html, body { height: 100%; margin: 0; }
 .plan-only .tab-bar { display: none !important; }
 .plan-only .hero-btn[aria-label="Back"] { visibility: hidden; pointer-events: none; }
 
+/* On a real phone the prototype fills the whole screen: no drawn phone border, rounded corners or fake status bar */
+@media (max-width: 520px) {
+  body { padding: 0; align-items: stretch; }
+  .phone-frame { width: 100%; max-width: 100%; height: 100vh; height: 100dvh; max-height: none; border: none; border-radius: 0; box-shadow: none; }
+  .status-bar { height: max(env(safe-area-inset-top, 0px), 10px); min-height: 0; padding: 0; }
+  .status-bar > * { display: none; }
+  .tab-bar { height: calc(60px + env(safe-area-inset-bottom, 0px)); min-height: 0; padding-bottom: env(safe-area-inset-bottom, 0px); }
+}
+
 /* Plan illustrations */
 .illus { position: relative; overflow: hidden; background: var(--border-light); }
 .illus svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
