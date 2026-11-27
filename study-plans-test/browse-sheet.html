@@ -2514,7 +2514,7 @@ function chipsFilters() {
   return h;
 }
 /* Filter sheet */
-/* Filter sheet: Sort by = radio list · Mood, Family = pills · Length = slider · Hide started = switch.
+/* Filter sheet: Sort by = radio list · Mood, Family = pills · Length = slider.
    Different filters must all match; inside Mood or Family any pick matches. */
 const SORTS = { recommended: 'Recommended', popular: 'Most popular', shortest: 'Shortest' };
 const LEN_STEPS = [7, 10, 14, 21, 30];    // slider stops, in days; the last stop means any length
@@ -2523,10 +2523,8 @@ const lenLabel = () => sheetLen === 4 ? 'Any length' : `Up to ${LEN_STEPS[sheetL
 function sheetMatches(p) {
   const picked = c => [...sheetTags].filter(t => t.split(':')[0] === c);
   const catOk = c => { const pk = picked(c); return !pk.length || p.tags.some(t => pk.includes(t) || (pk.includes(c) && t.split(':')[0] === c)); };
-  const idOf = Object.keys(PLANS).find(k => PLANS[k] === p);
   return catOk('Mood') && catOk('Family') &&
-    p.duration <= LEN_STEPS[sheetLen] &&
-    (!sheetTags.has('Hide:started') || !(startedPlans.has(idOf) || finishedPlans.has(idOf)));
+    p.duration <= LEN_STEPS[sheetLen];
 }
 function sortedEntries(entries) {
   const e = [...entries];
@@ -2555,13 +2553,12 @@ function renderFilterSheet() {
   const pill = (t, l) => `<button class="pf-chip ${sheetTags.has(t) ? 'on' : ''}" aria-pressed="${sheetTags.has(t)}" onclick="toggleSheetTag('${t}')">${l}</button>`;
   const family = `<div class="pf-row">${PLAN_CATS[1].subs.map(x => pill('Family:' + x, x)).join('')}</div>`;
   const slider = `<div class="fs-slider-head"><b>${lenLabel()}</b></div><input class="fs-range" type="range" min="0" max="4" step="1" value="${sheetLen}" aria-label="Length" oninput="setSheetLen(this.value)" style="--pct:${sheetLen * 25}%"><div class="fs-ticks"><span>7</span><span>10</span><span>14</span><span>21</span><span>30+</span></div>`;
-  const hide = `<label class="fs-switch fs-plain"><span>Hide plans I've started</span><input type="checkbox" ${sheetTags.has('Hide:started') ? 'checked' : ''} onchange="toggleSheetTag('Hide:started')"><i></i></label>`;
-  document.getElementById('filterSheetBody').innerHTML = sec('sort', 'Sort by', seg) + sec('mood', 'Mood', mood) + sec('family', 'Family', family) + sec('length', 'Length', slider) + sec('status', 'Status', hide);
+  document.getElementById('filterSheetBody').innerHTML = sec('sort', 'Sort by', seg) + sec('mood', 'Mood', mood) + sec('family', 'Family', family) + sec('length', 'Length', slider);
   document.getElementById('filterMatch').innerHTML = `<b>${sheetCount()}</b> ${sheetCount() === 1 ? 'plan matches' : 'plans match'}`;
 }
 function activeFilters() {
   const out = [];
-  [...sheetTags].forEach(t => out.push([t === 'Hide:started' ? "Hide plans I've started" :   t.split(':')[1], `toggleSheetTag('${t}')`]));
+  [...sheetTags].forEach(t => out.push([t.split(':')[1], `toggleSheetTag('${t}')`]));
   if (sheetLen < 4) out.push([lenLabel(), 'setSheetLen(4)']);
   return out;
 }
