@@ -4047,6 +4047,7 @@ if (libLike()) { setTabActive('home'); navigateTo('home'); }
   else if (planOnly) {
     // Day 1, fresh start: the plan is started today, nothing is done yet
     startedPlans.add('anxiety'); startDates.anxiety = TODAY_DATE; doneItems.anxiety = new Set(); streakCount = 0; streakHelpSeen = true;
+    Object.keys(reminders).forEach(k => delete reminders[k]); // no reminder yet: the button shows its default, "Set reminder"
     detailReturn = 'detail'; lastPlanOpened = 'anxiety'; navigateTo('detail', 'anxiety');
   }
   else if (layoutLink) { detailReturn = 'home'; lastPlanOpened = 'anxiety'; navigateTo('detail', 'anxiety'); }
