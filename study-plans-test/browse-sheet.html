@@ -2505,13 +2505,16 @@ function chipsFilters() {
 const SORTS = { recommended: 'Recommended', popular: 'Most popular', shortest: 'Shortest' };
 const LEN_STEPS = [7, 10, 14, 21, 30];    // slider stops, in days; the last stop means any length
 let sheetSort = 'recommended', sheetLen = 4;
-const FAMILY_OPTS = [['Family', 'All Family'], ['Family:Kids', 'Kids'], ['Family:Marriage', 'Marriage']];
+const TOPIC_OPTS = [['Family', 'Family'], ['Family:Kids', 'Kids'], ['Family:Marriage', 'Marriage'], ['Gospel', 'Gospel']];
 const lenLabel = () => sheetLen === 4 ? 'Any length' : `Up to ${LEN_STEPS[sheetLen]} days`;
 function sheetMatches(p) {
   const picked = c => [...sheetTags].filter(t => t.split(':')[0] === c);
   const catOk = c => { const pk = picked(c); return !pk.length || p.tags.some(t => pk.includes(t) || (pk.includes(c) && t.split(':')[0] === c)); };
+  // Topic = Family and Gospel pills in one group: any pick matches ("Family" means any Family plan)
+  const topicPicks = [...sheetTags].filter(t => ['Family', 'Gospel'].includes(t.split(':')[0]));
+  const topicOk = () => !topicPicks.length || p.tags.some(t => topicPicks.includes(t) || (topicPicks.includes('Family') && t.split(':')[0] === 'Family'));
   const idOf = Object.keys(PLANS).find(k => PLANS[k] === p);
-  return catOk('Mood') && catOk('Family') && catOk('Gospel') &&
+  return catOk('Mood') && topicOk() &&
     p.duration <= LEN_STEPS[sheetLen] &&
     (!sheetTags.has('Hide:started') || !(startedPlans.has(idOf) || finishedPlans.has(idOf)));
 }
@@ -2540,16 +2543,15 @@ function renderFilterSheet() {
   const seg = `<div class="fs-radios" role="radiogroup" aria-label="Sort by">${Object.entries(SORTS).map(([k, l]) => `<label class="fs-radio"><span>${l}</span><input type="radio" name="sheetSort" ${sheetSort === k ? 'checked' : ''} onchange="setSheetSort('${k}')"><i></i></label>`).join('')}</div>`;
   const mood = `<div class="pf-row">${PLAN_CATS[0].subs.map(x => { const t = 'Mood:' + x; return `<button class="pf-chip ${sheetTags.has(t) ? 'on' : ''}" aria-pressed="${sheetTags.has(t)}" onclick="toggleSheetTag('${t}')">${x}</button>`; }).join('')}</div>`;
   const pill = (t, l) => `<button class="pf-chip ${sheetTags.has(t) ? 'on' : ''}" aria-pressed="${sheetTags.has(t)}" onclick="toggleSheetTag('${t}')">${l}</button>`;
-  const family = `<div class="pf-row">${FAMILY_OPTS.map(([t, l]) => pill(t, l)).join('')}</div>`;
-  const gospel = `<div class="pf-row">${pill('Gospel', 'Gospel')}</div>`;
+  const topic = `<div class="pf-row">${TOPIC_OPTS.map(([t, l]) => pill(t, l)).join('')}</div>`;
   const slider = `<div class="fs-slider-head"><b>${lenLabel()}</b></div><input class="fs-range" type="range" min="0" max="4" step="1" value="${sheetLen}" aria-label="Length" oninput="setSheetLen(this.value)" style="--pct:${sheetLen * 25}%"><div class="fs-ticks"><span>7</span><span>10</span><span>14</span><span>21</span><span>30+</span></div>`;
   const hide = `<label class="fs-switch fs-plain"><span>Hide plans I've started</span><input type="checkbox" ${sheetTags.has('Hide:started') ? 'checked' : ''} onchange="toggleSheetTag('Hide:started')"><i></i></label>`;
-  document.getElementById('filterSheetBody').innerHTML = sec('sort', 'Sort by', seg) + sec('mood', 'Mood', mood) + sec('family', 'Family', family) + sec('gospel', 'Gospel', gospel) + sec('length', 'Length', slider) + sec('status', 'Status', hide);
+  document.getElementById('filterSheetBody').innerHTML = sec('sort', 'Sort by', seg) + sec('mood', 'Mood', mood) + sec('family', 'Topic', topic) + sec('length', 'Length', slider) + sec('status', 'Status', hide);
   document.getElementById('filterMatch').innerHTML = `<b>${sheetCount()}</b> ${sheetCount() === 1 ? 'plan matches' : 'plans match'}`;
 }
 function activeFilters() {
   const out = [];
-  [...sheetTags].forEach(t => out.push([t === 'Hide:started' ? "Hide plans I've started" : t === 'Family' ? 'All Family' :  t.split(':')[1], `toggleSheetTag('${t}')`]));
+  [...sheetTags].forEach(t => out.push([t === 'Hide:started' ? "Hide plans I've started" : t === 'Family' ? 'Family' :  t.split(':')[1], `toggleSheetTag('${t}')`]));
   if (sheetLen < 4) out.push([lenLabel(), 'setSheetLen(4)']);
   return out;
 }
