@@ -2451,7 +2451,7 @@ const PLAN_CATS = [
   { key: 'Mood', subs: ['Anxiety', 'Love', 'Happiness', 'Sadness', 'Peace', 'Loneliness', 'Gratitude', 'Hope', 'Stress', 'Discouragement', 'Anger'] },
   { key: 'Family', subs: ['Kids', 'Marriage', 'Loss'] }
 ];
-let planBrowse = window.BROWSE_VARIANT || 'chips'; // 'chips' | 'tiles' | 'rows' | 'sheet'
+let planBrowse = window.BROWSE_VARIANT || 'sheet'; // 'chips' | 'tiles' | 'rows' | 'sheet'
 const catScreens = () => planBrowse === 'tiles' || planBrowse === 'rows'; // these two start on a category screen, then open a list
 let planFilter = { cat: 'All', sub: null, view: catScreens() ? 'home' : 'list' };
 const sheetTags = new Set(); // filter sheet: 'Mood:Anxiety', 'Family:Kids'. Any pick inside a category, and every category that has a pick
