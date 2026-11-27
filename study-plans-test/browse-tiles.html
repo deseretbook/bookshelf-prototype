@@ -497,6 +497,11 @@ html, body { height: 100%; margin: 0; }
 .bl-back { border: none; background: none; color: var(--accent); font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; padding: 4px 0; display: inline-flex; align-items: center; gap: 2px; }
 .bl-back svg { width: 16px; height: 16px; }
 .bl-title { font-family: var(--font-display); font-size: 24px; font-weight: 700; margin: 6px 0 0; }
+.hub-title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.hub-filter-btn { position: relative; flex: 0 0 auto; width: 40px; height: 40px; border: none; border-radius: 50%; background: var(--card-muted); color: var(--fg); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.hub-filter-btn:active { transform: scale(0.95); }
+.hub-filter-btn svg { width: 22px; height: 22px; }
+.hub-filter-btn .fs-badge { position: absolute; top: -3px; right: -3px; }
 .fs-bar { display: flex; align-items: center; gap: 10px; }
 .fs-btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); background: var(--bg-card); border-radius: 100px; padding: 8px 16px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--fg); cursor: pointer; }
 .fs-btn svg { width: 16px; height: 16px; }
@@ -505,6 +510,56 @@ html, body { height: 100%; margin: 0; }
 .fs-active .pf-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-light); border-color: var(--accent); color: var(--accent); font-weight: 600; }
 .fs-active .pf-chip svg { width: 12px; height: 12px; }
 #filterSheet .pf-sub-label:first-child { margin-top: 14px; }
+#filterSheetBody { max-height: 560px; overflow-y: auto; margin: 0 -20px; padding: 0 20px 6px; }
+.fs-sorted { font-size: 13px; color: var(--fg-secondary); }
+.pf-types { font-size: 12px; color: var(--fg-tertiary); margin-top: 8px; }
+.fs-switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-light); font-size: 15px; font-weight: 500; cursor: pointer; }
+.fs-switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.fs-switch i { position: relative; flex: 0 0 auto; width: 46px; height: 28px; border-radius: 14px; background: var(--day-dot); transition: background .15s; }
+.fs-switch i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform .15s; }
+.fs-switch input:checked + i { background: var(--accent); }
+.fs-switch input:checked + i::after { transform: translateX(18px); }
+/* filter sheet controls */
+.fs-seg { display: flex; background: var(--card-muted); border-radius: 10px; padding: 3px; }
+.fs-seg button { flex: 1; border: none; background: transparent; border-radius: 8px; padding: 8px 4px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--fg-secondary); cursor: pointer; }
+.fs-seg button.on { background: var(--bg-card); color: var(--fg); box-shadow: 0 1px 3px rgba(0,0,0,.14); }
+.fs-sec { padding: 18px 0; border-top: 1px solid var(--border); }
+.fs-sec:first-child { border-top: none; padding-top: 10px; }
+.fs-h { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-family: var(--font-body); font-size: 14px; font-weight: 700; }
+.fs-h svg { width: 18px; height: 18px; color: var(--fg-secondary); }
+.fs-match { text-align: center; font-size: 13px; color: var(--fg-secondary); padding: 12px 0 10px; border-top: 1px solid var(--border); }
+.fs-match b { color: var(--accent); font-size: 14px; }
+.fs-foot { display: flex; gap: 12px; }
+.fs-foot .btn { flex: 1; }
+.fs-foot .btn-primary { flex: 1.3; }
+.fs-radios { background: none; }
+.fs-radio { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 0; font-size: 15px; cursor: pointer; }
+.fs-radio input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.fs-radio i { width: 22px; height: 22px; border-radius: 50%; border: 1.8px solid var(--day-dot-edge); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.fs-radio input:checked + i { border-color: var(--accent); }
+.fs-radio input:checked + i::after { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+.fs-radio input:focus-visible + i { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fs-checks { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.fs-check { display: flex; align-items: center; gap: 12px; padding: 12px 14px; font-size: 15px; cursor: pointer; border-top: 1px solid var(--border-light); }
+.fs-check:first-child { border-top: none; }
+.fs-check input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.fs-check i { width: 22px; height: 22px; border-radius: 6px; border: 1.8px solid var(--day-dot-edge); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.fs-check input:checked + i { background: var(--accent); border-color: var(--accent); }
+.fs-check input:checked + i::after { content: ""; width: 6px; height: 11px; border: solid #fff; border-width: 0 2.2px 2.2px 0; transform: rotate(45deg) translate(-1px, -1px); }
+.fs-check input:focus-visible + i { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fs-plain { margin-top: 0; padding-top: 0; border-top: none; }
+.fs-slider-head { text-align: right; font-size: 15px; margin-bottom: 4px; }
+.fs-range { width: 100%; margin: 0; accent-color: var(--accent); height: 28px; }
+.fs-ticks { display: flex; justify-content: space-between; font-size: 12px; color: var(--fg-tertiary); padding: 0 6px; }
+.fs-stepper { display: flex; align-items: center; justify-content: space-between; background: var(--card-muted); border-radius: 12px; padding: 4px; }
+.fs-stepper b { font-size: 15px; font-weight: 600; }
+.fs-stepper button { width: 44px; height: 40px; border: none; border-radius: 9px; background: var(--bg-card); font-size: 22px; line-height: 1; color: var(--fg); cursor: pointer; box-shadow: 0 1px 2px rgba(0,0,0,.1); }
+.fs-stepper button:disabled { opacity: .35; cursor: default; }
+.fs-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fs-card { display: flex; align-items: center; gap: 10px; border: 1.5px solid var(--border); background: var(--bg-card); border-radius: 12px; padding: 12px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--fg); cursor: pointer; text-align: left; }
+.fs-card.on { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+.fs-card-icon { width: 22px; height: 22px; flex: 0 0 auto; }
+.fs-switch input:focus-visible + i { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* User-test links (#link-a, #link-b): reviewer controls are hidden */
 .test-mode .tweak-fab, .test-mode .tweak-panel { display: none !important; }
@@ -1138,7 +1193,10 @@ html, body { height: 100%; margin: 0; }
             <span id="hubStreakCount">2</span>
           </span>
         </div>
-        <div class="screen-title">Study Plans</div>
+        <div class="hub-title-row">
+          <div class="screen-title">Study Plans</div>
+          <button class="hub-filter-btn" id="hubFilterBtn" hidden onclick="openFilterSheet()" aria-label="Filter study plans"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"/></svg><span class="fs-badge" id="hubFilterBadge" hidden></span></button>
+        </div>
         <div class="screen-subtitle">Deepen your daily study</div>
         <div class="hub-tabs" id="hubTabs" role="tablist" hidden>
           <button data-v="browse" role="tab" onclick="setHubTab('browse')">Browse</button>
@@ -1562,7 +1620,8 @@ html, body { height: 100%; margin: 0; }
     <div class="sheet-grip"></div>
     <div class="sheet-title">Filter</div>
     <div id="filterSheetBody"></div>
-    <div class="sheet-actions"><button class="btn btn-primary" id="filterShowBtn" onclick="closeSheets()">Show plans</button><button class="btn btn-outline" onclick="clearSheetTags()">Clear</button></div>
+    <div class="fs-match" id="filterMatch" aria-live="polite"></div>
+    <div class="fs-foot"><button class="btn btn-outline" onclick="clearSheetTags()">Clear all</button><button class="btn btn-primary" onclick="closeSheets()">Apply filters</button></div>
   </div>
   <div class="sheet" id="upgradeSheet" role="dialog" aria-modal="true" aria-labelledby="upgradeTitle">
     <div class="sheet-grip"></div>
@@ -1810,46 +1869,6 @@ const PLANS = {
       [[S, 'John 16:33', 'Be of good cheer', 2], [AB, 'Finding Peace, ch. 7', 'Peace that stays', 8]]
     ]
   },
-  closer: {
-    title: 'Drawing Closer to Christ',
-    kicker: 'General Spiritual · 30 days',
-    tagline: 'A month of daily devotionals',
-    desc: 'A month-long devotional journey to deepen your relationship with the Savior through daily scripture study, prophetic teachings, and moments of reflection.',
-    duration: 30, timePerDay: 10, focus: 'Gospel', tags: ['Gospel'], people: 5200,
-    weekTitles: ['Who He Is', 'Come Unto Him', 'His Ministry', 'His Atonement', 'Living as His Disciple'],
-    days: [
-      [[S, 'John 3:16–17', 'For God so loved the world', 3], [M, '"I Know That My Redeemer Lives"', 'Hymns', 4]],
-      [[S, 'D&C 76:22–24', 'He lives', 3], [EB, 'Jesus the Christ, ch. 1', 'James E. Talmage', 8]],
-      [[S, 'John 10:11–14', 'The good shepherd', 4], [M, '"The Lord Is My Shepherd"', 'Hymns', 4]],
-      [[S, 'Mosiah 3:5–8', 'The Lord Omnipotent', 5], [AB, 'Jesus the Christ, ch. 3', 'James E. Talmage', 6]],
-      [[S, 'Isaiah 53:3–5', 'He was wounded for our transgressions', 4], [M, '"I Stand All Amazed"', 'Hymns', 4]],
-      [[S, 'John 15:1–5', 'I am the vine', 4], [EB, 'Abide in Me, ch. 1', 'The true vine', 10]],
-      [[S, 'John 17:3', 'This is life eternal', 2], [M, '"Jesus, the Very Thought of Thee"', 'Hymns', 3]],
-      [[S, 'Matthew 11:28–30', 'Come unto me', 3], [M, '"Come unto Jesus"', 'Hymns', 4]],
-      [[S, 'Moroni 10:32', 'Come unto Christ', 3], [AB, 'Believing Christ, ch. 2', 'Stephen E. Robinson', 8]],
-      [[S, '3 Nephi 11:8–15', 'He showed them His hands', 6], [M, '"I Feel My Savior\'s Love"', 'Children\'s Songbook', 4]],
-      [[S, '2 Nephi 25:23', 'After all we can do', 2], [EB, 'The Continuous Atonement, ch. 1', 'Brad Wilcox', 8]],
-      [[S, 'Ether 12:27', 'Weak things become strong', 3], [M, '"Amazing Grace"', 'Tabernacle Choir', 4]],
-      [[S, '2 Nephi 31:19–20', 'Press forward', 4], [AB, 'Press Forward, ch. 3', 'Steadfast in Christ', 10]],
-      [[S, 'Ether 12:41', 'Seek this Jesus', 2], [EB, 'Believing Christ, ch. 3', 'Stephen E. Robinson', 8]],
-      [[S, 'Mark 5:25–34', 'The woman who touched His robe', 5], [EB, 'The Healer, ch. 2', 'The hem of His robe', 4]],
-      [[S, 'John 11:32–44', 'Jesus wept', 6], [EB, 'The Healer, ch. 3', 'He weeps with us', 8]],
-      [[S, 'Luke 7:36–50', 'She loved much', 6], [M, '"Where Can I Turn for Peace?"', 'Hymns', 4]],
-      [[S, '3 Nephi 17:5–10', 'He healed them every one', 5], [AB, 'The Healer, ch. 5', 'He healed them every one', 6]],
-      [[S, 'Matthew 14:22–33', 'Walking on water', 5], [M, '"Master, the Tempest Is Raging"', 'Hymns', 4]],
-      [[S, 'Luke 15:1–7', 'The lost sheep', 4], [EB, 'Found, ch. 1', 'The one who strayed', 10]],
-      [[S, 'Luke 7:22', 'The blind see, the lame walk', 2], [M, '"Lord, I Would Follow Thee"', 'Hymns', 4]],
-      [[S, 'Luke 22:39–44', 'Gethsemane', 5], [M, '"There Is a Green Hill Far Away"', 'Hymns', 4]],
-      [[S, 'Alma 7:11–13', 'He will take upon him their infirmities', 4], [AB, 'The Infinite Atonement, ch. 1', 'Tad R. Callister', 10]],
-      [[S, 'John 19:25–30', 'It is finished', 4], [M, '"O Savior, Thou Who Wearest a Crown"', 'Hymns', 4]],
-      [[S, 'Luke 24:1–8', 'He is not here, but is risen', 4], [M, '"He Is Risen!"', 'Hymns', 4]],
-      [[S, 'D&C 19:16–19', 'I, God, have suffered these things', 4], [EB, 'Believing Christ, ch. 4', 'Stephen E. Robinson', 10]],
-      [[S, 'Alma 34:9–10', 'An infinite atonement', 3], [AB, 'The Infinite Atonement, ch. 4', 'Tad R. Callister', 8]],
-      [[S, 'Isaiah 1:18', 'White as snow', 2], [M, '"How Great Thou Art"', 'Tabernacle Choir', 4]],
-      [[S, 'John 13:34–35', 'Love one another', 3], [M, '"Love One Another"', 'Hymns', 3]],
-      [[S, 'Mosiah 5:2', 'A mighty change of heart', 2], [AB, 'Press Forward, ch. 4', 'Keep going', 8]]
-    ]
-  },
   family: {
     title: 'Strengthening Family Bonds',
     kicker: 'Topical · 21 days',
@@ -1905,7 +1924,7 @@ const PLANS = {
     title: 'Learning to Love Like the Savior',
     tagline: 'A week on loving others as He does',
     desc: 'Seven short days of scripture, music and reflection on charity, kindness and seeing the people around you the way the Savior does.',
-    duration: 7, timePerDay: 10, focus: 'Mood', tags: ['Mood:Love', 'Gospel'], people: 820,
+    duration: 7, timePerDay: 10, focus: 'Mood', tags: ['Mood:Love'], people: 820,
     weekTitles: ['Love One Another'],
     days: [
       [[S, '1 John 4:7–11', 'Let us love one another', 3], [M, '"Love One Another"', 'Hymns', 3]],
@@ -1953,7 +1972,7 @@ const PLANS = {
     title: 'Peace After Loss',
     tagline: 'Comfort and hope after losing someone',
     desc: 'A quiet week for a family that is grieving. Scriptures on the Resurrection, music, and gentle reading about grief and hope.',
-    duration: 7, timePerDay: 12, focus: 'Family', tags: ['Family', 'Mood:Sadness', 'Mood:Peace'], people: 380,
+    duration: 7, timePerDay: 12, focus: 'Family', tags: ['Family:Loss', 'Mood:Sadness', 'Mood:Peace'], people: 380,
     weekTitles: ['Hope After Loss'],
     days: [
       [[S, 'John 14:27', 'Peace I leave with you', 3], [M, '"Families Can Be Together Forever"', 'Hymns', 3]],
@@ -1997,20 +2016,68 @@ const PLANS = {
       [[S, 'Mark 10:13–16', 'Of such is the kingdom of God', 3], [AB, 'Stories of Faith at Home, ch. 6', 'Praying together', 10]]
     ]
   },
-  gospel: {
-    title: 'The Plan of Happiness',
-    tagline: 'A week on why we are here',
-    desc: 'Seven days exploring the plan of salvation in the scriptures: where we came from, why we are here and where we are going.',
-    duration: 7, timePerDay: 12, focus: 'Gospel', tags: ['Gospel', 'Mood:Happiness'], people: 2750,
-    weekTitles: ['Why We Are Here'],
+  gratitude: {
+    title: 'Gratitude for Every Day',
+    tagline: 'A week of noticing what you already have',
+    desc: 'Seven short days of scripture, hymns and reading about giving thanks, and about noticing the good that is already in your day.',
+    duration: 7, timePerDay: 10, focus: 'Mood', tags: ['Mood:Gratitude', 'Mood:Happiness'], people: 1260,
+    weekTitles: ['Giving Thanks'],
     days: [
-      [[S, 'Moses 1:39', 'This is my work and my glory', 2], [M, '"O My Father"', 'Hymns', 4]],
-      [[S, 'Alma 42:8', 'The great plan of happiness', 3], [EB, 'The Plan, ch. 1', 'Why we are here', 10]],
-      [[S, '2 Nephi 2:22–25', 'Men are, that they might have joy', 4], [M, '"Know This, That Every Soul Is Free"', 'Hymns', 4]],
-      [[S, 'Abraham 3:24–26', 'We will prove them herewith', 4], [AB, 'The Plan, ch. 2', 'A time to prepare', 8]],
-      [[S, '2 Nephi 9:6–9', 'The resurrection of the dead', 4], [EB, 'The Plan, ch. 3', 'The Atonement', 8]],
-      [[S, 'Moroni 10:4–5', 'Ask God', 3], [M, '"Press Forward, Saints"', 'Hymns', 4]],
-      [[S, '2 Nephi 31:20', 'Press forward with a steadfastness in Christ', 3], [AB, 'The Plan, ch. 4', 'A witness of truth', 8]]
+      [[S, 'Psalm 100:4', 'Enter into his gates with thanksgiving', 2], [M, '"Count Your Blessings"', 'Hymns', 3]],
+      [[S, '1 Thessalonians 5:18', 'In every thing give thanks', 2], [AB, 'Grateful Every Day, ch. 1', 'Noticing small blessings', 7]],
+      [[S, 'Luke 17:11–19', 'The one who returned', 5], [M, '"Because I Have Been Given Much"', 'Hymns', 3]],
+      [[S, 'Mosiah 2:20–21', 'Thank him who has created you', 3], [EB, 'Grateful Every Day, ch. 2', 'Gratitude at the table', 8]],
+      [[S, 'Psalm 107:1', 'O give thanks unto the Lord', 2], [M, '"Come, Ye Thankful People, Come"', 'Hymns', 4]],
+      [[S, 'D&C 59:7', 'Thou shalt thank the Lord thy God', 2], [AB, 'Grateful Every Day, ch. 3', 'Thanks in hard seasons', 6]],
+      [[S, 'Alma 34:38', 'Live in thanksgiving daily', 2], [M, '"Now Thank We All Our God"', 'Hymns', 3]]
+    ]
+  },
+  hope: {
+    title: 'Hope When Things Feel Hard',
+    tagline: 'A week for when you feel discouraged',
+    desc: 'A gentle week of scripture, music and short reading for days when it is hard to keep going, with small reasons to hope.',
+    duration: 7, timePerDay: 10, focus: 'Mood', tags: ['Mood:Hope', 'Mood:Discouragement'], people: 1030,
+    weekTitles: ['Keep Going'],
+    days: [
+      [[S, 'Romans 15:13', 'The God of hope', 2], [M, '"Hope of Israel"', 'Hymns', 3]],
+      [[S, 'Galatians 6:9', 'Be not weary in well doing', 2], [AB, 'Keep Going, ch. 1', 'Small steps count', 7]],
+      [[S, 'Ether 12:4', 'Hope for a better world', 3], [M, '"Come, Come, Ye Saints"', 'Hymns', 4]],
+      [[S, 'Isaiah 40:29–31', 'They that wait upon the Lord', 3], [EB, 'Keep Going, ch. 2', 'Strength to continue', 8]],
+      [[S, 'Moroni 7:41', 'What shall ye hope for', 2], [M, '"Press Forward, Saints"', 'Hymns', 3]],
+      [[S, 'Hebrews 6:19', 'Hope as an anchor of the soul', 2], [AB, 'Keep Going, ch. 3', 'An anchor for the soul', 6]],
+      [[S, 'Lamentations 3:21–23', 'His mercies are new every morning', 3], [M, '"Great Is Thy Faithfulness"', 'Hymns', 4]]
+    ]
+  },
+  stress: {
+    title: 'Calm in a Stressful Week',
+    tagline: 'Short, steady days for a full schedule',
+    desc: 'A week of short readings and music for busy seasons, to help you put down what you are carrying and find a little rest each day.',
+    duration: 7, timePerDay: 10, focus: 'Mood', tags: ['Mood:Stress', 'Mood:Peace'], people: 1420,
+    weekTitles: ['Rest for the Busy'],
+    days: [
+      [[S, 'Matthew 6:33–34', 'Take no thought for the morrow', 3], [M, '"Master, the Tempest Is Raging"', 'Hymns', 4]],
+      [[S, 'Psalm 55:22', 'Cast thy burden upon the Lord', 2], [AB, 'Rest for the Busy, ch. 1', 'Making room to breathe', 6]],
+      [[S, 'Mark 6:31', 'Come ye yourselves apart and rest', 2], [M, '"Sweet Hour of Prayer"', 'Hymns', 3]],
+      [[S, 'Luke 10:38–42', 'Martha and Mary', 4], [EB, 'Rest for the Busy, ch. 2', 'Choosing the better part', 8]],
+      [[S, 'Psalm 4:8', 'I will lay me down in peace', 2], [M, '"Lead, Kindly Light"', 'Hymns', 4]],
+      [[S, 'Isaiah 26:3', 'Perfect peace', 2], [AB, 'Rest for the Busy, ch. 3', 'One thing at a time', 6]],
+      [[S, 'Exodus 33:14', 'I will give thee rest', 2], [M, '"Come unto Jesus"', 'Hymns', 4]]
+    ]
+  },
+  anger: {
+    title: 'Letting Go of Anger',
+    tagline: 'A week to cool down and forgive',
+    desc: 'Seven short days of scripture, music and reading about slowing down when you are angry, making peace, and forgiving.',
+    duration: 7, timePerDay: 10, focus: 'Mood', tags: ['Mood:Anger'], people: 560,
+    weekTitles: ['Slow to Anger'],
+    days: [
+      [[S, 'James 1:19–20', 'Slow to wrath', 2], [M, '"Let Us Oft Speak Kind Words"', 'Hymns', 3]],
+      [[S, 'Ephesians 4:26–27', 'Be ye angry, and sin not', 3], [AB, 'Letting Go, ch. 1', 'Naming what you feel', 7]],
+      [[S, 'Matthew 5:23–24', 'First be reconciled', 3], [M, '"Love One Another"', 'Hymns', 3]],
+      [[S, 'Proverbs 16:32', 'Slow to anger', 2], [EB, 'Letting Go, ch. 2', 'Pause before you answer', 8]],
+      [[S, 'Colossians 3:13', 'Forgiving one another', 2], [M, '"Lord, I Would Follow Thee"', 'Hymns', 4]],
+      [[S, 'Luke 6:27–29', 'Love your enemies', 4], [AB, 'Letting Go, ch. 3', 'Forgiveness takes time', 7]],
+      [[S, '3 Nephi 12:44', 'Pray for them which despitefully use you', 3], [M, '"Where Can I Turn for Peace?"', 'Hymns', 4]]
     ]
   }
 };
@@ -2043,38 +2110,6 @@ const DAY_NOTES = {
     ['Weakness can become a place where grace works.', 'What weakness could you offer to Him?'],
     ['Nothing can separate us from the love of God.', 'How does it feel to know His love does not change?'],
     ['The last day: look back on two weeks of peace.', 'Where have you felt peace these two weeks?']
-  ],
-  closer: [
-    ['The plan begins with the heart of the gospel: God\'s love for the world.', 'How have you felt God\'s love this week?'],
-    ['A witness of the living Christ: He lives.', 'What do you know about the Savior for yourself?'],
-    ['The Good Shepherd knows His sheep by name.', 'How does it feel to be known by Him?'],
-    ['King Benjamin describes the Lord coming among His people.', 'Which part of His life speaks to you most?'],
-    ['Isaiah describes the Savior carrying our griefs.', 'What grief could you let Him carry?'],
-    ['Abide in Him, like a branch in the vine.', 'What helps you stay connected to Him day to day?'],
-    ['A quiet day to look back on the first week.', 'How have you come to know Him?'],
-    ['"Come unto me": an invitation for anyone who is weary.', 'What would you bring to Him today?'],
-    ['Moroni closes his record with an invitation to come unto Christ.', 'What is one step toward Him you could take today?'],
-    ['The risen Lord invites each person, one by one, to come to Him.', 'What would it mean to come to Him one by one?'],
-    ['Grace is not just for the finish line.', 'Where do you need His grace today?'],
-    ['Weak things can become strong through Him.', 'What are you learning to trust Him with?'],
-    ['Nephi invites us to press forward with steadfastness in Christ.', 'What keeps you pressing forward?'],
-    ['A quiet day to look back on coming unto Him.', 'What does coming unto Him look like today?'],
-    ['A woman reaches out in faith, and Jesus stops for her.', 'When has He stopped for you?'],
-    ['At Lazarus\' tomb, Jesus weeps with those who mourn.', 'How does His compassion change how you see your sorrow?'],
-    ['A woman shows great love, and Jesus sees her heart.', 'How could you show your love for Him today?'],
-    ['In Bountiful, the Savior heals every one who comes.', 'What healing are you hoping for?'],
-    ['Peter walks on water, then reaches for the Savior\'s hand.', 'Where do you need to reach for His hand?'],
-    ['The shepherd leaves the ninety and nine for the one.', 'Who might be the one you could reach out to?'],
-    ['A quiet day to look back on His ministry.', 'Where have you seen Him minister to you?'],
-    ['In Gethsemane, the Savior prays, "Not my will, but thine."', 'What does His prayer in Gethsemane mean to you?'],
-    ['Alma teaches that He knows our pains and infirmities.', 'Which of your burdens does He already understand?'],
-    ['On the cross, the Savior finishes His work.', 'How can you remember Him this week?'],
-    ['The tomb is empty: He is risen.', 'What hope does the Resurrection give you?'],
-    ['The Savior describes His suffering in His own words.', 'What does it feel like to be loved this much?'],
-    ['Amulek teaches of an infinite and eternal atonement.', 'Where do you see His Atonement at work in your life?'],
-    ['A quiet day to ponder His sacrifice.', 'What does His sacrifice mean to you?'],
-    ['Disciples are known by how they love.', 'Who could you love a little more today?'],
-    ['The last day: look ahead to how you will keep drawing closer.', 'How will you keep drawing closer?']
   ],
   family: [
     ['Nephi begins his record by honoring his parents.', 'What did your family teach you about faith?'],
@@ -2165,21 +2200,47 @@ const DAY_NOTES = {
     ['Parents are asked to teach with patience.', 'What helps you stay patient at bedtime?'],
     ['The last day: the kingdom belongs to the humble.', 'What will your family keep doing?']
   ],
-  gospel: [
-    ['God shares His work: to bring us happiness.', 'What do you know about why you are here?'],
-    ['Alma calls it the great plan of happiness.', 'What part of the plan means the most to you?'],
-    ['Lehi teaches that we are here to have joy.', 'Where have you found joy through challenge?'],
-    ['We are placed here to be tested and to learn.', 'What have you learned from a hard time?'],
-    ['The Atonement makes the resurrection possible.', 'What does being redeemed mean to you?'],
-    ['Moroni invites anyone to ask God.', 'What would you like to ask Him this week?'],
-    ['The last day: press forward with hope.', 'How will you keep pressing forward?']
+  gratitude: [
+    ['Start the week by simply giving thanks.', 'What are you thankful for this morning?'],
+    ['Paul asks for thanks in every circumstance.', 'What small blessing did you notice today?'],
+    ['Ten were healed, but only one came back to say thank you.', 'Who could you thank today?'],
+    ['King Benjamin reminds us that every breath is a gift.', 'What do you have that you did not earn?'],
+    ['Giving thanks is where many psalms begin.', 'What would your own psalm of thanks say?'],
+    ['Gratitude is a commandment and a gift.', 'What can you be thankful for even when things are hard?'],
+    ['The last day: live in thanksgiving daily.', 'How will you keep noticing what you have?']
+  ],
+  hope: [
+    ['Hope is something God gives, not something you have to make.', 'Where do you need hope this week?'],
+    ['Do not grow weary, because the harvest comes.', 'What small step could you take today?'],
+    ['Hope looks toward something better.', 'What are you hoping for?'],
+    ['Those who wait on the Lord find new strength.', 'Where could you use new strength?'],
+    ['Mormon asks what we hope for, and answers with Christ.', 'Where do you see Christ in your hope?'],
+    ['Hope can be an anchor when the water is rough.', 'What helps you hold steady?'],
+    ['The last day: His mercies are new each morning.', 'What would you like to begin again?']
+  ],
+  stress: [
+    ['Take today as it comes.', 'What are you carrying that could wait until tomorrow?'],
+    ['You are invited to hand your burden over.', 'What would you like to put down?'],
+    ['Even Jesus asked His disciples to come apart and rest.', 'When could you rest for ten minutes?'],
+    ['Martha is worried about many things, Mary chooses one.', 'What is the one thing for today?'],
+    ['Peace can come even before the day is done.', 'What does a peaceful evening look like for you?'],
+    ['Perfect peace comes from a mind stayed on Him.', 'What helps your mind slow down?'],
+    ['The last day: He goes with you.', 'What will you keep from this week?']
+  ],
+  anger: [
+    ['Wisdom begins with listening before speaking.', 'What usually sets off your anger?'],
+    ['Anger is a feeling, and what we do with it is a choice.', 'What do you feel under the anger?'],
+    ['The Savior asks us to make peace first.', 'Who could you make peace with?'],
+    ['A calm spirit is stronger than a quick temper.', 'What helps you pause?'],
+    ['Forgiveness is a gift to the one who gives it, too.', 'What are you ready to let go of?'],
+    ['Jesus teaches a hard kind of love.', 'Who is hardest for you to love right now?'],
+    ['The last day: pray for the one who hurt you.', 'What could you pray for today?']
   ]
 };
 
 // Optional extras: listed under "Go deeper (optional)" and never counted toward the day being done
 const GO_DEEPER = {
   anxiety: { 0: [[S, 'Psalm 55:22', 'Cast thy burden upon the Lord', 2]], 4: [[S, 'Psalm 55:22', 'Cast thy burden upon the Lord', 2], [EB, 'Finding Peace, ch. 6', 'Small steps toward calm', 8]] },
-  closer: { 0: [[S, '1 John 4:9–10', 'Herein is love', 2]] },
   family: { 0: [[AB, 'Stories of Faith at Home, ch. 3', 'Our family\'s first stories', 8]] },
   joy: { 0: [[S, 'D&C 59:15–19', 'With cheerful hearts', 3]], 2: [[M, '"Joyful, Joyful, We Adore Thee"', 'Tabernacle Choir', 4]] }
 };
@@ -2234,7 +2295,7 @@ let memberGateTest = false; // test link on the Library option: Home also uses t
 const memberGate = () => plansHome === 'discover' || memberGateTest;
 let memberStarted = true; // tweak (Discover option): member has started a plan
 let streakHelpSeen = false; // the flame helper opens on its own once
-const FEATURED_PLAN = 'closer'; // not started in the default demo, so the Home banner and Discover hero show // tweak: 'rows' (Study Plans tab, Library-style My plans) or 'library'
+const FEATURED_PLAN = 'love'; // not started in the default demo, so the Home banner and Discover hero show // tweak: 'rows' (Study Plans tab, Library-style My plans) or 'library'
 const startDates = { anxiety: addDays(TODAY_DATE, -4), joy: addDays(TODAY_DATE, -2) };
 const reminders = { anxiety: '7:00 AM' };
 const doneItems = {
@@ -2294,9 +2355,9 @@ const MARKS = {
   home: '<path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9.5 21v-6h5v6"/>',
   heart: '<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0112 7.1a4.3 4.3 0 017.5 2.7C19.5 15.4 12 20 12 20z"/>'
 };
-const PLAN_MARK = { closer: 'sun', anxiety: 'sprout', family: 'home', joy: 'heart', love: 'heart', sadness: 'sun', lonely: 'sprout', loss: 'home', marriage: 'heart', kids: 'home', gospel: 'scripture' };
-// Each main category has its own color: Mood plum, Family clay, Gospel slate blue
-const FOCUS_ART = { 'Mood': 'mood', 'Family': 'topical', 'Gospel': 'spiritual' };
+const PLAN_MARK = { gratitude: 'sun', hope: 'sprout', stress: 'sprout', anger: 'heart', anxiety: 'sprout', family: 'home', joy: 'heart', love: 'heart', sadness: 'sun', lonely: 'sprout', loss: 'home', marriage: 'heart', kids: 'home' };
+// Each main category has its own color: Mood plum, Family clay
+const FOCUS_ART = { 'Mood': 'mood', 'Family': 'topical' };
 function planArt(planId) {
   const p = PLANS[planId];
   return { variant: FOCUS_ART[p.focus] || 'topical', mark: MARKS[PLAN_MARK[planId] || 'sprout'] };
@@ -2385,19 +2446,23 @@ function renderHub() {
   renderBrowse('hubBrowse');
 }
 
-/* Filters: Mood and Gospel are separate on purpose, because a plan can be in both. Family has two kinds. */
+/* Taxonomy: two categories. Mood and Family each have sub-filters, and more than one can be picked. */
 const PLAN_CATS = [
-  { key: 'Mood', subs: ['Anxiety', 'Love', 'Happiness', 'Sadness', 'Peace', 'Loneliness'] },
-  { key: 'Family', subs: ['Kids', 'Marriage'] },
-  { key: 'Gospel', subs: [] }
+  { key: 'Mood', subs: ['Anxiety', 'Love', 'Happiness', 'Sadness', 'Peace', 'Loneliness', 'Gratitude', 'Hope', 'Stress', 'Discouragement', 'Anger'] },
+  { key: 'Family', subs: ['Kids', 'Marriage', 'Loss'] }
 ];
 let planBrowse = window.BROWSE_VARIANT || 'chips'; // 'chips' | 'tiles' | 'rows' | 'sheet'
 const catScreens = () => planBrowse === 'tiles' || planBrowse === 'rows'; // these two start on a category screen, then open a list
 let planFilter = { cat: 'All', sub: null, view: catScreens() ? 'home' : 'list' };
-const sheetTags = new Set(); // filter sheet: 'Mood:Anxiety', 'Family:Kids', 'Gospel'. Any pick inside a group, and every group that has a pick
+const sheetTags = new Set(); // filter sheet: 'Mood:Anxiety', 'Family:Kids'. Any pick inside a category, and every category that has a pick
 const SUB_MARK = {
   Anxiety: '<path d="M3 9c3-3 6 3 9 0s6 3 9 0M3 15c3-3 6 3 9 0s6 3 9 0"/>',
-  Love: MARKS.heart, Happiness: MARKS.sun, Peace: MARKS.sprout, Gospel: MARKS.scripture,
+  Love: MARKS.heart, Happiness: MARKS.sun, Peace: MARKS.sprout, Loss: MARKS.home,
+  Gratitude: '<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5l-5.4 3 1.2-6L3.3 9.3l6.1-.7z"/>',
+  Hope: '<path d="M3 18a9 9 0 0118 0M7 18a5 5 0 0110 0"/>',
+  Stress: '<path d="M13 3L4 14h7l-1 7 9-11h-7z"/>',
+  Discouragement: '<path d="M4 8l5 5 4-3 7 8M15 18h5v-5"/>',
+  Anger: '<path d="M12 3c3 4 6 6 6 10a6 6 0 01-12 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3 0-6 2-9z"/>',
   Sadness: '<path d="M7 18a4 4 0 010-8 5 5 0 019.6-1A4.5 4.5 0 0117 18z"/>',
   Loneliness: '<path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/>',
   Kids: '<circle cx="12" cy="7" r="3"/><path d="M6 21v-4a6 6 0 0112 0v4"/>',
@@ -2407,12 +2472,7 @@ function tagPills(p) {
   return p.tags.map(t => t.includes(':') ? t.split(':')[1] : t).map(x => `<span class="pf-tag">${x}</span>`).join('');
 }
 function planMatches(p) {
-  if (planBrowse === 'sheet') {
-    return PLAN_CATS.every(c => {
-      const picked = [...sheetTags].filter(t => t.split(':')[0] === c.key);
-      return !picked.length || p.tags.some(t => picked.includes(t) || (picked.includes(c.key) && t.split(':')[0] === c.key));
-    });
-  }
+  if (planBrowse === 'sheet') return sheetMatches(p);
   const { cat, sub } = planFilter;
   if (cat === 'All') return true;
   return p.tags.some(t => { const [c, sb] = t.split(':'); return c === cat && (!sub || sb === sub); });
@@ -2429,21 +2489,21 @@ function setPlanFilter(cat, sub) {
 function openCat(cat, sub) { planFilter = { cat, sub: sub || null, view: 'list' }; renderBrowse('hubBrowse'); document.getElementById('screenContent').scrollTop = 0; }
 function backToCats() { planFilter = { cat: 'All', sub: null, view: 'home' }; renderBrowse('hubBrowse'); document.getElementById('screenContent').scrollTop = 0; }
 function setPlanBrowse(v) {
-  planBrowse = v; sheetTags.clear();
+  planBrowse = v; sheetTags.clear(); sheetSort = 'recommended'; sheetLen = 4;
   planFilter = { cat: 'All', sub: null, view: catScreens() ? 'home' : 'list' };
   renderTweaks();
   if (currentScreen === 'hub') renderHub(); else goBrowse();
 }
 const CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
 const markIcon = (k, cls = '') => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SUB_MARK[k]}</svg>`;
-const catItems = c => c.subs.length ? [...(c.key === 'Family' ? [{ label: 'All Family', cat: 'Family', sub: null, wide: true }] : []), ...c.subs.map(x => ({ label: x, cat: c.key, sub: x }))] : [{ label: c.key, cat: c.key, sub: null, wide: true }];
+const catItems = c => c.subs.map(x => ({ label: x, cat: c.key, sub: x }));
 function tilesHome() {
   const all = `<button class="bt-all" onclick="openCat('All')">All study plans<span>${plural(Object.keys(PLANS).length)}</span>${CHEV}</button>`;
-  return all + PLAN_CATS.map(c => `<div class="pf-sub-label">${c.key}</div><div class="bt-grid">${catItems(c).map(it => `<button class="bt-tile ${c.key.toLowerCase()} ${it.wide ? 'wide' : ''}" onclick="openCat('${it.cat}'${it.sub ? `,'${it.sub}'` : ''})">${markIcon(it.sub || (it.cat === 'Family' ? 'Kids' : 'Gospel'), 'bt-mark')}<b>${it.label}</b><span>${plural(countFor(it.cat, it.sub))}</span></button>`).join('')}</div>`).join('');
+  return all + PLAN_CATS.map(c => `<div class="pf-sub-label">${c.key}</div><div class="bt-grid">${catItems(c).map(it => `<button class="bt-tile ${c.key.toLowerCase()} ${it.wide ? 'wide' : ''}" onclick="openCat('${it.cat}'${it.sub ? `,'${it.sub}'` : ''})">${markIcon(it.sub, 'bt-mark')}<b>${it.label}</b><span>${plural(countFor(it.cat, it.sub))}</span></button>`).join('')}</div>`).join('');
 }
 function rowsHome() {
   const all = `<div class="br-group"><button class="br-row" onclick="openCat('All')"><span class="nm" style="font-weight:600">All study plans</span><span class="ct">${Object.keys(PLANS).length}</span>${CHEV}</button></div>`;
-  return all + PLAN_CATS.map(c => `<div class="pf-sub-label">${c.key}</div><div class="br-group">${catItems(c).map(it => `<button class="br-row" onclick="openCat('${it.cat}'${it.sub ? `,'${it.sub}'` : ''})">${markIcon(it.sub || (it.cat === 'Family' ? 'Kids' : 'Gospel'))}<span class="nm">${it.label}</span><span class="ct">${countFor(it.cat, it.sub)}</span>${CHEV}</button>`).join('')}</div>`).join('');
+  return all + PLAN_CATS.map(c => `<div class="pf-sub-label">${c.key}</div><div class="br-group">${catItems(c).map(it => `<button class="br-row" onclick="openCat('${it.cat}'${it.sub ? `,'${it.sub}'` : ''})">${markIcon(it.sub)}<span class="nm">${it.label}</span><span class="ct">${countFor(it.cat, it.sub)}</span>${CHEV}</button>`).join('')}</div>`).join('');
 }
 const BACK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
 function chipsFilters() {
@@ -2454,20 +2514,63 @@ function chipsFilters() {
   return h;
 }
 /* Filter sheet */
-const tagLabel = t => t.includes(':') ? t.split(':')[1] : (t === 'Family' ? 'All Family' : t);
+/* Filter sheet: Sort by = radio list · Mood, Family = pills · Length = slider · Hide started = switch.
+   Different filters must all match; inside Mood or Family any pick matches. */
+const SORTS = { recommended: 'Recommended', popular: 'Most popular', shortest: 'Shortest' };
+const LEN_STEPS = [7, 10, 14, 21, 30];    // slider stops, in days; the last stop means any length
+let sheetSort = 'recommended', sheetLen = 4;
+const lenLabel = () => sheetLen === 4 ? 'Any length' : `Up to ${LEN_STEPS[sheetLen]} days`;
+function sheetMatches(p) {
+  const picked = c => [...sheetTags].filter(t => t.split(':')[0] === c);
+  const catOk = c => { const pk = picked(c); return !pk.length || p.tags.some(t => pk.includes(t) || (pk.includes(c) && t.split(':')[0] === c)); };
+  const idOf = Object.keys(PLANS).find(k => PLANS[k] === p);
+  return catOk('Mood') && catOk('Family') &&
+    p.duration <= LEN_STEPS[sheetLen] &&
+    (!sheetTags.has('Hide:started') || !(startedPlans.has(idOf) || finishedPlans.has(idOf)));
+}
+function sortedEntries(entries) {
+  const e = [...entries];
+  if (planBrowse === 'sheet' && sheetSort === 'popular') e.sort((a, b) => b[1].people - a[1].people);
+  if (planBrowse === 'sheet' && sheetSort === 'shortest') e.sort((a, b) => a[1].duration - b[1].duration);
+  return e;
+}
+const refreshSheet = () => { renderFilterSheet(); renderBrowse('hubBrowse'); };
 function sheetCount() { return Object.values(PLANS).filter(planMatches).length; }
-function toggleSheetTag(t) { sheetTags.has(t) ? sheetTags.delete(t) : sheetTags.add(t); renderFilterSheet(); renderBrowse('hubBrowse'); }
-function clearSheetTags() { sheetTags.clear(); renderFilterSheet(); renderBrowse('hubBrowse'); }
+function toggleSheetTag(t) { sheetTags.has(t) ? sheetTags.delete(t) : sheetTags.add(t); refreshSheet(); }
+function setSheetSort(k) { sheetSort = k; refreshSheet(); }
+function setSheetLen(v) {
+  // no re-render of the sheet body here, so the slider keeps its drag
+  sheetLen = +v;
+  const h = document.querySelector('.fs-slider-head b'); if (h) h.textContent = lenLabel();
+  document.getElementById('filterMatch').innerHTML = `<b>${sheetCount()}</b> ${sheetCount() === 1 ? 'plan matches' : 'plans match'}`;
+  renderBrowse('hubBrowse');
+}
+function clearSheetTags() { sheetTags.clear(); sheetSort = 'recommended'; sheetLen = 4; refreshSheet(); }
 function openFilterSheet() { renderFilterSheet(); openSheet('filterSheet'); }
 function renderFilterSheet() {
-  const chip = t => `<button class="pf-chip ${sheetTags.has(t) ? 'on' : ''}" aria-pressed="${sheetTags.has(t)}" onclick="toggleSheetTag('${t}')">${tagLabel(t)}</button>`;
-  document.getElementById('filterSheetBody').innerHTML = PLAN_CATS.map(c => `<div class="pf-sub-label">${c.key}</div><div class="pf-row">${(c.subs.length ? [...(c.key === 'Family' ? ['Family'] : []), ...c.subs.map(x => c.key + ':' + x)] : [c.key]).map(chip).join('')}</div>`).join('');
-  document.getElementById('filterShowBtn').textContent = `Show ${plural(sheetCount())}`;
+  const SI = { sort: '<path d="M7 4v16M3.5 16.5L7 20l3.5-3.5M17 20V4M13.5 7.5L17 4l3.5 3.5"/>', mood: '<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0112 7.1a4.3 4.3 0 017.5 2.7C19.5 15.4 12 20 12 20z"/>', family: '<path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9.5 21v-6h5v6"/>', gospel: '<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 3v7l2-1.5L13 10V3"/>', length: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', status: '<circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/>' };
+  const sec = (k, title, body) => `<section class="fs-sec"><h4 class="fs-h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SI[k]}</svg>${title}</h4>${body}</section>`;
+  const seg = `<div class="fs-radios" role="radiogroup" aria-label="Sort by">${Object.entries(SORTS).map(([k, l]) => `<label class="fs-radio"><span>${l}</span><input type="radio" name="sheetSort" ${sheetSort === k ? 'checked' : ''} onchange="setSheetSort('${k}')"><i></i></label>`).join('')}</div>`;
+  const mood = `<div class="pf-row">${PLAN_CATS[0].subs.map(x => { const t = 'Mood:' + x; return `<button class="pf-chip ${sheetTags.has(t) ? 'on' : ''}" aria-pressed="${sheetTags.has(t)}" onclick="toggleSheetTag('${t}')">${x}</button>`; }).join('')}</div>`;
+  const pill = (t, l) => `<button class="pf-chip ${sheetTags.has(t) ? 'on' : ''}" aria-pressed="${sheetTags.has(t)}" onclick="toggleSheetTag('${t}')">${l}</button>`;
+  const family = `<div class="pf-row">${PLAN_CATS[1].subs.map(x => pill('Family:' + x, x)).join('')}</div>`;
+  const slider = `<div class="fs-slider-head"><b>${lenLabel()}</b></div><input class="fs-range" type="range" min="0" max="4" step="1" value="${sheetLen}" aria-label="Length" oninput="setSheetLen(this.value)" style="--pct:${sheetLen * 25}%"><div class="fs-ticks"><span>7</span><span>10</span><span>14</span><span>21</span><span>30+</span></div>`;
+  const hide = `<label class="fs-switch fs-plain"><span>Hide plans I've started</span><input type="checkbox" ${sheetTags.has('Hide:started') ? 'checked' : ''} onchange="toggleSheetTag('Hide:started')"><i></i></label>`;
+  document.getElementById('filterSheetBody').innerHTML = sec('sort', 'Sort by', seg) + sec('mood', 'Mood', mood) + sec('family', 'Family', family) + sec('length', 'Length', slider) + sec('status', 'Status', hide);
+  document.getElementById('filterMatch').innerHTML = `<b>${sheetCount()}</b> ${sheetCount() === 1 ? 'plan matches' : 'plans match'}`;
+}
+function activeFilters() {
+  const out = [];
+  [...sheetTags].forEach(t => out.push([t === 'Hide:started' ? "Hide plans I've started" :   t.split(':')[1], `toggleSheetTag('${t}')`]));
+  if (sheetLen < 4) out.push([lenLabel(), 'setSheetLen(4)']);
+  return out;
 }
 function sheetBar() {
-  const n = sheetTags.size;
-  return `<div class="fs-bar"><button class="fs-btn" onclick="openFilterSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>Filter${n ? `<span class="fs-badge">${n}</span>` : ''}</button></div>` +
-    (n ? `<div class="fs-active">${[...sheetTags].map(t => `<button class="pf-chip on" aria-label="Remove ${tagLabel(t)}" onclick="toggleSheetTag('${t}')">${tagLabel(t)}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`).join('')}</div>` : '');
+  // The icon button carries the only indicator: a badge with the number of filters on (a sort other than Recommended counts as one)
+  const n = activeFilters().length + (sheetSort !== 'recommended' ? 1 : 0);
+  const badge = document.getElementById('hubFilterBadge');
+  if (badge) { badge.hidden = !n; badge.textContent = n; }
+  return '';
 }
 function renderBrowse(containerId) {
   const box = document.getElementById(containerId);
@@ -2476,12 +2579,13 @@ function renderBrowse(containerId) {
     return;
   }
   const pf = document.getElementById('planFilters'), cnt = document.getElementById('planFilterCount');
+  document.getElementById('hubFilterBtn').hidden = planBrowse !== 'sheet';
   if (catScreens() && planFilter.view === 'home') {
     pf.innerHTML = ''; cnt.textContent = '';
     box.innerHTML = planBrowse === 'tiles' ? tilesHome() : rowsHome();
     return;
   }
-  const entries = Object.entries(PLANS).filter(([, p]) => planMatches(p));
+  const entries = sortedEntries(Object.entries(PLANS).filter(([, p]) => planMatches(p)));
   if (catScreens()) {
     const title = planFilter.cat === 'All' ? 'All study plans' : (planFilter.sub || planFilter.cat);
     pf.innerHTML = `<button class="bl-back" onclick="backToCats()">${BACK_SVG}Categories</button><h2 class="bl-title">${title}</h2>`;
@@ -2966,17 +3070,19 @@ function showNextPrompt(id, nx) {
 /* ---------- Completion ---------- */
 // Similar plans by theme, closest first. The suggestion skips plans already started or finished.
 const SIMILAR = {
-  anxiety: ['joy', 'closer', 'family'],
-  joy: ['anxiety', 'closer', 'family'],
-  closer: ['anxiety', 'joy', 'family'],
-  family: ['closer', 'joy', 'anxiety'],
-  love: ['marriage', 'closer', 'joy'],
-  sadness: ['loss', 'lonely', 'anxiety'],
-  lonely: ['sadness', 'anxiety', 'love'],
-  loss: ['sadness', 'family', 'anxiety'],
+  anxiety: ['stress', 'joy', 'hope'],
+  joy: ['gratitude', 'anxiety', 'love'],
+  family: ['kids', 'marriage', 'joy'],
+  love: ['marriage', 'joy', 'family'],
+  sadness: ['loss', 'lonely', 'hope'],
+  lonely: ['sadness', 'hope', 'love'],
+  loss: ['sadness', 'family', 'hope'],
   marriage: ['love', 'family', 'kids'],
-  kids: ['family', 'marriage', 'closer'],
-  gospel: ['closer', 'love', 'joy']
+  kids: ['family', 'marriage', 'gratitude'],
+  gratitude: ['joy', 'hope', 'love'],
+  hope: ['sadness', 'anxiety', 'gratitude'],
+  stress: ['anxiety', 'hope', 'joy'],
+  anger: ['stress', 'love', 'anxiety']
 };
 function suggestNext(id) {
   const sameFocus = Object.keys(PLANS).filter(p => p !== id && PLANS[p].focus === PLANS[id].focus);
@@ -3913,7 +4019,7 @@ if (libLike()) { setTabActive('home'); navigateTo('home'); }
   if (h === 'link-a' || libraryOption) {
     setLibraryNewUser(true); // no started, saved or finished plans: starting one turns on the flame and the Continue card
   } else {
-    savedPlans.add('closer'); // 3 in progress (default), 1 saved, 1 finished (default)
+    savedPlans.add('love'); // 3 in progress (default), 1 saved, 1 finished (default)
     streakHelpSeen = true; // an existing member: no first-time streak helper
   }
   if (remLink) {
